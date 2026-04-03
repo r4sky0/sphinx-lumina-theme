@@ -1,0 +1,27 @@
+<footer class="mt-10 border-t border-[var(--lumina-border)] pt-6">
+    {# Prev/Next navigation #}
+    {% if prev or next %}
+        <nav class="flex justify-between gap-4 mb-8" aria-label="Page navigation">
+            {% if prev %}
+                <a href="{{ prev.link }}"
+                   class="group flex flex-col items-start gap-1 rounded-lg border border-[var(--lumina-border)] p-4 no-underline hover:border-[var(--lumina-accent)] hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
+                    <span class="text-xs text-[var(--lumina-text-muted)]">Previous</span>
+                    <span class="text-sm font-medium text-[var(--lumina-text)] group-hover:text-[var(--lumina-accent)] transition-colors">&larr; {{ prev.title }}</span>
+                </a>
+            {% else %}
+                <div class="flex-1"></div>
+            {% endif %}
+            {% if next %}
+                <a href="{{ next.link }}"
+                   class="group flex flex-col items-end gap-1 rounded-lg border border-[var(--lumina-border)] p-4 no-underline hover:border-[var(--lumina-accent)] hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
+                    <span class="text-xs text-[var(--lumina-text-muted)]">Next</span>
+                    <span class="text-sm font-medium text-[var(--lumina-text)] group-hover:text-[var(--lumina-accent)] transition-colors">{{ next.title }} &rarr;</span>
+                </a>
+            {% endif %}
+        </nav>
+    {% endif %}
+    {# Footer text #}
+    {% if theme_footer_text and theme_footer_text != "" %}
+        <div class="text-center text-sm text-[var(--lumina-text-muted)] pb-6">{{ theme_footer_text }}</div>
+    {% endif %}
+</footer>

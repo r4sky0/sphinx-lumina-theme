@@ -1,0 +1,166 @@
+name: Tests
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: |
+          pnpm install
+          uv sync --extra dev
+
+      - name: Ruff check
+        run: uv run ruff check .
+
+      - name: Ruff format check
+        run: uv run ruff format --check .
+
+      - name: djlint check
+        run: uv run djlint src/sphinx_lumina_theme/theme/ --check
+
+  test-structure:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.12", "3.13", "3.14"]
+        sphinx: ["8", "9"]
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Set up Python
+        run: uv python install ${{ matrix.python }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: |
+          pnpm install
+          uv sync --extra dev
+
+      - name: Override Sphinx version
+        run: uv pip install "sphinx~=${{ matrix.sphinx }}.0"
+
+      - name: Build assets
+        run: pnpm run build
+
+      - name: Run structure tests
+        run: uv run pytest tests/ --ignore=tests/test_browser.py -v
+
+  test-extensions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: |
+          pnpm install
+          uv sync --extra dev
+
+      - name: Build assets
+        run: pnpm run build
+
+      - name: Build docs with all extensions (warnings as errors)
+        run: uv run sphinx-build docs docs/_build/html -W
+
+      - name: Verify key output files
+        run: |
+          test -f docs/_build/html/index.html
+          test -f docs/_build/html/getting-started.html
+
+      - name: Run extension tests
+        run: uv run pytest tests/test_extensions.py -v
+
+  test-browser:
+    needs: test-structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: |
+          pnpm install
+          uv sync --extra dev
+
+      - name: Install Playwright
+        run: uv run playwright install chromium
+
+      - name: Build assets
+        run: pnpm run build
+
+      - name: Run browser tests
+        run: uv run pytest tests/test_browser.py -v --browser chromium

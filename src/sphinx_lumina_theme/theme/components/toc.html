@@ -1,0 +1,26 @@
+{% if toc %}
+    <div class="sticky top-14 hidden h-[calc(100vh-3.5rem)] w-[220px] shrink-0 overflow-y-auto py-6 pr-4 xl:block">
+        {# Edit on GitHub link #}
+        {% if theme_source_repository and theme_source_repository != "" %}
+            <a href="{{ theme_source_repository }}/{{ theme_edit_uri }}/{{ theme_source_branch }}/{{ theme_source_directory }}{{ pagename }}{{ page_source_suffix }}"
+               class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)] no-underline hover:text-[var(--lumina-accent)] transition-colors"
+               target="_blank"
+               rel="noopener">
+                <svg class="h-3.5 w-3.5"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+                Edit this page
+            </a>
+        {% endif %}
+        <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-[var(--lumina-text-muted)]">On this page</p>
+        <nav class="lumina-toc-nav"
+             aria-label="Table of contents"
+             x-data="scrollspy()"
+             x-init="init()">
+            {{ toc }}
+        </nav>
+    </div>
+{% endif %}

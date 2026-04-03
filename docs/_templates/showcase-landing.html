@@ -1,0 +1,75 @@
+{# Showcase landing page — docs site only, not part of the shipped theme.
+   Uses the GPU fluid simulation hero for the Lumina docs showcase. #}
+{% extends "layout.html" %}
+{% block extrahead %}
+    {{ super() }}
+    <link rel="stylesheet"
+          href="{{ pathto('_static/showcase-landing.css', 1) }}">
+{% endblock %}
+{%- block content %}
+    <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
+    <div id="lumina-header">{% include "components/header.html" %}</div>
+    {# ── Hero ── #}
+    <section class="lumina-hero" x-data="fluidSimulation()">
+        <canvas x-ref="canvas" class="lumina-hero-canvas" aria-hidden="true"></canvas>
+        <div class="lumina-hero-content">
+            <div class="lumina-hero-badge">
+                Sphinx Theme <span class="lumina-hero-badge-sep">&middot;</span> v{{ lumina_version }}
+            </div>
+            <h1 class="lumina-hero-title">
+                Your docs,
+                <br>
+                <em>illuminated</em>
+            </h1>
+            <p class="lumina-hero-subtitle">
+                A Sphinx theme with the craft and care
+                your documentation deserves.
+            </p>
+            <div class="lumina-hero-actions">
+                <a href="{{ pathto("getting-started") }}"
+                   class="lumina-hero-btn lumina-hero-btn-primary">
+                    Get Started
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2.5"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+                {% if theme_source_repository %}
+                    <a href="{{ theme_source_repository }}"
+                       class="lumina-hero-btn lumina-hero-btn-secondary"
+                       target="_blank"
+                       rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                        </svg>
+                        GitHub
+                    </a>
+                {% endif %}
+            </div>
+            <div class="lumina-hero-tags">
+                <span>Dark Mode</span>
+                <span>Instant Search</span>
+                <span>MyST Markdown</span>
+                <span>Responsive</span>
+            </div>
+        </div>
+    </section>
+    {# ── Page content ── #}
+    {%- set hero_only = meta and meta.get('hero_only') -%}
+    <main id="lumina-content"
+          class="lumina-landing-content{% if hero_only %} is-empty{% endif %}"
+          data-pagefind-body>
+        <article class="lumina-article">
+            {% block body %}{{ body }}{% endblock %}
+        </article>
+    </main>
+    {% include "components/search-modal.html" %}
+{%- endblock %}
+{%- block scripts %}
+    <script src="{{ pathto('_static/fluid-simulation.js', 1) }}"></script>
+    {{ super() }}
+{%- endblock %}

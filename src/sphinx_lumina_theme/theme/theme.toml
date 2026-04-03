@@ -1,0 +1,21 @@
+[theme]
+inherit = "basic"
+stylesheets = ["lumina.css"]
+pygments_style = { default = "default", dark = "monokai" }
+
+[options]
+logo_only = "false"
+nav_links = ""
+nav_depth = "3"
+show_toc = "true"
+show_breadcrumbs = "true"
+show_prev_next = "true"
+accent_color = "#10b981"
+dark_mode_default = "auto"
+search_backend = "pagefind"
+source_repository = ""
+source_branch = "main"
+source_directory = "docs/"
+edit_uri = "edit"
+social_links = ""
+footer_text = ""

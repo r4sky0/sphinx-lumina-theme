@@ -1,0 +1,99 @@
+{# Master layout for the Lumina theme.
+   Inherits from basic/layout.html but overrides nearly everything. #}
+{% extends "basic/layout.html" %}
+{%- block doctype -%}
+    <!DOCTYPE html>
+{%- endblock -%}
+{% block extrahead %}
+    {% if not favicon %}
+        <link rel="icon"
+              type="image/svg+xml"
+              href="{{ pathto('_static/favicon.svg', 1) }}">
+    {% endif %}
+    {# Prevent flash of wrong theme #}
+    <script>
+(function() {
+  var stored = localStorage.getItem('lumina-theme');
+  if (stored === 'dark' || stored === 'light') {
+    document.documentElement.setAttribute('data-theme', stored);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+    </script>
+    <meta name="lumina-search-backend" content="{{ theme_search_backend }}">
+    <meta name="lumina-base-url" content="{{ pathto('', 1) }}">
+    {% if theme_accent_color != "#10b981" %}
+        <style>:root,[data-theme="light"],[data-theme="dark"]{--lumina-accent:{{ theme_accent_color }};}</style>
+    {% endif %}
+{% endblock %}
+{% block header %}{% endblock %}
+{% block relbar1 %}{% endblock %}
+{% block relbar2 %}{% endblock %}
+{%- block content %}
+    <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
+    <div id="lumina-header">{% include "components/header.html" %}</div>
+    <div class="lumina-wrapper">
+        <aside id="lumina-sidebar">
+            {% include "components/sidebar.html" %}
+        </aside>
+        <main id="lumina-content" data-pagefind-body>
+            <div class="lumina-content-toolbar">
+                {% if theme_show_breadcrumbs == "true" %}
+                    <div class="min-w-0 flex-1">{% include "components/breadcrumbs.html" %}</div>
+                {% endif %}
+                <button x-data="copyPage()"
+                        @click="copy()"
+                        class="lumina-copy-page"
+                        :class="{ 'is-copied': copied }"
+                        :aria-label="copied ? 'Copied to clipboard' : 'Copy page as Markdown'"
+                        :title="copied ? 'Copied!' : 'Copy page as Markdown'"
+                        type="button">
+                    <svg x-show="!copied"
+                         class="h-3.5 w-3.5"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg>
+                    <svg x-show="copied"
+                         x-cloak
+                         class="h-3.5 w-3.5"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span class="hidden sm:inline"
+                          x-text="copied ? 'Copied!' : 'Copy Markdown'"></span>
+                </button>
+            </div>
+            <article class="lumina-article" x-data="headerLinks()">
+                {% block body %}{% endblock %}
+            </article>
+            {% if theme_show_prev_next == "true" %}
+                {% include "components/footer.html" %}
+            {% endif %}
+        </main>
+        {% if theme_show_toc == "true" %}
+            <aside id="lumina-toc">
+                {% include "components/toc.html" %}
+            </aside>
+        {% endif %}
+    </div>
+    {% include "components/search-modal.html" %}
+{%- endblock %}
+{% block footer %}{% endblock %}
+{%- block scripts %}
+    {{ super() }}
+    <script src="{{ pathto('_static/lumina.js', 1) }}"></script>
+{%- endblock %}

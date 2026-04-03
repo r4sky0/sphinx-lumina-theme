@@ -1,0 +1,87 @@
+<div x-data="sidebar()">
+    {# Desktop sidebar #}
+    <div class="hidden h-[calc(100vh-3.5rem)] flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
+        <nav class="lumina-sidebar-nav" aria-label="Main navigation">
+            {{ toctree(maxdepth=theme_nav_depth|int, collapse=False, titles_only=True, includehidden=True) }}
+        </nav>
+        <div class="lumina-sidebar-footer">
+            Built with
+            <a href="https://github.com/ralph089/sphinx-lumina-theme"
+               target="_blank"
+               rel="noopener">
+                <svg class="lumina-sidebar-footer-icon"
+                     viewBox="0 0 32 32"
+                     fill="none"
+                     aria-hidden="true">
+                    <path d="M16 3L28 27H4L16 3Z" stroke="currentColor" stroke-width="2.5" fill="none" />
+                    <path d="M16 10L8 27H16" fill="currentColor" opacity="0.15" />
+                    <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
+                </svg>
+            Lumina</a>
+            <span class="lumina-sidebar-footer-version">v{{ lumina_version }}</span>
+        </div>
+    </div>
+    {# Mobile sidebar overlay #}
+    <template x-teleport="body">
+        <div>
+            {# Backdrop #}
+            <div x-show="mobileOpen"
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="fixed inset-0 top-14 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
+                 @click="close()"></div>
+            {# Drawer #}
+            <div id="lumina-sidebar-drawer"
+                 x-show="mobileOpen"
+                 x-transition:enter="transition ease-out duration-250"
+                 x-transition:enter-start="-translate-x-full"
+                 x-transition:enter-end="translate-x-0"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="translate-x-0"
+                 x-transition:leave-end="-translate-x-full"
+                 class="fixed inset-y-0 top-14 left-0 z-50 w-[280px] overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:hidden">
+                {# Close button #}
+                <button data-sidebar-close
+                        @click="close()"
+                        class="absolute top-4 right-4 rounded-md p-1 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] cursor-pointer"
+                        aria-label="Close navigation">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                {# Flattened nav links for mobile #}
+                {% if theme_nav_links and theme_nav_links != "" %}
+                    <div class="mb-4 border-b border-[var(--lumina-border)] pb-4">
+                        {% for link in theme_nav_links %}
+                            {% if link.children is defined %}
+                                <p class="px-3 pt-3 pb-1 text-xs font-semibold uppercase tracking-wide text-[var(--lumina-text-muted)]">
+                                    {{ link.title }}
+                                </p>
+                                {% for child in link.children %}
+                                    <a href="{{ child.url }}"
+                                       class="block px-3 py-1.5 text-sm text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] rounded-md transition-colors no-underline">{{ child.title }}</a>
+                                {% endfor %}
+                            {% else %}
+                                <a href="{{ link.url }}"
+                                   class="block px-3 py-1.5 text-sm text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] rounded-md transition-colors no-underline">{{ link.title }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <nav class="lumina-sidebar-nav" aria-label="Main navigation">
+                    {{ toctree(maxdepth=theme_nav_depth|int, collapse=False, titles_only=True, includehidden=True) }}
+                </nav>
+                <div class="lumina-sidebar-footer">
+                    <a href="https://github.com/ralph089/sphinx-lumina-theme"
+                       target="_blank"
+                       rel="noopener">Lumina</a>
+                    <span class="lumina-sidebar-footer-version">v{{ lumina_version }}</span>
+                </div>
+            </div>
+        </div>
+    </template>
+</div>

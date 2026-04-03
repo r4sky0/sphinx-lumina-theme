@@ -1,0 +1,218 @@
+/* ── Python domain (API documentation) ── */
+
+/* Signature wrapper (dl.py.function, dl.py.class, dl.py.method, etc.) */
+dl.py {
+  margin: 1.25rem 0;
+}
+
+/* Signature line */
+dt.sig {
+  background: var(--lumina-code-bg);
+  border: 1px solid color-mix(in srgb, var(--lumina-accent) 10%, var(--lumina-border));
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  overflow-x: auto;
+  position: relative;
+}
+
+dt.sig:target {
+  border-color: var(--lumina-accent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--lumina-accent) 20%, transparent);
+}
+
+/* Show headerlink on sig hover */
+dt.sig:hover > a.headerlink {
+  opacity: 0.6;
+}
+
+/* Function / class / attribute name */
+.sig-name.descname {
+  font-weight: 600;
+  color: var(--lumina-text);
+}
+
+/* Class prefix (e.g. "EventEmitter.") */
+.sig-prename.descclassname {
+  color: var(--lumina-text-muted);
+}
+
+/* "class" keyword prefix */
+dt.sig .property .k {
+  color: var(--lumina-text-muted);
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* Parentheses */
+.sig-paren {
+  color: var(--lumina-text-muted);
+}
+
+/* Parameters — reset italic, apply muted color for punctuation */
+em.sig-param {
+  font-style: normal;
+}
+
+/* Parameter names */
+em.sig-param .n {
+  color: var(--lumina-text);
+}
+
+/* Type-hint colons & brackets */
+em.sig-param .p,
+.property .p {
+  color: var(--lumina-text-muted);
+}
+
+/* Default value */
+em.sig-param .default_value {
+  color: var(--lumina-text-muted);
+}
+
+/* Operators (=, *, **) */
+em.sig-param .o,
+.property .o {
+  color: var(--lumina-text-muted);
+}
+
+/* Return arrow + type */
+.sig-return-icon {
+  color: var(--lumina-text-muted);
+  padding: 0 0.125rem;
+}
+
+.sig-return-typehint {
+  color: var(--lumina-text-muted);
+}
+
+/* Type annotations on attributes/data */
+dt.sig > .property {
+  color: var(--lumina-text-muted);
+}
+
+/* ── Definition body ── */
+dl.py > dd {
+  margin: 0;
+  padding: 0.75rem 0 0.25rem 1.25rem;
+  border-left: 2px solid color-mix(in srgb, var(--lumina-accent) 20%, var(--lumina-border));
+  margin-left: 0.5rem;
+}
+
+dl.py > dd > p:last-child {
+  margin-bottom: 0.5rem;
+}
+
+/* ── Field lists (Parameters, Returns, Raises) ── */
+dl.field-list {
+  margin: 0.5rem 0 0;
+}
+
+dl.field-list dt {
+  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--lumina-text-muted);
+  margin-top: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  background: color-mix(in srgb, var(--lumina-accent) 4%, var(--lumina-bg-secondary));
+  border-bottom: 1px solid var(--lumina-border);
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+
+dl.field-list dt:first-child {
+  margin-top: 0;
+}
+
+/* Hide the colon after field labels — the uppercase label is enough */
+dl.field-list .colon {
+  display: none;
+}
+
+dl.field-list dd {
+  margin: 0.375rem 0 0;
+  padding: 0;
+}
+
+/* Parameter list items within field lists */
+dl.field-list dd ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+dl.field-list dd li {
+  margin-bottom: 0.25rem;
+}
+
+dl.field-list dd li p {
+  margin-bottom: 0;
+}
+
+/* ── Cross-reference links ── */
+.lumina-article a code.xref {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.875em;
+  color: var(--lumina-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: color-mix(in srgb, var(--lumina-accent) 40%, transparent);
+  transition: text-decoration-color 0.15s;
+}
+
+.lumina-article a:hover code.xref {
+  text-decoration-color: var(--lumina-accent);
+}
+
+/* ── API signature syntax coloring ── */
+dt.sig .n { color: var(--lumina-text); }           /* names */
+dt.sig .k { color: #8b5cf6; }                      /* keywords (class, def) */
+dt.sig .nb { color: var(--lumina-accent); }         /* builtins (str, int, etc.) */
+
+[data-theme="dark"] dt.sig .k { color: #a78bfa; }
+
+/* ── Version directives ── */
+.versionadded,
+.versionchanged,
+div.deprecated {
+  margin: 1rem 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.9375rem;
+}
+
+.versionadded {
+  border-left: 3px solid var(--lumina-adm-tip);
+  background: color-mix(in srgb, var(--lumina-adm-tip) 5%, var(--lumina-bg));
+}
+
+.versionchanged {
+  border-left: 3px solid var(--lumina-adm-note);
+  background: color-mix(in srgb, var(--lumina-adm-note) 5%, var(--lumina-bg));
+}
+
+div.deprecated {
+  border-left: 3px solid var(--lumina-adm-warning);
+  background: color-mix(in srgb, var(--lumina-adm-warning) 5%, var(--lumina-bg));
+}
+
+.versionmodified {
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+
+.versionmodified.added { color: var(--lumina-adm-tip); }
+.versionmodified.changed { color: var(--lumina-adm-note); }
+.versionmodified.deprecated { color: var(--lumina-adm-warning-text); }
+
+/* Version directives contain a single p — remove its margin */
+.versionadded > p,
+.versionchanged > p,
+div.deprecated > p {
+  margin-bottom: 0;
+}

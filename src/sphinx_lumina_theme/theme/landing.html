@@ -1,0 +1,51 @@
+{# Landing page template — optional hero section with configurable content.
+   Activate via page metadata: template: landing.html
+   Hero fields (all optional): hero_title, hero_subtitle, hero_primary_url,
+   hero_primary_text, hero_secondary_url, hero_secondary_text, hero_tags #}
+{% extends "layout.html" %}
+{%- block content %}
+    <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
+    <div id="lumina-header">{% include "components/header.html" %}</div>
+    {% if hero_title is defined and hero_title %}
+        <section class="lumina-hero">
+            <div class="lumina-hero-content">
+                <h1 class="lumina-hero-title">{{ hero_title }}</h1>
+                {% if hero_subtitle is defined and hero_subtitle %}<p class="lumina-hero-subtitle">{{ hero_subtitle }}</p>{% endif %}
+                {% if hero_primary_text is defined and hero_primary_text %}
+                    <div class="lumina-hero-actions">
+                        <a href="{{ pathto(hero_primary_url) if hero_primary_url is defined and hero_primary_url else '#' }}"
+                           class="lumina-hero-btn lumina-hero-btn-primary">
+                            {{ hero_primary_text }}
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2.5"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        {% if hero_secondary_text is defined and hero_secondary_text %}
+                            <a href="{{ hero_secondary_url if hero_secondary_url is defined else '#' }}"
+                               class="lumina-hero-btn lumina-hero-btn-secondary"
+                               {% if hero_secondary_url is defined and '://' in hero_secondary_url %}target="_blank" rel="noopener"{% endif %}>
+                                {{ hero_secondary_text }}
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {% if hero_tags is defined and hero_tags %}
+                    <div class="lumina-hero-tags">
+                        {% for tag in hero_tags.split(',') %}<span>{{ tag.strip() }}</span>{% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+    {% endif %}
+    <main id="lumina-content" class="lumina-landing-content" data-pagefind-body>
+        <article class="lumina-article">
+            {% block body %}{{ body }}{% endblock %}
+        </article>
+    </main>
+    {% include "components/search-modal.html" %}
+{%- endblock %}

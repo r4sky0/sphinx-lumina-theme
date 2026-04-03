@@ -1,0 +1,149 @@
+/* ── Landing page hero ── */
+
+.lumina-hero {
+  position: relative;
+  padding: 5rem 1.5rem 4rem;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, color-mix(in srgb, var(--lumina-accent) 10%, transparent), transparent),
+    linear-gradient(180deg, color-mix(in srgb, var(--lumina-accent) 4%, var(--lumina-bg)) 0%, var(--lumina-bg) 100%);
+  border-bottom: 1px solid var(--lumina-border);
+  margin-top: 3.5rem; /* clear fixed header */
+}
+
+.lumina-hero-content {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.lumina-hero-title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--lumina-text);
+  margin: 0 0 1rem;
+  animation: lumina-hero-enter 0.6s ease-out both;
+}
+
+.lumina-hero-subtitle {
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--lumina-text-muted);
+  max-width: 36rem;
+  margin: 0 auto 2rem;
+  animation: lumina-hero-enter 0.6s ease-out 0.1s both;
+}
+
+.lumina-hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  animation: lumina-hero-enter 0.6s ease-out 0.2s both;
+}
+
+.lumina-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.lumina-hero-btn svg {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.lumina-hero-btn-primary {
+  background-color: var(--lumina-accent);
+  color: #fff;
+  box-shadow:
+    0 1px 3px color-mix(in srgb, var(--lumina-accent) 30%, transparent),
+    0 4px 12px color-mix(in srgb, var(--lumina-accent) 15%, transparent);
+}
+
+.lumina-hero-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 2px 6px color-mix(in srgb, var(--lumina-accent) 35%, transparent),
+    0 8px 20px color-mix(in srgb, var(--lumina-accent) 20%, transparent);
+}
+
+.lumina-hero-btn-primary:hover svg {
+  transform: translateX(2px);
+}
+
+.lumina-hero-btn-primary:active {
+  transform: translateY(0);
+}
+
+.lumina-hero-btn-secondary {
+  background-color: transparent;
+  color: var(--lumina-text);
+  border: 1px solid var(--lumina-border);
+}
+
+.lumina-hero-btn-secondary:hover {
+  color: var(--lumina-accent);
+  border-color: color-mix(in srgb, var(--lumina-accent) 40%, var(--lumina-border));
+  background-color: color-mix(in srgb, var(--lumina-accent) 5%, transparent);
+}
+
+.lumina-hero-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  animation: lumina-hero-enter 0.6s ease-out 0.3s both;
+}
+
+.lumina-hero-tags span {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--lumina-text-muted);
+  background-color: color-mix(in srgb, var(--lumina-accent) 8%, var(--lumina-bg-secondary));
+  border: 1px solid color-mix(in srgb, var(--lumina-accent) 12%, var(--lumina-border));
+  border-radius: 9999px;
+}
+
+/* ── Landing page content area ── */
+
+.lumina-landing-content {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2rem 2rem 4rem;
+}
+
+/* ── Hero entrance animation ── */
+
+@keyframes lumina-hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumina-hero-title,
+  .lumina-hero-subtitle,
+  .lumina-hero-actions,
+  .lumina-hero-tags {
+    animation: none;
+  }
+}

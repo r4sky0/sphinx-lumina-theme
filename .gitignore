@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+*.whl
+
+# Node
+node_modules/
+
+# Build output
+docs/_build/
+src/sphinx_lumina_theme/theme/static/lumina.css
+src/sphinx_lumina_theme/theme/static/lumina.js
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.venv/
+
+# Tools
+.superpowers/
+.agents/
+.claude/
+.playwright-mcp/
+.worktrees/
+skills-lock.json
+
+# Screenshots
+*.png
