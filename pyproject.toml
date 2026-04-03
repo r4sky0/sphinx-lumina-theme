@@ -38,6 +38,9 @@ artifacts = ["src/sphinx_lumina_theme/theme/static/lumina.css", "src/sphinx_lumi
 [tool.hatch.build.targets.wheel]
 packages = ["src/sphinx_lumina_theme"]
 
+[tool.semantic_release.remote]
+ignore_token_for_push = true
+
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
 version_variables = ["src/sphinx_lumina_theme/__init__.py:__version__"]
