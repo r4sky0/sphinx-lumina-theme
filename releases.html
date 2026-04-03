@@ -156,15 +156,17 @@
                 
             
             
-            <button data-sidebar-toggle
-                    class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] lg:hidden cursor-pointer"
-                    aria-label="Toggle navigation"
-                    aria-expanded="false"
-                    aria-controls="lumina-sidebar-drawer">
-                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
+            
+                <button data-sidebar-toggle
+                        class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] lg:hidden cursor-pointer"
+                        aria-label="Toggle navigation"
+                        aria-expanded="false"
+                        aria-controls="lumina-sidebar-drawer">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            
         </div>
     </div>
 </header></div>
@@ -213,7 +215,7 @@
                     <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                 </svg>
             Lumina</a>
-            <span class="lumina-sidebar-footer-version">v1.8.7</span>
+            <span class="lumina-sidebar-footer-version">v1.8.8</span>
         </div>
     </div>
     
@@ -280,7 +282,7 @@
                     <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                        target="_blank"
                        rel="noopener">Lumina</a>
-                    <span class="lumina-sidebar-footer-version">v1.8.7</span>
+                    <span class="lumina-sidebar-footer-version">v1.8.8</span>
                 </div>
             </div>
         </div>
@@ -341,10 +343,21 @@
             <article class="lumina-article" x-data="headerLinks()">
                 <section class="tex2jax_ignore mathjax_ignore" id="releases">
 <h1>Releases<a class="headerlink" href="#releases" title="Link to this heading">¶</a></h1>
-<section id="v1-8-7-2026-04-03">
-<h2>v1.8.7 (2026-04-03)<a class="headerlink" href="#v1-8-7-2026-04-03" title="Link to this heading">¶</a></h2>
+<section id="v1-8-8-2026-04-03">
+<h2>v1.8.8 (2026-04-03)<a class="headerlink" href="#v1-8-8-2026-04-03" title="Link to this heading">¶</a></h2>
 <section id="bug-fixes">
 <h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Remove non-functional mobile menu from landing pages
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/13">#13</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/bd6674d87fa0a4aca3dc3e92b715224bfe21afd4"><code class="docutils literal notranslate"><span class="pre">bd6674d</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-7-2026-04-03">
+<h2>v1.8.7 (2026-04-03)<a class="headerlink" href="#v1-8-7-2026-04-03" title="Link to this heading">¶</a></h2>
+<section id="id1">
+<h3>Bug Fixes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Outdated content and inaccuracies across documentation
 (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/12">#12</a>,
@@ -373,8 +386,8 @@
 </section>
 <section id="v1-8-6-2026-04-03">
 <h2>v1.8.6 (2026-04-03)<a class="headerlink" href="#v1-8-6-2026-04-03" title="Link to this heading">¶</a></h2>
-<section id="id1">
-<h3>Bug Fixes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<section id="id2">
+<h3>Bug Fixes<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Resolve pagefind import URL against document instead of script
 (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/10">#10</a>,
@@ -384,8 +397,8 @@
 </section>
 <section id="v1-8-5-2026-04-03">
 <h2>v1.8.5 (2026-04-03)<a class="headerlink" href="#v1-8-5-2026-04-03" title="Link to this heading">¶</a></h2>
-<section id="id2">
-<h3>Bug Fixes<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<section id="id3">
+<h3>Bug Fixes<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Run semantic-release natively to use deploy key
 (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/8">#8</a>,
@@ -396,8 +409,8 @@
 </ul>
 <details>
 <summary>Maintenance</summary>
-<section id="id3">
-<h4>Chores<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
+<section id="id4">
+<h4>Chores<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Deployment preview in PRs (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/7">#7</a>,
 <a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/6efd807485f2a8eda7bf537a7cd753ebe3247489"><code class="docutils literal notranslate"><span class="pre">6efd807</span></code></a>)</p></li>
@@ -471,8 +484,12 @@
              x-init="init()">
             <ul>
 <li><a class="reference internal" href="#">Releases</a><ul>
+<li><a class="reference internal" href="#v1-8-8-2026-04-03">v1.8.8 (2026-04-03)</a><ul>
+<li><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#v1-8-7-2026-04-03">v1.8.7 (2026-04-03)</a><ul>
-<li><a class="reference internal" href="#bug-fixes">Bug Fixes</a><ul>
+<li><a class="reference internal" href="#id1">Bug Fixes</a><ul>
 <li><a class="reference internal" href="#build-system">Build System</a></li>
 <li><a class="reference internal" href="#chores">Chores</a></li>
 </ul>
@@ -480,12 +497,12 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#v1-8-6-2026-04-03">v1.8.6 (2026-04-03)</a><ul>
-<li><a class="reference internal" href="#id1">Bug Fixes</a></li>
+<li><a class="reference internal" href="#id2">Bug Fixes</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#v1-8-5-2026-04-03">v1.8.5 (2026-04-03)</a><ul>
-<li><a class="reference internal" href="#id2">Bug Fixes</a><ul>
-<li><a class="reference internal" href="#id3">Chores</a></li>
+<li><a class="reference internal" href="#id3">Bug Fixes</a><ul>
+<li><a class="reference internal" href="#id4">Chores</a></li>
 </ul>
 </li>
 </ul>
