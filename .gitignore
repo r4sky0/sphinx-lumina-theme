@@ -42,3 +42,4 @@ skills-lock.json
 
 # Screenshots
 *.png
+!docs/assets/banner.png

@@ -7,6 +7,10 @@
 
 A modern, clean Sphinx documentation theme built with **Tailwind CSS v4** and **Alpine.js**.
 
+<a href="https://r4sky0.github.io/sphinx-lumina-theme/">
+  <img src="docs/assets/banner.png" alt="Sphinx Lumina Theme — Getting Started page showing sidebar navigation, content area with code blocks, and table of contents" width="100%">
+</a>
+
 **[View the documentation →](https://r4sky0.github.io/sphinx-lumina-theme/)**
 
 ---
