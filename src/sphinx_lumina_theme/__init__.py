@@ -6,7 +6,7 @@ from sphinx.util import logging
 
 logger = logging.getLogger(__name__)
 
-__version__ = "1.8.7"
+__version__ = "1.8.8"
 
 _HERO_FIELDS = (
     "hero_title",

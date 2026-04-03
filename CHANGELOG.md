@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v1.8.8 (2026-04-03)
+
+### Bug Fixes
+
+- Remove non-functional mobile menu from landing pages
+  ([#13](https://github.com/r4sky0/sphinx-lumina-theme/pull/13),
+  [`bd6674d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/bd6674d87fa0a4aca3dc3e92b715224bfe21afd4))
+
+
 ## v1.8.7 (2026-04-03)
 
 ### Bug Fixes
