@@ -102,7 +102,8 @@ export default function searchModal() {
     async loadSearchEngine() {
       if (this.backend === "pagefind") {
         try {
-          this.pagefind = await import(`${this.baseUrl}_pagefind/pagefind.js`);
+          const pagefindUrl = new URL(`${this.baseUrl}_pagefind/pagefind.js`, document.baseURI).href;
+          this.pagefind = await import(pagefindUrl);
           await this.pagefind.init();
           this.loaded = true;
         } catch (e) {

@@ -117,3 +117,45 @@ def test_prev_next_navigation(page: Page, live_server: str):
     expect(footer_nav).to_be_visible()
     nav_links = footer_nav.locator("a")
     assert nav_links.count() >= 1
+
+
+def test_pagefind_loads_without_errors(page: Page, live_server: str):
+    """Pagefind should load from the correct URL without 404 errors.
+
+    Regression test: import() in a classic script resolves relative URLs
+    against the script's location (_static/), not the document URL. This
+    caused pagefind.js to be fetched from _static/_pagefind/ instead of
+    _pagefind/, resulting in a 404.
+    """
+    failed_requests = []
+    page.on("requestfailed", lambda req: failed_requests.append(req.url))
+
+    page.goto(live_server)
+    page.wait_for_function("() => window.Alpine !== undefined")
+
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    expect(modal).to_be_visible()
+
+    # Type a query — this triggers Pagefind load + search in one step
+    modal.locator("input[type='search']").fill("getting started")
+
+    # Wait for actual result links to appear (Pagefind loaded & returned hits)
+    page.wait_for_selector("#lumina-search-modal a[href]", timeout=10000)
+
+    # The "Search requires Pagefind indexing" error must NOT be visible
+    error_msg = modal.get_by_text("Search requires Pagefind indexing")
+    expect(error_msg).to_have_count(0)
+
+    # No requests to _pagefind/ should have 404'd
+    pagefind_failures = [u for u in failed_requests if "_pagefind" in u]
+    assert pagefind_failures == [], (
+        f"Pagefind resources failed to load: {pagefind_failures}"
+    )
+
+    # Pagefind results contain <mark> highlighted excerpts — the Sphinx
+    # fallback does not. This confirms the Pagefind backend is active.
+    excerpt_html = page.inner_html("#lumina-search-modal a[href] span:last-child")
+    assert "<mark>" in excerpt_html, (
+        "Expected Pagefind excerpt with <mark> highlights, got Sphinx fallback"
+    )
