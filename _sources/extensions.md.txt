@@ -270,7 +270,7 @@ myst_enable_extensions = [
 ]
 
 # Copy button: strip shell prompts
-copybutton_prompt_text = r">>> |\.\.\. |\$ "
+copybutton_prompt_text = r">>> |\.\.\. |\$ |> "
 copybutton_prompt_is_regexp = True
 
 # Intersphinx: link to Python and Sphinx docs

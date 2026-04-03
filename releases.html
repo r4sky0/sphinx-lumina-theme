@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Typography" href="reference/typography.html" />
-    <link rel="prev" title="Troubleshooting" href="troubleshooting.html" />
+    <link rel="prev" title="Extensions" href="extensions.html" />
     
         <link rel="icon"
               type="image/svg+xml"
@@ -176,10 +176,11 @@
         <nav class="lumina-sidebar-nav" aria-label="Main navigation">
             <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="customization.html">Customization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extensions.html">Extensions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customization.html">Customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions.html">Extensions</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Releases</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
@@ -212,7 +213,7 @@
                     <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                 </svg>
             Lumina</a>
-            <span class="lumina-sidebar-footer-version">v1.8.6</span>
+            <span class="lumina-sidebar-footer-version">v1.8.7</span>
         </div>
     </div>
     
@@ -252,10 +253,11 @@
                 <nav class="lumina-sidebar-nav" aria-label="Main navigation">
                     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="customization.html">Customization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extensions.html">Extensions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customization.html">Customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions.html">Extensions</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Releases</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
@@ -278,7 +280,7 @@
                     <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                        target="_blank"
                        rel="noopener">Lumina</a>
-                    <span class="lumina-sidebar-footer-version">v1.8.6</span>
+                    <span class="lumina-sidebar-footer-version">v1.8.7</span>
                 </div>
             </div>
         </div>
@@ -339,10 +341,40 @@
             <article class="lumina-article" x-data="headerLinks()">
                 <section class="tex2jax_ignore mathjax_ignore" id="releases">
 <h1>Releases<a class="headerlink" href="#releases" title="Link to this heading">¶</a></h1>
-<section id="v1-8-6-2026-04-03">
-<h2>v1.8.6 (2026-04-03)<a class="headerlink" href="#v1-8-6-2026-04-03" title="Link to this heading">¶</a></h2>
+<section id="v1-8-7-2026-04-03">
+<h2>v1.8.7 (2026-04-03)<a class="headerlink" href="#v1-8-7-2026-04-03" title="Link to this heading">¶</a></h2>
 <section id="bug-fixes">
 <h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Outdated content and inaccuracies across documentation
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/12">#12</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/d996ca920dfa62dccdb57078c2e3b1adc57b4577"><code class="docutils literal notranslate"><span class="pre">d996ca9</span></code></a>)</p></li>
+</ul>
+<details>
+<summary>Maintenance</summary>
+<section id="build-system">
+<h4>Build System<a class="headerlink" href="#build-system" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>deps-dev</strong>: Bump esbuild from 0.27.5 to 0.28.0
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/3">#3</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/bf7e444b5cfd1f861ee9340ae3977f89ca18fd0d"><code class="docutils literal notranslate"><span class="pre">bf7e444</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="chores">
+<h4>Chores<a class="headerlink" href="#chores" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>deps</strong>: Bump actions/github-script from 7 to 8
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/2">#2</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/eaa7d5513beb7744b27e367f2a27898f89a54073"><code class="docutils literal notranslate"><span class="pre">eaa7d55</span></code></a>)</p></li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="v1-8-6-2026-04-03">
+<h2>v1.8.6 (2026-04-03)<a class="headerlink" href="#v1-8-6-2026-04-03" title="Link to this heading">¶</a></h2>
+<section id="id1">
+<h3>Bug Fixes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Resolve pagefind import URL against document instead of script
 (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/10">#10</a>,
@@ -352,8 +384,8 @@
 </section>
 <section id="v1-8-5-2026-04-03">
 <h2>v1.8.5 (2026-04-03)<a class="headerlink" href="#v1-8-5-2026-04-03" title="Link to this heading">¶</a></h2>
-<section id="id1">
-<h3>Bug Fixes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<section id="id2">
+<h3>Bug Fixes<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Run semantic-release natively to use deploy key
 (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/8">#8</a>,
@@ -364,8 +396,8 @@
 </ul>
 <details>
 <summary>Maintenance</summary>
-<section id="chores">
-<h4>Chores<a class="headerlink" href="#chores" title="Link to this heading">¶</a></h4>
+<section id="id3">
+<h4>Chores<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Deployment preview in PRs (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/7">#7</a>,
 <a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/6efd807485f2a8eda7bf537a7cd753ebe3247489"><code class="docutils literal notranslate"><span class="pre">6efd807</span></code></a>)</p></li>
@@ -393,10 +425,10 @@
     
         <nav class="flex justify-between gap-4 mb-8" aria-label="Page navigation">
             
-                <a href="troubleshooting.html"
+                <a href="extensions.html"
                    class="group flex flex-col items-start gap-1 rounded-lg border border-[var(--lumina-border)] p-4 no-underline hover:border-[var(--lumina-accent)] hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
                     <span class="text-xs text-[var(--lumina-text-muted)]">Previous</span>
-                    <span class="text-sm font-medium text-[var(--lumina-text)] group-hover:text-[var(--lumina-accent)] transition-colors">&larr; Troubleshooting</span>
+                    <span class="text-sm font-medium text-[var(--lumina-text)] group-hover:text-[var(--lumina-accent)] transition-colors">&larr; Extensions</span>
                 </a>
             
             
@@ -439,13 +471,21 @@
              x-init="init()">
             <ul>
 <li><a class="reference internal" href="#">Releases</a><ul>
+<li><a class="reference internal" href="#v1-8-7-2026-04-03">v1.8.7 (2026-04-03)</a><ul>
+<li><a class="reference internal" href="#bug-fixes">Bug Fixes</a><ul>
+<li><a class="reference internal" href="#build-system">Build System</a></li>
+<li><a class="reference internal" href="#chores">Chores</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#v1-8-6-2026-04-03">v1.8.6 (2026-04-03)</a><ul>
-<li><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
+<li><a class="reference internal" href="#id1">Bug Fixes</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#v1-8-5-2026-04-03">v1.8.5 (2026-04-03)</a><ul>
-<li><a class="reference internal" href="#id1">Bug Fixes</a><ul>
-<li><a class="reference internal" href="#chores">Chores</a></li>
+<li><a class="reference internal" href="#id2">Bug Fixes</a><ul>
+<li><a class="reference internal" href="#id3">Chores</a></li>
 </ul>
 </li>
 </ul>

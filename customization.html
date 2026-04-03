@@ -176,10 +176,11 @@
         <nav class="lumina-sidebar-nav" aria-label="Main navigation">
             <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Customization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extensions.html">Extensions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="getting-started.html">Getting Started</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions.html">Extensions</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Releases</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
@@ -212,7 +213,7 @@
                     <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                 </svg>
             Lumina</a>
-            <span class="lumina-sidebar-footer-version">v1.8.6</span>
+            <span class="lumina-sidebar-footer-version">v1.8.7</span>
         </div>
     </div>
     
@@ -252,10 +253,11 @@
                 <nav class="lumina-sidebar-nav" aria-label="Main navigation">
                     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Customization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extensions.html">Extensions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="getting-started.html">Getting Started</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions.html">Extensions</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Releases</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
@@ -278,7 +280,7 @@
                     <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                        target="_blank"
                        rel="noopener">Lumina</a>
-                    <span class="lumina-sidebar-footer-version">v1.8.6</span>
+                    <span class="lumina-sidebar-footer-version">v1.8.7</span>
                 </div>
             </div>
         </div>
@@ -293,6 +295,17 @@
      aria-label="Breadcrumb">
     <a href="index.html"
        class="whitespace-nowrap hover:text-[var(--lumina-accent)] no-underline transition-colors">Sphinx Lumina Theme  documentation</a>
+    
+        
+            <svg class="h-3.5 w-3.5 flex-shrink-0"
+                 fill="none"
+                 stroke="currentColor"
+                 viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <a href="getting-started.html"
+               class="whitespace-nowrap hover:text-[var(--lumina-accent)] no-underline transition-colors">Getting Started</a>
+        
     
     <svg class="h-3.5 w-3.5 flex-shrink-0"
          fill="none"
@@ -398,7 +411,7 @@
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nav_links</span></code></p></td>
 <td><p>list</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
-<td><p>Links displayed in the header navigation bar. Each item needs <code class="docutils literal notranslate"><span class="pre">title</span></code> and <code class="docutils literal notranslate"><span class="pre">url</span></code> keys. Add <code class="docutils literal notranslate"><span class="pre">&quot;external&quot;:</span> <span class="pre">True</span></code> for off-site links.</p></td>
+<td><p>Links displayed in the header navigation bar. Each item needs <code class="docutils literal notranslate"><span class="pre">title</span></code> and <code class="docutils literal notranslate"><span class="pre">url</span></code> keys. Add <code class="docutils literal notranslate"><span class="pre">&quot;external&quot;:</span> <span class="pre">True</span></code> for off-site links, or <code class="docutils literal notranslate"><span class="pre">&quot;children&quot;</span></code> with a list of <code class="docutils literal notranslate"><span class="pre">{title,</span> <span class="pre">url}</span></code> items for dropdown menus.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nav_depth</span></code></p></td>
 <td><p>string</p></td>
@@ -535,7 +548,13 @@
     <span class="c1"># Navigation</span>
     <span class="s2">&quot;nav_links&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Guide&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;getting-started&quot;</span><span class="p">},</span>
-        <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Reference&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;reference/typography&quot;</span><span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Reference&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;children&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Typography&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;reference/typography&quot;</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Code Blocks&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;reference/code-blocks&quot;</span><span class="p">},</span>
+            <span class="p">],</span>
+        <span class="p">},</span>
         <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;GitHub&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/you/project&quot;</span><span class="p">,</span> <span class="s2">&quot;external&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
     <span class="p">],</span>
     <span class="s2">&quot;nav_depth&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
@@ -639,14 +658,14 @@
 
 <span class="c">/* Dark mode overrides */</span>
 <span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;dark&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nv">--lumina-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#18181b</span><span class="p">;</span>
-<span class="w">    </span><span class="nv">--lumina-bg-secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#27272a</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#09090b</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-bg-secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#18181b</span><span class="p">;</span>
 <span class="w">    </span><span class="nv">--lumina-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#fafafa</span><span class="p">;</span>
 <span class="w">    </span><span class="nv">--lumina-text-muted</span><span class="p">:</span><span class="w"> </span><span class="mh">#a1a1aa</span><span class="p">;</span>
-<span class="w">    </span><span class="nv">--lumina-border</span><span class="p">:</span><span class="w"> </span><span class="mh">#3f3f46</span><span class="p">;</span>
-<span class="w">    </span><span class="nv">--lumina-accent</span><span class="p">:</span><span class="w"> </span><span class="mh">#34d399</span><span class="p">;</span>
-<span class="w">    </span><span class="nv">--lumina-accent-light</span><span class="p">:</span><span class="w"> </span><span class="mh">#064e3b</span><span class="p">;</span>
-<span class="w">    </span><span class="nv">--lumina-code-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#27272a</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-border</span><span class="p">:</span><span class="w"> </span><span class="mh">#27272a</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-accent</span><span class="p">:</span><span class="w"> </span><span class="mh">#10b981</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-accent-light</span><span class="p">:</span><span class="w"> </span><span class="mh">#022c22</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-code-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#1c1c20</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -655,13 +674,26 @@
 <section id="admonition-colors">
 <h3>Admonition Colors<a class="headerlink" href="#admonition-colors" title="Link to this heading">¶</a></h3>
 <p>Each admonition type has its own color property:</p>
-<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nv">--lumina-adm-note</span><span class="p">:</span><span class="w"> </span><span class="mh">#3b82f6</span><span class="p">;</span><span class="w">        </span><span class="c">/* Blue */</span>
-<span class="w">    </span><span class="nv">--lumina-adm-tip</span><span class="p">:</span><span class="w"> </span><span class="mh">#10b981</span><span class="p">;</span><span class="w">         </span><span class="c">/* Green */</span>
-<span class="w">    </span><span class="nv">--lumina-adm-warning</span><span class="p">:</span><span class="w"> </span><span class="mh">#f59e0b</span><span class="p">;</span><span class="w">     </span><span class="c">/* Amber */</span>
-<span class="w">    </span><span class="nv">--lumina-adm-danger</span><span class="p">:</span><span class="w"> </span><span class="mh">#ef4444</span><span class="p">;</span><span class="w">      </span><span class="c">/* Red */</span>
-<span class="w">    </span><span class="nv">--lumina-adm-important</span><span class="p">:</span><span class="w"> </span><span class="mh">#8b5cf6</span><span class="p">;</span><span class="w">   </span><span class="c">/* Purple */</span>
-<span class="w">    </span><span class="nv">--lumina-adm-seealso</span><span class="p">:</span><span class="w"> </span><span class="mh">#14b8a6</span><span class="p">;</span><span class="w">     </span><span class="c">/* Teal */</span>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="c">/* Light mode */</span>
+<span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nv">--lumina-adm-note</span><span class="p">:</span><span class="w"> </span><span class="mh">#3b82f6</span><span class="p">;</span><span class="w">           </span><span class="c">/* Blue */</span>
+<span class="w">    </span><span class="nv">--lumina-adm-tip</span><span class="p">:</span><span class="w"> </span><span class="mh">#10b981</span><span class="p">;</span><span class="w">            </span><span class="c">/* Green */</span>
+<span class="w">    </span><span class="nv">--lumina-adm-warning</span><span class="p">:</span><span class="w"> </span><span class="mh">#f59e0b</span><span class="p">;</span><span class="w">        </span><span class="c">/* Amber */</span>
+<span class="w">    </span><span class="nv">--lumina-adm-warning-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#d97706</span><span class="p">;</span><span class="w">   </span><span class="c">/* Amber (darker, for text contrast) */</span>
+<span class="w">    </span><span class="nv">--lumina-adm-danger</span><span class="p">:</span><span class="w"> </span><span class="mh">#ef4444</span><span class="p">;</span><span class="w">         </span><span class="c">/* Red */</span>
+<span class="w">    </span><span class="nv">--lumina-adm-important</span><span class="p">:</span><span class="w"> </span><span class="mh">#8b5cf6</span><span class="p">;</span><span class="w">      </span><span class="c">/* Purple */</span>
+<span class="w">    </span><span class="nv">--lumina-adm-seealso</span><span class="p">:</span><span class="w"> </span><span class="mh">#14b8a6</span><span class="p">;</span><span class="w">        </span><span class="c">/* Teal */</span>
+<span class="p">}</span>
+
+<span class="c">/* Dark mode */</span>
+<span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;dark&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nv">--lumina-adm-note</span><span class="p">:</span><span class="w"> </span><span class="mh">#60a5fa</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-adm-tip</span><span class="p">:</span><span class="w"> </span><span class="mh">#34d399</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-adm-warning</span><span class="p">:</span><span class="w"> </span><span class="mh">#fbbf24</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-adm-warning-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#f59e0b</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-adm-danger</span><span class="p">:</span><span class="w"> </span><span class="mh">#f87171</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-adm-important</span><span class="p">:</span><span class="w"> </span><span class="mh">#a78bfa</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-adm-seealso</span><span class="p">:</span><span class="w"> </span><span class="mh">#2dd4bf</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -674,10 +706,13 @@
 <li><p><strong>Source Sans 3</strong> (400, 500, 600, 700) — body text</p></li>
 <li><p><strong>JetBrains Mono</strong> (400, 500) — code blocks and inline code</p></li>
 </ul>
-<p>To use your own fonts, override the font-family in your custom CSS:</p>
-<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nv">--lumina-font-body</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Inter&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">system-ui</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
-<span class="w">    </span><span class="nv">--lumina-font-code</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fira Code&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">monospace</span><span class="p">;</span>
+<p>To use your own fonts, override the font-family declarations in your custom CSS. The body font is applied on the <code class="docutils literal notranslate"><span class="pre">body</span></code> element and code fonts are set on <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">pre</span></code>, and <code class="docutils literal notranslate"><span class="pre">.highlight</span></code> elements:</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-family</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Inter&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">system-ui</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">code</span><span class="o">,</span><span class="w"> </span><span class="nt">pre</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">highlight</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-family</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fira Code&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ui-monospace</span><span class="p">,</span><span class="w"> </span><span class="kc">monospace</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
