@@ -5,24 +5,48 @@ updates:
     schedule:
       interval: weekly
     groups:
-      github-actions:
+      github-actions-minor:
         patterns:
           - "*"
+        update-types:
+          - minor
+          - patch
+      github-actions-major:
+        patterns:
+          - "*"
+        update-types:
+          - major
 
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: weekly
     groups:
-      npm-dependencies:
+      npm-minor:
         patterns:
           - "*"
+        update-types:
+          - minor
+          - patch
+      npm-major:
+        patterns:
+          - "*"
+        update-types:
+          - major
 
   - package-ecosystem: pip
     directory: /
     schedule:
       interval: weekly
     groups:
-      pip-dependencies:
+      pip-minor:
         patterns:
           - "*"
+        update-types:
+          - minor
+          - patch
+      pip-major:
+        patterns:
+          - "*"
+        update-types:
+          - major
