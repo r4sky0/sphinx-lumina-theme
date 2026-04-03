@@ -2,6 +2,32 @@
 
 <!-- releases -->
 
+## v1.8.7 (2026-04-03)
+
+### Bug Fixes
+
+- Outdated content and inaccuracies across documentation
+  ([#12](https://github.com/r4sky0/sphinx-lumina-theme/pull/12),
+  [`d996ca9`](https://github.com/r4sky0/sphinx-lumina-theme/commit/d996ca920dfa62dccdb57078c2e3b1adc57b4577))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps-dev**: Bump esbuild from 0.27.5 to 0.28.0
+  ([#3](https://github.com/r4sky0/sphinx-lumina-theme/pull/3),
+  [`bf7e444`](https://github.com/r4sky0/sphinx-lumina-theme/commit/bf7e444b5cfd1f861ee9340ae3977f89ca18fd0d))
+
+#### Chores
+
+- **deps**: Bump actions/github-script from 7 to 8
+  ([#2](https://github.com/r4sky0/sphinx-lumina-theme/pull/2),
+  [`eaa7d55`](https://github.com/r4sky0/sphinx-lumina-theme/commit/eaa7d5513beb7744b27e367f2a27898f89a54073))
+
+</details>
+
+
 ## v1.8.6 (2026-04-03)
 
 ### Bug Fixes
