@@ -24,79 +24,261 @@ pre.mermaid > svg {
   background: color-mix(in srgb, var(--lumina-bg-secondary) 80%, var(--lumina-bg));
 }
 
-/* ── Fullscreen button — match Lumina style ── */
-.mermaid-fullscreen-btn {
-  background: var(--lumina-bg) !important;
-  border: 1px solid var(--lumina-border) !important;
-  border-radius: 0.375rem !important;
-  color: var(--lumina-text-muted) !important;
-  box-shadow: none !important;
-  transition: color 0.15s, background-color 0.15s, border-color 0.15s !important;
-}
-
-.mermaid-fullscreen-btn:hover {
-  color: var(--lumina-accent) !important;
-  background: var(--lumina-accent-light) !important;
-  border-color: color-mix(in srgb, var(--lumina-accent) 30%, transparent) !important;
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-/* Override dark-theme-specific fullscreen btn (handled by data-theme) */
-.mermaid-fullscreen-btn.dark-theme {
-  background: var(--lumina-bg) !important;
-  border-color: var(--lumina-border) !important;
-  color: var(--lumina-text-muted) !important;
-}
-
-.mermaid-fullscreen-btn.dark-theme:hover {
-  color: var(--lumina-accent) !important;
-  background: var(--lumina-accent-light) !important;
-  box-shadow: none !important;
-}
-
-/* ── Fullscreen modal — match Lumina style ── */
-.mermaid-fullscreen-modal {
-  background: color-mix(in srgb, var(--lumina-bg) 98%, transparent) !important;
-}
-
-.mermaid-fullscreen-modal.dark-theme {
-  background: color-mix(in srgb, var(--lumina-bg) 98%, transparent) !important;
-}
-
-.mermaid-container-fullscreen {
-  background: var(--lumina-bg) !important;
+/* ── Fullscreen button — match Lumina copy-button pattern ──
+   Uses body-prefix specificity to override sphinxcontrib-mermaid
+   defaults without !important. */
+body .mermaid-fullscreen-btn {
+  background: var(--lumina-bg);
   border: 1px solid var(--lumina-border);
-  border-radius: 0.75rem !important;
-  box-shadow: 0 8px 30px color-mix(in srgb, var(--lumina-text) 10%, transparent) !important;
+  border-radius: 0.375rem;
+  color: var(--lumina-text-muted);
+  box-shadow: none;
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+  transform: none;
 }
 
-.mermaid-container-fullscreen.dark-theme {
-  background: var(--lumina-bg) !important;
-  box-shadow: 0 8px 30px color-mix(in srgb, var(--lumina-text) 15%, transparent) !important;
+body .mermaid-fullscreen-btn:hover {
+  color: var(--lumina-accent);
+  background: var(--lumina-accent-light);
+  border-color: color-mix(in srgb, var(--lumina-accent) 30%, transparent);
+  box-shadow: none;
+  transform: none;
 }
 
-.mermaid-fullscreen-close {
-  background: var(--lumina-bg) !important;
-  border: 1px solid var(--lumina-border) !important;
-  color: var(--lumina-text-muted) !important;
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--lumina-text) 8%, transparent) !important;
+body .mermaid-fullscreen-btn:focus-visible {
+  outline: 2px solid var(--lumina-accent);
+  outline-offset: 2px;
 }
 
-.mermaid-fullscreen-close:hover {
-  color: var(--lumina-accent) !important;
-  background: var(--lumina-bg) !important;
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--lumina-text) 12%, transparent) !important;
-  transform: none !important;
+/* ── Fullscreen modal ── */
+body .mermaid-fullscreen-modal {
+  background: color-mix(in srgb, var(--lumina-bg) 98%, transparent);
 }
 
-.mermaid-fullscreen-close.dark-theme {
-  background: var(--lumina-bg) !important;
-  border-color: var(--lumina-border) !important;
-  color: var(--lumina-text-muted) !important;
+body .mermaid-container-fullscreen {
+  background: var(--lumina-bg);
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--lumina-text) 10%, transparent);
 }
 
-.mermaid-fullscreen-close.dark-theme:hover {
-  color: var(--lumina-accent) !important;
-  background: var(--lumina-bg) !important;
+[data-theme="dark"] .mermaid-container-fullscreen {
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--lumina-text) 15%, transparent);
+}
+
+body .mermaid-fullscreen-close {
+  background: var(--lumina-bg);
+  border: 1px solid var(--lumina-border);
+  color: var(--lumina-text-muted);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--lumina-text) 8%, transparent);
+}
+
+body .mermaid-fullscreen-close:hover {
+  color: var(--lumina-accent);
+  background: var(--lumina-bg);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--lumina-text) 12%, transparent);
+  transform: none;
+}
+
+body .mermaid-fullscreen-close:focus-visible {
+  outline: 2px solid var(--lumina-accent);
+  outline-offset: 2px;
+}
+
+/* ── Diagram color overrides — align Mermaid palette with Lumina ──
+   Mermaid embeds <style> inside each SVG with ID-scoped selectors
+   (e.g. #mermaid-XXX .node rect) at specificity 1,1,1. External
+   selectors cannot beat this without !important. The variables below
+   keep the actual color values DRY; !important is only on the
+   fill/stroke declarations that compete with Mermaid's rules. */
+
+/* -- Shared variables for diagram colors -- */
+pre.mermaid {
+  --mermaid-node-fill: color-mix(in srgb, var(--lumina-accent) 8%, var(--lumina-bg));
+  --mermaid-node-stroke: color-mix(in srgb, var(--lumina-accent) 30%, var(--lumina-border));
+  --mermaid-edge: var(--lumina-text-muted);
+  --mermaid-text: var(--lumina-text);
+  --mermaid-label-bg: var(--lumina-bg-secondary);
+}
+
+[data-theme="dark"] pre.mermaid {
+  --mermaid-node-fill: color-mix(in srgb, var(--lumina-accent) 10%, var(--lumina-bg-secondary));
+  --mermaid-node-stroke: color-mix(in srgb, var(--lumina-accent) 25%, var(--lumina-border));
+}
+
+/* -- Flowcharts & shared node shapes -- */
+pre.mermaid .node rect,
+pre.mermaid .node polygon,
+pre.mermaid .node circle,
+pre.mermaid .node ellipse,
+pre.mermaid .node path {
+  fill: var(--mermaid-node-fill) !important;
+  stroke: var(--mermaid-node-stroke) !important;
+}
+
+pre.mermaid .node .label {
+  fill: var(--mermaid-text) !important;
+  color: var(--mermaid-text) !important;
+}
+
+pre.mermaid .edgePath .path {
+  stroke: var(--mermaid-edge) !important;
+}
+
+pre.mermaid .edgeLabel {
+  background-color: var(--mermaid-label-bg) !important;
+  color: var(--mermaid-text) !important;
+}
+
+pre.mermaid .edgeLabel rect {
+  fill: var(--mermaid-label-bg) !important;
+  opacity: 1 !important;
+}
+
+pre.mermaid .edgeLabel .label {
+  fill: var(--mermaid-text) !important;
+  color: var(--mermaid-text) !important;
+}
+
+pre.mermaid marker path {
+  fill: var(--mermaid-edge) !important;
+  stroke: var(--mermaid-edge) !important;
+}
+
+pre.mermaid .cluster rect {
+  fill: color-mix(in srgb, var(--lumina-accent) 4%, var(--lumina-bg)) !important;
+  stroke: var(--mermaid-node-stroke) !important;
+}
+
+/* -- Sequence diagrams -- */
+pre.mermaid .actor {
+  fill: var(--mermaid-node-fill) !important;
+  stroke: var(--mermaid-node-stroke) !important;
+}
+
+pre.mermaid text.actor > tspan {
+  fill: var(--mermaid-text) !important;
+}
+
+pre.mermaid .actor-line {
+  stroke: var(--lumina-border) !important;
+}
+
+pre.mermaid .messageLine0,
+pre.mermaid .messageLine1 {
+  stroke: var(--mermaid-edge) !important;
+}
+
+pre.mermaid .messageText {
+  fill: var(--mermaid-text) !important;
+}
+
+pre.mermaid .activation0 {
+  fill: color-mix(in srgb, var(--lumina-accent) 12%, var(--lumina-bg)) !important;
+  stroke: var(--mermaid-node-stroke) !important;
+}
+
+pre.mermaid .note {
+  fill: color-mix(in srgb, var(--lumina-accent) 6%, var(--lumina-bg)) !important;
+  stroke: var(--mermaid-node-stroke) !important;
+}
+
+pre.mermaid .noteText {
+  fill: var(--mermaid-text) !important;
+}
+
+pre.mermaid .loopLine {
+  stroke: var(--mermaid-node-stroke) !important;
+}
+
+pre.mermaid .loopText > tspan {
+  fill: var(--mermaid-text) !important;
+}
+
+/* -- Class diagrams -- */
+pre.mermaid .classGroup rect {
+  fill: var(--mermaid-node-fill) !important;
+  stroke: var(--mermaid-node-stroke) !important;
+}
+
+pre.mermaid .classGroup line {
+  stroke: var(--mermaid-node-stroke) !important;
+}
+
+pre.mermaid .divider path {
+  fill: var(--mermaid-node-stroke) !important;
+  stroke: var(--mermaid-node-stroke) !important;
+}
+
+pre.mermaid .classLabel .label {
+  fill: var(--mermaid-text) !important;
+}
+
+pre.mermaid .relation {
+  stroke: var(--mermaid-edge) !important;
+}
+
+/* -- State diagrams -- */
+pre.mermaid .stateGroup rect,
+pre.mermaid .stateGroup circle {
+  fill: var(--mermaid-node-fill) !important;
+  stroke: var(--mermaid-node-stroke) !important;
+}
+
+pre.mermaid .stateGroup .label text {
+  fill: var(--mermaid-text) !important;
+}
+
+pre.mermaid .transition {
+  stroke: var(--mermaid-edge) !important;
+}
+
+/* -- ER diagrams -- */
+pre.mermaid .er.entityBox {
+  fill: var(--mermaid-node-fill) !important;
+  stroke: var(--mermaid-node-stroke) !important;
+}
+
+pre.mermaid .er.entityLabel {
+  fill: var(--mermaid-text) !important;
+}
+
+pre.mermaid .er.attributeBoxEven {
+  fill: color-mix(in srgb, var(--lumina-accent) 4%, var(--lumina-bg)) !important;
+}
+
+pre.mermaid .er.attributeBoxOdd {
+  fill: color-mix(in srgb, var(--lumina-accent) 8%, var(--lumina-bg)) !important;
+}
+
+pre.mermaid .er.relationshipLine {
+  stroke: var(--mermaid-edge) !important;
+}
+
+pre.mermaid .er.relationshipLabel {
+  fill: var(--mermaid-text) !important;
+}
+
+/* -- Gantt charts -- */
+pre.mermaid .task {
+  stroke: var(--mermaid-node-stroke) !important;
+}
+
+pre.mermaid .taskText {
+  fill: var(--mermaid-text) !important;
+}
+
+pre.mermaid .grid .tick line {
+  stroke: var(--lumina-border) !important;
+}
+
+/* -- Pie charts -- */
+pre.mermaid .pieCircle {
+  stroke: var(--lumina-bg) !important;
+}
+
+/* -- Mindmaps -- */
+pre.mermaid .node-bkg {
+  fill: var(--mermaid-node-fill) !important;
+  stroke: var(--mermaid-node-stroke) !important;
 }

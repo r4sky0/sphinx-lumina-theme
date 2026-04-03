@@ -96,6 +96,9 @@ div.highlight {
 .sd-tab-set {
   margin: 1.5rem 0;
   overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--lumina-accent) 10%, var(--lumina-border));
+  border-radius: 0.5rem;
+  background: var(--lumina-bg);
 }
 
 .sd-tab-set > label {
@@ -115,6 +118,12 @@ div.highlight {
   color: var(--lumina-text);
 }
 
+.sd-tab-set > label:focus-visible {
+  outline: 2px solid var(--lumina-accent);
+  outline-offset: -2px;
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+
 .sd-tab-set > input:checked + label {
   color: var(--lumina-accent);
   border-bottom-color: var(--lumina-accent);
@@ -127,9 +136,12 @@ div.highlight {
 .sd-tab-content > div.highlight,
 .sd-tab-content > pre.highlight {
   margin: 0;
-  border-top: none;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  border: none;
+  border-radius: 0;
+}
+
+[data-theme="dark"] .sd-tab-set {
+  border-color: color-mix(in srgb, var(--lumina-accent) 8%, var(--lumina-border));
 }
 
 /* ── sphinx-design cards ── */
