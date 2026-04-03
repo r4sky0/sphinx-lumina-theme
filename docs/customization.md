@@ -43,7 +43,7 @@ All options are set in `html_theme_options` in your `conf.py`. Every option has 
 * - `nav_links`
   - list
   - `[]`
-  - Links displayed in the header navigation bar. Each item needs `title` and `url` keys. Add `"external": True` for off-site links.
+  - Links displayed in the header navigation bar. Each item needs `title` and `url` keys. Add `"external": True` for off-site links, or `"children"` with a list of `{title, url}` items for dropdown menus.
 * - `nav_depth`
   - string
   - `"3"`
@@ -144,7 +144,13 @@ html_theme_options = {
     # Navigation
     "nav_links": [
         {"title": "Guide", "url": "getting-started"},
-        {"title": "Reference", "url": "reference/typography"},
+        {
+            "title": "Reference",
+            "children": [
+                {"title": "Typography", "url": "reference/typography"},
+                {"title": "Code Blocks", "url": "reference/code-blocks"},
+            ],
+        },
         {"title": "GitHub", "url": "https://github.com/you/project", "external": True},
     ],
     "nav_depth": "3",
@@ -236,14 +242,14 @@ Then create `docs/_static/custom.css`:
 
 /* Dark mode overrides */
 [data-theme="dark"] {
-    --lumina-bg: #18181b;
-    --lumina-bg-secondary: #27272a;
+    --lumina-bg: #09090b;
+    --lumina-bg-secondary: #18181b;
     --lumina-text: #fafafa;
     --lumina-text-muted: #a1a1aa;
-    --lumina-border: #3f3f46;
-    --lumina-accent: #34d399;
-    --lumina-accent-light: #064e3b;
-    --lumina-code-bg: #27272a;
+    --lumina-border: #27272a;
+    --lumina-accent: #10b981;
+    --lumina-accent-light: #022c22;
+    --lumina-code-bg: #1c1c20;
 }
 ```
 
@@ -252,13 +258,26 @@ Then create `docs/_static/custom.css`:
 Each admonition type has its own color property:
 
 ```css
+/* Light mode */
 :root {
-    --lumina-adm-note: #3b82f6;        /* Blue */
-    --lumina-adm-tip: #10b981;         /* Green */
-    --lumina-adm-warning: #f59e0b;     /* Amber */
-    --lumina-adm-danger: #ef4444;      /* Red */
-    --lumina-adm-important: #8b5cf6;   /* Purple */
-    --lumina-adm-seealso: #14b8a6;     /* Teal */
+    --lumina-adm-note: #3b82f6;           /* Blue */
+    --lumina-adm-tip: #10b981;            /* Green */
+    --lumina-adm-warning: #f59e0b;        /* Amber */
+    --lumina-adm-warning-text: #d97706;   /* Amber (darker, for text contrast) */
+    --lumina-adm-danger: #ef4444;         /* Red */
+    --lumina-adm-important: #8b5cf6;      /* Purple */
+    --lumina-adm-seealso: #14b8a6;        /* Teal */
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+    --lumina-adm-note: #60a5fa;
+    --lumina-adm-tip: #34d399;
+    --lumina-adm-warning: #fbbf24;
+    --lumina-adm-warning-text: #f59e0b;
+    --lumina-adm-danger: #f87171;
+    --lumina-adm-important: #a78bfa;
+    --lumina-adm-seealso: #2dd4bf;
 }
 ```
 
@@ -269,12 +288,15 @@ Lumina ships with self-hosted fonts — no external CDN requests:
 - **Source Sans 3** (400, 500, 600, 700) — body text
 - **JetBrains Mono** (400, 500) — code blocks and inline code
 
-To use your own fonts, override the font-family in your custom CSS:
+To use your own fonts, override the font-family declarations in your custom CSS. The body font is applied on the `body` element and code fonts are set on `code`, `pre`, and `.highlight` elements:
 
 ```css
-:root {
-    --lumina-font-body: "Inter", system-ui, sans-serif;
-    --lumina-font-code: "Fira Code", monospace;
+body {
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+code, pre, .highlight {
+    font-family: "Fira Code", ui-monospace, monospace;
 }
 ```
 

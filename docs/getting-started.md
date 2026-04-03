@@ -253,7 +253,7 @@ sphinx-autobuild docs docs/_build/html --open-browser
 This watches your `docs/` directory and automatically rebuilds when files change. Your browser refreshes automatically.
 
 :::{note}
-**Search during development:** Pagefind indexes your content during full builds. During live preview with `sphinx-autobuild`, search may not be available. Use `Ctrl+F` for in-page search instead.
+**Search during development:** Pagefind indexes your content during full builds. During live preview with `sphinx-autobuild`, search may not be available. Use `⌘F` / `Ctrl+F` for in-page search instead.
 :::
 
 :::{tip}
@@ -286,10 +286,10 @@ Set up MyST, sphinx-design, Mermaid diagrams, and more.
 Browse the complete reference for typography, admonitions, code blocks, and more.
 :::
 
-:::{grid-item-card} Troubleshooting
-:link: troubleshooting
-:link-type: doc
-Solutions to common issues with builds, search, and styling.
-:::
-
 ::::
+
+```{toctree}
+:hidden:
+customization
+extensions
+```

@@ -10,9 +10,6 @@ hero_only: true
 :hidden:
 introduction
 getting-started
-customization
-extensions
-troubleshooting
 releases
 ```
 

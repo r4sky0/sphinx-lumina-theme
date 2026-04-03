@@ -120,16 +120,16 @@ myst_substitutions = {
 
 Document when features were added, changed, or deprecated.
 
-```{versionadded} 0.1.0
-The `accent_color` theme option for customizing the primary color.
+```{versionadded} 1.2.0
+The `nav_links` option now supports dropdown menus via the `children` key.
 ```
 
-```{versionchanged} 0.2.0
+```{versionchanged} 1.5.0
 The `search_backend` option now defaults to `"pagefind"` instead of `"sphinx"`.
 ```
 
-```{deprecated} 0.3.0
-The `logo_only` option. Use the `logo` configuration in `html_theme_options` instead.
+```{deprecated} 1.8.0
+The `legacy_search` option. Use `search_backend` instead.
 ```
 
 The MyST syntax:

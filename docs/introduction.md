@@ -28,7 +28,7 @@ Light and dark themes designed together, with carefully chosen colors that maint
 :::
 
 :::{grid-item-card} Fast Search
-Press {kbd}`Ctrl+K` to open instant full-text search powered by Pagefind. No external services, no API keys — the index ships with your docs.
+Press {kbd}`⌘K` / {kbd}`Ctrl+K` to open instant full-text search powered by Pagefind. No external services, no API keys — the index ships with your docs.
 :::
 
 :::{grid-item-card} Styled Admonitions
