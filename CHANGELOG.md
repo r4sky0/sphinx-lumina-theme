@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v1.8.6 (2026-04-03)
+
+### Bug Fixes
+
+- Resolve pagefind import URL against document instead of script
+  ([#10](https://github.com/r4sky0/sphinx-lumina-theme/pull/10),
+  [`36aeff7`](https://github.com/r4sky0/sphinx-lumina-theme/commit/36aeff7d022c09042c72a542c030c0e38680da1d))
+
+
 ## v1.8.5 (2026-04-03)
 
 ### Bug Fixes
