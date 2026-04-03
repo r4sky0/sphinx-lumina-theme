@@ -62,7 +62,7 @@ The package isn't installed in your current Python environment.
 uv pip list | grep lumina
 
 # Install it
-uv add sphinx-lumina-theme@git+https://github.com/ralph089/sphinx-lumina-theme.git
+uv add sphinx-lumina-theme@git+https://github.com/r4sky0/sphinx-lumina-theme.git
 ```
 
 If you're using a virtual environment, make sure it's activated before building.
@@ -125,7 +125,7 @@ pnpm run build
 If you installed via pip/uv from the git repository, the compiled assets should be included. Try reinstalling:
 
 ```bash
-uv add --reinstall sphinx-lumina-theme@git+https://github.com/ralph089/sphinx-lumina-theme.git
+uv add --reinstall sphinx-lumina-theme@git+https://github.com/r4sky0/sphinx-lumina-theme.git
 ```
 
 ### Custom CSS not loading
@@ -192,7 +192,7 @@ Lumina automatically re-renders Mermaid diagrams when the theme toggles. If this
 
 ## Still Stuck?
 
-If none of these solutions help, [open an issue](https://github.com/ralph089/sphinx-lumina-theme/issues) with:
+If none of these solutions help, [open an issue](https://github.com/r4sky0/sphinx-lumina-theme/issues) with:
 
 - Your `conf.py` (redact any sensitive values)
 - The full error output from `sphinx-build`

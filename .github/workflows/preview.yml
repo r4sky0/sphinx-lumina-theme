@@ -72,6 +72,9 @@ jobs:
           rm -rf "$PR_DIR"
           cp -r docs/_build/html "$PR_DIR"
 
+          # Ensure GitHub Pages skips Jekyll processing
+          touch gh-pages-deploy/.nojekyll
+
           # Commit and push
           cd gh-pages-deploy
           git add .

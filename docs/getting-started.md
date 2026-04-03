@@ -20,13 +20,13 @@ Lumina requires **Python 3.10+** and **Sphinx 7.0+**.
 
 :::{tab-item} uv (recommended)
 ```bash
-uv add sphinx-lumina-theme@git+https://github.com/ralph089/sphinx-lumina-theme.git@v{version}
+uv add sphinx-lumina-theme@git+https://github.com/r4sky0/sphinx-lumina-theme.git@v{version}
 ```
 :::
 
 :::{tab-item} pip
 ```bash
-pip install git+https://github.com/ralph089/sphinx-lumina-theme.git@v{version}
+pip install git+https://github.com/r4sky0/sphinx-lumina-theme.git@v{version}
 ```
 :::
 

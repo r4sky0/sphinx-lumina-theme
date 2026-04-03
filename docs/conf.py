@@ -20,11 +20,11 @@ myst_enable_extensions = [
 ]
 html_theme = "lumina"
 html_theme_options = {
-    "source_repository": "https://github.com/ralph089/sphinx-lumina-theme",
+    "source_repository": "https://github.com/r4sky0/sphinx-lumina-theme",
     "source_branch": "main",
     "source_directory": "docs/",
     "social_links": [
-        {"icon": "github", "url": "https://github.com/ralph089/sphinx-lumina-theme"},
+        {"icon": "github", "url": "https://github.com/r4sky0/sphinx-lumina-theme"},
     ],
 }
 exclude_patterns = ["_build", "superpowers"]
