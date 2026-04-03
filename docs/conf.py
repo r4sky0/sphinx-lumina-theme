@@ -34,3 +34,11 @@ myst_substitutions = {
     "project_name": "Sphinx Lumina Theme",
     "version": __version__,
 }
+
+
+def _replace_version_placeholder(_app, _docname, source):
+    source[0] = source[0].replace("@v{version}", f"@v{__version__}")
+
+
+def setup(app):
+    app.connect("source-read", _replace_version_placeholder)

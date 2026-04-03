@@ -9,7 +9,7 @@ version = sys.argv[1]
 root = Path(__file__).resolve().parent.parent
 pattern = re.compile(r"@v(?:[\d]+\.[\d]+\.[\d]+|\{version\}|\{\{version\}\})")
 
-paths = [root / "README.md", root / "docs" / "getting-started.md"]
+paths = [root / "README.md"]
 
 for path in paths:
     text = path.read_text()

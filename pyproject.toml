@@ -44,7 +44,7 @@ ignore_token_for_push = true
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
 version_variables = ["src/sphinx_lumina_theme/__init__.py:__version__"]
-assets = ["README.md", "docs/getting-started.md"]
+assets = ["README.md"]
 build_command = "python3 scripts/update_version.py {version}"
 commit_parser = "conventional"
 major_on_zero = false
