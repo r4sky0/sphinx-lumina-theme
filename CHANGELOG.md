@@ -14,7 +14,10 @@
   ([#6](https://github.com/r4sky0/sphinx-lumina-theme/pull/6),
   [`7955fdc`](https://github.com/r4sky0/sphinx-lumina-theme/commit/7955fdc5ad577ccdca4991f0cf3412c7c0205a56))
 
-### Chores
+<details>
+<summary>Maintenance</summary>
+
+#### Chores
 
 - Deployment preview in PRs ([#7](https://github.com/r4sky0/sphinx-lumina-theme/pull/7),
   [`6efd807`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6efd807485f2a8eda7bf537a7cd753ebe3247489))
@@ -25,7 +28,9 @@
 - Update site url ([#5](https://github.com/r4sky0/sphinx-lumina-theme/pull/5),
   [`ecc3434`](https://github.com/r4sky0/sphinx-lumina-theme/commit/ecc343494ca8029b32a71e4d552252983240c966))
 
+</details>
+
 
 ## v1.8.4 (2026-04-03)
 
-Initial public release.
+- Initial Release

@@ -1,0 +1,39 @@
+{%  set prev_changelog_contents = prev_changelog_file | read_file | safe
+%}{%  set changelog_parts = prev_changelog_contents.split(insertion_flag, maxsplit=1)
+%}{#
+#}{%  if changelog_parts | length < 2
+%}{%    if prev_changelog_contents | length > 0
+%}{{      changelog_parts[0]
+}}{%    else
+%}{%      include "changelog_init.md.j2"
+%}{%    endif
+%}{%  else
+%}{%    set prev_changelog_top = changelog_parts[0] | trim
+%}{%    if prev_changelog_top | length > 0
+%}{{
+          "%s\n\n%s\n" | format(prev_changelog_top, insertion_flag | trim)
+
+}}{%    else
+%}{{
+          "%s\n" | format(insertion_flag | trim)
+
+}}{%    endif
+%}{%    include "unreleased_changes.md.j2"
+-%}{%    if releases | length > 0
+%}{%      set release = releases[0]
+%}{%      if releases | length == 1 and ctx.mask_initial_release
+%}{{        "\n"
+}}{%-       include "first_release.md.j2"
+-%}{{       "\n"
+}}{%      elif "# " ~ release.version.as_semver_tag() ~ " " not in changelog_parts[1]
+%}{{        "\n"
+}}{%-       include "versioned_changes.md.j2"
+-%}{{       "\n"
+}}{%      endif
+%}{%    endif
+%}{%    set previous_changelog_bottom = changelog_parts[1] | trim
+%}{%    if previous_changelog_bottom | length > 0
+%}{{      "\n%s\n" | format(previous_changelog_bottom)
+}}{%    endif
+%}{%  endif
+%}

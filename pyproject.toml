@@ -60,6 +60,7 @@ ignore_merge_commits = true
 
 [tool.semantic_release.changelog]
 insertion_flag = "<!-- releases -->"
+template_dir = "templates"
 
 [tool.semantic_release.changelog.default_templates]
 changelog_file = "CHANGELOG.md"
