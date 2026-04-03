@@ -343,27 +343,43 @@
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
 <p>You need a working Sphinx project. If you don’t have one yet:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>my-docs<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>my-docs
-uv<span class="w"> </span>init<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>uv<span class="w"> </span>add<span class="w"> </span>sphinx<span class="w"> </span>myst-parser
-uv<span class="w"> </span>run<span class="w"> </span>sphinx-quickstart<span class="w"> </span>docs
-</pre></div>
-</div>
-<p>Lumina requires <strong>Python 3.10+</strong> and <strong>Sphinx 7.0+</strong>.</p>
-</section>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-0">
 uv (recommended)</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>sphinx-lumina-theme@git+https://github.com/r4sky0/sphinx-lumina-theme.git@v<span class="o">{</span>version<span class="o">}</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>my-docs<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>my-docs
+uv<span class="w"> </span>init<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>uv<span class="w"> </span>add<span class="w"> </span>sphinx<span class="w"> </span>myst-parser
+uv<span class="w"> </span>run<span class="w"> </span>sphinx-quickstart<span class="w"> </span>docs
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-1">
 pip</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/r4sky0/sphinx-lumina-theme.git@v<span class="o">{</span>version<span class="o">}</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>my-docs<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>my-docs
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>sphinx<span class="w"> </span>myst-parser
+sphinx-quickstart<span class="w"> </span>docs
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lumina requires <strong>Python 3.10+</strong> and <strong>Sphinx 8.0+</strong>.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+uv (recommended)</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>sphinx-lumina-theme@git+https://github.com/r4sky0/sphinx-lumina-theme.git@v1.8.6
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-3">
+pip</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/r4sky0/sphinx-lumina-theme.git@v1.8.6
 </pre></div>
 </div>
 </div>
@@ -376,8 +392,21 @@ pip</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 <p>That’s it — Lumina works with zero configuration. Build your docs to see it:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-4">
+uv (recommended)</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>run<span class="w"> </span>sphinx-build<span class="w"> </span>docs<span class="w"> </span>docs/_build/html
 </pre></div>
+</div>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-5">
+pip</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sphinx-build<span class="w"> </span>docs<span class="w"> </span>docs/_build/html
+</pre></div>
+</div>
+</div>
 </div>
 <p>Open <code class="docutils literal notranslate"><span class="pre">docs/_build/html/index.html</span></code> in your browser.</p>
 </section>
@@ -411,8 +440,21 @@ pip</label><div class="sd-tab-content docutils">
 <h2>Using MyST Markdown<a class="headerlink" href="#using-myst-markdown" title="Link to this heading">¶</a></h2>
 <p>Lumina works with both reStructuredText and MyST Markdown. We recommend MyST for a more natural writing experience.</p>
 <p>Install the parser and enable useful extensions:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-6">
+uv (recommended)</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>myst-parser
 </pre></div>
+</div>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-7">
+pip</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>myst-parser
+</pre></div>
+</div>
+</div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
@@ -443,25 +485,29 @@ Admonitions use the colon fence syntax.
 <section id="setting-up-search">
 <h2>Setting Up Search<a class="headerlink" href="#setting-up-search" title="Link to this heading">¶</a></h2>
 <p>Lumina supports two search backends:</p>
-<section id="pagefind-recommended">
-<h3>Pagefind (recommended)<a class="headerlink" href="#pagefind-recommended" title="Link to this heading">¶</a></h3>
-<p><a class="reference external" href="https://pagefind.app">Pagefind</a> provides fast, keyboard-driven search with no external services. Install it and run it after each build:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Pagefind</span>
-npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>pagefind
-
-<span class="c1"># Build docs, then index</span>
-uv<span class="w"> </span>run<span class="w"> </span>sphinx-build<span class="w"> </span>docs<span class="w"> </span>docs/_build/html
-pagefind<span class="w"> </span>--site<span class="w"> </span>docs/_build/html
+<section id="pagefind-default">
+<h3>Pagefind (default)<a class="headerlink" href="#pagefind-default" title="Link to this heading">¶</a></h3>
+<p><a class="reference external" href="https://pagefind.app">Pagefind</a> provides fast, keyboard-driven search with no external services. Lumina runs Pagefind automatically at the end of each build — no manual setup required. You just need <a class="reference external" href="https://nodejs.org">Node.js</a> installed so that <code class="docutils literal notranslate"><span class="pre">npx</span></code> is available.</p>
+<p>Build your docs and search is ready:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-8" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-8">
+uv (recommended)</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>run<span class="w"> </span>sphinx-build<span class="w"> </span>docs<span class="w"> </span>docs/_build/html
 </pre></div>
+</div>
+</div>
+<input id="sd-tab-item-9" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-9">
+pip</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sphinx-build<span class="w"> </span>docs<span class="w"> </span>docs/_build/html
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Automate this in a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>:</p>
-<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">docs</span><span class="o">:</span>
-<span class="w">	</span>uv<span class="w"> </span>run<span class="w"> </span>sphinx-build<span class="w"> </span>docs<span class="w"> </span>docs/_build/html
-<span class="w">	</span>pagefind<span class="w"> </span>--site<span class="w"> </span>docs/_build/html
-</pre></div>
-</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">npx</span></code> is not found, the build completes normally but search won’t be indexed. Install Node.js to enable Pagefind, or switch to Sphinx’s built-in search (see below).</p>
 </div>
 </section>
 <section id="built-in-sphinx-search">
@@ -512,18 +558,28 @@ pagefind<span class="w"> </span>--site<span class="w"> </span>docs/_build/html
 <section id="development-workflow">
 <h2>Development Workflow<a class="headerlink" href="#development-workflow" title="Link to this heading">¶</a></h2>
 <p>For a live-reloading development experience, use <code class="docutils literal notranslate"><span class="pre">sphinx-autobuild</span></code>:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-10" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-10">
+uv (recommended)</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>sphinx-autobuild<span class="w"> </span>--dev
 uv<span class="w"> </span>run<span class="w"> </span>sphinx-autobuild<span class="w"> </span>docs<span class="w"> </span>docs/_build/html<span class="w"> </span>--open-browser
 </pre></div>
 </div>
+</div>
+<input id="sd-tab-item-11" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-11">
+pip</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sphinx-autobuild
+sphinx-autobuild<span class="w"> </span>docs<span class="w"> </span>docs/_build/html<span class="w"> </span>--open-browser
+</pre></div>
+</div>
+</div>
+</div>
 <p>This watches your <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory and automatically rebuilds when files change. Your browser refreshes automatically.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>Search during development:</strong> Pagefind search requires a full build with indexing. During live preview, search will show a helpful message suggesting <code class="docutils literal notranslate"><span class="pre">Ctrl+F</span></code> instead. To enable full search:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>run<span class="w"> </span>sphinx-build<span class="w"> </span>docs<span class="w"> </span>docs/_build/html
-pagefind<span class="w"> </span>--site<span class="w"> </span>docs/_build/html
-</pre></div>
-</div>
+<p><strong>Search during development:</strong> Pagefind indexes your content during full builds. During live preview with <code class="docutils literal notranslate"><span class="pre">sphinx-autobuild</span></code>, search may not be available. Use <code class="docutils literal notranslate"><span class="pre">Ctrl+F</span></code> for in-page search instead.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -637,7 +693,7 @@ Troubleshooting</div>
 <li><a class="reference internal" href="#recommended-configuration">Recommended Configuration</a></li>
 <li><a class="reference internal" href="#using-myst-markdown">Using MyST Markdown</a></li>
 <li><a class="reference internal" href="#setting-up-search">Setting Up Search</a><ul>
-<li><a class="reference internal" href="#pagefind-recommended">Pagefind (recommended)</a></li>
+<li><a class="reference internal" href="#pagefind-default">Pagefind (default)</a></li>
 <li><a class="reference internal" href="#built-in-sphinx-search">Built-in Sphinx search</a></li>
 </ul>
 </li>
