@@ -30,7 +30,7 @@ A modern Sphinx theme that treats documentation as a first-class product experie
 Requires **Python 3.10+** and **Sphinx 8.0+**.
 
 ```bash
-uv add sphinx-lumina-theme@git+https://github.com/r4sky0/sphinx-lumina-theme.git@v{version}
+uv add sphinx-lumina-theme@git+https://github.com/r4sky0/sphinx-lumina-theme.git@v1.8.10
 ```
 
 Set the theme in your `conf.py`:
