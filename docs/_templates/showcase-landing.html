@@ -8,6 +8,7 @@
 {% endblock %}
 {%- block content %}
     <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
+    {% set is_landing = true %}
     <div id="lumina-header">{% include "components/header.html" %}</div>
     {# ── Hero ── #}
     <section class="lumina-hero" x-data="fluidSimulation()">

@@ -157,16 +157,18 @@
                     </a>
                 {% endfor %}
             {% endif %}
-            {# Mobile hamburger #}
-            <button data-sidebar-toggle
-                    class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] lg:hidden cursor-pointer"
-                    aria-label="Toggle navigation"
-                    aria-expanded="false"
-                    aria-controls="lumina-sidebar-drawer">
-                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
+            {# Mobile hamburger — hidden on landing page which has no sidebar #}
+            {% if not is_landing %}
+                <button data-sidebar-toggle
+                        class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] lg:hidden cursor-pointer"
+                        aria-label="Toggle navigation"
+                        aria-expanded="false"
+                        aria-controls="lumina-sidebar-drawer">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            {% endif %}
         </div>
     </div>
 </header>
