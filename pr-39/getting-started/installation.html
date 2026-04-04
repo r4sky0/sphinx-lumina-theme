@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="article:modified_time" content="2026-04-04T12:59:35+00:00" />
+    <title>Installation &#8212; Sphinx Lumina Theme  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=5c1612a1" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/lumina.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuration" href="configuration.html" />
+    <link rel="prev" title="Getting Started" href="index.html" />
+
+    
+        <link rel="icon"
+              type="image/svg+xml"
+              href="../_static/favicon.svg">
+    
+    
+    <script>
+(function() {
+  var stored = localStorage.getItem('lumina-theme');
+  if (stored === 'dark' || stored === 'light') {
+    document.documentElement.setAttribute('data-theme', stored);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+    </script>
+    <meta name="lumina-search-backend" content="pagefind">
+    <meta name="lumina-base-url" content="../">
+    
+        <script>document.documentElement.dataset.apiBaseUrl = "https://petstore3.swagger.io/api/v3";</script>
+    
+    
+    
+    
+        <link rel="alternate"
+              type="text/markdown"
+              href="../llms.txt"
+              title="LLM-friendly documentation index">
+    
+
+
+  </head><body>
+
+
+
+
+    <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
+    <div id="lumina-header">
+
+        <header class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--lumina-border)] bg-[var(--lumina-bg)]/80 backdrop-blur-sm">
+    <div class="mx-auto flex h-14 max-w-[90rem] items-center justify-between px-4 lg:px-6">
+        
+        <div class="flex items-center gap-3">
+            <a href="../index.html"
+               class="flex items-center gap-2 text-[var(--lumina-text)] no-underline hover:opacity-80 transition-opacity">
+                
+                    
+                    <svg class="lumina-logo h-7 w-7"
+                         viewBox="0 0 32 32"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 3L28 27H4L16 3Z" stroke="var(--lumina-accent)" stroke-width="2" fill="none" />
+                        <path class="lumina-logo-facet-l" d="M16 10L8 27H16" fill="var(--lumina-accent)" />
+                        <path class="lumina-logo-facet-r" d="M16 10L24 27H16" fill="var(--lumina-accent)" />
+                        <line x1="16" y1="3" x2="16" y2="10" stroke="var(--lumina-accent)" stroke-width="2" />
+                    </svg>
+                
+                
+                    <span class="font-semibold text-base">Sphinx Lumina Theme</span>
+                
+            </a>
+        </div>
+        
+        
+        
+        <div class="flex items-center gap-2">
+            
+            <button data-search-trigger
+                    class="flex items-center gap-2 rounded-lg border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-3 py-2 text-[0.8125rem] text-[var(--lumina-text-muted)] hover:border-[var(--lumina-accent)] transition-colors cursor-pointer lg:min-w-56"
+                    aria-label="Search documentation"
+                    aria-haspopup="dialog">
+                <svg class="h-4 w-4 shrink-0"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <span class="hidden lg:inline flex-1 text-left">Search docs...</span>
+                <kbd data-search-shortcut
+                     class="hidden lg:inline rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-1.5 py-0.5 text-[0.6875rem] font-[family-name:'JetBrains_Mono'] tracking-[0.02em]">⌘K</kbd>
+            </button>
+            
+            <button data-theme-toggle
+                    x-data="themeToggle()"
+                    @click="cycle()"
+                    class="relative flex h-9 w-9 items-center justify-center rounded-md text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors cursor-pointer"
+                    :aria-label="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'">
+                
+                <svg x-show="mode === 'light'"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 rotate-[-90deg] scale-0"
+                     x-transition:enter-end="opacity-100 rotate-0 scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0 scale-0"
+                     class="h-5 w-5 absolute"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                
+                <svg x-show="mode === 'dark'"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 rotate-90 scale-0"
+                     x-transition:enter-end="opacity-100 rotate-0 scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0 scale-0"
+                     class="h-5 w-5 absolute"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+                
+                <svg x-show="mode === 'auto'"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 scale-0"
+                     x-transition:enter-end="opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0 scale-0"
+                     class="h-5 w-5 absolute"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+            </button>
+            
+            
+                
+                    <a href="https://github.com/r4sky0/sphinx-lumina-theme"
+                       class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] transition-colors no-underline"
+                       target="_blank"
+                       rel="noopener"
+                       aria-label="Github (opens in new tab)">
+                        
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                            </svg>
+                        
+                    </a>
+                
+            
+            
+            
+                <button data-sidebar-toggle
+                        class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors lg:hidden cursor-pointer"
+                        aria-label="Toggle navigation"
+                        aria-expanded="false"
+                        aria-controls="lumina-sidebar-drawer">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            
+        </div>
+    </div>
+</header>
+
+    </div>
+    <div class="lumina-wrapper">
+        <aside id="lumina-sidebar">
+
+            <div x-data="sidebar()">
+    
+    <div class="hidden h-[calc(100vh-3.5rem)] flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
+        <nav class="lumina-sidebar-nav" aria-label="Main navigation">
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/search.html">Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/dark-mode.html">Dark Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/myst-markdown.html">MyST Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/navigation.html">Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/custom-styling.html">Custom Styling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/landing-page.html">Landing Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development-workflow.html">Development Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extensions/index.html">Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/myst-parser.html">MyST Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-design.html">sphinx-design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-copybutton.html">sphinx-copybutton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/mermaid.html">Mermaid Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/openapi.html">OpenAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-llm.html">sphinx-llm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-last-updated-by-git.html">sphinx-last-updated-by-git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/mathjax.html">MathJax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/typography.html">Typography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/admonitions.html">Admonitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/code-blocks.html">Code Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/lists-and-tables.html">Lists &amp; Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/cards-and-grids.html">Cards &amp; Grids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/images-and-figures.html">Images &amp; Figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/badges-and-buttons.html">Badges &amp; Buttons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/math.html">Math</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/diagrams.html">Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/footnotes-and-references.html">Footnotes &amp; References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/api-documentation.html">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/http-api.html">HTTP API Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/architecture.html">Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+</ul>
+
+        </nav>
+        
+            <div class="lumina-sidebar-footer">
+                Built with
+                <a href="https://github.com/r4sky0/sphinx-lumina-theme"
+                   target="_blank"
+                   rel="noopener">
+                    <svg class="lumina-sidebar-footer-icon"
+                         viewBox="0 0 32 32"
+                         fill="none"
+                         aria-hidden="true">
+                        <path d="M16 3L28 27H4L16 3Z" stroke="currentColor" stroke-width="2.5" fill="none" />
+                        <path d="M16 10L8 27H16" fill="currentColor" opacity="0.15" />
+                        <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
+                    </svg>
+                Lumina</a>
+                <span class="lumina-sidebar-footer-version">v1.19.0</span>
+            </div>
+        
+    </div>
+    
+    <template x-teleport="body">
+        <div>
+            
+            <div x-show="mobileOpen"
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="fixed inset-0 top-14 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
+                 @click="close()"></div>
+            
+            <div id="lumina-sidebar-drawer"
+                 x-show="mobileOpen"
+                 x-transition:enter="transition ease-out duration-250"
+                 x-transition:enter-start="-translate-x-full"
+                 x-transition:enter-end="translate-x-0"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="translate-x-0"
+                 x-transition:leave-end="-translate-x-full"
+                 class="fixed inset-y-0 top-14 left-0 z-50 w-[280px] overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:hidden">
+                
+                <button data-sidebar-close
+                        @click="close()"
+                        class="absolute top-4 right-4 rounded-md p-1 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] cursor-pointer"
+                        aria-label="Close navigation">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                
+                
+                <nav class="lumina-sidebar-nav" aria-label="Main navigation">
+                    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/search.html">Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/dark-mode.html">Dark Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/myst-markdown.html">MyST Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/navigation.html">Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/custom-styling.html">Custom Styling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/landing-page.html">Landing Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development-workflow.html">Development Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extensions/index.html">Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/myst-parser.html">MyST Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-design.html">sphinx-design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-copybutton.html">sphinx-copybutton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/mermaid.html">Mermaid Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/openapi.html">OpenAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-llm.html">sphinx-llm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-last-updated-by-git.html">sphinx-last-updated-by-git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/mathjax.html">MathJax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/typography.html">Typography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/admonitions.html">Admonitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/code-blocks.html">Code Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/lists-and-tables.html">Lists &amp; Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/cards-and-grids.html">Cards &amp; Grids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/images-and-figures.html">Images &amp; Figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/badges-and-buttons.html">Badges &amp; Buttons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/math.html">Math</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/diagrams.html">Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/footnotes-and-references.html">Footnotes &amp; References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/api-documentation.html">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/http-api.html">HTTP API Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/architecture.html">Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+</ul>
+
+                </nav>
+                
+                    <div class="lumina-sidebar-footer">
+                        <a href="https://github.com/r4sky0/sphinx-lumina-theme"
+                           target="_blank"
+                           rel="noopener">Lumina</a>
+                        <span class="lumina-sidebar-footer-version">v1.19.0</span>
+                    </div>
+                
+            </div>
+        </div>
+    </template>
+</div>
+
+        </aside>
+        <main id="lumina-content" data-pagefind-body>
+            <div class="lumina-content-toolbar" data-pagefind-ignore>
+                
+                    <div class="min-w-0 flex-1">
+
+                        <nav class="flex items-center gap-2 overflow-x-auto text-sm text-[var(--lumina-text-muted)]"
+     style="scrollbar-width:none"
+     aria-label="Breadcrumb">
+    <a href="../index.html"
+       class="whitespace-nowrap hover:text-[var(--lumina-accent)] no-underline transition-colors">Sphinx Lumina Theme  documentation</a>
+    
+        
+            <svg class="h-3.5 w-3.5 flex-shrink-0"
+                 fill="none"
+                 stroke="currentColor"
+                 viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <a href="index.html"
+               class="whitespace-nowrap hover:text-[var(--lumina-accent)] no-underline transition-colors">Getting Started</a>
+        
+    
+    <svg class="h-3.5 w-3.5 flex-shrink-0"
+         fill="none"
+         stroke="currentColor"
+         viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+    <span class="whitespace-nowrap text-[var(--lumina-text)]">Installation</span>
+</nav>
+
+                    </div>
+                
+                <button x-data="copyPage()"
+                        @click="copy()"
+                        class="lumina-copy-page"
+                        :class="{ 'is-copied': copied }"
+                        :aria-label="copied ? 'Copied to clipboard' : 'Copy page as Markdown'"
+                        :title="copied ? 'Copied!' : 'Copy page as Markdown'"
+                        type="button">
+                    <svg x-show="!copied"
+                         class="h-3.5 w-3.5"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg>
+                    <svg x-show="copied"
+                         x-cloak
+                         class="h-3.5 w-3.5"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span class="hidden sm:inline"
+                          x-text="copied ? 'Copied!' : 'Copy Markdown'"></span>
+                </button>
+            </div>
+            <article class="lumina-article" x-data="headerLinks()">
+
+                
+
+    <section class="tex2jax_ignore mathjax_ignore" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
+<p>Install the Lumina theme and build your first page.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
+<p>You need a working Sphinx project. If you don’t have one yet:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+uv (recommended)</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>my-docs<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>my-docs
+uv<span class="w"> </span>init<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>uv<span class="w"> </span>add<span class="w"> </span>sphinx<span class="w"> </span>myst-parser
+uv<span class="w"> </span>run<span class="w"> </span>sphinx-quickstart<span class="w"> </span>docs
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+pip</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>my-docs<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>my-docs
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>sphinx<span class="w"> </span>myst-parser
+sphinx-quickstart<span class="w"> </span>docs
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lumina requires <strong>Python 3.12+</strong> and <strong>Sphinx 8.0+</strong>.</p>
+</section>
+<section id="install-the-theme">
+<h2>Install the Theme<a class="headerlink" href="#install-the-theme" title="Link to this heading">¶</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+uv (recommended)</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>sphinx-lumina-theme
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-3">
+pip</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sphinx-lumina-theme
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="first-build">
+<h2>First Build<a class="headerlink" href="#first-build" title="Link to this heading">¶</a></h2>
+<p>Open your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> and set the theme:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme</span> <span class="o">=</span> <span class="s2">&quot;lumina&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>That’s it — Lumina works with zero configuration. Build your docs:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-4">
+uv (recommended)</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>run<span class="w"> </span>sphinx-build<span class="w"> </span>docs<span class="w"> </span>docs/_build/html
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-5">
+pip</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sphinx-build<span class="w"> </span>docs<span class="w"> </span>docs/_build/html
+</pre></div>
+</div>
+</div>
+</div>
+<p>Open <code class="docutils literal notranslate"><span class="pre">docs/_build/html/index.html</span></code> in your browser.</p>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">¶</a></h2>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-3 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Configuration</div>
+<p class="sd-card-text">Explore all theme options, accent colors, and the recommended setup.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="configuration.html"><span class="doc">Configuration</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Guides</div>
+<p class="sd-card-text">Set up search, dark mode, MyST Markdown, navigation, and more.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../guides/index.html"><span class="doc">Guides</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Reference</div>
+<p class="sd-card-text">Browse the complete reference for typography, admonitions, code blocks, and more.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../reference/index.html"><span class="doc">Reference</span></a></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+
+
+            </article>
+            
+
+                <div data-pagefind-ignore>
+
+                    <footer class="mt-10 border-t border-[var(--lumina-border)] pt-6">
+    
+    
+        <nav class="flex justify-between gap-4 mb-8" aria-label="Page navigation">
+            
+                <a href="index.html"
+                   class="group flex flex-col items-start gap-1 rounded-lg border border-[var(--lumina-border)] p-4 no-underline hover:border-[var(--lumina-accent)] hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
+                    <span class="text-xs text-[var(--lumina-text-muted)]">Previous</span>
+                    <span class="text-sm font-medium text-[var(--lumina-text)] group-hover:text-[var(--lumina-accent)] transition-colors">&larr; Getting Started</span>
+                </a>
+            
+            
+                <a href="configuration.html"
+                   class="group flex flex-col items-end gap-1 rounded-lg border border-[var(--lumina-border)] p-4 no-underline hover:border-[var(--lumina-accent)] hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
+                    <span class="text-xs text-[var(--lumina-text-muted)]">Next</span>
+                    <span class="text-sm font-medium text-[var(--lumina-text)] group-hover:text-[var(--lumina-accent)] transition-colors">Configuration &rarr;</span>
+                </a>
+            
+        </nav>
+    
+    
+    
+        <p class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)]">
+            <svg class="h-3.5 w-3.5 shrink-0"
+                 fill="none"
+                 stroke="currentColor"
+                 viewBox="0 0 24 24"
+                 aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Last updated <time>April 4, 2026</time>
+        </p>
+    
+    
+    
+</footer>
+
+                </div>
+
+
+            
+        </main>
+        
+            <aside id="lumina-toc">
+
+                
+    <div class="sticky top-14 hidden h-[calc(100vh-3.5rem)] w-[220px] shrink-0 overflow-y-auto py-6 pr-4 xl:block">
+        
+        
+            <a href="https://github.com/r4sky0/sphinx-lumina-theme/edit/main/docs/getting-started/installation.md"
+               class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)] no-underline hover:text-[var(--lumina-accent)] transition-colors"
+               target="_blank"
+               rel="noopener">
+                <svg class="h-3.5 w-3.5"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+                Edit this page
+            </a>
+        
+        <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-[var(--lumina-text-muted)]">On this page</p>
+        <nav class="lumina-toc-nav"
+             aria-label="Table of contents"
+             x-data="scrollspy()"
+             x-init="init()">
+            <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#install-the-theme">Install the Theme</a></li>
+<li><a class="reference internal" href="#first-build">First Build</a></li>
+<li><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+
+        </nav>
+    </div>
+
+
+            </aside>
+        
+    </div>
+
+    
+        <button id="lumina-back-to-top"
+                x-data="backToTop()"
+                x-show="visible"
+                x-cloak
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 translate-y-2"
+                x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0"
+                x-transition:leave-end="opacity-0 translate-y-2"
+                @click="scrollToTop()"
+                class="fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--lumina-border)] bg-[var(--lumina-bg)] text-[var(--lumina-text-muted)] shadow-md hover:text-[var(--lumina-text)] hover:border-[var(--lumina-accent)] hover:shadow-lg transition-all cursor-pointer"
+                aria-label="Back to top"
+                type="button">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+            </svg>
+        </button>
+    
+
+    <div id="lumina-search-modal"
+     x-data="searchModal()"
+     x-show="open"
+     x-cloak
+     @keydown.escape.window="close()"
+     @keydown.meta.k.window.prevent="toggle()"
+     @keydown.ctrl.k.window.prevent="toggle()"
+     class="fixed inset-0 z-[100]"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Search documentation">
+    
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click="close()"></div>
+    
+    <div class="relative mx-auto mt-[15vh] max-w-xl rounded-xl border border-[var(--lumina-border)] bg-[var(--lumina-bg)] shadow-2xl"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95">
+        
+        <div class="flex items-center border-b border-[var(--lumina-border)] px-4">
+            <svg class="h-5 w-5 text-[var(--lumina-text-muted)]"
+                 fill="none"
+                 stroke="currentColor"
+                 viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="search"
+                   x-ref="searchInput"
+                   x-model="query"
+                   @input.debounce.150ms="search()"
+                   @keydown.arrow-down.prevent="moveDown()"
+                   @keydown.arrow-up.prevent="moveUp()"
+                   @keydown.enter.prevent="goToSelected()"
+                   class="w-full border-0 bg-transparent px-3 py-4 text-[var(--lumina-text)] placeholder-[var(--lumina-text-muted)] outline-none"
+                   placeholder="Search docs..."
+                   autocomplete="off">
+            <kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1.5 py-0.5 text-xs text-[var(--lumina-text-muted)]">esc</kbd>
+        </div>
+        
+        <div class="max-h-[60vh] overflow-y-auto p-2"
+             aria-live="polite"
+             role="status">
+            <template x-if="!loaded">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]">Loading search index...</p>
+            </template>
+            <template x-if="loaded && query.length > 0 && results.length === 0">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]">No results found.</p>
+            </template>
+            <template x-if="error">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]"
+                   x-text="error"></p>
+            </template>
+            <template x-for="(result, index) in results" :key="result.url">
+                <a :href="result.url"
+                   class="flex flex-col gap-0.5 rounded-lg px-3 py-2.5 no-underline transition-colors"
+                   :class="index === selectedIndex ? 'bg-[var(--lumina-accent-light)] text-[var(--lumina-accent)]' : 'hover:bg-[var(--lumina-bg-secondary)] text-[var(--lumina-text)]'"
+                   @mouseenter="selectedIndex = index">
+                    <div class="flex min-w-0 items-center justify-between gap-2">
+                        <span class="truncate text-sm font-medium" x-text="result.title"></span>
+                        <template x-if="result.section">
+                            <span class="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
+                                  :class="index === selectedIndex ? 'bg-[var(--lumina-accent)] text-white opacity-70' : 'bg-[var(--lumina-bg-secondary)] text-[var(--lumina-text-muted)]'"
+                                  x-text="result.section"></span>
+                        </template>
+                    </div>
+                    <span class="line-clamp-2 text-xs text-[var(--lumina-text-muted)]"
+                          x-html="result.excerpt"></span>
+                </a>
+            </template>
+            <template x-if="loaded && query.length === 0">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]">Type to search...</p>
+            </template>
+        </div>
+        
+        <div class="flex items-center gap-3 border-t border-[var(--lumina-border)] px-4 py-2.5 text-xs text-[var(--lumina-text-muted)]">
+            <span class="flex items-center gap-1"><kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> Navigate</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> Open</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1 py-0.5 font-mono text-[10px]">esc</kbd> Close</span>
+        </div>
+    </div>
+</div>
+
+
+
+
+  </body>
+</html>
