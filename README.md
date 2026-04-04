@@ -23,6 +23,7 @@ A modern Sphinx theme that treats documentation as a first-class product experie
 - **Interactive HTTP API** — OpenAPI endpoint docs with live "Try it out" panels and curl copy buttons; no Swagger UI needed
 - **Code blocks** — syntax highlighting with one-click copy
 - **Self-hosted fonts** — Source Sans 3 and JetBrains Mono, no external CDN calls
+- **Version switcher** — dropdown to navigate between documentation versions, loaded from a JSON URL
 - **Customizable** — accent colors, navigation links, social links, and more via `conf.py`
 
 ## Quick Start

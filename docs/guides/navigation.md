@@ -92,3 +92,41 @@ html_theme_options = {
     "show_prev_next": "false",
 }
 ```
+
+## Version Switcher
+
+Display a dropdown in the header that lets readers switch between documentation versions. The version list loads from a JSON file you host alongside your docs.
+
+### Setup
+
+1. **Create a `versions.json` file** and host it at a stable URL:
+
+```{code-block} json
+:caption: versions.json
+[
+  {"version": "latest", "url": "https://example.com/en/latest/", "name": "dev (latest)"},
+  {"version": "1.17", "url": "https://example.com/en/1.17/"},
+  {"version": "1.16", "url": "https://example.com/en/1.16/"}
+]
+```
+
+Each entry has:
+- **`version`** (required) -- version identifier, used to match `version_switcher_match`
+- **`url`** (required) -- base URL for that version's docs (must end with `/`)
+- **`name`** (optional) -- display label, falls back to `version`
+
+2. **Configure the theme** in your `conf.py`:
+
+```{code-block} python
+:caption: conf.py
+html_theme_options = {
+    "version_switcher_json": "https://example.com/versions.json",
+    "version_switcher_match": "1.17",
+}
+```
+
+The `version_switcher_match` value should match a `version` field in your JSON. The dropdown highlights that entry as "(current)".
+
+### How It Works
+
+When a reader selects a different version, the switcher navigates to the same page path on the selected version's URL. For example, viewing `https://example.com/en/1.17/guides/search.html` and selecting "latest" navigates to `https://example.com/en/latest/guides/search.html`.
