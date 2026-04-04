@@ -1,3 +1,7 @@
+import DOMPurify from "dompurify";
+
+const EXCERPT_CONFIG = { ALLOWED_TAGS: ["mark"], ALLOWED_ATTR: [] };
+
 export default function searchModal() {
   return {
     open: false,
@@ -128,7 +132,7 @@ export default function searchModal() {
         this.results = results.map((r) => ({
           title: r.meta?.title || "Untitled",
           url: r.url,
-          excerpt: r.excerpt,
+          excerpt: DOMPurify.sanitize(r.excerpt, EXCERPT_CONFIG),
         }));
       } else {
         this.results = [

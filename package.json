@@ -24,5 +24,8 @@
     "husky": "9.1.7",
     "lint-staged": "16.4.0",
     "tailwindcss": "^4.0"
+  },
+  "dependencies": {
+    "dompurify": "3.3.3"
   }
 }
