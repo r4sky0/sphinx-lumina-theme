@@ -25,6 +25,9 @@
     </script>
     <meta name="lumina-search-backend" content="{{ theme_search_backend }}">
     <meta name="lumina-base-url" content="{{ pathto('', 1) }}">
+    {% if theme_api_base_url %}
+        <script>document.documentElement.dataset.apiBaseUrl = {{ theme_api_base_url | tojson }};</script>
+    {% endif %}
     {% if theme_accent_color != "#10b981" %}
         <style>:root,[data-theme="light"],[data-theme="dark"]{--lumina-accent:{{ theme_accent_color }};}</style>
     {% endif %}

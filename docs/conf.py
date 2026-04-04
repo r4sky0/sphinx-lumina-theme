@@ -8,6 +8,7 @@ extensions = [
     "sphinx_design",
     "sphinx_copybutton",
     "sphinxcontrib.mermaid",
+    "sphinxcontrib.openapi",
 ]
 myst_enable_extensions = [
     "colon_fence",
@@ -26,6 +27,7 @@ html_theme_options = {
     "social_links": [
         {"icon": "github", "url": "https://github.com/r4sky0/sphinx-lumina-theme"},
     ],
+    "api_base_url": "https://api.example.com/v1",
 }
 exclude_patterns = ["_build", "superpowers"]
 templates_path = ["_templates"]

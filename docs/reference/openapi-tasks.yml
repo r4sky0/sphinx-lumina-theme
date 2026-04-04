@@ -1,0 +1,151 @@
+openapi: "3.0.3"
+info:
+  title: Tasks API
+  version: "1.0.0"
+  description: A minimal task management API.
+servers:
+  - url: https://api.example.com/v1
+    description: Production
+paths:
+  /tasks:
+    get:
+      summary: List tasks
+      description: Returns all tasks, optionally filtered by status.
+      parameters:
+        - name: status
+          in: query
+          description: Filter by task status.
+          schema:
+            type: string
+            enum: [pending, done]
+      responses:
+        "200":
+          description: An array of tasks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Task"
+    post:
+      summary: Create a task
+      description: Creates a new task and returns it.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title]
+              properties:
+                title:
+                  type: string
+                  description: Short summary of the task.
+                description:
+                  type: string
+                  nullable: true
+                  description: Optional longer description.
+      responses:
+        "201":
+          description: The newly created task.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+  /tasks/{task_id}:
+    get:
+      summary: Get a task
+      description: Returns a single task by its ID.
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: Unique task identifier.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: The requested task.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "404":
+          description: Task not found.
+    patch:
+      summary: Update a task
+      description: Updates an existing task. Only provided fields are changed.
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: Unique task identifier.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                  nullable: true
+                status:
+                  type: string
+                  enum: [pending, done]
+      responses:
+        "200":
+          description: The updated task.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "404":
+          description: Task not found.
+    delete:
+      summary: Delete a task
+      description: Permanently removes a task.
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: Unique task identifier.
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Task deleted successfully.
+        "404":
+          description: Task not found.
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier.
+          example: 42
+        title:
+          type: string
+          description: Short summary.
+          example: Write API documentation
+        description:
+          type: string
+          nullable: true
+          description: Optional longer description.
+          example: Document all endpoints with request and response examples.
+        status:
+          type: string
+          enum: [pending, done]
+          description: Current task status.
+          example: pending
+        created_at:
+          type: string
+          format: date-time
+          description: When the task was created.
+          example: "2026-04-04T10:30:00Z"
