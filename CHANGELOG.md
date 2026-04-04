@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v1.13.0 (2026-04-04)
+
+### Features
+
+- Add sphinx-last-updated-by-git support
+  ([#23](https://github.com/r4sky0/sphinx-lumina-theme/pull/23),
+  [`f8c25a3`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f8c25a34d955b059cef1b7bfecb28ab509507ca5))
+
+
 ## v1.12.0 (2026-04-04)
 
 ### Features
