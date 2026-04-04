@@ -34,6 +34,8 @@ Inline and display equations, labeled references, multi-line systems, and matric
 
 Document REST endpoints from OpenAPI specs or hand-written directives. Every endpoint gets a **Copy as curl** button and a collapsible **Try it out** panel — no Swagger UI required.
 
+Let readers switch between documentation versions with a dropdown loaded from a JSON file you host alongside your docs.
+
 Source Sans 3 and JetBrains Mono are bundled with the theme. No external CDN requests, no privacy concerns.
 
 ## Built with
