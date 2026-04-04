@@ -92,6 +92,63 @@ div.highlight {
   position: relative;
 }
 
+/* ── Code block captions (file header bar) ── */
+.literal-block-wrapper {
+  margin: 1.25rem 0;
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--lumina-accent) 10%, var(--lumina-border));
+  overflow: hidden;
+}
+
+.literal-block-wrapper div.highlight,
+.literal-block-wrapper pre.highlight {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.code-block-caption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--lumina-bg-secondary);
+  border-bottom: 1px solid color-mix(in srgb, var(--lumina-accent) 10%, var(--lumina-border));
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--lumina-text-muted);
+  overflow: hidden;
+}
+
+.code-block-caption::before {
+  content: "";
+  flex-shrink: 0;
+  width: 0.875rem;
+  height: 0.875rem;
+  background-color: var(--lumina-text-muted);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+.code-block-caption .caption-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.code-block-caption .headerlink {
+  display: none;
+}
+
+/* Show copy button when hovering anywhere on the captioned block, not just code area */
+.literal-block-wrapper:hover button.copybtn {
+  opacity: 1;
+}
+
 /* ── sphinx-design tabs ── */
 .sd-tab-set {
   --sd-color-tabs-label-active: var(--lumina-accent);
@@ -144,6 +201,12 @@ div.highlight {
 
 .sd-tab-content div.highlight,
 .sd-tab-content pre.highlight {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.sd-tab-content .literal-block-wrapper {
   margin: 0;
   border: none;
   border-radius: 0;
