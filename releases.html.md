@@ -1,5 +1,13 @@
 # Releases
 
+## v1.12.0 (2026-04-04)
+
+### Features
+
+- Add animated demo GIF recording for README
+  ([#24](https://github.com/r4sky0/sphinx-lumina-theme/pull/24),
+  [`21222ef`](https://github.com/r4sky0/sphinx-lumina-theme/commit/21222ef236c7a5b424e6c80e99382ffc15641e89))
+
 ## v1.11.0 (2026-04-04)
 
 ### Features
