@@ -80,7 +80,7 @@ The "Try it out" panel sends requests directly from the reader's browser. Your A
 
 The closest ancestor's `data-api-base-url` takes precedence over the global setting:
 
-```{code-block} markdown
+````{code-block} markdown
 <div data-api-base-url="https://staging.api.example.com/v1">
 
 ```{eval-rst}
@@ -88,7 +88,7 @@ The closest ancestor's `data-api-base-url` takes precedence over the global sett
 ```
 
 </div>
-```
+````
 
 This works with both `.. openapi::` directives and individual `.. http:get::` / `.. http:post::` directives.
 

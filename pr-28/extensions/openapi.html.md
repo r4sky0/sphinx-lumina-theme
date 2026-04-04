@@ -85,7 +85,7 @@ The closest ancestor’s `data-api-base-url` takes precedence over the global se
 ```
 
 </div>
-\`\`\`
+```
 
 This works with both `.. openapi::` directives and individual `.. http:get::` / `.. http:post::` directives.
 
