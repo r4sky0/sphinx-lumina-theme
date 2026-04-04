@@ -144,6 +144,78 @@ div.highlight {
   border-color: color-mix(in srgb, var(--lumina-accent) 8%, var(--lumina-border));
 }
 
+/* ── sphinx-design badges ── */
+.sd-badge {
+  border-radius: 0.375rem !important;
+  font-weight: 600 !important;
+  font-size: 0.75em !important;
+  padding: 0.3em 0.6em !important;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s !important;
+}
+
+/* Outline badges — tinted background for better readability */
+.sd-badge[class*="sd-outline-"] {
+  background-color: color-mix(in srgb, currentColor 6%, transparent) !important;
+}
+
+/* Outline text/border: boost colors that fail WCAG AA on the page background.
+   Filled backgrounds use darker shades for white-text contrast,
+   but outline variants need brighter colors as text on the page. */
+.sd-outline-warning,
+.sd-text-warning,
+.sd-btn-outline-warning {
+  color: #b45309 !important;
+  border-color: #b45309 !important;
+}
+
+[data-theme="dark"] .sd-outline-primary,
+[data-theme="dark"] .sd-text-primary,
+[data-theme="dark"] .sd-btn-outline-primary {
+  color: #10b981 !important;
+  border-color: #10b981 !important;
+}
+
+[data-theme="dark"] .sd-outline-danger,
+[data-theme="dark"] .sd-text-danger,
+[data-theme="dark"] .sd-btn-outline-danger {
+  color: #f87171 !important;
+  border-color: #f87171 !important;
+}
+
+/* ── sphinx-design buttons ── */
+.sd-btn {
+  border-radius: 0.375rem !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  font-family: inherit !important;
+  padding: 0.5rem 1.25rem !important;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s !important;
+}
+
+.sd-btn:focus-visible {
+  outline: 2px solid var(--lumina-accent) !important;
+  outline-offset: 2px !important;
+}
+
+/* Filled buttons — subtle shadow for elevation */
+.sd-btn-primary,
+.sd-btn-secondary,
+.sd-btn-success,
+.sd-btn-info,
+.sd-btn-warning,
+.sd-btn-danger {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.sd-btn-primary:hover,
+.sd-btn-secondary:hover,
+.sd-btn-success:hover,
+.sd-btn-info:hover,
+.sd-btn-warning:hover,
+.sd-btn-danger:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+}
+
 /* ── sphinx-design cards ── */
 .sd-card {
   border: 1px solid var(--lumina-border) !important;

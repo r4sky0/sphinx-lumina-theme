@@ -63,6 +63,41 @@
   --lumina-adm-seealso: #14b8a6;
 }
 
+/* sphinx-design color overrides — html:root beats sphinx-design's :root
+   regardless of stylesheet load order (specificity 0,1,1 vs 0,1,0) */
+html:root {
+  --sd-color-primary: #047857;
+  --sd-color-primary-highlight: #065f46;
+  --sd-color-primary-text: #fff;
+  --sd-color-primary-bg: rgba(4, 120, 87, 0.1);
+  --sd-color-secondary: #71717a;
+  --sd-color-secondary-highlight: #52525b;
+  --sd-color-secondary-text: #fff;
+  --sd-color-secondary-bg: rgba(113, 113, 122, 0.1);
+  --sd-color-success: #0f766e;
+  --sd-color-success-highlight: #115e59;
+  --sd-color-success-text: #fff;
+  --sd-color-success-bg: rgba(15, 118, 110, 0.1);
+  --sd-color-info: #2563eb;
+  --sd-color-info-highlight: #1d4ed8;
+  --sd-color-info-text: #fff;
+  --sd-color-info-bg: rgba(37, 99, 235, 0.1);
+  --sd-color-warning: #f59e0b;
+  --sd-color-warning-highlight: #d97706;
+  --sd-color-warning-text: #451a03;
+  --sd-color-warning-bg: rgba(245, 158, 11, 0.1);
+  --sd-color-danger: #dc2626;
+  --sd-color-danger-highlight: #b91c1c;
+  --sd-color-danger-text: #fff;
+  --sd-color-danger-bg: rgba(220, 38, 38, 0.1);
+  --sd-color-light: #f4f4f5;
+  --sd-color-light-highlight: #e4e4e7;
+  --sd-color-light-text: #18181b;
+  --sd-color-dark: #27272a;
+  --sd-color-dark-highlight: #18181b;
+  --sd-color-dark-text: #fafafa;
+}
+
 /* ── Dark mode ── */
 [data-theme="dark"] {
   --lumina-bg: #09090b;
@@ -80,6 +115,39 @@
   --lumina-adm-danger: #f87171;
   --lumina-adm-important: #a78bfa;
   --lumina-adm-seealso: #2dd4bf;
+}
+
+html[data-theme="dark"] {
+  --sd-color-primary: #047857;
+  --sd-color-primary-highlight: #065f46;
+  --sd-color-primary-text: #fff;
+  --sd-color-primary-bg: rgba(4, 120, 87, 0.15);
+  --sd-color-secondary: #a1a1aa;
+  --sd-color-secondary-highlight: #d4d4d8;
+  --sd-color-secondary-text: #18181b;
+  --sd-color-secondary-bg: rgba(161, 161, 170, 0.15);
+  --sd-color-success: #2dd4bf;
+  --sd-color-success-highlight: #5eead4;
+  --sd-color-success-text: #042f2e;
+  --sd-color-success-bg: rgba(45, 212, 191, 0.15);
+  --sd-color-info: #60a5fa;
+  --sd-color-info-highlight: #93bbfd;
+  --sd-color-info-text: #1e3a5f;
+  --sd-color-info-bg: rgba(96, 165, 250, 0.15);
+  --sd-color-warning: #fbbf24;
+  --sd-color-warning-highlight: #fcd34d;
+  --sd-color-warning-text: #422006;
+  --sd-color-warning-bg: rgba(251, 191, 36, 0.15);
+  --sd-color-danger: #dc2626;
+  --sd-color-danger-highlight: #b91c1c;
+  --sd-color-danger-text: #fff;
+  --sd-color-danger-bg: rgba(220, 38, 38, 0.15);
+  --sd-color-light: #27272a;
+  --sd-color-light-highlight: #3f3f46;
+  --sd-color-light-text: #fafafa;
+  --sd-color-dark: #d4d4d8;
+  --sd-color-dark-highlight: #e4e4e7;
+  --sd-color-dark-text: #18181b;
 }
 
 @media (prefers-reduced-motion: no-preference) {
