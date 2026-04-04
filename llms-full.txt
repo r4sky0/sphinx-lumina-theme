@@ -1817,7 +1817,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 1.16.0.
+This documentation is for Sphinx Lumina Theme version 1.16.1.
 
 The MyST syntax:
 
@@ -2298,13 +2298,13 @@ Lumina requires **Python 3.10+** and **Sphinx 8.0+**.
 ### uv (recommended)
 
 ```bash
-uv add sphinx-lumina-theme@git+https://github.com/r4sky0/sphinx-lumina-theme.git@v1.16.0
+uv add sphinx-lumina-theme@git+https://github.com/r4sky0/sphinx-lumina-theme.git@v1.16.1
 ```
 
 ### pip
 
 ```bash
-pip install git+https://github.com/r4sky0/sphinx-lumina-theme.git@v1.16.0
+pip install git+https://github.com/r4sky0/sphinx-lumina-theme.git@v1.16.1
 ```
 
 ## First Build
@@ -3164,6 +3164,14 @@ The token is cleared when the browser tab is closed (sessionStorage scope).
 # releases.html.md
 
 # Releases
+
+## v1.16.1 (2026-04-04)
+
+### Bug Fixes
+
+- Sanitize search excerpts to prevent XSS via x-html
+  ([#29](https://github.com/r4sky0/sphinx-lumina-theme/pull/29),
+  [`aea9974`](https://github.com/r4sky0/sphinx-lumina-theme/commit/aea9974d87e94daf59c897c791302668b76a49ea))
 
 ## v1.16.0 (2026-04-04)
 

@@ -1,5 +1,13 @@
 # Releases
 
+## v1.16.1 (2026-04-04)
+
+### Bug Fixes
+
+- Sanitize search excerpts to prevent XSS via x-html
+  ([#29](https://github.com/r4sky0/sphinx-lumina-theme/pull/29),
+  [`aea9974`](https://github.com/r4sky0/sphinx-lumina-theme/commit/aea9974d87e94daf59c897c791302668b76a49ea))
+
 ## v1.16.0 (2026-04-04)
 
 ### Features
