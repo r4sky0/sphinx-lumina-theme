@@ -3,7 +3,7 @@
 Mathematical notation rendered by MathJax. Enabled by the `dollarmath` and `amsmath` MyST extensions.
 
 :::{note}
-See {doc}`../extensions` for setup instructions.
+See {doc}`/extensions/mathjax` for setup instructions.
 :::
 
 ## Inline Math

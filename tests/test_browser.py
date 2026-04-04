@@ -72,7 +72,7 @@ def test_mobile_sidebar(page: Page, live_server: str):
     """On mobile viewport, hamburger should open sidebar drawer."""
     # Use a regular page (not landing) where sidebar is rendered
     page.set_viewport_size({"width": 375, "height": 667})
-    page.goto(f"{live_server}/getting-started.html")
+    page.goto(f"{live_server}/getting-started/installation.html")
     page.wait_for_function("() => window.Alpine !== undefined")
 
     hamburger = page.locator("[data-sidebar-toggle]")
@@ -87,7 +87,7 @@ def test_toc_scrollspy(page: Page, live_server: str):
     """Scrolling should activate a TOC link via scrollspy."""
     # TOC sidebar requires xl breakpoint (1280px+)
     page.set_viewport_size({"width": 1400, "height": 900})
-    page.goto(f"{live_server}/getting-started.html")
+    page.goto(f"{live_server}/getting-started/installation.html")
     page.wait_for_function("() => window.Alpine !== undefined")
 
     # Scroll to a heading further down the page
@@ -99,7 +99,7 @@ def test_toc_scrollspy(page: Page, live_server: str):
 
 def test_breadcrumbs_link(page: Page, live_server: str):
     """Getting-started page should have breadcrumb with link to index."""
-    page.goto(f"{live_server}/getting-started.html")
+    page.goto(f"{live_server}/getting-started/installation.html")
     page.wait_for_function("() => window.Alpine !== undefined")
 
     breadcrumb = page.locator("nav[aria-label='Breadcrumb']")
@@ -110,7 +110,7 @@ def test_breadcrumbs_link(page: Page, live_server: str):
 
 def test_prev_next_navigation(page: Page, live_server: str):
     """Getting-started page should have prev/next navigation cards."""
-    page.goto(f"{live_server}/getting-started.html")
+    page.goto(f"{live_server}/getting-started/installation.html")
     page.wait_for_function("() => window.Alpine !== undefined")
 
     footer_nav = page.locator("nav[aria-label='Page navigation']")

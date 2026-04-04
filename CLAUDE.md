@@ -83,6 +83,32 @@ Tests use pytest with BeautifulSoup for HTML assertions. The `build_output` fixt
 
 Docs are in `docs/` using MyST Markdown (not reStructuredText). The theme dogfoods itself — `conf.py` sets `html_theme = "lumina"`. Extensions: `myst_parser`, `sphinx_design`, `sphinx_copybutton`.
 
+The docs use a hub-and-spoke architecture with five sections:
+
+```
+docs/
+├── getting-started/    # Installation + configuration
+├── guides/             # Search, dark mode, MyST, navigation, styling, dev workflow
+├── extensions/         # One page per supported extension
+├── reference/          # Visual showcase + syntax reference (typography, admonitions, etc.)
+└── contributing/       # Dev setup + architecture overview
+```
+
+Each section has an `index.md` hub page with card grids linking to topic pages. The root `docs/index.md` toctree references all section hubs.
+
+## Keeping Docs Up to Date
+
+When making changes that affect user-facing behavior, update the relevant documentation:
+
+- **Theme options**: `docs/getting-started/configuration.md` (options reference) and `docs/guides/navigation.md` or other guide pages
+- **CSS custom properties**: `docs/guides/custom-styling.md`
+- **New extensions or extension changes**: add/update the page under `docs/extensions/`
+- **New reference content types**: add a page under `docs/reference/` and link it from `docs/reference/index.md`
+- **Template or component changes**: `docs/contributing/architecture.md`
+- **Cross-references**: use `{doc}` links with absolute paths (e.g., `/extensions/mermaid`) for cross-section links
+
+If your change adds a new page, make sure it's included in the parent section's `index.md` toctree and card grid.
+
 ## Key Conventions
 
 - **Package managers**: pnpm for JS, uv for Python — never use npm or pip

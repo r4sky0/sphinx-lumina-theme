@@ -3,7 +3,7 @@
 Lumina supports [Mermaid](https://mermaid.js.org/) diagrams via the `sphinxcontrib-mermaid` extension. Diagrams automatically adapt to the current light or dark theme.
 
 :::{tip}
-See {doc}`../extensions` for installation and setup instructions.
+See {doc}`/extensions/mermaid` for installation and setup instructions.
 :::
 
 ## Choosing a Diagram Type

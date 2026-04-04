@@ -70,4 +70,4 @@ The theme extends Sphinx's built-in `basic` theme, so it inherits all of Sphinx'
 
 ## Getting started
 
-Ready to try it? Head to the {doc}`getting-started` guide to install Lumina and configure it for your project.
+Ready to try it? Head to the {doc}`getting-started/index` guide to install Lumina and configure it for your project.

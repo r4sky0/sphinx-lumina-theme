@@ -1,6 +1,6 @@
 # Cards & Grids
 
-Layout components from sphinx-design for visually organizing content into cards and responsive grids. Requires the `sphinx_design` extension — see {doc}`../extensions` for setup.
+Layout components from sphinx-design for visually organizing content into cards and responsive grids. Requires the `sphinx_design` extension — see {doc}`/extensions/sphinx-design` for setup.
 
 ## Basic Cards
 
@@ -51,7 +51,7 @@ Footer content
 Make entire cards clickable by adding a `:link:` option.
 
 :::{card} Read the Getting Started Guide
-:link: ../getting-started
+:link: /getting-started/installation
 :link-type: doc
 Step-by-step instructions for installing and configuring the Lumina theme.
 :::

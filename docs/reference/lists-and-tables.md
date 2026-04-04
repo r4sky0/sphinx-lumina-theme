@@ -54,7 +54,7 @@ The MyST syntax:
 ```
 
 :::{note}
-Task lists require the `tasklist` MyST extension. See {doc}`../extensions` for setup.
+Task lists require the `tasklist` MyST extension. See {doc}`/extensions/myst-parser` for setup.
 :::
 
 ## Rich Content in Lists
