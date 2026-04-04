@@ -1,0 +1,669 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Images &amp; Figures &#8212; Sphinx Lumina Theme  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=db1cbb58" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/lumina.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Badges &amp; Buttons" href="badges-and-buttons.html" />
+    <link rel="prev" title="Cards &amp; Grids" href="cards-and-grids.html" />
+    
+        <link rel="icon"
+              type="image/svg+xml"
+              href="../_static/favicon.svg">
+    
+    
+    <script>
+(function() {
+  var stored = localStorage.getItem('lumina-theme');
+  if (stored === 'dark' || stored === 'light') {
+    document.documentElement.setAttribute('data-theme', stored);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+    </script>
+    <meta name="lumina-search-backend" content="pagefind">
+    <meta name="lumina-base-url" content="../">
+    
+
+  </head><body>
+    <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
+    <div id="lumina-header"><header class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--lumina-border)] bg-[var(--lumina-bg)]/80 backdrop-blur-sm">
+    <div class="mx-auto flex h-14 max-w-[90rem] items-center justify-between px-4 lg:px-6">
+        
+        <div class="flex items-center gap-3">
+            <a href="../index.html"
+               class="flex items-center gap-2 text-[var(--lumina-text)] no-underline hover:opacity-80 transition-opacity">
+                
+                    
+                    <svg class="lumina-logo h-7 w-7"
+                         viewBox="0 0 32 32"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 3L28 27H4L16 3Z" stroke="var(--lumina-accent)" stroke-width="2" fill="none" />
+                        <path class="lumina-logo-facet-l" d="M16 10L8 27H16" fill="var(--lumina-accent)" />
+                        <path class="lumina-logo-facet-r" d="M16 10L24 27H16" fill="var(--lumina-accent)" />
+                        <line x1="16" y1="3" x2="16" y2="10" stroke="var(--lumina-accent)" stroke-width="2" />
+                    </svg>
+                
+                
+                    <span class="font-semibold text-base">Sphinx Lumina Theme</span>
+                
+            </a>
+        </div>
+        
+        
+        
+        <div class="flex items-center gap-2">
+            
+            <button data-search-trigger
+                    class="flex items-center gap-2 rounded-lg border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-3 py-2 text-[0.8125rem] text-[var(--lumina-text-muted)] hover:border-[var(--lumina-accent)] transition-colors cursor-pointer lg:min-w-56"
+                    aria-label="Search documentation"
+                    aria-haspopup="dialog">
+                <svg class="h-4 w-4 shrink-0"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <span class="hidden lg:inline flex-1 text-left">Search docs...</span>
+                <kbd data-search-shortcut
+                     class="hidden lg:inline rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-1.5 py-0.5 text-[0.6875rem] font-[family-name:'JetBrains_Mono'] tracking-[0.02em]">⌘K</kbd>
+            </button>
+            
+            <button data-theme-toggle
+                    x-data="themeToggle()"
+                    @click="cycle()"
+                    class="relative flex h-9 w-9 items-center justify-center rounded-md text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors cursor-pointer"
+                    :aria-label="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'">
+                
+                <svg x-show="mode === 'light'"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 rotate-[-90deg] scale-0"
+                     x-transition:enter-end="opacity-100 rotate-0 scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0 scale-0"
+                     class="h-5 w-5 absolute"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                
+                <svg x-show="mode === 'dark'"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 rotate-90 scale-0"
+                     x-transition:enter-end="opacity-100 rotate-0 scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0 scale-0"
+                     class="h-5 w-5 absolute"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+                
+                <svg x-show="mode === 'auto'"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 scale-0"
+                     x-transition:enter-end="opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0 scale-0"
+                     class="h-5 w-5 absolute"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+            </button>
+            
+            
+                
+                    <a href="https://github.com/r4sky0/sphinx-lumina-theme"
+                       class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] transition-colors no-underline"
+                       target="_blank"
+                       rel="noopener"
+                       aria-label="Github (opens in new tab)">
+                        
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                            </svg>
+                        
+                    </a>
+                
+            
+            
+            
+                <button data-sidebar-toggle
+                        class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors lg:hidden cursor-pointer"
+                        aria-label="Toggle navigation"
+                        aria-expanded="false"
+                        aria-controls="lumina-sidebar-drawer">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            
+        </div>
+    </div>
+</header></div>
+    <div class="lumina-wrapper">
+        <aside id="lumina-sidebar">
+            <div x-data="sidebar()">
+    
+    <div class="hidden h-[calc(100vh-3.5rem)] flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
+        <nav class="lumina-sidebar-nav" aria-label="Main navigation">
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../customization.html">Customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions.html">Extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="typography.html">Typography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="admonitions.html">Admonitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-blocks.html">Code Blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists-and-tables.html">Lists &amp; Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cards-and-grids.html">Cards &amp; Grids</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Images &amp; Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="badges-and-buttons.html">Badges &amp; Buttons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math.html">Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagrams.html">Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="footnotes-and-references.html">Footnotes &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api-documentation.html">API Documentation</a></li>
+</ul>
+
+        </nav>
+        <div class="lumina-sidebar-footer">
+            Built with
+            <a href="https://github.com/r4sky0/sphinx-lumina-theme"
+               target="_blank"
+               rel="noopener">
+                <svg class="lumina-sidebar-footer-icon"
+                     viewBox="0 0 32 32"
+                     fill="none"
+                     aria-hidden="true">
+                    <path d="M16 3L28 27H4L16 3Z" stroke="currentColor" stroke-width="2.5" fill="none" />
+                    <path d="M16 10L8 27H16" fill="currentColor" opacity="0.15" />
+                    <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
+                </svg>
+            Lumina</a>
+            <span class="lumina-sidebar-footer-version">v1.8.11</span>
+        </div>
+    </div>
+    
+    <template x-teleport="body">
+        <div>
+            
+            <div x-show="mobileOpen"
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="fixed inset-0 top-14 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
+                 @click="close()"></div>
+            
+            <div id="lumina-sidebar-drawer"
+                 x-show="mobileOpen"
+                 x-transition:enter="transition ease-out duration-250"
+                 x-transition:enter-start="-translate-x-full"
+                 x-transition:enter-end="translate-x-0"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="translate-x-0"
+                 x-transition:leave-end="-translate-x-full"
+                 class="fixed inset-y-0 top-14 left-0 z-50 w-[280px] overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:hidden">
+                
+                <button data-sidebar-close
+                        @click="close()"
+                        class="absolute top-4 right-4 rounded-md p-1 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] cursor-pointer"
+                        aria-label="Close navigation">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                
+                
+                <nav class="lumina-sidebar-nav" aria-label="Main navigation">
+                    <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../customization.html">Customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions.html">Extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="typography.html">Typography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="admonitions.html">Admonitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-blocks.html">Code Blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists-and-tables.html">Lists &amp; Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cards-and-grids.html">Cards &amp; Grids</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Images &amp; Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="badges-and-buttons.html">Badges &amp; Buttons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math.html">Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagrams.html">Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="footnotes-and-references.html">Footnotes &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api-documentation.html">API Documentation</a></li>
+</ul>
+
+                </nav>
+                <div class="lumina-sidebar-footer">
+                    <a href="https://github.com/r4sky0/sphinx-lumina-theme"
+                       target="_blank"
+                       rel="noopener">Lumina</a>
+                    <span class="lumina-sidebar-footer-version">v1.8.11</span>
+                </div>
+            </div>
+        </div>
+    </template>
+</div>
+        </aside>
+        <main id="lumina-content" data-pagefind-body>
+            <div class="lumina-content-toolbar">
+                
+                    <div class="min-w-0 flex-1"><nav class="flex items-center gap-2 overflow-x-auto text-sm text-[var(--lumina-text-muted)]"
+     style="scrollbar-width:none"
+     aria-label="Breadcrumb">
+    <a href="../index.html"
+       class="whitespace-nowrap hover:text-[var(--lumina-accent)] no-underline transition-colors">Sphinx Lumina Theme  documentation</a>
+    
+    <svg class="h-3.5 w-3.5 flex-shrink-0"
+         fill="none"
+         stroke="currentColor"
+         viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+    <span class="whitespace-nowrap text-[var(--lumina-text)]">Images &amp; Figures</span>
+</nav></div>
+                
+                <button x-data="copyPage()"
+                        @click="copy()"
+                        class="lumina-copy-page"
+                        :class="{ 'is-copied': copied }"
+                        :aria-label="copied ? 'Copied to clipboard' : 'Copy page as Markdown'"
+                        :title="copied ? 'Copied!' : 'Copy page as Markdown'"
+                        type="button">
+                    <svg x-show="!copied"
+                         class="h-3.5 w-3.5"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg>
+                    <svg x-show="copied"
+                         x-cloak
+                         class="h-3.5 w-3.5"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span class="hidden sm:inline"
+                          x-text="copied ? 'Copied!' : 'Copy Markdown'"></span>
+                </button>
+            </div>
+            <article class="lumina-article" x-data="headerLinks()">
+                <section class="tex2jax_ignore mathjax_ignore" id="images-figures">
+<h1>Images &amp; Figures<a class="headerlink" href="#images-figures" title="Link to this heading">¶</a></h1>
+<p>Embedding and formatting visual content in your documentation.</p>
+<section id="basic-images">
+<h2>Basic Images<a class="headerlink" href="#basic-images" title="Link to this heading">¶</a></h2>
+<p>Use standard Markdown syntax to embed an image.</p>
+<p><img alt="Wide placeholder image" src="../_images/placeholder-wide.svg" /></p>
+<p>The MyST syntax:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>![<span class="nt">Alt text</span>](<span class="na">path/to/image.png</span>)
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Always include descriptive alt text. It improves accessibility for screen reader users and appears as fallback text if the image fails to load.</p>
+</div>
+</section>
+<section id="image-directive">
+<h2>Image Directive<a class="headerlink" href="#image-directive" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">image</span></code> directive gives you control over width, alignment, and alt text that Markdown syntax doesn’t offer.</p>
+<a class="reference internal image-reference" href="../_images/placeholder-square.svg"><img alt="Square placeholder image" class="align-center" src="../_images/placeholder-square.svg" style="width: 200px;" />
+</a>
+<p>The MyST syntax:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{image} path/to/image.svg
+:alt: Description of the image
+:width: 200px
+:align: center
+```
+</pre></div>
+</div>
+<section id="alignment-options">
+<h3>Alignment Options<a class="headerlink" href="#alignment-options" title="Link to this heading">¶</a></h3>
+<p>Images can be aligned left, center, or right within the content area.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-3 sd-row-cols-xs-3 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<a class="reference internal image-reference" href="../_images/placeholder-square.svg"><img alt="Left-aligned image" class="align-left" src="../_images/placeholder-square.svg" style="width: 120px;" />
+</a>
+<p><strong>Left</strong> — text wraps around the right side.</p>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<a class="reference internal image-reference" href="../_images/placeholder-square.svg"><img alt="Centered image" class="align-center" src="../_images/placeholder-square.svg" style="width: 120px;" />
+</a>
+<p><strong>Center</strong> — image stands alone.</p>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<a class="reference internal image-reference" href="../_images/placeholder-square.svg"><img alt="Right-aligned image" class="align-right" src="../_images/placeholder-square.svg" style="width: 120px;" />
+</a>
+<p><strong>Right</strong> — text wraps around the left side.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="figures">
+<h2>Figures<a class="headerlink" href="#figures" title="Link to this heading">¶</a></h2>
+<p>Figures wrap an image with a caption and optional legend. Use them when an image needs explanation or attribution.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/placeholder-wide.svg"><img alt="Wide placeholder image" src="../_images/placeholder-wide.svg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 1.</strong> A wide placeholder image demonstrating the figure directive. Figures support full Markdown in captions including <strong>bold</strong>, <em>italic</em>, and <code class="docutils literal notranslate"><span class="pre">code</span></code>.</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The MyST syntax:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{figure} path/to/image.svg
+:alt: Description
+:width: 100%
+:align: center
+
+Caption text with <span class="gs">**Markdown**</span> support.
+```
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use figures instead of bare images when you need a caption. Figures are also the correct semantic choice for diagrams, screenshots, and charts — anything that the text refers to by number or name.</p>
+</div>
+</section>
+<section id="scaled-images">
+<h2>Scaled Images<a class="headerlink" href="#scaled-images" title="Link to this heading">¶</a></h2>
+<p>Control image size as a percentage of the content width.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-3 sd-row-cols-lg-3 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<a class="reference internal image-reference" href="../_images/placeholder-square.svg"><img alt="Full-width image" src="../_images/placeholder-square.svg" style="width: 100%;" />
+</a>
+<p><code class="docutils literal notranslate"><span class="pre">100%</span></code> width</p>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<a class="reference internal image-reference" href="../_images/placeholder-square.svg"><img alt="Half-width image" src="../_images/placeholder-square.svg" style="width: 100%;" />
+</a>
+<p><code class="docutils literal notranslate"><span class="pre">50%</span></code> width</p>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<a class="reference internal image-reference" href="../_images/placeholder-square.svg"><img alt="Quarter-width image" src="../_images/placeholder-square.svg" style="width: 100%;" />
+</a>
+<p><code class="docutils literal notranslate"><span class="pre">25%</span></code> width</p>
+</div>
+</div>
+</div>
+<p>You can use percentages, pixels, or any CSS length unit:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>:width: 50%       # Percentage of content width
+:width: 300px     # Fixed pixel width
+:width: 20em      # Relative to font size
+</pre></div>
+</div>
+</section>
+<section id="linked-images">
+<h2>Linked Images<a class="headerlink" href="#linked-images" title="Link to this heading">¶</a></h2>
+<p>Wrap an image in a link to make it clickable.</p>
+<p><a class="reference download internal" download="" href="../_downloads/96ea19f06e44cff643af6146ba8b1802/placeholder-wide.svg"><span class="xref download myst"><img alt="Placeholder image" src="../_images/placeholder-square.svg" /></span></a></p>
+<p>The MyST syntax:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>[<span class="nt">![Alt text</span>](<span class="na">thumbnail.png</span>)](full-size.png)
+</pre></div>
+</div>
+</section>
+<section id="images-in-admonitions">
+<h2>Images in Admonitions<a class="headerlink" href="#images-in-admonitions" title="Link to this heading">¶</a></h2>
+<p>Images work inside any block element, including admonitions and cards.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Images inside admonitions maintain their styling. This is useful for annotated screenshots or diagrams that accompany a specific instruction.</p>
+<a class="reference internal image-reference" href="../_images/placeholder-wide.svg"><img alt="Image inside an admonition" src="../_images/placeholder-wide.svg" style="width: 100%;" />
+</a>
+</div>
+</section>
+<section id="file-format-guidance">
+<h2>File Format Guidance<a class="headerlink" href="#file-format-guidance" title="Link to this heading">¶</a></h2>
+<p>Choose the right format for your images:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 25.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Format</p></th>
+<th class="head"><p>Best for</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>SVG</strong></p></td>
+<td><p>Diagrams, icons, logos</p></td>
+<td><p>Scales to any size without quality loss. Smallest file size for simple graphics. Preferred for anything that isn’t a photograph.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>PNG</strong></p></td>
+<td><p>Screenshots, UI captures</p></td>
+<td><p>Lossless compression. Good for images with text, sharp edges, or transparency.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>WebP</strong></p></td>
+<td><p>Photos, complex images</p></td>
+<td><p>Modern format with excellent compression. Supported by all current browsers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>JPEG</strong></p></td>
+<td><p>Photos (fallback)</p></td>
+<td><p>Wide compatibility. Use WebP instead when possible for smaller files.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Store images in a <code class="docutils literal notranslate"><span class="pre">_images/</span></code> subdirectory within your docs folder to keep things organized. Reference them with relative paths: <code class="docutils literal notranslate"><span class="pre">_images/my-screenshot.png</span></code>.</p>
+</div>
+</section>
+</section>
+
+            </article>
+            
+                <footer class="mt-10 border-t border-[var(--lumina-border)] pt-6">
+    
+    
+        <nav class="flex justify-between gap-4 mb-8" aria-label="Page navigation">
+            
+                <a href="cards-and-grids.html"
+                   class="group flex flex-col items-start gap-1 rounded-lg border border-[var(--lumina-border)] p-4 no-underline hover:border-[var(--lumina-accent)] hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
+                    <span class="text-xs text-[var(--lumina-text-muted)]">Previous</span>
+                    <span class="text-sm font-medium text-[var(--lumina-text)] group-hover:text-[var(--lumina-accent)] transition-colors">&larr; Cards &amp; Grids</span>
+                </a>
+            
+            
+                <a href="badges-and-buttons.html"
+                   class="group flex flex-col items-end gap-1 rounded-lg border border-[var(--lumina-border)] p-4 no-underline hover:border-[var(--lumina-accent)] hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
+                    <span class="text-xs text-[var(--lumina-text-muted)]">Next</span>
+                    <span class="text-sm font-medium text-[var(--lumina-text)] group-hover:text-[var(--lumina-accent)] transition-colors">Badges &amp; Buttons &rarr;</span>
+                </a>
+            
+        </nav>
+    
+    
+    
+</footer>
+            
+        </main>
+        
+            <aside id="lumina-toc">
+                
+    <div class="sticky top-14 hidden h-[calc(100vh-3.5rem)] w-[220px] shrink-0 overflow-y-auto py-6 pr-4 xl:block">
+        
+        
+            <a href="https://github.com/r4sky0/sphinx-lumina-theme/edit/main/docs/reference/images-and-figures.md"
+               class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)] no-underline hover:text-[var(--lumina-accent)] transition-colors"
+               target="_blank"
+               rel="noopener">
+                <svg class="h-3.5 w-3.5"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+                Edit this page
+            </a>
+        
+        <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-[var(--lumina-text-muted)]">On this page</p>
+        <nav class="lumina-toc-nav"
+             aria-label="Table of contents"
+             x-data="scrollspy()"
+             x-init="init()">
+            <ul>
+<li><a class="reference internal" href="#">Images &amp; Figures</a><ul>
+<li><a class="reference internal" href="#basic-images">Basic Images</a></li>
+<li><a class="reference internal" href="#image-directive">Image Directive</a><ul>
+<li><a class="reference internal" href="#alignment-options">Alignment Options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#figures">Figures</a></li>
+<li><a class="reference internal" href="#scaled-images">Scaled Images</a></li>
+<li><a class="reference internal" href="#linked-images">Linked Images</a></li>
+<li><a class="reference internal" href="#images-in-admonitions">Images in Admonitions</a></li>
+<li><a class="reference internal" href="#file-format-guidance">File Format Guidance</a></li>
+</ul>
+</li>
+</ul>
+
+        </nav>
+    </div>
+
+            </aside>
+        
+    </div>
+    <div id="lumina-search-modal"
+     x-data="searchModal()"
+     x-show="open"
+     x-cloak
+     @keydown.escape.window="close()"
+     @keydown.meta.k.window.prevent="toggle()"
+     @keydown.ctrl.k.window.prevent="toggle()"
+     class="fixed inset-0 z-[100]"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Search documentation">
+    
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click="close()"></div>
+    
+    <div class="relative mx-auto mt-[15vh] max-w-xl rounded-xl border border-[var(--lumina-border)] bg-[var(--lumina-bg)] shadow-2xl"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95">
+        
+        <div class="flex items-center border-b border-[var(--lumina-border)] px-4">
+            <svg class="h-5 w-5 text-[var(--lumina-text-muted)]"
+                 fill="none"
+                 stroke="currentColor"
+                 viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="search"
+                   x-ref="searchInput"
+                   x-model="query"
+                   @input.debounce.150ms="search()"
+                   @keydown.arrow-down.prevent="moveDown()"
+                   @keydown.arrow-up.prevent="moveUp()"
+                   @keydown.enter.prevent="goToSelected()"
+                   class="w-full border-0 bg-transparent px-3 py-4 text-[var(--lumina-text)] placeholder-[var(--lumina-text-muted)] outline-none"
+                   placeholder="Search docs..."
+                   autocomplete="off">
+            <kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1.5 py-0.5 text-xs text-[var(--lumina-text-muted)]">esc</kbd>
+        </div>
+        
+        <div class="max-h-[60vh] overflow-y-auto p-2"
+             aria-live="polite"
+             role="status">
+            <template x-if="!loaded">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]">Loading search index...</p>
+            </template>
+            <template x-if="loaded && query.length > 0 && results.length === 0">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]">No results found.</p>
+            </template>
+            <template x-if="error">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]"
+                   x-text="error"></p>
+            </template>
+            <template x-for="(result, index) in results" :key="result.url">
+                <a :href="result.url"
+                   class="flex flex-col gap-0.5 rounded-lg px-3 py-2.5 no-underline transition-colors"
+                   :class="index === selectedIndex ? 'bg-[var(--lumina-accent-light)] text-[var(--lumina-accent)]' : 'hover:bg-[var(--lumina-bg-secondary)] text-[var(--lumina-text)]'"
+                   @mouseenter="selectedIndex = index">
+                    <span class="text-sm font-medium" x-text="result.title"></span>
+                    <span class="text-xs text-[var(--lumina-text-muted)] line-clamp-2"
+                          x-html="result.excerpt"></span>
+                </a>
+            </template>
+            <template x-if="loaded && query.length === 0">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]">Type to search...</p>
+            </template>
+        </div>
+        
+        <div class="flex items-center gap-3 border-t border-[var(--lumina-border)] px-4 py-2.5 text-xs text-[var(--lumina-text-muted)]">
+            <span class="flex items-center gap-1"><kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> Navigate</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> Open</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1 py-0.5 font-mono text-[10px]">esc</kbd> Close</span>
+        </div>
+    </div>
+</div>
+  </body>
+</html>
