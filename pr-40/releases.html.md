@@ -1,5 +1,12 @@
 # Releases
 
+## v1.20.0 (2026-04-04)
+
+### Features
+
+- Add back-to-top button ([#39](https://github.com/r4sky0/sphinx-lumina-theme/pull/39),
+  [`312335e`](https://github.com/r4sky0/sphinx-lumina-theme/commit/312335e4830b2251e6ee579dd8b1a3d9a6277519))
+
 ## v1.19.0 (2026-04-04)
 
 ### Features

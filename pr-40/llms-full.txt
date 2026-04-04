@@ -1242,6 +1242,7 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 | `show_breadcrumbs` | string | `"true"`  | Show or hide the breadcrumb trail above the content.                                                                                                                                                     |
 | `show_prev_next`   | string | `"true"`  | Show or hide previous/next page navigation at the bottom.                                                                                                                                                |
 | `show_attribution` | string | `"true"`  | Show or hide the “Built with Lumina” attribution link in the sidebar footer.                                                                                                                             |
+| `show_back_to_top` | string | `"true"`  | Show or hide the back-to-top button that appears when scrolling up.                                                                                                                                      |
 
 ### Search
 
@@ -1325,6 +1326,7 @@ html_theme_options = {
     "show_breadcrumbs": "true",
     "show_prev_next": "true",
     "show_attribution": "true",
+    "show_back_to_top": "true",
 
     # Search
     "search_backend": "pagefind",
@@ -1823,7 +1825,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 1.19.0.
+This documentation is for Sphinx Lumina Theme version 1.20.0.
 
 The MyST syntax:
 
@@ -3267,6 +3269,13 @@ The token is cleared when the browser tab is closed (sessionStorage scope).
 # releases.html.md
 
 # Releases
+
+## v1.20.0 (2026-04-04)
+
+### Features
+
+- Add back-to-top button ([#39](https://github.com/r4sky0/sphinx-lumina-theme/pull/39),
+  [`312335e`](https://github.com/r4sky0/sphinx-lumina-theme/commit/312335e4830b2251e6ee579dd8b1a3d9a6277519))
 
 ## v1.19.0 (2026-04-04)
 
