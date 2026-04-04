@@ -2,21 +2,14 @@ import DOMPurify from "dompurify";
 
 const EXCERPT_CONFIG = { ALLOWED_TAGS: ["mark"], ALLOWED_ATTR: [] };
 
-const SECTION_LABELS = {
-  "getting-started": "Getting Started",
-  "guides": "Guides",
-  "reference": "Reference",
-  "extensions": "Extensions",
-  "contributing": "Contributing",
-};
-
 function sectionFromUrl(url) {
   const segments = url.split("?")[0].split("#")[0]
     .replace(/\.html$/, "")
     .split("/")
     .filter(Boolean);
   if (segments.length < 2) return null;
-  return SECTION_LABELS[segments[segments.length - 2]] ?? null;
+  const slug = segments[segments.length - 2];
+  return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 export default function searchModal() {
