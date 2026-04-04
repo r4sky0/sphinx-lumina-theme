@@ -188,6 +188,12 @@ html.lumina-transitioning header {
 a:hover > .lumina-logo .lumina-logo-facet-l { opacity: 0.4; }
 a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
 
+/* Light/dark logo switching — pure CSS, no JS needed */
+.lumina-logo-light { display: block; }
+.lumina-logo-dark { display: none; }
+[data-theme="dark"] .lumina-logo-light { display: none; }
+[data-theme="dark"] .lumina-logo-dark { display: block; }
+
 /* ── Selection ── */
 ::selection {
   background-color: color-mix(in srgb, var(--lumina-accent) 25%, transparent);

@@ -4,7 +4,22 @@
         <div class="flex items-center gap-3">
             <a href="{{ pathto(master_doc) }}"
                class="flex items-center gap-2 text-[var(--lumina-text)] no-underline hover:opacity-80 transition-opacity">
-                {% if logo_url is defined and logo_url %}
+                {% if lumina_light_logo is defined and lumina_dark_logo is defined and lumina_light_logo and lumina_dark_logo %}
+                    <img src="{{ lumina_light_logo }}"
+                         alt="{{ project }} logo"
+                         class="lumina-logo-light h-7 w-auto">
+                    <img src="{{ lumina_dark_logo }}"
+                         alt="{{ project }} logo"
+                         class="lumina-logo-dark h-7 w-auto">
+                {% elif lumina_light_logo is defined and lumina_light_logo %}
+                    <img src="{{ lumina_light_logo }}"
+                         alt="{{ project }} logo"
+                         class="h-7 w-auto">
+                {% elif lumina_dark_logo is defined and lumina_dark_logo %}
+                    <img src="{{ lumina_dark_logo }}"
+                         alt="{{ project }} logo"
+                         class="h-7 w-auto">
+                {% elif logo_url is defined and logo_url %}
                     <img src="{{ logo_url }}" alt="{{ project }} logo" class="h-7 w-auto">
                 {% else %}
                     {# Default Lumina logomark — geometric light prism #}

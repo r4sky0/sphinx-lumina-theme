@@ -22,6 +22,16 @@ _HERO_FIELDS = (
 def _add_context(app, pagename, templatename, context, doctree):
     context["lumina_version"] = __version__
     context["has_llms_txt"] = "sphinx_llm.txt" in app.extensions
+
+    # Separate light/dark logos
+    light_logo = app.builder.theme_options.get("light_logo", "")
+    dark_logo = app.builder.theme_options.get("dark_logo", "")
+
+    if light_logo:
+        context["lumina_light_logo"] = context["pathto"]("_static/" + light_logo, 1)
+    if dark_logo:
+        context["lumina_dark_logo"] = context["pathto"]("_static/" + dark_logo, 1)
+
     # Allow pages to opt into a custom template via metadata
     meta = app.env.metadata.get(pagename, {})
 

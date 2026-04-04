@@ -53,6 +53,14 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
   - string
   - `"false"`
   - When `"true"`, hides the project name in the header and shows only the logo.
+* - `light_logo`
+  - string
+  - `""`
+  - Logo image for light mode (path relative to `_static`). Falls back to `html_logo`.
+* - `dark_logo`
+  - string
+  - `""`
+  - Logo image for dark mode (path relative to `_static`). When set alone, displays in both modes. Set both `light_logo` and `dark_logo` for automatic switching.
 ```
 
 ### Navigation
@@ -232,6 +240,8 @@ html_theme_options = {
     "accent_color": "#10b981",
     "dark_mode_default": "auto",
     "logo_only": "false",
+    "light_logo": "logo-light.svg",
+    "dark_logo": "logo-dark.svg",
 
     # Navigation
     "nav_links": [
