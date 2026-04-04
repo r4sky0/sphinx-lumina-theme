@@ -185,6 +185,35 @@ graph LR
 
 See {doc}`reference/diagrams` for flowcharts, sequence diagrams, class diagrams, Gantt charts, and more.
 
+## sphinxcontrib-openapi
+
+[sphinxcontrib-openapi](https://sphinxcontrib-openapi.readthedocs.io/) generates HTTP API documentation directly from OpenAPI (Swagger) specification files. It builds on [sphinxcontrib-httpdomain](https://sphinxcontrib-httpdomain.readthedocs.io/), which provides HTTP method directives for writing endpoint docs by hand. Lumina styles all HTTP endpoints with color-coded method indicators.
+
+### Setup
+
+```bash
+uv add sphinxcontrib-openapi
+```
+
+```{code-block} python
+:caption: conf.py
+extensions = ["sphinxcontrib.openapi"]
+```
+
+This also installs the HTTP domain, so you can write individual endpoints manually with `http:get::`, `http:post::`, and other method directives.
+
+### Usage
+
+Point the `openapi` directive at your spec file:
+
+````markdown
+```{eval-rst}
+.. openapi:: path/to/openapi.yml
+```
+````
+
+See {doc}`reference/http-api` for rendered examples of both auto-generated and manually written HTTP API documentation.
+
 ## MathJax
 
 Sphinx includes MathJax support by default. Combined with MyST's `dollarmath` and `amsmath` extensions, you get full LaTeX math rendering.
@@ -250,6 +279,7 @@ extensions = [
     "sphinx_design",
     "sphinx_copybutton",
     "sphinxcontrib.mermaid",
+    "sphinxcontrib.openapi",
 
     # API documentation (if applicable)
     "sphinx.ext.autodoc",

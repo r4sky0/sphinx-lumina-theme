@@ -9,7 +9,7 @@
     <title>Extensions &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="_static/lumina.css?v=4e0c88f8" />
+    <link rel="stylesheet" type="text/css" href="_static/lumina.css?v=6de53493" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     
@@ -44,6 +44,9 @@
     </script>
     <meta name="lumina-search-backend" content="pagefind">
     <meta name="lumina-base-url" content="./">
+    
+        <script>document.documentElement.dataset.apiBaseUrl = "https://api.example.com/v1";</script>
+    
     
 
   </head><body>
@@ -198,6 +201,7 @@
 <li class="toctree-l1"><a class="reference internal" href="reference/diagrams.html">Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/footnotes-and-references.html">Footnotes &amp; References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/api-documentation.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/http-api.html">HTTP API Documentation</a></li>
 </ul>
 
         </nav>
@@ -215,7 +219,7 @@
                     <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                 </svg>
             Lumina</a>
-            <span class="lumina-sidebar-footer-version">v1.8.13</span>
+            <span class="lumina-sidebar-footer-version">v1.9.0</span>
         </div>
     </div>
     
@@ -275,6 +279,7 @@
 <li class="toctree-l1"><a class="reference internal" href="reference/diagrams.html">Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/footnotes-and-references.html">Footnotes &amp; References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/api-documentation.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/http-api.html">HTTP API Documentation</a></li>
 </ul>
 
                 </nav>
@@ -282,7 +287,7 @@
                     <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                        target="_blank"
                        rel="noopener">Lumina</a>
-                    <span class="lumina-sidebar-footer-version">v1.8.13</span>
+                    <span class="lumina-sidebar-footer-version">v1.9.0</span>
                 </div>
             </div>
         </div>
@@ -363,8 +368,8 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>myst-parser
 </pre></div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;myst_parser&quot;</span><span class="p">]</span>
 
 <span class="n">myst_enable_extensions</span> <span class="o">=</span> <span class="p">[</span>
@@ -420,8 +425,8 @@ This also works, but nesting gets awkward.
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>sphinx-design
 </pre></div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sphinx_design&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -503,8 +508,8 @@ Dropdowns</div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>sphinx-copybutton
 </pre></div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id10" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sphinx_copybutton&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -529,8 +534,8 @@ Dropdowns</div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>sphinxcontrib-mermaid
 </pre></div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id11" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sphinxcontrib.mermaid&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -553,11 +558,38 @@ graph LR
 <p>See <a class="reference internal" href="reference/diagrams.html"><span class="doc">Diagrams</span></a> for flowcharts, sequence diagrams, class diagrams, Gantt charts, and more.</p>
 </section>
 </section>
+<section id="sphinxcontrib-openapi">
+<h2>sphinxcontrib-openapi<a class="headerlink" href="#sphinxcontrib-openapi" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://sphinxcontrib-openapi.readthedocs.io/">sphinxcontrib-openapi</a> generates HTTP API documentation directly from OpenAPI (Swagger) specification files. It builds on <a class="reference external" href="https://sphinxcontrib-httpdomain.readthedocs.io/">sphinxcontrib-httpdomain</a>, which provides HTTP method directives for writing endpoint docs by hand. Lumina styles all HTTP endpoints with color-coded method indicators.</p>
+<section id="id4">
+<h3>Setup<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>sphinxcontrib-openapi
+</pre></div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id12" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sphinxcontrib.openapi&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>This also installs the HTTP domain, so you can write individual endpoints manually with <code class="docutils literal notranslate"><span class="pre">http:get::</span></code>, <code class="docutils literal notranslate"><span class="pre">http:post::</span></code>, and other method directives.</p>
+</section>
+<section id="id5">
+<h3>Usage<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p>Point the <code class="docutils literal notranslate"><span class="pre">openapi</span></code> directive at your spec file:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{eval-rst}
+.. openapi:: path/to/openapi.yml
+```
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="reference/http-api.html"><span class="doc">HTTP API Documentation</span></a> for rendered examples of both auto-generated and manually written HTTP API documentation.</p>
+</section>
+</section>
 <section id="mathjax">
 <h2>MathJax<a class="headerlink" href="#mathjax" title="Link to this heading">¶</a></h2>
 <p>Sphinx includes MathJax support by default. Combined with MyST’s <code class="docutils literal notranslate"><span class="pre">dollarmath</span></code> and <code class="docutils literal notranslate"><span class="pre">amsmath</span></code> extensions, you get full LaTeX math rendering.</p>
-<section id="id4">
-<h3>Setup<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<section id="id6">
+<h3>Setup<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <p>No additional packages needed. Just enable the MyST extensions:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">myst_enable_extensions</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;dollarmath&quot;</span><span class="p">,</span>    <span class="c1"># $E = mc^2$ inline, $$...$$ display</span>
@@ -566,8 +598,8 @@ graph LR
 </pre></div>
 </div>
 </section>
-<section id="id5">
-<h3>Usage<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<section id="id7">
+<h3>Usage<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>Inline math: $f(x) = x^2 + 1$
 
 Display math:
@@ -618,14 +650,15 @@ $$
 <section id="recommended-conf-py">
 <h2>Recommended <code class="docutils literal notranslate"><span class="pre">conf.py</span></code><a class="headerlink" href="#recommended-conf-py" title="Link to this heading">¶</a></h2>
 <p>Here’s a well-rounded configuration that includes all the recommended extensions:</p>
-<div class="literal-block-wrapper docutils container" id="id10">
-<div class="code-block-caption"><span class="caption-text">conf.py — Recommended extensions setup</span><a class="headerlink" href="#id10" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">conf.py — Recommended extensions setup</span><a class="headerlink" href="#id13" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
     <span class="c1"># Content</span>
     <span class="s2">&quot;myst_parser&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sphinx_design&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sphinx_copybutton&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sphinxcontrib.mermaid&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sphinxcontrib.openapi&quot;</span><span class="p">,</span>
 
     <span class="c1"># API documentation (if applicable)</span>
     <span class="s2">&quot;sphinx.ext.autodoc&quot;</span><span class="p">,</span>
@@ -735,9 +768,14 @@ $$
 <li><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mathjax">MathJax</a><ul>
+<li><a class="reference internal" href="#sphinxcontrib-openapi">sphinxcontrib-openapi</a><ul>
 <li><a class="reference internal" href="#id4">Setup</a></li>
 <li><a class="reference internal" href="#id5">Usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mathjax">MathJax</a><ul>
+<li><a class="reference internal" href="#id6">Setup</a></li>
+<li><a class="reference internal" href="#id7">Usage</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#other-compatible-extensions">Other Compatible Extensions</a></li>

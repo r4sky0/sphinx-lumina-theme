@@ -27,4 +27,5 @@ reference/math
 reference/diagrams
 reference/footnotes-and-references
 reference/api-documentation
+reference/http-api
 ```

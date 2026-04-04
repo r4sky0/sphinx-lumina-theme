@@ -5,13 +5,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search &#8212; Sphinx Lumina Theme  documentation</title>
+    <title>HTTP Routing Table &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=5349f25f" />
     <link rel="stylesheet" type="text/css" href="_static/lumina.css?v=6de53493" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    
     
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
@@ -456,13 +455,9 @@ mermaid.initialize(
 window.addEventListener("load", load);
 window.runMermaid = runMermaid;</script>
     <script src="_static/lumina.js"></script>
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" />
-    <script src="searchindex.js" defer="defer"></script>
-    <meta name="robots" content="noindex" />
-    
+    <link rel="search" title="Search" href="search.html" />
+
     
         <link rel="icon"
               type="image/svg+xml"
@@ -487,6 +482,11 @@ window.runMermaid = runMermaid;</script>
         <script>document.documentElement.dataset.apiBaseUrl = "https://api.example.com/v1";</script>
     
     
+
+
+    <script>
+      DOCUMENTATION_OPTIONS.COLLAPSE_INDEX = true;
+    </script>
 
 
   </head><body>
@@ -749,7 +749,7 @@ window.runMermaid = runMermaid;</script>
          viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
     </svg>
-    <span class="whitespace-nowrap text-[var(--lumina-text)]">Search</span>
+    <span class="whitespace-nowrap text-[var(--lumina-text)]">HTTP Routing Table</span>
 </nav></div>
                 
                 <button x-data="copyPage()"
@@ -787,33 +787,63 @@ window.runMermaid = runMermaid;</script>
             </div>
             <article class="lumina-article" x-data="headerLinks()">
                 
-  <h1 id="search-documentation">Search</h1>
-  
-  <noscript>
-  <div class="admonition warning">
-  <p>
-    Please activate JavaScript to enable the search
-    functionality.
-  </p>
-  </div>
-  </noscript>
-  
-  
-  <p>
-    Searching for multiple words only shows matches that contain
-    all words.
-  </p>
-  
-  
-  <form action="" method="get">
-    <input type="text" name="q" aria-labelledby="search-documentation" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-    <input type="submit" value="search" />
-    <span id="search-progress" style="padding-left: 10px"></span>
-  </form>
-  
-  
-  <div id="search-results"></div>
-  
+
+   <h1>HTTP Routing Table</h1>
+
+   <div class="modindex-jumpbox">
+   <a href="#cap-/tasks"><strong>/tasks</strong></a> | 
+   <a href="#cap-/users"><strong>/users</strong></a>
+   </div>
+
+   <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/tasks"><td></td><td>
+       <strong>/tasks</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="reference/http-api.html#get--tasks"><code class="xref">GET /tasks</code></a></td><td>
+       <em>List tasks</em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="reference/http-api.html#get--tasks-task_id"><code class="xref">GET /tasks/{task_id}</code></a></td><td>
+       <em>Get a task</em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="reference/http-api.html#post--tasks"><code class="xref">POST /tasks</code></a></td><td>
+       <em>Create a task</em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="reference/http-api.html#delete--tasks-task_id"><code class="xref">DELETE /tasks/{task_id}</code></a></td><td>
+       <em>Delete a task</em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="reference/http-api.html#patch--tasks-task_id"><code class="xref">PATCH /tasks/{task_id}</code></a></td><td>
+       <em>Update a task</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/users"><td></td><td>
+       <strong>/users</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="reference/http-api.html#get--users"><code class="xref">GET /users</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="reference/http-api.html#post--users"><code class="xref">POST /users</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="reference/http-api.html#delete--users-(int-user_id)"><code class="xref">DELETE /users/(int:user_id)</code></a></td><td>
+       <em></em></td></tr>
+   </table>
+
 
             </article>
             
