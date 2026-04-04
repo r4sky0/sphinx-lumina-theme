@@ -2,6 +2,14 @@
 
 <!-- releases -->
 
+## v1.19.0 (2026-04-04)
+
+### Features
+
+- Add icons to hero feature tags ([#37](https://github.com/r4sky0/sphinx-lumina-theme/pull/37),
+  [`6eab593`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6eab5933af2ff4a5e6bcf5db77ef6a6b903c6a51))
+
+
 ## v1.18.1 (2026-04-04)
 
 ### Bug Fixes
