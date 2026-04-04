@@ -26,6 +26,7 @@ export function tryItPanel() {
     sending: false,
     response: null,
     showBearer: false,
+    copiedResponse: false,
 
     /* Form values */
     bearerToken: "",
@@ -170,6 +171,18 @@ export function tryItPanel() {
       } finally {
         this.sending = false;
       }
+    },
+
+    async copyResponse() {
+      const text = this.response?.bodyText;
+      if (!text || text === "(No response body)") return;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        return;
+      }
+      this.copiedResponse = true;
+      setTimeout(() => { this.copiedResponse = false; }, 1500);
     },
 
     clear() {
@@ -384,6 +397,23 @@ const PANEL_TEMPLATE = `
                     x-text="response.status ? response.status + ' ' + response.statusText : response.statusText">
               </span>
               <span class="lumina-try-it-elapsed" x-text="response.elapsed + 'ms'"></span>
+              <button type="button" class="lumina-try-it-copy-res"
+                      @click="copyResponse()"
+                      :class="{ 'is-copied': copiedResponse }"
+                      :aria-label="copiedResponse ? 'Copied!' : 'Copy response'"
+                      x-show="response.bodyText !== '(No response body)'">
+                <svg x-show="!copiedResponse" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                <svg x-show="copiedResponse" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </button>
             </div>
             <pre class="lumina-try-it-res-body"
                  :class="{ 'lumina-try-it-res-body--error': response.error }"><code x-html="formattedBody"></code></pre>

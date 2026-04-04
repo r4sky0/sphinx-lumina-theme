@@ -705,6 +705,41 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
   margin-bottom: 0.5rem;
 }
 
+.lumina-try-it-copy-res {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.625rem;
+  height: 1.625rem;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.3rem;
+  color: var(--lumina-text-muted);
+  cursor: pointer;
+  opacity: 0.5;
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s, opacity 0.15s;
+}
+
+.lumina-try-it-copy-res:hover {
+  opacity: 1;
+  color: var(--lumina-accent);
+  background: var(--lumina-accent-light);
+  border-color: color-mix(in srgb, var(--lumina-accent) 20%, transparent);
+}
+
+.lumina-try-it-copy-res.is-copied {
+  opacity: 1;
+  color: var(--lumina-accent);
+}
+
+.lumina-try-it-copy-res:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--lumina-accent);
+  outline-offset: -1px;
+}
+
 .lumina-try-it-status {
   display: inline-flex;
   align-items: center;
