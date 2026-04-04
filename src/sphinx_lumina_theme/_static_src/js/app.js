@@ -18,10 +18,8 @@ window.Alpine = Alpine;
 Alpine.start();
 
 /* ── Easter egg for fellow developers ── */
-if (typeof console !== "undefined" && console.log) {
-  console.log(
-    "%c✦ Lumina Theme %c\nCrafted for clarity. Built on Sphinx.\nhttps://github.com/anthropics/sphinx-lumina-theme",
-    "color: #10b981; font-size: 14px; font-weight: bold;",
-    "color: inherit; font-size: 12px;"
-  );
-}
+console.log(
+  "%c✦ Lumina Theme %c\nCrafted for clarity. Built on Sphinx.\nhttps://github.com/r4sky0/sphinx-lumina-theme",
+  "color: #10b981; font-size: 14px; font-weight: bold;",
+  "color: inherit; font-size: 12px;"
+);

@@ -98,6 +98,11 @@
   background-color: color-mix(in srgb, var(--lumina-accent) 5%, transparent);
 }
 
+.lumina-hero-btn-secondary:active {
+  transform: translateY(0);
+  background-color: color-mix(in srgb, var(--lumina-accent) 8%, transparent);
+}
+
 .lumina-hero-tags {
   display: flex;
   justify-content: center;

@@ -7,7 +7,7 @@ export default function headerLinks() {
           const href = link.getAttribute("href");
           const url = new URL(href, window.location.href).toString();
 
-          navigator.clipboard.writeText(url).then(() => {
+          copyText(url).then(() => {
             link.setAttribute("data-tooltip", "Copied!");
             link.classList.add("lumina-tooltip-visible");
 
@@ -20,4 +20,22 @@ export default function headerLinks() {
       });
     },
   };
+}
+
+function copyText(text) {
+  if (navigator.clipboard) {
+    return navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+  }
+  return fallbackCopy(text);
+}
+
+function fallbackCopy(text) {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.style.cssText = "position:fixed;opacity:0";
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textarea);
+  return Promise.resolve();
 }

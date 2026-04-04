@@ -125,7 +125,6 @@
   font-size: 0.9375rem;
   display: block;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .lumina-article th {
