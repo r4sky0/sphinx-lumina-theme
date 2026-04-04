@@ -27,7 +27,7 @@ sphinx-quickstart docs
 
 ::::
 
-Lumina requires **Python 3.10+** and **Sphinx 8.0+**.
+Lumina requires **Python 3.12+** and **Sphinx 8.0+**.
 
 ## Install the Theme
 

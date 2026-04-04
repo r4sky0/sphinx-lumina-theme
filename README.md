@@ -28,7 +28,7 @@ A modern Sphinx theme that treats documentation as a first-class product experie
 
 ## Quick Start
 
-Requires **Python 3.10+** and **Sphinx 8.0+**.
+Requires **Python 3.12+** and **Sphinx 8.0+**.
 
 ```bash
 uv add sphinx-lumina-theme

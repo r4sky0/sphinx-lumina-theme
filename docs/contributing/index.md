@@ -6,7 +6,7 @@ How to set up a development environment and contribute to the Sphinx Lumina Them
 
 You need the following tools installed:
 
-- **Python 3.10+** and [uv](https://docs.astral.sh/uv/) for Python dependency management
+- **Python 3.12+** and [uv](https://docs.astral.sh/uv/) for Python dependency management
 - **Node.js 18+** and [pnpm](https://pnpm.io/) for JavaScript dependency management
 
 ## Development Setup

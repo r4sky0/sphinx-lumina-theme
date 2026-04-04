@@ -15,11 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install uv
+      - name: Set up uv and Python
         uses: astral-sh/setup-uv@v7
-
-      - name: Set up Python
-        run: uv python install 3.12
+        with:
+          python-version: "3.14"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v5
@@ -56,11 +55,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install uv
+      - name: Set up uv and Python
         uses: astral-sh/setup-uv@v7
-
-      - name: Set up Python
-        run: uv python install ${{ matrix.python }}
+        with:
+          python-version: ${{ matrix.python }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v5
@@ -92,11 +90,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install uv
+      - name: Set up uv and Python
         uses: astral-sh/setup-uv@v7
-
-      - name: Set up Python
-        run: uv python install 3.12
+        with:
+          python-version: "3.14"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v5
@@ -134,11 +131,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install uv
+      - name: Set up uv and Python
         uses: astral-sh/setup-uv@v7
-
-      - name: Set up Python
-        run: uv python install 3.12
+        with:
+          python-version: "3.14"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v5

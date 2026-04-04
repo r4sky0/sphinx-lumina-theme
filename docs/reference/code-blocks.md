@@ -116,7 +116,7 @@ database:
 [project]
 name = "my-project"
 version = "1.0.0"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

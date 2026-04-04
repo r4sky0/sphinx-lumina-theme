@@ -29,7 +29,7 @@ Nested unordered lists:
 Nested ordered lists:
 
 1. Install dependencies
-   1. Install Python 3.10+
+   1. Install Python 3.12+
    2. Install Node.js 18+
 2. Configure the project
    1. Copy the example config
