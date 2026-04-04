@@ -1,13 +1,14 @@
 /**
- * Curl Copy — Alpine.js component
+ * Curl Copy
  *
  * Scans HTTP domain endpoints (dl.http) and injects a "Copy curl"
  * button into each signature card. Builds the curl command from
  * the rendered method, path, query parameters, headers, and JSON
  * body fields in the DOM.
  *
- * The base URL is read from html_theme_options["api_base_url"].
- * It is output as a data attribute on <html> by the theme template.
+ * Called from boot() in app.js after Alpine.start().
+ * The base URL is read from html_theme_options["api_base_url"],
+ * output as a data attribute on <html> by the theme template.
  */
 
 export default function curlCopy() {
@@ -15,9 +16,17 @@ export default function curlCopy() {
   const endpoints = document.querySelectorAll("dl.http");
   if (endpoints.length === 0) return;
 
-  // Inject server URL badge before the first endpoint
+  // Inject server URL badge before the first endpoint in each section
   if (baseUrl) {
-    injectServerBadge(endpoints[0], baseUrl);
+    const seen = new Set();
+    endpoints.forEach((dl) => {
+      const section = dl.closest("section") || dl.parentNode;
+      if (!seen.has(section)) {
+        seen.add(section);
+        const first = section.querySelector("dl.http");
+        if (first) injectServerBadge(first, baseUrl);
+      }
+    });
   }
 
   endpoints.forEach((dl) => {
@@ -56,14 +65,16 @@ function injectButton(dl, baseUrl) {
     e.preventDefault();
     e.stopPropagation();
     const curl = buildCurl(dl, baseUrl);
-    copyText(curl).then(() => {
-      btn.classList.add("is-copied");
-      setIcon(btn, "check");
-      setTimeout(() => {
-        btn.classList.remove("is-copied");
-        setIcon(btn, "curl");
-      }, 1500);
-    });
+    copyText(curl)
+      .then(() => {
+        btn.classList.add("is-copied");
+        setIcon(btn, "check");
+        setTimeout(() => {
+          btn.classList.remove("is-copied");
+          setIcon(btn, "curl");
+        }, 1500);
+      })
+      .catch(() => {});
   });
 
   sig.appendChild(btn);
@@ -129,7 +140,7 @@ function buildCurl(dl, baseUrl) {
   // Build URL with query params
   let fullUrl = url;
   if (queryParams.length > 0) {
-    const qs = queryParams.map((p) => `${p}=`).join("&");
+    const qs = queryParams.map((p) => `${p}=<value>`).join("&");
     fullUrl += `?${qs}`;
   }
   parts.push(`"${fullUrl}"`);

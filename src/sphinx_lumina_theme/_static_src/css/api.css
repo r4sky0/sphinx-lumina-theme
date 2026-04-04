@@ -235,6 +235,7 @@ dl.http {
 
 /* Signature card — 3px left border colored by method */
 dl.http > dt.sig {
+  position: relative;
   border-left: 3px solid var(--lumina-border);
   border-radius: 0.375rem 0.5rem 0.5rem 0.375rem;
 }
