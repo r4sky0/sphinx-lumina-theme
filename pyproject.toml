@@ -68,3 +68,8 @@ template_dir = "templates"
 [tool.semantic_release.changelog.default_templates]
 changelog_file = "CHANGELOG.md"
 output_format = "md"
+
+[dependency-groups]
+dev = [
+    "sphinx-llm>=0.4.1",
+]
