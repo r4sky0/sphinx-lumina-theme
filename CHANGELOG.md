@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v1.8.13 (2026-04-04)
+
+### Bug Fixes
+
+- Polish tabs to align with design system
+  ([#19](https://github.com/r4sky0/sphinx-lumina-theme/pull/19),
+  [`475b3da`](https://github.com/r4sky0/sphinx-lumina-theme/commit/475b3da3a82961ef70c40bc38fd3880aa1c33a9a))
+
+
 ## v1.8.12 (2026-04-04)
 
 ### Bug Fixes
