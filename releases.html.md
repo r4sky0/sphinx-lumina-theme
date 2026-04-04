@@ -1,5 +1,12 @@
 # Releases
 
+## v1.22.0 (2026-04-04)
+
+### Features
+
+- Add dismissible announcement banner ([#38](https://github.com/r4sky0/sphinx-lumina-theme/pull/38),
+  [`62fbccd`](https://github.com/r4sky0/sphinx-lumina-theme/commit/62fbccd6b1fb4e603ec95d30c955287d33058881))
+
 ## v1.21.1 (2026-04-04)
 
 ### Bug Fixes
