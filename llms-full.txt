@@ -1802,7 +1802,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 1.13.0.
+This documentation is for Sphinx Lumina Theme version 1.14.0.
 
 The MyST syntax:
 
@@ -2203,13 +2203,13 @@ Lumina requires **Python 3.10+** and **Sphinx 8.0+**.
 ### uv (recommended)
 
 ```bash
-uv add sphinx-lumina-theme@git+https://github.com/r4sky0/sphinx-lumina-theme.git@v1.13.0
+uv add sphinx-lumina-theme@git+https://github.com/r4sky0/sphinx-lumina-theme.git@v1.14.0
 ```
 
 ### pip
 
 ```bash
-pip install git+https://github.com/r4sky0/sphinx-lumina-theme.git@v1.13.0
+pip install git+https://github.com/r4sky0/sphinx-lumina-theme.git@v1.14.0
 ```
 
 ## First Build
@@ -2968,6 +2968,25 @@ See [HTTP API Documentation](../reference/http-api.md) for rendered examples of 
 # releases.html.md
 
 # Releases
+
+## v1.14.0 (2026-04-04)
+
+### Features
+
+- Style code block captions as file header bars
+  ([#26](https://github.com/r4sky0/sphinx-lumina-theme/pull/26),
+  [`f95c495`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f95c49578c34deb20da19e538913c7deb92fca81))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Documentation
+
+- Remove Getting Started and Customization links from README nav
+  ([#25](https://github.com/r4sky0/sphinx-lumina-theme/pull/25),
+  [`f76b586`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f76b586d0a467442157ae981e1c7d2240ecfd13c))
+
+</details>
 
 ## v1.13.0 (2026-04-04)
 

@@ -1,5 +1,24 @@
 # Releases
 
+## v1.14.0 (2026-04-04)
+
+### Features
+
+- Style code block captions as file header bars
+  ([#26](https://github.com/r4sky0/sphinx-lumina-theme/pull/26),
+  [`f95c495`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f95c49578c34deb20da19e538913c7deb92fca81))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Documentation
+
+- Remove Getting Started and Customization links from README nav
+  ([#25](https://github.com/r4sky0/sphinx-lumina-theme/pull/25),
+  [`f76b586`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f76b586d0a467442157ae981e1c7d2240ecfd13c))
+
+</details>
+
 ## v1.13.0 (2026-04-04)
 
 ### Features
