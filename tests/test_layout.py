@@ -22,3 +22,41 @@ def test_dark_mode_script_in_head(index_html):
     scripts = head.find_all("script")
     inline_scripts = [s for s in scripts if s.string and "lumina-theme" in s.string]
     assert len(inline_scripts) > 0, "Missing dark mode pre-paint script in <head>"
+
+
+def test_external_scripts_are_deferred(index_html):
+    """All external scripts should have the defer attribute to avoid render-blocking."""
+    head = index_html.find("head")
+    for script in head.find_all("script", src=True):
+        assert script.get("defer") is not None, (
+            f"Script {script['src']} is missing defer attribute"
+        )
+
+
+def test_inline_scripts_not_deferred(index_html):
+    """Inline scripts should NOT have defer (it's meaningless for inline)."""
+    head = index_html.find("head")
+    for script in head.find_all("script"):
+        if not script.get("src"):
+            assert script.get("defer") is None, "Inline script should not have defer"
+
+
+def test_lumina_js_is_included(index_html):
+    """lumina.js should be included via the script files mechanism."""
+    head = index_html.find("head")
+    scripts = [s["src"] for s in head.find_all("script", src=True)]
+    lumina_scripts = [s for s in scripts if "lumina.js" in s]
+    assert len(lumina_scripts) == 1, "lumina.js should appear exactly once"
+
+
+def test_font_preload(index_html):
+    """Primary font should have a preload hint."""
+    head = index_html.find("head")
+    preloads = head.find_all("link", rel="preload")
+    font_preloads = [
+        el for el in preloads if "source-sans-3-regular" in el.get("href", "")
+    ]
+    assert len(font_preloads) == 1, "Missing preload for Source Sans 3 Regular"
+    link = font_preloads[0]
+    assert link.get("as") == "font"
+    assert link.get("crossorigin") is not None, "Font preload must have crossorigin"

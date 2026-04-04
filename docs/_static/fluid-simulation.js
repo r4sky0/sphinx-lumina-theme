@@ -17,7 +17,21 @@ document.addEventListener("alpine:init", () => {
 
     init() {
       const canvas = this.$refs.canvas;
-      this._cleanup = startFluid(canvas, this.$el);
+      const isMobile = window.innerWidth < 768;
+      const opts = isMobile ? { sim: 128, dye: 256, jacobi: 20 } : {};
+
+      const start = () => {
+        this._cleanup = startFluid(canvas, this.$el, opts);
+      };
+
+      // Defer heavy GPU init to avoid blocking initial page render.
+      // requestIdleCallback waits for an idle period; the timeout ensures
+      // the simulation starts within 2 s even on a busy main thread.
+      if ("requestIdleCallback" in window) {
+        this._idleId = requestIdleCallback(start, { timeout: 2000 });
+      } else {
+        this._timerId = setTimeout(start, 100);
+      }
 
       /* Track hero visibility so the header can go transparent */
       this._observer = new IntersectionObserver(
@@ -33,6 +47,8 @@ document.addEventListener("alpine:init", () => {
     },
 
     destroy() {
+      if (this._idleId) cancelIdleCallback(this._idleId);
+      if (this._timerId) clearTimeout(this._timerId);
       if (this._cleanup) this._cleanup();
       if (this._observer) this._observer.disconnect();
       document.documentElement.removeAttribute("data-hero-visible");
@@ -42,7 +58,7 @@ document.addEventListener("alpine:init", () => {
 
 /* ────────────────────────────────────────────────────────────────────────── */
 
-function startFluid(canvas, container) {
+function startFluid(canvas, container, opts = {}) {
   const gl = canvas.getContext("webgl2", {
     alpha: true,
     premultipliedAlpha: false,
@@ -57,9 +73,9 @@ function startFluid(canvas, container) {
   ).matches;
 
   /* ── Config ── */
-  const SIM = 256;
-  const DYE = 512;
-  const JACOBI_ITERS = 30;
+  const SIM = opts.sim || 256;
+  const DYE = opts.dye || 512;
+  const JACOBI_ITERS = opts.jacobi || 30;
   const VEL_DISSIPATION = 0.985;
   const DYE_DISSIPATION = 0.978;
   const PRESS_DISSIPATION = 0.8;

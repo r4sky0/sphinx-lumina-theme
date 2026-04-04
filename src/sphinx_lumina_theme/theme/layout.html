@@ -14,6 +14,11 @@
               type="image/svg+xml"
               href="{{ pathto('_static/favicon.svg', 1) }}">
     {% endif %}
+    <link rel="preload"
+          as="font"
+          type="font/woff2"
+          href="{{ pathto('_static/fonts/source-sans-3-regular.woff2', 1) }}"
+          crossorigin>
     {# Prevent flash of wrong theme #}
     <script>
 (function() {
@@ -183,7 +188,4 @@
 
 {% endblock footer %}
 
-{%- block scripts %}
-    {{ super() }}
-    <script src="{{ pathto('_static/lumina.js', 1) }}"></script>
-{%- endblock %}
+{%- block scripts %}{{ super() }}{%- endblock %}

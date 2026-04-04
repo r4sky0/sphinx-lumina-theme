@@ -49,6 +49,21 @@ def _add_context(app, pagename, templatename, context, doctree):
         if field in meta:
             context[field] = meta[field]
 
+    # Make all external scripts non-render-blocking (defer).
+    # Sphinx places the {%- block scripts %} inside <head>, so without defer
+    # every script blocks rendering.  We wrap the built-in js_tag() function
+    # to inject defer="defer" into all external <script> tags while leaving
+    # inline scripts (FOUC prevention, announcement state) synchronous.
+    _original_js_tag = context["js_tag"]
+
+    def _deferred_js_tag(js):
+        tag = _original_js_tag(js)
+        if "src=" in tag and "defer" not in tag and "async" not in tag:
+            tag = tag.replace("<script ", '<script defer="defer" ', 1)
+        return tag
+
+    context["js_tag"] = _deferred_js_tag
+
     if "template" in meta:
         return meta["template"]
 
@@ -108,6 +123,7 @@ def _run_pagefind(app, exception):
 def setup(app):
     """Register the Lumina theme with Sphinx."""
     app.add_html_theme("lumina", str(Path(__file__).parent / "theme"))
+    app.add_js_file("lumina.js", loading_method="defer", priority=900)
     app.connect("html-page-context", _add_context)
     app.connect("build-finished", _run_pagefind)
     return {
