@@ -13,7 +13,7 @@
     <title>Sphinx Lumina Theme &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="_static/lumina.css?v=351c9adf" />
+    <link rel="stylesheet" type="text/css" href="_static/lumina.css?v=3f9be52b" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <script src="_static/fluid-simulation.js"></script>
@@ -58,6 +58,16 @@
     
     
     
+        <script>
+(function() {
+  var id = 'c1925fe1';
+  if (!id || localStorage.getItem('lumina-announce-' + id) !== '1') {
+    document.documentElement.classList.add('has-announcement');
+  }
+})();
+        </script>
+    
+    
         <link rel="alternate"
               type="text/markdown"
               href="llms.txt"
@@ -79,6 +89,26 @@
     <div id="lumina-header">
 
         <header class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--lumina-border)] bg-[var(--lumina-bg)]/80 backdrop-blur-sm">
+
+    
+    <div id="lumina-announcement"
+         x-data="announcementBanner()"
+         data-announcement-id="c1925fe1"
+         class="bg-[var(--lumina-accent)] text-white text-center text-sm">
+        <div class="mx-auto flex max-w-[90rem] items-center justify-center gap-4 px-4 py-2">
+            <div class="flex-1 [&_a]:underline [&_a]:font-medium">You are viewing the development docs. <a href="https://github.com/r4sky0/sphinx-lumina-theme">Star on GitHub</a> if you like the theme!</div>
+            <button @click="dismiss()"
+                    class="shrink-0 rounded p-0.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    aria-label="Dismiss announcement"
+                    type="button">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
     <div class="mx-auto flex h-14 max-w-[90rem] items-center justify-between px-4 lg:px-6">
         
         <div class="flex items-center gap-3">
@@ -197,7 +227,7 @@
         <canvas x-ref="canvas" class="lumina-hero-canvas" aria-hidden="true"></canvas>
         <div class="lumina-hero-content">
             <div class="lumina-hero-badge">
-                Sphinx Theme <span class="lumina-hero-badge-sep">&middot;</span> v1.21.1
+                Sphinx Theme <span class="lumina-hero-badge-sep">&middot;</span> v1.22.0
             </div>
             <h1 class="lumina-hero-title">
                 Your docs,

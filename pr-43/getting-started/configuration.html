@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-04T14:10:41+00:00" />
+    <meta property="article:modified_time" content="2026-04-04T17:17:01+00:00" />
     <title>Configuration &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=351c9adf" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=3f9be52b" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     
@@ -53,6 +53,16 @@
     
     
     
+        <script>
+(function() {
+  var id = 'c1925fe1';
+  if (!id || localStorage.getItem('lumina-announce-' + id) !== '1') {
+    document.documentElement.classList.add('has-announcement');
+  }
+})();
+        </script>
+    
+    
         <link rel="alternate"
               type="text/markdown"
               href="../llms.txt"
@@ -66,9 +76,30 @@
 
 
     <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
+
     <div id="lumina-header">
 
         <header class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--lumina-border)] bg-[var(--lumina-bg)]/80 backdrop-blur-sm">
+
+    
+    <div id="lumina-announcement"
+         x-data="announcementBanner()"
+         data-announcement-id="c1925fe1"
+         class="bg-[var(--lumina-accent)] text-white text-center text-sm">
+        <div class="mx-auto flex max-w-[90rem] items-center justify-center gap-4 px-4 py-2">
+            <div class="flex-1 [&_a]:underline [&_a]:font-medium">You are viewing the development docs. <a href="https://github.com/r4sky0/sphinx-lumina-theme">Star on GitHub</a> if you like the theme!</div>
+            <button @click="dismiss()"
+                    class="shrink-0 rounded p-0.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    aria-label="Dismiss announcement"
+                    type="button">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
     <div class="mx-auto flex h-14 max-w-[90rem] items-center justify-between px-4 lg:px-6">
         
         <div class="flex items-center gap-3">
@@ -197,7 +228,7 @@
 
             <div x-data="sidebar()">
     
-    <div class="hidden h-[calc(100vh-3.5rem)] flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
+    <div class="lumina-sidebar-desktop hidden flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
         <nav class="lumina-sidebar-nav" aria-label="Main navigation">
             <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
@@ -265,7 +296,7 @@
                         <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                     </svg>
                 Lumina</a>
-                <span class="lumina-sidebar-footer-version">v1.21.1</span>
+                <span class="lumina-sidebar-footer-version">v1.22.0</span>
             </div>
         
     </div>
@@ -360,7 +391,7 @@
                         <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                            target="_blank"
                            rel="noopener">Lumina</a>
-                        <span class="lumina-sidebar-footer-version">v1.21.1</span>
+                        <span class="lumina-sidebar-footer-version">v1.22.0</span>
                     </div>
                 
             </div>
@@ -512,6 +543,31 @@
 <td><p>string</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
 <td><p>Logo image for dark mode (path relative to <code class="docutils literal notranslate"><span class="pre">_static</span></code>). When set alone, displays in both modes. Set both <code class="docutils literal notranslate"><span class="pre">light_logo</span></code> and <code class="docutils literal notranslate"><span class="pre">dark_logo</span></code> for automatic switching.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="announcement">
+<h3>Announcement<a class="headerlink" href="#announcement" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 45.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">announcement</span></code></p></td>
+<td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
+<td><p>HTML content for a dismissible banner above the header. Supports links and inline formatting. Users can dismiss it; the preference persists in <code class="docutils literal notranslate"><span class="pre">localStorage</span></code> and resets automatically when the content changes.</p></td>
 </tr>
 </tbody>
 </table>
@@ -761,6 +817,9 @@
     <span class="s2">&quot;light_logo&quot;</span><span class="p">:</span> <span class="s2">&quot;logo-light.svg&quot;</span><span class="p">,</span>
     <span class="s2">&quot;dark_logo&quot;</span><span class="p">:</span> <span class="s2">&quot;logo-dark.svg&quot;</span><span class="p">,</span>
 
+    <span class="c1"># Announcement</span>
+    <span class="s2">&quot;announcement&quot;</span><span class="p">:</span> <span class="s1">&#39;New in v2.0 — &lt;a href=&quot;/changelog&quot;&gt;see what changed&lt;/a&gt;!&#39;</span><span class="p">,</span>
+
     <span class="c1"># Navigation</span>
     <span class="s2">&quot;nav_links&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Guide&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;getting-started&quot;</span><span class="p">},</span>
@@ -875,7 +934,7 @@ Custom Styling</div>
             <aside id="lumina-toc">
 
                 
-    <div class="sticky top-14 hidden h-[calc(100vh-3.5rem)] w-[220px] shrink-0 overflow-y-auto py-6 pr-4 xl:block">
+    <div class="lumina-toc-container sticky top-14 hidden h-[calc(100vh-3.5rem)] w-[220px] shrink-0 overflow-y-auto py-6 pr-4 xl:block">
         
         
             <a href="https://github.com/r4sky0/sphinx-lumina-theme/edit/main/docs/getting-started/configuration.md"
@@ -901,6 +960,7 @@ Custom Styling</div>
 <li><a class="reference internal" href="#recommended-configuration">Recommended Configuration</a></li>
 <li><a class="reference internal" href="#theme-options-reference">Theme Options Reference</a><ul>
 <li><a class="reference internal" href="#appearance">Appearance</a></li>
+<li><a class="reference internal" href="#announcement">Announcement</a></li>
 <li><a class="reference internal" href="#navigation">Navigation</a></li>
 <li><a class="reference internal" href="#search">Search</a></li>
 <li><a class="reference internal" href="#http-api">HTTP API</a></li>

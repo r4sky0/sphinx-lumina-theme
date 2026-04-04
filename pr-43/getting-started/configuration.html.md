@@ -36,6 +36,12 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 | `light_logo`        | string | `""`        | Logo image for light mode (path relative to `_static`). Falls back to `html_logo`.                                                                            |
 | `dark_logo`         | string | `""`        | Logo image for dark mode (path relative to `_static`). When set alone, displays in both modes. Set both `light_logo` and `dark_logo` for automatic switching. |
 
+### Announcement
+
+| Option         | Type   | Default   | Description                                                                                                                                                                                                      |
+|----------------|--------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `announcement` | string | `""`      | HTML content for a dismissible banner above the header. Supports links and inline formatting. Users can dismiss it; the preference persists in `localStorage` and resets automatically when the content changes. |
+
 ### Navigation
 
 | Option             | Type   | Default   | Description                                                                                                                                                                                              |
@@ -112,6 +118,9 @@ html_theme_options = {
     "logo_only": "false",
     "light_logo": "logo-light.svg",
     "dark_logo": "logo-dark.svg",
+
+    # Announcement
+    "announcement": 'New in v2.0 — <a href="/changelog">see what changed</a>!',
 
     # Navigation
     "nav_links": [

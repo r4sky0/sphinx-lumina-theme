@@ -11,7 +11,7 @@
     <title>MyST Markdown &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=351c9adf" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=3f9be52b" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     
@@ -53,6 +53,16 @@
     
     
     
+        <script>
+(function() {
+  var id = 'c1925fe1';
+  if (!id || localStorage.getItem('lumina-announce-' + id) !== '1') {
+    document.documentElement.classList.add('has-announcement');
+  }
+})();
+        </script>
+    
+    
         <link rel="alternate"
               type="text/markdown"
               href="../llms.txt"
@@ -66,9 +76,30 @@
 
 
     <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
+
     <div id="lumina-header">
 
         <header class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--lumina-border)] bg-[var(--lumina-bg)]/80 backdrop-blur-sm">
+
+    
+    <div id="lumina-announcement"
+         x-data="announcementBanner()"
+         data-announcement-id="c1925fe1"
+         class="bg-[var(--lumina-accent)] text-white text-center text-sm">
+        <div class="mx-auto flex max-w-[90rem] items-center justify-center gap-4 px-4 py-2">
+            <div class="flex-1 [&_a]:underline [&_a]:font-medium">You are viewing the development docs. <a href="https://github.com/r4sky0/sphinx-lumina-theme">Star on GitHub</a> if you like the theme!</div>
+            <button @click="dismiss()"
+                    class="shrink-0 rounded p-0.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    aria-label="Dismiss announcement"
+                    type="button">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
     <div class="mx-auto flex h-14 max-w-[90rem] items-center justify-between px-4 lg:px-6">
         
         <div class="flex items-center gap-3">
@@ -197,7 +228,7 @@
 
             <div x-data="sidebar()">
     
-    <div class="hidden h-[calc(100vh-3.5rem)] flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
+    <div class="lumina-sidebar-desktop hidden flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
         <nav class="lumina-sidebar-nav" aria-label="Main navigation">
             <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
@@ -265,7 +296,7 @@
                         <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                     </svg>
                 Lumina</a>
-                <span class="lumina-sidebar-footer-version">v1.21.1</span>
+                <span class="lumina-sidebar-footer-version">v1.22.0</span>
             </div>
         
     </div>
@@ -360,7 +391,7 @@
                         <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                            target="_blank"
                            rel="noopener">Lumina</a>
-                        <span class="lumina-sidebar-footer-version">v1.21.1</span>
+                        <span class="lumina-sidebar-footer-version">v1.22.0</span>
                     </div>
                 
             </div>
@@ -631,7 +662,7 @@ Inner admonition.
             <aside id="lumina-toc">
 
                 
-    <div class="sticky top-14 hidden h-[calc(100vh-3.5rem)] w-[220px] shrink-0 overflow-y-auto py-6 pr-4 xl:block">
+    <div class="lumina-toc-container sticky top-14 hidden h-[calc(100vh-3.5rem)] w-[220px] shrink-0 overflow-y-auto py-6 pr-4 xl:block">
         
         
             <a href="https://github.com/r4sky0/sphinx-lumina-theme/edit/main/docs/guides/myst-markdown.md"
