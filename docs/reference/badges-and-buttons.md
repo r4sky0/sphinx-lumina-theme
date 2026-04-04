@@ -1,6 +1,6 @@
 # Badges & Buttons
 
-Inline badges and clickable buttons from sphinx-design for labeling and calls to action. Requires the `sphinx_design` extension — see {doc}`../extensions` for setup.
+Inline badges and clickable buttons from sphinx-design for labeling and calls to action. Requires the `sphinx_design` extension — see {doc}`/extensions/sphinx-design` for setup.
 
 ## Badges
 
@@ -54,7 +54,7 @@ Badges work naturally inline with text: The API is {bdg-success}`stable` and sup
 
 Clickable button links for calls to action.
 
-```{button-link} ../getting-started
+```{button-link} /getting-started/installation
 :color: primary
 Get Started
 ```
@@ -77,7 +77,7 @@ Button Text
 
 Buttons with outline styling for secondary actions.
 
-```{button-link} ../getting-started
+```{button-link} /getting-started/installation
 :color: primary
 :outline:
 Get Started
@@ -103,7 +103,7 @@ Button Text
 
 Link buttons to internal documentation pages using `button-ref`.
 
-```{button-ref} ../getting-started
+```{button-ref} /getting-started/installation
 :color: primary
 :ref-type: doc
 Read the Guide
@@ -149,13 +149,13 @@ Document API stability inline: The configuration API is {bdg-success}`stable`, t
 
 Use primary buttons for the main action and outline buttons for alternatives:
 
-```{button-ref} ../getting-started
+```{button-ref} /getting-started/installation
 :color: primary
 :ref-type: doc
 Get Started
 ```
 
-```{button-ref} ../customization
+```{button-ref} /getting-started/configuration
 :color: secondary
 :outline:
 :ref-type: doc

@@ -3,7 +3,7 @@
 How HTTP API endpoints render in the Lumina theme. This page covers auto-generated docs from OpenAPI specs and manually written HTTP directives.
 
 :::{tip}
-See {doc}`../extensions` for installation and setup instructions.
+See {doc}`/extensions/openapi` for installation and setup instructions.
 :::
 
 ## From an OpenAPI Spec
