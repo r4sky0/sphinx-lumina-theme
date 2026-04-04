@@ -252,6 +252,7 @@ function injectPanel(dl, baseUrl) {
 const PANEL_TEMPLATE = `
   <button type="button" class="lumina-try-it-toggle"
           @click="open = !open"
+          :class="{ 'is-open': open }"
           :aria-expanded="open.toString()">
     <svg class="lumina-try-it-chevron" width="10" height="10" viewBox="0 0 24 24"
          fill="none" stroke="currentColor" stroke-width="2.5"
