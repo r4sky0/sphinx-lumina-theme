@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v1.22.1 (2026-04-04)
+
+### Bug Fixes
+
+- Try It Out panel — Safari crash, collapsed content leak, polish
+  ([#43](https://github.com/r4sky0/sphinx-lumina-theme/pull/43),
+  [`810df2d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/810df2d66f0d2c805e0aae69d5bdf00876b921c5))
+
+
 ## v1.22.0 (2026-04-04)
 
 ### Features
