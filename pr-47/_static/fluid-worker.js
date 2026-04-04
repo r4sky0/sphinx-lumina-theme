@@ -1,207 +1,72 @@
 /**
- * GPU Fluid Simulation — Lumina landing page hero background.
+ * Web Worker for GPU Fluid Simulation.
  *
- * Implements Jos Stam's Stable Fluids on WebGL2 with ping-pong framebuffers.
- * Supports light/dark mode via a theme-aware display shader.
- *
- * The simulation runs in a Web Worker via OffscreenCanvas to keep the main
- * thread free.  Browsers without OffscreenCanvas fall back to main-thread
- * rendering.
- *
- * Exported as an Alpine.js component: attach with x-data="fluidSimulation()"
- * and provide a <canvas x-ref="canvas"> inside the element.
+ * Receives an OffscreenCanvas via postMessage and runs the entire Stable Fluids
+ * simulation off the main thread.  The main thread only forwards lightweight
+ * pointer / theme / resize events.
  */
 
-// Capture script URL at load time so we can resolve the worker path later.
-// This file is NOT part of the shipped theme — it's docs-only.
-const _scriptSrc = document.currentScript && document.currentScript.src;
+/* ── Shared state updated by messages ── */
+let canvas, gl;
+let cw = 0,
+  ch = 0;
+let darkMode = 0;
+let prefersReduced = false;
+let frameId = 0;
+const pointer = { x: 0, y: 0, prevX: -1, prevY: -1, active: false };
 
-document.addEventListener("alpine:init", () => {
-  window.Alpine.data("fluidSimulation", () => ({
-    _worker: null,
-    _cleanup: null,
-    _workerCleanup: null,
-    _observer: null,
-    _idleId: null,
-    _timerId: null,
-
-    init() {
-      const canvas = this.$refs.canvas;
-      const container = this.$el;
-      const isMobile = window.innerWidth < 768;
-      const opts = isMobile
-        ? { sim: 128, dye: 256, jacobi: 20 }
-        : { sim: 256, dye: 512, jacobi: 30 };
-
-      const start = () => {
-        // Try OffscreenCanvas + Worker (moves all GPU work off main thread)
-        if (typeof OffscreenCanvas !== "undefined" && _scriptSrc) {
-          try {
-            this._startWorker(canvas, container, opts);
-            return;
-          } catch (_) {
-            /* fall through to main-thread path */
-          }
-        }
-        // Fallback: run on main thread
-        this._cleanup = startFluid(canvas, container, opts);
-      };
-
-      // Defer heavy GPU init to avoid blocking initial page render.
-      if ("requestIdleCallback" in window) {
-        this._idleId = requestIdleCallback(start, { timeout: 2000 });
-      } else {
-        this._timerId = setTimeout(start, 100);
+/* ── Message handler ── */
+self.onmessage = (e) => {
+  const d = e.data;
+  switch (d.type) {
+    case "init":
+      init(d);
+      break;
+    case "pointer":
+      pointer.x = d.x;
+      pointer.y = d.y;
+      pointer.active = true;
+      break;
+    case "pointerenter":
+      pointer.prevX = d.x;
+      pointer.prevY = d.y;
+      break;
+    case "theme":
+      darkMode = d.dark ? 1.0 : 0.0;
+      break;
+    case "resize":
+      cw = d.w;
+      ch = d.h;
+      if (canvas) {
+        canvas.width = d.w * d.dpr;
+        canvas.height = d.h * d.dpr;
       }
-
-      /* Track hero visibility so the header can go transparent */
-      this._observer = new IntersectionObserver(
-        ([e]) =>
-          document.documentElement.toggleAttribute(
-            "data-hero-visible",
-            e.isIntersecting,
-          ),
-        { threshold: 0 },
-      );
-      this._observer.observe(this.$el);
-      document.documentElement.setAttribute("data-hero-visible", "");
-    },
-
-    _startWorker(canvas, container, opts) {
-      const workerUrl = _scriptSrc.replace(
-        "fluid-simulation.js",
-        "fluid-worker.js",
-      );
-      const offscreen = canvas.transferControlToOffscreen();
-      const worker = new Worker(workerUrl);
-
-      worker.postMessage(
-        {
-          type: "init",
-          canvas: offscreen,
-          w: canvas.clientWidth,
-          h: canvas.clientHeight,
-          dpr: Math.min(window.devicePixelRatio || 1, 2),
-          dark:
-            document.documentElement.getAttribute("data-theme") === "dark",
-          reduced: window.matchMedia("(prefers-reduced-motion: reduce)")
-            .matches,
-          ...opts,
-        },
-        [offscreen],
-      );
-
-      /* Forward pointer events to the worker */
-      const cw = () => canvas.clientWidth;
-      const ch = () => canvas.clientHeight;
-
-      const onMouseEnter = (e) =>
-        worker.postMessage({
-          type: "pointerenter",
-          x: e.clientX / cw(),
-          y: 1.0 - e.clientY / ch(),
-        });
-      const onMouseMove = (e) =>
-        worker.postMessage({
-          type: "pointer",
-          x: e.clientX / cw(),
-          y: 1.0 - e.clientY / ch(),
-        });
-      const onTouchStart = (e) => {
-        const t = e.touches[0];
-        worker.postMessage({
-          type: "pointerenter",
-          x: t.clientX / cw(),
-          y: 1.0 - t.clientY / ch(),
-        });
-      };
-      const onTouchMove = (e) => {
-        const t = e.touches[0];
-        worker.postMessage({
-          type: "pointer",
-          x: t.clientX / cw(),
-          y: 1.0 - t.clientY / ch(),
-        });
-      };
-
-      container.addEventListener("mouseenter", onMouseEnter);
-      container.addEventListener("mousemove", onMouseMove);
-      container.addEventListener("touchstart", onTouchStart, {
-        passive: true,
-      });
-      container.addEventListener("touchmove", onTouchMove, {
-        passive: true,
-      });
-
-      /* Forward theme changes */
-      const themeObs = new MutationObserver(() =>
-        worker.postMessage({
-          type: "theme",
-          dark:
-            document.documentElement.getAttribute("data-theme") === "dark",
-        }),
-      );
-      themeObs.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ["data-theme"],
-      });
-
-      /* Forward resize */
-      const onResize = () =>
-        worker.postMessage({
-          type: "resize",
-          w: canvas.clientWidth,
-          h: canvas.clientHeight,
-          dpr: Math.min(window.devicePixelRatio || 1, 2),
-        });
-      window.addEventListener("resize", onResize);
-
-      this._worker = worker;
-      this._workerCleanup = () => {
-        worker.postMessage({ type: "stop" });
-        worker.terminate();
-        themeObs.disconnect();
-        window.removeEventListener("resize", onResize);
-        container.removeEventListener("mouseenter", onMouseEnter);
-        container.removeEventListener("mousemove", onMouseMove);
-        container.removeEventListener("touchstart", onTouchStart);
-        container.removeEventListener("touchmove", onTouchMove);
-      };
-    },
-
-    destroy() {
-      if (this._idleId) cancelIdleCallback(this._idleId);
-      if (this._timerId) clearTimeout(this._timerId);
-      if (this._workerCleanup) this._workerCleanup();
-      if (this._cleanup) this._cleanup();
-      if (this._observer) this._observer.disconnect();
-      document.documentElement.removeAttribute("data-hero-visible");
-    },
-  }));
-});
-
-/* ════════════════════════════════════════════════════════════════════════════
- * Main-thread fallback — used only when OffscreenCanvas is unavailable.
- * ════════════════════════════════════════════════════════════════════════════ */
-
-function startFluid(canvas, container, opts = {}) {
-  const gl = canvas.getContext("webgl2", {
-    alpha: true,
-    premultipliedAlpha: false,
-  });
-  if (!gl || !gl.getExtension("EXT_color_buffer_float")) {
-    canvas.style.display = "none";
-    return () => {};
+      break;
+    case "stop":
+      cancelAnimationFrame(frameId);
+      self.close();
+      break;
   }
+};
 
-  const prefersReduced = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
+/* ── Simulation ── */
+function init(cfg) {
+  canvas = cfg.canvas;
+  cw = cfg.w;
+  ch = cfg.h;
+  darkMode = cfg.dark ? 1.0 : 0.0;
+  prefersReduced = cfg.reduced;
 
-  /* ── Config ── */
-  const SIM = opts.sim || 256;
-  const DYE = opts.dye || 512;
-  const JACOBI_ITERS = opts.jacobi || 30;
+  const dpr = Math.min(cfg.dpr || 1, 2);
+  canvas.width = cw * dpr;
+  canvas.height = ch * dpr;
+
+  gl = canvas.getContext("webgl2", { alpha: true, premultipliedAlpha: false });
+  if (!gl || !gl.getExtension("EXT_color_buffer_float")) return;
+
+  const SIM = cfg.sim || 256;
+  const DYE = cfg.dye || 512;
+  const JACOBI_ITERS = cfg.jacobi || 30;
   const VEL_DISSIPATION = 0.985;
   const DYE_DISSIPATION = 0.978;
   const PRESS_DISSIPATION = 0.8;
@@ -216,21 +81,6 @@ function startFluid(canvas, container, opts = {}) {
     [0.11, 0.58, 0.32],
     [0.05, 0.4, 0.33],
   ];
-
-  /* ── Dark-mode state ── */
-  let darkMode =
-    document.documentElement.getAttribute("data-theme") === "dark" ? 1.0 : 0.0;
-
-  const themeObserver = new MutationObserver(() => {
-    darkMode =
-      document.documentElement.getAttribute("data-theme") === "dark"
-        ? 1.0
-        : 0.0;
-  });
-  themeObserver.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ["data-theme"],
-  });
 
   /* ── WebGL helpers ── */
   function compileShader(type, src) {
@@ -414,6 +264,7 @@ function startFluid(canvas, container, opts = {}) {
       fragColor = vec4(texture(uVelocity, vUv).xy - vec2(R - L, T - B), 0, 1);
     }`;
 
+  /* Display shader — interpolates between light and dark palettes via uDark */
   const displayFS = `#version 300 es
     precision highp float;
     in vec2 vUv;
@@ -424,16 +275,23 @@ function startFluid(canvas, container, opts = {}) {
       vec3 dye = texture(uDye, vUv).rgb * mix(2.5, 3.0, uDark);
       vec3 bg  = mix(vec3(0.988, 0.988, 0.984), vec3(0.035, 0.035, 0.043), uDark);
       float i  = length(dye);
+
+      /* 4-stop emerald tone-map — blended between light/dark palettes */
       vec3 tA = mix(vec3(0.920, 0.978, 0.955), vec3(0.025, 0.065, 0.045), uDark);
       vec3 tB = mix(vec3(0.800, 0.955, 0.900), vec3(0.040, 0.130, 0.085), uDark);
       vec3 tC = mix(vec3(0.500, 0.880, 0.740), vec3(0.070, 0.260, 0.170), uDark);
       vec3 tD = mix(vec3(0.150, 0.770, 0.560), vec3(0.120, 0.480, 0.320), uDark);
+
       vec3 tinted = mix(tA, tB, smoothstep(0.0, 0.25, i));
       tinted = mix(tinted, tC, smoothstep(0.25, 0.8, i));
       tinted = mix(tinted, tD, smoothstep(0.8, 2.0, i));
       vec3 color = mix(bg, tinted, smoothstep(0.005, 0.25, i) * 0.7);
+
+      /* Elliptical content mask — protects center text readability */
       float contentMask = smoothstep(0.15, 0.6, length((vUv - 0.5) * vec2(1.3, 2.0)));
       color = mix(bg, color, 0.4 + contentMask * 0.6);
+
+      /* Vignette */
       float vig = 1.0 - smoothstep(0.5, 1.3, length(vUv - 0.5) * 1.4);
       color = mix(color * 0.97, color, vig);
       fragColor = vec4(color, 1.0);
@@ -476,7 +334,7 @@ function startFluid(canvas, container, opts = {}) {
     gl.HALF_FLOAT,
     gl.LINEAR,
   );
-  const divergence = createFBO(
+  const divergenceFBO = createFBO(
     SIM,
     SIM,
     gl.R16F,
@@ -493,39 +351,12 @@ function startFluid(canvas, container, opts = {}) {
     gl.LINEAR,
   );
 
-  /* ── Pointer input ── */
-  const pointer = { x: 0, y: 0, prevX: -1, prevY: -1, active: false };
-
-  function onPointerMove(cx, cy) {
-    pointer.x = cx / canvas.clientWidth;
-    pointer.y = 1.0 - cy / canvas.clientHeight;
-    pointer.active = true;
-  }
-
-  const onMouseEnter = (e) => {
-    pointer.prevX = e.clientX / canvas.clientWidth;
-    pointer.prevY = 1.0 - e.clientY / canvas.clientHeight;
-  };
-  const onMouseMove = (e) => onPointerMove(e.clientX, e.clientY);
-  const onTouchStart = (e) => {
-    const t = e.touches[0];
-    pointer.prevX = t.clientX / canvas.clientWidth;
-    pointer.prevY = 1.0 - t.clientY / canvas.clientHeight;
-  };
-  const onTouchMove = (e) =>
-    onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
-
-  container.addEventListener("mouseenter", onMouseEnter);
-  container.addEventListener("mousemove", onMouseMove);
-  container.addEventListener("touchstart", onTouchStart, { passive: true });
-  container.addEventListener("touchmove", onTouchMove, { passive: true });
-
   /* ── Splat ── */
   function splat(x, y, dx, dy, radius) {
     const u = prog.splat.uniforms;
     use(prog.splat);
     gl.uniform1i(u.uTarget, 0);
-    gl.uniform1f(u.aspectRatio, canvas.clientWidth / canvas.clientHeight);
+    gl.uniform1f(u.aspectRatio, cw / ch);
     gl.uniform2f(u.point, x, y);
     gl.uniform1f(u.radius, radius);
 
@@ -564,16 +395,8 @@ function startFluid(canvas, container, opts = {}) {
     );
   }
 
-  /* ── Resize ── */
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = canvas.clientWidth * dpr;
-    canvas.height = canvas.clientHeight * dpr;
-  }
-
   /* ── Simulation loop ── */
   let lastTime = performance.now();
-  let frameId = 0;
 
   function step() {
     const now = performance.now();
@@ -589,9 +412,10 @@ function startFluid(canvas, container, opts = {}) {
       return;
     }
 
+    /* Input */
     if (pointer.active && pointer.prevX >= 0) {
-      const dx = (pointer.x - pointer.prevX) * canvas.clientWidth * 10;
-      const dy = (pointer.y - pointer.prevY) * canvas.clientHeight * 10;
+      const dx = (pointer.x - pointer.prevX) * cw * 10;
+      const dy = (pointer.y - pointer.prevY) * ch * 10;
       pointer.prevX = pointer.x;
       pointer.prevY = pointer.y;
       if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
@@ -604,6 +428,7 @@ function startFluid(canvas, container, opts = {}) {
       pointer.prevY = pointer.y;
     }
 
+    /* Ambient */
     ambientTimer += dt;
     if (ambientTimer >= nextAmbientAt) {
       ambientTimer = 0;
@@ -611,6 +436,7 @@ function startFluid(canvas, container, opts = {}) {
       edgeSplat();
     }
 
+    /* Advect velocity */
     use(prog.advection);
     gl.uniform2fv(prog.advection.uniforms.texelSize, SIM_TEXEL);
     gl.uniform1i(prog.advection.uniforms.uVelocity, 0);
@@ -621,6 +447,7 @@ function startFluid(canvas, container, opts = {}) {
     blit(velocity.write);
     velocity.swap();
 
+    /* Advect dye */
     use(prog.advection);
     gl.uniform2fv(prog.advection.uniforms.texelSize, SIM_TEXEL);
     gl.uniform1i(prog.advection.uniforms.uSource, 1);
@@ -630,12 +457,14 @@ function startFluid(canvas, container, opts = {}) {
     blit(dye.write);
     dye.swap();
 
+    /* Divergence */
     use(prog.divergence);
     gl.uniform2fv(prog.divergence.uniforms.texelSize, SIM_TEXEL);
     gl.uniform1i(prog.divergence.uniforms.uVelocity, 0);
     bindTex(0, velocity.read.texture);
-    blit(divergence);
+    blit(divergenceFBO);
 
+    /* Clear pressure */
     use(prog.clear);
     gl.uniform1i(prog.clear.uniforms.uTexture, 0);
     gl.uniform1f(prog.clear.uniforms.value, PRESS_DISSIPATION);
@@ -643,10 +472,11 @@ function startFluid(canvas, container, opts = {}) {
     blit(pressure.write);
     pressure.swap();
 
+    /* Pressure solve (Jacobi) */
     use(prog.pressure);
     gl.uniform2fv(prog.pressure.uniforms.texelSize, SIM_TEXEL);
     gl.uniform1i(prog.pressure.uniforms.uDivergence, 1);
-    bindTex(1, divergence.texture);
+    bindTex(1, divergenceFBO.texture);
     for (let i = 0; i < JACOBI_ITERS; i++) {
       gl.uniform1i(prog.pressure.uniforms.uPressure, 0);
       bindTex(0, pressure.read.texture);
@@ -654,6 +484,7 @@ function startFluid(canvas, container, opts = {}) {
       pressure.swap();
     }
 
+    /* Gradient subtraction */
     use(prog.gradSub);
     gl.uniform2fv(prog.gradSub.uniforms.texelSize, SIM_TEXEL);
     gl.uniform1i(prog.gradSub.uniforms.uPressure, 0);
@@ -663,6 +494,7 @@ function startFluid(canvas, container, opts = {}) {
     blit(velocity.write);
     velocity.swap();
 
+    /* Display */
     use(prog.display);
     gl.uniform1i(prog.display.uniforms.uDye, 0);
     gl.uniform1f(prog.display.uniforms.uDark, darkMode);
@@ -672,8 +504,6 @@ function startFluid(canvas, container, opts = {}) {
     frameId = requestAnimationFrame(step);
   }
 
-  window.addEventListener("resize", resize);
-  resize();
   gl.bindVertexArray(quadVAO);
 
   /* Seed initial wisps at edges */
@@ -692,15 +522,4 @@ function startFluid(canvas, container, opts = {}) {
   });
 
   step();
-
-  /* ── Cleanup ── */
-  return () => {
-    cancelAnimationFrame(frameId);
-    themeObserver.disconnect();
-    window.removeEventListener("resize", resize);
-    container.removeEventListener("mouseenter", onMouseEnter);
-    container.removeEventListener("mousemove", onMouseMove);
-    container.removeEventListener("touchstart", onTouchStart);
-    container.removeEventListener("touchmove", onTouchMove);
-  };
 }
