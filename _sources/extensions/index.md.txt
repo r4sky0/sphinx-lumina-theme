@@ -41,6 +41,12 @@ Auto-generated HTTP API docs from OpenAPI specs.
 LLM-friendly docs following the llms.txt convention.
 :::
 
+:::{grid-item-card} sphinx-last-updated-by-git {bdg-secondary}`optional`
+:link: sphinx-last-updated-by-git
+:link-type: doc
+Show "Last updated" dates in the page footer from git history.
+:::
+
 :::{grid-item-card} MathJax {bdg-secondary}`built-in`
 :link: mathjax
 :link-type: doc
@@ -127,5 +133,6 @@ sphinx-copybutton
 mermaid
 openapi
 sphinx-llm
+sphinx-last-updated-by-git
 mathjax
 ```

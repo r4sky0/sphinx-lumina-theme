@@ -14,6 +14,8 @@ Auto-generated HTTP API docs from OpenAPI specs.
 
 LLM-friendly docs following the llms.txt convention.
 
+Show “Last updated” dates in the page footer from git history.
+
 LaTeX math rendering with MathJax.
 
 ## Other Compatible Extensions
