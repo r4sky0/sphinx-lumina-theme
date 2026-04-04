@@ -152,11 +152,11 @@ jobs:
           pnpm install
           uv sync --dev
 
-      - name: Install Playwright
-        run: uv run playwright install chromium
+      - name: Install Playwright browsers
+        run: uv run playwright install --with-deps chromium firefox webkit
 
       - name: Build assets
         run: pnpm run build
 
       - name: Run browser tests
-        run: uv run pytest tests/test_browser.py -v --browser chromium
+        run: uv run pytest tests/test_browser.py -v --browser chromium --browser firefox --browser webkit

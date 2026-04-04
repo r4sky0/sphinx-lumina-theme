@@ -80,9 +80,9 @@ function injectButton(dl, baseUrl) {
   const btn = document.createElement("button");
   btn.className = "lumina-curl-copy";
   btn.setAttribute("x-data", "curlCopyBtn");
-  btn.setAttribute("@click", "copy()");
-  btn.setAttribute(":class", "{ 'is-copied': copied }");
-  btn.setAttribute(":aria-label", "copied ? 'Copied!' : 'Copy as curl'");
+  btn.setAttribute("x-on:click", "copy()");
+  btn.setAttribute("x-bind:class", "{ 'is-copied': copied }");
+  btn.setAttribute("x-bind:aria-label", "copied ? 'Copied!' : 'Copy as curl'");
   btn.setAttribute("title", "Copy as curl");
   btn.setAttribute("aria-label", "Copy as curl");
 

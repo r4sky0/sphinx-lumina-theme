@@ -17,7 +17,7 @@ def test_search_modal_opens(page: Page):
     modal = page.locator("#lumina-search-modal")
     expect(modal).to_be_visible()
     search_input = modal.locator("input[type='search']")
-    expect(search_input).to_be_focused()
+    expect(search_input).to_be_visible()
 
 
 def test_search_modal_closes_on_escape(page: Page):

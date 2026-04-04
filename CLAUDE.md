@@ -68,6 +68,8 @@ src/sphinx_lumina_theme/
 
 Alpine.js components are registered via `Alpine.data()` in separate modules under `_static_src/js/`. Each component (scrollspy, themeToggle, searchModal, sidebar, headerLinks, copyPage) is imported and registered in `app.js`, then referenced in templates with `x-data`.
 
+**Important**: When creating elements with `document.createElement()` and setting Alpine directives via `setAttribute()`, use the long-form syntax (`x-on:click`, `x-bind:class`) instead of shorthand (`@click`, `:class`). WebKit/Safari throws `Invalid qualified name` for `@` and `:` prefixes in `setAttribute()` calls. The shorthand only works in HTML templates parsed by the HTML parser.
+
 ### Theming / Dark Mode
 
 - CSS custom properties (`--lumina-accent`, `--lumina-bg`, `--lumina-text`, etc.) defined in `base.css`

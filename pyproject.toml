@@ -82,6 +82,7 @@ template_dir = "templates"
 changelog_file = "CHANGELOG.md"
 output_format = "md"
 
+
 [dependency-groups]
 dev = [
     "pytest>=8.0",
