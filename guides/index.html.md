@@ -12,4 +12,6 @@ Header links, social icons, sidebar depth, and breadcrumbs.
 
 CSS custom properties, fonts, syntax highlighting, and templates.
 
+Create a full-width entry point with an optional hero section.
+
 Live reload with sphinx-autobuild and the asset watcher.

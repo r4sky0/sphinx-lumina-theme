@@ -35,6 +35,12 @@ Header links, social icons, sidebar depth, and breadcrumbs.
 CSS custom properties, fonts, syntax highlighting, and templates.
 :::
 
+:::{grid-item-card} Landing Page
+:link: landing-page
+:link-type: doc
+Create a full-width entry point with an optional hero section.
+:::
+
 :::{grid-item-card} Development Workflow
 :link: development-workflow
 :link-type: doc
@@ -50,5 +56,6 @@ dark-mode
 myst-markdown
 navigation
 custom-styling
+landing-page
 development-workflow
 ```
