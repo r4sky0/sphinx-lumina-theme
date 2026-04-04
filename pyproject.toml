@@ -4,10 +4,35 @@ version = "1.22.1"
 description = "A modern Sphinx documentation theme with Tailwind CSS and Alpine.js"
 readme = "README.md"
 license = "Apache-2.0"
+authors = [
+    { name = "Ralph Offinger", email = "ralph.offinger@gmail.com" },
+]
+keywords = ["sphinx", "theme", "documentation", "tailwindcss", "alpinejs", "dark-mode"]
 requires-python = ">=3.12"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Framework :: Sphinx",
+    "Framework :: Sphinx :: Theme",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Documentation",
+    "Topic :: Documentation :: Sphinx",
+    "Topic :: Software Development :: Documentation",
+]
 dependencies = [
     "sphinx>=8.0",
 ]
+
+[project.urls]
+Homepage = "https://r4sky0.github.io/sphinx-lumina-theme/"
+Documentation = "https://r4sky0.github.io/sphinx-lumina-theme/"
+Repository = "https://github.com/r4sky0/sphinx-lumina-theme"
+Changelog = "https://github.com/r4sky0/sphinx-lumina-theme/blob/main/CHANGELOG.md"
+"Issue Tracker" = "https://github.com/r4sky0/sphinx-lumina-theme/issues"
 
 [project.entry-points."sphinx.html_themes"]
 lumina = "sphinx_lumina_theme"
