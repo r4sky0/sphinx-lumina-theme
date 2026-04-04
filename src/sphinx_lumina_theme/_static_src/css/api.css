@@ -710,34 +710,33 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.625rem;
-  height: 1.625rem;
+  width: 2rem;
+  height: 2rem;
   padding: 0;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 0.3rem;
+  background: var(--lumina-bg-secondary);
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.375rem;
   color: var(--lumina-text-muted);
   cursor: pointer;
-  opacity: 0.5;
-  transition: color 0.15s, background-color 0.15s, border-color 0.15s, opacity 0.15s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
 }
 
 .lumina-try-it-copy-res:hover {
-  opacity: 1;
-  color: var(--lumina-accent);
   background: var(--lumina-accent-light);
-  border-color: color-mix(in srgb, var(--lumina-accent) 20%, transparent);
+  color: var(--lumina-accent);
+  border-color: var(--lumina-accent);
 }
 
 .lumina-try-it-copy-res.is-copied {
-  opacity: 1;
-  color: var(--lumina-accent);
+  background: var(--lumina-accent);
+  color: #fff;
+  border-color: var(--lumina-accent);
+  transform: scale(1.05);
 }
 
 .lumina-try-it-copy-res:focus-visible {
-  opacity: 1;
   outline: 2px solid var(--lumina-accent);
-  outline-offset: -1px;
+  outline-offset: 2px;
 }
 
 .lumina-try-it-status {
