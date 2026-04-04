@@ -1,21 +1,14 @@
 export default function announcementBanner() {
+  let _id = null;
   return {
-    dismissed: false,
-
     init() {
-      const id = this.$el.getAttribute("data-announcement-id");
-      if (id && localStorage.getItem("lumina-announce-" + id) === "1") {
-        this.dismissed = true;
-        document.documentElement.classList.remove("has-announcement");
-      }
+      _id = this.$el.getAttribute("data-announcement-id");
     },
 
     dismiss() {
-      const id = this.$el.getAttribute("data-announcement-id");
-      if (id) {
-        localStorage.setItem("lumina-announce-" + id, "1");
+      if (_id) {
+        localStorage.setItem("lumina-announce-" + _id, "1");
       }
-      this.dismissed = true;
       document.documentElement.classList.remove("has-announcement");
     },
   };

@@ -368,6 +368,8 @@ a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
   animation: lumina-fade-in 0.4s ease-out;
 }
 
+html:not(.has-announcement) #lumina-announcement { display: none; }
+
 html.has-announcement .lumina-wrapper {
   margin-top: calc(3.5rem + 2.25rem);
   min-height: calc(100vh - 3.5rem - 2.25rem);
