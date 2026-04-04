@@ -409,7 +409,6 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 
 .lumina-try-it-panel {
   overflow: hidden;
-  padding-bottom: 0.25rem;
 }
 
 .lumina-try-it-url-bar {
