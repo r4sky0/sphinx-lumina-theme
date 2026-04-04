@@ -2,6 +2,26 @@
 
 <!-- releases -->
 
+## v1.18.0 (2026-04-04)
+
+### Features
+
+- Bump dev Python to 3.14 and minimum to 3.12
+  ([#34](https://github.com/r4sky0/sphinx-lumina-theme/pull/34),
+  [`17414b6`](https://github.com/r4sky0/sphinx-lumina-theme/commit/17414b6071fc82c6387e662ec74cbd7752241b9d))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Continuous Integration
+
+- Publish releases to PyPI via trusted publishers
+  ([#33](https://github.com/r4sky0/sphinx-lumina-theme/pull/33),
+  [`ae97887`](https://github.com/r4sky0/sphinx-lumina-theme/commit/ae97887b3f8cbe0cca901fd4c60f4ba6f22d8818))
+
+</details>
+
+
 ## v1.17.0 (2026-04-04)
 
 ### Features
