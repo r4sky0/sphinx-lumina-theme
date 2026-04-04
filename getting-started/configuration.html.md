@@ -44,6 +44,7 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 | `show_breadcrumbs` | string | `"true"`  | Show or hide the breadcrumb trail above the content.                                                                                                                                                     |
 | `show_prev_next`   | string | `"true"`  | Show or hide previous/next page navigation at the bottom.                                                                                                                                                |
 | `show_attribution` | string | `"true"`  | Show or hide the “Built with Lumina” attribution link in the sidebar footer.                                                                                                                             |
+| `show_back_to_top` | string | `"true"`  | Show or hide the back-to-top button that appears when scrolling up.                                                                                                                                      |
 
 ### Search
 
@@ -125,6 +126,7 @@ html_theme_options = {
     "show_breadcrumbs": "true",
     "show_prev_next": "true",
     "show_attribution": "true",
+    "show_back_to_top": "true",
 
     # Search
     "search_backend": "pagefind",
