@@ -123,7 +123,7 @@ jobs:
       - name: Verify key output files
         run: |
           test -f docs/_build/html/index.html
-          test -f docs/_build/html/getting-started.html
+          test -f docs/_build/html/getting-started/installation.html
 
       - name: Run extension tests
         run: uv run pytest tests/test_extensions.py -v
