@@ -48,3 +48,4 @@ docs/superpowers/
 *.png
 !docs/assets/banner.png
 .worktrees/
+snapshot-light.md

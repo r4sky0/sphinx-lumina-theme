@@ -21,6 +21,25 @@ build-backend = "hatchling.build"
 [tool.hatch.build]
 artifacts = ["src/sphinx_lumina_theme/theme/static/lumina.css", "src/sphinx_lumina_theme/theme/static/lumina.js"]
 
+[tool.hatch.build.targets.sdist]
+exclude = [
+    ".github/",
+    ".husky/",
+    ".impeccable.md",
+    ".nvmrc",
+    ".python-version",
+    "CHANGELOG.md",
+    "CLAUDE.md",
+    "commitlint.config.js",
+    "docs/",
+    "docs/assets/banner.png",
+    "scripts/record-demo.py",
+    "snapshot-light.md",
+    "templates/",
+    "tests/",
+    "uv.lock",
+]
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/sphinx_lumina_theme"]
 
