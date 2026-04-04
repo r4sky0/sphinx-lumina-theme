@@ -1,5 +1,30 @@
 # Releases
 
+## v1.23.0 (2026-04-04)
+
+### Features
+
+- Add version switcher dropdown ([#41](https://github.com/r4sky0/sphinx-lumina-theme/pull/41),
+  [`d4f09c1`](https://github.com/r4sky0/sphinx-lumina-theme/commit/d4f09c17e59e33c9e73088326077d2e390f06a10))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Chores
+
+- Add PyPI classifiers, project URLs, author, and keywords
+  ([#44](https://github.com/r4sky0/sphinx-lumina-theme/pull/44),
+  [`9b4805c`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9b4805c84f2346721625b94179bf801ed11c6774))
+
+#### Documentation
+
+- Add pip install command to README ([#45](https://github.com/r4sky0/sphinx-lumina-theme/pull/45),
+  [`5eadb1c`](https://github.com/r4sky0/sphinx-lumina-theme/commit/5eadb1c6688f17c10dafac7ab94ec673a6627448))
+- Update README demo GIF ([#46](https://github.com/r4sky0/sphinx-lumina-theme/pull/46),
+  [`6c3ae46`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6c3ae46d7bc9dffd4ba9ede7038ab4e33ecefca9))
+
+</details>
+
 ## v1.22.1 (2026-04-04)
 
 ### Bug Fixes
