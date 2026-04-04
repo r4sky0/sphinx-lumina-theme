@@ -40,6 +40,16 @@
             html:root,html[data-theme="dark"]{--sd-color-primary:color-mix(in srgb,{{ theme_accent_color }} 85%,black);--sd-color-primary-highlight:color-mix(in srgb,{{ theme_accent_color }} 70%,black);--sd-color-primary-text:#fff;--sd-color-primary-bg:color-mix(in srgb,{{ theme_accent_color }} 12%,transparent);}
         </style>
     {% endif %}
+    {% if announcement_content is defined and announcement_content %}
+        <script>
+(function() {
+  var id = '{{ announcement_id }}';
+  if (!id || localStorage.getItem('lumina-announce-' + id) !== '1') {
+    document.documentElement.classList.add('has-announcement');
+  }
+})();
+        </script>
+    {% endif %}
     {% if has_llms_txt %}
         <link rel="alternate"
               type="text/markdown"
@@ -63,8 +73,6 @@
 
 {%- block content %}
     <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
-
-    {% include "components/announcement.html" %}
 
     <div id="lumina-header">
 

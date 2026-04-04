@@ -363,9 +363,14 @@ a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
 .lumina-wrapper {
   display: flex;
   max-width: 90rem;
-  margin: calc(3.5rem + var(--lumina-announce-h, 0px)) auto 0;
-  min-height: calc(100vh - 3.5rem - var(--lumina-announce-h, 0px));
+  margin: 3.5rem auto 0;
+  min-height: calc(100vh - 3.5rem);
   animation: lumina-fade-in 0.4s ease-out;
+}
+
+html.has-announcement .lumina-wrapper {
+  margin-top: calc(3.5rem + 2.25rem);
+  min-height: calc(100vh - 3.5rem - 2.25rem);
 }
 
 #lumina-sidebar {
@@ -375,9 +380,18 @@ a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
 @media (min-width: 1024px) {
   #lumina-sidebar {
     position: sticky;
-    top: calc(3.5rem + var(--lumina-announce-h, 0px));
+    top: 3.5rem;
     align-self: flex-start;
     width: 260px;
+  }
+
+  html.has-announcement #lumina-sidebar {
+    top: calc(3.5rem + 2.25rem);
+  }
+
+  html.has-announcement .lumina-toc-container {
+    top: calc(3.5rem + 2.25rem);
+    height: calc(100vh - 3.5rem - 2.25rem);
   }
 }
 
