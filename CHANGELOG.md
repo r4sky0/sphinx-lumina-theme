@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v1.10.0 (2026-04-04)
+
+### Features
+
+- Add llms.txt integration with sphinx-llm
+  ([#21](https://github.com/r4sky0/sphinx-lumina-theme/pull/21),
+  [`e55d1d5`](https://github.com/r4sky0/sphinx-lumina-theme/commit/e55d1d5bc494cbd3d13a5e6c00cc175586d646e3))
+
+
 ## v1.9.0 (2026-04-04)
 
 ### Features
