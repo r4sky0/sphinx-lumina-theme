@@ -1,5 +1,7 @@
 {% if toc %}
-    <div class="sticky top-14 hidden h-[calc(100vh-3.5rem)] w-[220px] shrink-0 overflow-y-auto py-6 pr-4 xl:block">
+    <div class="sticky hidden w-[220px] shrink-0 overflow-y-auto py-6 pr-4 xl:block"
+         style="top: calc(3.5rem + var(--lumina-announce-h, 0px));
+                height: calc(100vh - 3.5rem - var(--lumina-announce-h, 0px))">
         {# Edit on GitHub link #}
         {% if theme_source_repository and theme_source_repository != "" %}
             <a href="{{ theme_source_repository }}/{{ theme_edit_uri }}/{{ theme_source_branch }}/{{ theme_source_directory }}{{ pagename }}{{ page_source_suffix }}"

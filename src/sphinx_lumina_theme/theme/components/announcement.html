@@ -4,7 +4,7 @@
          x-show="!dismissed"
          x-cloak
          data-announcement-id="{{ announcement_id }}"
-         class="relative z-[60] bg-[var(--lumina-accent)] text-white text-center text-sm"
+         class="fixed top-0 left-0 right-0 z-[60] bg-[var(--lumina-accent)] text-white text-center text-sm"
          role="status">
         <div class="mx-auto flex max-w-[90rem] items-center justify-center gap-4 px-4 py-2">
             <div class="flex-1 [&_a]:underline [&_a]:font-medium">{{ announcement_content }}</div>
