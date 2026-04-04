@@ -7,7 +7,9 @@ export default function announcementBanner() {
       if (id && localStorage.getItem("lumina-announce-" + id) === "1") {
         this.dismissed = true;
       } else {
-        this._updateOffset();
+        // Defer measurement until after Alpine removes x-cloak and
+        // the browser has reflowed — offsetHeight is 0 during init()
+        this.$nextTick(() => this._updateOffset());
       }
     },
 
