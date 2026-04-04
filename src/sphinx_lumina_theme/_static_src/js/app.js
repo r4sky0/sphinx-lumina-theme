@@ -9,6 +9,7 @@ import navDropdown from "./nav-dropdown.js";
 import curlCopy, { curlCopyBtn } from "./curl-copy.js";
 import tryIt, { tryItPanel } from "./try-it.js";
 import backToTop from "./back-to-top.js";
+import announcementBanner from "./announcement.js";
 Alpine.data("scrollspy", scrollspy);
 Alpine.data("themeToggle", themeToggle);
 Alpine.data("searchModal", searchModal);
@@ -19,6 +20,7 @@ Alpine.data("navDropdown", navDropdown);
 Alpine.data("curlCopyBtn", curlCopyBtn);
 Alpine.data("tryItPanel", tryItPanel);
 Alpine.data("backToTop", backToTop);
+Alpine.data("announcementBanner", announcementBanner);
 
 window.Alpine = Alpine;
 

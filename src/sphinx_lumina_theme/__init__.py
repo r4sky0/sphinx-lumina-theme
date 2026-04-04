@@ -1,12 +1,13 @@
 """Sphinx Lumina Theme — a modern documentation theme."""
 
+import hashlib
 from pathlib import Path
 
 from sphinx.util import logging
 
 logger = logging.getLogger(__name__)
 
-__version__ = "1.21.1"
+__version__ = "1.22.0"
 
 _HERO_FIELDS = (
     "hero_title",
@@ -31,6 +32,14 @@ def _add_context(app, pagename, templatename, context, doctree):
         context["lumina_light_logo"] = context["pathto"]("_static/" + light_logo, 1)
     if dark_logo:
         context["lumina_dark_logo"] = context["pathto"]("_static/" + dark_logo, 1)
+
+    # Announcement banner
+    announcement = app.builder.theme_options.get("announcement", "")
+    if announcement:
+        context["announcement_content"] = announcement
+        context["announcement_id"] = hashlib.md5(
+            announcement.encode(), usedforsecurity=False
+        ).hexdigest()[:8]
 
     # Allow pages to opt into a custom template via metadata
     meta = app.env.metadata.get(pagename, {})
