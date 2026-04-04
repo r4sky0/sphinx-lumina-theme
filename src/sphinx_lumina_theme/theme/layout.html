@@ -31,6 +31,12 @@
     {% if theme_accent_color != "#10b981" %}
         <style>:root,[data-theme="light"],[data-theme="dark"]{--lumina-accent:{{ theme_accent_color }};}</style>
     {% endif %}
+    {% if has_llms_txt %}
+        <link rel="alternate"
+              type="text/markdown"
+              href="{{ pathto('llms.txt', 1) }}"
+              title="LLM-friendly documentation index">
+    {% endif %}
 {% endblock %}
 {% block header %}{% endblock %}
 {% block relbar1 %}{% endblock %}
