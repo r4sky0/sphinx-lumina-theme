@@ -80,6 +80,7 @@ ${n.trimEnd()}
 ${r.message}`:r.message,bodyHtml:null,isJson:!1,error:!0}}finally{this.sending=!1}},async copyResponse(){let e=this.response?.bodyText;if(!(!e||e==="(No response body)")){try{await navigator.clipboard.writeText(e)}catch{return}this.copiedResponse=!0,setTimeout(()=>{this.copiedResponse=!1},1500)}},clear(){this.response=null,this.bodyError=null}}}function or(){if(document.documentElement.dataset.tryItOut==="false")return;let e=document.querySelectorAll("dl.http");e.length&&e.forEach(t=>{let n=Zl(t);n&&Ql(t,n)})}function Zl(e){let t=e.parentElement;for(;t&&t!==document.documentElement;){if(t.dataset.apiBaseUrl!==void 0)return t.dataset.apiBaseUrl;t=t.parentElement}return document.documentElement.dataset.apiBaseUrl||""}function Ql(e,t){let n=e.querySelector(":scope > dd");if(!n)return;let r=nc(e),i=rc(e),o=ic(i),s=ir(n,"Query Parameters"),l=ir(n,"Request Headers"),c=ir(n,"Request JSON Object"),u=["POST","PUT","PATCH"].includes(r),f=document.createElement("div");f.className="lumina-try-it",f.setAttribute("x-data","tryItPanel"),vo.set(f,{method:r,path:i,baseUrl:t,pathParams:o,queryParams:s,allHeaders:l,bodyFields:c,hasBody:u}),f.insertAdjacentHTML("beforeend",ec),n.appendChild(f),window.Alpine.initTree(f)}var ec=`
   <button type="button" class="lumina-try-it-toggle"
           @click="open = !open"
+          :class="{ 'is-open': open }"
           :aria-expanded="open.toString()">
     <svg class="lumina-try-it-chevron" width="10" height="10" viewBox="0 0 24 24"
          fill="none" stroke="currentColor" stroke-width="2.5"
