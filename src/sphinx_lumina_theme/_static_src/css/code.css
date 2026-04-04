@@ -94,6 +94,14 @@ div.highlight {
 
 /* ── sphinx-design tabs ── */
 .sd-tab-set {
+  --sd-color-tabs-label-active: var(--lumina-accent);
+  --sd-color-tabs-label-hover: var(--lumina-text);
+  --sd-color-tabs-label-inactive: var(--lumina-text-muted);
+  --sd-color-tabs-underline-active: var(--lumina-accent);
+  --sd-color-tabs-underline-hover: color-mix(in srgb, var(--lumina-accent) 40%, transparent);
+  --sd-color-tabs-underline-inactive: transparent;
+  --sd-color-tabs-overline: transparent;
+  --sd-color-tabs-underline: var(--lumina-border);
   margin: 1.5rem 0;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--lumina-accent) 10%, var(--lumina-border));
@@ -129,19 +137,16 @@ div.highlight {
   border-bottom-color: var(--lumina-accent);
 }
 
-.sd-tab-content {
+.sd-tab-set > .sd-tab-content {
   padding: 0;
+  box-shadow: none;
 }
 
-.sd-tab-content > div.highlight,
-.sd-tab-content > pre.highlight {
+.sd-tab-content div.highlight,
+.sd-tab-content pre.highlight {
   margin: 0;
   border: none;
   border-radius: 0;
-}
-
-[data-theme="dark"] .sd-tab-set {
-  border-color: color-mix(in srgb, var(--lumina-accent) 8%, var(--lumina-border));
 }
 
 /* ── sphinx-design badges ── */
@@ -215,7 +220,6 @@ div.highlight {
 .sd-btn-danger:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
 }
-
 /* ── sphinx-design cards ── */
 .sd-card {
   border: 1px solid var(--lumina-border) !important;
