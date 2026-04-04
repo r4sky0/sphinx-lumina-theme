@@ -21,6 +21,7 @@ _HERO_FIELDS = (
 
 def _add_context(app, pagename, templatename, context, doctree):
     context["lumina_version"] = __version__
+    context["has_llms_txt"] = "sphinx_llm.txt" in app.extensions
     # Allow pages to opt into a custom template via metadata
     meta = app.env.metadata.get(pagename, {})
 

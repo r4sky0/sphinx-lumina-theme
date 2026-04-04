@@ -40,6 +40,9 @@ Thumbs.db
 .worktrees/
 skills-lock.json
 
+# Superpowers (local plans/specs)
+docs/superpowers/
+
 # Screenshots
 *.png
 !docs/assets/banner.png

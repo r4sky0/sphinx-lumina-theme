@@ -9,6 +9,7 @@ extensions = [
     "sphinx_copybutton",
     "sphinxcontrib.mermaid",
     "sphinxcontrib.openapi",
+    "sphinx_llm.txt",
 ]
 myst_enable_extensions = [
     "colon_fence",
