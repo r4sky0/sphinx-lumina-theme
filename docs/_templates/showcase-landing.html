@@ -1,15 +1,24 @@
 {# Showcase landing page — docs site only, not part of the shipped theme.
    Uses the GPU fluid simulation hero for the Lumina docs showcase. #}
+
 {% extends "layout.html" %}
+
 {% block extrahead %}
+
     {{ super() }}
     <link rel="stylesheet"
           href="{{ pathto('_static/showcase-landing.css', 1) }}">
+
 {% endblock %}
+
 {%- block content %}
     <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
     {% set is_landing = true %}
-    <div id="lumina-header">{% include "components/header.html" %}</div>
+    <div id="lumina-header">
+
+        {% include "components/header.html" %}
+
+    </div>
     {# ── Hero ── #}
     <section class="lumina-hero" x-data="fluidSimulation()">
         <canvas x-ref="canvas" class="lumina-hero-canvas" aria-hidden="true"></canvas>
@@ -27,7 +36,7 @@
                 your documentation deserves.
             </p>
             <div class="lumina-hero-actions">
-                <a href="{{ pathto("getting-started/index") }}"
+                <a href="{{ pathto('getting-started/index') }}"
                    class="lumina-hero-btn lumina-hero-btn-primary">
                     Get Started
                     <svg viewBox="0 0 24 24"
@@ -52,10 +61,48 @@
                 {% endif %}
             </div>
             <div class="lumina-hero-tags">
-                <span>Dark Mode</span>
-                <span>Instant Search</span>
-                <span>MyST Markdown</span>
-                <span>Responsive</span>
+                <span>
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5" />
+                        <path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" />
+                    </svg>
+                    Dark Mode
+                </span>
+                <span>
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.5"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <circle cx="10.5" cy="10.5" r="7" />
+                        <path d="m21 21-5.2-5.2" />
+                    </svg>
+                    Instant Search
+                </span>
+                <span>
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.5"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="m8 7-5 5 5 5" />
+                        <path d="m16 7 5 5-5 5" />
+                    </svg>
+                    MyST Markdown
+                </span>
+                <span>
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.5"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <rect x="2" y="3" width="13" height="10" rx="1.5" /><rect x="14" y="9" width="8" height="12" rx="1.5" />
+                    </svg>
+                    Responsive
+                </span>
             </div>
         </div>
     </section>
@@ -65,10 +112,16 @@
           class="lumina-landing-content{% if hero_only %} is-empty{% endif %}"
           data-pagefind-body>
         <article class="lumina-article">
+
             {% block body %}{{ body }}{% endblock %}
+
+
         </article>
     </main>
+
     {% include "components/search-modal.html" %}
+
+
 {%- endblock %}
 {%- block scripts %}
     <script src="{{ pathto('_static/fluid-simulation.js', 1) }}"></script>

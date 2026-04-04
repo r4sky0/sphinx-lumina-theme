@@ -226,6 +226,9 @@
 }
 
 .lumina-hero-tags span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--lumina-text-muted);
@@ -233,6 +236,13 @@
   border-radius: 9999px;
   background: color-mix(in srgb, var(--lumina-text-muted) 7%, transparent);
   letter-spacing: 0.01em;
+}
+
+.lumina-hero-tags span svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  flex-shrink: 0;
+  opacity: 0.7;
 }
 
 /* ── Subtle header when hero is visible ── */
