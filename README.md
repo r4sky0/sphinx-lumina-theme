@@ -31,7 +31,7 @@ A modern Sphinx theme that treats documentation as a first-class product experie
 Requires **Python 3.10+** and **Sphinx 8.0+**.
 
 ```bash
-uv add sphinx-lumina-theme@git+https://github.com/r4sky0/sphinx-lumina-theme.git@v{version}
+uv add sphinx-lumina-theme
 ```
 
 Set the theme in your `conf.py`:
@@ -47,22 +47,6 @@ uv run sphinx-build docs docs/_build/html
 ```
 
 That's it. For pip, MyST Markdown setup, and configuration options, see the [Getting Started](https://r4sky0.github.io/sphinx-lumina-theme/getting-started.html) guide.
-
-## HTTP API Documentation
-
-Set `api_base_url` in your theme options to add interactive features to every documented HTTP endpoint:
-
-```python
-html_theme_options = {
-    "api_base_url": "https://api.example.com/v1",
-}
-```
-
-- **Copy as curl** — a button on every endpoint signature copies a ready-to-run `curl` command to the clipboard
-- **Try it out** — a collapsible panel lets readers fill in parameters and send live requests from the docs page
-- **Per-block override** — wrap endpoints in `<div data-api-base-url="...">` to use a different server for a specific group
-
-Works with both [`sphinxcontrib-openapi`](https://sphinxcontrib-openapi.readthedocs.io/) (auto-generated from spec files) and manually written `sphinxcontrib-httpdomain` directives.
 
 ## Configuration
 
