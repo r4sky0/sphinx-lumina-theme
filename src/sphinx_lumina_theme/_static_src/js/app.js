@@ -8,6 +8,7 @@ import copyPage from "./copy-page.js";
 import navDropdown from "./nav-dropdown.js";
 import curlCopy, { curlCopyBtn } from "./curl-copy.js";
 import tryIt, { tryItPanel } from "./try-it.js";
+import backToTop from "./back-to-top.js";
 Alpine.data("scrollspy", scrollspy);
 Alpine.data("themeToggle", themeToggle);
 Alpine.data("searchModal", searchModal);
@@ -17,6 +18,7 @@ Alpine.data("copyPage", copyPage);
 Alpine.data("navDropdown", navDropdown);
 Alpine.data("curlCopyBtn", curlCopyBtn);
 Alpine.data("tryItPanel", tryItPanel);
+Alpine.data("backToTop", backToTop);
 
 window.Alpine = Alpine;
 
