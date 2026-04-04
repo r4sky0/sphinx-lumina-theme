@@ -1,5 +1,16 @@
 # Releases
 
+## v1.18.1 (2026-04-04)
+
+### Bug Fixes
+
+- Accent color no longer bleeds emerald into derived CSS vars
+  ([#35](https://github.com/r4sky0/sphinx-lumina-theme/pull/35),
+  [`73eeacd`](https://github.com/r4sky0/sphinx-lumina-theme/commit/73eeacd411db8c2bc7303e2a6d52d89805d3f957))
+- Use standard Apache 2.0 license and clean up sdist
+  ([#36](https://github.com/r4sky0/sphinx-lumina-theme/pull/36),
+  [`f538619`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f5386195a1456b255272495043ea4396a9e5c602))
+
 ## v1.18.0 (2026-04-04)
 
 ### Features
