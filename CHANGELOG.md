@@ -2,6 +2,14 @@
 
 <!-- releases -->
 
+## v1.21.1 (2026-04-04)
+
+### Bug Fixes
+
+- Fix README for PyPI ([#42](https://github.com/r4sky0/sphinx-lumina-theme/pull/42),
+  [`95e6383`](https://github.com/r4sky0/sphinx-lumina-theme/commit/95e63838506da78dda11ab221a962bde0d627a9c))
+
+
 ## v1.21.0 (2026-04-04)
 
 ### Features
