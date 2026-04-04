@@ -85,6 +85,10 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
   - string
   - `"true"`
   - Show or hide previous/next page navigation at the bottom.
+* - `show_attribution`
+  - string
+  - `"true"`
+  - Show or hide the "Built with Lumina" attribution link in the sidebar footer.
 ```
 
 ### Search
@@ -219,6 +223,7 @@ html_theme_options = {
     "show_toc": "true",
     "show_breadcrumbs": "true",
     "show_prev_next": "true",
+    "show_attribution": "true",
 
     # Search
     "search_backend": "pagefind",

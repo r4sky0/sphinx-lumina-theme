@@ -1,5 +1,13 @@
 # Releases
 
+## v1.15.0 (2026-04-04)
+
+### Features
+
+- Switch to Apache 2.0 license and add configurable attribution
+  ([#27](https://github.com/r4sky0/sphinx-lumina-theme/pull/27),
+  [`bc3a0ab`](https://github.com/r4sky0/sphinx-lumina-theme/commit/bc3a0ab24ac739b073eabc57ba09a1af44be37d8))
+
 ## v1.14.0 (2026-04-04)
 
 ### Features
