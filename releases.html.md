@@ -1,5 +1,12 @@
 # Releases
 
+## v1.21.0 (2026-04-04)
+
+### Features
+
+- Add separate light/dark mode logos ([#40](https://github.com/r4sky0/sphinx-lumina-theme/pull/40),
+  [`bd5a86a`](https://github.com/r4sky0/sphinx-lumina-theme/commit/bd5a86a9fac808bff4e0a9a32be7151e013e249a))
+
 ## v1.20.0 (2026-04-04)
 
 ### Features
