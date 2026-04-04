@@ -2,11 +2,17 @@
    Activate via page metadata: template: landing.html
    Hero fields (all optional): hero_title, hero_subtitle, hero_primary_url,
    hero_primary_text, hero_secondary_url, hero_secondary_text, hero_tags #}
+
 {% extends "layout.html" %}
+
 {%- block content %}
     <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
     {% set is_landing = true %}
-    <div id="lumina-header">{% include "components/header.html" %}</div>
+    <div id="lumina-header">
+
+        {% include "components/header.html" %}
+
+    </div>
     {% if hero_title is defined and hero_title %}
         <section class="lumina-hero">
             <div class="lumina-hero-content">
@@ -45,8 +51,16 @@
     {% endif %}
     <main id="lumina-content" class="lumina-landing-content" data-pagefind-body>
         <article class="lumina-article">
-            {% block body %}{{ body }}{% endblock %}
+
+            {% block body %}
+
+                {{ body }}
+
+            {% endblock body %}
+
         </article>
     </main>
+
     {% include "components/search-modal.html" %}
+
 {%- endblock %}

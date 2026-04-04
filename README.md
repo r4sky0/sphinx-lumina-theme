@@ -21,6 +21,7 @@ A modern Sphinx theme that treats documentation as a first-class product experie
 - **Instant search** — Pagefind-powered search with keyboard navigation (`⌘K`)
 - **Responsive layout** — mobile-first with collapsible sidebar and sticky table of contents
 - **MyST Markdown** — write docs in Markdown with full Sphinx directive support
+- **Interactive HTTP API** — OpenAPI endpoint docs with live "Try it out" panels and curl copy buttons; no Swagger UI needed
 - **Code blocks** — syntax highlighting with one-click copy
 - **Self-hosted fonts** — Source Sans 3 and JetBrains Mono, no external CDN calls
 - **Customizable** — accent colors, navigation links, social links, and more via `conf.py`
@@ -47,6 +48,22 @@ uv run sphinx-build docs docs/_build/html
 
 That's it. For pip, MyST Markdown setup, and configuration options, see the [Getting Started](https://r4sky0.github.io/sphinx-lumina-theme/getting-started.html) guide.
 
+## HTTP API Documentation
+
+Set `api_base_url` in your theme options to add interactive features to every documented HTTP endpoint:
+
+```python
+html_theme_options = {
+    "api_base_url": "https://api.example.com/v1",
+}
+```
+
+- **Copy as curl** — a button on every endpoint signature copies a ready-to-run `curl` command to the clipboard
+- **Try it out** — a collapsible panel lets readers fill in parameters and send live requests from the docs page
+- **Per-block override** — wrap endpoints in `<div data-api-base-url="...">` to use a different server for a specific group
+
+Works with both [`sphinxcontrib-openapi`](https://sphinxcontrib-openapi.readthedocs.io/) (auto-generated from spec files) and manually written `sphinxcontrib-httpdomain` directives.
+
 ## Configuration
 
 All options go in `html_theme_options` in your `conf.py`. Every option has a sensible default — you only need to set what you want to change.
@@ -58,10 +75,11 @@ html_theme_options = {
     "nav_links": "Guide=/guide, API=/api",
     "source_repository": "https://github.com/you/your-repo",
     "social_links": "github=https://github.com/you",
+    "api_base_url": "https://api.example.com/v1",  # enables interactive API features
 }
 ```
 
-See the full [Customization](https://r4sky0.github.io/sphinx-lumina-theme/customization.html) reference for all available options.
+See the full [Configuration](https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html) reference for all available options.
 
 ## Development
 
@@ -69,7 +87,7 @@ See the full [Customization](https://r4sky0.github.io/sphinx-lumina-theme/custom
 git clone https://github.com/r4sky0/sphinx-lumina-theme.git
 cd sphinx-lumina-theme
 pnpm install        # JS dependencies
-uv sync --extra dev # Python dependencies
+uv sync --dev       # Python dependencies
 pnpm run build      # Build CSS + JS assets
 uv run pytest       # Run tests
 ```

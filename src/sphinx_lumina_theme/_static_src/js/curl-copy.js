@@ -2,115 +2,109 @@
  * Curl Copy
  *
  * Scans HTTP domain endpoints (dl.http) and injects a "Copy curl"
- * button into each signature card. Builds the curl command from
- * the rendered method, path, query parameters, headers, and JSON
- * body fields in the DOM.
+ * button (Alpine.js component) into each signature card. Builds the
+ * curl command from the rendered method, path, query parameters,
+ * headers, and JSON body fields in the DOM.
+ *
+ * Exports:
+ *   curlCopyBtn  — Alpine.data factory, registered in app.js
+ *   curlCopy     — boot function, called from boot() in app.js
  *
  * Called from boot() in app.js after Alpine.start().
  * The base URL is read from html_theme_options["api_base_url"],
  * output as a data attribute on <html> by the theme template.
  */
 
+/* Module-level store — maps each injected button to its curl string */
+const _curlCmds = new WeakMap();
+
+/* ── Alpine.data factory ───────────────────────────────────────────── */
+
+export function curlCopyBtn() {
+  return {
+    copied: false,
+
+    async copy() {
+      const curl = _curlCmds.get(this.$el);
+      if (!curl) return;
+      try {
+        await copyText(curl);
+      } catch {
+        return;
+      }
+      this.copied = true;
+      setTimeout(() => { this.copied = false; }, 1500);
+    },
+  };
+}
+
+/* ── Boot ──────────────────────────────────────────────────────────── */
+
 export default function curlCopy() {
-  const baseUrl = document.documentElement.dataset.apiBaseUrl || "";
   const endpoints = document.querySelectorAll("dl.http");
   if (endpoints.length === 0) return;
 
-  // Inject server URL badge once before the first endpoint on each page
-  if (baseUrl) {
-    injectServerBadge(endpoints[0], baseUrl);
-  }
-
   endpoints.forEach((dl) => {
-    injectButton(dl, baseUrl);
+    injectButton(dl, resolveBaseUrl(dl));
   });
 }
 
-function injectServerBadge(firstEndpoint, baseUrl) {
-  const badge = document.createElement("div");
-  badge.className = "lumina-api-server";
-
-  const label = document.createElement("span");
-  label.className = "lumina-api-server-label";
-  label.textContent = "Server";
-
-  const url = document.createElement("code");
-  url.className = "lumina-api-server-url";
-  url.textContent = baseUrl;
-
-  badge.appendChild(label);
-  badge.appendChild(url);
-  firstEndpoint.parentNode.insertBefore(badge, firstEndpoint);
+/* Walk up the ancestor chain for the nearest data-api-base-url override,
+   falling back to the global value set by the theme option. */
+function resolveBaseUrl(el) {
+  let node = el.parentElement;
+  while (node && node !== document.documentElement) {
+    if (node.dataset.apiBaseUrl !== undefined) return node.dataset.apiBaseUrl;
+    node = node.parentElement;
+  }
+  return document.documentElement.dataset.apiBaseUrl || "";
 }
+
+/* ── Button injection ──────────────────────────────────────────────── */
 
 function injectButton(dl, baseUrl) {
   const sig = dl.querySelector("dt.sig");
   if (!sig) return;
 
-  const btn = document.createElement("button");
-  btn.className = "lumina-curl-copy";
-  btn.setAttribute("aria-label", "Copy as curl");
-  btn.title = "Copy as curl";
-  setIcon(btn, "curl");
-
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const curl = buildCurl(dl, baseUrl);
-    copyText(curl)
-      .then(() => {
-        btn.classList.add("is-copied");
-        setIcon(btn, "check");
-        setTimeout(() => {
-          btn.classList.remove("is-copied");
-          setIcon(btn, "curl");
-        }, 1500);
-      })
-      .catch(() => {});
-  });
-
-  sig.appendChild(btn);
-}
-
-/* ── Icon rendering (safe DOM construction) ── */
-
-function setIcon(btn, type) {
-  // Clear existing children
-  while (btn.firstChild) btn.removeChild(btn.firstChild);
-
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("width", "14");
-  svg.setAttribute("height", "14");
-  svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("fill", "none");
-  svg.setAttribute("stroke", "currentColor");
-  svg.setAttribute("stroke-width", "2");
-  svg.setAttribute("stroke-linecap", "round");
-  svg.setAttribute("stroke-linejoin", "round");
-
-  if (type === "check") {
-    const polyline = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "polyline"
-    );
-    polyline.setAttribute("points", "20 6 9 17 4 12");
-    svg.appendChild(polyline);
-  } else {
-    const p1 = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "polyline"
-    );
-    p1.setAttribute("points", "16 18 22 12 16 6");
-    const p2 = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "polyline"
-    );
-    p2.setAttribute("points", "8 6 2 12 8 18");
-    svg.appendChild(p1);
-    svg.appendChild(p2);
+  if (baseUrl) {
+    let host = baseUrl.replace(/\/$/, "");
+    try { host = new URL(baseUrl).hostname; } catch {}
+    const tag = document.createElement("span");
+    tag.className = "lumina-api-host";
+    tag.textContent = host;
+    sig.appendChild(tag);
   }
 
-  btn.appendChild(svg);
+  const curl = buildCurl(dl, baseUrl);
+
+  const btn = document.createElement("button");
+  btn.className = "lumina-curl-copy";
+  btn.setAttribute("x-data", "curlCopyBtn");
+  btn.setAttribute("@click", "copy()");
+  btn.setAttribute(":class", "{ 'is-copied': copied }");
+  btn.setAttribute(":aria-label", "copied ? 'Copied!' : 'Copy as curl'");
+  btn.setAttribute("title", "Copy as curl");
+  btn.setAttribute("aria-label", "Copy as curl");
+
+  _curlCmds.set(btn, curl);
+
+  /* Two SVGs — Alpine's x-show toggles between them */
+  btn.insertAdjacentHTML("beforeend", `
+    <svg x-show="!copied" width="14" height="14" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+         stroke-linejoin="round" aria-hidden="true">
+      <polyline points="16 18 22 12 16 6"/>
+      <polyline points="8 6 2 12 8 18"/>
+    </svg>
+    <svg x-show="copied" width="14" height="14" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+         stroke-linejoin="round" aria-hidden="true">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+  `);
+
+  sig.appendChild(btn);
+  window.Alpine.initTree(btn);
 }
 
 /* ── Curl command builder ── */
@@ -129,7 +123,6 @@ function buildCurl(dl, baseUrl) {
     parts.push(`-X ${method}`);
   }
 
-  // Build URL with query params
   let fullUrl = url;
   if (queryParams.length > 0) {
     const qs = queryParams.map((p) => `${p}=<value>`).join("&");
@@ -137,7 +130,6 @@ function buildCurl(dl, baseUrl) {
   }
   parts.push(`"${fullUrl}"`);
 
-  // Add headers (skip Content-Type if we have a body — curl sets it with -d)
   for (const h of headers) {
     if (h.name.toLowerCase() === "content-type" && jsonFields.length > 0) {
       continue;
@@ -145,7 +137,6 @@ function buildCurl(dl, baseUrl) {
     parts.push(`-H "${h.name}: ${h.value}"`);
   }
 
-  // Add JSON body
   if (jsonFields.length > 0) {
     parts.push('-H "Content-Type: application/json"');
     const body = {};
@@ -155,12 +146,13 @@ function buildCurl(dl, baseUrl) {
     parts.push(`-d '${JSON.stringify(body)}'`);
   }
 
-  // Single-line for simple commands, multi-line for complex ones
   if (parts.length <= 2) {
     return parts.join(" ");
   }
   return parts.join(" \\\n  ");
 }
+
+/* ── DOM extraction helpers ────────────────────────────────────────── */
 
 function extractMethod(dl) {
   const methods = ["get", "post", "put", "patch", "delete", "head", "options"];
@@ -173,10 +165,7 @@ function extractMethod(dl) {
 
 function extractPath(dl) {
   const names = dl.querySelectorAll("dt.sig .sig-name.descname");
-  if (names.length >= 2) {
-    return names[1].textContent.trim();
-  }
-  return "/";
+  return names.length >= 2 ? names[1].textContent.trim() : "/";
 }
 
 function extractHeaders(dl) {
@@ -184,8 +173,7 @@ function extractHeaders(dl) {
 }
 
 function extractQueryParams(dl) {
-  const items = extractFieldSection(dl, "Query Parameters");
-  return items.map((i) => i.name);
+  return extractFieldSection(dl, "Query Parameters").map((i) => i.name);
 }
 
 function extractJsonFields(dl) {
@@ -200,34 +188,33 @@ function extractFieldSection(dl, label) {
   if (!fieldList) return [];
 
   const items = [];
-  const dts = fieldList.querySelectorAll(":scope > dt");
 
-  for (const dt of dts) {
-    const dtText = dt.textContent.replace(/:$/, "").trim();
-    if (!dtText.startsWith(label)) continue;
+  for (const dt of fieldList.querySelectorAll(":scope > dt")) {
+    if (!dt.textContent.replace(/:$/, "").trim().startsWith(label)) continue;
 
     const fieldDd = dt.nextElementSibling;
     if (!fieldDd || fieldDd.tagName.toLowerCase() !== "dd") continue;
 
-    const lis = fieldDd.querySelectorAll("li");
-    for (const li of lis) {
+    for (const li of fieldDd.querySelectorAll("li")) {
       const strong = li.querySelector("strong");
-      const em = li.querySelector("em");
-      if (strong) {
-        const name = strong.textContent.trim();
-        const type = em ? em.textContent.trim() : "string";
-        let value = "";
-        if (label === "Request Headers") {
+      if (!strong) continue;
+
+      const name = strong.textContent.trim();
+      const type = li.querySelector("em")?.textContent.trim() ?? "string";
+      let value = "";
+
+      if (label === "Request Headers") {
+        const code = li.querySelector("code");
+        if (code) {
+          value = code.textContent;
+        } else {
           const text = li.textContent;
-          const dashIdx = text.indexOf("\u2013");
-          if (dashIdx !== -1) {
-            value = text.substring(dashIdx + 1).trim().replace(/\.$/, "");
-            const code = li.querySelector("code");
-            if (code) value = code.textContent;
-          }
+          const dash = text.indexOf("\u2013");
+          if (dash !== -1) value = text.slice(dash + 1).trim().replace(/\.$/, "");
         }
-        items.push({ name, type, value });
       }
+
+      items.push({ name, type, value });
     }
   }
 
@@ -235,33 +222,22 @@ function extractFieldSection(dl, label) {
 }
 
 function placeholder(type) {
-  switch (type.toLowerCase()) {
-    case "integer":
-    case "int":
-    case "number":
-      return 0;
-    case "boolean":
-    case "bool":
-      return true;
-    case "array":
-      return [];
-    case "object":
-      return {};
-    default:
-      return "";
+  switch ((type || "").toLowerCase()) {
+    case "integer": case "int": case "number": return 0;
+    case "boolean": case "bool": return true;
+    case "array": return [];
+    case "object": return {};
+    default: return "";
   }
 }
 
-/* ── Clipboard ── */
+/* ── Clipboard ─────────────────────────────────────────────────────── */
 
 function copyText(text) {
   if (navigator.clipboard) {
-    return navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+    return navigator.clipboard.writeText(text);
   }
-  return fallbackCopy(text);
-}
-
-function fallbackCopy(text) {
+  /* Fallback for older browsers */
   const textarea = document.createElement("textarea");
   textarea.value = text;
   textarea.style.cssText = "position:fixed;opacity:0";

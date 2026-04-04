@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
-          uv sync --extra dev
+          uv sync --dev
 
       - name: Ruff check
         run: uv run ruff check .
@@ -76,7 +76,7 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
-          uv sync --extra dev
+          uv sync --dev
 
       - name: Override Sphinx version
         run: uv pip install "sphinx~=${{ matrix.sphinx }}.0"
@@ -112,7 +112,7 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
-          uv sync --extra dev
+          uv sync --dev
 
       - name: Build assets
         run: pnpm run build
@@ -154,7 +154,7 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
-          uv sync --extra dev
+          uv sync --dev
 
       - name: Install Playwright
         run: uv run playwright install chromium

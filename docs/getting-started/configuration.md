@@ -107,6 +107,28 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
   - Search implementation. `"pagefind"` for Pagefind (recommended), `"sphinx"` for Sphinx built-in search.
 ```
 
+### HTTP API
+
+These options control the interactive features on HTTP API endpoint pages. They require `sphinxcontrib-openapi` or `sphinxcontrib-httpdomain`. See {doc}`/extensions/openapi` for setup.
+
+```{list-table}
+:header-rows: 1
+:widths: 25 15 15 45
+
+* - Option
+  - Type
+  - Default
+  - Description
+* - `api_base_url`
+  - string
+  - `""`
+  - Default base URL for all HTTP API endpoints. Enables the "Copy as curl" button and "Try it out" panel. Individual blocks can override this with a `data-api-base-url` attribute on any ancestor element — see {doc}`/extensions/openapi`.
+* - `try_it_out`
+  - string
+  - `"true"`
+  - Set to `"false"` to hide the "Try it out" panel while keeping the "Copy as curl" button.
+```
+
 ### Source Links
 
 These options enable the "Edit on GitHub" link in the table of contents sidebar.
@@ -227,6 +249,10 @@ html_theme_options = {
 
     # Search
     "search_backend": "pagefind",
+
+    # HTTP API interactive features
+    "api_base_url": "https://api.example.com/v1",
+    "try_it_out": "true",
 
     # Source links (enables "Edit on GitHub")
     "source_repository": "https://github.com/you/project",

@@ -1,10 +1,14 @@
 {# Master layout for the Lumina theme.
    Inherits from basic/layout.html but overrides nearly everything. #}
+
 {% extends "basic/layout.html" %}
+
 {%- block doctype -%}
     <!DOCTYPE html>
 {%- endblock -%}
+
 {% block extrahead %}
+
     {% if not favicon %}
         <link rel="icon"
               type="image/svg+xml"
@@ -28,6 +32,7 @@
     {% if theme_api_base_url %}
         <script>document.documentElement.dataset.apiBaseUrl = {{ theme_api_base_url | tojson }};</script>
     {% endif %}
+    {% if theme_try_it_out == "false" %}<script>document.documentElement.dataset.tryItOut = "false";</script>{% endif %}
     {% if theme_accent_color != "#10b981" %}
         <style>:root,[data-theme="light"],[data-theme="dark"]{--lumina-accent:{{ theme_accent_color }};}</style>
     {% endif %}
@@ -37,21 +42,42 @@
               href="{{ pathto('llms.txt', 1) }}"
               title="LLM-friendly documentation index">
     {% endif %}
-{% endblock %}
-{% block header %}{% endblock %}
-{% block relbar1 %}{% endblock %}
-{% block relbar2 %}{% endblock %}
+
+{% endblock extrahead %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block relbar1 %}
+
+{% endblock relbar1 %}
+
+{% block relbar2 %}
+
+{% endblock relbar2 %}
+
 {%- block content %}
     <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
-    <div id="lumina-header">{% include "components/header.html" %}</div>
+    <div id="lumina-header">
+
+        {% include "components/header.html" %}
+
+    </div>
     <div class="lumina-wrapper">
         <aside id="lumina-sidebar">
+
             {% include "components/sidebar.html" %}
+
         </aside>
         <main id="lumina-content" data-pagefind-body>
             <div class="lumina-content-toolbar">
                 {% if theme_show_breadcrumbs == "true" %}
-                    <div class="min-w-0 flex-1">{% include "components/breadcrumbs.html" %}</div>
+                    <div class="min-w-0 flex-1">
+
+                        {% include "components/breadcrumbs.html" %}
+
+                    </div>
                 {% endif %}
                 <button x-data="copyPage()"
                         @click="copy()"
@@ -87,21 +113,35 @@
                 </button>
             </div>
             <article class="lumina-article" x-data="headerLinks()">
-                {% block body %}{% endblock %}
+
+                {% block body %}
+
+                {% endblock body %}
+
             </article>
             {% if theme_show_prev_next == "true" %}
+
                 {% include "components/footer.html" %}
+
             {% endif %}
         </main>
         {% if theme_show_toc == "true" %}
             <aside id="lumina-toc">
+
                 {% include "components/toc.html" %}
+
             </aside>
         {% endif %}
     </div>
+
     {% include "components/search-modal.html" %}
+
 {%- endblock %}
-{% block footer %}{% endblock %}
+
+{% block footer %}
+
+{% endblock footer %}
+
 {%- block scripts %}
     {{ super() }}
     <script src="{{ pathto('_static/lumina.js', 1) }}"></script>

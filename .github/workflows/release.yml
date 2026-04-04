@@ -58,7 +58,7 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
-          uv sync --extra dev
+          uv sync --dev
 
       - name: Build assets
         run: pnpm run build

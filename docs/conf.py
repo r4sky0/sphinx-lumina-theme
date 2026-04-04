@@ -31,7 +31,7 @@ html_theme_options = {
     "social_links": [
         {"icon": "github", "url": "https://github.com/r4sky0/sphinx-lumina-theme"},
     ],
-    "api_base_url": "https://api.example.com/v1",
+    "api_base_url": "https://petstore3.swagger.io/api/v3",
 }
 exclude_patterns = ["_build", "superpowers"]
 templates_path = ["_templates"]

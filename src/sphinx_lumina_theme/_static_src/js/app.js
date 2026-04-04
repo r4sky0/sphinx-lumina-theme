@@ -6,7 +6,8 @@ import sidebar from "./sidebar.js";
 import headerLinks from "./header-links.js";
 import copyPage from "./copy-page.js";
 import navDropdown from "./nav-dropdown.js";
-import curlCopy from "./curl-copy.js";
+import curlCopy, { curlCopyBtn } from "./curl-copy.js";
+import tryIt, { tryItPanel } from "./try-it.js";
 Alpine.data("scrollspy", scrollspy);
 Alpine.data("themeToggle", themeToggle);
 Alpine.data("searchModal", searchModal);
@@ -14,6 +15,8 @@ Alpine.data("sidebar", sidebar);
 Alpine.data("headerLinks", headerLinks);
 Alpine.data("copyPage", copyPage);
 Alpine.data("navDropdown", navDropdown);
+Alpine.data("curlCopyBtn", curlCopyBtn);
+Alpine.data("tryItPanel", tryItPanel);
 
 window.Alpine = Alpine;
 
@@ -21,6 +24,7 @@ window.Alpine = Alpine;
 function boot() {
   Alpine.start();
   curlCopy();
+  tryIt();
 }
 
 if (document.readyState === "loading") {

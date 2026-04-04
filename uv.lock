@@ -1395,7 +1395,7 @@ wheels = [
 
 [[package]]
 name = "sphinx-lumina-theme"
-version = "1.10.0"
+version = "1.14.0"
 source = { editable = "." }
 dependencies = [
     { name = "sphinx", version = "8.1.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
@@ -1403,7 +1403,7 @@ dependencies = [
     { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "beautifulsoup4" },
     { name = "djlint" },
@@ -1418,37 +1418,32 @@ dev = [
     { name = "sphinx-design", version = "0.6.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "sphinx-design", version = "0.7.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "sphinx-last-updated-by-git" },
+    { name = "sphinx-llm" },
     { name = "sphinxcontrib-httpdomain" },
     { name = "sphinxcontrib-mermaid" },
     { name = "sphinxcontrib-openapi" },
 ]
 
-[package.dev-dependencies]
-dev = [
-    { name = "sphinx-llm" },
-]
-
 [package.metadata]
-requires-dist = [
-    { name = "beautifulsoup4", marker = "extra == 'dev'", specifier = ">=4.12" },
-    { name = "djlint", marker = "extra == 'dev'", specifier = ">=1.36" },
-    { name = "myst-parser", marker = "extra == 'dev'", specifier = ">=4.0" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
-    { name = "pytest-playwright", marker = "extra == 'dev'", specifier = ">=0.6" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.11" },
-    { name = "sphinx", specifier = ">=8.0" },
-    { name = "sphinx-autobuild", marker = "extra == 'dev'", specifier = ">=2024.0" },
-    { name = "sphinx-copybutton", marker = "extra == 'dev'", specifier = ">=0.5" },
-    { name = "sphinx-design", marker = "extra == 'dev'", specifier = ">=0.6" },
-    { name = "sphinx-last-updated-by-git", marker = "extra == 'dev'", specifier = ">=0.3" },
-    { name = "sphinxcontrib-httpdomain", marker = "extra == 'dev'", specifier = ">=2.0" },
-    { name = "sphinxcontrib-mermaid", marker = "extra == 'dev'", specifier = ">=1.0" },
-    { name = "sphinxcontrib-openapi", marker = "extra == 'dev'", specifier = ">=0.8" },
-]
-provides-extras = ["dev"]
+requires-dist = [{ name = "sphinx", specifier = ">=8.0" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "sphinx-llm", specifier = ">=0.4.1" }]
+dev = [
+    { name = "beautifulsoup4", specifier = ">=4.12" },
+    { name = "djlint", specifier = ">=1.36" },
+    { name = "myst-parser", specifier = ">=4.0" },
+    { name = "pytest", specifier = ">=8.0" },
+    { name = "pytest-playwright", specifier = ">=0.6" },
+    { name = "ruff", specifier = ">=0.11" },
+    { name = "sphinx-autobuild", specifier = ">=2024.0" },
+    { name = "sphinx-copybutton", specifier = ">=0.5" },
+    { name = "sphinx-design", specifier = ">=0.6" },
+    { name = "sphinx-last-updated-by-git", specifier = ">=0.3" },
+    { name = "sphinx-llm", specifier = ">=0.4.1" },
+    { name = "sphinxcontrib-httpdomain", specifier = ">=2.0" },
+    { name = "sphinxcontrib-mermaid", specifier = ">=1.0" },
+    { name = "sphinxcontrib-openapi", specifier = ">=0.8" },
+]
 
 [[package]]
 name = "sphinx-markdown-builder"
