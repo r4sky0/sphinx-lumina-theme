@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 <html lang="en" data-content_root="../">
@@ -27,6 +28,7 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Diagrams" href="diagrams.html" />
     <link rel="prev" title="Badges &amp; Buttons" href="badges-and-buttons.html" />
+
     
         <link rel="icon"
               type="image/svg+xml"
@@ -59,9 +61,16 @@
               title="LLM-friendly documentation index">
     
 
+
   </head><body>
+
+
+
+
     <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
-    <div id="lumina-header"><header class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--lumina-border)] bg-[var(--lumina-bg)]/80 backdrop-blur-sm">
+    <div id="lumina-header">
+
+        <header class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--lumina-border)] bg-[var(--lumina-bg)]/80 backdrop-blur-sm">
     <div class="mx-auto flex h-14 max-w-[90rem] items-center justify-between px-4 lg:px-6">
         
         <div class="flex items-center gap-3">
@@ -182,9 +191,12 @@
             
         </div>
     </div>
-</header></div>
+</header>
+
+    </div>
     <div class="lumina-wrapper">
         <aside id="lumina-sidebar">
+
             <div x-data="sidebar()">
     
     <div class="hidden h-[calc(100vh-3.5rem)] flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
@@ -355,11 +367,14 @@
         </div>
     </template>
 </div>
+
         </aside>
         <main id="lumina-content" data-pagefind-body>
             <div class="lumina-content-toolbar">
                 
-                    <div class="min-w-0 flex-1"><nav class="flex items-center gap-2 overflow-x-auto text-sm text-[var(--lumina-text-muted)]"
+                    <div class="min-w-0 flex-1">
+
+                        <nav class="flex items-center gap-2 overflow-x-auto text-sm text-[var(--lumina-text-muted)]"
      style="scrollbar-width:none"
      aria-label="Breadcrumb">
     <a href="../index.html"
@@ -383,7 +398,9 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
     </svg>
     <span class="whitespace-nowrap text-[var(--lumina-text)]">Math</span>
-</nav></div>
+</nav>
+
+                    </div>
                 
                 <button x-data="copyPage()"
                         @click="copy()"
@@ -419,7 +436,10 @@
                 </button>
             </div>
             <article class="lumina-article" x-data="headerLinks()">
-                <section class="tex2jax_ignore mathjax_ignore" id="math">
+
+                
+
+    <section class="tex2jax_ignore mathjax_ignore" id="math">
 <h1>Math<a class="headerlink" href="#math" title="Link to this heading">¶</a></h1>
 <p>Mathematical notation rendered by MathJax. Enabled by the <code class="docutils literal notranslate"><span class="pre">dollarmath</span></code> and <code class="docutils literal notranslate"><span class="pre">amsmath</span></code> MyST extensions.</p>
 <div class="admonition note">
@@ -715,8 +735,12 @@ a_{31} &amp; a_{32} &amp; a_{33}
 </section>
 </section>
 
+
+
+
             </article>
             
+
                 <footer class="mt-10 border-t border-[var(--lumina-border)] pt-6">
     
     
@@ -753,10 +777,12 @@ a_{31} &amp; a_{32} &amp; a_{33}
     
     
 </footer>
+
             
         </main>
         
             <aside id="lumina-toc">
+
                 
     <div class="sticky top-14 hidden h-[calc(100vh-3.5rem)] w-[220px] shrink-0 overflow-y-auto py-6 pr-4 xl:block">
         
@@ -801,9 +827,11 @@ a_{31} &amp; a_{32} &amp; a_{33}
         </nav>
     </div>
 
+
             </aside>
         
     </div>
+
     <div id="lumina-search-modal"
      x-data="searchModal()"
      x-show="open"
@@ -888,5 +916,9 @@ a_{31} &amp; a_{32} &amp; a_{33}
         </div>
     </div>
 </div>
+
+
+
+
   </body>
 </html>
