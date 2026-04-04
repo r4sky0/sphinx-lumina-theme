@@ -37,6 +37,7 @@ Thumbs.db
 .agents/
 .claude/
 .playwright-mcp/
+.demo-tmp/
 .worktrees/
 skills-lock.json
 

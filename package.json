@@ -5,7 +5,8 @@
   "scripts": {
     "build": "node scripts/build-assets.js",
     "dev": "node scripts/build-assets.js --watch",
-    "prepare": "husky"
+    "prepare": "husky",
+    "record-demo": "uv run python scripts/record-demo.py"
   },
   "lint-staged": {
     "*.py": [
