@@ -41,6 +41,18 @@ def _add_context(app, pagename, templatename, context, doctree):
             announcement.encode(), usedforsecurity=False
         ).hexdigest()[:8]
 
+    # Version switcher
+    vs_json = app.builder.theme_options.get("version_switcher_json", "")
+    vs_match = app.builder.theme_options.get("version_switcher_match", "")
+    if vs_json:
+        context["lumina_version_json"] = vs_json
+        context["lumina_version_match"] = vs_match
+        if not vs_match:
+            logger.warning(
+                "version_switcher_json is set but version_switcher_match is empty — "
+                "the version dropdown will not highlight the current version"
+            )
+
     # Allow pages to opt into a custom template via metadata
     meta = app.env.metadata.get(pagename, {})
 

@@ -10,6 +10,7 @@ import curlCopy, { curlCopyBtn } from "./curl-copy.js";
 import tryIt, { tryItPanel } from "./try-it.js";
 import backToTop from "./back-to-top.js";
 import announcementBanner from "./announcement.js";
+import versionSwitcher from "./version-switcher.js";
 Alpine.data("scrollspy", scrollspy);
 Alpine.data("themeToggle", themeToggle);
 Alpine.data("searchModal", searchModal);
@@ -21,6 +22,7 @@ Alpine.data("curlCopyBtn", curlCopyBtn);
 Alpine.data("tryItPanel", tryItPanel);
 Alpine.data("backToTop", backToTop);
 Alpine.data("announcementBanner", announcementBanner);
+Alpine.data("versionSwitcher", versionSwitcher);
 
 window.Alpine = Alpine;
 

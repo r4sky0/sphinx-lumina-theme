@@ -40,6 +40,9 @@
                     <span class="font-semibold text-base">{{ project }}</span>
                 {% endif %}
             </a>
+
+            {% include "components/version-switcher.html" %}
+
         </div>
         {# Center nav links #}
         {% if theme_nav_links and theme_nav_links != "" %}
