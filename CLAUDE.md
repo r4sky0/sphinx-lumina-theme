@@ -109,6 +109,14 @@ When making changes that affect user-facing behavior, update the relevant docume
 
 If your change adds a new page, make sure it's included in the parent section's `index.md` toctree and card grid.
 
+## After Rebasing
+
+`git rebase --continue` does not trigger the pre-commit hook, so lint-staged/djlint will not run automatically. After resolving rebase conflicts, always verify HTML templates before pushing:
+
+```bash
+uv run djlint src/sphinx_lumina_theme/theme/ --check
+```
+
 ## Key Conventions
 
 - **Package managers**: pnpm for JS, uv for Python — never use npm or pip
