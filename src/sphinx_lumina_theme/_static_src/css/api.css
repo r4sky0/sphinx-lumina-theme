@@ -312,36 +312,14 @@ dl.http.delete > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-dan
 dl.http.head > dd,
 dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-important) 20%, var(--lumina-border)); }
 
-/* ── API server badge ── */
-.lumina-api-server {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem 0.875rem;
-  background: var(--lumina-code-bg);
-  border: 1px solid color-mix(in srgb, var(--lumina-accent) 10%, var(--lumina-border));
-  border-left: 3px solid var(--lumina-accent);
-  border-radius: 0.375rem 0.5rem 0.5rem 0.375rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.8125rem;
-  line-height: 1.7;
-}
-
-.lumina-api-server-label {
-  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
-  font-weight: 600;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--lumina-accent);
-}
-
-.lumina-api-server-url {
-  color: var(--lumina-text);
-  background: none;
-  border: none;
-  padding: 0;
+/* ── Inline server hostname tag (inside dt.sig) ── */
+.lumina-api-host {
+  margin-left: 0.75rem;
+  font-size: 0.6875rem;
+  color: var(--lumina-text-muted);
+  opacity: 0.6;
+  font-style: normal;
+  vertical-align: middle;
 }
 
 /* ── Curl copy button ── */
@@ -379,4 +357,440 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 .lumina-curl-copy.is-copied {
   opacity: 1;
   color: var(--lumina-accent);
+}
+
+/* ── Try It Out panel ──────────────────────────────────────────────── */
+
+[x-cloak] { display: none !important; }
+
+.lumina-try-it {
+  margin-top: 1rem;
+  border-top: 1px solid var(--lumina-border);
+}
+
+.lumina-try-it-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.5rem 0;
+  border: none;
+  background: transparent;
+  color: var(--lumina-text-muted);
+  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.lumina-try-it-toggle:hover {
+  color: var(--lumina-accent);
+}
+
+.lumina-try-it-chevron {
+  flex-shrink: 0;
+  transition: transform 0.2s ease-out;
+}
+
+.lumina-try-it-chevron.is-open {
+  transform: rotate(90deg);
+}
+
+.lumina-try-it-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.22s ease-out;
+}
+
+.lumina-try-it-grid.is-open {
+  grid-template-rows: 1fr;
+}
+
+.lumina-try-it-panel {
+  overflow: hidden;
+  padding-bottom: 0.25rem;
+}
+
+.lumina-try-it-url-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--lumina-code-bg);
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.5rem;
+  margin-bottom: 0.875rem;
+  overflow: hidden;
+}
+
+.lumina-try-it-method-pill {
+  flex-shrink: 0;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.25rem;
+}
+
+.lumina-try-it-method-pill--get    { color: var(--lumina-adm-note);      background: color-mix(in srgb, var(--lumina-adm-note)      12%, var(--lumina-code-bg)); }
+.lumina-try-it-method-pill--post   { color: var(--lumina-adm-tip);       background: color-mix(in srgb, var(--lumina-adm-tip)       12%, var(--lumina-code-bg)); }
+.lumina-try-it-method-pill--put    { color: var(--lumina-adm-warning);   background: color-mix(in srgb, var(--lumina-adm-warning)   12%, var(--lumina-code-bg)); }
+.lumina-try-it-method-pill--patch  { color: var(--lumina-adm-warning);   background: color-mix(in srgb, var(--lumina-adm-warning)   12%, var(--lumina-code-bg)); }
+.lumina-try-it-method-pill--delete { color: var(--lumina-adm-danger);    background: color-mix(in srgb, var(--lumina-adm-danger)    12%, var(--lumina-code-bg)); }
+.lumina-try-it-method-pill--head,
+.lumina-try-it-method-pill--options { color: var(--lumina-adm-important); background: color-mix(in srgb, var(--lumina-adm-important) 12%, var(--lumina-code-bg)); }
+
+.lumina-try-it-url-display {
+  flex: 1;
+  min-width: 0;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.8125rem;
+  color: var(--lumina-text);
+  background: none;
+  border: none;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lumina-try-it-section {
+  margin-bottom: 0.875rem;
+}
+
+.lumina-try-it-section-label {
+  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--lumina-text-muted);
+  margin-bottom: 0.375rem;
+}
+
+.lumina-try-it-param-row {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.375rem;
+}
+
+.lumina-try-it-param-name {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.8125rem;
+  color: var(--lumina-text);
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lumina-try-it-required {
+  color: var(--lumina-adm-danger);
+  font-weight: 700;
+}
+
+.lumina-try-it-type-tag {
+  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--lumina-text-muted);
+  background: color-mix(in srgb, var(--lumina-text-muted) 10%, var(--lumina-bg-secondary));
+  padding: 0.05rem 0.3rem;
+  border-radius: 0.25rem;
+  flex-shrink: 0;
+}
+
+.lumina-try-it-input {
+  width: 100%;
+  padding: 0.3125rem 0.5rem;
+  background: var(--lumina-bg);
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.375rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.8125rem;
+  color: var(--lumina-text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.lumina-try-it-input:focus {
+  outline: none;
+  border-color: var(--lumina-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--lumina-accent) 20%, transparent);
+}
+
+.lumina-try-it-input::placeholder {
+  color: var(--lumina-text-muted);
+  opacity: 0.6;
+}
+
+.lumina-try-it-bearer-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.375rem;
+  overflow: hidden;
+  background: var(--lumina-bg);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.lumina-try-it-bearer-wrap:focus-within {
+  border-color: var(--lumina-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--lumina-accent) 20%, transparent);
+}
+
+.lumina-try-it-bearer-prefix {
+  flex-shrink: 0;
+  padding: 0.3125rem 0.5rem;
+  background: var(--lumina-code-bg);
+  border-right: 1px solid var(--lumina-border);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--lumina-text-muted);
+  user-select: none;
+}
+
+.lumina-try-it-bearer-wrap .lumina-try-it-input {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.lumina-try-it-bearer-wrap .lumina-try-it-input:focus {
+  box-shadow: none;
+}
+
+.lumina-try-it-eye-toggle {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  width: 2rem;
+  padding: 0;
+  background: none;
+  border: none;
+  border-left: 1px solid var(--lumina-border);
+  color: var(--lumina-text-muted);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.lumina-try-it-eye-toggle:hover {
+  color: var(--lumina-text);
+}
+
+.lumina-try-it-eye-toggle:focus-visible {
+  outline: 2px solid var(--lumina-accent);
+  outline-offset: -2px;
+}
+
+.lumina-try-it-body {
+  width: 100%;
+  padding: 0.5rem 0.625rem;
+  background: var(--lumina-code-bg);
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.375rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--lumina-text);
+  resize: vertical;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.lumina-try-it-body:focus {
+  outline: none;
+  border-color: var(--lumina-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--lumina-accent) 20%, transparent);
+}
+
+.lumina-try-it-body.has-error {
+  border-color: var(--lumina-adm-danger);
+}
+
+.lumina-try-it-body-error {
+  margin: 0.25rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--lumina-adm-danger);
+}
+
+.lumina-try-it-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.875rem;
+}
+
+.lumina-try-it-send {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.4375rem 0.875rem;
+  background: var(--lumina-accent);
+  border: none;
+  border-radius: 0.375rem;
+  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.lumina-try-it-send:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.lumina-try-it-send:disabled,
+.lumina-try-it-send.is-loading {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@keyframes lumina-spin {
+  to { transform: rotate(360deg); }
+}
+
+.lumina-send-spinner {
+  display: none;
+}
+
+.lumina-try-it-send.is-loading .lumina-send-icon {
+  display: none;
+}
+
+.lumina-try-it-send.is-loading .lumina-send-spinner {
+  display: block;
+  animation: lumina-spin 0.7s linear infinite;
+}
+
+.lumina-try-it-clear {
+  padding: 0.4375rem 0.75rem;
+  background: transparent;
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.375rem;
+  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-size: 0.875rem;
+  color: var(--lumina-text-muted);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.lumina-try-it-clear:hover {
+  color: var(--lumina-text);
+  border-color: color-mix(in srgb, var(--lumina-text-muted) 50%, transparent);
+}
+
+.lumina-try-it-sending {
+  padding: 0.75rem 0;
+  font-size: 0.875rem;
+  color: var(--lumina-text-muted);
+}
+
+.lumina-try-it-response {
+  border-top: 1px solid var(--lumina-border);
+  padding-top: 0.875rem;
+}
+
+.lumina-try-it-res-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.lumina-try-it-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1875rem 0.5rem;
+  border-radius: 0.25rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.lumina-try-it-status--success { color: var(--lumina-adm-tip);     background: color-mix(in srgb, var(--lumina-adm-tip)     12%, var(--lumina-bg)); }
+.lumina-try-it-status--info    { color: var(--lumina-adm-note);    background: color-mix(in srgb, var(--lumina-adm-note)    12%, var(--lumina-bg)); }
+.lumina-try-it-status--warning { color: var(--lumina-adm-warning); background: color-mix(in srgb, var(--lumina-adm-warning) 12%, var(--lumina-bg)); }
+.lumina-try-it-status--error   { color: var(--lumina-adm-danger);  background: color-mix(in srgb, var(--lumina-adm-danger)  12%, var(--lumina-bg)); }
+
+.lumina-try-it-elapsed {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--lumina-text-muted);
+}
+
+.lumina-try-it-res-body {
+  margin: 0;
+  padding: 0.75rem;
+  background: var(--lumina-code-bg);
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.375rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  max-height: 20rem;
+  overflow-y: auto;
+}
+
+.lumina-try-it-res-body code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.lumina-try-it-res-body--error {
+  border-color: color-mix(in srgb, var(--lumina-adm-danger) 30%, var(--lumina-border));
+}
+
+/* JSON syntax highlight tokens */
+.sh-key  { color: var(--lumina-accent); }
+.sh-str  { color: var(--lumina-adm-warning); }
+.sh-num  { color: var(--lumina-adm-note); }
+.sh-bool { color: var(--lumina-adm-important); }
+
+/* Focus-visible on the toggle button */
+.lumina-try-it-toggle:focus-visible {
+  outline: 2px solid var(--lumina-accent);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* Pulsing "Sending…" indicator */
+@keyframes lumina-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
+
+.lumina-try-it-sending {
+  animation: lumina-pulse 1.4s ease-in-out infinite;
+}
+
+/* Responsive: stack label/input on narrow viewports */
+@media (max-width: 32rem) {
+  .lumina-try-it-param-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .lumina-try-it-grid,
+  .lumina-try-it-chevron {
+    transition: none;
+  }
+  .lumina-send-spinner {
+    animation: none;
+  }
+  .lumina-try-it-sending {
+    animation: none;
+  }
 }

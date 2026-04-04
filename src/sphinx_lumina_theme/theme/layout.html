@@ -28,6 +28,7 @@
     {% if theme_api_base_url %}
         <script>document.documentElement.dataset.apiBaseUrl = {{ theme_api_base_url | tojson }};</script>
     {% endif %}
+    {% if theme_try_it_out == "false" %}<script>document.documentElement.dataset.tryItOut = "false";</script>{% endif %}
     {% if theme_accent_color != "#10b981" %}
         <style>:root,[data-theme="light"],[data-theme="dark"]{--lumina-accent:{{ theme_accent_color }};}</style>
     {% endif %}

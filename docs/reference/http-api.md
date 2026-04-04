@@ -3,7 +3,7 @@
 How HTTP API endpoints render in the Lumina theme. This page covers auto-generated docs from OpenAPI specs and manually written HTTP directives.
 
 :::{tip}
-See {doc}`/extensions/openapi` for installation and setup instructions.
+See {doc}`/extensions/openapi` for installation, setup, and interactive feature documentation (copy as curl and Try it out).
 :::
 
 ## From an OpenAPI Spec
@@ -11,14 +11,14 @@ See {doc}`/extensions/openapi` for installation and setup instructions.
 The `openapi` directive renders an entire API from a spec file. Point it at your OpenAPI (Swagger) YAML or JSON:
 
 ```{eval-rst}
-.. openapi:: openapi-tasks.yml
+.. openapi:: openapi-petstore.yml
 ```
 
 The MyST syntax:
 
 ~~~markdown
 ```{eval-rst}
-.. openapi:: openapi-tasks.yml
+.. openapi:: openapi-petstore.yml
 ```
 ~~~
 
@@ -70,6 +70,57 @@ For individual endpoints or when you need more control, use the HTTP domain dire
    :status 204: User deleted successfully.
    :status 404: User not found.
 ```
+
+### Per-block URL Override
+
+When some endpoints live on a different server than the global `api_base_url`, wrap their directives in a `<div data-api-base-url="...">`. The "Try it out" panel and curl commands for those endpoints will use the override URL.
+
+```{raw} html
+<div data-api-base-url="https://reports.api.example.com/v2">
+```
+
+```{eval-rst}
+.. http:get:: /reports
+
+   Returns available reports for the current user.
+
+   :reqheader Authorization: Bearer token.
+   :status 200: A list of report objects.
+   :status 401: Authentication required.
+
+.. http:post:: /reports
+
+   Queues a new report for generation.
+
+   :<json string type: Report type: ``summary``, ``detail``, or ``audit``.
+   :<json string from: Start date in ``YYYY-MM-DD`` format.
+   :<json string to: End date in ``YYYY-MM-DD`` format.
+   :reqheader Authorization: Bearer token.
+   :reqheader Content-Type: ``application/json``
+   :status 202: Report generation queued.
+   :status 422: Validation failed.
+```
+
+```{raw} html
+</div>
+```
+
+The "Try it out" buttons above use `https://reports.api.example.com/v2` while the GET and POST `/users` endpoints above them use the global URL. The MyST syntax:
+
+~~~markdown
+```{raw} html
+<div data-api-base-url="https://other.api.example.com/v2">
+```
+
+```{eval-rst}
+.. http:get:: /endpoint
+   ...
+```
+
+```{raw} html
+</div>
+```
+~~~
 
 The MyST syntax for manual directives:
 
