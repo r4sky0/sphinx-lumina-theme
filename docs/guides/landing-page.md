@@ -53,7 +53,7 @@ The hero only renders when `hero_title` is set. All other hero fields are option
 
 Any Markdown body below the frontmatter renders in a wide single-column layout under the hero. Use it for a feature overview, a getting-started callout, or whatever fits your project:
 
-````{code-block} markdown
+```markdown
 ---
 template: landing.html
 hero_title: My Project
@@ -82,7 +82,7 @@ MIT license. Contributions welcome.
 :::
 
 ::::
-````
+```
 
 ## Behavior notes
 
