@@ -32,7 +32,7 @@ html_theme_options = {
         {"icon": "github", "url": "https://github.com/r4sky0/sphinx-lumina-theme"},
     ],
     "api_base_url": "https://petstore3.swagger.io/api/v3",
-    "announcement": 'You are viewing the development docs. <a href="https://github.com/r4sky0/sphinx-lumina-theme">Star on GitHub</a> if you like the theme!',
+    "announcement": 'A fast, modern Sphinx theme with dark mode, full-text search, and Alpine.js interactivity. <a href="https://github.com/r4sky0/sphinx-lumina-theme">Star on GitHub ★</a>',
 }
 exclude_patterns = ["_build", "superpowers"]
 templates_path = ["_templates"]
