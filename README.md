@@ -12,7 +12,7 @@ A modern Sphinx theme that treats documentation as a first-class product experie
 </a>
 
 <p align="center">
-  <a href="https://r4sky0.github.io/sphinx-lumina-theme/"><strong>Documentation</strong></a> · <a href="https://r4sky0.github.io/sphinx-lumina-theme/getting-started.html"><strong>Getting Started</strong></a> · <a href="https://r4sky0.github.io/sphinx-lumina-theme/customization.html"><strong>Customization</strong></a>
+  <a href="https://r4sky0.github.io/sphinx-lumina-theme/"><strong>Documentation</strong></a>
 </p>
 
 ## Features
