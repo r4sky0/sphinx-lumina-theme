@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v1.8.12 (2026-04-04)
+
+### Bug Fixes
+
+- Align sphinx-design badges and buttons with design system
+  ([#18](https://github.com/r4sky0/sphinx-lumina-theme/pull/18),
+  [`c722f8b`](https://github.com/r4sky0/sphinx-lumina-theme/commit/c722f8b94ce21db624eacbff705b3cedd8a23ac8))
+
+
 ## v1.8.11 (2026-04-04)
 
 ### Bug Fixes
