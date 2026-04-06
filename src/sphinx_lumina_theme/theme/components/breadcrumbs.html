@@ -1,7 +1,7 @@
 <nav class="flex items-center gap-2 overflow-x-auto text-sm text-[var(--lumina-text-muted)]"
      style="scrollbar-width:none"
      aria-label="Breadcrumb">
-    <a href="{{ pathto(master_doc) }}"
+    <a href="{{ pathto(root_doc) }}"
        class="whitespace-nowrap hover:text-[var(--lumina-accent)] no-underline transition-colors">{{ shorttitle }}</a>
     {% if parents %}
         {% for parent in parents %}
