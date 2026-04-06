@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-06T07:54:10+00:00" />
+    <meta property="article:modified_time" content="2026-04-06T08:10:37+00:00" />
     <title>JavaScript API &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
@@ -511,9 +511,9 @@
 <dl class="js function">
 <dt class="sig sig-object js" id="boot">
 <span class="sig-name descname"><span class="n"><span class="pre">boot</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#boot" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Initializes the theme by starting Alpine.js and running post-render
+<dd><p>Initializes the theme by starting Alpine.js and running post-render
 boot functions (curlCopy, tryIt). Called on DOMContentLoaded or
-immediately if the DOM is already ready.&lt;/p&gt;</p>
+immediately if the DOM is already ready.</p>
 </dd></dl>
 
 </section>
@@ -522,22 +522,22 @@ immediately if the DOM is already ready.&lt;/p&gt;</p>
 <dl class="js function">
 <dt class="sig sig-object js" id="scrollspy">
 <span class="sig-name descname"><span class="n"><span class="pre">scrollspy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scrollspy" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Factory for the scrollspy Alpine component.
-Registered as &lt;code&gt;Alpine.data(&amp;quot;scrollspy&amp;quot;, scrollspy)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Properties:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;activeId&lt;/code&gt; &lt;em&gt;(string|null)&lt;/em&gt; — The &lt;code&gt;id&lt;/code&gt; of the currently visible section.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;observer&lt;/code&gt; &lt;em&gt;(IntersectionObserver|null)&lt;/em&gt; — The observer instance.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Methods:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;init()&lt;/code&gt; — Collects TOC link targets and starts observing.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;updateActive(nav)&lt;/code&gt; — Toggles the &lt;code&gt;lumina-toc-active&lt;/code&gt; class on TOC links.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;destroy()&lt;/code&gt; — Disconnects the IntersectionObserver.&lt;/li&gt;
-&lt;/ul&gt;</p>
+<dd><p>Factory for the scrollspy Alpine component.
+Registered as <code class="docutils literal notranslate"><span class="pre">Alpine.data(&quot;scrollspy&quot;,</span> <span class="pre">scrollspy)</span></code>.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">activeId</span></code> <em>(string|null)</em> — The <code class="docutils literal notranslate"><span class="pre">id</span></code> of the currently visible section.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">observer</span></code> <em>(IntersectionObserver|null)</em> — The observer instance.</p></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">init()</span></code> — Collects TOC link targets and starts observing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">updateActive(nav)</span></code> — Toggles the <code class="docutils literal notranslate"><span class="pre">lumina-toc-active</span></code> class on TOC links.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">destroy()</span></code> — Disconnects the IntersectionObserver.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>object</strong> – &lt;p&gt;Alpine.js component data.&lt;/p&gt;</p>
+<dd class="field-odd"><p><strong>object</strong> – Alpine.js component data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -545,21 +545,21 @@ Registered as &lt;code&gt;Alpine.data(&amp;quot;scrollspy&amp;quot;, scrollspy)&
 <dl class="js function">
 <dt class="sig sig-object js" id="sidebar">
 <span class="sig-name descname"><span class="n"><span class="pre">sidebar</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sidebar" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Factory for the sidebar Alpine component.
-Registered as &lt;code&gt;Alpine.data(&amp;quot;sidebar&amp;quot;, sidebar)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Properties:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;mobileOpen&lt;/code&gt; &lt;em&gt;(boolean)&lt;/em&gt; — Whether the mobile sidebar is visible.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Methods:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;toggle()&lt;/code&gt; — Toggles the sidebar and locks/unlocks body scroll.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;close()&lt;/code&gt; — Closes the sidebar and restores focus.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;init()&lt;/code&gt; — Attaches toggle button handlers and a media-query listener.&lt;/li&gt;
-&lt;/ul&gt;</p>
+<dd><p>Factory for the sidebar Alpine component.
+Registered as <code class="docutils literal notranslate"><span class="pre">Alpine.data(&quot;sidebar&quot;,</span> <span class="pre">sidebar)</span></code>.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mobileOpen</span></code> <em>(boolean)</em> — Whether the mobile sidebar is visible.</p></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">toggle()</span></code> — Toggles the sidebar and locks/unlocks body scroll.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">close()</span></code> — Closes the sidebar and restores focus.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">init()</span></code> — Attaches toggle button handlers and a media-query listener.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>object</strong> – &lt;p&gt;Alpine.js component data.&lt;/p&gt;</p>
+<dd class="field-odd"><p><strong>object</strong> – Alpine.js component data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -567,23 +567,23 @@ Registered as &lt;code&gt;Alpine.data(&amp;quot;sidebar&amp;quot;, sidebar)&lt;/
 <dl class="js function">
 <dt class="sig sig-object js" id="navDropdown">
 <span class="sig-name descname"><span class="n"><span class="pre">navDropdown</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#navDropdown" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Factory for the nav-dropdown Alpine component.
-Registered as &lt;code&gt;Alpine.data(&amp;quot;navDropdown&amp;quot;, navDropdown)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Properties:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;open&lt;/code&gt; &lt;em&gt;(boolean)&lt;/em&gt; — Whether the dropdown is visible.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Methods:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;toggle()&lt;/code&gt; — Toggles the dropdown open/closed.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;show()&lt;/code&gt; — Opens the dropdown, cancelling any pending hide timer.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;hide()&lt;/code&gt; — Closes the dropdown after a 150 ms delay.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;cancelHide()&lt;/code&gt; — Cancels a pending hide (e.g. when re-entering the dropdown).&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;handleKeydown(e)&lt;/code&gt; — Closes on Escape and returns focus to the trigger.&lt;/li&gt;
-&lt;/ul&gt;</p>
+<dd><p>Factory for the nav-dropdown Alpine component.
+Registered as <code class="docutils literal notranslate"><span class="pre">Alpine.data(&quot;navDropdown&quot;,</span> <span class="pre">navDropdown)</span></code>.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">open</span></code> <em>(boolean)</em> — Whether the dropdown is visible.</p></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">toggle()</span></code> — Toggles the dropdown open/closed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">show()</span></code> — Opens the dropdown, cancelling any pending hide timer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hide()</span></code> — Closes the dropdown after a 150 ms delay.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cancelHide()</span></code> — Cancels a pending hide (e.g. when re-entering the dropdown).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">handleKeydown(e)</span></code> — Closes on Escape and returns focus to the trigger.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>object</strong> – &lt;p&gt;Alpine.js component data.&lt;/p&gt;</p>
+<dd class="field-odd"><p><strong>object</strong> – Alpine.js component data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -591,23 +591,23 @@ Registered as &lt;code&gt;Alpine.data(&amp;quot;navDropdown&amp;quot;, navDropdo
 <dl class="js function">
 <dt class="sig sig-object js" id="versionSwitcher">
 <span class="sig-name descname"><span class="n"><span class="pre">versionSwitcher</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#versionSwitcher" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Factory for the version-switcher Alpine component.
-Registered as &lt;code&gt;Alpine.data(&amp;quot;versionSwitcher&amp;quot;, versionSwitcher)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Properties:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;open&lt;/code&gt; &lt;em&gt;(boolean)&lt;/em&gt; — Whether the version dropdown is visible.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;versions&lt;/code&gt; &lt;em&gt;(Array)&lt;/em&gt; — Fetched array of &lt;code&gt;{ version, name, url }&lt;/code&gt; objects.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;currentLabel&lt;/code&gt; &lt;em&gt;(string)&lt;/em&gt; — Display label for the active version.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;error&lt;/code&gt; &lt;em&gt;(boolean)&lt;/em&gt; — Whether version fetching failed.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Methods:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;init()&lt;/code&gt; — Reads config attributes and fetches the version manifest.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;toggle()&lt;/code&gt; — Toggles the dropdown open/closed.&lt;/li&gt;
-&lt;/ul&gt;</p>
+<dd><p>Factory for the version-switcher Alpine component.
+Registered as <code class="docutils literal notranslate"><span class="pre">Alpine.data(&quot;versionSwitcher&quot;,</span> <span class="pre">versionSwitcher)</span></code>.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">open</span></code> <em>(boolean)</em> — Whether the version dropdown is visible.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">versions</span></code> <em>(Array)</em> — Fetched array of <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">version,</span> <span class="pre">name,</span> <span class="pre">url</span> <span class="pre">}</span></code> objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">currentLabel</span></code> <em>(string)</em> — Display label for the active version.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">error</span></code> <em>(boolean)</em> — Whether version fetching failed.</p></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">init()</span></code> — Reads config attributes and fetches the version manifest.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">toggle()</span></code> — Toggles the dropdown open/closed.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>object</strong> – &lt;p&gt;Alpine.js component data.&lt;/p&gt;</p>
+<dd class="field-odd"><p><strong>object</strong> – Alpine.js component data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -618,21 +618,21 @@ Registered as &lt;code&gt;Alpine.data(&amp;quot;versionSwitcher&amp;quot;, versi
 <dl class="js function">
 <dt class="sig sig-object js" id="themeToggle">
 <span class="sig-name descname"><span class="n"><span class="pre">themeToggle</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#themeToggle" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Factory for the theme-toggle Alpine component.
-Registered as &lt;code&gt;Alpine.data(&amp;quot;themeToggle&amp;quot;, themeToggle)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Properties:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;mode&lt;/code&gt; &lt;em&gt;(string)&lt;/em&gt; — Current mode: &lt;code&gt;&amp;quot;auto&amp;quot;&lt;/code&gt;, &lt;code&gt;&amp;quot;light&amp;quot;&lt;/code&gt;, or &lt;code&gt;&amp;quot;dark&amp;quot;&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Methods:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;init()&lt;/code&gt; — Reads stored preference, applies the theme, and listens for OS changes.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;cycle()&lt;/code&gt; — Advances the mode: auto → light → dark → auto.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;apply()&lt;/code&gt; — Applies the effective theme to &lt;code&gt;document.documentElement&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;</p>
+<dd><p>Factory for the theme-toggle Alpine component.
+Registered as <code class="docutils literal notranslate"><span class="pre">Alpine.data(&quot;themeToggle&quot;,</span> <span class="pre">themeToggle)</span></code>.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mode</span></code> <em>(string)</em> — Current mode: <code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;light&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;dark&quot;</span></code>.</p></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">init()</span></code> — Reads stored preference, applies the theme, and listens for OS changes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cycle()</span></code> — Advances the mode: auto → light → dark → auto.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apply()</span></code> — Applies the effective theme to <code class="docutils literal notranslate"><span class="pre">document.documentElement</span></code>.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>object</strong> – &lt;p&gt;Alpine.js component data.&lt;/p&gt;</p>
+<dd class="field-odd"><p><strong>object</strong> – Alpine.js component data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -640,32 +640,32 @@ Registered as &lt;code&gt;Alpine.data(&amp;quot;themeToggle&amp;quot;, themeTogg
 <dl class="js function">
 <dt class="sig sig-object js" id="searchModal">
 <span class="sig-name descname"><span class="n"><span class="pre">searchModal</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#searchModal" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Factory for the search modal Alpine component.
-Registered as &lt;code&gt;Alpine.data(&amp;quot;searchModal&amp;quot;, searchModal)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Properties:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;open&lt;/code&gt; &lt;em&gt;(boolean)&lt;/em&gt; — Whether the modal is visible.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;query&lt;/code&gt; &lt;em&gt;(string)&lt;/em&gt; — Current search input value.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;results&lt;/code&gt; &lt;em&gt;(Array)&lt;/em&gt; — Array of search result objects.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;selectedIndex&lt;/code&gt; &lt;em&gt;(number)&lt;/em&gt; — Index of the keyboard-highlighted result.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;loaded&lt;/code&gt; &lt;em&gt;(boolean)&lt;/em&gt; — Whether the search engine has been initialized.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;error&lt;/code&gt; &lt;em&gt;(string|null)&lt;/em&gt; — Error message, if search initialization failed.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;backend&lt;/code&gt; &lt;em&gt;(string)&lt;/em&gt; — Search backend: &lt;code&gt;&amp;quot;pagefind&amp;quot;&lt;/code&gt; or &lt;code&gt;&amp;quot;sphinx&amp;quot;&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Methods:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;init()&lt;/code&gt; — Sets up keyboard shortcuts and trigger buttons.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;toggle()&lt;/code&gt; — Opens or closes the modal.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;openModal()&lt;/code&gt; — Opens the modal, loads the search engine on first use.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;close()&lt;/code&gt; — Closes the modal and restores focus.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;search()&lt;/code&gt; — Runs a search query and populates results.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;moveDown()&lt;/code&gt; — Moves keyboard selection down.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;moveUp()&lt;/code&gt; — Moves keyboard selection up.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;goToSelected()&lt;/code&gt; — Navigates to the selected result.&lt;/li&gt;
-&lt;/ul&gt;</p>
+<dd><p>Factory for the search modal Alpine component.
+Registered as <code class="docutils literal notranslate"><span class="pre">Alpine.data(&quot;searchModal&quot;,</span> <span class="pre">searchModal)</span></code>.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">open</span></code> <em>(boolean)</em> — Whether the modal is visible.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">query</span></code> <em>(string)</em> — Current search input value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">results</span></code> <em>(Array)</em> — Array of search result objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selectedIndex</span></code> <em>(number)</em> — Index of the keyboard-highlighted result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loaded</span></code> <em>(boolean)</em> — Whether the search engine has been initialized.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">error</span></code> <em>(string|null)</em> — Error message, if search initialization failed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">backend</span></code> <em>(string)</em> — Search backend: <code class="docutils literal notranslate"><span class="pre">&quot;pagefind&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;sphinx&quot;</span></code>.</p></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">init()</span></code> — Sets up keyboard shortcuts and trigger buttons.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">toggle()</span></code> — Opens or closes the modal.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">openModal()</span></code> — Opens the modal, loads the search engine on first use.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">close()</span></code> — Closes the modal and restores focus.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">search()</span></code> — Runs a search query and populates results.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">moveDown()</span></code> — Moves keyboard selection down.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">moveUp()</span></code> — Moves keyboard selection up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">goToSelected()</span></code> — Navigates to the selected result.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>object</strong> – &lt;p&gt;Alpine.js component data.&lt;/p&gt;</p>
+<dd class="field-odd"><p><strong>object</strong> – Alpine.js component data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -673,21 +673,21 @@ Registered as &lt;code&gt;Alpine.data(&amp;quot;searchModal&amp;quot;, searchMod
 <dl class="js function">
 <dt class="sig sig-object js" id="backToTop">
 <span class="sig-name descname"><span class="n"><span class="pre">backToTop</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#backToTop" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Factory for the back-to-top Alpine component.
-Registered as &lt;code&gt;Alpine.data(&amp;quot;backToTop&amp;quot;, backToTop)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Properties:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;visible&lt;/code&gt; &lt;em&gt;(boolean)&lt;/em&gt; — Whether the button is currently shown.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Methods:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;init()&lt;/code&gt; — Attaches a passive scroll listener.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;destroy()&lt;/code&gt; — Removes the scroll listener.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;scrollToTop()&lt;/code&gt; — Scrolls the page to the top, respecting reduced-motion preference.&lt;/li&gt;
-&lt;/ul&gt;</p>
+<dd><p>Factory for the back-to-top Alpine component.
+Registered as <code class="docutils literal notranslate"><span class="pre">Alpine.data(&quot;backToTop&quot;,</span> <span class="pre">backToTop)</span></code>.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">visible</span></code> <em>(boolean)</em> — Whether the button is currently shown.</p></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">init()</span></code> — Attaches a passive scroll listener.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">destroy()</span></code> — Removes the scroll listener.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scrollToTop()</span></code> — Scrolls the page to the top, respecting reduced-motion preference.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>object</strong> – &lt;p&gt;Alpine.js component data.&lt;/p&gt;</p>
+<dd class="field-odd"><p><strong>object</strong> – Alpine.js component data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -695,16 +695,16 @@ Registered as &lt;code&gt;Alpine.data(&amp;quot;backToTop&amp;quot;, backToTop)&
 <dl class="js function">
 <dt class="sig sig-object js" id="announcementBanner">
 <span class="sig-name descname"><span class="n"><span class="pre">announcementBanner</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#announcementBanner" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Factory for the announcement banner Alpine component.
-Registered as &lt;code&gt;Alpine.data(&amp;quot;announcementBanner&amp;quot;, announcementBanner)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Methods:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;init()&lt;/code&gt; — Reads the announcement ID from &lt;code&gt;data-announcement-id&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;dismiss()&lt;/code&gt; — Hides the banner and persists the dismissal in localStorage.&lt;/li&gt;
-&lt;/ul&gt;</p>
+<dd><p>Factory for the announcement banner Alpine component.
+Registered as <code class="docutils literal notranslate"><span class="pre">Alpine.data(&quot;announcementBanner&quot;,</span> <span class="pre">announcementBanner)</span></code>.</p>
+<p><strong>Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">init()</span></code> — Reads the announcement ID from <code class="docutils literal notranslate"><span class="pre">data-announcement-id</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dismiss()</span></code> — Hides the banner and persists the dismissal in localStorage.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>object</strong> – &lt;p&gt;Alpine.js component data.&lt;/p&gt;</p>
+<dd class="field-odd"><p><strong>object</strong> – Alpine.js component data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -715,15 +715,15 @@ Registered as &lt;code&gt;Alpine.data(&amp;quot;announcementBanner&amp;quot;, an
 <dl class="js function">
 <dt class="sig sig-object js" id="headerLinks">
 <span class="sig-name descname"><span class="n"><span class="pre">headerLinks</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#headerLinks" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Factory for the header-links Alpine component.
-Registered as &lt;code&gt;Alpine.data(&amp;quot;headerLinks&amp;quot;, headerLinks)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Methods:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;init()&lt;/code&gt; — Attaches click handlers to all &lt;code&gt;.headerlink&lt;/code&gt; elements.&lt;/li&gt;
-&lt;/ul&gt;</p>
+<dd><p>Factory for the header-links Alpine component.
+Registered as <code class="docutils literal notranslate"><span class="pre">Alpine.data(&quot;headerLinks&quot;,</span> <span class="pre">headerLinks)</span></code>.</p>
+<p><strong>Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">init()</span></code> — Attaches click handlers to all <code class="docutils literal notranslate"><span class="pre">.headerlink</span></code> elements.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>object</strong> – &lt;p&gt;Alpine.js component data.&lt;/p&gt;</p>
+<dd class="field-odd"><p><strong>object</strong> – Alpine.js component data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -731,19 +731,19 @@ Registered as &lt;code&gt;Alpine.data(&amp;quot;headerLinks&amp;quot;, headerLin
 <dl class="js function">
 <dt class="sig sig-object js" id="copyPage">
 <span class="sig-name descname"><span class="n"><span class="pre">copyPage</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copyPage" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Factory for the copy-page Alpine component.
-Registered as &lt;code&gt;Alpine.data(&amp;quot;copyPage&amp;quot;, copyPage)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Properties:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;copied&lt;/code&gt; &lt;em&gt;(boolean)&lt;/em&gt; — Briefly &lt;code&gt;true&lt;/code&gt; after a successful copy.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Methods:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;copy()&lt;/code&gt; — Converts the article to Markdown and copies it to the clipboard.&lt;/li&gt;
-&lt;/ul&gt;</p>
+<dd><p>Factory for the copy-page Alpine component.
+Registered as <code class="docutils literal notranslate"><span class="pre">Alpine.data(&quot;copyPage&quot;,</span> <span class="pre">copyPage)</span></code>.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">copied</span></code> <em>(boolean)</em> — Briefly <code class="docutils literal notranslate"><span class="pre">true</span></code> after a successful copy.</p></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">copy()</span></code> — Converts the article to Markdown and copies it to the clipboard.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>object</strong> – &lt;p&gt;Alpine.js component data.&lt;/p&gt;</p>
+<dd class="field-odd"><p><strong>object</strong> – Alpine.js component data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -754,19 +754,19 @@ Registered as &lt;code&gt;Alpine.data(&amp;quot;copyPage&amp;quot;, copyPage)&lt
 <dl class="js function">
 <dt class="sig sig-object js" id="curlCopyBtn">
 <span class="sig-name descname"><span class="n"><span class="pre">curlCopyBtn</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#curlCopyBtn" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Alpine.js data factory for the per-endpoint copy-curl button.
-Registered as &lt;code&gt;Alpine.data(&amp;quot;curlCopyBtn&amp;quot;, curlCopyBtn)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Properties:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;copied&lt;/code&gt; &lt;em&gt;(boolean)&lt;/em&gt; — Briefly &lt;code&gt;true&lt;/code&gt; after a successful copy.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Methods:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;copy()&lt;/code&gt; — Copies the pre-built curl command to the clipboard.&lt;/li&gt;
-&lt;/ul&gt;</p>
+<dd><p>Alpine.js data factory for the per-endpoint copy-curl button.
+Registered as <code class="docutils literal notranslate"><span class="pre">Alpine.data(&quot;curlCopyBtn&quot;,</span> <span class="pre">curlCopyBtn)</span></code>.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">copied</span></code> <em>(boolean)</em> — Briefly <code class="docutils literal notranslate"><span class="pre">true</span></code> after a successful copy.</p></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">copy()</span></code> — Copies the pre-built curl command to the clipboard.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>object</strong> – &lt;p&gt;Alpine.js component data.&lt;/p&gt;</p>
+<dd class="field-odd"><p><strong>object</strong> – Alpine.js component data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -774,34 +774,34 @@ Registered as &lt;code&gt;Alpine.data(&amp;quot;curlCopyBtn&amp;quot;, curlCopyB
 <dl class="js function">
 <dt class="sig sig-object js" id="curlCopy">
 <span class="sig-name descname"><span class="n"><span class="pre">curlCopy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#curlCopy" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Boot function that scans the page for HTTP endpoints and injects
-copy-curl buttons. Called from &lt;code&gt;boot()&lt;/code&gt; in app.js after &lt;code&gt;Alpine.start()&lt;/code&gt;.&lt;/p&gt;</p>
+<dd><p>Boot function that scans the page for HTTP endpoints and injects
+copy-curl buttons. Called from <code class="docutils literal notranslate"><span class="pre">boot()</span></code> in app.js after <code class="docutils literal notranslate"><span class="pre">Alpine.start()</span></code>.</p>
 </dd></dl>
 
 <dl class="js function">
 <dt class="sig sig-object js" id="tryItPanel">
 <span class="sig-name descname"><span class="n"><span class="pre">tryItPanel</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tryItPanel" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Alpine.js data factory for the interactive request panel.
-Registered as &lt;code&gt;Alpine.data(&amp;quot;tryItPanel&amp;quot;, tryItPanel)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Properties:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;open&lt;/code&gt; &lt;em&gt;(boolean)&lt;/em&gt; — Whether the panel is expanded.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sending&lt;/code&gt; &lt;em&gt;(boolean)&lt;/em&gt; — True while a request is in-flight.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;response&lt;/code&gt; &lt;em&gt;(object|null)&lt;/em&gt; — Last response (status, body, elapsed time).&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;method&lt;/code&gt; &lt;em&gt;(string)&lt;/em&gt; — HTTP method (GET, POST, etc.).&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;path&lt;/code&gt; &lt;em&gt;(string)&lt;/em&gt; — Endpoint path with &lt;code&gt;{param}&lt;/code&gt; placeholders.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;baseUrl&lt;/code&gt; &lt;em&gt;(string)&lt;/em&gt; — API base URL from theme options.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Methods:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;init()&lt;/code&gt; — Reads config injected by the boot function.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;send()&lt;/code&gt; — Sends the request and populates the response.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;copyResponse()&lt;/code&gt; — Copies the response body to the clipboard.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;clear()&lt;/code&gt; — Resets the response and error state.&lt;/li&gt;
-&lt;/ul&gt;</p>
+<dd><p>Alpine.js data factory for the interactive request panel.
+Registered as <code class="docutils literal notranslate"><span class="pre">Alpine.data(&quot;tryItPanel&quot;,</span> <span class="pre">tryItPanel)</span></code>.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">open</span></code> <em>(boolean)</em> — Whether the panel is expanded.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sending</span></code> <em>(boolean)</em> — True while a request is in-flight.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">response</span></code> <em>(object|null)</em> — Last response (status, body, elapsed time).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">method</span></code> <em>(string)</em> — HTTP method (GET, POST, etc.).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code> <em>(string)</em> — Endpoint path with <code class="docutils literal notranslate"><span class="pre">{param}</span></code> placeholders.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">baseUrl</span></code> <em>(string)</em> — API base URL from theme options.</p></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">init()</span></code> — Reads config injected by the boot function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">send()</span></code> — Sends the request and populates the response.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">copyResponse()</span></code> — Copies the response body to the clipboard.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">clear()</span></code> — Resets the response and error state.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>object</strong> – &lt;p&gt;Alpine.js component data.&lt;/p&gt;</p>
+<dd class="field-odd"><p><strong>object</strong> – Alpine.js component data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -809,10 +809,10 @@ Registered as &lt;code&gt;Alpine.data(&amp;quot;tryItPanel&amp;quot;, tryItPanel
 <dl class="js function">
 <dt class="sig sig-object js" id="tryIt">
 <span class="sig-name descname"><span class="n"><span class="pre">tryIt</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tryIt" title="Link to this definition">¶</a></dt>
-<dd><p>&lt;p&gt;Boot function that scans the page for HTTP endpoints and injects
-interactive &amp;quot;Try It Out&amp;quot; panels. Called from &lt;code&gt;boot()&lt;/code&gt; in app.js
-after &lt;code&gt;Alpine.start()&lt;/code&gt;. Skipped if &lt;code&gt;data-try-it-out=&amp;quot;false&amp;quot;&lt;/code&gt;
-is set on &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt;.&lt;/p&gt;</p>
+<dd><p>Boot function that scans the page for HTTP endpoints and injects
+interactive “Try It Out” panels. Called from <code class="docutils literal notranslate"><span class="pre">boot()</span></code> in app.js
+after <code class="docutils literal notranslate"><span class="pre">Alpine.start()</span></code>. Skipped if <code class="docutils literal notranslate"><span class="pre">data-try-it-out=&quot;false&quot;</span></code>
+is set on <code class="docutils literal notranslate"><span class="pre">&lt;html&gt;</span></code>.</p>
 </dd></dl>
 
 </section>

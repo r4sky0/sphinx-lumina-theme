@@ -6,249 +6,249 @@ Auto-generated reference for the theme’s Alpine.js components. Each component 
 
 ### boot()
 
-<p>Initializes the theme by starting Alpine.js and running post-render
+Initializes the theme by starting Alpine.js and running post-render
 boot functions (curlCopy, tryIt). Called on DOMContentLoaded or
-immediately if the DOM is already ready.</p>
+immediately if the DOM is already ready.
 
 ## Navigation
 
 ### scrollspy()
 
-<p>Factory for the scrollspy Alpine component.
-Registered as <code>Alpine.data(&quot;scrollspy&quot;, scrollspy)</code>.</p>
-<p><strong>Properties:</strong></p>
-<ul>
-<li><code>activeId</code> <em>(string|null)</em> — The <code>id</code> of the currently visible section.</li>
-<li><code>observer</code> <em>(IntersectionObserver|null)</em> — The observer instance.</li>
-</ul>
-<p><strong>Methods:</strong></p>
-<ul>
-<li><code>init()</code> — Collects TOC link targets and starts observing.</li>
-<li><code>updateActive(nav)</code> — Toggles the <code>lumina-toc-active</code> class on TOC links.</li>
-<li><code>destroy()</code> — Disconnects the IntersectionObserver.</li>
-</ul>
+Factory for the scrollspy Alpine component.
+Registered as `Alpine.data("scrollspy", scrollspy)`.
+
+**Properties:**
+
+- `activeId`  *(string|null)* — The `id` of the currently visible section.
+- `observer`  *(IntersectionObserver|null)* — The observer instance.
+
+**Methods:**
+
+- `init()` — Collects TOC link targets and starts observing.
+- `updateActive(nav)` — Toggles the `lumina-toc-active` class on TOC links.
+- `destroy()` — Disconnects the IntersectionObserver.
 
 * **Returns:**
-  **object** – <p>Alpine.js component data.</p>
+  **object** – Alpine.js component data.
 
 ### sidebar()
 
-<p>Factory for the sidebar Alpine component.
-Registered as <code>Alpine.data(&quot;sidebar&quot;, sidebar)</code>.</p>
-<p><strong>Properties:</strong></p>
-<ul>
-<li><code>mobileOpen</code> <em>(boolean)</em> — Whether the mobile sidebar is visible.</li>
-</ul>
-<p><strong>Methods:</strong></p>
-<ul>
-<li><code>toggle()</code> — Toggles the sidebar and locks/unlocks body scroll.</li>
-<li><code>close()</code> — Closes the sidebar and restores focus.</li>
-<li><code>init()</code> — Attaches toggle button handlers and a media-query listener.</li>
-</ul>
+Factory for the sidebar Alpine component.
+Registered as `Alpine.data("sidebar", sidebar)`.
+
+**Properties:**
+
+- `mobileOpen`  *(boolean)* — Whether the mobile sidebar is visible.
+
+**Methods:**
+
+- `toggle()` — Toggles the sidebar and locks/unlocks body scroll.
+- `close()` — Closes the sidebar and restores focus.
+- `init()` — Attaches toggle button handlers and a media-query listener.
 
 * **Returns:**
-  **object** – <p>Alpine.js component data.</p>
+  **object** – Alpine.js component data.
 
 ### navDropdown()
 
-<p>Factory for the nav-dropdown Alpine component.
-Registered as <code>Alpine.data(&quot;navDropdown&quot;, navDropdown)</code>.</p>
-<p><strong>Properties:</strong></p>
-<ul>
-<li><code>open</code> <em>(boolean)</em> — Whether the dropdown is visible.</li>
-</ul>
-<p><strong>Methods:</strong></p>
-<ul>
-<li><code>toggle()</code> — Toggles the dropdown open/closed.</li>
-<li><code>show()</code> — Opens the dropdown, cancelling any pending hide timer.</li>
-<li><code>hide()</code> — Closes the dropdown after a 150 ms delay.</li>
-<li><code>cancelHide()</code> — Cancels a pending hide (e.g. when re-entering the dropdown).</li>
-<li><code>handleKeydown(e)</code> — Closes on Escape and returns focus to the trigger.</li>
-</ul>
+Factory for the nav-dropdown Alpine component.
+Registered as `Alpine.data("navDropdown", navDropdown)`.
+
+**Properties:**
+
+- `open`  *(boolean)* — Whether the dropdown is visible.
+
+**Methods:**
+
+- `toggle()` — Toggles the dropdown open/closed.
+- `show()` — Opens the dropdown, cancelling any pending hide timer.
+- `hide()` — Closes the dropdown after a 150 ms delay.
+- `cancelHide()` — Cancels a pending hide (e.g. when re-entering the dropdown).
+- `handleKeydown(e)` — Closes on Escape and returns focus to the trigger.
 
 * **Returns:**
-  **object** – <p>Alpine.js component data.</p>
+  **object** – Alpine.js component data.
 
 ### versionSwitcher()
 
-<p>Factory for the version-switcher Alpine component.
-Registered as <code>Alpine.data(&quot;versionSwitcher&quot;, versionSwitcher)</code>.</p>
-<p><strong>Properties:</strong></p>
-<ul>
-<li><code>open</code> <em>(boolean)</em> — Whether the version dropdown is visible.</li>
-<li><code>versions</code> <em>(Array)</em> — Fetched array of <code>{ version, name, url }</code> objects.</li>
-<li><code>currentLabel</code> <em>(string)</em> — Display label for the active version.</li>
-<li><code>error</code> <em>(boolean)</em> — Whether version fetching failed.</li>
-</ul>
-<p><strong>Methods:</strong></p>
-<ul>
-<li><code>init()</code> — Reads config attributes and fetches the version manifest.</li>
-<li><code>toggle()</code> — Toggles the dropdown open/closed.</li>
-</ul>
+Factory for the version-switcher Alpine component.
+Registered as `Alpine.data("versionSwitcher", versionSwitcher)`.
+
+**Properties:**
+
+- `open`  *(boolean)* — Whether the version dropdown is visible.
+- `versions`  *(Array)* — Fetched array of `{ version, name, url }` objects.
+- `currentLabel`  *(string)* — Display label for the active version.
+- `error`  *(boolean)* — Whether version fetching failed.
+
+**Methods:**
+
+- `init()` — Reads config attributes and fetches the version manifest.
+- `toggle()` — Toggles the dropdown open/closed.
 
 * **Returns:**
-  **object** – <p>Alpine.js component data.</p>
+  **object** – Alpine.js component data.
 
 ## UI Controls
 
 ### themeToggle()
 
-<p>Factory for the theme-toggle Alpine component.
-Registered as <code>Alpine.data(&quot;themeToggle&quot;, themeToggle)</code>.</p>
-<p><strong>Properties:</strong></p>
-<ul>
-<li><code>mode</code> <em>(string)</em> — Current mode: <code>&quot;auto&quot;</code>, <code>&quot;light&quot;</code>, or <code>&quot;dark&quot;</code>.</li>
-</ul>
-<p><strong>Methods:</strong></p>
-<ul>
-<li><code>init()</code> — Reads stored preference, applies the theme, and listens for OS changes.</li>
-<li><code>cycle()</code> — Advances the mode: auto → light → dark → auto.</li>
-<li><code>apply()</code> — Applies the effective theme to <code>document.documentElement</code>.</li>
-</ul>
+Factory for the theme-toggle Alpine component.
+Registered as `Alpine.data("themeToggle", themeToggle)`.
+
+**Properties:**
+
+- `mode`  *(string)* — Current mode: `"auto"`, `"light"`, or `"dark"`.
+
+**Methods:**
+
+- `init()` — Reads stored preference, applies the theme, and listens for OS changes.
+- `cycle()` — Advances the mode: auto → light → dark → auto.
+- `apply()` — Applies the effective theme to `document.documentElement`.
 
 * **Returns:**
-  **object** – <p>Alpine.js component data.</p>
+  **object** – Alpine.js component data.
 
 ### searchModal()
 
-<p>Factory for the search modal Alpine component.
-Registered as <code>Alpine.data(&quot;searchModal&quot;, searchModal)</code>.</p>
-<p><strong>Properties:</strong></p>
-<ul>
-<li><code>open</code> <em>(boolean)</em> — Whether the modal is visible.</li>
-<li><code>query</code> <em>(string)</em> — Current search input value.</li>
-<li><code>results</code> <em>(Array)</em> — Array of search result objects.</li>
-<li><code>selectedIndex</code> <em>(number)</em> — Index of the keyboard-highlighted result.</li>
-<li><code>loaded</code> <em>(boolean)</em> — Whether the search engine has been initialized.</li>
-<li><code>error</code> <em>(string|null)</em> — Error message, if search initialization failed.</li>
-<li><code>backend</code> <em>(string)</em> — Search backend: <code>&quot;pagefind&quot;</code> or <code>&quot;sphinx&quot;</code>.</li>
-</ul>
-<p><strong>Methods:</strong></p>
-<ul>
-<li><code>init()</code> — Sets up keyboard shortcuts and trigger buttons.</li>
-<li><code>toggle()</code> — Opens or closes the modal.</li>
-<li><code>openModal()</code> — Opens the modal, loads the search engine on first use.</li>
-<li><code>close()</code> — Closes the modal and restores focus.</li>
-<li><code>search()</code> — Runs a search query and populates results.</li>
-<li><code>moveDown()</code> — Moves keyboard selection down.</li>
-<li><code>moveUp()</code> — Moves keyboard selection up.</li>
-<li><code>goToSelected()</code> — Navigates to the selected result.</li>
-</ul>
+Factory for the search modal Alpine component.
+Registered as `Alpine.data("searchModal", searchModal)`.
+
+**Properties:**
+
+- `open`  *(boolean)* — Whether the modal is visible.
+- `query`  *(string)* — Current search input value.
+- `results`  *(Array)* — Array of search result objects.
+- `selectedIndex`  *(number)* — Index of the keyboard-highlighted result.
+- `loaded`  *(boolean)* — Whether the search engine has been initialized.
+- `error`  *(string|null)* — Error message, if search initialization failed.
+- `backend`  *(string)* — Search backend: `"pagefind"` or `"sphinx"`.
+
+**Methods:**
+
+- `init()` — Sets up keyboard shortcuts and trigger buttons.
+- `toggle()` — Opens or closes the modal.
+- `openModal()` — Opens the modal, loads the search engine on first use.
+- `close()` — Closes the modal and restores focus.
+- `search()` — Runs a search query and populates results.
+- `moveDown()` — Moves keyboard selection down.
+- `moveUp()` — Moves keyboard selection up.
+- `goToSelected()` — Navigates to the selected result.
 
 * **Returns:**
-  **object** – <p>Alpine.js component data.</p>
+  **object** – Alpine.js component data.
 
 ### backToTop()
 
-<p>Factory for the back-to-top Alpine component.
-Registered as <code>Alpine.data(&quot;backToTop&quot;, backToTop)</code>.</p>
-<p><strong>Properties:</strong></p>
-<ul>
-<li><code>visible</code> <em>(boolean)</em> — Whether the button is currently shown.</li>
-</ul>
-<p><strong>Methods:</strong></p>
-<ul>
-<li><code>init()</code> — Attaches a passive scroll listener.</li>
-<li><code>destroy()</code> — Removes the scroll listener.</li>
-<li><code>scrollToTop()</code> — Scrolls the page to the top, respecting reduced-motion preference.</li>
-</ul>
+Factory for the back-to-top Alpine component.
+Registered as `Alpine.data("backToTop", backToTop)`.
+
+**Properties:**
+
+- `visible`  *(boolean)* — Whether the button is currently shown.
+
+**Methods:**
+
+- `init()` — Attaches a passive scroll listener.
+- `destroy()` — Removes the scroll listener.
+- `scrollToTop()` — Scrolls the page to the top, respecting reduced-motion preference.
 
 * **Returns:**
-  **object** – <p>Alpine.js component data.</p>
+  **object** – Alpine.js component data.
 
 ### announcementBanner()
 
-<p>Factory for the announcement banner Alpine component.
-Registered as <code>Alpine.data(&quot;announcementBanner&quot;, announcementBanner)</code>.</p>
-<p><strong>Methods:</strong></p>
-<ul>
-<li><code>init()</code> — Reads the announcement ID from <code>data-announcement-id</code>.</li>
-<li><code>dismiss()</code> — Hides the banner and persists the dismissal in localStorage.</li>
-</ul>
+Factory for the announcement banner Alpine component.
+Registered as `Alpine.data("announcementBanner", announcementBanner)`.
+
+**Methods:**
+
+- `init()` — Reads the announcement ID from `data-announcement-id`.
+- `dismiss()` — Hides the banner and persists the dismissal in localStorage.
 
 * **Returns:**
-  **object** – <p>Alpine.js component data.</p>
+  **object** – Alpine.js component data.
 
 ## Content Utilities
 
 ### headerLinks()
 
-<p>Factory for the header-links Alpine component.
-Registered as <code>Alpine.data(&quot;headerLinks&quot;, headerLinks)</code>.</p>
-<p><strong>Methods:</strong></p>
-<ul>
-<li><code>init()</code> — Attaches click handlers to all <code>.headerlink</code> elements.</li>
-</ul>
+Factory for the header-links Alpine component.
+Registered as `Alpine.data("headerLinks", headerLinks)`.
+
+**Methods:**
+
+- `init()` — Attaches click handlers to all `.headerlink` elements.
 
 * **Returns:**
-  **object** – <p>Alpine.js component data.</p>
+  **object** – Alpine.js component data.
 
 ### copyPage()
 
-<p>Factory for the copy-page Alpine component.
-Registered as <code>Alpine.data(&quot;copyPage&quot;, copyPage)</code>.</p>
-<p><strong>Properties:</strong></p>
-<ul>
-<li><code>copied</code> <em>(boolean)</em> — Briefly <code>true</code> after a successful copy.</li>
-</ul>
-<p><strong>Methods:</strong></p>
-<ul>
-<li><code>copy()</code> — Converts the article to Markdown and copies it to the clipboard.</li>
-</ul>
+Factory for the copy-page Alpine component.
+Registered as `Alpine.data("copyPage", copyPage)`.
+
+**Properties:**
+
+- `copied`  *(boolean)* — Briefly `true` after a successful copy.
+
+**Methods:**
+
+- `copy()` — Converts the article to Markdown and copies it to the clipboard.
 
 * **Returns:**
-  **object** – <p>Alpine.js component data.</p>
+  **object** – Alpine.js component data.
 
 ## API Tools
 
 ### curlCopyBtn()
 
-<p>Alpine.js data factory for the per-endpoint copy-curl button.
-Registered as <code>Alpine.data(&quot;curlCopyBtn&quot;, curlCopyBtn)</code>.</p>
-<p><strong>Properties:</strong></p>
-<ul>
-<li><code>copied</code> <em>(boolean)</em> — Briefly <code>true</code> after a successful copy.</li>
-</ul>
-<p><strong>Methods:</strong></p>
-<ul>
-<li><code>copy()</code> — Copies the pre-built curl command to the clipboard.</li>
-</ul>
+Alpine.js data factory for the per-endpoint copy-curl button.
+Registered as `Alpine.data("curlCopyBtn", curlCopyBtn)`.
+
+**Properties:**
+
+- `copied`  *(boolean)* — Briefly `true` after a successful copy.
+
+**Methods:**
+
+- `copy()` — Copies the pre-built curl command to the clipboard.
 
 * **Returns:**
-  **object** – <p>Alpine.js component data.</p>
+  **object** – Alpine.js component data.
 
 ### curlCopy()
 
-<p>Boot function that scans the page for HTTP endpoints and injects
-copy-curl buttons. Called from <code>boot()</code> in app.js after <code>Alpine.start()</code>.</p>
+Boot function that scans the page for HTTP endpoints and injects
+copy-curl buttons. Called from `boot()` in app.js after `Alpine.start()`.
 
 ### tryItPanel()
 
-<p>Alpine.js data factory for the interactive request panel.
-Registered as <code>Alpine.data(&quot;tryItPanel&quot;, tryItPanel)</code>.</p>
-<p><strong>Properties:</strong></p>
-<ul>
-<li><code>open</code> <em>(boolean)</em> — Whether the panel is expanded.</li>
-<li><code>sending</code> <em>(boolean)</em> — True while a request is in-flight.</li>
-<li><code>response</code> <em>(object|null)</em> — Last response (status, body, elapsed time).</li>
-<li><code>method</code> <em>(string)</em> — HTTP method (GET, POST, etc.).</li>
-<li><code>path</code> <em>(string)</em> — Endpoint path with <code>{param}</code> placeholders.</li>
-<li><code>baseUrl</code> <em>(string)</em> — API base URL from theme options.</li>
-</ul>
-<p><strong>Methods:</strong></p>
-<ul>
-<li><code>init()</code> — Reads config injected by the boot function.</li>
-<li><code>send()</code> — Sends the request and populates the response.</li>
-<li><code>copyResponse()</code> — Copies the response body to the clipboard.</li>
-<li><code>clear()</code> — Resets the response and error state.</li>
-</ul>
+Alpine.js data factory for the interactive request panel.
+Registered as `Alpine.data("tryItPanel", tryItPanel)`.
+
+**Properties:**
+
+- `open`  *(boolean)* — Whether the panel is expanded.
+- `sending`  *(boolean)* — True while a request is in-flight.
+- `response`  *(object|null)* — Last response (status, body, elapsed time).
+- `method`  *(string)* — HTTP method (GET, POST, etc.).
+- `path`  *(string)* — Endpoint path with `{param}` placeholders.
+- `baseUrl`  *(string)* — API base URL from theme options.
+
+**Methods:**
+
+- `init()` — Reads config injected by the boot function.
+- `send()` — Sends the request and populates the response.
+- `copyResponse()` — Copies the response body to the clipboard.
+- `clear()` — Resets the response and error state.
 
 * **Returns:**
-  **object** – <p>Alpine.js component data.</p>
+  **object** – Alpine.js component data.
 
 ### tryIt()
 
-<p>Boot function that scans the page for HTTP endpoints and injects
-interactive &quot;Try It Out&quot; panels. Called from <code>boot()</code> in app.js
-after <code>Alpine.start()</code>. Skipped if <code>data-try-it-out=&quot;false&quot;</code>
-is set on <code>&lt;html&gt;</code>.</p>
+Boot function that scans the page for HTTP endpoints and injects
+interactive “Try It Out” panels. Called from `boot()` in app.js
+after `Alpine.start()`. Skipped if `data-try-it-out="false"`
+is set on `<html>`.
