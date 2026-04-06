@@ -1,5 +1,36 @@
 # Releases
 
+## v1.25.0 (2026-04-06)
+
+### Features
+
+- Add auto-generated JavaScript API documentation
+  ([#51](https://github.com/r4sky0/sphinx-lumina-theme/pull/51),
+  [`3214fee`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3214fee0e37ea76249fe8573e9ce05c092b2b8b9))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Chores
+
+- Add aria-hidden attribute to decorative SVG icons
+  ([#49](https://github.com/r4sky0/sphinx-lumina-theme/pull/49),
+  [`6e3af4e`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6e3af4e82f3adbb2fb71af296a00ef676ee01ea3))
+
+#### Continuous Integration
+
+- Refactor GitHub Actions workflows to use reusable actions
+  ([#50](https://github.com/r4sky0/sphinx-lumina-theme/pull/50),
+  [`3efa0a9`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3efa0a981c8a7354e1fdff5c96e6205fbad75208))
+
+#### Documentation
+
+- Getting Started documentation link in README
+  ([#48](https://github.com/r4sky0/sphinx-lumina-theme/pull/48),
+  [`795763c`](https://github.com/r4sky0/sphinx-lumina-theme/commit/795763ce15d700e3cfbfed42af665bc20f3a0ef8))
+
+</details>
+
 ## v1.24.0 (2026-04-04)
 
 ### Features
