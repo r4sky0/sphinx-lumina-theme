@@ -52,7 +52,7 @@ Build your docs:
 uv run sphinx-build docs docs/_build/html
 ```
 
-That's it. For MyST Markdown setup and configuration options, see the [Getting Started](https://r4sky0.github.io/sphinx-lumina-theme/getting-started.html) guide.
+That's it. For MyST Markdown setup and configuration options, see the [Getting Started](https://r4sky0.github.io/sphinx-lumina-theme/getting-started/) guide.
 
 ## Configuration
 
