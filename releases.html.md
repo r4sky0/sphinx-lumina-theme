@@ -1,5 +1,24 @@
 # Releases
 
+## v1.25.1 (2026-04-07)
+
+### Bug Fixes
+
+- Smooth fluid simulation mouse interaction
+  ([#53](https://github.com/r4sky0/sphinx-lumina-theme/pull/53),
+  [`8364262`](https://github.com/r4sky0/sphinx-lumina-theme/commit/8364262b1ec7642123babe30bcf47049510d90dc))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Chores
+
+- Replace deprecated master_doc with root_doc in theme templates
+  ([#52](https://github.com/r4sky0/sphinx-lumina-theme/pull/52),
+  [`deb6985`](https://github.com/r4sky0/sphinx-lumina-theme/commit/deb6985c5e3351a5a76f02a639cb605ad6cbd4c5))
+
+</details>
+
 ## v1.25.0 (2026-04-06)
 
 ### Features
