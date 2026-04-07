@@ -91,37 +91,50 @@ document.addEventListener("alpine:init", () => {
         [offscreen],
       );
 
-      /* Forward pointer events to the worker */
+      /* Forward pointer events to the worker — rAF-gated to send at most
+         one message per display frame regardless of input event frequency. */
       const cw = () => canvas.clientWidth;
       const ch = () => canvas.clientHeight;
+      let pendingEnter = null;
+      let pendingPointer = null;
+      let sendScheduled = false;
 
-      const onMouseEnter = (e) =>
-        worker.postMessage({
-          type: "pointerenter",
-          x: e.clientX / cw(),
-          y: 1.0 - e.clientY / ch(),
-        });
-      const onMouseMove = (e) =>
-        worker.postMessage({
-          type: "pointer",
-          x: e.clientX / cw(),
-          y: 1.0 - e.clientY / ch(),
-        });
+      function flushPointer() {
+        sendScheduled = false;
+        if (pendingEnter) {
+          worker.postMessage({ type: "pointerenter", ...pendingEnter });
+          pendingEnter = null;
+        }
+        if (pendingPointer) {
+          worker.postMessage({ type: "pointer", ...pendingPointer });
+          pendingPointer = null;
+        }
+      }
+
+      function scheduleFlush() {
+        if (!sendScheduled) {
+          sendScheduled = true;
+          requestAnimationFrame(flushPointer);
+        }
+      }
+
+      const onMouseEnter = (e) => {
+        pendingEnter = { x: e.clientX / cw(), y: 1.0 - e.clientY / ch() };
+        scheduleFlush();
+      };
+      const onMouseMove = (e) => {
+        pendingPointer = { x: e.clientX / cw(), y: 1.0 - e.clientY / ch() };
+        scheduleFlush();
+      };
       const onTouchStart = (e) => {
         const t = e.touches[0];
-        worker.postMessage({
-          type: "pointerenter",
-          x: t.clientX / cw(),
-          y: 1.0 - t.clientY / ch(),
-        });
+        pendingEnter = { x: t.clientX / cw(), y: 1.0 - t.clientY / ch() };
+        scheduleFlush();
       };
       const onTouchMove = (e) => {
         const t = e.touches[0];
-        worker.postMessage({
-          type: "pointer",
-          x: t.clientX / cw(),
-          y: 1.0 - t.clientY / ch(),
-        });
+        pendingPointer = { x: t.clientX / cw(), y: 1.0 - t.clientY / ch() };
+        scheduleFlush();
       };
 
       container.addEventListener("mouseenter", onMouseEnter);
@@ -206,7 +219,7 @@ function startFluid(canvas, container, opts = {}) {
   const DYE_DISSIPATION = 0.978;
   const PRESS_DISSIPATION = 0.8;
   const SPLAT_RADIUS = 0.006;
-  const SPLAT_FORCE = 2000;
+  const SPLAT_FORCE = 200;
   const SIM_TEXEL = new Float32Array([1 / SIM, 1 / SIM]);
 
   const DYE_COLORS = [
@@ -495,6 +508,8 @@ function startFluid(canvas, container, opts = {}) {
 
   /* ── Pointer input ── */
   const pointer = { x: 0, y: 0, prevX: -1, prevY: -1, active: false };
+  let smoothVx = 0,
+    smoothVy = 0;
 
   function onPointerMove(cx, cy) {
     pointer.x = cx / canvas.clientWidth;
@@ -505,12 +520,16 @@ function startFluid(canvas, container, opts = {}) {
   const onMouseEnter = (e) => {
     pointer.prevX = e.clientX / canvas.clientWidth;
     pointer.prevY = 1.0 - e.clientY / canvas.clientHeight;
+    smoothVx = 0;
+    smoothVy = 0;
   };
   const onMouseMove = (e) => onPointerMove(e.clientX, e.clientY);
   const onTouchStart = (e) => {
     const t = e.touches[0];
     pointer.prevX = t.clientX / canvas.clientWidth;
     pointer.prevY = 1.0 - t.clientY / canvas.clientHeight;
+    smoothVx = 0;
+    smoothVy = 0;
   };
   const onTouchMove = (e) =>
     onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
@@ -590,14 +609,22 @@ function startFluid(canvas, container, opts = {}) {
     }
 
     if (pointer.active && pointer.prevX >= 0) {
-      const dx = (pointer.x - pointer.prevX) * canvas.clientWidth * 10;
-      const dy = (pointer.y - pointer.prevY) * canvas.clientHeight * 10;
+      const rawDx = (pointer.x - pointer.prevX) * canvas.clientWidth;
+      const rawDy = (pointer.y - pointer.prevY) * canvas.clientHeight;
       pointer.prevX = pointer.x;
       pointer.prevY = pointer.y;
-      if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
-        const vx = Math.max(-20000, Math.min(20000, dx * SPLAT_FORCE));
-        const vy = Math.max(-20000, Math.min(20000, dy * SPLAT_FORCE));
-        splat(pointer.x, pointer.y, vx, vy, SPLAT_RADIUS);
+      const speed = Math.sqrt(rawDx * rawDx + rawDy * rawDy);
+      if (speed > 0.5) {
+        const force = Math.min(8000, Math.sqrt(speed) * SPLAT_FORCE);
+        const vx = (rawDx / speed) * force;
+        const vy = (rawDy / speed) * force;
+        const EMA = 0.3;
+        smoothVx += EMA * (vx - smoothVx);
+        smoothVy += EMA * (vy - smoothVy);
+        splat(pointer.x, pointer.y, smoothVx, smoothVy, SPLAT_RADIUS);
+      } else {
+        smoothVx *= 0.85;
+        smoothVy *= 0.85;
       }
     } else if (pointer.active) {
       pointer.prevX = pointer.x;

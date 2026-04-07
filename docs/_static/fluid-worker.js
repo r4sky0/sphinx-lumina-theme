@@ -14,6 +14,8 @@ let darkMode = 0;
 let prefersReduced = false;
 let frameId = 0;
 const pointer = { x: 0, y: 0, prevX: -1, prevY: -1, active: false };
+let smoothVx = 0,
+  smoothVy = 0;
 
 /* ── Message handler ── */
 self.onmessage = (e) => {
@@ -30,6 +32,8 @@ self.onmessage = (e) => {
     case "pointerenter":
       pointer.prevX = d.x;
       pointer.prevY = d.y;
+      smoothVx = 0;
+      smoothVy = 0;
       break;
     case "theme":
       darkMode = d.dark ? 1.0 : 0.0;
@@ -71,7 +75,7 @@ function init(cfg) {
   const DYE_DISSIPATION = 0.978;
   const PRESS_DISSIPATION = 0.8;
   const SPLAT_RADIUS = 0.006;
-  const SPLAT_FORCE = 2000;
+  const SPLAT_FORCE = 200;
   const SIM_TEXEL = new Float32Array([1 / SIM, 1 / SIM]);
 
   const DYE_COLORS = [
@@ -414,14 +418,22 @@ function init(cfg) {
 
     /* Input */
     if (pointer.active && pointer.prevX >= 0) {
-      const dx = (pointer.x - pointer.prevX) * cw * 10;
-      const dy = (pointer.y - pointer.prevY) * ch * 10;
+      const rawDx = (pointer.x - pointer.prevX) * cw;
+      const rawDy = (pointer.y - pointer.prevY) * ch;
       pointer.prevX = pointer.x;
       pointer.prevY = pointer.y;
-      if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
-        const vx = Math.max(-20000, Math.min(20000, dx * SPLAT_FORCE));
-        const vy = Math.max(-20000, Math.min(20000, dy * SPLAT_FORCE));
-        splat(pointer.x, pointer.y, vx, vy, SPLAT_RADIUS);
+      const speed = Math.sqrt(rawDx * rawDx + rawDy * rawDy);
+      if (speed > 0.5) {
+        const force = Math.min(8000, Math.sqrt(speed) * SPLAT_FORCE);
+        const vx = (rawDx / speed) * force;
+        const vy = (rawDy / speed) * force;
+        const EMA = 0.3;
+        smoothVx += EMA * (vx - smoothVx);
+        smoothVy += EMA * (vy - smoothVy);
+        splat(pointer.x, pointer.y, smoothVx, smoothVy, SPLAT_RADIUS);
+      } else {
+        smoothVx *= 0.85;
+        smoothVy *= 0.85;
       }
     } else if (pointer.active) {
       pointer.prevX = pointer.x;
