@@ -152,3 +152,12 @@
     animation: none;
   }
 }
+
+/* ── Wide layout mode ── */
+[data-layout="wide"] .lumina-hero-content {
+  max-width: 60rem;
+}
+
+[data-layout="wide"] .lumina-landing-content {
+  max-width: 60rem;
+}

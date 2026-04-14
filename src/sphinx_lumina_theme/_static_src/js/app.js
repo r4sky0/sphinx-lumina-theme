@@ -20,6 +20,7 @@ import tryIt, { tryItPanel } from "./try-it.js";
 import backToTop from "./back-to-top.js";
 import announcementBanner from "./announcement.js";
 import versionSwitcher from "./version-switcher.js";
+import layoutToggle from "./layout-toggle.js";
 Alpine.data("scrollspy", scrollspy);
 Alpine.data("themeToggle", themeToggle);
 Alpine.data("searchModal", searchModal);
@@ -32,6 +33,7 @@ Alpine.data("tryItPanel", tryItPanel);
 Alpine.data("backToTop", backToTop);
 Alpine.data("announcementBanner", announcementBanner);
 Alpine.data("versionSwitcher", versionSwitcher);
+Alpine.data("layoutToggle", layoutToggle);
 
 window.Alpine = Alpine;
 

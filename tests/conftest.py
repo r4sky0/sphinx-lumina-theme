@@ -30,6 +30,26 @@ def build_output(tmp_path_factory):
 
 
 @pytest.fixture(scope="session")
+def wide_build_output(tmp_path_factory):
+    """Build sample docs with wide_layout enabled."""
+    src_dir = Path(__file__).parent / "sample_docs"
+    out_dir = tmp_path_factory.mktemp("wide_build")
+    doctree_dir = out_dir / ".doctrees"
+
+    app = Sphinx(
+        srcdir=str(src_dir),
+        confdir=str(src_dir),
+        outdir=str(out_dir),
+        doctreedir=str(doctree_dir),
+        buildername="html",
+        freshenv=True,
+        confoverrides={"html_theme_options.wide_layout": "true"},
+    )
+    app.build()
+    return out_dir
+
+
+@pytest.fixture(scope="session")
 def index_html(build_output):
     """Return parsed HTML of the index page."""
     from bs4 import BeautifulSoup
