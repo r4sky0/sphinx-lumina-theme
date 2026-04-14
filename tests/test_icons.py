@@ -126,3 +126,21 @@ class TestSidebarIcons:
         assert link is not None, "Should find getting-started link in sidebar"
         svg = link.find("svg", class_="lumina-sidebar-icon")
         assert svg is None, "Sidebar link without icon metadata should have no icon"
+
+
+class TestLogoIcon:
+    """Tests for the logo_icon theme option."""
+
+    def test_logo_icon_renders_svg_in_header(self, icons_html):
+        """When logo_icon is set, header should contain an SVG with lumina-logo-icon class."""
+        header = icons_html.find("header")
+        assert header is not None
+        svg = header.find("svg", class_="lumina-logo-icon")
+        assert svg is not None, "Header should have a logo icon SVG"
+
+    def test_logo_icon_has_aria_hidden(self, icons_html):
+        """Logo icon SVG should be decorative (aria-hidden)."""
+        header = icons_html.find("header")
+        svg = header.find("svg", class_="lumina-logo-icon")
+        assert svg is not None
+        assert svg.get("aria-hidden") == "true"
