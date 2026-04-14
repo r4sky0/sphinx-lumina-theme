@@ -2,6 +2,30 @@
 
 <!-- releases -->
 
+## v1.25.2 (2026-04-14)
+
+### Bug Fixes
+
+- Remove page-load transition animation
+  ([#57](https://github.com/r4sky0/sphinx-lumina-theme/pull/57),
+  [`853be35`](https://github.com/r4sky0/sphinx-lumina-theme/commit/853be35a0068b0d9bb63b76517f641c0791dba32))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump actions/github-script from 8.0.0 to 9.0.0
+  ([#55](https://github.com/r4sky0/sphinx-lumina-theme/pull/55),
+  [`6f6b1aa`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6f6b1aae4983289a941273ad8fba6d1e73e6d8ea))
+
+- **deps**: Bump pypa/gh-action-pypi-publish from 1.13.0 to 1.14.0 in the github-actions-minor group
+  ([#54](https://github.com/r4sky0/sphinx-lumina-theme/pull/54),
+  [`c4f53c5`](https://github.com/r4sky0/sphinx-lumina-theme/commit/c4f53c5e7dc703eb48873e50057c6b980dc121a2))
+
+</details>
+
+
 ## v1.25.1 (2026-04-07)
 
 ### Bug Fixes
