@@ -137,6 +137,12 @@ def _add_context(app, pagename, templatename, context, doctree):
     context["js_tag"] = _deferred_js_tag
 
     if "template" in meta:
+        # Icon browser page: inject all icon names + SVG inner content
+        if meta["template"] == "icon-browser.html":
+            from ._icons import ICONS
+
+            context["icon_entries"] = sorted(ICONS.items())
+            context["icon_count"] = len(ICONS)
         return meta["template"]
 
 
