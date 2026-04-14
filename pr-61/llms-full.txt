@@ -33,6 +33,8 @@ Python API docs with functions, classes, autodoc, and cross-referencing.
 
 OpenAPI auto-generated docs and manual HTTP method directives.
 
+Browse all 1900+ Lucide icons available for cards, sidebar, and logo.
+
 
 # index.html.md
 
@@ -2176,6 +2178,11 @@ The syntax:
 :http:post:`/users`
 :http:delete:`/users/(int:user_id)`
 ```
+
+
+# icons.html.md
+
+# Icon Browser
 
 
 # icons.html.md

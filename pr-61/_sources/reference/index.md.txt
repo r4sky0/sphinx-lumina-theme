@@ -77,6 +77,12 @@ Python API docs with functions, classes, autodoc, and cross-referencing.
 OpenAPI auto-generated docs and manual HTTP method directives.
 :::
 
+:::{grid-item-card} Icons
+:link: icons
+:link-type: doc
+Browse all 1900+ Lucide icons available for cards, sidebar, and logo.
+:::
+
 ::::
 
 ```{toctree}
@@ -93,4 +99,5 @@ diagrams
 footnotes-and-references
 api-documentation
 http-api
+icons
 ```

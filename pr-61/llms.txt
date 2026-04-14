@@ -24,6 +24,7 @@
 - [Diagrams](reference/diagrams.html.md): Lumina supports [Mermaid](https://mermaid.js.org/) diagrams via the `sphinxcontrib-mermaid` extensio...
 - [Footnotes & References](reference/footnotes-and-references.html.md): Cross-referencing, citations, glossaries, and linking across documents and projects.
 - [HTTP API Documentation](reference/http-api.html.md): How HTTP API endpoints render in the Lumina theme. This page covers auto-generated docs from OpenAPI...
+- [Icon Browser](reference/icons.html.md): Page content
 - [Icons](guides/icons.html.md): Add [Lucide](https://lucide.dev/icons/) icons to cards, sidebar navigation, and your site logo.
 - [Images & Figures](reference/images-and-figures.html.md): Embedding and formatting visual content in your documentation.
 - [Installation](getting-started/installation.html.md): Install the Lumina theme and build your first page.

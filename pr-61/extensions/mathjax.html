@@ -11,7 +11,7 @@
     <title>MathJax &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=22b22d50" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=ca11bbe0" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=1416ca66"></script>
+    <script defer="defer" src="../_static/lumina.js?v=6a0e71b7"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Reference" href="../reference/index.html" />
@@ -105,15 +105,7 @@
             <button @click="dismiss()"
                     class="shrink-0 rounded p-0.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                     aria-label="Dismiss announcement"
-                    type="button">
-                <svg class="h-4 w-4"
-                     fill="none"
-                     stroke="currentColor"
-                     viewBox="0 0 24 24"
-                     aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
+                    type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
         </div>
     </div>
 
@@ -153,13 +145,7 @@
                     class="flex items-center gap-2 rounded-lg border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-3 py-2 text-[0.8125rem] text-[var(--lumina-text-muted)] hover:border-[var(--lumina-accent)] transition-colors cursor-pointer lg:min-w-56"
                     aria-label="Search documentation"
                     aria-haspopup="dialog">
-                <svg class="h-4 w-4 shrink-0"
-                     fill="none"
-                     stroke="currentColor"
-                     viewBox="0 0 24 24"
-                     aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
                 <span class="hidden lg:inline flex-1 text-left">Search docs...</span>
                 <kbd data-search-shortcut
                      class="hidden lg:inline rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-1.5 py-0.5 text-[0.6875rem] font-[family-name:'JetBrains_Mono'] tracking-[0.02em]">⌘K</kbd>
@@ -181,9 +167,12 @@
                      class="h-5 w-5 absolute"
                      fill="none"
                      stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
                      viewBox="0 0 24 24"
                      aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    <circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />
                 </svg>
                 
                 <svg x-show="mode === 'dark'"
@@ -196,9 +185,12 @@
                      class="h-5 w-5 absolute"
                      fill="none"
                      stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
                      viewBox="0 0 24 24"
                      aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
                 </svg>
                 
                 <svg x-show="mode === 'auto'"
@@ -211,9 +203,12 @@
                      class="h-5 w-5 absolute"
                      fill="none"
                      stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
                      viewBox="0 0 24 24"
                      aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    <rect width="20" height="14" x="2" y="3" rx="2" /><line x1="8" x2="16" y1="21" y2="21" /><line x1="12" x2="12" y1="17" y2="21" />
                 </svg>
             </button>
             
@@ -233,10 +228,7 @@
                          stroke-width="2"
                          stroke-linecap="round"
                          stroke-linejoin="round">
-                        <polyline points="15 3 21 3 21 9" />
-                        <polyline points="9 21 3 21 3 15" />
-                        <line x1="21" y1="3" x2="14" y2="10" />
-                        <line x1="3" y1="21" x2="10" y2="14" />
+                        <path d="M15 3h6v6" /><path d="m21 3-7 7" /><path d="m3 21 7-7" /><path d="M9 21H3v-6" />
                     </svg>
                     
                     <svg x-show="wide"
@@ -249,10 +241,7 @@
                          stroke-width="2"
                          stroke-linecap="round"
                          stroke-linejoin="round">
-                        <polyline points="4 14 10 14 10 20" />
-                        <polyline points="20 10 14 10 14 4" />
-                        <line x1="14" y1="10" x2="21" y2="3" />
-                        <line x1="3" y1="21" x2="10" y2="14" />
+                        <path d="m14 10 7-7" /><path d="M20 10h-6V4" /><path d="m3 21 7-7" /><path d="M4 14h6v6" />
                     </svg>
                 </button>
             
@@ -281,15 +270,7 @@
                         class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors lg:hidden cursor-pointer"
                         aria-label="Toggle navigation"
                         aria-expanded="false"
-                        aria-controls="lumina-sidebar-drawer">
-                    <svg class="h-5 w-5"
-                         fill="none"
-                         stroke="currentColor"
-                         viewBox="0 0 24 24"
-                         aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
+                        aria-controls="lumina-sidebar-drawer"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg></button>
             
         </div>
     </div>
@@ -347,6 +328,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../reference/footnotes-and-references.html">Footnotes &amp; References</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/api-documentation.html">API Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/http-api.html">HTTP API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/icons.html">Icon Browser</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a><ul>
@@ -404,15 +386,7 @@
                 <button data-sidebar-close
                         @click="close()"
                         class="absolute top-4 right-4 rounded-md p-1 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] cursor-pointer"
-                        aria-label="Close navigation">
-                    <svg class="h-5 w-5"
-                         fill="none"
-                         stroke="currentColor"
-                         viewBox="0 0 24 24"
-                         aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+                        aria-label="Close navigation"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
                 
                 
                 <nav class="lumina-sidebar-nav" aria-label="Main navigation">
@@ -460,6 +434,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../reference/footnotes-and-references.html">Footnotes &amp; References</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/api-documentation.html">API Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/http-api.html">HTTP API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/icons.html">Icon Browser</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a><ul>
@@ -497,23 +472,12 @@
        class="whitespace-nowrap hover:text-[var(--lumina-accent)] no-underline transition-colors">Sphinx Lumina Theme  documentation</a>
     
         
-            <svg class="h-3.5 w-3.5 flex-shrink-0"
-                 fill="none"
-                 stroke="currentColor"
-                 viewBox="0 0 24 24"
-                 aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
             <a href="index.html"
                class="whitespace-nowrap hover:text-[var(--lumina-accent)] no-underline transition-colors">Extensions</a>
         
     
-    <svg class="h-3.5 w-3.5 flex-shrink-0"
-         fill="none"
-         stroke="currentColor"
-         viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
     <span class="whitespace-nowrap text-[var(--lumina-text)]">MathJax</span>
 </nav>
 
@@ -535,8 +499,7 @@
                          stroke-width="2"
                          stroke-linecap="round"
                          stroke-linejoin="round">
-                        <rect x="9" y="9" width="13" height="13" rx="2" />
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                        <rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
                     </svg>
                     <svg x-show="copied"
                          x-cloak
@@ -548,7 +511,7 @@
                          stroke-width="2"
                          stroke-linecap="round"
                          stroke-linejoin="round">
-                        <polyline points="20 6 9 17 4 12" />
+                        <path d="M20 6 9 17l-5-5" />
                     </svg>
                     <span class="hidden sm:inline"
                           x-text="copied ? 'Copied!' : 'Copy Markdown'"></span>
@@ -620,13 +583,7 @@ $$
     
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)]">
-            <svg class="h-3.5 w-3.5 shrink-0"
-                 fill="none"
-                 stroke="currentColor"
-                 viewBox="0 0 24 24"
-                 aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
             Last updated <time>April 4, 2026</time>
         </p>
     
@@ -650,13 +607,7 @@ $$
                class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)] no-underline hover:text-[var(--lumina-accent)] transition-colors"
                target="_blank"
                rel="noopener">
-                <svg class="h-3.5 w-3.5"
-                     fill="none"
-                     stroke="currentColor"
-                     viewBox="0 0 24 24"
-                     aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg>
                 Edit this page
             </a>
         
@@ -695,15 +646,7 @@ $$
                 @click="scrollToTop()"
                 class="fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--lumina-border)] bg-[var(--lumina-bg)] text-[var(--lumina-text-muted)] shadow-md hover:text-[var(--lumina-text)] hover:border-[var(--lumina-accent)] hover:shadow-lg transition-all cursor-pointer"
                 aria-label="Back to top"
-                type="button">
-            <svg class="h-5 w-5"
-                 fill="none"
-                 stroke="currentColor"
-                 viewBox="0 0 24 24"
-                 aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-            </svg>
-        </button>
+                type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6" /></svg></button>
     
 
     <div id="lumina-search-modal"
@@ -736,13 +679,7 @@ $$
          x-transition:leave-end="opacity-0 scale-95">
         
         <div class="flex items-center border-b border-[var(--lumina-border)] px-4">
-            <svg class="h-5 w-5 text-[var(--lumina-text-muted)]"
-                 fill="none"
-                 stroke="currentColor"
-                 viewBox="0 0 24 24"
-                 aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--lumina-text-muted)]" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
             <input type="search"
                    x-ref="searchInput"
                    x-model="query"
