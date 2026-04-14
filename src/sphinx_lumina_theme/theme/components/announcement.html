@@ -8,15 +8,7 @@
             <button @click="dismiss()"
                     class="shrink-0 rounded p-0.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                     aria-label="Dismiss announcement"
-                    type="button">
-                <svg class="h-4 w-4"
-                     fill="none"
-                     stroke="currentColor"
-                     viewBox="0 0 24 24"
-                     aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
+                    type="button">{{ lumina_icon("x", size=16) }}</button>
         </div>
     </div>
 {% endif %}

@@ -194,6 +194,10 @@ a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
 [data-theme="dark"] .lumina-logo-light { display: none; }
 [data-theme="dark"] .lumina-logo-dark { display: block; }
 
+.lumina-logo-icon {
+  color: var(--lumina-accent);
+}
+
 /* ── Selection ── */
 ::selection {
   background-color: color-mix(in srgb, var(--lumina-accent) 25%, transparent);
@@ -337,6 +341,25 @@ a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
 
 .lumina-sidebar-nav .current > ul {
   border-left-color: color-mix(in srgb, var(--lumina-accent) 50%, var(--lumina-border));
+}
+
+/* Sidebar icons */
+.lumina-sidebar-nav a:has(.lumina-sidebar-icon) {
+  display: flex;
+  align-items: center;
+  gap: 0.4375rem;
+}
+
+.lumina-sidebar-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--lumina-text-muted);
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.lumina-sidebar-nav .current > a > .lumina-sidebar-icon {
+  color: var(--lumina-accent);
 }
 
 /* Active leaf link — accent bar on current child page */
@@ -563,8 +586,8 @@ a.headerlink::before {
   height: 0.7em;
   font-size: 1rem;
   background-color: var(--lumina-text);
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2.5' stroke='black'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2.5' stroke='black'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20fill=%27none%27%20viewBox=%270%200%2024%2024%27%20stroke=%27black%27%20stroke-width=%272.5%27%20stroke-linecap=%27round%27%20stroke-linejoin=%27round%27%3E%3Cpath%20d=%22M10%2013a5%205%200%200%200%207.54.54l3-3a5%205%200%200%200-7.07-7.07l-1.72%201.71%22%20/%3E%3Cpath%20d=%22M14%2011a5%205%200%200%200-7.54-.54l-3%203a5%205%200%200%200%207.07%207.07l1.71-1.71%22%20/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20fill=%27none%27%20viewBox=%270%200%2024%2024%27%20stroke=%27black%27%20stroke-width=%272.5%27%20stroke-linecap=%27round%27%20stroke-linejoin=%27round%27%3E%3Cpath%20d=%22M10%2013a5%205%200%200%200%207.54.54l3-3a5%205%200%200%200-7.07-7.07l-1.72%201.71%22%20/%3E%3Cpath%20d=%22M14%2011a5%205%200%200%200-7.54-.54l-3%203a5%205%200%200%200%207.07%207.07l1.71-1.71%22%20/%3E%3C/svg%3E");
   -webkit-mask-size: contain;
   mask-size: contain;
   -webkit-mask-repeat: no-repeat;

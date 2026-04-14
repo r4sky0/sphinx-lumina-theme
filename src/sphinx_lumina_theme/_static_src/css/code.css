@@ -127,7 +127,7 @@ div.highlight {
   width: 0.875rem;
   height: 0.875rem;
   background-color: var(--lumina-text-muted);
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2024%2024%27%20fill=%27none%27%20stroke=%27black%27%20stroke-width=%272%27%20stroke-linecap=%27round%27%20stroke-linejoin=%27round%27%3E%3Cpath%20d=%22M6%2022a2%202%200%200%201-2-2V4a2%202%200%200%201%202-2h8a2.4%202.4%200%200%201%201.704.706l3.588%203.588A2.4%202.4%200%200%201%2020%208v12a2%202%200%200%201-2%202z%22%20/%3E%3Cpath%20d=%22M14%202v5a1%201%200%200%200%201%201h5%22%20/%3E%3C/svg%3E");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -318,6 +318,38 @@ div.highlight {
 .sd-card-text {
   color: var(--lumina-text-muted) !important;
   font-size: 0.9375rem;
+}
+
+/* Card icon — inline (default) */
+.sd-card-icon-inline {
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sd-card-icon-inline .lumina-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--lumina-accent);
+  flex-shrink: 0;
+}
+
+/* Card icon — featured */
+.sd-card-icon-featured {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: color-mix(in srgb, var(--lumina-accent) 10%, transparent);
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.sd-card-icon-featured .lumina-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--lumina-accent);
 }
 
 /* ── sphinx-design grid ── */

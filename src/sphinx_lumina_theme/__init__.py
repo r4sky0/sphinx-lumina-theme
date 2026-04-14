@@ -1,6 +1,7 @@
 """Sphinx Lumina Theme — a modern documentation theme."""
 
 import hashlib
+import re
 from pathlib import Path
 
 from sphinx.util import logging
@@ -18,6 +19,52 @@ _HERO_FIELDS = (
     "hero_secondary_text",
     "hero_tags",
 )
+
+
+def _build_page_icons(app):
+    """Build a mapping of pagename → icon name from page metadata."""
+    icons = {}
+    for pagename, meta in app.env.metadata.items():
+        icon = meta.get("icon", "")
+        if icon:
+            icons[pagename] = icon
+    return icons
+
+
+def _add_sidebar_icons(toctree_html, page_icons, pagename, get_icon_fn):
+    """Post-process toctree HTML to inject icon SVGs into sidebar links."""
+    if not page_icons:
+        return toctree_html
+
+    def _replace_link(match):
+        full_match = match.group(0)
+        href = match.group(1)
+        # Self-reference links (current page) use href="#"
+        if href == "#" or href == "":
+            icon_name = page_icons.get(pagename, "")
+        else:
+            # Resolve href to pagename: strip .html, handle relative paths
+            target = re.sub(r"\.html$", "", href)
+            target = re.sub(r"/$", "/index", target)
+            # Handle relative URLs by resolving against current page
+            if not target.startswith("/") and "/" in pagename:
+                base = pagename.rsplit("/", 1)[0]
+                target = base + "/" + target
+            # Also try without path prefix for top-level pages
+            icon_name = page_icons.get(target, "")
+            if not icon_name:
+                # Try stripping leading segments
+                simple = target.rsplit("/", 1)[-1] if "/" in target else target
+                icon_name = page_icons.get(simple, "")
+        if not icon_name:
+            return full_match
+        svg = get_icon_fn(icon_name, size=16, css_class="lumina-sidebar-icon")
+        if not svg:
+            return full_match
+        # Insert SVG right after the opening <a ...> tag
+        return full_match + str(svg)
+
+    return re.sub(r'<a\b[^>]*href="([^"]*)"[^>]*>', _replace_link, toctree_html)
 
 
 def _add_context(app, pagename, templatename, context, doctree):
@@ -63,6 +110,17 @@ def _add_context(app, pagename, templatename, context, doctree):
         if field in meta:
             context[field] = meta[field]
 
+    # Icon system: make icon renderer and sidebar filter available to templates
+    from ._icon_utils import get_icon_inner, get_icon_svg
+
+    context["lumina_icon"] = get_icon_svg
+    context["lumina_icon_inner"] = get_icon_inner
+
+    page_icons = _build_page_icons(app)
+    context["add_sidebar_icons"] = lambda html: _add_sidebar_icons(
+        html, page_icons, pagename, get_icon_svg
+    )
+
     # Make all external scripts non-render-blocking (defer).
     # Sphinx places the {%- block scripts %} inside <head>, so without defer
     # every script blocks rendering.  We wrap the built-in js_tag() function
@@ -79,6 +137,12 @@ def _add_context(app, pagename, templatename, context, doctree):
     context["js_tag"] = _deferred_js_tag
 
     if "template" in meta:
+        # Icon browser page: inject all icon names + SVG inner content
+        if meta["template"] == "icon-browser.html":
+            from ._icons import ICONS
+
+            context["icon_entries"] = sorted(ICONS.items())
+            context["icon_count"] = len(ICONS)
         return meta["template"]
 
 
@@ -136,8 +200,12 @@ def _run_pagefind(app, exception):
 
 def setup(app):
     """Register the Lumina theme with Sphinx."""
+    from ._directives import LuminaCardDirective, LuminaGridItemCardDirective
+
     app.add_html_theme("lumina", str(Path(__file__).parent / "theme"))
     app.add_js_file("lumina.js", loading_method="defer", priority=900)
+    app.add_directive("card", LuminaCardDirective, override=True)
+    app.add_directive("grid-item-card", LuminaGridItemCardDirective, override=True)
     app.connect("html-page-context", _add_context)
     app.connect("build-finished", _run_pagefind)
     return {

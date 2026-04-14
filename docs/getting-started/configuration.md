@@ -65,6 +65,10 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
   - string
   - `""`
   - Logo image for dark mode (path relative to `_static`). When set alone, displays in both modes. Set both `light_logo` and `dark_logo` for automatic switching.
+* - `logo_icon`
+  - string
+  - `""`
+  - Use a [Lucide icon](https://lucide.dev/icons/) as the site logo instead of an image. Pass the icon name (e.g. `"hexagon"`). Only used when no image logo is configured. See {doc}`/guides/icons`.
 ```
 
 ### Announcement

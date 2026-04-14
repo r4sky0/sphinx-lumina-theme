@@ -44,7 +44,7 @@ build-backend = "hatchling.build"
 [tool.hatch.build.hooks.custom]
 
 [tool.hatch.build]
-artifacts = ["src/sphinx_lumina_theme/theme/static/lumina.css", "src/sphinx_lumina_theme/theme/static/lumina.js"]
+artifacts = ["src/sphinx_lumina_theme/theme/static/lumina.css", "src/sphinx_lumina_theme/theme/static/lumina.js", "src/sphinx_lumina_theme/_icons.py"]
 
 [tool.hatch.build.targets.sdist]
 exclude = [

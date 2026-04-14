@@ -70,4 +70,5 @@ Content two.
 :hidden:
 getting-started
 landing-test
+icons-test
 ```
