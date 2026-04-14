@@ -194,6 +194,10 @@ a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
 [data-theme="dark"] .lumina-logo-light { display: none; }
 [data-theme="dark"] .lumina-logo-dark { display: block; }
 
+.lumina-logo-icon {
+  color: var(--lumina-accent);
+}
+
 /* ── Selection ── */
 ::selection {
   background-color: color-mix(in srgb, var(--lumina-accent) 25%, transparent);
@@ -337,6 +341,25 @@ a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
 
 .lumina-sidebar-nav .current > ul {
   border-left-color: color-mix(in srgb, var(--lumina-accent) 50%, var(--lumina-border));
+}
+
+/* Sidebar icons */
+.lumina-sidebar-nav a:has(.lumina-sidebar-icon) {
+  display: flex;
+  align-items: center;
+  gap: 0.4375rem;
+}
+
+.lumina-sidebar-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--lumina-text-muted);
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.lumina-sidebar-nav .current > a > .lumina-sidebar-icon {
+  color: var(--lumina-accent);
 }
 
 /* Active leaf link — accent bar on current child page */
