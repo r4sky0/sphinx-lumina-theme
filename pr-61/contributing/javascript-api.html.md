@@ -20,13 +20,11 @@ Registered as `Alpine.data("scrollspy", scrollspy)`.
 **Properties:**
 
 - `activeId`  *(string|null)* — The `id` of the currently visible section.
-- `observer`  *(IntersectionObserver|null)* — The observer instance.
 
 **Methods:**
 
-- `init()` — Collects TOC link targets and starts observing.
-- `updateActive(nav)` — Toggles the `lumina-toc-active` class on TOC links.
-- `destroy()` — Disconnects the IntersectionObserver.
+- `init()` — Creates the indicator, computes positions, starts observers.
+- `destroy()` — Disconnects observers and removes the indicator element.
 
 * **Returns:**
   **object** – Alpine.js component data.
