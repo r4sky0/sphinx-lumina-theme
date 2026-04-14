@@ -1,5 +1,13 @@
 # Releases
 
+## v1.26.1 (2026-04-14)
+
+### Bug Fixes
+
+- Improve sidebar navigation visual hierarchy and typography
+  ([#60](https://github.com/r4sky0/sphinx-lumina-theme/pull/60),
+  [`bfc78dc`](https://github.com/r4sky0/sphinx-lumina-theme/commit/bfc78dce562a8ca63ec686601e5e30fcc270d2fe))
+
 ## v1.26.0 (2026-04-14)
 
 ### Features
