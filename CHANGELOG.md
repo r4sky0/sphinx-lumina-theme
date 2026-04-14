@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v1.26.0 (2026-04-14)
+
+### Features
+
+- Add wide layout mode with reader toggle
+  ([#58](https://github.com/r4sky0/sphinx-lumina-theme/pull/58),
+  [`90d784f`](https://github.com/r4sky0/sphinx-lumina-theme/commit/90d784f758542e0d19bf4bb1177bc33369a22b31))
+
+
 ## v1.25.2 (2026-04-14)
 
 ### Bug Fixes
