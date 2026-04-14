@@ -1853,7 +1853,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 1.26.1.
+This documentation is for Sphinx Lumina Theme version 1.27.0.
 
 The MyST syntax:
 
@@ -2458,13 +2458,11 @@ Registered as `Alpine.data("scrollspy", scrollspy)`.
 **Properties:**
 
 - `activeId`  *(string|null)* — The `id` of the currently visible section.
-- `observer`  *(IntersectionObserver|null)* — The observer instance.
 
 **Methods:**
 
-- `init()` — Collects TOC link targets and starts observing.
-- `updateActive(nav)` — Toggles the `lumina-toc-active` class on TOC links.
-- `destroy()` — Disconnects the IntersectionObserver.
+- `init()` — Creates the indicator, computes positions, starts observers.
+- `destroy()` — Disconnects observers and removes the indicator element.
 
 * **Returns:**
   **object** – Alpine.js component data.
@@ -3594,6 +3592,14 @@ The token is cleared when the browser tab is closed (sessionStorage scope).
 # releases.html.md
 
 # Releases
+
+## v1.27.0 (2026-04-14)
+
+### Features
+
+- Redesign TOC with sliding indicator and typographic hierarchy
+  ([#62](https://github.com/r4sky0/sphinx-lumina-theme/pull/62),
+  [`5b4fa4f`](https://github.com/r4sky0/sphinx-lumina-theme/commit/5b4fa4f89dd6da38eccd2f5d2750e4521c1c7d1a))
 
 ## v1.26.1 (2026-04-14)
 

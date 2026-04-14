@@ -1,5 +1,13 @@
 # Releases
 
+## v1.27.0 (2026-04-14)
+
+### Features
+
+- Redesign TOC with sliding indicator and typographic hierarchy
+  ([#62](https://github.com/r4sky0/sphinx-lumina-theme/pull/62),
+  [`5b4fa4f`](https://github.com/r4sky0/sphinx-lumina-theme/commit/5b4fa4f89dd6da38eccd2f5d2750e4521c1c7d1a))
+
 ## v1.26.1 (2026-04-14)
 
 ### Bug Fixes
