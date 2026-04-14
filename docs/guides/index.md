@@ -41,6 +41,12 @@ CSS custom properties, fonts, syntax highlighting, and templates.
 Create a full-width entry point with an optional hero section.
 :::
 
+:::{grid-item-card} Wide Layout
+:link: wide-layout
+:link-type: doc
+Expand the content area for code-heavy docs on wide screens.
+:::
+
 :::{grid-item-card} Development Workflow
 :link: development-workflow
 :link-type: doc
@@ -57,5 +63,6 @@ myst-markdown
 navigation
 custom-styling
 landing-page
+wide-layout
 development-workflow
 ```
