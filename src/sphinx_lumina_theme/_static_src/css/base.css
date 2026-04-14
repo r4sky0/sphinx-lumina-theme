@@ -412,6 +412,19 @@ html.has-announcement .lumina-sidebar-desktop {
   padding: 2rem clamp(1rem, 2vw, 2.5rem) 4rem;
 }
 
+/* ── Wide layout mode ── */
+[data-layout="wide"] .lumina-wrapper {
+  max-width: 100rem;
+}
+
+[data-layout="wide"] #lumina-content {
+  max-width: 60rem;
+}
+
+[data-layout="wide"] .lumina-header-inner {
+  max-width: 100rem;
+}
+
 /* Responsive: hide TOC below xl */
 @media (max-width: 1279px) {
   #lumina-toc > div { display: none; }

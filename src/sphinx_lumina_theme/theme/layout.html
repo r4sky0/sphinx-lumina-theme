@@ -32,6 +32,15 @@
   }
 })();
     </script>
+    {% if lumina_wide_layout %}
+        <script>
+(function() {
+  if (localStorage.getItem('lumina-layout') === 'wide') {
+    document.documentElement.setAttribute('data-layout', 'wide');
+  }
+})();
+        </script>
+    {% endif %}
     <meta name="lumina-search-backend" content="{{ theme_search_backend }}">
     <meta name="lumina-base-url" content="{{ pathto('', 1) }}">
     {% if theme_api_base_url %}

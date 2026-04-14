@@ -49,6 +49,10 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
   - string
   - `"auto"`
   - Initial color mode. `"auto"` follows system preference, `"light"` and `"dark"` force a mode.
+* - `wide_layout`
+  - string
+  - `"false"`
+  - Enables a layout toggle in the header that lets readers switch to a wider content area (`60rem` instead of `48rem`). Useful for code-heavy documentation on wide screens. The toggle appears only on viewports ≥1280px and the preference is persisted in the reader's browser.
 * - `logo_only`
   - string
   - `"false"`
