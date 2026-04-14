@@ -47,6 +47,12 @@ Create a full-width entry point with an optional hero section.
 Expand the content area for code-heavy docs on wide screens.
 :::
 
+:::{grid-item-card} Icons
+:link: icons
+:link-type: doc
+Add Lucide icons to cards, sidebar items, and your logo.
+:::
+
 :::{grid-item-card} Development Workflow
 :link: development-workflow
 :link-type: doc
@@ -64,5 +70,6 @@ navigation
 custom-styling
 landing-page
 wide-layout
+icons
 development-workflow
 ```
