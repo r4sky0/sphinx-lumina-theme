@@ -1,7 +1,10 @@
 """Tests for the Lucide icon system."""
 
+from pathlib import Path
+
 import pytest
 from bs4 import BeautifulSoup
+from sphinx.application import Sphinx
 
 from sphinx_lumina_theme._icon_utils import get_icon_svg
 
@@ -128,19 +131,56 @@ class TestSidebarIcons:
         assert svg is None, "Sidebar link without icon metadata should have no icon"
 
 
+def _build_with_logo_icon(tmp_path):
+    """Build sample docs with logo_icon option and return parsed HTML."""
+    import shutil
+
+    src_dir = Path(__file__).parent / "sample_docs"
+    conf_dir = tmp_path / "conf"
+    conf_dir.mkdir()
+    out_dir = tmp_path / "build"
+    doctree_dir = out_dir / ".doctrees"
+
+    (conf_dir / "conf.py").write_text(
+        'project = "Test"\n'
+        'extensions = ["myst_parser", "sphinx_design"]\n'
+        'html_theme = "lumina"\n'
+        'html_theme_options = {"logo_icon": "hexagon"}\n'
+        'exclude_patterns = ["_build"]\n'
+        'myst_enable_extensions = ["colon_fence"]\n'
+    )
+
+    for f in src_dir.iterdir():
+        if f.name != "conf.py":
+            shutil.copy2(f, conf_dir / f.name)
+
+    app = Sphinx(
+        srcdir=str(conf_dir),
+        confdir=str(conf_dir),
+        outdir=str(out_dir),
+        doctreedir=str(doctree_dir),
+        buildername="html",
+        freshenv=True,
+    )
+    app.build()
+    return BeautifulSoup((out_dir / "index.html").read_text(), "html.parser")
+
+
 class TestLogoIcon:
     """Tests for the logo_icon theme option."""
 
-    def test_logo_icon_renders_svg_in_header(self, icons_html):
+    def test_logo_icon_renders_svg_in_header(self, tmp_path):
         """When logo_icon is set, header should contain an SVG with lumina-logo-icon class."""
-        header = icons_html.find("header")
+        html = _build_with_logo_icon(tmp_path)
+        header = html.find("header")
         assert header is not None
         svg = header.find("svg", class_="lumina-logo-icon")
         assert svg is not None, "Header should have a logo icon SVG"
 
-    def test_logo_icon_has_aria_hidden(self, icons_html):
+    def test_logo_icon_has_aria_hidden(self, tmp_path):
         """Logo icon SVG should be decorative (aria-hidden)."""
-        header = icons_html.find("header")
+        html = _build_with_logo_icon(tmp_path)
+        header = html.find("header")
         svg = header.find("svg", class_="lumina-logo-icon")
         assert svg is not None
         assert svg.get("aria-hidden") == "true"

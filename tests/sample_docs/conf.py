@@ -8,7 +8,6 @@ extensions = [
 ]
 html_theme = "lumina"
 html_theme_options = {
-    "logo_icon": "hexagon",
     "nav_links": [
         {"title": "Guide", "url": "getting-started"},
         {"title": "GitHub", "url": "https://github.com/example/test", "external": True},
