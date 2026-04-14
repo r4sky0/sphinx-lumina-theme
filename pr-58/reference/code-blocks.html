@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-06T08:47:23+00:00" />
+    <meta property="article:modified_time" content="2026-04-14T19:16:46+00:00" />
     <title>Code Blocks &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
@@ -50,6 +50,14 @@
   }
 })();
     </script>
+    
+        <script>
+(function() {
+  if (localStorage.getItem('lumina-layout') === 'wide') {
+    document.documentElement.setAttribute('data-layout', 'wide');
+  }
+})();
+        </script>
     
     <meta name="lumina-search-backend" content="pagefind">
     <meta name="lumina-base-url" content="../">
@@ -208,6 +216,45 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
             </button>
+            
+                
+                <button x-data="layoutToggle()"
+                        @click="toggle()"
+                        class="hidden xl:flex h-9 w-9 items-center justify-center rounded-md text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors cursor-pointer"
+                        :aria-label="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
+                        type="button">
+                    
+                    <svg x-show="!wide"
+                         class="h-4 w-4"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         aria-hidden="true"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <polyline points="15 3 21 3 21 9" />
+                        <polyline points="9 21 3 21 3 15" />
+                        <line x1="21" y1="3" x2="14" y2="10" />
+                        <line x1="3" y1="21" x2="10" y2="14" />
+                    </svg>
+                    
+                    <svg x-show="wide"
+                         x-cloak
+                         class="h-4 w-4"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         aria-hidden="true"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <polyline points="4 14 10 14 10 20" />
+                        <polyline points="20 10 14 10 14 4" />
+                        <line x1="14" y1="10" x2="21" y2="3" />
+                        <line x1="3" y1="21" x2="10" y2="14" />
+                    </svg>
+                </button>
             
             
             
@@ -914,7 +961,7 @@ Rust</label><div class="sd-tab-content docutils">
                  aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            Last updated <time>April 6, 2026</time>
+            Last updated <time>April 14, 2026</time>
         </p>
     
     
