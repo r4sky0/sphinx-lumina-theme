@@ -111,9 +111,10 @@ def _add_context(app, pagename, templatename, context, doctree):
             context[field] = meta[field]
 
     # Icon system: make icon renderer and sidebar filter available to templates
-    from ._icon_utils import get_icon_svg
+    from ._icon_utils import get_icon_inner, get_icon_svg
 
     context["lumina_icon"] = get_icon_svg
+    context["lumina_icon_inner"] = get_icon_inner
 
     page_icons = _build_page_icons(app)
     context["add_sidebar_icons"] = lambda html: _add_sidebar_icons(

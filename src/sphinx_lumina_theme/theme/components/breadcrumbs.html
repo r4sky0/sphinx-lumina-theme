@@ -5,22 +5,11 @@
        class="whitespace-nowrap hover:text-[var(--lumina-accent)] no-underline transition-colors">{{ shorttitle }}</a>
     {% if parents %}
         {% for parent in parents %}
-            <svg class="h-3.5 w-3.5 flex-shrink-0"
-                 fill="none"
-                 stroke="currentColor"
-                 viewBox="0 0 24 24"
-                 aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
+            {{ lumina_icon("chevron-right", size=14, css_class="flex-shrink-0") }}
             <a href="{{ parent.link }}"
                class="whitespace-nowrap hover:text-[var(--lumina-accent)] no-underline transition-colors">{{ parent.title }}</a>
         {% endfor %}
     {% endif %}
-    <svg class="h-3.5 w-3.5 flex-shrink-0"
-         fill="none"
-         stroke="currentColor"
-         viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-    </svg>
+    {{ lumina_icon("chevron-right", size=14, css_class="flex-shrink-0") }}
     <span class="whitespace-nowrap text-[var(--lumina-text)]">{{ title }}</span>
 </nav>

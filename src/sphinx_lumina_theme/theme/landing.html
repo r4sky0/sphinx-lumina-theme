@@ -24,15 +24,7 @@
                         <a href="{{ pathto(hero_primary_url) if hero_primary_url is defined and hero_primary_url else '#' }}"
                            class="lumina-hero-btn lumina-hero-btn-primary">
                             {{ hero_primary_text }}
-                            <svg viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 stroke-width="2.5"
-                                 stroke-linecap="round"
-                                 stroke-linejoin="round"
-                                 aria-hidden="true">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
+                            {{ lumina_icon("arrow-right", stroke_width=2.5, css_class="lumina-hero-arrow") }}
                         </a>
                         {% if hero_secondary_text is defined and hero_secondary_text %}
                             <a href="{{ hero_secondary_url if hero_secondary_url is defined else '#' }}"

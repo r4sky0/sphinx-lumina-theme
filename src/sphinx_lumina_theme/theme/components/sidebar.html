@@ -50,15 +50,7 @@
                 <button data-sidebar-close
                         @click="close()"
                         class="absolute top-4 right-4 rounded-md p-1 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] cursor-pointer"
-                        aria-label="Close navigation">
-                    <svg class="h-5 w-5"
-                         fill="none"
-                         stroke="currentColor"
-                         viewBox="0 0 24 24"
-                         aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+                        aria-label="Close navigation">{{ lumina_icon("x", size=20) }}</button>
                 {# Flattened nav links for mobile #}
                 {% if theme_nav_links and theme_nav_links != "" %}
                     <div class="mb-4 border-b border-[var(--lumina-border)] pb-4">
