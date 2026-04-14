@@ -1,5 +1,13 @@
 # Releases
 
+## v1.28.0 (2026-04-14)
+
+### Features
+
+- Add Lucide icon system for cards, sidebar, and logo
+  ([#61](https://github.com/r4sky0/sphinx-lumina-theme/pull/61),
+  [`d52cbb6`](https://github.com/r4sky0/sphinx-lumina-theme/commit/d52cbb6cefcd714e5e187d2380758864c8a7e267))
+
 ## v1.27.0 (2026-04-14)
 
 ### Features
