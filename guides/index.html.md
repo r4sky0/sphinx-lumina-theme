@@ -16,4 +16,6 @@ Create a full-width entry point with an optional hero section.
 
 Expand the content area for code-heavy docs on wide screens.
 
+Add Lucide icons to cards, sidebar items, and your logo.
+
 Live reload with sphinx-autobuild and the asset watcher.

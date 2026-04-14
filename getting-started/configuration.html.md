@@ -36,6 +36,7 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 | `logo_only`         | string | `"false"`   | When `"true"`, hides the project name in the header and shows only the logo.                                                                                                                                                                                                    |
 | `light_logo`        | string | `""`        | Logo image for light mode (path relative to `_static`). Falls back to `html_logo`.                                                                                                                                                                                              |
 | `dark_logo`         | string | `""`        | Logo image for dark mode (path relative to `_static`). When set alone, displays in both modes. Set both `light_logo` and `dark_logo` for automatic switching.                                                                                                                   |
+| `logo_icon`         | string | `""`        | Use a [Lucide icon](https://lucide.dev/icons/) as the site logo instead of an image. Pass the icon name (e.g. `"hexagon"`). Only used when no image logo is configured. See [Icons](../guides/icons.md).                                                                        |
 
 ### Announcement
 

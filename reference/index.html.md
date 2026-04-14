@@ -25,3 +25,5 @@ Cross-references, glossaries, intersphinx, version directives, and downloads.
 Python API docs with functions, classes, autodoc, and cross-referencing.
 
 OpenAPI auto-generated docs and manual HTTP method directives.
+
+Browse all 1900+ Lucide icons available for cards, sidebar, and logo.
