@@ -23,9 +23,8 @@ _HERO_FIELDS = (
 def _add_context(app, pagename, templatename, context, doctree):
     context["lumina_version"] = __version__
     context["has_llms_txt"] = "sphinx_llm.txt" in app.extensions
-    context["lumina_wide_layout"] = (
-        app.builder.theme_options.get("wide_layout", "false") == "true"
-    )
+    wide_val = app.builder.theme_options.get("wide_layout", "false")
+    context["lumina_wide_layout"] = wide_val is True or str(wide_val).lower() == "true"
 
     # Separate light/dark logos
     light_logo = app.builder.theme_options.get("light_logo", "")
