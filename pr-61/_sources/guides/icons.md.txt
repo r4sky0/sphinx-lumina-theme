@@ -8,31 +8,48 @@ Lumina ships with the full Lucide icon set (1900+ icons). Icons render as inline
 
 Add an icon to any `{card}` or `{grid-item-card}` directive with the `:icon:` option:
 
-```{code-block} markdown
+````{code-block} markdown
 :caption: docs/index.md
+
 :::{card} Getting Started
 :icon: rocket
 
 Install and configure Lumina in minutes.
 :::
-```
+````
+
+Here's how that renders:
+
+:::{card} Getting Started
+:icon: rocket
+
+Install and configure Lumina in minutes.
+:::
 
 By default, icons appear **inline** next to the card title. For a more prominent treatment, use the **featured** style — a larger icon in a tinted accent pill above the title:
 
-```{code-block} markdown
+````{code-block} markdown
 :caption: docs/index.md
+
 :::{card} Getting Started
 :icon: rocket
 :icon-style: featured
 
 Install and configure Lumina in minutes.
 :::
-```
+````
+
+Here's the featured style:
+
+:::{card} Getting Started
+:icon: rocket
+:icon-style: featured
+
+Install and configure Lumina in minutes.
+:::
 
 Both styles work with `{grid-item-card}` too:
 
-```{code-block} markdown
-:caption: docs/index.md
 ::::{grid} 1 1 2 3
 :gutter: 3
 
@@ -55,7 +72,6 @@ Common questions.
 :::
 
 ::::
-```
 
 Cards without `:icon:` render exactly as before — no changes needed to existing content.
 
@@ -63,13 +79,14 @@ Cards without `:icon:` render exactly as before — no changes needed to existin
 
 Give sidebar navigation items an icon by adding `icon` to a page's frontmatter:
 
-```{code-block} yaml
+````{code-block} yaml
 :caption: docs/getting-started/index.md
+
 ---
 icon: rocket
 ---
 # Getting Started
-```
+````
 
 The icon appears next to the page title in the sidebar. Pages without an `icon` field are unaffected — no empty space, no layout shift.
 
@@ -83,6 +100,7 @@ Use a Lucide icon as your site logo instead of a custom image. Set the `logo_ico
 
 ```{code-block} python
 :caption: conf.py
+
 html_theme_options = {
     "logo_icon": "hexagon",
 }

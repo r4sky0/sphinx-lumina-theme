@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-14T19:44:09+00:00" />
+    <meta property="article:modified_time" content="2026-04-14T19:53:28+00:00" />
     <title>Icons &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
@@ -565,44 +565,91 @@
 <section id="card-icons">
 <h2>Card Icons<a class="headerlink" href="#card-icons" title="Link to this heading">¶</a></h2>
 <p>Add an icon to any <code class="docutils literal notranslate"><span class="pre">{card}</span></code> or <code class="docutils literal notranslate"><span class="pre">{grid-item-card}</span></code> directive with the <code class="docutils literal notranslate"><span class="pre">:icon:</span></code> option:</p>
-<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>Install and configure Lumina in minutes.
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">docs/index.md</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>:::{card} Getting Started
+:icon: rocket
+
+Install and configure Lumina in minutes.
 :::
 </pre></div>
+</div>
+</div>
+<p>Here’s how that renders:</p>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold sd-card-icon-inline docutils">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lumina-icon" aria-hidden="true"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09" /><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05" /></svg>Getting Started</div>
+<p class="sd-card-text">Install and configure Lumina in minutes.</p>
+</div>
 </div>
 <p>By default, icons appear <strong>inline</strong> next to the card title. For a more prominent treatment, use the <strong>featured</strong> style — a larger icon in a tinted accent pill above the title:</p>
-<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>Install and configure Lumina in minutes.
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">docs/index.md</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>:::{card} Getting Started
+:icon: rocket
+:icon-style: featured
+
+Install and configure Lumina in minutes.
 :::
 </pre></div>
 </div>
+</div>
+<p>Here’s the featured style:</p>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-icon-featured docutils">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lumina-icon" aria-hidden="true"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09" /><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05" /></svg></div>
+<div class="sd-card-title sd-font-weight-bold docutils">
+Getting Started</div>
+<p class="sd-card-text">Install and configure Lumina in minutes.</p>
+</div>
+</div>
 <p>Both styles work with <code class="docutils literal notranslate"><span class="pre">{grid-item-card}</span></code> too:</p>
-<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>:::{grid-item-card} Guides
-:icon: book-open
-:icon-style: featured
-Step-by-step tutorials.
-:::
-
-:::{grid-item-card} Reference
-:icon: list
-:icon-style: featured
-API documentation.
-:::
-
-:::{grid-item-card} FAQ
-:icon: circle-help
-:icon-style: featured
-Common questions.
-:::
-
-::::
-</pre></div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-3 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-icon-featured docutils">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lumina-icon" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></div>
+<div class="sd-card-title sd-font-weight-bold docutils">
+Guides</div>
+<p class="sd-card-text">Step-by-step tutorials.</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-icon-featured docutils">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lumina-icon" aria-hidden="true"><path d="M3 5h.01" /><path d="M3 12h.01" /><path d="M3 19h.01" /><path d="M8 5h13" /><path d="M8 12h13" /><path d="M8 19h13" /></svg></div>
+<div class="sd-card-title sd-font-weight-bold docutils">
+Reference</div>
+<p class="sd-card-text">API documentation.</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-icon-featured docutils">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lumina-icon" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><path d="M12 17h.01" /></svg></div>
+<div class="sd-card-title sd-font-weight-bold docutils">
+FAQ</div>
+<p class="sd-card-text">Common questions.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <p>Cards without <code class="docutils literal notranslate"><span class="pre">:icon:</span></code> render exactly as before — no changes needed to existing content.</p>
 </section>
 <section id="sidebar-icons">
 <h2>Sidebar Icons<a class="headerlink" href="#sidebar-icons" title="Link to this heading">¶</a></h2>
 <p>Give sidebar navigation items an icon by adding <code class="docutils literal notranslate"><span class="pre">icon</span></code> to a page’s frontmatter:</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">docs/getting-started/index.md</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">docs/getting-started/index.md</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
 <span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rocket</span>
 <span class="nn">---</span>
@@ -619,8 +666,8 @@ Common questions.
 <section id="logo-icon">
 <h2>Logo Icon<a class="headerlink" href="#logo-icon" title="Link to this heading">¶</a></h2>
 <p>Use a Lucide icon as your site logo instead of a custom image. Set the <code class="docutils literal notranslate"><span class="pre">logo_icon</span></code> theme option in your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>:</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;logo_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;hexagon&quot;</span><span class="p">,</span>
 <span class="p">}</span>
