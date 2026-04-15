@@ -208,14 +208,12 @@
 
 .lumina-article table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: collapse;
   margin-bottom: 1.25rem;
   font-size: 0.9375rem;
   display: block;
   overflow-x: auto;
   border: 1px solid var(--lumina-border);
-  border-radius: 0.5rem;
 }
 
 .lumina-article th {
