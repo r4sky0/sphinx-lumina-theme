@@ -598,7 +598,8 @@ window.runMermaid = runMermaid;</script>
                     x-data="themeToggle()"
                     @click="cycle()"
                     class="relative flex h-9 w-9 items-center justify-center rounded-md text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors cursor-pointer"
-                    :aria-label="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'">
+                    :aria-label="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'"
+                    :title="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'">
                 
                 <svg x-show="mode === 'light'"
                      x-transition:enter="transition ease-out duration-200"
@@ -660,6 +661,7 @@ window.runMermaid = runMermaid;</script>
                         @click="toggle()"
                         class="hidden xl:flex h-9 w-9 items-center justify-center rounded-md text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors cursor-pointer"
                         :aria-label="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
+                        :title="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
                         type="button">
                     
                     <svg x-show="!wide"
@@ -695,6 +697,7 @@ window.runMermaid = runMermaid;</script>
                        class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] transition-colors no-underline"
                        target="_blank"
                        rel="noopener"
+                       title="Github"
                        aria-label="Github (opens in new tab)">
                         
                             <svg class="h-5 w-5"
