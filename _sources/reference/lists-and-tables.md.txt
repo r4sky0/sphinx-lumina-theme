@@ -133,7 +133,7 @@ Tables with many columns scroll horizontally when they overflow the content area
 | `show_toc` | string | `true` | No | Show right-side TOC | `false` | v0.1.0 |
 | `show_breadcrumbs` | string | `true` | No | Show breadcrumb trail | `false` | v0.1.0 |
 | `show_prev_next` | string | `true` | No | Show pagination | `false` | v0.1.0 |
-| `nav_depth` | string | `3` | No | Sidebar tree depth | `2` | v0.1.0 |
+| `nav_depth` | string | `4` | No | Sidebar tree depth | `2` | v0.1.0 |
 | `search_backend` | string | `pagefind` | No | Search provider | `sphinx` | v0.1.0 |
 
 ### List Tables

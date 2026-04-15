@@ -103,8 +103,8 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
   - Links displayed in the header navigation bar. Each item needs `title` and `url` keys. Add `"external": True` for off-site links, or `"children"` with a list of `{title, url}` items for dropdown menus.
 * - `nav_depth`
   - string
-  - `"3"`
-  - Maximum depth of the sidebar table of contents tree.
+  - `"4"`
+  - Maximum depth of the sidebar table of contents tree. Branches are collapsible in the UI — see {doc}`/guides/navigation` for details.
 * - `show_toc`
   - string
   - `"true"`
@@ -318,7 +318,7 @@ html_theme_options = {
         },
         {"title": "GitHub", "url": "https://github.com/you/project", "external": True},
     ],
-    "nav_depth": "3",
+    "nav_depth": "4",
     "show_toc": "true",
     "show_breadcrumbs": "true",
     "show_prev_next": "true",

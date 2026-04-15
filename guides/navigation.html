@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-15T06:40:01+00:00" />
+    <meta property="article:modified_time" content="2026-04-15T11:05:47+00:00" />
     <title>Navigation &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=bfde4efe" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=d24ffbd2" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=47ffe97c"></script>
+    <script defer="defer" src="../_static/lumina.js?v=82a8d64b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Custom Styling" href="custom-styling.html" />
@@ -355,7 +355,9 @@
 
 
         
-            <nav class="lumina-sidebar-nav" aria-label="Section navigation">
+            <nav class="lumina-sidebar-nav"
+                 aria-label="Section navigation"
+                 x-data="sidebarNav()">
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><ul>
@@ -527,7 +529,9 @@
                 
                 
                 
-                    <nav class="lumina-sidebar-nav" aria-label="Section navigation">
+                    <nav class="lumina-sidebar-nav"
+                         aria-label="Section navigation"
+                         x-data="sidebarNav()">
                         <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><ul>
@@ -714,17 +718,55 @@
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;nav_depth&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>   <span class="c1"># Default: 3 levels deep</span>
+    <span class="s2">&quot;nav_depth&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>   <span class="c1"># Default: 4 levels deep</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </section>
+<section id="collapsible-sidebar-items">
+<h2>Collapsible Sidebar Items<a class="headerlink" href="#collapsible-sidebar-items" title="Link to this heading">¶</a></h2>
+<p>Every branch in the left sidebar can be collapsed or expanded via a chevron
+toggle that appears next to its label. Behavior:</p>
+<ul class="simple">
+<li><p>The branch that contains the <strong>current page</strong> is auto-expanded on load,
+along with all of its ancestors. Readers always see where they are.</p></li>
+<li><p>Every other branch is expanded by default, but can be collapsed with a
+single click on its chevron.</p></li>
+<li><p>State is recomputed on each page load — it is not persisted across
+navigations.</p></li>
+</ul>
+<section id="marking-a-branch-collapsed-by-default">
+<h3>Marking a branch collapsed by default<a class="headerlink" href="#marking-a-branch-collapsed-by-default" title="Link to this heading">¶</a></h3>
+<p>If a branch should start <strong>collapsed</strong> (until a reader visits a page inside
+it), add <code class="docutils literal notranslate"><span class="pre">nav_collapsed:</span> <span class="pre">true</span></code> to the frontmatter of its index page.</p>
+<p>For MyST Markdown:</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">guides/advanced/index.md</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>---
+<span class="gu">nav_collapsed: true</span>
+<span class="gu">---</span>
+
+<span class="gh"># Advanced Topics</span>
+</pre></div>
+</div>
+</div>
+<p>For reStructuredText, use a field list at the top of the document:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="nc">:nav_collapsed:</span> true
+
+<span class="gh">Advanced Topics</span>
+<span class="gh">===============</span>
+</pre></div>
+</div>
+<p>The branch auto-expands whenever the reader is viewing a page inside it,
+so collapsed-by-default entries never hide the current page.</p>
+</section>
+</section>
 <section id="breadcrumbs">
 <h2>Breadcrumbs<a class="headerlink" href="#breadcrumbs" title="Link to this heading">¶</a></h2>
 <p>The breadcrumb trail above the content helps readers orient themselves. To hide it:</p>
-<div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;show_breadcrumbs&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
 <span class="p">}</span>
@@ -735,8 +777,8 @@
 <section id="page-table-of-contents">
 <h2>Page Table of Contents<a class="headerlink" href="#page-table-of-contents" title="Link to this heading">¶</a></h2>
 <p>The right-side page outline shows h2 and h3 headings. To hide it:</p>
-<div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;show_toc&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
 <span class="p">}</span>
@@ -747,8 +789,8 @@
 <section id="previous-next-navigation">
 <h2>Previous / Next Navigation<a class="headerlink" href="#previous-next-navigation" title="Link to this heading">¶</a></h2>
 <p>Page-level previous/next links appear at the bottom of each page. To hide them:</p>
-<div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id10" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;show_prev_next&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
 <span class="p">}</span>
@@ -762,8 +804,8 @@
 <section id="setup">
 <h3>Setup<a class="headerlink" href="#setup" title="Link to this heading">¶</a></h3>
 <p>Define your sections in <code class="docutils literal notranslate"><span class="pre">html_theme_options</span></code>:</p>
-<div class="literal-block-wrapper docutils container" id="id10">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id10" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id11" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;doc_sections&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
@@ -812,8 +854,8 @@
 <ol class="arabic simple">
 <li><p><strong>Create a <code class="docutils literal notranslate"><span class="pre">versions.json</span></code> file</strong> and host it at a stable URL:</p></li>
 </ol>
-<div class="literal-block-wrapper docutils container" id="id11">
-<div class="code-block-caption"><span class="caption-text">versions.json</span><a class="headerlink" href="#id11" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">versions.json</span><a class="headerlink" href="#id12" title="Link to this code">¶</a></div>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
 <span class="w">  </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;latest&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/en/latest/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dev (latest)&quot;</span><span class="p">},</span>
 <span class="w">  </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.17&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/en/1.17/&quot;</span><span class="p">},</span>
@@ -831,8 +873,8 @@
 <ol class="arabic simple" start="2">
 <li><p><strong>Configure the theme</strong> in your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>:</p></li>
 </ol>
-<div class="literal-block-wrapper docutils container" id="id12">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id12" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id13" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;version_switcher_json&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/versions.json&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version_switcher_match&quot;</span><span class="p">:</span> <span class="s2">&quot;1.17&quot;</span><span class="p">,</span>
@@ -922,6 +964,10 @@
 </li>
 <li><a class="reference internal" href="#social-links">Social Links</a></li>
 <li><a class="reference internal" href="#sidebar-depth">Sidebar Depth</a></li>
+<li><a class="reference internal" href="#collapsible-sidebar-items">Collapsible Sidebar Items</a><ul>
+<li><a class="reference internal" href="#marking-a-branch-collapsed-by-default">Marking a branch collapsed by default</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#breadcrumbs">Breadcrumbs</a></li>
 <li><a class="reference internal" href="#page-table-of-contents">Page Table of Contents</a></li>
 <li><a class="reference internal" href="#previous-next-navigation">Previous / Next Navigation</a></li>

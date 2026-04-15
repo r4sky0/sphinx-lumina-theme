@@ -49,7 +49,7 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 | Option             | Type   | Default   | Description                                                                                                                                                                                              |
 |--------------------|--------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `nav_links`        | list   | `[]`      | Links displayed in the header navigation bar. Each item needs `title` and `url` keys. Add `"external": True` for off-site links, or `"children"` with a list of `{title, url}` items for dropdown menus. |
-| `nav_depth`        | string | `"3"`     | Maximum depth of the sidebar table of contents tree.                                                                                                                                                     |
+| `nav_depth`        | string | `"4"`     | Maximum depth of the sidebar table of contents tree. Branches are collapsible in the UI — see [Navigation](../guides/navigation.md) for details.                                                         |
 | `show_toc`         | string | `"true"`  | Show or hide the right-side page table of contents.                                                                                                                                                      |
 | `show_breadcrumbs` | string | `"true"`  | Show or hide the breadcrumb trail above the content.                                                                                                                                                     |
 | `show_prev_next`   | string | `"true"`  | Show or hide previous/next page navigation at the bottom.                                                                                                                                                |
@@ -149,7 +149,7 @@ html_theme_options = {
         },
         {"title": "GitHub", "url": "https://github.com/you/project", "external": True},
     ],
-    "nav_depth": "3",
+    "nav_depth": "4",
     "show_toc": "true",
     "show_breadcrumbs": "true",
     "show_prev_next": "true",

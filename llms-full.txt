@@ -1256,7 +1256,7 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 | Option             | Type   | Default   | Description                                                                                                                                                                                              |
 |--------------------|--------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `nav_links`        | list   | `[]`      | Links displayed in the header navigation bar. Each item needs `title` and `url` keys. Add `"external": True` for off-site links, or `"children"` with a list of `{title, url}` items for dropdown menus. |
-| `nav_depth`        | string | `"3"`     | Maximum depth of the sidebar table of contents tree.                                                                                                                                                     |
+| `nav_depth`        | string | `"4"`     | Maximum depth of the sidebar table of contents tree. Branches are collapsible in the UI — see [Navigation](../guides/navigation.md) for details.                                                         |
 | `show_toc`         | string | `"true"`  | Show or hide the right-side page table of contents.                                                                                                                                                      |
 | `show_breadcrumbs` | string | `"true"`  | Show or hide the breadcrumb trail above the content.                                                                                                                                                     |
 | `show_prev_next`   | string | `"true"`  | Show or hide previous/next page navigation at the bottom.                                                                                                                                                |
@@ -1356,7 +1356,7 @@ html_theme_options = {
         },
         {"title": "GitHub", "url": "https://github.com/you/project", "external": True},
     ],
-    "nav_depth": "3",
+    "nav_depth": "4",
     "show_toc": "true",
     "show_breadcrumbs": "true",
     "show_prev_next": "true",
@@ -3043,7 +3043,7 @@ Tables with many columns scroll horizontally when they overflow the content area
 | `show_toc`          | string | `true`     | No         | Show right-side TOC   | `false`   | v0.1.0  |
 | `show_breadcrumbs`  | string | `true`     | No         | Show breadcrumb trail | `false`   | v0.1.0  |
 | `show_prev_next`    | string | `true`     | No         | Show pagination       | `false`   | v0.1.0  |
-| `nav_depth`         | string | `3`        | No         | Sidebar tree depth    | `2`       | v0.1.0  |
+| `nav_depth`         | string | `4`        | No         | Sidebar tree depth    | `2`       | v0.1.0  |
 | `search_backend`    | string | `pagefind` | No         | Search provider       | `sphinx`  | v0.1.0  |
 
 ### List Tables
@@ -3524,9 +3524,48 @@ Control how deep the sidebar table of contents tree expands:
 
 ```python
 html_theme_options = {
-    "nav_depth": "3",   # Default: 3 levels deep
+    "nav_depth": "4",   # Default: 4 levels deep
 }
 ```
+
+## Collapsible Sidebar Items
+
+Every branch in the left sidebar can be collapsed or expanded via a chevron
+toggle that appears next to its label. Behavior:
+
+- The branch that contains the **current page** is auto-expanded on load,
+  along with all of its ancestors. Readers always see where they are.
+- Every other branch is expanded by default, but can be collapsed with a
+  single click on its chevron.
+- State is recomputed on each page load — it is not persisted across
+  navigations.
+
+### Marking a branch collapsed by default
+
+If a branch should start **collapsed** (until a reader visits a page inside
+it), add `nav_collapsed: true` to the frontmatter of its index page.
+
+For MyST Markdown:
+
+```markdown
+---
+nav_collapsed: true
+---
+
+# Advanced Topics
+```
+
+For reStructuredText, use a field list at the top of the document:
+
+```rst
+:nav_collapsed: true
+
+Advanced Topics
+===============
+```
+
+The branch auto-expands whenever the reader is viewing a page inside it,
+so collapsed-by-default entries never hide the current page.
 
 ## Breadcrumbs
 

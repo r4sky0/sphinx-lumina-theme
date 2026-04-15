@@ -56,9 +56,49 @@ Control how deep the sidebar table of contents tree expands:
 ```{code-block} python
 :caption: conf.py
 html_theme_options = {
-    "nav_depth": "3",   # Default: 3 levels deep
+    "nav_depth": "4",   # Default: 4 levels deep
 }
 ```
+
+## Collapsible Sidebar Items
+
+Every branch in the left sidebar can be collapsed or expanded via a chevron
+toggle that appears next to its label. Behavior:
+
+- The branch that contains the **current page** is auto-expanded on load,
+  along with all of its ancestors. Readers always see where they are.
+- Every other branch is expanded by default, but can be collapsed with a
+  single click on its chevron.
+- State is recomputed on each page load — it is not persisted across
+  navigations.
+
+### Marking a branch collapsed by default
+
+If a branch should start **collapsed** (until a reader visits a page inside
+it), add `nav_collapsed: true` to the frontmatter of its index page.
+
+For MyST Markdown:
+
+````{code-block} markdown
+:caption: guides/advanced/index.md
+---
+nav_collapsed: true
+---
+
+# Advanced Topics
+````
+
+For reStructuredText, use a field list at the top of the document:
+
+```rst
+:nav_collapsed: true
+
+Advanced Topics
+===============
+```
+
+The branch auto-expands whenever the reader is viewing a page inside it,
+so collapsed-by-default entries never hide the current page.
 
 ## Breadcrumbs
 
