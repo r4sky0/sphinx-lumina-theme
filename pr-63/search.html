@@ -456,7 +456,7 @@ mermaid.initialize(
 
 window.addEventListener("load", load);
 window.runMermaid = runMermaid;</script>
-    <script defer="defer" src="_static/lumina.js?v=2d5a34fc"></script>
+    <script defer="defer" src="_static/lumina.js?v=47ffe97c"></script>
     <script src="_static/searchtools.js"></script>
     <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -726,8 +726,8 @@ window.runMermaid = runMermaid;</script>
         
 
     <div id="lumina-section-switcher"
-         x-data="sectionSwitcher()"
-         @keydown.escape="open = false"
+         x-data="navDropdown()"
+         @keydown="handleKeydown($event)"
          class="lumina-section-switcher">
         <button @click="toggle()"
                 :aria-expanded="open"
@@ -896,8 +896,8 @@ window.runMermaid = runMermaid;</script>
                 
 
     <div id="lumina-section-switcher"
-         x-data="sectionSwitcher()"
-         @keydown.escape="open = false"
+         x-data="navDropdown()"
+         @keydown="handleKeydown($event)"
          class="lumina-section-switcher">
         <button @click="toggle()"
                 :aria-expanded="open"
