@@ -1,5 +1,12 @@
 # Releases
 
+## v1.30.0 (2026-04-15)
+
+### Features
+
+- Add doc sections switcher ([#63](https://github.com/r4sky0/sphinx-lumina-theme/pull/63),
+  [`90e5186`](https://github.com/r4sky0/sphinx-lumina-theme/commit/90e5186f9308239b1465e4b3c1f52aba37f461e5))
+
 ## v1.29.0 (2026-04-15)
 
 ### Features
