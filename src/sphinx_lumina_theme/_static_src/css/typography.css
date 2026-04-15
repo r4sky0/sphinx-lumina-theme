@@ -194,11 +194,14 @@
 
 .lumina-article table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin-bottom: 1.25rem;
   font-size: 0.9375rem;
   display: block;
   overflow-x: auto;
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.5rem;
 }
 
 .lumina-article th {
@@ -206,12 +209,12 @@
   font-weight: 600;
   padding: 0.625rem 0.75rem;
   border-bottom: 2px solid var(--lumina-border);
-  background: color-mix(in srgb, var(--lumina-accent) 4%, var(--lumina-bg));
+  background: color-mix(in srgb, var(--lumina-accent) 6%, var(--lumina-bg));
   font-variant-numeric: tabular-nums;
 }
 
 [data-theme="dark"] .lumina-article th {
-  background: color-mix(in srgb, var(--lumina-accent) 6%, var(--lumina-bg-secondary));
+  background: color-mix(in srgb, var(--lumina-accent) 8%, var(--lumina-bg-secondary));
   border-bottom-color: color-mix(in srgb, var(--lumina-accent) 15%, var(--lumina-border));
 }
 
@@ -219,6 +222,27 @@
   padding: 0.625rem 0.75rem;
   border-bottom: 1px solid var(--lumina-border);
   font-variant-numeric: tabular-nums;
+}
+
+.lumina-article tbody tr {
+  transition: background-color 0.1s;
+}
+
+.lumina-article tbody tr:hover {
+  background: color-mix(in srgb, var(--lumina-accent) 4%, transparent);
+}
+
+.lumina-article tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.lumina-article table caption {
+  caption-side: top;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--lumina-text-muted);
+  padding-bottom: 0.625rem;
 }
 
 .lumina-article blockquote {
