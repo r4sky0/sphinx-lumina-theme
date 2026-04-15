@@ -4,7 +4,8 @@
          x-data="navDropdown()"
          @keydown="handleKeydown($event)"
          class="lumina-section-switcher">
-        <button @click="toggle()"
+        <button x-ref="trigger"
+                @click="toggle()"
                 :aria-expanded="open"
                 aria-haspopup="true"
                 aria-label="Switch documentation section"
@@ -12,8 +13,8 @@
                 type="button">
             {% if lumina_current_section %}
                 <span class="lumina-section-switcher-icon"
-                      style="background: {{ lumina_current_section.color }}15;
-                             color: {{ lumina_current_section.color }}">
+                      style="--section-color: {{ lumina_current_section.color }};
+                             color: var(--section-color)">
                     {{ lumina_icon(lumina_current_section.icon, size=18) }}
                 </span>
                 <span class="lumina-section-switcher-label">
@@ -22,18 +23,34 @@
                     <span class="lumina-section-switcher-desc">{{ lumina_current_section.description }}</span>
                 </span>
             {% else %}
+                <span class="lumina-section-switcher-icon lumina-section-switcher-icon--neutral">
+                    {{ lumina_icon("layout-grid", size=18) }}
+                </span>
                 <span class="lumina-section-switcher-label">
                     <span class="lumina-section-switcher-name">Browse sections</span>
+                    <span class="lumina-section-switcher-desc">Switch documentation area</span>
                 </span>
             {% endif %}
-            {{ lumina_icon("chevrons-up-down", size=14, css_class="lumina-section-switcher-chevron") }}
+            <svg class="lumina-section-switcher-chevron"
+                 :class="open && 'rotate-180'"
+                 width="14"
+                 height="14"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 viewBox="0 0 24 24"
+                 aria-hidden="true">
+                {{ lumina_icon_inner("chevron-down") }}
+            </svg>
         </button>
         <div x-show="open"
              x-cloak
              @click.away="open = false"
              x-transition:enter="transition ease-out duration-150"
-             x-transition:enter-start="opacity-0 -translate-y-1"
-             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:enter-start="opacity-0 -translate-y-1 scale-[0.98]"
+             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
              x-transition:leave="transition ease-in duration-100"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
@@ -44,8 +61,8 @@
                    class="lumina-section-switcher-item{% if lumina_current_section and section._link == lumina_current_section._link %} active{% endif %}"
                    role="menuitem">
                     <span class="lumina-section-switcher-icon"
-                          style="background: {{ section.color }}15;
-                                 color: {{ section.color }}">{{ lumina_icon(section.icon, size=16) }}</span>
+                          style="--section-color: {{ section.color }};
+                                 color: var(--section-color)">{{ lumina_icon(section.icon, size=16) }}</span>
                     <span class="lumina-section-switcher-label">
                         <span class="lumina-section-switcher-name"
                               style="color: {{ section.color }}">{{ section.name }}</span>
