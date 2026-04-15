@@ -123,35 +123,24 @@ def _prepare_sections(app, sections):
 
     # Compute link targets and the set of all explicitly claimed docnames
     claimed = set()
-    default_section = None
     for s in sections:
-        paths = _section_paths(s)
-        if paths:
-            s["_link"] = paths[0] + "/index"
-        if not s.get("default"):
-            claimed |= _paths_to_docnames(paths)
+        # Explicit "link" takes priority, then first path, then root_doc
+        if "link" in s:
+            s["_link"] = s["link"]
         else:
-            default_section = s
+            paths = _section_paths(s)
+            if paths:
+                s["_link"] = paths[0] + "/index"
+            else:
+                s["_link"] = root_doc
+        if not s.get("default"):
+            claimed |= _paths_to_docnames(_section_paths(s))
 
     # Cache the root doctree (constant during write phase)
     try:
         app._lumina_root_doctree = app.env.get_doctree(root_doc)
     except FileNotFoundError:
         app._lumina_root_doctree = None
-
-    # Default section links to its first unclaimed toctree entry
-    if default_section and "_link" not in default_section:
-        root_doctree = app._lumina_root_doctree
-        if root_doctree:
-            for node in root_doctree.findall(addnodes.toctree):
-                for _title, docname in node["entries"]:
-                    if docname not in claimed:
-                        default_section["_link"] = docname
-                        break
-                if "_link" in default_section:
-                    break
-        if "_link" not in default_section:
-            default_section["_link"] = root_doc
 
     app._lumina_claimed_paths = claimed
 

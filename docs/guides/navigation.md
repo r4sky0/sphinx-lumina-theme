@@ -111,6 +111,7 @@ html_theme_options = {
             "icon": "book-open",
             "color": "#10b981",
             "default": True,
+            "link": "getting-started/index",
         },
         {
             "path": "contributing",
@@ -130,6 +131,7 @@ Each section has:
 - **`color`** (required) -- hex color for the icon badge and section name in the switcher
 - **`path`** or **`paths`** -- directory prefixes that belong to this section. Use `path` for a single directory (e.g., `"contributing"`), or `paths` for multiple directories grouped under one section.
 - **`default`** -- set to `True` on one section to make it the catch-all. Any page not claimed by another section's explicit paths automatically belongs to the default section.
+- **`link`** -- page to navigate to when clicking this section in the dropdown (e.g., `"getting-started/index"`). Defaults to the first entry in `path`/`paths`.
 
 ### How It Works
 

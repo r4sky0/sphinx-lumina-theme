@@ -333,6 +333,7 @@ html_theme_options = {
             "icon": "book-open",
             "color": "#10b981",
             "default": True,
+            "link": "getting-started/index",
         },
         {
             "path": "contributing",
