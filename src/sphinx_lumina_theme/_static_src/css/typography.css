@@ -108,6 +108,36 @@
   list-style-type: decimal;
 }
 
+/* Collapse <p> margins inside block containers — Sphinx/MyST wraps
+   list items, definition values, and table cells in <p> tags */
+.lumina-article li > p,
+.lumina-article dd > p,
+.lumina-article td > p {
+  margin-bottom: 0.25rem;
+}
+
+.lumina-article li > p:last-child,
+.lumina-article dd > p:last-child,
+.lumina-article td > p:last-child {
+  margin-bottom: 0;
+}
+
+/* Graduated bullet styles for nested unordered lists */
+.lumina-article ul > li > ul > li {
+  list-style-type: circle;
+}
+
+.lumina-article ul > li > ul > li > ul > li {
+  list-style-type: square;
+}
+
+/* Tighter nested list margins */
+.lumina-article li > ul,
+.lumina-article li > ol {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
 .lumina-article code:not(pre code) {
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.875em;
