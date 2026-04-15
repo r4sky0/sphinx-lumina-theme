@@ -213,7 +213,6 @@
   font-size: 0.9375rem;
   display: block;
   overflow-x: auto;
-  border: 1px solid var(--lumina-border);
 }
 
 .lumina-article th {
