@@ -13,6 +13,14 @@ logger = logging.getLogger(__name__)
 
 __version__ = "1.31.3"
 
+_CODE_STYLE_PRESETS = {
+    "default": ("default", "monokai"),
+    "nord": ("tango", "nord"),
+    "one-dark": ("friendly", "one-dark"),
+    "gruvbox": ("gruvbox-light", "gruvbox-dark"),
+    "material": ("lovelace", "material"),
+}
+
 _HERO_FIELDS = (
     "hero_title",
     "hero_subtitle",
@@ -22,6 +30,34 @@ _HERO_FIELDS = (
     "hero_secondary_text",
     "hero_tags",
 )
+
+
+def _apply_code_style(app):
+    """Map the ``code_style`` theme option to Pygments style pair.
+
+    Replaces both the light and dark highlighters on the builder.
+    Must run on ``builder-inited`` (not ``config-inited``) because theme
+    extensions are loaded after ``config-inited`` has already fired.
+    """
+    opts = app.builder.theme_options
+    code_style = opts.get("code_style", "default")
+    if code_style == "default":
+        return
+    preset = _CODE_STYLE_PRESETS.get(code_style)
+    if preset is None:
+        valid = ", ".join(sorted(_CODE_STYLE_PRESETS))
+        logger.warning(
+            "Unknown code_style %r — valid presets: %s. Falling back to 'default'.",
+            code_style,
+            valid,
+        )
+        return
+    light, dark = preset
+
+    from sphinx.highlighting import PygmentsBridge
+
+    app.builder.highlighter = PygmentsBridge("html", light)
+    app.builder.dark_highlighter = PygmentsBridge("html", dark)
 
 
 def _build_page_icons(app):
@@ -425,6 +461,7 @@ def setup(app):
     app.add_js_file("lumina.js", loading_method="defer", priority=900)
     app.add_directive("card", LuminaCardDirective, override=True)
     app.add_directive("grid-item-card", LuminaGridItemCardDirective, override=True)
+    app.connect("builder-inited", _apply_code_style)
     app.connect("html-page-context", _add_context)
     app.connect("build-finished", _run_pagefind)
     return {
