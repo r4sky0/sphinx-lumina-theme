@@ -56,6 +56,12 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 | `show_attribution` | string | `"true"`  | Show or hide the “Built with Lumina” attribution link in the sidebar footer.                                                                                                                             |
 | `show_back_to_top` | string | `"true"`  | Show or hide the back-to-top button that appears when scrolling up.                                                                                                                                      |
 
+### Doc Sections
+
+| Option         | Type   | Default   | Description                                                                                                                                                                                                                             |
+|----------------|--------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `doc_sections` | list   | `[]`      | Define major documentation sections with icons and colors. Adds a dropdown at the top of the sidebar that lets readers switch between sections, each with its own navigation tree. See [Navigation](../guides/navigation.md) for setup. |
+
 ### Version Switcher
 
 | Option                   | Type   | Default   | Description                                                                                            |
@@ -149,6 +155,25 @@ html_theme_options = {
     "show_prev_next": "true",
     "show_attribution": "true",
     "show_back_to_top": "true",
+
+    # Doc sections
+    "doc_sections": [
+        {
+            "name": "User Documentation",
+            "description": "Installation, guides & reference",
+            "icon": "book-open",
+            "color": "#10b981",
+            "default": True,
+            "link": "getting-started/index",
+        },
+        {
+            "path": "contributing",
+            "name": "Developer Documentation",
+            "description": "Architecture & development",
+            "icon": "code",
+            "color": "#8b5cf6",
+        },
+    ],
 
     # Version switcher
     "version_switcher_json": "https://example.com/versions.json",

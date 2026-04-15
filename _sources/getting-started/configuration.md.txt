@@ -127,6 +127,22 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
   - Show or hide the back-to-top button that appears when scrolling up.
 ```
 
+### Doc Sections
+
+```{list-table}
+:header-rows: 1
+:widths: 25 15 15 45
+
+* - Option
+  - Type
+  - Default
+  - Description
+* - `doc_sections`
+  - list
+  - `[]`
+  - Define major documentation sections with icons and colors. Adds a dropdown at the top of the sidebar that lets readers switch between sections, each with its own navigation tree. See {doc}`/guides/navigation` for setup.
+```
+
 ### Version Switcher
 
 ```{list-table}
@@ -308,6 +324,25 @@ html_theme_options = {
     "show_prev_next": "true",
     "show_attribution": "true",
     "show_back_to_top": "true",
+
+    # Doc sections
+    "doc_sections": [
+        {
+            "name": "User Documentation",
+            "description": "Installation, guides & reference",
+            "icon": "book-open",
+            "color": "#10b981",
+            "default": True,
+            "link": "getting-started/index",
+        },
+        {
+            "path": "contributing",
+            "name": "Developer Documentation",
+            "description": "Architecture & development",
+            "icon": "code",
+            "color": "#8b5cf6",
+        },
+    ],
 
     # Version switcher
     "version_switcher_json": "https://example.com/versions.json",

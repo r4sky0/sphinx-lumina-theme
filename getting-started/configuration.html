@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-15T06:37:31+00:00" />
+    <meta property="article:modified_time" content="2026-04-15T06:40:01+00:00" />
     <title>Configuration &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=dec4582f" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=bfde4efe" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -285,8 +285,78 @@
             <div x-data="sidebar()">
     
     <div class="lumina-sidebar-desktop hidden flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
-        <nav class="lumina-sidebar-nav" aria-label="Main navigation">
-            <ul class="current">
+
+        
+
+    <div id="lumina-section-switcher"
+         x-data="navDropdown()"
+         @keydown="handleKeydown($event)"
+         class="lumina-section-switcher">
+        <button @click="toggle()"
+                :aria-expanded="open"
+                aria-haspopup="true"
+                aria-label="Switch documentation section"
+                class="lumina-section-switcher-trigger"
+                type="button">
+            
+                <span class="lumina-section-switcher-icon"
+                      style="background: #10b98115;
+                             color: #10b981">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
+                </span>
+                <span class="lumina-section-switcher-label">
+                    <span class="lumina-section-switcher-name"
+                          style="color: #10b981">User Documentation</span>
+                    <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                </span>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lumina-section-switcher-chevron" aria-hidden="true"><path d="m7 15 5 5 5-5" /><path d="m7 9 5-5 5 5" /></svg>
+        </button>
+        <div x-show="open"
+             x-cloak
+             @click.away="open = false"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="lumina-section-switcher-dropdown"
+             role="menu">
+            
+                <a href="index.html"
+                   class="lumina-section-switcher-item active"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="background: #10b98115;
+                                 color: #10b981"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #10b981">User Documentation</span>
+                        <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                    </span>
+                </a>
+            
+                <a href="../contributing/index.html"
+                   class="lumina-section-switcher-item"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="background: #8b5cf615;
+                                 color: #8b5cf6"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #8b5cf6">Developer Documentation</span>
+                        <span class="lumina-section-switcher-desc">Architecture & development</span>
+                    </span>
+                </a>
+            
+        </div>
+    </div>
+
+
+        
+            <nav class="lumina-sidebar-nav" aria-label="Section navigation">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
@@ -333,15 +403,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../reference/icons.html">Icon Browser</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/architecture.html">Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/javascript-api.html">JavaScript API</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
 </ul>
 
-        </nav>
+            </nav>
+        
         
             <div class="lumina-sidebar-footer">
                 Built with
@@ -389,10 +455,80 @@
                         @click="close()"
                         class="absolute top-4 right-4 rounded-md p-1 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] cursor-pointer"
                         aria-label="Close navigation"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+
+                
+
+    <div id="lumina-section-switcher"
+         x-data="navDropdown()"
+         @keydown="handleKeydown($event)"
+         class="lumina-section-switcher">
+        <button @click="toggle()"
+                :aria-expanded="open"
+                aria-haspopup="true"
+                aria-label="Switch documentation section"
+                class="lumina-section-switcher-trigger"
+                type="button">
+            
+                <span class="lumina-section-switcher-icon"
+                      style="background: #10b98115;
+                             color: #10b981">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
+                </span>
+                <span class="lumina-section-switcher-label">
+                    <span class="lumina-section-switcher-name"
+                          style="color: #10b981">User Documentation</span>
+                    <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                </span>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lumina-section-switcher-chevron" aria-hidden="true"><path d="m7 15 5 5 5-5" /><path d="m7 9 5-5 5 5" /></svg>
+        </button>
+        <div x-show="open"
+             x-cloak
+             @click.away="open = false"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="lumina-section-switcher-dropdown"
+             role="menu">
+            
+                <a href="index.html"
+                   class="lumina-section-switcher-item active"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="background: #10b98115;
+                                 color: #10b981"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #10b981">User Documentation</span>
+                        <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                    </span>
+                </a>
+            
+                <a href="../contributing/index.html"
+                   class="lumina-section-switcher-item"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="background: #8b5cf615;
+                                 color: #8b5cf6"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #8b5cf6">Developer Documentation</span>
+                        <span class="lumina-section-switcher-desc">Architecture & development</span>
+                    </span>
+                </a>
+            
+        </div>
+    </div>
+
+
                 
                 
-                <nav class="lumina-sidebar-nav" aria-label="Main navigation">
-                    <ul class="current">
+                
+                    <nav class="lumina-sidebar-nav" aria-label="Section navigation">
+                        <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
@@ -439,15 +575,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../reference/icons.html">Icon Browser</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/architecture.html">Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/javascript-api.html">JavaScript API</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
 </ul>
 
-                </nav>
+                    </nav>
+                
                 
                     <div class="lumina-sidebar-footer">
                         <a href="https://github.com/r4sky0/sphinx-lumina-theme"
@@ -686,6 +818,31 @@
 <td><p>string</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;true&quot;</span></code></p></td>
 <td><p>Show or hide the back-to-top button that appears when scrolling up.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="doc-sections">
+<h3>Doc Sections<a class="headerlink" href="#doc-sections" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 45.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">doc_sections</span></code></p></td>
+<td><p>list</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+<td><p>Define major documentation sections with icons and colors. Adds a dropdown at the top of the sidebar that lets readers switch between sections, each with its own navigation tree. See <a class="reference internal" href="../guides/navigation.html"><span class="doc">Navigation</span></a> for setup.</p></td>
 </tr>
 </tbody>
 </table>
@@ -932,6 +1089,25 @@
     <span class="s2">&quot;show_attribution&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
     <span class="s2">&quot;show_back_to_top&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
 
+    <span class="c1"># Doc sections</span>
+    <span class="s2">&quot;doc_sections&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;User Documentation&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Installation, guides &amp; reference&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;book-open&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#10b981&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;getting-started/index&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;contributing&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Developer Documentation&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Architecture &amp; development&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;code&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#8b5cf6&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">],</span>
+
     <span class="c1"># Version switcher</span>
     <span class="s2">&quot;version_switcher_json&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/versions.json&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version_switcher_match&quot;</span><span class="p">:</span> <span class="s2">&quot;1.17&quot;</span><span class="p">,</span>
@@ -1049,6 +1225,7 @@ Custom Styling</div>
 <li><a class="reference internal" href="#appearance">Appearance</a></li>
 <li><a class="reference internal" href="#announcement">Announcement</a></li>
 <li><a class="reference internal" href="#navigation">Navigation</a></li>
+<li><a class="reference internal" href="#doc-sections">Doc Sections</a></li>
 <li><a class="reference internal" href="#version-switcher">Version Switcher</a></li>
 <li><a class="reference internal" href="#search">Search</a></li>
 <li><a class="reference internal" href="#http-api">HTTP API</a></li>

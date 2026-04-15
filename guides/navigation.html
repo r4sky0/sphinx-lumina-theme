@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-04T18:28:33+00:00" />
+    <meta property="article:modified_time" content="2026-04-15T06:40:01+00:00" />
     <title>Navigation &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=dec4582f" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=bfde4efe" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -285,8 +285,78 @@
             <div x-data="sidebar()">
     
     <div class="lumina-sidebar-desktop hidden flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
-        <nav class="lumina-sidebar-nav" aria-label="Main navigation">
-            <ul class="current">
+
+        
+
+    <div id="lumina-section-switcher"
+         x-data="navDropdown()"
+         @keydown="handleKeydown($event)"
+         class="lumina-section-switcher">
+        <button @click="toggle()"
+                :aria-expanded="open"
+                aria-haspopup="true"
+                aria-label="Switch documentation section"
+                class="lumina-section-switcher-trigger"
+                type="button">
+            
+                <span class="lumina-section-switcher-icon"
+                      style="background: #10b98115;
+                             color: #10b981">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
+                </span>
+                <span class="lumina-section-switcher-label">
+                    <span class="lumina-section-switcher-name"
+                          style="color: #10b981">User Documentation</span>
+                    <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                </span>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lumina-section-switcher-chevron" aria-hidden="true"><path d="m7 15 5 5 5-5" /><path d="m7 9 5-5 5 5" /></svg>
+        </button>
+        <div x-show="open"
+             x-cloak
+             @click.away="open = false"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="lumina-section-switcher-dropdown"
+             role="menu">
+            
+                <a href="../getting-started/index.html"
+                   class="lumina-section-switcher-item active"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="background: #10b98115;
+                                 color: #10b981"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #10b981">User Documentation</span>
+                        <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                    </span>
+                </a>
+            
+                <a href="../contributing/index.html"
+                   class="lumina-section-switcher-item"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="background: #8b5cf615;
+                                 color: #8b5cf6"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #8b5cf6">Developer Documentation</span>
+                        <span class="lumina-section-switcher-desc">Architecture & development</span>
+                    </span>
+                </a>
+            
+        </div>
+    </div>
+
+
+        
+            <nav class="lumina-sidebar-nav" aria-label="Section navigation">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
@@ -333,15 +403,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../reference/icons.html">Icon Browser</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/architecture.html">Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/javascript-api.html">JavaScript API</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
 </ul>
 
-        </nav>
+            </nav>
+        
         
             <div class="lumina-sidebar-footer">
                 Built with
@@ -389,10 +455,80 @@
                         @click="close()"
                         class="absolute top-4 right-4 rounded-md p-1 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] cursor-pointer"
                         aria-label="Close navigation"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+
+                
+
+    <div id="lumina-section-switcher"
+         x-data="navDropdown()"
+         @keydown="handleKeydown($event)"
+         class="lumina-section-switcher">
+        <button @click="toggle()"
+                :aria-expanded="open"
+                aria-haspopup="true"
+                aria-label="Switch documentation section"
+                class="lumina-section-switcher-trigger"
+                type="button">
+            
+                <span class="lumina-section-switcher-icon"
+                      style="background: #10b98115;
+                             color: #10b981">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
+                </span>
+                <span class="lumina-section-switcher-label">
+                    <span class="lumina-section-switcher-name"
+                          style="color: #10b981">User Documentation</span>
+                    <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                </span>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lumina-section-switcher-chevron" aria-hidden="true"><path d="m7 15 5 5 5-5" /><path d="m7 9 5-5 5 5" /></svg>
+        </button>
+        <div x-show="open"
+             x-cloak
+             @click.away="open = false"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="lumina-section-switcher-dropdown"
+             role="menu">
+            
+                <a href="../getting-started/index.html"
+                   class="lumina-section-switcher-item active"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="background: #10b98115;
+                                 color: #10b981"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #10b981">User Documentation</span>
+                        <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                    </span>
+                </a>
+            
+                <a href="../contributing/index.html"
+                   class="lumina-section-switcher-item"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="background: #8b5cf615;
+                                 color: #8b5cf6"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #8b5cf6">Developer Documentation</span>
+                        <span class="lumina-section-switcher-desc">Architecture & development</span>
+                    </span>
+                </a>
+            
+        </div>
+    </div>
+
+
                 
                 
-                <nav class="lumina-sidebar-nav" aria-label="Main navigation">
-                    <ul class="current">
+                
+                    <nav class="lumina-sidebar-nav" aria-label="Section navigation">
+                        <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
@@ -439,15 +575,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../reference/icons.html">Icon Browser</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/architecture.html">Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/javascript-api.html">JavaScript API</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
 </ul>
 
-                </nav>
+                    </nav>
+                
                 
                     <div class="lumina-sidebar-footer">
                         <a href="https://github.com/r4sky0/sphinx-lumina-theme"
@@ -529,8 +661,8 @@
 <section id="header-navigation-links">
 <h2>Header Navigation Links<a class="headerlink" href="#header-navigation-links" title="Link to this heading">¶</a></h2>
 <p>Add links to your site header for quick access to key pages:</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;nav_links&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Guide&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;getting-started&quot;</span><span class="p">},</span>
@@ -544,8 +676,8 @@
 <section id="dropdown-menus">
 <h3>Dropdown Menus<a class="headerlink" href="#dropdown-menus" title="Link to this heading">¶</a></h3>
 <p>Create dropdown navigation menus with the <code class="docutils literal notranslate"><span class="pre">children</span></code> key:</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;nav_links&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
@@ -565,8 +697,8 @@
 <section id="social-links">
 <h2>Social Links<a class="headerlink" href="#social-links" title="Link to this heading">¶</a></h2>
 <p>Display icon links in the header (currently supports GitHub):</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;social_links&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span><span class="s2">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;github&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/you/your-project&quot;</span><span class="p">},</span>
@@ -579,8 +711,8 @@
 <section id="sidebar-depth">
 <h2>Sidebar Depth<a class="headerlink" href="#sidebar-depth" title="Link to this heading">¶</a></h2>
 <p>Control how deep the sidebar table of contents tree expands:</p>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;nav_depth&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>   <span class="c1"># Default: 3 levels deep</span>
 <span class="p">}</span>
@@ -591,8 +723,8 @@
 <section id="breadcrumbs">
 <h2>Breadcrumbs<a class="headerlink" href="#breadcrumbs" title="Link to this heading">¶</a></h2>
 <p>The breadcrumb trail above the content helps readers orient themselves. To hide it:</p>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;show_breadcrumbs&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
 <span class="p">}</span>
@@ -603,8 +735,8 @@
 <section id="page-table-of-contents">
 <h2>Page Table of Contents<a class="headerlink" href="#page-table-of-contents" title="Link to this heading">¶</a></h2>
 <p>The right-side page outline shows h2 and h3 headings. To hide it:</p>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;show_toc&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
 <span class="p">}</span>
@@ -615,8 +747,8 @@
 <section id="previous-next-navigation">
 <h2>Previous / Next Navigation<a class="headerlink" href="#previous-next-navigation" title="Link to this heading">¶</a></h2>
 <p>Page-level previous/next links appear at the bottom of each page. To hide them:</p>
-<div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;show_prev_next&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
 <span class="p">}</span>
@@ -624,16 +756,64 @@
 </div>
 </div>
 </section>
+<section id="doc-sections">
+<h2>Doc Sections<a class="headerlink" href="#doc-sections" title="Link to this heading">¶</a></h2>
+<p>Group your documentation into distinct sections, each with its own icon, color, and sidebar navigation. A dropdown at the top of the sidebar lets readers switch between them — useful when your docs serve different audiences (e.g., users vs. developers) or cover separate products.</p>
+<section id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Link to this heading">¶</a></h3>
+<p>Define your sections in <code class="docutils literal notranslate"><span class="pre">html_theme_options</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id10" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;doc_sections&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;User Documentation&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Installation, guides &amp; reference&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;book-open&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#10b981&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;getting-started/index&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;contributing&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Developer Documentation&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Architecture &amp; development&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;code&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#8b5cf6&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Each section has:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">name</span></code></strong> (required) – display name in the switcher dropdown</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">description</span></code></strong> (required) – short tagline shown below the name</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">icon</span></code></strong> (required) – a <a class="reference external" href="https://lucide.dev/icons/">Lucide icon</a> name (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;book-open&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;code&quot;</span></code>)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">color</span></code></strong> (required) – hex color for the icon badge and section name in the switcher</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">path</span></code></strong> or <strong><code class="docutils literal notranslate"><span class="pre">paths</span></code></strong> – directory prefixes that belong to this section. Use <code class="docutils literal notranslate"><span class="pre">path</span></code> for a single directory (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;contributing&quot;</span></code>), or <code class="docutils literal notranslate"><span class="pre">paths</span></code> for multiple directories grouped under one section.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">default</span></code></strong> – set to <code class="docutils literal notranslate"><span class="pre">True</span></code> on one section to make it the catch-all. Any page not claimed by another section’s explicit paths automatically belongs to the default section.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">link</span></code></strong> – page to navigate to when clicking this section in the dropdown (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;getting-started/index&quot;</span></code>). Defaults to the first entry in <code class="docutils literal notranslate"><span class="pre">path</span></code>/<code class="docutils literal notranslate"><span class="pre">paths</span></code>.</p></li>
+</ul>
+</section>
+<section id="how-it-works">
+<h3>How It Works<a class="headerlink" href="#how-it-works" title="Link to this heading">¶</a></h3>
+<p>When a reader visits a page that belongs to a section, the sidebar shows only that section’s navigation tree. The dropdown at the top highlights the active section and lets readers jump to any other section’s index page.</p>
+<p>One section can be marked as <code class="docutils literal notranslate"><span class="pre">&quot;default&quot;:</span> <span class="pre">True</span></code>. That section automatically includes every page not explicitly assigned to another section — you don’t need to list every directory. This is the simplest way to split docs into two groups like “User Documentation” (everything) and “Developer Documentation” (just <code class="docutils literal notranslate"><span class="pre">contributing/</span></code>).</p>
+<p>Section colors are contained to the switcher dropdown — they don’t affect the rest of the page’s accent color.</p>
+</section>
+</section>
 <section id="version-switcher">
 <h2>Version Switcher<a class="headerlink" href="#version-switcher" title="Link to this heading">¶</a></h2>
 <p>Display a dropdown in the header that lets readers switch between documentation versions. The version list loads from a JSON file you host alongside your docs.</p>
-<section id="setup">
-<h3>Setup<a class="headerlink" href="#setup" title="Link to this heading">¶</a></h3>
+<section id="id1">
+<h3>Setup<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Create a <code class="docutils literal notranslate"><span class="pre">versions.json</span></code> file</strong> and host it at a stable URL:</p></li>
 </ol>
-<div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-text">versions.json</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">versions.json</span><a class="headerlink" href="#id11" title="Link to this code">¶</a></div>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
 <span class="w">  </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;latest&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/en/latest/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dev (latest)&quot;</span><span class="p">},</span>
 <span class="w">  </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.17&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/en/1.17/&quot;</span><span class="p">},</span>
@@ -651,8 +831,8 @@
 <ol class="arabic simple" start="2">
 <li><p><strong>Configure the theme</strong> in your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>:</p></li>
 </ol>
-<div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id12" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;version_switcher_json&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/versions.json&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version_switcher_match&quot;</span><span class="p">:</span> <span class="s2">&quot;1.17&quot;</span><span class="p">,</span>
@@ -662,8 +842,8 @@
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">version_switcher_match</span></code> value should match a <code class="docutils literal notranslate"><span class="pre">version</span></code> field in your JSON. The dropdown highlights that entry as “(current)”.</p>
 </section>
-<section id="how-it-works">
-<h3>How It Works<a class="headerlink" href="#how-it-works" title="Link to this heading">¶</a></h3>
+<section id="id2">
+<h3>How It Works<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <p>When a reader selects a different version, the switcher navigates to the same page path on the selected version’s URL. For example, viewing <code class="docutils literal notranslate"><span class="pre">https://example.com/en/1.17/guides/search.html</span></code> and selecting “latest” navigates to <code class="docutils literal notranslate"><span class="pre">https://example.com/en/latest/guides/search.html</span></code>.</p>
 </section>
 </section>
@@ -701,7 +881,7 @@
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)]">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>April 4, 2026</time>
+            Last updated <time>April 15, 2026</time>
         </p>
     
     
@@ -745,9 +925,14 @@
 <li><a class="reference internal" href="#breadcrumbs">Breadcrumbs</a></li>
 <li><a class="reference internal" href="#page-table-of-contents">Page Table of Contents</a></li>
 <li><a class="reference internal" href="#previous-next-navigation">Previous / Next Navigation</a></li>
-<li><a class="reference internal" href="#version-switcher">Version Switcher</a><ul>
+<li><a class="reference internal" href="#doc-sections">Doc Sections</a><ul>
 <li><a class="reference internal" href="#setup">Setup</a></li>
 <li><a class="reference internal" href="#how-it-works">How It Works</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#version-switcher">Version Switcher</a><ul>
+<li><a class="reference internal" href="#id1">Setup</a></li>
+<li><a class="reference internal" href="#id2">How It Works</a></li>
 </ul>
 </li>
 </ul>

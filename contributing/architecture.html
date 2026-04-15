@@ -11,7 +11,7 @@
     <title>Architecture &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=dec4582f" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=bfde4efe" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -285,63 +285,87 @@
             <div x-data="sidebar()">
     
     <div class="lumina-sidebar-desktop hidden flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
-        <nav class="lumina-sidebar-nav" aria-label="Main navigation">
-            <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../getting-started/configuration.html">Configuration</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../guides/search.html">Search</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/dark-mode.html">Dark Mode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/myst-markdown.html">MyST Markdown</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/navigation.html">Navigation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/custom-styling.html">Custom Styling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/landing-page.html">Landing Page</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/wide-layout.html">Wide Layout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/icons.html">Icons</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/development-workflow.html">Development Workflow</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../extensions/index.html">Extensions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/myst-parser.html">MyST Parser</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-design.html">sphinx-design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-copybutton.html">sphinx-copybutton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/mermaid.html">Mermaid Diagrams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/openapi.html">OpenAPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-llm.html">sphinx-llm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-js.html">sphinx-js</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-last-updated-by-git.html">sphinx-last-updated-by-git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/mathjax.html">MathJax</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/typography.html">Typography</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/admonitions.html">Admonitions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/code-blocks.html">Code Blocks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/lists-and-tables.html">Lists &amp; Tables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/cards-and-grids.html">Cards &amp; Grids</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/images-and-figures.html">Images &amp; Figures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/badges-and-buttons.html">Badges &amp; Buttons</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/math.html">Math</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/diagrams.html">Diagrams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/footnotes-and-references.html">Footnotes &amp; References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/api-documentation.html">API Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/http-api.html">HTTP API Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/icons.html">Icon Browser</a></li>
-</ul>
-</li>
+
+        
+
+    <div id="lumina-section-switcher"
+         x-data="navDropdown()"
+         @keydown="handleKeydown($event)"
+         class="lumina-section-switcher">
+        <button @click="toggle()"
+                :aria-expanded="open"
+                aria-haspopup="true"
+                aria-label="Switch documentation section"
+                class="lumina-section-switcher-trigger"
+                type="button">
+            
+                <span class="lumina-section-switcher-icon"
+                      style="background: #8b5cf615;
+                             color: #8b5cf6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg>
+                </span>
+                <span class="lumina-section-switcher-label">
+                    <span class="lumina-section-switcher-name"
+                          style="color: #8b5cf6">Developer Documentation</span>
+                    <span class="lumina-section-switcher-desc">Architecture & development</span>
+                </span>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lumina-section-switcher-chevron" aria-hidden="true"><path d="m7 15 5 5 5-5" /><path d="m7 9 5-5 5 5" /></svg>
+        </button>
+        <div x-show="open"
+             x-cloak
+             @click.away="open = false"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="lumina-section-switcher-dropdown"
+             role="menu">
+            
+                <a href="../getting-started/index.html"
+                   class="lumina-section-switcher-item"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="background: #10b98115;
+                                 color: #10b981"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #10b981">User Documentation</span>
+                        <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                    </span>
+                </a>
+            
+                <a href="index.html"
+                   class="lumina-section-switcher-item active"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="background: #8b5cf615;
+                                 color: #8b5cf6"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #8b5cf6">Developer Documentation</span>
+                        <span class="lumina-section-switcher-desc">Architecture & development</span>
+                    </span>
+                </a>
+            
+        </div>
+    </div>
+
+
+        
+            <nav class="lumina-sidebar-nav" aria-label="Section navigation">
+                <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributing</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="javascript-api.html">JavaScript API</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
 </ul>
 
-        </nav>
+            </nav>
+        
         
             <div class="lumina-sidebar-footer">
                 Built with
@@ -389,65 +413,89 @@
                         @click="close()"
                         class="absolute top-4 right-4 rounded-md p-1 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] cursor-pointer"
                         aria-label="Close navigation"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+
+                
+
+    <div id="lumina-section-switcher"
+         x-data="navDropdown()"
+         @keydown="handleKeydown($event)"
+         class="lumina-section-switcher">
+        <button @click="toggle()"
+                :aria-expanded="open"
+                aria-haspopup="true"
+                aria-label="Switch documentation section"
+                class="lumina-section-switcher-trigger"
+                type="button">
+            
+                <span class="lumina-section-switcher-icon"
+                      style="background: #8b5cf615;
+                             color: #8b5cf6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg>
+                </span>
+                <span class="lumina-section-switcher-label">
+                    <span class="lumina-section-switcher-name"
+                          style="color: #8b5cf6">Developer Documentation</span>
+                    <span class="lumina-section-switcher-desc">Architecture & development</span>
+                </span>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lumina-section-switcher-chevron" aria-hidden="true"><path d="m7 15 5 5 5-5" /><path d="m7 9 5-5 5 5" /></svg>
+        </button>
+        <div x-show="open"
+             x-cloak
+             @click.away="open = false"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="lumina-section-switcher-dropdown"
+             role="menu">
+            
+                <a href="../getting-started/index.html"
+                   class="lumina-section-switcher-item"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="background: #10b98115;
+                                 color: #10b981"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #10b981">User Documentation</span>
+                        <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                    </span>
+                </a>
+            
+                <a href="index.html"
+                   class="lumina-section-switcher-item active"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="background: #8b5cf615;
+                                 color: #8b5cf6"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #8b5cf6">Developer Documentation</span>
+                        <span class="lumina-section-switcher-desc">Architecture & development</span>
+                    </span>
+                </a>
+            
+        </div>
+    </div>
+
+
                 
                 
-                <nav class="lumina-sidebar-nav" aria-label="Main navigation">
-                    <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../getting-started/configuration.html">Configuration</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../guides/search.html">Search</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/dark-mode.html">Dark Mode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/myst-markdown.html">MyST Markdown</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/navigation.html">Navigation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/custom-styling.html">Custom Styling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/landing-page.html">Landing Page</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/wide-layout.html">Wide Layout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/icons.html">Icons</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/development-workflow.html">Development Workflow</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../extensions/index.html">Extensions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/myst-parser.html">MyST Parser</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-design.html">sphinx-design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-copybutton.html">sphinx-copybutton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/mermaid.html">Mermaid Diagrams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/openapi.html">OpenAPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-llm.html">sphinx-llm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-js.html">sphinx-js</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-last-updated-by-git.html">sphinx-last-updated-by-git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../extensions/mathjax.html">MathJax</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/typography.html">Typography</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/admonitions.html">Admonitions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/code-blocks.html">Code Blocks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/lists-and-tables.html">Lists &amp; Tables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/cards-and-grids.html">Cards &amp; Grids</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/images-and-figures.html">Images &amp; Figures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/badges-and-buttons.html">Badges &amp; Buttons</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/math.html">Math</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/diagrams.html">Diagrams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/footnotes-and-references.html">Footnotes &amp; References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/api-documentation.html">API Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/http-api.html">HTTP API Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/icons.html">Icon Browser</a></li>
-</ul>
-</li>
+                
+                    <nav class="lumina-sidebar-nav" aria-label="Section navigation">
+                        <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributing</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="javascript-api.html">JavaScript API</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
 </ul>
 
-                </nav>
+                    </nav>
+                
                 
                     <div class="lumina-sidebar-footer">
                         <a href="https://github.com/r4sky0/sphinx-lumina-theme"
