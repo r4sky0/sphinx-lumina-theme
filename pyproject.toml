@@ -1,6 +1,6 @@
 [project]
 name = "sphinx-lumina-theme"
-version = "1.29.0"
+version = "1.30.0"
 description = "A modern Sphinx documentation theme with Tailwind CSS and Alpine.js"
 readme = "README.md"
 license = "Apache-2.0"
