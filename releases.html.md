@@ -1,5 +1,23 @@
 # Releases
 
+## v1.28.1 (2026-04-15)
+
+### Bug Fixes
+
+- Tighten tab component spacing ([#64](https://github.com/r4sky0/sphinx-lumina-theme/pull/64),
+  [`58c5429`](https://github.com/r4sky0/sphinx-lumina-theme/commit/58c542983aa9aff1bcabadb1d712f9b3e97eed07))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps-dev**: Bump pytest from 9.0.2 to 9.0.3 in the uv group across 1 directory
+  ([#56](https://github.com/r4sky0/sphinx-lumina-theme/pull/56),
+  [`d5b1bb7`](https://github.com/r4sky0/sphinx-lumina-theme/commit/d5b1bb754e49c83e0394e07d55c60f5f3b3476aa))
+
+</details>
+
 ## v1.28.0 (2026-04-14)
 
 ### Features
