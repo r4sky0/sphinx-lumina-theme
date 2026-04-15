@@ -10,9 +10,13 @@
 {% block extrahead %}
 
     {% if not favicon %}
-        <link rel="icon"
-              type="image/svg+xml"
-              href="{{ pathto('_static/favicon.svg', 1) }}">
+        {% if lumina_logo_icon_favicon is defined and lumina_logo_icon_favicon %}
+            <link rel="icon" type="image/svg+xml" href="{{ lumina_logo_icon_favicon }}">
+        {% else %}
+            <link rel="icon"
+                  type="image/svg+xml"
+                  href="{{ pathto('_static/favicon.svg', 1) }}">
+        {% endif %}
     {% endif %}
     <link rel="preload"
           as="font"

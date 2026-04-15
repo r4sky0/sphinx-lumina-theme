@@ -25,7 +25,7 @@
                 {% elif logo_url is defined and logo_url %}
                     <img src="{{ logo_url }}" alt="{{ project }} logo" class="h-7 w-auto">
                 {% elif theme_logo_icon and theme_logo_icon != "" %}
-                    {{ lumina_icon(theme_logo_icon, size=28, css_class="lumina-logo-icon") }}
+                    {{ lumina_icon(theme_logo_icon, size=theme_logo_icon_size|default(24) |int, css_class="lumina-logo-icon") }}
                 {% else %}
                     {# Default Lumina logomark — geometric light prism #}
                     <svg class="lumina-logo h-7 w-7"

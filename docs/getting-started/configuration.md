@@ -68,8 +68,16 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 * - `logo_icon`
   - string
   - `""`
-  - Use a [Lucide icon](https://lucide.dev/icons/) as the site logo instead of an image. Pass the icon name (e.g. `"hexagon"`). Only used when no image logo is configured. See {doc}`/guides/icons`.
+  - Use a [Lucide icon](https://lucide.dev/icons/) as the site logo instead of an image. Pass the icon name (e.g. `"hexagon"`). Only used when no image logo is configured. When set, the browser favicon is automatically derived from the same icon and colored with `accent_color`, unless you also set Sphinx's `html_favicon`, which takes precedence. See {doc}`/guides/icons`.
+* - `logo_icon_size`
+  - string
+  - `"24"`
+  - Display size in pixels for `logo_icon`. Lucide icons are pixel-perfect at multiples of 24 (24, 48, 72, …); other sizes appear fuzzy because the 2-unit strokes can't align to whole device pixels. Stick to 24 unless you deliberately want a larger logo.
 ```
+
+:::{tip} Why 24 and not 28?
+Lucide icons are designed on a 24×24 grid with 2-unit-wide strokes. When a Lucide icon is rendered at a size that isn't a clean multiple of 24, those strokes land on fractional device pixels and the browser anti-aliases them across two columns of pixels — the icon looks subtly fuzzy. Stick to 24, 48, or 72 for a crisp logo.
+:::
 
 ### Announcement
 

@@ -268,6 +268,18 @@ def _add_context(app, pagename, templatename, context, doctree):
     if dark_logo:
         context["lumina_dark_logo"] = context["pathto"]("_static/" + dark_logo, 1)
 
+    # Derive a favicon from logo_icon (Lucide) when set, so the browser tab
+    # matches the header logo. Sphinx's html_favicon still wins via the
+    # ``favicon`` context variable check in layout.html.
+    logo_icon = app.builder.theme_options.get("logo_icon", "")
+    if logo_icon:
+        from ._icon_utils import get_icon_data_href
+
+        accent = app.builder.theme_options.get("accent_color", "#10b981")
+        favicon_href = get_icon_data_href(logo_icon, stroke=accent)
+        if favicon_href:
+            context["lumina_logo_icon_favicon"] = favicon_href
+
     # Announcement banner
     announcement = app.builder.theme_options.get("announcement", "")
     if announcement:

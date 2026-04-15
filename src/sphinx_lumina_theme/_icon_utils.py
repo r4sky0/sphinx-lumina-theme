@@ -38,10 +38,13 @@ def get_icon_inner(name):
     return Markup(ICONS.get(name, ""))
 
 
-def get_icon_data_uri(name, stroke_width=2):
-    """Return a CSS-ready data URI for a Lucide icon.
+def get_icon_data_href(name, stroke="currentColor", stroke_width=2):
+    """Return a bare ``data:image/svg+xml,...`` URI for a Lucide icon.
 
-    Suitable for use in mask-image or background-image CSS properties.
+    Suitable for use as an ``href`` on ``<link rel="icon">``. Unlike
+    :func:`get_icon_data_uri`, no ``url("...")`` wrapping is applied, and
+    the stroke color can be customized (favicons render outside any CSS
+    context, so ``currentColor`` is not resolvable).
     """
     from ._icons import ICONS
 
@@ -51,7 +54,16 @@ def get_icon_data_uri(name, stroke_width=2):
 
     svg = (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" '
-        f'fill="none" stroke="currentColor" stroke-width="{stroke_width}" '
+        f'fill="none" stroke="{stroke}" stroke-width="{stroke_width}" '
         f'stroke-linecap="round" stroke-linejoin="round">{inner}</svg>'
     )
-    return f'url("data:image/svg+xml,{quote(svg, safe="/:@!$&()*+,;=")}")'
+    return f"data:image/svg+xml,{quote(svg, safe='/:@!$&()*+,;=')}"
+
+
+def get_icon_data_uri(name, stroke_width=2):
+    """Return a CSS-ready data URI for a Lucide icon.
+
+    Suitable for use in mask-image or background-image CSS properties.
+    """
+    href = get_icon_data_href(name, stroke_width=stroke_width)
+    return f'url("{href}")' if href else ""
