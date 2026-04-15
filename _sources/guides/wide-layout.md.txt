@@ -1,19 +1,32 @@
 # Wide Layout
 
-Lumina's default content width (48rem) is optimized for comfortable reading at around 80-90 characters per line. If your documentation is code-heavy or includes wide tables, you can enable a wider layout that lets readers expand the content area to 60rem.
+Lumina's default content width (48rem) is optimized for comfortable reading at around 80-90 characters per line. If your documentation is code-heavy or includes wide tables, you can enable a wider layout that expands the content area to 60rem.
 
-## Configuration
+## Reader Toggle
 
-Enable the wide layout toggle in your `conf.py`:
+Let readers choose between normal and wide layouts with a toggle button in the header:
 
 ```{code-block} python
 :caption: conf.py
 html_theme_options = {
-    "wide_layout": True,
+    "wide_layout": "toggle",
 }
 ```
 
-This adds a toggle button to the header (next to the dark mode switch) that lets readers switch between normal and wide layouts. The toggle is only visible on screens 1280px and wider, since narrower viewports don't have extra space to use.
+This adds a toggle button next to the dark mode switch. The toggle is only visible on screens 1280px and wider, since narrower viewports don't have extra space to use. The reader's preference is persisted in `localStorage`.
+
+## Always Wide
+
+Force wide mode permanently — no toggle, always wide:
+
+```{code-block} python
+:caption: conf.py
+html_theme_options = {
+    "wide_layout": "always",
+}
+```
+
+This is useful when your entire documentation is code-heavy and you want every reader to see the wider layout without having to discover and click a toggle.
 
 ## How It Works
 
