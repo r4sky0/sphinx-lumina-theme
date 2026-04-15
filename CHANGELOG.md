@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v1.31.1 (2026-04-15)
+
+### Bug Fixes
+
+- Render Lucide logo icon crisply and derive favicon from it
+  ([#67](https://github.com/r4sky0/sphinx-lumina-theme/pull/67),
+  [`f5de441`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f5de4412157fc90974917a96a29e437d96eb0353))
+
+
 ## v1.31.0 (2026-04-15)
 
 ### Features
