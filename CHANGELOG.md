@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v1.33.1 (2026-04-15)
+
+### Bug Fixes
+
+- Add tooltips to icon-only header buttons
+  ([#72](https://github.com/r4sky0/sphinx-lumina-theme/pull/72),
+  [`c8ea143`](https://github.com/r4sky0/sphinx-lumina-theme/commit/c8ea143e1c8d4dfc884653d6e986f739803ce1eb))
+
+
 ## v1.33.0 (2026-04-15)
 
 ### Features
