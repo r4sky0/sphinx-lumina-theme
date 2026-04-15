@@ -92,46 +92,58 @@ def _detect_section(pagename, sections):
 def _section_toctree(app, pagename, section, maxdepth, collapse):
     """Render toctree HTML for a section's subtree(s).
 
-    Uses Sphinx's internal ``_resolve_toctree`` to resolve only the toctree
-    node(s) from the section hub document(s).  Supports sections with
-    multiple ``paths``, concatenating their toctree HTML.
+    Resolves the **root** document's toctree but filters its entries to only
+    include those matching the section's path prefixes.  This preserves the
+    full hierarchy (section headings with nested children) while scoping the
+    sidebar to just the relevant sections.
 
     Note: ``_resolve_toctree`` is a private API but has been stable across
     Sphinx 7.x and 8.x.  This project requires ``sphinx>=8.0``.
     """
+    import copy
+
     from sphinx import addnodes
     from sphinx.environment.adapters.toctree import _resolve_toctree
 
+    paths = _section_paths(section)
+    path_set = {p + "/index" for p in paths}
     builder = app.builder
-    fragments = []
+    root_doc = app.env.config.root_doc
 
-    for path in _section_paths(section):
-        section_root = path + "/index"
-        try:
-            doctree = app.env.get_doctree(section_root)
-        except FileNotFoundError:
-            logger.warning(
-                "doc_sections entry '%s' has no matching document at %s",
-                section.get("name", "?"),
-                section_root,
-            )
+    try:
+        root_doctree = app.env.get_doctree(root_doc)
+    except FileNotFoundError:
+        return ""
+
+    fragments = []
+    for node in root_doctree.findall(addnodes.toctree):
+        # Filter entries to only include docs matching this section
+        matching_entries = [
+            (title, docname)
+            for title, docname in node["entries"]
+            if docname in path_set
+        ]
+        if not matching_entries:
             continue
 
-        for node in doctree.findall(addnodes.toctree):
-            resolved = _resolve_toctree(
-                app.env,
-                pagename,
-                builder,
-                node,
-                prune=True,
-                maxdepth=maxdepth,
-                titles_only=True,
-                collapse=collapse,
-                includehidden=True,
-                tags=builder.tags,
-            )
-            if resolved:
-                fragments.append(builder.render_partial(resolved)["fragment"])
+        filtered = copy.deepcopy(node)
+        filtered["entries"] = matching_entries
+        filtered["includefiles"] = [f for f in node["includefiles"] if f in path_set]
+
+        resolved = _resolve_toctree(
+            app.env,
+            pagename,
+            builder,
+            filtered,
+            prune=True,
+            maxdepth=maxdepth,
+            titles_only=True,
+            collapse=collapse,
+            includehidden=True,
+            tags=builder.tags,
+        )
+        if resolved:
+            fragments.append(builder.render_partial(resolved)["fragment"])
 
     return "\n".join(fragments)
 
