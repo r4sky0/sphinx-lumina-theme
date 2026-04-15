@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-04T09:02:51+00:00" />
+    <meta property="article:modified_time" content="2026-04-15T20:40:38+00:00" />
     <title>Custom Styling &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
@@ -788,31 +788,81 @@
 </section>
 <section id="syntax-highlighting">
 <h2>Syntax Highlighting<a class="headerlink" href="#syntax-highlighting" title="Link to this heading">¶</a></h2>
-<p>Lumina uses separate Pygments styles for light and dark modes:</p>
-<ul class="simple">
-<li><p><strong>Light mode:</strong> <code class="docutils literal notranslate"><span class="pre">default</span></code> style</p></li>
-<li><p><strong>Dark mode:</strong> <code class="docutils literal notranslate"><span class="pre">monokai</span></code> style</p></li>
-</ul>
-<p>To change them:</p>
+<p>Lumina ships five syntax highlighting presets — curated light/dark pairs tested for contrast on the theme’s code block backgrounds. Set the <code class="docutils literal notranslate"><span class="pre">code_style</span></code> theme option to switch:</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pygments_style</span> <span class="o">=</span> <span class="s2">&quot;friendly&quot;</span>           <span class="c1"># Light mode</span>
-<span class="n">pygments_dark_style</span> <span class="o">=</span> <span class="s2">&quot;dracula&quot;</span>       <span class="c1"># Dark mode (Lumina extension)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;code_style&quot;</span><span class="p">:</span> <span class="s2">&quot;nord&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">Available presets</span><a class="headerlink" href="#id4" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 45.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Preset</p></th>
+<th class="head"><p>Light style</p></th>
+<th class="head"><p>Dark style</p></th>
+<th class="head"><p>Character</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;default&quot;</span></code></p></td>
+<td><p>default</p></td>
+<td><p>monokai</p></td>
+<td><p>Neutral baseline — familiar Pygments defaults</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;nord&quot;</span></code></p></td>
+<td><p>tango</p></td>
+<td><p>nord</p></td>
+<td><p>Cool, crisp, precise — arctic calm</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;one-dark&quot;</span></code></p></td>
+<td><p>friendly</p></td>
+<td><p>one-dark</p></td>
+<td><p>Warm, modern — Atom’s popular syntax theme</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;gruvbox&quot;</span></code></p></td>
+<td><p>gruvbox-light</p></td>
+<td><p>gruvbox-dark</p></td>
+<td><p>Earthy, bold — retro groove with warm tones</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;material&quot;</span></code></p></td>
+<td><p>lovelace</p></td>
+<td><p>material</p></td>
+<td><p>Refined, editorial — Google’s Material palette</p></td>
+</tr>
+</tbody>
+</table>
+<section id="custom-styles">
+<h3>Custom styles<a class="headerlink" href="#custom-styles" title="Link to this heading">¶</a></h3>
+<p>For full control, set <code class="docutils literal notranslate"><span class="pre">pygments_style</span></code> and <code class="docutils literal notranslate"><span class="pre">pygments_dark_style</span></code> directly in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>. When either is set, the <code class="docutils literal notranslate"><span class="pre">code_style</span></code> preset is ignored.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pygments_style</span> <span class="o">=</span> <span class="s2">&quot;friendly&quot;</span>
+<span class="n">pygments_dark_style</span> <span class="o">=</span> <span class="s2">&quot;dracula&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Preview available Pygments styles at <a class="reference external" href="https://pygments.org/styles/">pygments.org/styles</a>.</p>
+<p>Preview all available Pygments styles at <a class="reference external" href="https://pygments.org/styles/">pygments.org/styles</a>.</p>
 </div>
+</section>
 </section>
 <section id="hiding-page-elements">
 <h2>Hiding Page Elements<a class="headerlink" href="#hiding-page-elements" title="Link to this heading">¶</a></h2>
 <p>Selectively hide UI elements globally or per-page.</p>
 <section id="globally">
 <h3>Globally<a class="headerlink" href="#globally" title="Link to this heading">¶</a></h3>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;show_toc&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>           <span class="c1"># Hide right-side TOC on all pages</span>
     <span class="s2">&quot;show_breadcrumbs&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>   <span class="c1"># Hide breadcrumbs on all pages</span>
@@ -835,15 +885,15 @@
 <section id="custom-templates">
 <h2>Custom Templates<a class="headerlink" href="#custom-templates" title="Link to this heading">¶</a></h2>
 <p>Lumina’s templates are designed for extension. To override a specific component, create a <code class="docutils literal notranslate"><span class="pre">_templates/</span></code> directory:</p>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">templates_path</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;_templates&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <p>Then create a template that extends the original:</p>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">docs/_templates/layout.html</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">docs/_templates/layout.html</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
 <div class="highlight-html+jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;!layout.html&quot;</span> <span class="cp">%}</span>
 
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">extrahead</span> <span class="cp">%}</span>
@@ -889,7 +939,7 @@
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)]">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>April 4, 2026</time>
+            Last updated <time>April 15, 2026</time>
         </p>
     
     
@@ -931,7 +981,10 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#fonts">Fonts</a></li>
-<li><a class="reference internal" href="#syntax-highlighting">Syntax Highlighting</a></li>
+<li><a class="reference internal" href="#syntax-highlighting">Syntax Highlighting</a><ul>
+<li><a class="reference internal" href="#custom-styles">Custom styles</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#hiding-page-elements">Hiding Page Elements</a><ul>
 <li><a class="reference internal" href="#globally">Globally</a></li>
 <li><a class="reference internal" href="#per-page">Per-page</a></li>

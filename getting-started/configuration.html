@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-15T12:06:26+00:00" />
+    <meta property="article:modified_time" content="2026-04-15T20:40:38+00:00" />
     <title>Configuration &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
@@ -741,37 +741,42 @@
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;#10b981&quot;</span></code></p></td>
 <td><p>Primary brand color used for links, active states, and accents. Any valid CSS color.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dark_mode_default</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">code_style</span></code></p></td>
+<td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;default&quot;</span></code></p></td>
+<td><p>Syntax highlighting preset. Sets matched Pygments styles for light and dark modes. Options: <code class="docutils literal notranslate"><span class="pre">&quot;default&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;nord&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;one-dark&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;gruvbox&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;material&quot;</span></code>. See <a class="reference internal" href="../guides/custom-styling.html"><span class="doc">Custom Styling</span></a> for details.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dark_mode_default</span></code></p></td>
 <td><p>string</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code></p></td>
 <td><p>Initial color mode. <code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code> follows system preference, <code class="docutils literal notranslate"><span class="pre">&quot;light&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;dark&quot;</span></code> force a mode.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wide_layout</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">wide_layout</span></code></p></td>
 <td><p>string</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;false&quot;</span></code></p></td>
 <td><p>Controls wide content layout (<code class="docutils literal notranslate"><span class="pre">60rem</span></code> instead of <code class="docutils literal notranslate"><span class="pre">48rem</span></code>). <code class="docutils literal notranslate"><span class="pre">&quot;toggle&quot;</span></code> shows a button in the header that lets readers switch (visible on viewports ≥1280px, persisted in browser). <code class="docutils literal notranslate"><span class="pre">&quot;always&quot;</span></code> forces wide mode permanently with no toggle. See <a class="reference internal" href="../guides/wide-layout.html"><span class="doc">Wide Layout</span></a>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">logo_only</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">logo_only</span></code></p></td>
 <td><p>string</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;false&quot;</span></code></p></td>
 <td><p>When <code class="docutils literal notranslate"><span class="pre">&quot;true&quot;</span></code>, hides the project name in the header and shows only the logo.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">light_logo</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">light_logo</span></code></p></td>
 <td><p>string</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
 <td><p>Logo image for light mode (path relative to <code class="docutils literal notranslate"><span class="pre">_static</span></code>). Falls back to <code class="docutils literal notranslate"><span class="pre">html_logo</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dark_logo</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dark_logo</span></code></p></td>
 <td><p>string</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
 <td><p>Logo image for dark mode (path relative to <code class="docutils literal notranslate"><span class="pre">_static</span></code>). When set alone, displays in both modes. Set both <code class="docutils literal notranslate"><span class="pre">light_logo</span></code> and <code class="docutils literal notranslate"><span class="pre">dark_logo</span></code> for automatic switching.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">logo_icon</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">logo_icon</span></code></p></td>
 <td><p>string</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
 <td><p>Use a <a class="reference external" href="https://lucide.dev/icons/">Lucide icon</a> as the site logo instead of an image. Pass the icon name (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;hexagon&quot;</span></code>). Only used when no image logo is configured. When set, the browser favicon is automatically derived from the same icon and colored with <code class="docutils literal notranslate"><span class="pre">accent_color</span></code>, unless you also set Sphinx’s <code class="docutils literal notranslate"><span class="pre">html_favicon</span></code>, which takes precedence. See <a class="reference internal" href="../guides/icons.html"><span class="doc">Icons</span></a>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">logo_icon_size</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">logo_icon_size</span></code></p></td>
 <td><p>string</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;24&quot;</span></code></p></td>
 <td><p>Display size in pixels for <code class="docutils literal notranslate"><span class="pre">logo_icon</span></code>. Lucide icons are pixel-perfect at multiples of 24 (24, 48, 72, …); other sizes appear fuzzy because the 2-unit strokes can’t align to whole device pixels. Stick to 24 unless you deliberately want a larger logo.</p></td>
