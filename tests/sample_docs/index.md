@@ -69,6 +69,7 @@ Content two.
 ```{toctree}
 :hidden:
 getting-started
+typography-test
 landing-test
 icons-test
 guides/index
