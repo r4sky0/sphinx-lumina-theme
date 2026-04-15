@@ -20,4 +20,4 @@ html_theme_options = {
     "source_directory": "docs/",
 }
 exclude_patterns = ["_build"]
-myst_enable_extensions = ["colon_fence", "tasklist", "deflist"]
+myst_enable_extensions = ["colon_fence", "tasklist", "deflist", "fieldlist"]
