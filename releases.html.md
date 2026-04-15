@@ -1,5 +1,13 @@
 # Releases
 
+## v1.32.0 (2026-04-15)
+
+### Features
+
+- Add code_style theme option with 5 curated Pygments presets
+  ([#70](https://github.com/r4sky0/sphinx-lumina-theme/pull/70),
+  [`b458959`](https://github.com/r4sky0/sphinx-lumina-theme/commit/b4589599b19de61b9e5165a3c2b29855d866d8dc))
+
 ## v1.31.3 (2026-04-15)
 
 ### Bug Fixes
