@@ -138,6 +138,50 @@
   margin-bottom: 0.25rem;
 }
 
+/* ── Task lists (MyST checkbox syntax) ── */
+.lumina-article .task-list-item {
+  list-style: none;
+}
+
+.lumina-article .task-list-item > p {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.lumina-article .task-list-item-checkbox {
+  appearance: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 2px solid var(--lumina-border);
+  border-radius: 0.25rem;
+  flex-shrink: 0;
+  cursor: default;
+  position: relative;
+  top: 0.1em;
+}
+
+.lumina-article .task-list-item-checkbox:checked {
+  background: var(--lumina-accent);
+  border-color: var(--lumina-accent);
+}
+
+.lumina-article .task-list-item-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 0.3125rem;
+  top: 0.125rem;
+  width: 0.3125rem;
+  height: 0.5625rem;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.lumina-article .task-list-item:has(.task-list-item-checkbox:checked) {
+  color: var(--lumina-text-muted);
+}
+
 .lumina-article code:not(pre code) {
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.875em;
