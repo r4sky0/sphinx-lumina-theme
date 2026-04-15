@@ -2,6 +2,14 @@
 
 <!-- releases -->
 
+## v1.29.0 (2026-04-15)
+
+### Features
+
+- Add always-on wide layout mode ([#65](https://github.com/r4sky0/sphinx-lumina-theme/pull/65),
+  [`cd6987e`](https://github.com/r4sky0/sphinx-lumina-theme/commit/cd6987ec73fdfa55ae333acb76d7bc3992d8b9a7))
+
+
 ## v1.28.1 (2026-04-15)
 
 ### Bug Fixes
