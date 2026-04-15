@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v1.31.2 (2026-04-15)
+
+### Bug Fixes
+
+- Redesign sidebar active state and move chevrons to right
+  ([#69](https://github.com/r4sky0/sphinx-lumina-theme/pull/69),
+  [`7eea5d3`](https://github.com/r4sky0/sphinx-lumina-theme/commit/7eea5d327e3bfe3c902c9af69f1b2b1e7b79c423))
+
+
 ## v1.31.1 (2026-04-15)
 
 ### Bug Fixes
