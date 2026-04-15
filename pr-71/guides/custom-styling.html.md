@@ -97,16 +97,31 @@ If you use custom fonts, add the font files to your `_static/` directory and inc
 
 ## Syntax Highlighting
 
-Lumina uses separate Pygments styles for light and dark modes:
-
-- **Light mode:** `default` style
-- **Dark mode:** `monokai` style
-
-To change them:
+Lumina ships five syntax highlighting presets — curated light/dark pairs tested for contrast on the theme’s code block backgrounds. Set the `code_style` theme option to switch:
 
 ```python
-pygments_style = "friendly"           # Light mode
-pygments_dark_style = "dracula"       # Dark mode (Lumina extension)
+html_theme_options = {
+    "code_style": "nord",
+}
+```
+
+#### Available presets
+
+| Preset       | Light style   | Dark style   | Character                                      |
+|--------------|---------------|--------------|------------------------------------------------|
+| `"default"`  | default       | monokai      | Neutral baseline — familiar Pygments defaults  |
+| `"nord"`     | tango         | nord         | Cool, crisp, precise — arctic calm             |
+| `"one-dark"` | friendly      | one-dark     | Warm, modern — Atom’s popular syntax theme     |
+| `"gruvbox"`  | gruvbox-light | gruvbox-dark | Earthy, bold — retro groove with warm tones    |
+| `"material"` | lovelace      | material     | Refined, editorial — Google’s Material palette |
+
+### Custom styles
+
+For full control, set `pygments_style` and `pygments_dark_style` directly in `conf.py`. When either is set, the `code_style` preset is ignored.
+
+```python
+pygments_style = "friendly"
+pygments_dark_style = "dracula"
 ```
 
 ## Hiding Page Elements

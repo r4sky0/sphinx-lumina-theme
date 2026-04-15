@@ -45,6 +45,10 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
   - string
   - `"#10b981"`
   - Primary brand color used for links, active states, and accents. Any valid CSS color.
+* - `code_style`
+  - string
+  - `"default"`
+  - Syntax highlighting preset. Sets matched Pygments styles for light and dark modes. Options: `"default"`, `"nord"`, `"one-dark"`, `"gruvbox"`, `"material"`. See {doc}`/guides/custom-styling` for details.
 * - `dark_mode_default`
   - string
   - `"auto"`
