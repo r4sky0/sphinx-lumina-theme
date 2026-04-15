@@ -1,5 +1,13 @@
 # Releases
 
+## v1.31.0 (2026-04-15)
+
+### Features
+
+- Collapsible sidebar navigation with extra depth level
+  ([#66](https://github.com/r4sky0/sphinx-lumina-theme/pull/66),
+  [`a66577e`](https://github.com/r4sky0/sphinx-lumina-theme/commit/a66577e2aa03474fcba113002319a0bf5f326cdc))
+
 ## v1.30.0 (2026-04-15)
 
 ### Features
