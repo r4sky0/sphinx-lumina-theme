@@ -92,6 +92,15 @@ def index_html(build_output):
     return BeautifulSoup(html_path.read_text(), "html.parser")
 
 
+@pytest.fixture(scope="session")
+def typography_html(build_output):
+    """Return parsed HTML of the typography test page."""
+    from bs4 import BeautifulSoup
+
+    html_path = build_output / "typography-test.html"
+    return BeautifulSoup(html_path.read_text(), "html.parser")
+
+
 def _find_free_port():
     """Find a free TCP port."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
