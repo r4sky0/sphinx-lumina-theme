@@ -11,7 +11,7 @@
     <title>Mermaid Diagrams &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=5bdc9d59" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=5d56983f" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -294,7 +294,8 @@
          x-data="navDropdown()"
          @keydown="handleKeydown($event)"
          class="lumina-section-switcher">
-        <button @click="toggle()"
+        <button x-ref="trigger"
+                @click="toggle()"
                 :aria-expanded="open"
                 aria-haspopup="true"
                 aria-label="Switch documentation section"
@@ -302,8 +303,8 @@
                 type="button">
             
                 <span class="lumina-section-switcher-icon"
-                      style="background: #10b98115;
-                             color: #10b981">
+                      style="--section-color: #10b981;
+                             color: var(--section-color)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
                 </span>
                 <span class="lumina-section-switcher-label">
@@ -312,14 +313,26 @@
                     <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
                 </span>
             
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lumina-section-switcher-chevron" aria-hidden="true"><path d="m7 15 5 5 5-5" /><path d="m7 9 5-5 5 5" /></svg>
+            <svg class="lumina-section-switcher-chevron"
+                 :class="open && 'rotate-180'"
+                 width="14"
+                 height="14"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 viewBox="0 0 24 24"
+                 aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+            </svg>
         </button>
         <div x-show="open"
              x-cloak
              @click.away="open = false"
              x-transition:enter="transition ease-out duration-150"
-             x-transition:enter-start="opacity-0 -translate-y-1"
-             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:enter-start="opacity-0 -translate-y-1 scale-[0.98]"
+             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
              x-transition:leave="transition ease-in duration-100"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
@@ -330,8 +343,8 @@
                    class="lumina-section-switcher-item active"
                    role="menuitem">
                     <span class="lumina-section-switcher-icon"
-                          style="background: #10b98115;
-                                 color: #10b981"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
+                          style="--section-color: #10b981;
+                                 color: var(--section-color)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
                     <span class="lumina-section-switcher-label">
                         <span class="lumina-section-switcher-name"
                               style="color: #10b981">User Documentation</span>
@@ -343,8 +356,8 @@
                    class="lumina-section-switcher-item"
                    role="menuitem">
                     <span class="lumina-section-switcher-icon"
-                          style="background: #8b5cf615;
-                                 color: #8b5cf6"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
+                          style="--section-color: #8b5cf6;
+                                 color: var(--section-color)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
                     <span class="lumina-section-switcher-label">
                         <span class="lumina-section-switcher-name"
                               style="color: #8b5cf6">Developer Documentation</span>
@@ -466,7 +479,8 @@
          x-data="navDropdown()"
          @keydown="handleKeydown($event)"
          class="lumina-section-switcher">
-        <button @click="toggle()"
+        <button x-ref="trigger"
+                @click="toggle()"
                 :aria-expanded="open"
                 aria-haspopup="true"
                 aria-label="Switch documentation section"
@@ -474,8 +488,8 @@
                 type="button">
             
                 <span class="lumina-section-switcher-icon"
-                      style="background: #10b98115;
-                             color: #10b981">
+                      style="--section-color: #10b981;
+                             color: var(--section-color)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
                 </span>
                 <span class="lumina-section-switcher-label">
@@ -484,14 +498,26 @@
                     <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
                 </span>
             
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lumina-section-switcher-chevron" aria-hidden="true"><path d="m7 15 5 5 5-5" /><path d="m7 9 5-5 5 5" /></svg>
+            <svg class="lumina-section-switcher-chevron"
+                 :class="open && 'rotate-180'"
+                 width="14"
+                 height="14"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 viewBox="0 0 24 24"
+                 aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+            </svg>
         </button>
         <div x-show="open"
              x-cloak
              @click.away="open = false"
              x-transition:enter="transition ease-out duration-150"
-             x-transition:enter-start="opacity-0 -translate-y-1"
-             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:enter-start="opacity-0 -translate-y-1 scale-[0.98]"
+             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
              x-transition:leave="transition ease-in duration-100"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
@@ -502,8 +528,8 @@
                    class="lumina-section-switcher-item active"
                    role="menuitem">
                     <span class="lumina-section-switcher-icon"
-                          style="background: #10b98115;
-                                 color: #10b981"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
+                          style="--section-color: #10b981;
+                                 color: var(--section-color)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
                     <span class="lumina-section-switcher-label">
                         <span class="lumina-section-switcher-name"
                               style="color: #10b981">User Documentation</span>
@@ -515,8 +541,8 @@
                    class="lumina-section-switcher-item"
                    role="menuitem">
                     <span class="lumina-section-switcher-icon"
-                          style="background: #8b5cf615;
-                                 color: #8b5cf6"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
+                          style="--section-color: #8b5cf6;
+                                 color: var(--section-color)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
                     <span class="lumina-section-switcher-label">
                         <span class="lumina-section-switcher-name"
                               style="color: #8b5cf6">Developer Documentation</span>
