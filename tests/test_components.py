@@ -108,7 +108,10 @@ def test_sidebar_toggle_button_after_link(build_output):
     css_path = build_output / "_static" / "lumina.css"
     css_text = css_path.read_text()
     # Grid should be [link][toggle] — the link column comes first
+    # Strip spaces to handle minifier variations (e.g. "minmax(0,1fr)auto")
+    css_no_spaces = css_text.replace(" ", "")
     assert (
-        "minmax(0,1fr) auto" in css_text.replace(" ", "")
+        "minmax(0,1fr)auto" in css_no_spaces
+        or "minmax(0,1fr) auto" in css_text
         or "minmax(0, 1fr) auto" in css_text
     )

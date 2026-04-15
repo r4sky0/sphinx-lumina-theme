@@ -501,7 +501,7 @@ a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
   width: 1rem;
   height: 1rem;
   padding: 0;
-  margin: 0.375rem 0.125rem 0.375rem 0;
+  margin: 0.375rem 0 0.375rem 0.125rem;
   background: transparent;
   border: 0;
   color: var(--lumina-text-muted);
@@ -510,7 +510,7 @@ a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
   transition: transform 0.15s ease, color 0.15s, background-color 0.15s;
   flex-shrink: 0;
   grid-row: 1;
-  grid-column: 1;
+  grid-column: 2;
 }
 
 .lumina-sidebar-nav-toggle:hover {
@@ -533,17 +533,17 @@ a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
   transform: rotate(90deg);
 }
 
-/* Lay out branch li as [toggle][link] on one row, with the nested ul
+/* Lay out branch li as [link][toggle] on one row, with the nested ul
    spanning the full width underneath. */
 .lumina-sidebar-nav li.has-children {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: start;
 }
 
 .lumina-sidebar-nav li.has-children > a {
   grid-row: 1;
-  grid-column: 2;
+  grid-column: 1;
   min-width: 0;
 }
 

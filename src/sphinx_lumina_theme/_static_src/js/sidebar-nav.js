@@ -66,7 +66,7 @@ export default function sidebarNav() {
           event.stopPropagation();
           this._toggle(li, button);
         });
-        li.insertBefore(button, link);
+        li.insertBefore(button, link.nextSibling);
 
         // Mark the li so CSS can style branches specifically.
         li.classList.add("has-children");
