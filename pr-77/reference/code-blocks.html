@@ -1,0 +1,1273 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="article:modified_time" content="2026-04-15T06:40:01+00:00" />
+    <title>Code Blocks &#8212; Sphinx Lumina Theme  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=c31003f6" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <script defer="defer" src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script defer="defer" src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script defer="defer" src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
+    <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="../_static/lumina.js?v=c936d917"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lists &amp; Tables" href="lists-and-tables.html" />
+    <link rel="prev" title="Admonitions" href="admonitions.html" />
+
+    
+        
+            <link rel="icon"
+                  type="image/svg+xml"
+                  href="../_static/favicon.svg">
+        
+    
+    <link rel="preload"
+          as="font"
+          type="font/woff2"
+          href="../_static/fonts/source-sans-3-regular.woff2"
+          crossorigin>
+    
+    <script>
+(function() {
+  var stored = localStorage.getItem('lumina-theme');
+  if (stored === 'dark' || stored === 'light') {
+    document.documentElement.setAttribute('data-theme', stored);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+    </script>
+    
+        <script>
+(function() {
+  
+  if (localStorage.getItem('lumina-layout') === 'wide') {
+    document.documentElement.setAttribute('data-layout', 'wide');
+  }
+  
+})();
+        </script>
+    
+    <meta name="lumina-search-backend" content="pagefind">
+    <meta name="lumina-base-url" content="../">
+    
+        <script>document.documentElement.dataset.apiBaseUrl = "https://petstore3.swagger.io/api/v3";</script>
+    
+    
+    
+    
+        <script>
+(function() {
+  var id = '0f8129f2';
+  if (!id || localStorage.getItem('lumina-announce-' + id) !== '1') {
+    document.documentElement.classList.add('has-announcement');
+  }
+})();
+        </script>
+    
+    
+        <link rel="alternate"
+              type="text/markdown"
+              href="../llms.txt"
+              title="LLM-friendly documentation index">
+    
+
+
+  </head><body>
+
+
+
+
+    <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
+
+    <div id="lumina-header">
+
+        <header class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--lumina-border)] bg-[var(--lumina-bg)]/80 backdrop-blur-sm">
+
+    
+    <div id="lumina-announcement"
+         x-data="announcementBanner()"
+         data-announcement-id="0f8129f2"
+         class="bg-[color-mix(in_srgb,var(--lumina-accent),black_40%)] text-white text-center text-sm">
+        <div class="mx-auto flex max-w-[90rem] items-center justify-center gap-4 px-4 py-2">
+            <div class="flex-1 [&_a]:underline [&_a]:font-medium">A fast, modern Sphinx theme with dark mode, full-text search, and Alpine.js interactivity. <a href="https://github.com/r4sky0/sphinx-lumina-theme">Star on GitHub ★</a></div>
+            <button @click="dismiss()"
+                    class="shrink-0 rounded p-0.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    aria-label="Dismiss announcement"
+                    type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+        </div>
+    </div>
+
+
+    <div class="lumina-header-inner mx-auto flex h-14 max-w-[90rem] items-center justify-between px-4 lg:px-6">
+        
+        <div class="flex items-center gap-3">
+            <a href="../index.html"
+               class="flex items-center gap-2 text-[var(--lumina-text)] no-underline hover:opacity-80 transition-opacity">
+                
+                    
+                    <svg class="lumina-logo h-7 w-7"
+                         viewBox="0 0 32 32"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg"
+                         aria-hidden="true">
+                        <path d="M16 3L28 27H4L16 3Z" stroke="var(--lumina-accent)" stroke-width="2" fill="none" />
+                        <path class="lumina-logo-facet-l" d="M16 10L8 27H16" fill="var(--lumina-accent)" />
+                        <path class="lumina-logo-facet-r" d="M16 10L24 27H16" fill="var(--lumina-accent)" />
+                        <line x1="16" y1="3" x2="16" y2="10" stroke="var(--lumina-accent)" stroke-width="2" />
+                    </svg>
+                
+                
+                    <span class="font-semibold text-base">Sphinx Lumina Theme</span>
+                
+            </a>
+
+            
+
+        </div>
+        
+        
+        
+        <div class="flex items-center gap-2">
+            
+            <button data-search-trigger
+                    class="flex items-center gap-2 rounded-lg border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-3 py-2 text-[0.8125rem] text-[var(--lumina-text-muted)] hover:border-[var(--lumina-accent)] transition-colors cursor-pointer lg:min-w-56"
+                    aria-label="Search documentation"
+                    aria-haspopup="dialog">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
+                <span class="hidden lg:inline flex-1 text-left">Search docs...</span>
+                <kbd data-search-shortcut
+                     class="hidden lg:inline rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-1.5 py-0.5 text-[0.6875rem] font-[family-name:'JetBrains_Mono'] tracking-[0.02em]">⌘K</kbd>
+            </button>
+            
+            <button data-theme-toggle
+                    x-data="themeToggle()"
+                    @click="cycle()"
+                    class="relative flex h-9 w-9 items-center justify-center rounded-md text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors cursor-pointer"
+                    :aria-label="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'"
+                    :title="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'">
+                
+                <svg x-show="mode === 'light'"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 rotate-[-90deg] scale-0"
+                     x-transition:enter-end="opacity-100 rotate-0 scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0 scale-0"
+                     class="h-5 w-5 absolute"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     viewBox="0 0 24 24"
+                     aria-hidden="true">
+                    <circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />
+                </svg>
+                
+                <svg x-show="mode === 'dark'"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 rotate-90 scale-0"
+                     x-transition:enter-end="opacity-100 rotate-0 scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0 scale-0"
+                     class="h-5 w-5 absolute"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     viewBox="0 0 24 24"
+                     aria-hidden="true">
+                    <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+                </svg>
+                
+                <svg x-show="mode === 'auto'"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 scale-0"
+                     x-transition:enter-end="opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0 scale-0"
+                     class="h-5 w-5 absolute"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     viewBox="0 0 24 24"
+                     aria-hidden="true">
+                    <rect width="20" height="14" x="2" y="3" rx="2" /><line x1="8" x2="16" y1="21" y2="21" /><line x1="12" x2="12" y1="17" y2="21" />
+                </svg>
+            </button>
+            
+                
+                <button x-data="layoutToggle()"
+                        @click="toggle()"
+                        class="hidden xl:flex h-9 w-9 items-center justify-center rounded-md text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors cursor-pointer"
+                        :aria-label="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
+                        :title="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
+                        type="button">
+                    
+                    <svg x-show="!wide"
+                         class="h-4 w-4"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         aria-hidden="true"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M15 3h6v6" /><path d="m21 3-7 7" /><path d="m3 21 7-7" /><path d="M9 21H3v-6" />
+                    </svg>
+                    
+                    <svg x-show="wide"
+                         x-cloak
+                         class="h-4 w-4"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         aria-hidden="true"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="m14 10 7-7" /><path d="M20 10h-6V4" /><path d="m3 21 7-7" /><path d="M4 14h6v6" />
+                    </svg>
+                </button>
+            
+            
+            
+                
+                    <a href="https://github.com/r4sky0/sphinx-lumina-theme"
+                       class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] transition-colors no-underline"
+                       target="_blank"
+                       rel="noopener"
+                       title="Github"
+                       aria-label="Github (opens in new tab)">
+                        
+                            <svg class="h-5 w-5"
+                                 fill="currentColor"
+                                 viewBox="0 0 24 24"
+                                 aria-hidden="true">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                            </svg>
+                        
+                    </a>
+                
+            
+            
+            
+                <button data-sidebar-toggle
+                        class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors lg:hidden cursor-pointer"
+                        aria-label="Toggle navigation"
+                        aria-expanded="false"
+                        aria-controls="lumina-sidebar-drawer"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg></button>
+            
+        </div>
+    </div>
+</header>
+
+    </div>
+    <div class="lumina-wrapper">
+        <aside id="lumina-sidebar">
+
+            <div x-data="sidebar()">
+    
+    <div class="lumina-sidebar-desktop hidden flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
+
+        
+
+    <div id="lumina-section-switcher"
+         x-data="navDropdown()"
+         @keydown="handleKeydown($event)"
+         class="lumina-section-switcher">
+        <button x-ref="trigger"
+                @click="toggle()"
+                :aria-expanded="open"
+                aria-haspopup="true"
+                aria-label="Switch documentation section"
+                class="lumina-section-switcher-trigger"
+                type="button">
+            
+                <span class="lumina-section-switcher-icon"
+                      style="--section-color: #10b981;
+                             color: var(--section-color)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
+                </span>
+                <span class="lumina-section-switcher-label">
+                    <span class="lumina-section-switcher-name"
+                          style="color: #10b981">User Documentation</span>
+                    <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                </span>
+            
+            <svg class="lumina-section-switcher-chevron"
+                 :class="open && 'rotate-180'"
+                 width="14"
+                 height="14"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 viewBox="0 0 24 24"
+                 aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+            </svg>
+        </button>
+        <div x-show="open"
+             x-cloak
+             @click.away="open = false"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1 scale-[0.98]"
+             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="lumina-section-switcher-dropdown"
+             role="menu">
+            
+                <a href="../getting-started/index.html"
+                   class="lumina-section-switcher-item active"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="--section-color: #10b981;
+                                 color: var(--section-color)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #10b981">User Documentation</span>
+                        <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                    </span>
+                </a>
+            
+                <a href="../contributing/index.html"
+                   class="lumina-section-switcher-item"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="--section-color: #8b5cf6;
+                                 color: var(--section-color)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #8b5cf6">Developer Documentation</span>
+                        <span class="lumina-section-switcher-desc">Architecture & development</span>
+                    </span>
+                </a>
+            
+        </div>
+    </div>
+
+
+        
+            <nav class="lumina-sidebar-nav"
+                 aria-label="Section navigation"
+                 x-data="sidebarNav()">
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/configuration.html">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/search.html">Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/dark-mode.html">Dark Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/myst-markdown.html">MyST Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/navigation.html">Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/custom-styling.html">Custom Styling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/landing-page.html">Landing Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/wide-layout.html">Wide Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/icons.html">Icons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development-workflow.html">Development Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extensions/index.html">Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/myst-parser.html">MyST Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-design.html">sphinx-design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-copybutton.html">sphinx-copybutton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/mermaid.html">Mermaid Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/openapi.html">OpenAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-llm.html">sphinx-llm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-js.html">sphinx-js</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-last-updated-by-git.html">sphinx-last-updated-by-git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/mathjax.html">MathJax</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="typography.html">Typography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admonitions.html">Admonitions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Code Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lists-and-tables.html">Lists &amp; Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cards-and-grids.html">Cards &amp; Grids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images-and-figures.html">Images &amp; Figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="badges-and-buttons.html">Badges &amp; Buttons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="math.html">Math</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagrams.html">Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="footnotes-and-references.html">Footnotes &amp; References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-documentation.html">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http-api.html">HTTP API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icons.html">Icon Browser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+</ul>
+
+            </nav>
+        
+        
+            <div class="lumina-sidebar-footer">
+                Built with
+                <a href="https://github.com/r4sky0/sphinx-lumina-theme"
+                   target="_blank"
+                   rel="noopener">
+                    <svg class="lumina-sidebar-footer-icon"
+                         viewBox="0 0 32 32"
+                         fill="none"
+                         aria-hidden="true">
+                        <path d="M16 3L28 27H4L16 3Z" stroke="currentColor" stroke-width="2.5" fill="none" />
+                        <path d="M16 10L8 27H16" fill="currentColor" opacity="0.15" />
+                        <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
+                    </svg>
+                Lumina</a>
+                <span class="lumina-sidebar-footer-version">v1.33.2</span>
+            </div>
+        
+    </div>
+    
+    <template x-teleport="body">
+        <div>
+            
+            <div x-show="mobileOpen"
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="fixed inset-0 top-14 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
+                 @click="close()"></div>
+            
+            <div id="lumina-sidebar-drawer"
+                 x-show="mobileOpen"
+                 x-transition:enter="transition ease-out duration-250"
+                 x-transition:enter-start="-translate-x-full"
+                 x-transition:enter-end="translate-x-0"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="translate-x-0"
+                 x-transition:leave-end="-translate-x-full"
+                 class="fixed inset-y-0 top-14 left-0 z-50 w-[280px] overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:hidden">
+                
+                <button data-sidebar-close
+                        @click="close()"
+                        class="absolute top-4 right-4 rounded-md p-1 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] cursor-pointer"
+                        aria-label="Close navigation"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+
+                
+
+    <div id="lumina-section-switcher"
+         x-data="navDropdown()"
+         @keydown="handleKeydown($event)"
+         class="lumina-section-switcher">
+        <button x-ref="trigger"
+                @click="toggle()"
+                :aria-expanded="open"
+                aria-haspopup="true"
+                aria-label="Switch documentation section"
+                class="lumina-section-switcher-trigger"
+                type="button">
+            
+                <span class="lumina-section-switcher-icon"
+                      style="--section-color: #10b981;
+                             color: var(--section-color)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
+                </span>
+                <span class="lumina-section-switcher-label">
+                    <span class="lumina-section-switcher-name"
+                          style="color: #10b981">User Documentation</span>
+                    <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                </span>
+            
+            <svg class="lumina-section-switcher-chevron"
+                 :class="open && 'rotate-180'"
+                 width="14"
+                 height="14"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 viewBox="0 0 24 24"
+                 aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+            </svg>
+        </button>
+        <div x-show="open"
+             x-cloak
+             @click.away="open = false"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1 scale-[0.98]"
+             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="lumina-section-switcher-dropdown"
+             role="menu">
+            
+                <a href="../getting-started/index.html"
+                   class="lumina-section-switcher-item active"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="--section-color: #10b981;
+                                 color: var(--section-color)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #10b981">User Documentation</span>
+                        <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                    </span>
+                </a>
+            
+                <a href="../contributing/index.html"
+                   class="lumina-section-switcher-item"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="--section-color: #8b5cf6;
+                                 color: var(--section-color)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #8b5cf6">Developer Documentation</span>
+                        <span class="lumina-section-switcher-desc">Architecture & development</span>
+                    </span>
+                </a>
+            
+        </div>
+    </div>
+
+
+                
+                
+                
+                    <nav class="lumina-sidebar-nav"
+                         aria-label="Section navigation"
+                         x-data="sidebarNav()">
+                        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/configuration.html">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/search.html">Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/dark-mode.html">Dark Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/myst-markdown.html">MyST Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/navigation.html">Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/custom-styling.html">Custom Styling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/landing-page.html">Landing Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/wide-layout.html">Wide Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/icons.html">Icons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development-workflow.html">Development Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extensions/index.html">Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/myst-parser.html">MyST Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-design.html">sphinx-design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-copybutton.html">sphinx-copybutton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/mermaid.html">Mermaid Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/openapi.html">OpenAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-llm.html">sphinx-llm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-js.html">sphinx-js</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-last-updated-by-git.html">sphinx-last-updated-by-git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/mathjax.html">MathJax</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="typography.html">Typography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admonitions.html">Admonitions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Code Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lists-and-tables.html">Lists &amp; Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cards-and-grids.html">Cards &amp; Grids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images-and-figures.html">Images &amp; Figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="badges-and-buttons.html">Badges &amp; Buttons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="math.html">Math</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagrams.html">Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="footnotes-and-references.html">Footnotes &amp; References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-documentation.html">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http-api.html">HTTP API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icons.html">Icon Browser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+</ul>
+
+                    </nav>
+                
+                
+                    <div class="lumina-sidebar-footer">
+                        <a href="https://github.com/r4sky0/sphinx-lumina-theme"
+                           target="_blank"
+                           rel="noopener">Lumina</a>
+                        <span class="lumina-sidebar-footer-version">v1.33.2</span>
+                    </div>
+                
+            </div>
+        </div>
+    </template>
+</div>
+
+        </aside>
+        <main id="lumina-content" data-pagefind-body>
+            <div class="lumina-content-toolbar" data-pagefind-ignore>
+                
+                    <div class="min-w-0 flex-1">
+
+                        <nav class="flex items-center gap-2 overflow-x-auto text-sm text-[var(--lumina-text-muted)]"
+     style="scrollbar-width:none"
+     aria-label="Breadcrumb">
+    <a href="../index.html"
+       class="whitespace-nowrap hover:text-[var(--lumina-accent)] no-underline transition-colors">Sphinx Lumina Theme  documentation</a>
+    
+        
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+            <a href="index.html"
+               class="whitespace-nowrap hover:text-[var(--lumina-accent)] no-underline transition-colors">Reference</a>
+        
+    
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+    <span class="whitespace-nowrap text-[var(--lumina-text)]">Code Blocks</span>
+</nav>
+
+                    </div>
+                
+                <button x-data="copyPage()"
+                        @click="copy()"
+                        class="lumina-copy-page"
+                        :class="{ 'is-copied': copied }"
+                        :aria-label="copied ? 'Copied to clipboard' : 'Copy page as Markdown'"
+                        :title="copied ? 'Copied!' : 'Copy page as Markdown'"
+                        type="button">
+                    <svg x-show="!copied"
+                         class="h-3.5 w-3.5"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         aria-hidden="true"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                    </svg>
+                    <svg x-show="copied"
+                         x-cloak
+                         class="h-3.5 w-3.5"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         aria-hidden="true"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                    <span class="hidden sm:inline"
+                          x-text="copied ? 'Copied!' : 'Copy Markdown'"></span>
+                </button>
+            </div>
+            <article class="lumina-article" x-data="headerLinks()">
+
+                
+
+    <section class="tex2jax_ignore mathjax_ignore" id="code-blocks">
+<h1>Code Blocks<a class="headerlink" href="#code-blocks" title="Link to this heading">¶</a></h1>
+<p>Syntax-highlighted code with line numbers, emphasis, captions, and more.</p>
+<section id="basic-syntax-highlighting">
+<h2>Basic Syntax Highlighting<a class="headerlink" href="#basic-syntax-highlighting" title="Link to this heading">¶</a></h2>
+<p>Specify the language after the opening fence for syntax highlighting.</p>
+<section id="python">
+<h3>Python<a class="headerlink" href="#python" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the first n Fibonacci numbers.&quot;&quot;&quot;</span>
+    <span class="n">sequence</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">sequence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">sequence</span>
+</pre></div>
+</div>
+</section>
+<section id="javascript">
+<h3>JavaScript<a class="headerlink" href="#javascript" title="Link to this heading">¶</a></h3>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchUser</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/api/users/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`HTTP </span><span class="si">${</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="rust">
+<h3>Rust<a class="headerlink" href="#rust" title="Link to this heading">¶</a></h3>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span><span class="w"> </span><span class="nf">binary_search</span><span class="o">&lt;</span><span class="n">T</span><span class="p">:</span><span class="w"> </span><span class="nb">Ord</span><span class="o">&gt;</span><span class="p">(</span><span class="n">slice</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="n">T</span><span class="p">],</span><span class="w"> </span><span class="n">target</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">T</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Option</span><span class="o">&lt;</span><span class="kt">usize</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">low</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">high</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slice</span><span class="p">.</span><span class="n">len</span><span class="p">();</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">low</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">high</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">low</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">high</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">low</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">        </span><span class="k">match</span><span class="w"> </span><span class="n">slice</span><span class="p">[</span><span class="n">mid</span><span class="p">].</span><span class="n">cmp</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">std</span><span class="p">::</span><span class="n">cmp</span><span class="p">::</span><span class="n">Ordering</span><span class="p">::</span><span class="n">Equal</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">mid</span><span class="p">),</span>
+<span class="w">            </span><span class="n">std</span><span class="p">::</span><span class="n">cmp</span><span class="p">::</span><span class="n">Ordering</span><span class="p">::</span><span class="n">Less</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">low</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="n">std</span><span class="p">::</span><span class="n">cmp</span><span class="p">::</span><span class="n">Ordering</span><span class="p">::</span><span class="n">Greater</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">high</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nb">None</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="bash">
+<h3>Bash<a class="headerlink" href="#bash" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.md<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing: </span><span class="nv">$file</span><span class="s2">&quot;</span>
+<span class="w">    </span>wc<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="yaml">
+<h3>YAML<a class="headerlink" href="#yaml" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0.0.0</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="w">  </span><span class="nt">debug</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+
+<span class="nt">database</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgresql://localhost/mydb</span>
+<span class="w">  </span><span class="nt">pool_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+</pre></div>
+</div>
+</section>
+<section id="json">
+<h3>JSON<a class="headerlink" href="#json" title="Link to this heading">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sphinx-lumina-theme&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;sphinx&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;=7.0&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="html">
+<h3>HTML<a class="headerlink" href="#html" title="Link to this heading">¶</a></h3>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;navigation&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Main&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/docs&quot;</span><span class="p">&gt;</span>Documentation<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="css">
+<h3>CSS<a class="headerlink" href="#css" title="Link to this heading">¶</a></h3>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nv">--color-accent</span><span class="p">:</span><span class="w"> </span><span class="mh">#10b981</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--color-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#fcfcfc</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--color-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#18181b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">admonition</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">border-left</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-accent</span><span class="p">);</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="toml">
+<h3>TOML<a class="headerlink" href="#toml" title="Link to this heading">¶</a></h3>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[project]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my-project&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span>
+<span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;=3.12&quot;</span>
+
+<span class="k">[tool.pytest.ini_options]</span>
+<span class="n">testpaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="line-numbers">
+<h2>Line Numbers<a class="headerlink" href="#line-numbers" title="Link to this heading">¶</a></h2>
+<p>Add <code class="docutils literal notranslate"><span class="pre">:linenos:</span></code> to display line numbers alongside the code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">EventEmitter</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_handlers</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>    <span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">handler</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_handlers</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>    <span class="k">def</span><span class="w"> </span><span class="nf">emit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="linenos"> 9</span>        <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handlers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="p">[]):</span>
+<span class="linenos">10</span>            <span class="n">handler</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The MyST syntax:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{code-block} python
+:linenos:
+your code here
+```
+</pre></div>
+</div>
+</section>
+<section id="line-emphasis">
+<h2>Line Emphasis<a class="headerlink" href="#line-emphasis" title="Link to this heading">¶</a></h2>
+<p>Highlight specific lines to draw attention to important parts.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">retries</span><span class="p">):</span>
+<span class="hll"><span class="linenos">3</span>        <span class="k">try</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">4</span>            <span class="k">return</span> <span class="n">socket</span><span class="o">.</span><span class="n">create_connection</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+</span><span class="hll"><span class="linenos">5</span>        <span class="k">except</span> <span class="ne">ConnectionError</span><span class="p">:</span>
+</span><span class="linenos">6</span>            <span class="k">if</span> <span class="n">attempt</span> <span class="o">==</span> <span class="n">retries</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">7</span>                <span class="k">raise</span>
+<span class="linenos">8</span>            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">attempt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The MyST syntax:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{code-block} python
+:linenos:
+:emphasize-lines: 3,4,5
+your code here
+```
+</pre></div>
+</div>
+</section>
+<section id="captions">
+<h2>Captions<a class="headerlink" href="#captions" title="Link to this heading">¶</a></h2>
+<p>Add a caption above the code block to describe its purpose.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">conf.py — Minimal theme configuration</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme</span> <span class="o">=</span> <span class="s2">&quot;lumina&quot;</span>
+<span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;accent_color&quot;</span><span class="p">:</span> <span class="s2">&quot;#10b981&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The MyST syntax:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{code-block} python
+:caption: conf.py — Minimal theme configuration
+your code here
+```
+</pre></div>
+</div>
+</section>
+<section id="diff-highlighting">
+<h2>Diff Highlighting<a class="headerlink" href="#diff-highlighting" title="Link to this heading">¶</a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">diff</span></code> language to show additions and removals.</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">- html_theme = &quot;alabaster&quot;</span>
+<span class="gi">+ html_theme = &quot;lumina&quot;</span>
+<span class="gi">+ html_theme_options = {</span>
+<span class="gi">+     &quot;accent_color&quot;: &quot;#10b981&quot;,</span>
+<span class="gi">+ }</span>
+</pre></div>
+</div>
+</section>
+<section id="tabbed-code-blocks">
+<h2>Tabbed Code Blocks<a class="headerlink" href="#tabbed-code-blocks" title="Link to this heading">¶</a></h2>
+<p>Group related code in tabs using sphinx-design. Useful for showing the same concept in multiple languages.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Python</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+JavaScript</label><div class="sd-tab-content docutils">
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">hello</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hello, </span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">!`</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+Rust</label><div class="sd-tab-content docutils">
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span><span class="w"> </span><span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="fm">format!</span><span class="p">(</span><span class="s">&quot;Hello, {}!&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The MyST syntax:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>::::{tab-set}
+:::{tab-item} Python
+<span class="sb">```python</span>
+<span class="n">code</span> <span class="n">here</span>
+<span class="sb">```</span>
+:::
+:::{tab-item} JavaScript
+<span class="sb">```javascript</span>
+<span class="nx">code</span><span class="w"> </span><span class="nx">here</span>
+<span class="sb">```</span>
+:::
+::::
+</pre></div>
+</div>
+</section>
+<section id="including-code-from-files">
+<h2>Including Code from Files<a class="headerlink" href="#including-code-from-files" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">literalinclude</span></code> directive pulls code directly from a file in your project. This keeps examples in sync with real code.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">docs/conf.py</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Sphinx-Lumina-Theme documentation.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sphinx_lumina_theme</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
+
+<span class="n">project</span> <span class="o">=</span> <span class="s2">&quot;Sphinx Lumina Theme&quot;</span>
+<span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;myst_parser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sphinx_design&quot;</span><span class="p">,</span>
+</pre></div>
+</div>
+</div>
+<p>The MyST syntax:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{literalinclude} ../path/to/file.py
+:language: python
+:caption: path/to/file.py
+```
+</pre></div>
+</div>
+<section id="useful-options">
+<h3>Useful Options<a class="headerlink" href="#useful-options" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">:language:</span></code></p></td>
+<td><p>Syntax highlighting language. Auto-detected from file extension if omitted.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">:lines:</span></code></p></td>
+<td><p>Include only specific lines. Examples: <code class="docutils literal notranslate"><span class="pre">1-10</span></code>, <code class="docutils literal notranslate"><span class="pre">5,8,12</span></code>, <code class="docutils literal notranslate"><span class="pre">1-5,10-15</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">:linenos:</span></code></p></td>
+<td><p>Show line numbers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">:emphasize-lines:</span></code></p></td>
+<td><p>Highlight specific lines within the included range.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">:caption:</span></code></p></td>
+<td><p>Add a caption above the code block.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">:start-after:</span></code></p></td>
+<td><p>Include content after a matching string (exclusive).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">:end-before:</span></code></p></td>
+<td><p>Include content before a matching string (exclusive).</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">:start-after:</span></code> and <code class="docutils literal notranslate"><span class="pre">:end-before:</span></code> with comment markers for resilient includes that won’t break when line numbers change:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{literalinclude} ../src/config.py
+:start-after: # -- theme options start --
+:end-before: # -- theme options end --
+```
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="copy-button">
+<h2>Copy Button<a class="headerlink" href="#copy-button" title="Link to this heading">¶</a></h2>
+<p>All code blocks include a copy-to-clipboard button provided by <code class="docutils literal notranslate"><span class="pre">sphinx-copybutton</span></code>. Hover over any code block to see it appear in the top-right corner. No configuration needed — it works automatically.</p>
+</section>
+<section id="quick-reference">
+<h2>Quick Reference<a class="headerlink" href="#quick-reference" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 30.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Directive</p></th>
+<th class="head"><p>Key option</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Basic highlighting</p></td>
+<td><p>Fenced code block</p></td>
+<td><p>Language after opening fence</p></td>
+</tr>
+<tr class="row-odd"><td><p>Line numbers</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">code-block</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">:linenos:</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Line emphasis</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">code-block</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">:emphasize-lines:</span> <span class="pre">3,4,5</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Caption</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">code-block</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">:caption:</span> <span class="pre">text</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Include from file</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">literalinclude</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">:lines:</span> <span class="pre">1-10</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Diff view</p></td>
+<td><p>Fenced code block</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">diff</span></code> language</p></td>
+</tr>
+<tr class="row-even"><td><p>Tabbed code</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tab-set</span></code> + <code class="docutils literal notranslate"><span class="pre">tab-item</span></code></p></td>
+<td><p>sphinx-design directives</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+
+
+            </article>
+            
+
+                <div data-pagefind-ignore>
+
+                    <footer class="mt-10 border-t border-[var(--lumina-border)] pt-6">
+    
+    
+        <nav class="flex justify-between gap-4 mb-8" aria-label="Page navigation">
+            
+                <a href="admonitions.html"
+                   class="group flex flex-col items-start gap-1 rounded-lg border border-[var(--lumina-border)] p-4 no-underline hover:border-[var(--lumina-accent)] hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
+                    <span class="text-xs text-[var(--lumina-text-muted)]">Previous</span>
+                    <span class="text-sm font-medium text-[var(--lumina-text)] group-hover:text-[var(--lumina-accent)] transition-colors">&larr; Admonitions</span>
+                </a>
+            
+            
+                <a href="lists-and-tables.html"
+                   class="group flex flex-col items-end gap-1 rounded-lg border border-[var(--lumina-border)] p-4 no-underline hover:border-[var(--lumina-accent)] hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
+                    <span class="text-xs text-[var(--lumina-text-muted)]">Next</span>
+                    <span class="text-sm font-medium text-[var(--lumina-text)] group-hover:text-[var(--lumina-accent)] transition-colors">Lists &amp; Tables &rarr;</span>
+                </a>
+            
+        </nav>
+    
+    
+    
+        <p class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+            Last updated <time>April 15, 2026</time>
+        </p>
+    
+    
+    
+</footer>
+
+                </div>
+
+
+            
+        </main>
+        
+            <aside id="lumina-toc">
+
+                
+    <div class="lumina-toc-container sticky top-14 hidden h-[calc(100vh-3.5rem)] w-[220px] shrink-0 py-6 pr-4 xl:block">
+        
+        
+            <a href="https://github.com/r4sky0/sphinx-lumina-theme/edit/main/docs/reference/code-blocks.md"
+               class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)] no-underline hover:text-[var(--lumina-accent)] transition-colors"
+               target="_blank"
+               rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg>
+                Edit this page
+            </a>
+        
+        <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-[var(--lumina-text-muted)]">On this page</p>
+        <div class="lumina-toc-scroll">
+            <nav class="lumina-toc-nav"
+                 aria-label="Table of contents"
+                 x-data="scrollspy()"
+                 x-init="init()">
+                <ul>
+<li><a class="reference internal" href="#">Code Blocks</a><ul>
+<li><a class="reference internal" href="#basic-syntax-highlighting">Basic Syntax Highlighting</a><ul>
+<li><a class="reference internal" href="#python">Python</a></li>
+<li><a class="reference internal" href="#javascript">JavaScript</a></li>
+<li><a class="reference internal" href="#rust">Rust</a></li>
+<li><a class="reference internal" href="#bash">Bash</a></li>
+<li><a class="reference internal" href="#yaml">YAML</a></li>
+<li><a class="reference internal" href="#json">JSON</a></li>
+<li><a class="reference internal" href="#html">HTML</a></li>
+<li><a class="reference internal" href="#css">CSS</a></li>
+<li><a class="reference internal" href="#toml">TOML</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#line-numbers">Line Numbers</a></li>
+<li><a class="reference internal" href="#line-emphasis">Line Emphasis</a></li>
+<li><a class="reference internal" href="#captions">Captions</a></li>
+<li><a class="reference internal" href="#diff-highlighting">Diff Highlighting</a></li>
+<li><a class="reference internal" href="#tabbed-code-blocks">Tabbed Code Blocks</a></li>
+<li><a class="reference internal" href="#including-code-from-files">Including Code from Files</a><ul>
+<li><a class="reference internal" href="#useful-options">Useful Options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#copy-button">Copy Button</a></li>
+<li><a class="reference internal" href="#quick-reference">Quick Reference</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+
+
+            </aside>
+        
+    </div>
+
+    
+        <button id="lumina-back-to-top"
+                x-data="backToTop()"
+                x-show="visible"
+                x-cloak
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 translate-y-2"
+                x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0"
+                x-transition:leave-end="opacity-0 translate-y-2"
+                @click="scrollToTop()"
+                class="fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--lumina-border)] bg-[var(--lumina-bg)] text-[var(--lumina-text-muted)] shadow-md hover:text-[var(--lumina-text)] hover:border-[var(--lumina-accent)] hover:shadow-lg transition-all cursor-pointer"
+                aria-label="Back to top"
+                type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6" /></svg></button>
+    
+
+    <div id="lumina-search-modal"
+     x-data="searchModal()"
+     x-show="open"
+     x-cloak
+     @keydown.escape.window="close()"
+     @keydown.meta.k.window.prevent="toggle()"
+     @keydown.ctrl.k.window.prevent="toggle()"
+     class="fixed inset-0 z-[100]"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Search documentation">
+    
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click="close()"></div>
+    
+    <div class="relative mx-auto mt-[15vh] max-w-xl rounded-xl border border-[var(--lumina-border)] bg-[var(--lumina-bg)] shadow-2xl"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95">
+        
+        <div class="flex items-center border-b border-[var(--lumina-border)] px-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--lumina-text-muted)]" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
+            <input type="search"
+                   x-ref="searchInput"
+                   x-model="query"
+                   @input.debounce.150ms="search()"
+                   @keydown.arrow-down.prevent="moveDown()"
+                   @keydown.arrow-up.prevent="moveUp()"
+                   @keydown.enter.prevent="goToSelected()"
+                   class="w-full border-0 bg-transparent px-3 py-4 text-[var(--lumina-text)] placeholder-[var(--lumina-text-muted)] outline-none"
+                   placeholder="Search docs..."
+                   autocomplete="off">
+            <kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1.5 py-0.5 text-xs text-[var(--lumina-text-muted)]">esc</kbd>
+        </div>
+        
+        <div class="max-h-[60vh] overflow-y-auto p-2"
+             aria-live="polite"
+             role="status">
+            <template x-if="!loaded">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]">Loading search index...</p>
+            </template>
+            <template x-if="loaded && query.length > 0 && results.length === 0">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]">No results found.</p>
+            </template>
+            <template x-if="error">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]"
+                   x-text="error"></p>
+            </template>
+            <template x-for="(result, index) in results" :key="result.url">
+                <a :href="result.url"
+                   class="flex flex-col gap-0.5 rounded-lg px-3 py-2.5 no-underline transition-colors"
+                   :class="index === selectedIndex ? 'bg-[var(--lumina-accent-light)] text-[var(--lumina-accent)]' : 'hover:bg-[var(--lumina-bg-secondary)] text-[var(--lumina-text)]'"
+                   @mouseenter="selectedIndex = index">
+                    <div class="flex min-w-0 items-center justify-between gap-2">
+                        <span class="truncate text-sm font-medium" x-text="result.title"></span>
+                        <template x-if="result.section">
+                            <span class="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
+                                  :class="index === selectedIndex ? 'bg-[var(--lumina-accent)] text-white opacity-70' : 'bg-[var(--lumina-bg-secondary)] text-[var(--lumina-text-muted)]'"
+                                  x-text="result.section"></span>
+                        </template>
+                    </div>
+                    <span class="line-clamp-2 text-xs text-[var(--lumina-text-muted)]"
+                          x-html="result.excerpt"></span>
+                </a>
+            </template>
+            <template x-if="loaded && query.length === 0">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]">Type to search...</p>
+            </template>
+        </div>
+        
+        <div class="flex items-center gap-3 border-t border-[var(--lumina-border)] px-4 py-2.5 text-xs text-[var(--lumina-text-muted)]">
+            <span class="flex items-center gap-1"><kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> Navigate</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> Open</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1 py-0.5 font-mono text-[10px]">esc</kbd> Close</span>
+        </div>
+    </div>
+</div>
+
+
+
+
+  </body>
+</html>
