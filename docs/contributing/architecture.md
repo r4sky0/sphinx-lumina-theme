@@ -17,8 +17,8 @@ src/sphinx_lumina_theme/
     └── static/              # Compiled CSS/JS + fonts (DO NOT edit directly)
 ```
 
-:::{warning}
-Never edit files in `theme/static/` directly. They are compiled outputs from `_static_src/`. Run `pnpm run build` after changing any CSS or JS source files.
+:::{danger}
+Never edit files in `theme/static/` directly — they are compiled outputs and **your edits will be overwritten** on the next build. Edit the sources in `_static_src/` and run `pnpm run build`.
 :::
 
 ## Asset Build Pipeline

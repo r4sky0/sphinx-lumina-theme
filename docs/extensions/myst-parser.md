@@ -23,6 +23,6 @@ myst_enable_extensions = [
 ]
 ```
 
-:::{tip}
-For writing syntax, colon fence usage, and substitutions, see the {doc}`/guides/myst-markdown` guide.
+:::{seealso}
+{doc}`/guides/myst-markdown` — writing syntax, colon fence usage, substitutions, and directive examples.
 :::

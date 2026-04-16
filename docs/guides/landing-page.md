@@ -89,5 +89,8 @@ MIT license. Contributions welcome.
 - The sidebar, table of contents, and breadcrumbs are hidden on landing pages.
 - The page body is still indexed by Pagefind.
 - A landing page can be used for any page, not just the root `index.md`.
-- `hero_primary_url` expects a **doc name** (the same format used in Sphinx `:doc:` references), not a file path. For example, `getting-started/installation` — not `getting-started/installation.md` or `../getting-started/installation.html`.
 - The secondary button detects external URLs automatically — any URL containing `://` opens in a new tab with `rel="noopener"`.
+
+:::{caution}
+`hero_primary_url` expects a **doc name** — the same format used in Sphinx `:doc:` references. Use `getting-started/installation`, not `getting-started/installation.md` or `../getting-started/installation.html`.
+:::

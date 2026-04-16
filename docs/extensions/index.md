@@ -8,54 +8,72 @@ Lumina works with any Sphinx extension. These are the ones we recommend and styl
 :::{grid-item-card} MyST Parser {bdg-success}`recommended`
 :link: myst-parser
 :link-type: doc
+:icon: pen-line
+:icon-style: featured
 Write documentation in Markdown with full Sphinx directive support.
 :::
 
 :::{grid-item-card} sphinx-design {bdg-success}`recommended`
 :link: sphinx-design
 :link-type: doc
+:icon: layout-grid
+:icon-style: featured
 Cards, grids, tabs, badges, buttons, and dropdowns.
 :::
 
 :::{grid-item-card} sphinx-copybutton {bdg-success}`recommended`
 :link: sphinx-copybutton
 :link-type: doc
+:icon: copy
+:icon-style: featured
 Copy-to-clipboard button on every code block.
 :::
 
 :::{grid-item-card} Mermaid {bdg-secondary}`optional`
 :link: mermaid
 :link-type: doc
+:icon: git-branch
+:icon-style: featured
 Flowcharts, sequence diagrams, class diagrams, and more.
 :::
 
 :::{grid-item-card} OpenAPI {bdg-secondary}`optional`
 :link: openapi
 :link-type: doc
+:icon: server
+:icon-style: featured
 Auto-generated HTTP API docs from OpenAPI specs.
 :::
 
 :::{grid-item-card} sphinx-js {bdg-secondary}`optional`
 :link: sphinx-js
 :link-type: doc
+:icon: braces
+:icon-style: featured
 Auto-generated JavaScript API docs from JSDoc comments.
 :::
 
 :::{grid-item-card} sphinx-llm {bdg-secondary}`optional`
 :link: sphinx-llm
 :link-type: doc
+:icon: bot
+:icon-style: featured
 LLM-friendly docs following the llms.txt convention.
 :::
 
 :::{grid-item-card} sphinx-last-updated-by-git {bdg-secondary}`optional`
 :link: sphinx-last-updated-by-git
 :link-type: doc
+:icon: history
+:icon-style: featured
 Show "Last updated" dates in the page footer from git history.
 :::
 
 :::{grid-item-card} MathJax {bdg-secondary}`built-in`
 :link: mathjax
 :link-type: doc
+:icon: sigma
+:icon-style: featured
 LaTeX math rendering with MathJax.
 :::
 
