@@ -82,6 +82,17 @@ def _resolve_href_to_pagename(href, pagename):
     return target
 
 
+def _with_basename_fallback(target):
+    """Yield ``target`` and, if distinct, its basename.
+
+    Sphinx pagenames are path-like (``guides/search``) but a page's own
+    metadata may be keyed just by the basename in some edge cases.
+    """
+    yield target
+    if "/" in target:
+        yield target.rsplit("/", 1)[-1]
+
+
 def _add_sidebar_icons(toctree_html, page_icons, pagename, get_icon_fn):
     """Post-process toctree HTML to inject icon SVGs into sidebar links."""
     if not page_icons:
@@ -94,10 +105,14 @@ def _add_sidebar_icons(toctree_html, page_icons, pagename, get_icon_fn):
             icon_name = page_icons.get(pagename, "")
         else:
             target = _resolve_href_to_pagename(href, pagename)
-            icon_name = page_icons.get(target, "")
-            if not icon_name:
-                simple = target.rsplit("/", 1)[-1] if "/" in target else target
-                icon_name = page_icons.get(simple, "")
+            icon_name = next(
+                (
+                    page_icons[k]
+                    for k in _with_basename_fallback(target)
+                    if k in page_icons
+                ),
+                "",
+            )
         if not icon_name:
             return full_match
         svg = get_icon_fn(icon_name, size=16, css_class="lumina-sidebar-icon")
@@ -134,10 +149,8 @@ def _mark_collapsed_entries(toctree_html, collapsed_docs, pagename):
         if "data-nav-collapsed" in attrs:
             return match.group(0)
         target = _resolve_href_to_pagename(match.group("href"), pagename)
-        if target not in collapsed_docs:
-            simple = target.rsplit("/", 1)[-1] if "/" in target else target
-            if simple not in collapsed_docs:
-                return match.group(0)
+        if not any(k in collapsed_docs for k in _with_basename_fallback(target)):
+            return match.group(0)
         new_open = f'<li{attrs} data-nav-collapsed="true">'
         return new_open + match.group("gap") + match.group("anchor")
 

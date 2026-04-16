@@ -10,6 +10,14 @@
  * - {@link tryIt} — boot function, called from ``boot()`` in app.js.
  */
 
+import {
+  resolveBaseUrl,
+  extractMethod,
+  extractPath,
+  extractFieldSection,
+  fieldPlaceholder,
+} from "./_http-api-utils.js";
+
 const SESSION_KEY = "lumina-api-token";
 
 /* Module-level config store — keyed by the injected wrapper element */
@@ -78,7 +86,7 @@ export function tryItPanel() {
       if (this.hasBody) {
         if (this.bodyFields.length) {
           const obj = {};
-          this.bodyFields.forEach((f) => { obj[f.name] = bodyPlaceholder(f.type); });
+          this.bodyFields.forEach((f) => { obj[f.name] = fieldPlaceholder(f.type); });
           this.bodyJson = JSON.stringify(obj, null, 2);
         } else {
           this.bodyJson = "{}";
@@ -234,17 +242,6 @@ export default function tryIt() {
   });
 }
 
-/* Walk up the ancestor chain for the nearest data-api-base-url override,
-   falling back to the global value set by the theme option. */
-function resolveBaseUrl(el) {
-  let node = el.parentElement;
-  while (node && node !== document.documentElement) {
-    if (node.dataset.apiBaseUrl !== undefined) return node.dataset.apiBaseUrl;
-    node = node.parentElement;
-  }
-  return document.documentElement.dataset.apiBaseUrl || "";
-}
-
 /* ── Panel injection ───────────────────────────────────────────────── */
 
 function injectPanel(dl, baseUrl) {
@@ -254,9 +251,9 @@ function injectPanel(dl, baseUrl) {
   const method      = extractMethod(dl);
   const path        = extractPath(dl);
   const pathParams  = parsePathParams(path);
-  const queryParams = extractSection(dd, "Query Parameters");
-  const allHeaders  = extractSection(dd, "Request Headers");
-  const bodyFields  = extractSection(dd, "Request JSON Object");
+  const queryParams = extractFieldSection(dd, "Query Parameters");
+  const allHeaders  = extractFieldSection(dd, "Request Headers");
+  const bodyFields  = extractFieldSection(dd, "Request JSON Object");
   const hasBody     = ["POST", "PUT", "PATCH"].includes(method);
 
   /* Wrapper is the Alpine component root */
@@ -486,70 +483,10 @@ function highlight(json) {
 
 /* ── DOM extraction helpers ────────────────────────────────────────── */
 
-function extractMethod(dl) {
-  for (const m of ["get", "post", "put", "patch", "delete", "head", "options"]) {
-    if (dl.classList.contains(m)) return m.toUpperCase();
-  }
-  return "GET";
-}
-
-function extractPath(dl) {
-  const names = dl.querySelectorAll("dt.sig .sig-name.descname");
-  return names.length >= 2 ? names[1].textContent.trim() : "/";
-}
-
 function parsePathParams(path) {
   const params = [];
   for (const m of path.matchAll(/\{([^}]+)\}/g)) params.push({ name: m[1] });
   return params;
-}
-
-function extractSection(dd, label) {
-  const fieldList = dd.querySelector("dl.field-list");
-  if (!fieldList) return [];
-
-  const results = [];
-
-  for (const dt of fieldList.querySelectorAll(":scope > dt")) {
-    if (!dt.textContent.replace(/:$/, "").trim().startsWith(label)) continue;
-
-    const sibling = dt.nextElementSibling;
-    if (!sibling) continue;
-
-    sibling.querySelectorAll("li").forEach((li) => {
-      const strong = li.querySelector("strong");
-      if (!strong) return;
-
-      const name = strong.textContent.trim();
-      const type = li.querySelector("em")?.textContent.trim() ?? "string";
-      let value  = "";
-
-      if (label === "Request Headers") {
-        const code = li.querySelector("code");
-        if (code) {
-          value = code.textContent;
-        } else {
-          const text = li.textContent;
-          const dash = text.indexOf("\u2013");
-          if (dash !== -1) value = text.slice(dash + 1).trim();
-        }
-      }
-
-      results.push({ name, type, value });
-    });
-  }
-
-  return results;
-}
-
-function bodyPlaceholder(type) {
-  switch ((type || "").toLowerCase()) {
-    case "integer": case "int": case "number": return 0;
-    case "boolean": case "bool": return true;
-    case "array": return [];
-    case "object": return {};
-    default: return "";
-  }
 }
 
 /* ── Utilities ─────────────────────────────────────────────────────── */

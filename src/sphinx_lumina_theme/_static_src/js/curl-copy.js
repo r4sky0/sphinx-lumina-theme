@@ -10,6 +10,14 @@
  * - {@link curlCopy} — boot function, called from ``boot()`` in app.js.
  */
 
+import {
+  resolveBaseUrl,
+  extractMethod,
+  extractPath,
+  extractFieldSection,
+  fieldPlaceholder,
+} from "./_http-api-utils.js";
+
 /* Module-level store — maps each injected button to its curl string */
 const _curlCmds = new WeakMap();
 
@@ -63,17 +71,6 @@ export default function curlCopy() {
   endpoints.forEach((dl) => {
     injectButton(dl, resolveBaseUrl(dl));
   });
-}
-
-/* Walk up the ancestor chain for the nearest data-api-base-url override,
-   falling back to the global value set by the theme option. */
-function resolveBaseUrl(el) {
-  let node = el.parentElement;
-  while (node && node !== document.documentElement) {
-    if (node.dataset.apiBaseUrl !== undefined) return node.dataset.apiBaseUrl;
-    node = node.parentElement;
-  }
-  return document.documentElement.dataset.apiBaseUrl || "";
 }
 
 /* ── Button injection ──────────────────────────────────────────────── */
@@ -157,7 +154,7 @@ function buildCurl(dl, baseUrl) {
     parts.push('-H "Content-Type: application/json"');
     const body = {};
     for (const f of jsonFields) {
-      body[f.name] = placeholder(f.type);
+      body[f.name] = fieldPlaceholder(f.type);
     }
     parts.push(`-d '${JSON.stringify(body)}'`);
   }
@@ -170,81 +167,16 @@ function buildCurl(dl, baseUrl) {
 
 /* ── DOM extraction helpers ────────────────────────────────────────── */
 
-function extractMethod(dl) {
-  const methods = ["get", "post", "put", "patch", "delete", "head", "options"];
-  for (const m of methods) {
-    if (dl.classList.contains(m)) return m.toUpperCase();
-  }
-  const first = dl.querySelector("dt.sig .sig-name.descname");
-  return first ? first.textContent.trim() : "GET";
-}
-
-function extractPath(dl) {
-  const names = dl.querySelectorAll("dt.sig .sig-name.descname");
-  return names.length >= 2 ? names[1].textContent.trim() : "/";
-}
-
 function extractHeaders(dl) {
-  return extractFieldSection(dl, "Request Headers");
+  return extractFieldSection(dl.querySelector("dd"), "Request Headers");
 }
 
 function extractQueryParams(dl) {
-  return extractFieldSection(dl, "Query Parameters").map((i) => i.name);
+  return extractFieldSection(dl.querySelector("dd"), "Query Parameters").map((i) => i.name);
 }
 
 function extractJsonFields(dl) {
-  return extractFieldSection(dl, "Request JSON Object");
-}
-
-function extractFieldSection(dl, label) {
-  const dd = dl.querySelector("dd");
-  if (!dd) return [];
-
-  const fieldList = dd.querySelector("dl.field-list");
-  if (!fieldList) return [];
-
-  const items = [];
-
-  for (const dt of fieldList.querySelectorAll(":scope > dt")) {
-    if (!dt.textContent.replace(/:$/, "").trim().startsWith(label)) continue;
-
-    const fieldDd = dt.nextElementSibling;
-    if (!fieldDd || fieldDd.tagName.toLowerCase() !== "dd") continue;
-
-    for (const li of fieldDd.querySelectorAll("li")) {
-      const strong = li.querySelector("strong");
-      if (!strong) continue;
-
-      const name = strong.textContent.trim();
-      const type = li.querySelector("em")?.textContent.trim() ?? "string";
-      let value = "";
-
-      if (label === "Request Headers") {
-        const code = li.querySelector("code");
-        if (code) {
-          value = code.textContent;
-        } else {
-          const text = li.textContent;
-          const dash = text.indexOf("\u2013");
-          if (dash !== -1) value = text.slice(dash + 1).trim().replace(/\.$/, "");
-        }
-      }
-
-      items.push({ name, type, value });
-    }
-  }
-
-  return items;
-}
-
-function placeholder(type) {
-  switch ((type || "").toLowerCase()) {
-    case "integer": case "int": case "number": return 0;
-    case "boolean": case "bool": return true;
-    case "array": return [];
-    case "object": return {};
-    default: return "";
-  }
+  return extractFieldSection(dl.querySelector("dd"), "Request JSON Object");
 }
 
 /* ── Clipboard ─────────────────────────────────────────────────────── */
