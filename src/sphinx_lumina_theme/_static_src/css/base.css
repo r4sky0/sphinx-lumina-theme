@@ -437,7 +437,8 @@ a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
   background-color: var(--lumina-bg-secondary);
 }
 
-.lumina-sidebar-nav li.current:not(.toctree-l1) > a {
+.lumina-sidebar-nav li.current:not(.toctree-l1) > a,
+.lumina-sidebar-nav li.toctree-l1.current > a.current {
   color: var(--lumina-accent);
   background-color: var(--lumina-accent-light);
   font-weight: 600;
