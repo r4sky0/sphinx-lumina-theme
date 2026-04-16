@@ -1900,7 +1900,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 1.33.2.
+This documentation is for Sphinx Lumina Theme version 1.33.3.
 
 The MyST syntax:
 
@@ -3833,6 +3833,14 @@ The token is cleared when the browser tab is closed (sessionStorage scope).
 # releases.html.md
 
 # Releases
+
+## v1.33.3 (2026-04-16)
+
+### Bug Fixes
+
+- Highlight top-level nav items when they are the current page
+  ([#77](https://github.com/r4sky0/sphinx-lumina-theme/pull/77),
+  [`9e6390d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9e6390d53df74980eae7650da244b5d85ec743c5))
 
 ## v1.33.2 (2026-04-16)
 

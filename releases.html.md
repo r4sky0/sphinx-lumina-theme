@@ -1,5 +1,13 @@
 # Releases
 
+## v1.33.3 (2026-04-16)
+
+### Bug Fixes
+
+- Highlight top-level nav items when they are the current page
+  ([#77](https://github.com/r4sky0/sphinx-lumina-theme/pull/77),
+  [`9e6390d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9e6390d53df74980eae7650da244b5d85ec743c5))
+
 ## v1.33.2 (2026-04-16)
 
 ### Bug Fixes
