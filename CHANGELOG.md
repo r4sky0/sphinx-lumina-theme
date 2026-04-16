@@ -2,6 +2,26 @@
 
 <!-- releases -->
 
+## v1.34.0 (2026-04-16)
+
+### Features
+
+- Polish API field list labels, parameter items, and status codes
+  ([#78](https://github.com/r4sky0/sphinx-lumina-theme/pull/78),
+  [`7871617`](https://github.com/r4sky0/sphinx-lumina-theme/commit/78716171b467c18a0ce74cb77d1985d0746184fe))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump dompurify from 3.3.3 to 3.4.0
+  ([#73](https://github.com/r4sky0/sphinx-lumina-theme/pull/73),
+  [`86c94c6`](https://github.com/r4sky0/sphinx-lumina-theme/commit/86c94c6558c5270d19476600581e6d110607c239))
+
+</details>
+
+
 ## v1.33.3 (2026-04-16)
 
 ### Bug Fixes
