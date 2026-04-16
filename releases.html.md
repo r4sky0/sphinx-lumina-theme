@@ -1,5 +1,13 @@
 # Releases
 
+## v1.35.0 (2026-04-16)
+
+### Features
+
+- Optimize scrollspy and improve accessibility
+  ([#79](https://github.com/r4sky0/sphinx-lumina-theme/pull/79),
+  [`31c7cb4`](https://github.com/r4sky0/sphinx-lumina-theme/commit/31c7cb456e786e2ef23278ecda062c4a35712187))
+
 ## v1.34.0 (2026-04-16)
 
 ### Features
