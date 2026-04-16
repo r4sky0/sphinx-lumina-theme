@@ -35,9 +35,9 @@ export default function sidebar() {
 
       if (this.mobileOpen) {
         this._trigger = document.activeElement;
-        setTimeout(() => {
+        this.$nextTick(() => {
           document.querySelector("[data-sidebar-close]")?.focus();
-        }, 260);
+        });
       }
     },
 

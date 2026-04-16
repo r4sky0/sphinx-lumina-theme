@@ -27,39 +27,40 @@ export default function scrollspy() {
     _observer: null,
     _resizeObserver: null,
     _indicator: null,
+    _links: [],
     _positions: new Map(),
 
     init() {
       const nav = this.$el;
-      const links = Array.from(nav.querySelectorAll("a"));
-      const ids = links
-        .map((a) => a.getAttribute("href"))
-        .filter((href) => href && href.startsWith("#"))
-        .map((href) => href.slice(1));
+      // Cache the id ↔ link mapping once. The TOC markup is static for the
+      // page's lifetime, so re-querying on every scroll/resize is wasted work.
+      this._links = Array.from(nav.querySelectorAll("a"))
+        .map((a) => {
+          const href = a.getAttribute("href");
+          return href && href.startsWith("#") ? { id: href.slice(1), el: a } : null;
+        })
+        .filter(Boolean);
 
-      if (ids.length === 0) return;
+      if (this._links.length === 0) return;
 
-      // Create the sliding indicator element
       this._indicator = document.createElement("div");
       this._indicator.className = "lumina-toc-indicator";
       this._indicator.setAttribute("aria-hidden", "true");
       nav.appendChild(this._indicator);
 
-      // Compute link positions and recompute on layout changes
-      this._computePositions(nav);
+      this._computePositions();
       this._resizeObserver = new ResizeObserver(() => {
-        this._computePositions(nav);
+        this._computePositions();
         if (this.activeId) this._updateIndicator();
       });
       this._resizeObserver.observe(nav);
 
-      // Track which heading is in view
       this._observer = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
             if (entry.isIntersecting) {
               this.activeId = entry.target.id;
-              this._updateActive(nav);
+              this._updateActive();
               this._updateIndicator();
               break;
             }
@@ -68,28 +69,22 @@ export default function scrollspy() {
         { rootMargin: "-80px 0px -60% 0px" },
       );
 
-      for (const id of ids) {
+      for (const { id } of this._links) {
         const el = document.getElementById(id);
         if (el) this._observer.observe(el);
       }
     },
 
-    _computePositions(nav) {
+    _computePositions() {
       this._positions.clear();
-      for (const link of nav.querySelectorAll("a")) {
-        const href = link.getAttribute("href");
-        if (!href || !href.startsWith("#")) continue;
-        const id = href.slice(1);
-        const top = link.offsetTop;
-        const bottom = top + link.offsetHeight;
-        this._positions.set(id, [top, bottom]);
+      for (const { id, el } of this._links) {
+        this._positions.set(id, [el.offsetTop, el.offsetTop + el.offsetHeight]);
       }
     },
 
-    _updateActive(nav) {
-      for (const a of nav.querySelectorAll("a")) {
-        const href = a.getAttribute("href");
-        a.classList.toggle("lumina-toc-active", href === "#" + this.activeId);
+    _updateActive() {
+      for (const { id, el } of this._links) {
+        el.classList.toggle("lumina-toc-active", id === this.activeId);
       }
     },
 
