@@ -2,6 +2,8 @@
     <div id="lumina-announcement"
          x-data="announcementBanner()"
          data-announcement-id="{{ announcement_id }}"
+         role="region"
+         aria-label="Site announcement"
          class="bg-[color-mix(in_srgb,var(--lumina-accent),black_40%)] text-white text-center text-sm">
         <div class="mx-auto flex max-w-[90rem] items-center justify-center gap-4 px-4 py-2">
             <div class="flex-1 [&_a]:underline [&_a]:font-medium">{{ announcement_content }}</div>
