@@ -65,6 +65,8 @@ Open `docs/_build/html/index.html` in your browser.
 
 ## Next Steps
 
+You’ve got Lumina running. Next, tune it for your project or explore what it can do.
+
 Explore all theme options, accent colors, and the recommended setup.
 
 Set up search, dark mode, MyST Markdown, navigation, and more.

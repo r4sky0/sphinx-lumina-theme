@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-04T09:02:51+00:00" />
+    <meta property="article:modified_time" content="2026-04-16T16:59:05+00:00" />
     <title>MathJax &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
@@ -21,6 +21,8 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script defer="defer" src="../_static/lumina.js?v=adc6d524"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -719,7 +721,17 @@ $$
 $$
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="../reference/math.html"><span class="doc">Math</span></a> for labeled equations, multi-line systems, and matrices.</p>
+<p><strong>Result:</strong></p>
+<p>Inline math: <span class="math notranslate nohighlight">\(f(x) = x^2 + 1\)</span></p>
+<p>Display math:</p>
+<div class="math notranslate nohighlight">
+\[
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+\]</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../reference/math.html"><span class="doc">Math</span></a> — labeled equations, multi-line systems, matrices, and symbol tables.</p>
+</div>
 </section>
 </section>
 
@@ -755,7 +767,7 @@ $$
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)]">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>April 4, 2026</time>
+            Last updated <time>April 16, 2026</time>
         </p>
     
     

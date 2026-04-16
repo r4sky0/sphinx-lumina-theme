@@ -68,8 +68,8 @@ The panel pre-populates from the documented endpoint:
 
 After sending, the panel shows the HTTP status code, response time in milliseconds, and a syntax-highlighted JSON response body (or plain text for non-JSON responses).
 
-#### NOTE
-The “Try it out” panel sends requests directly from the reader’s browser. Your API server must allow CORS requests from the docs origin, or requests will fail with a network error. Many public APIs (like Stripe, GitHub, or Petstore) already support CORS.
+#### WARNING
+**CORS required.** The “Try it out” panel sends requests directly from the reader’s browser. Your API must allow CORS from the docs origin, or requests fail with a network error. Many public APIs (Stripe, GitHub, Petstore) already support this.
 
 ### Overriding the base URL per block
 

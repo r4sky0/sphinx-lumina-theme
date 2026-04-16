@@ -17,9 +17,6 @@ src/sphinx_lumina_theme/
     └── static/              # Compiled CSS/JS + fonts (DO NOT edit directly)
 ```
 
-#### WARNING
-Never edit files in `theme/static/` directly. They are compiled outputs from `_static_src/`. Run `pnpm run build` after changing any CSS or JS source files.
-
 ## Asset Build Pipeline
 
 Source files in `_static_src/` are compiled into `theme/static/`:

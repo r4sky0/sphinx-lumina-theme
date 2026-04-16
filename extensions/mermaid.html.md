@@ -28,4 +28,7 @@ graph LR
 ```
 ```
 
-See [Diagrams](../reference/diagrams.md) for flowcharts, sequence diagrams, class diagrams, Gantt charts, and more.
+**Result:**
+
+#### SEE ALSO
+[Diagrams](../reference/diagrams.md) — flowcharts, sequence diagrams, class diagrams, Gantt charts, and more rendered examples.

@@ -21,3 +21,6 @@ myst_enable_extensions = [
     "substitution",    # {{variable}} template replacements
 ]
 ```
+
+#### SEE ALSO
+[MyST Markdown](../guides/myst-markdown.md) — writing syntax, colon fence usage, substitutions, and directive examples.

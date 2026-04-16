@@ -36,7 +36,7 @@ Create a JSDoc configuration file at the project root:
 }
 ```
 
-:::{warning}
+:::{danger}
 Do **not** enable JSDoc's `plugins/markdown` plugin. It converts descriptions to HTML before sphinx-js sees them, causing raw HTML tags to appear in the rendered output. sphinx-js expects plain text and handles formatting natively via reStructuredText.
 :::
 

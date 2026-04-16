@@ -34,9 +34,6 @@ Create a JSDoc configuration file at the project root:
 }
 ```
 
-#### WARNING
-Do **not** enable JSDoc’s `plugins/markdown` plugin. It converts descriptions to HTML before sphinx-js sees them, causing raw HTML tags to appear in the rendered output. sphinx-js expects plain text and handles formatting natively via reStructuredText.
-
 ## Writing JSDoc Comments
 
 Add JSDoc blocks above your exported functions. sphinx-js picks up `@function`, `@returns`, `@param`, and description text.

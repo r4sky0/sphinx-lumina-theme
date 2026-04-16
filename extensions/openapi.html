@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-04T11:19:06+00:00" />
+    <meta property="article:modified_time" content="2026-04-16T16:59:05+00:00" />
     <title>OpenAPI &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
@@ -758,9 +758,9 @@
 <li><p><strong>Request body</strong> — JSON textarea pre-filled with a schema template for POST/PUT/PATCH endpoints</p></li>
 </ul>
 <p>After sending, the panel shows the HTTP status code, response time in milliseconds, and a syntax-highlighted JSON response body (or plain text for non-JSON responses).</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The “Try it out” panel sends requests directly from the reader’s browser. Your API server must allow CORS requests from the docs origin, or requests will fail with a network error. Many public APIs (like Stripe, GitHub, or Petstore) already support CORS.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>CORS required.</strong> The “Try it out” panel sends requests directly from the reader’s browser. Your API must allow CORS from the docs origin, or requests fail with a network error. Many public APIs (Stripe, GitHub, Petstore) already support this.</p>
 </div>
 </section>
 <section id="overriding-the-base-url-per-block">
@@ -849,7 +849,7 @@
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)]">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>April 4, 2026</time>
+            Last updated <time>April 16, 2026</time>
         </p>
     
     

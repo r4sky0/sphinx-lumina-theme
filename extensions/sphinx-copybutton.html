@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-04T09:02:51+00:00" />
+    <meta property="article:modified_time" content="2026-04-16T16:59:05+00:00" />
     <title>sphinx-copybutton &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
@@ -706,11 +706,11 @@
 </pre></div>
 </div>
 </div>
-<p>No additional configuration needed. The button appears on hover in the top-right corner of any code block.</p>
+<p>No additional configuration needed. The button appears on hover in the top-right corner of any code block — try it on any example on this page.</p>
 </section>
 <section id="filtering-prompt-characters">
 <h2>Filtering Prompt Characters<a class="headerlink" href="#filtering-prompt-characters" title="Link to this heading">¶</a></h2>
-<p>If your code blocks include shell prompts, configure the extension to strip them when copying:</p>
+<p>If your code blocks include shell prompts (e.g., <code class="docutils literal notranslate"><span class="pre">$</span></code> for bash, <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> for Python REPL), configure the extension to strip them when copying:</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copybutton_prompt_text</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&gt;&gt;&gt; |\.\.\. |\$ |&gt; &quot;</span>
@@ -719,6 +719,10 @@
 </div>
 </div>
 <p>This strips <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">...</span></code>, <code class="docutils literal notranslate"><span class="pre">$</span></code>, and <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> prompts so readers copy only the actual commands.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../reference/code-blocks.html"><span class="doc">Code Blocks</span></a> — for syntax highlighting, line numbers, captions, diffs, and tabbed code examples.</p>
+</div>
 </section>
 </section>
 
@@ -754,7 +758,7 @@
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)]">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>April 4, 2026</time>
+            Last updated <time>April 16, 2026</time>
         </p>
     
     

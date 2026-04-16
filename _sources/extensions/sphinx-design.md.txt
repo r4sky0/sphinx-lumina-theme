@@ -19,39 +19,51 @@ extensions = ["sphinx_design"]
 :gutter: 3
 
 :::{grid-item-card} Cards
+:link: /reference/cards-and-grids
+:link-type: doc
+:icon: square
+:icon-style: featured
 Contained content blocks with optional headers, footers, and links.
-
-See {doc}`/reference/cards-and-grids`
 :::
 
 :::{grid-item-card} Grids
+:link: /reference/cards-and-grids
+:link-type: doc
+:icon: layout-grid
+:icon-style: featured
 Responsive layouts with configurable columns per breakpoint.
-
-See {doc}`/reference/cards-and-grids`
 :::
 
 :::{grid-item-card} Tabs
+:link: /reference/code-blocks
+:link-type: doc
+:icon: folder
+:icon-style: featured
 Tabbed content panels for grouping related information.
-
-See {doc}`/reference/code-blocks`
 :::
 
 :::{grid-item-card} Badges
+:link: /reference/badges-and-buttons
+:link-type: doc
+:icon: badge-check
+:icon-style: featured
 Inline status labels with color variants.
-
-See {doc}`/reference/badges-and-buttons`
 :::
 
 :::{grid-item-card} Buttons
+:link: /reference/badges-and-buttons
+:link-type: doc
+:icon: mouse-pointer-click
+:icon-style: featured
 Styled link buttons with primary and secondary variants.
-
-See {doc}`/reference/badges-and-buttons`
 :::
 
 :::{grid-item-card} Dropdowns
+:link: /reference/admonitions
+:link-type: doc
+:icon: chevron-down
+:icon-style: featured
 Collapsible content sections.
-
-See {doc}`/reference/admonitions`
 :::
 
 ::::

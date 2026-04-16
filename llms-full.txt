@@ -542,9 +542,6 @@ src/sphinx_lumina_theme/
     └── static/              # Compiled CSS/JS + fonts (DO NOT edit directly)
 ```
 
-#### WARNING
-Never edit files in `theme/static/` directly. They are compiled outputs from `_static_src/`. Run `pnpm run build` after changing any CSS or JS source files.
-
 ## Asset Build Pipeline
 
 Source files in `_static_src/` are compiled into `theme/static/`:
@@ -1675,10 +1672,18 @@ sphinx-autobuild docs docs/_build/html --open-browser
 
 This watches your `docs/` directory and automatically rebuilds when files change. Your browser refreshes automatically.
 
-#### NOTE
-**Search during development:** Pagefind indexes your content during full builds. During live preview with `sphinx-autobuild`, search may not be available. Use `⌘F` / `Ctrl`+`F` for in-page search instead.
+#### SEE ALSO
+Pagefind only indexes during full builds, so `⌘K` search may not be populated during live preview. See [Search](search.md) for details and fallbacks.
 
 ## Asset Watcher
+
+If you’re editing Lumina’s own CSS or JavaScript source (not just using the theme), run the asset watcher in a separate terminal:
+
+```bash
+pnpm run dev
+```
+
+This recompiles the theme’s CSS and JavaScript on every change. You don’t need this if you’re only editing your project’s documentation content.
 
 
 # diagrams.html.md
@@ -2523,6 +2528,8 @@ Open `docs/_build/html/index.html` in your browser.
 
 ## Next Steps
 
+You’ve got Lumina running. Next, tune it for your project or explore what it can do.
+
 Explore all theme options, accent colors, and the recommended setup.
 
 Set up search, dark mode, MyST Markdown, navigation, and more.
@@ -2592,7 +2599,7 @@ Ready to try it? Head to the [Getting Started](getting-started/index.md) guide t
 
 # JavaScript API
 
-Auto-generated reference for the theme’s Alpine.js components. Each component is a factory function registered via `Alpine.data()` in [the entry point]() and referenced in Jinja2 templates with `x-data`.
+Auto-generated reference for the theme’s Alpine.js components. Each component is a factory function registered via `Alpine.data()` in `_static_src/js/app.js` and referenced in Jinja2 templates with `x-data`.
 
 ## Entry Point
 
@@ -2937,7 +2944,6 @@ MIT license. Contributions welcome.
 - The sidebar, table of contents, and breadcrumbs are hidden on landing pages.
 - The page body is still indexed by Pagefind.
 - A landing page can be used for any page, not just the root `index.md`.
-- `hero_primary_url` expects a **doc name** (the same format used in Sphinx `:doc:` references), not a file path. For example, `getting-started/installation` — not `getting-started/installation.md` or `../getting-started/installation.html`.
 - The secondary button detects external URLs automatically — any URL containing `://` opens in a new tab with `rel="noopener"`.
 
 
@@ -3308,7 +3314,19 @@ $$
 $$
 ```
 
-See [Math](../reference/math.md) for labeled equations, multi-line systems, and matrices.
+**Result:**
+
+Inline math: $f(x) = x^2 + 1$
+
+Display math:
+
+$$
+
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+$$
+
+#### SEE ALSO
+[Math](../reference/math.md) — labeled equations, multi-line systems, matrices, and symbol tables.
 
 
 # mermaid.html.md
@@ -3343,7 +3361,10 @@ graph LR
 ```
 ```
 
-See [Diagrams](../reference/diagrams.md) for flowcharts, sequence diagrams, class diagrams, Gantt charts, and more.
+**Result:**
+
+#### SEE ALSO
+[Diagrams](../reference/diagrams.md) — flowcharts, sequence diagrams, class diagrams, Gantt charts, and more rendered examples.
 
 
 # myst-markdown.html.md
@@ -3483,6 +3504,9 @@ myst_enable_extensions = [
     "substitution",    # {{variable}} template replacements
 ]
 ```
+
+#### SEE ALSO
+[MyST Markdown](../guides/myst-markdown.md) — writing syntax, colon fence usage, substitutions, and directive examples.
 
 
 # navigation.html.md
@@ -3772,8 +3796,8 @@ The panel pre-populates from the documented endpoint:
 
 After sending, the panel shows the HTTP status code, response time in milliseconds, and a syntax-highlighted JSON response body (or plain text for non-JSON responses).
 
-#### NOTE
-The “Try it out” panel sends requests directly from the reader’s browser. Your API server must allow CORS requests from the docs origin, or requests will fail with a network error. Many public APIs (like Stripe, GitHub, or Petstore) already support CORS.
+#### WARNING
+**CORS required.** The “Try it out” panel sends requests directly from the reader’s browser. Your API must allow CORS from the docs origin, or requests fail with a network error. Many public APIs (Stripe, GitHub, Petstore) already support this.
 
 ### Overriding the base URL per block
 
@@ -4460,11 +4484,11 @@ uv add sphinx-copybutton
 extensions = ["sphinx_copybutton"]
 ```
 
-No additional configuration needed. The button appears on hover in the top-right corner of any code block.
+No additional configuration needed. The button appears on hover in the top-right corner of any code block — try it on any example on this page.
 
 ## Filtering Prompt Characters
 
-If your code blocks include shell prompts, configure the extension to strip them when copying:
+If your code blocks include shell prompts (e.g., `$` for bash, `>>>` for Python REPL), configure the extension to strip them when copying:
 
 ```python
 copybutton_prompt_text = r">>> |\.\.\. |\$ |> "
@@ -4472,6 +4496,9 @@ copybutton_prompt_is_regexp = True
 ```
 
 This strips `>>>`, `...`, `$`, and `>` prompts so readers copy only the actual commands.
+
+#### SEE ALSO
+[Code Blocks](../reference/code-blocks.md) — for syntax highlighting, line numbers, captions, diffs, and tabbed code examples.
 
 
 # sphinx-design.html.md
@@ -4494,27 +4521,15 @@ extensions = ["sphinx_design"]
 
 Contained content blocks with optional headers, footers, and links.
 
-See [Cards & Grids](../reference/cards-and-grids.md)
-
 Responsive layouts with configurable columns per breakpoint.
-
-See [Cards & Grids](../reference/cards-and-grids.md)
 
 Tabbed content panels for grouping related information.
 
-See [Code Blocks](../reference/code-blocks.md)
-
 Inline status labels with color variants.
-
-See [Badges & Buttons](../reference/badges-and-buttons.md)
 
 Styled link buttons with primary and secondary variants.
 
-See [Badges & Buttons](../reference/badges-and-buttons.md)
-
 Collapsible content sections.
-
-See [Admonitions](../reference/admonitions.md)
 
 
 # sphinx-js.html.md
@@ -4554,9 +4569,6 @@ Create a JSDoc configuration file at the project root:
   }
 }
 ```
-
-#### WARNING
-Do **not** enable JSDoc’s `plugins/markdown` plugin. It converts descriptions to HTML before sphinx-js sees them, causing raw HTML tags to appear in the rendered output. sphinx-js expects plain text and handles formatting natively via reStructuredText.
 
 ## Writing JSDoc Comments
 
@@ -4733,7 +4745,7 @@ suppress_warnings = ["git.too_shallow"]
 
 # sphinx-llm
 
-[sphinx-llm](https://github.com/NVIDIA/sphinx-llm) generates LLM-friendly versions of your documentation following the [llms.txt convention](https://llmstxt.org/). This makes your docs directly consumable by AI assistants and coding tools.
+Make your docs readable by AI assistants and coding tools. [sphinx-llm](https://github.com/NVIDIA/sphinx-llm) generates LLM-friendly versions of your documentation following the [llms.txt convention](https://llmstxt.org/) — Lumina links to `llms.txt` automatically once the extension is enabled.
 
 ## What It Produces
 
