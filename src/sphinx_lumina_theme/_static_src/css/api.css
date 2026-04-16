@@ -105,12 +105,14 @@ dl.py > dd > p:last-child {
   margin-bottom: 0.5rem;
 }
 
-/* ── Field lists (Parameters, Returns, Raises) ── */
-dl.field-list {
+/* ── Field lists (Parameters, Returns, Raises) ──
+   Scoped to API domain ancestors so standalone field lists
+   use the grid layout from typography.css instead. */
+:is(dl.py, dl.http, dl.js) dl.field-list {
   margin: 0.5rem 0 0;
 }
 
-dl.field-list dt {
+:is(dl.py, dl.http, dl.js) dl.field-list dt {
   font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
   font-weight: 600;
   font-size: 0.75rem;
@@ -124,31 +126,31 @@ dl.field-list dt {
   border-radius: 0.25rem 0.25rem 0 0;
 }
 
-dl.field-list dt:first-child {
+:is(dl.py, dl.http, dl.js) dl.field-list dt:first-child {
   margin-top: 0;
 }
 
 /* Hide the colon after field labels — the uppercase label is enough */
-dl.field-list .colon {
+:is(dl.py, dl.http, dl.js) dl.field-list .colon {
   display: none;
 }
 
-dl.field-list dd {
+:is(dl.py, dl.http, dl.js) dl.field-list dd {
   margin: 0.375rem 0 0;
   padding: 0;
 }
 
 /* Parameter list items within field lists */
-dl.field-list dd ul {
+:is(dl.py, dl.http, dl.js) dl.field-list dd ul {
   margin: 0;
   padding-left: 1.25rem;
 }
 
-dl.field-list dd li {
+:is(dl.py, dl.http, dl.js) dl.field-list dd li {
   margin-bottom: 0.25rem;
 }
 
-dl.field-list dd li p {
+:is(dl.py, dl.http, dl.js) dl.field-list dd li p {
   margin-bottom: 0;
 }
 
