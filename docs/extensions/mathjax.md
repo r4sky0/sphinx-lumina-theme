@@ -26,4 +26,16 @@ $$
 $$
 ```
 
-See {doc}`/reference/math` for labeled equations, multi-line systems, and matrices.
+**Result:**
+
+Inline math: $f(x) = x^2 + 1$
+
+Display math:
+
+$$
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+$$
+
+:::{seealso}
+{doc}`/reference/math` — labeled equations, multi-line systems, matrices, and symbol tables.
+:::

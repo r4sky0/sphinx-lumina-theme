@@ -1,6 +1,6 @@
 # sphinx-llm
 
-[sphinx-llm](https://github.com/NVIDIA/sphinx-llm) generates LLM-friendly versions of your documentation following the [llms.txt convention](https://llmstxt.org/). This makes your docs directly consumable by AI assistants and coding tools.
+Make your docs readable by AI assistants and coding tools. [sphinx-llm](https://github.com/NVIDIA/sphinx-llm) generates LLM-friendly versions of your documentation following the [llms.txt convention](https://llmstxt.org/) — Lumina links to `llms.txt` automatically once the extension is enabled.
 
 ## What It Produces
 

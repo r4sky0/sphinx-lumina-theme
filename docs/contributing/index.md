@@ -69,12 +69,16 @@ For a live-reloading workflow while editing docs, run `uv run sphinx-autobuild d
 :::{grid-item-card} Architecture
 :link: architecture
 :link-type: doc
+:icon: layers
+:icon-style: featured
 Learn how the theme is structured — build pipeline, templates, Alpine.js components, and testing.
 :::
 
 :::{grid-item-card} JavaScript API
 :link: javascript-api
 :link-type: doc
+:icon: braces
+:icon-style: featured
 Auto-generated reference for every Alpine.js component in the theme.
 :::
 

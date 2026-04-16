@@ -3,8 +3,7 @@
 Make your docs easier to scan by adding icons to cards, sidebar navigation, and your site logo. Lumina includes all 1900+ [Lucide](https://lucide.dev/icons/) icons — rendered as inline SVG at build time with zero runtime cost.
 
 :::{tip}
-Browse and search all available icons in the {doc}`/reference/icons`.
-Click any icon to copy its name.
+Not sure what's available? The {doc}`/reference/icons` page has an interactive browser — search by name and click any icon to copy it.
 :::
 
 ## Card Icons

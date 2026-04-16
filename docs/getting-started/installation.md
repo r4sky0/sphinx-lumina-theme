@@ -76,7 +76,13 @@ sphinx-build docs docs/_build/html
 
 Open `docs/_build/html/index.html` in your browser.
 
+:::{tip}
+Press {kbd}`⌘K` / {kbd}`Ctrl+K` to search your docs once Pagefind has indexed them. Search works after a full build — see {doc}`/guides/search` for details.
+:::
+
 ## Next Steps
+
+You've got Lumina running. Next, tune it for your project or explore what it can do.
 
 ::::{grid} 1 1 2 3
 :gutter: 3
@@ -84,18 +90,24 @@ Open `docs/_build/html/index.html` in your browser.
 :::{grid-item-card} Configuration
 :link: configuration
 :link-type: doc
+:icon: sliders-horizontal
+:icon-style: featured
 Explore all theme options, accent colors, and the recommended setup.
 :::
 
 :::{grid-item-card} Guides
 :link: /guides/index
 :link-type: doc
+:icon: book-open
+:icon-style: featured
 Set up search, dark mode, MyST Markdown, navigation, and more.
 :::
 
 :::{grid-item-card} Reference
 :link: /reference/index
 :link-type: doc
+:icon: list
+:icon-style: featured
 Browse the complete reference for typography, admonitions, code blocks, and more.
 :::
 

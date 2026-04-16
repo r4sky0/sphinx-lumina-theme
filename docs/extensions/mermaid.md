@@ -29,4 +29,14 @@ graph LR
 ```
 ````
 
-See {doc}`/reference/diagrams` for flowcharts, sequence diagrams, class diagrams, Gantt charts, and more.
+**Result:**
+
+```{mermaid}
+graph LR
+    A[Source] --> B[Build]
+    B --> C[Deploy]
+```
+
+:::{seealso}
+{doc}`/reference/diagrams` — flowcharts, sequence diagrams, class diagrams, Gantt charts, and more rendered examples.
+:::

@@ -1,6 +1,6 @@
 # JavaScript API
 
-Auto-generated reference for the theme's Alpine.js components. Each component is a factory function registered via `Alpine.data()` in {doc}`the entry point <javascript-api>` and referenced in Jinja2 templates with `x-data`.
+Auto-generated reference for the theme's Alpine.js components. Each component is a factory function registered via `Alpine.data()` in `_static_src/js/app.js` and referenced in Jinja2 templates with `x-data`.
 
 ## Entry Point
 
