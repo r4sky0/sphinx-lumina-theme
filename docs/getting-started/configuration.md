@@ -49,6 +49,10 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
   - string
   - `"default"`
   - Syntax highlighting preset. Sets matched Pygments styles for light and dark modes. Options: `"default"`, `"nord"`, `"one-dark"`, `"gruvbox"`, `"material"`. See {doc}`/guides/custom-styling` for details.
+* - `code_labels`
+  - string
+  - `"true"`
+  - Show a small uppercase language chip (e.g. `PY`, `BASH`, `JSON`) in the top-right of code blocks on hover. Set to `"false"` to hide.
 * - `dark_mode_default`
   - string
   - `"auto"`
@@ -97,6 +101,18 @@ Lucide icons are designed on a 24×24 grid with 2-unit-wide strokes. When a Luci
   - string
   - `""`
   - HTML content for a dismissible banner above the header. Supports links and inline formatting. Users can dismiss it; the preference persists in `localStorage` and resets automatically when the content changes.
+* - `announcement_variant`
+  - string
+  - `""`
+  - Severity variant for the announcement background. One of `"info"`, `"success"`, `"warning"`, `"danger"`. Leave empty to use the theme accent.
+* - `announcement_link`
+  - string
+  - `""`
+  - Optional URL for a call-to-action button rendered to the right of the message. Requires `announcement_link_label` to actually appear.
+* - `announcement_link_label`
+  - string
+  - `""`
+  - Text shown on the call-to-action button. Keep it short (e.g. `"Read more"`, `"Upgrade"`).
 ```
 
 ### Navigation
@@ -211,6 +227,32 @@ These options control the interactive features on HTTP API endpoint pages. They 
   - string
   - `"true"`
   - Set to `"false"` to hide the "Try it out" panel while keeping the "Copy as curl" button.
+* - `api_member_filter`
+  - string
+  - `"true"`
+  - Show an in-page filter input above Python classes with more than 8 members. Set to `"false"` to disable. See {doc}`/reference/api-documentation` for details.
+```
+
+### 404 Page
+
+Lumina auto-generates a branded 404 page with a search trigger and an optional "popular pages" list.
+
+```{list-table}
+:header-rows: 1
+:widths: 25 15 15 45
+
+* - Option
+  - Type
+  - Default
+  - Description
+* - `enable_404`
+  - string
+  - `"true"`
+  - Generate `404.html` at the site root. Set to `"false"` to skip it (e.g. when you ship your own).
+* - `popular_pages`
+  - string
+  - `""`
+  - Comma-separated list of doc refs to surface on the 404 page. Each entry is a doc ref optionally followed by `|Label` (e.g. `"guides/search|Search guide, getting-started/installation|Install"`).
 ```
 
 ### Source Links

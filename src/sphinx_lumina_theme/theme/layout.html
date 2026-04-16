@@ -55,6 +55,10 @@
         <script>document.documentElement.dataset.apiBaseUrl = {{ theme_api_base_url | tojson }};</script>
     {% endif %}
     {% if theme_try_it_out == "false" %}<script>document.documentElement.dataset.tryItOut = "false";</script>{% endif %}
+    {% if theme_code_labels == "true" %}<script>document.documentElement.dataset.codeLabels = "true";</script>{% endif %}
+    {% if theme_api_member_filter == "true" %}
+        <script>document.documentElement.dataset.apiMemberFilter = "true";</script>
+    {% endif %}
     {% if theme_accent_color != "#10b981" %}
         <style>
             :root,[data-theme="light"]{--lumina-accent:{{ theme_accent_color }};--lumina-accent-light:color-mix(in srgb,{{ theme_accent_color }} 12%,white);}
@@ -195,6 +199,8 @@
     {% endif %}
 
     {% include "components/search-modal.html" %}
+
+    {% include "components/shortcuts-modal.html" %}
 
 {%- endblock %}
 

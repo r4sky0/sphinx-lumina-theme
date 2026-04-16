@@ -1,0 +1,56 @@
+{# 404 page — registered automatically via html_additional_pages when
+   `theme_enable_404` is true. Uses the landing shell (no sidebar/TOC)
+   and surfaces the search modal plus an optional "popular pages" list
+   populated from the `popular_pages` theme option. Each entry is a
+   doc ref optionally followed by `|label`, e.g. "guides/search|Search guide". #}
+
+{% extends "landing.html" %}
+
+{% set title = "Page not found" %}
+
+{% block body %}
+
+    <div class="lumina-404 flex flex-col items-center justify-center gap-6 py-16 text-center">
+        <div class="text-[6rem] font-bold leading-none text-[var(--lumina-accent)] opacity-80">404</div>
+        <h1 class="m-0 text-2xl font-semibold text-[var(--lumina-text)]">Page not found</h1>
+        <p class="m-0 max-w-md text-[var(--lumina-text-muted)]">
+            We couldn't find the page you were looking for. Try searching the docs, or jump to a popular page below.
+        </p>
+        <button data-search-trigger
+                class="flex items-center gap-2 rounded-lg border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-4 py-2.5 text-sm text-[var(--lumina-text-muted)] hover:border-[var(--lumina-accent)] transition-colors cursor-pointer"
+                aria-label="Search documentation"
+                aria-haspopup="dialog"
+                type="button">
+            {{ lumina_icon("search", size=16, css_class="shrink-0") }}
+            <span>Search the docs</span>
+            <kbd data-search-shortcut
+                 class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-1.5 py-0.5 text-[0.6875rem] font-[family-name:'JetBrains_Mono'] tracking-[0.02em]">&#8984;K</kbd>
+        </button>
+        {% if theme_popular_pages and theme_popular_pages != "" %}
+            <div class="mt-6 w-full max-w-md">
+                <h2 class="m-0 mb-3 text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--lumina-text-muted)]">
+                    Popular pages
+                </h2>
+                <ul class="m-0 flex list-none flex-col gap-1 p-0 text-left">
+                    {% for entry in theme_popular_pages.split(",") %}
+                        {% set parts = entry.strip().split("|") %}
+                        {% set ref = parts[0].strip() %}
+                        {% set label = (parts[1] if parts|length > 1 else ref).strip() %}
+                        {% if ref %}
+                            <li>
+                                <a href="{{ pathto(ref) }}"
+                                   class="flex items-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm text-[var(--lumina-text)] no-underline hover:border-[var(--lumina-border)] hover:bg-[var(--lumina-bg-secondary)] transition-colors">
+                                    {{ lumina_icon("arrow-right", size=14, css_class="shrink-0 text-[var(--lumina-text-muted)]") }}
+                                    <span>{{ label }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <a href="{{ pathto(root_doc) }}"
+           class="mt-2 text-sm text-[var(--lumina-accent)] hover:underline">&larr; Back to home</a>
+    </div>
+
+{% endblock %}

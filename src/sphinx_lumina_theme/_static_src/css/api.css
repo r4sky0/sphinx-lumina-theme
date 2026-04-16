@@ -213,12 +213,245 @@ dt.sig .nb { color: var(--lumina-accent); }         /* builtins (str, int, etc.)
 
 [data-theme="dark"] dt.sig .k { color: #a78bfa; }
 
-/* ── Version directives ── */
+/* ── Symbol type badges ──
+   A small uppercase chip rendered before each autodoc signature so readers
+   can skim dense class pages and tell methods from attributes at a glance.
+   Keyed on the second class of the outer `dl` (which Sphinx sets to the
+   symbol kind, e.g. `dl.py.method`). */
+dl.py.class > dt.sig::before,
+dl.py.method > dt.sig::before,
+dl.py.function > dt.sig::before,
+dl.py.property > dt.sig::before,
+dl.py.attribute > dt.sig::before,
+dl.py.data > dt.sig::before,
+dl.py.exception > dt.sig::before,
+dl.py.module > dt.sig::before,
+dl.py.classmethod > dt.sig::before,
+dl.py.staticmethod > dt.sig::before,
+dl.py.decorator > dt.sig::before {
+  display: inline-block;
+  padding: 0.0625rem 0.4rem;
+  margin-right: 0.625rem;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  vertical-align: 0.15em;
+  white-space: nowrap;
+  color: var(--lumina-text-muted);
+  background: color-mix(in srgb, var(--lumina-text-muted) 12%, transparent);
+}
+
+dl.py.class > dt.sig::before {
+  content: "CLASS";
+  color: #6366f1;
+  background: color-mix(in srgb, #6366f1 12%, transparent);
+}
+
+dl.py.method > dt.sig::before {
+  content: "METHOD";
+  color: var(--lumina-adm-tip);
+  background: color-mix(in srgb, var(--lumina-adm-tip) 12%, transparent);
+}
+
+dl.py.classmethod > dt.sig::before {
+  content: "CLASSMETHOD";
+  color: var(--lumina-adm-tip);
+  background: color-mix(in srgb, var(--lumina-adm-tip) 12%, transparent);
+}
+
+dl.py.staticmethod > dt.sig::before {
+  content: "STATIC";
+  color: var(--lumina-adm-tip);
+  background: color-mix(in srgb, var(--lumina-adm-tip) 12%, transparent);
+}
+
+dl.py.function > dt.sig::before {
+  content: "FUNC";
+  color: var(--lumina-adm-tip);
+  background: color-mix(in srgb, var(--lumina-adm-tip) 12%, transparent);
+}
+
+dl.py.property > dt.sig::before {
+  content: "PROPERTY";
+  color: var(--lumina-adm-warning-text);
+  background: color-mix(in srgb, var(--lumina-adm-warning) 15%, transparent);
+}
+
+dl.py.attribute > dt.sig::before {
+  content: "ATTR";
+  color: var(--lumina-adm-warning-text);
+  background: color-mix(in srgb, var(--lumina-adm-warning) 15%, transparent);
+}
+
+dl.py.data > dt.sig::before {
+  content: "DATA";
+}
+
+dl.py.exception > dt.sig::before {
+  content: "EXC";
+  color: var(--lumina-adm-danger);
+  background: color-mix(in srgb, var(--lumina-adm-danger) 12%, transparent);
+}
+
+dl.py.module > dt.sig::before {
+  content: "MODULE";
+  color: #6366f1;
+  background: color-mix(in srgb, #6366f1 12%, transparent);
+}
+
+dl.py.decorator > dt.sig::before {
+  content: "DECORATOR";
+  color: #8b5cf6;
+  background: color-mix(in srgb, #8b5cf6 12%, transparent);
+}
+
+/* Suppress the redundant `property`/`class` keyword prefix when a badge already conveys the kind */
+dl.py.class > dt.sig > .property,
+dl.py.property > dt.sig > .property {
+  display: none;
+}
+
+/* ── Sticky signature (4.2) ──
+   For long method/function docstrings, the signature line sticks to the
+   top of the viewport so readers always know which symbol they're reading
+   about. The sticky state is slightly muted so it reads as context, not
+   the primary content. */
+dl.py.method > dt.sig,
+dl.py.classmethod > dt.sig,
+dl.py.staticmethod > dt.sig,
+dl.py.function > dt.sig,
+dl.py.property > dt.sig {
+  position: sticky;
+  top: 3.5rem;
+  z-index: 5;
+  backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--lumina-code-bg) 92%, transparent);
+}
+
+html.has-announcement dl.py.method > dt.sig,
+html.has-announcement dl.py.classmethod > dt.sig,
+html.has-announcement dl.py.staticmethod > dt.sig,
+html.has-announcement dl.py.function > dt.sig,
+html.has-announcement dl.py.property > dt.sig {
+  top: calc(3.5rem + 2.25rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Sticky still works, but we drop the blur to avoid compositing cost */
+  dl.py.method > dt.sig,
+  dl.py.classmethod > dt.sig,
+  dl.py.staticmethod > dt.sig,
+  dl.py.function > dt.sig,
+  dl.py.property > dt.sig {
+    backdrop-filter: none;
+  }
+}
+
+/* ── Copy import path button (4.3) ──
+   Injected by js/import-path.js. Styled similarly to the headerlink. */
+.lumina-import-path {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 0.5rem;
+  padding: 0.125rem 0.375rem;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--lumina-text-muted);
+  background: transparent;
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s, border-color 0.15s, background-color 0.15s;
+  vertical-align: 0.15em;
+}
+
+.lumina-import-path svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+dt.sig:hover .lumina-import-path {
+  opacity: 0.8;
+}
+
+.lumina-import-path:hover {
+  color: var(--lumina-accent);
+  border-color: var(--lumina-accent);
+  background: var(--lumina-accent-light);
+  opacity: 1 !important;
+}
+
+.lumina-import-path.is-copied {
+  color: var(--lumina-accent);
+  border-color: var(--lumina-accent);
+  opacity: 1 !important;
+}
+
+/* ── Member filter input (4.4) ──
+   Rendered by js/member-filter.js above a dense class. */
+.lumina-member-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  margin: 1rem 0;
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.5rem;
+  background: var(--lumina-bg-secondary);
+}
+
+.lumina-member-filter svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--lumina-text-muted);
+  flex-shrink: 0;
+}
+
+.lumina-member-filter input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--lumina-text);
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.lumina-member-filter input::placeholder {
+  color: var(--lumina-text-muted);
+}
+
+.lumina-member-filter-count {
+  font-size: 0.75rem;
+  color: var(--lumina-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+dl.py[hidden] {
+  display: none;
+}
+
+/* ── Version directives ──────────────────────────────────────────
+   Sphinx emits `versionadded`, `versionchanged`, and `deprecated`
+   wrappers, each containing a `.versionmodified` span with the
+   version string. We render the wrapper as a compact left-border
+   block and promote `.versionmodified` to an inline chip so the
+   version label reads as a status badge, not a paragraph prefix. */
 .versionadded,
 .versionchanged,
 div.deprecated {
   margin: 1rem 0;
-  padding: 0.5rem 0.75rem;
+  padding: 0.625rem 0.875rem;
   border-radius: 0.375rem;
   font-size: 0.9375rem;
 }
@@ -238,20 +471,47 @@ div.deprecated {
   background: color-mix(in srgb, var(--lumina-adm-warning) 5%, var(--lumina-bg));
 }
 
+/* Version-tag chip */
 .versionmodified {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.6875rem;
   font-weight: 600;
-  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  white-space: nowrap;
 }
 
-.versionmodified.added { color: var(--lumina-adm-tip); }
-.versionmodified.changed { color: var(--lumina-adm-note); }
-.versionmodified.deprecated { color: var(--lumina-adm-warning-text); }
+.versionmodified.added {
+  color: var(--lumina-adm-tip);
+  background: color-mix(in srgb, var(--lumina-adm-tip) 12%, transparent);
+}
 
-/* Version directives contain a single p — remove its margin */
+.versionmodified.changed {
+  color: var(--lumina-adm-note);
+  background: color-mix(in srgb, var(--lumina-adm-note) 12%, transparent);
+}
+
+.versionmodified.deprecated {
+  color: var(--lumina-adm-warning-text);
+  background: color-mix(in srgb, var(--lumina-adm-warning) 15%, transparent);
+}
+
+/* Keep spacing tight — Sphinx wraps the content in a single <p> */
 .versionadded > p,
 .versionchanged > p,
 div.deprecated > p {
-  margin-bottom: 0;
+  margin: 0;
+}
+
+/* Breathing room between the chip and the description text */
+.versionmodified {
+  margin-right: 0.375rem;
 }
 
 /* ── HTTP domain (REST API documentation) ──────────────────────────

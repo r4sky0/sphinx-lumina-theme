@@ -115,6 +115,13 @@
                 <kbd data-search-shortcut
                      class="hidden lg:inline rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-1.5 py-0.5 text-[0.6875rem] font-[family-name:'JetBrains_Mono'] tracking-[0.02em]">⌘K</kbd>
             </button>
+            {# Keyboard shortcuts trigger — hidden on mobile where physical keyboards are rare #}
+            <button data-shortcuts-trigger
+                    class="hidden md:flex h-9 w-9 items-center justify-center rounded-md text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors cursor-pointer"
+                    aria-label="Show keyboard shortcuts"
+                    aria-haspopup="dialog"
+                    title="Keyboard shortcuts (?)"
+                    type="button">{{ lumina_icon("keyboard", size=18) }}</button>
             {# Theme toggle #}
             <button data-theme-toggle
                     x-data="themeToggle()"

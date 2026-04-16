@@ -60,6 +60,21 @@ def _apply_code_style(app):
     app.builder.dark_highlighter = PygmentsBridge("html", dark)
 
 
+def _register_404(app):
+    """Auto-register a Lumina-branded 404 page via ``html_additional_pages``.
+
+    Respects any existing user-provided 404 template and the theme option
+    ``enable_404`` so adopters can opt out if they want to ship their own.
+    """
+    if getattr(app.builder, "name", None) != "html":
+        return
+    if app.builder.theme_options.get("enable_404", "true") != "true":
+        return
+    pages = app.config.html_additional_pages
+    if "404" not in pages:
+        pages["404"] = "404.html"
+
+
 def _build_page_icons(app):
     """Build a mapping of pagename → icon name from page metadata."""
     icons = {}
@@ -323,6 +338,22 @@ def _add_context(app, pagename, templatename, context, doctree):
         context["announcement_id"] = hashlib.md5(
             announcement.encode(), usedforsecurity=False
         ).hexdigest()[:8]
+        variant = app.builder.theme_options.get("announcement_variant", "") or ""
+        valid_variants = {"", "info", "success", "warning", "danger"}
+        if variant not in valid_variants:
+            logger.warning(
+                "announcement_variant %r is not one of %s — ignoring",
+                variant,
+                sorted(v for v in valid_variants if v),
+            )
+            variant = ""
+        context["announcement_variant"] = variant
+        context["announcement_link"] = app.builder.theme_options.get(
+            "announcement_link", ""
+        )
+        context["announcement_link_label"] = app.builder.theme_options.get(
+            "announcement_link_label", ""
+        )
 
     # Version switcher
     vs_json = app.builder.theme_options.get("version_switcher_json", "")
@@ -462,6 +493,7 @@ def setup(app):
     app.add_directive("card", LuminaCardDirective, override=True)
     app.add_directive("grid-item-card", LuminaGridItemCardDirective, override=True)
     app.connect("builder-inited", _apply_code_style)
+    app.connect("builder-inited", _register_404)
     app.connect("html-page-context", _add_context)
     app.connect("build-finished", _run_pagefind)
     return {

@@ -188,3 +188,50 @@ Create a `.md` or `.rst` file and use the `automodule`, `autoclass`, or `autofun
 :::{tip}
 Combine autodoc with Napoleon for clean, readable docstrings. Write Google-style docstrings in your code and let Napoleon convert them to Sphinx format automatically.
 :::
+
+## Reader affordances
+
+Lumina adds a few small features on top of Sphinx's autodoc output that make dense API pages easier to scan.
+
+### Symbol badges
+
+Every signature line is prefixed with an uppercase chip — `CLASS`, `METHOD`, `PROPERTY`, `ATTR`, `EXC`, `FUNC`, etc. — in a color matched to the admonition palette. Skim the left edge of a class page to tell methods from attributes without reading the signatures.
+
+### Sticky signature
+
+On long method or function bodies, the signature line sticks to the top of the viewport as you scroll so you always know which symbol the text below is documenting. Enabled automatically; it respects `prefers-reduced-motion` (no backdrop blur in reduced-motion mode).
+
+### Copy import path
+
+Hover any class, method, or function signature to reveal a **Copy path** button. It copies the fully qualified dotted path — e.g. `sphinx_lumina_theme.api.EventEmitter.on` — so you can paste it straight into `from ... import ...` or a `{py:meth}` cross-reference.
+
+### In-page member filter
+
+Classes with more than 8 members get a filter input at the top of their body. Type to hide non-matching members in real time. The visible/total count updates as you type, and {kbd}`Esc` clears the filter.
+
+Opt out per-project via:
+
+```{code-block} python
+:caption: conf.py
+html_theme_options = {
+    "api_member_filter": "false",
+}
+```
+
+### Version directives
+
+`.. versionadded::`, `.. versionchanged::`, and `.. deprecated::` render as pill-shaped version badges matching the admonition system. The directive description sits inline with the badge so the whole notice reads as a single, compact line.
+
+```{py:function} fancy_connect(host: str, port: int = 443) -> Connection
+
+Connect with TLS by default.
+
+.. versionadded:: 1.4
+   Initial release.
+
+.. versionchanged:: 1.5
+   The ``port`` argument gained a default value.
+
+.. deprecated:: 2.0
+   Use :py:func:`connect` with ``tls=True`` instead.
+```

@@ -59,6 +59,18 @@ Add Lucide icons to cards, sidebar items, and your logo.
 Live reload with sphinx-autobuild and the asset watcher.
 :::
 
+:::{grid-item-card} Deployment
+:link: deployment
+:link-type: doc
+Ship to GitHub Pages, Netlify, Read the Docs, or Vercel.
+:::
+
+:::{grid-item-card} Keyboard Shortcuts
+:link: keyboard-shortcuts
+:link-type: doc
+Every shortcut available to readers of your docs.
+:::
+
 ::::
 
 ```{toctree}
@@ -72,4 +84,6 @@ landing-page
 wide-layout
 icons
 development-workflow
+deployment
+keyboard-shortcuts
 ```

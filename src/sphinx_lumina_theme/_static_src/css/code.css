@@ -92,6 +92,101 @@ div.highlight {
   position: relative;
 }
 
+/* ── Language labels ──
+   When `theme_code_labels` is true, Sphinx emits `highlight-<lang>` on the
+   outer wrapper (e.g. `highlight-python`, `highlight-bash`). We render a
+   small uppercase chip in the top-right corner, tucked to the left of the
+   copy button. Unknown languages get no label. */
+html[data-code-labels="true"] div[class*="highlight-"]:not(.highlight) {
+  position: relative;
+}
+
+html[data-code-labels="true"] div[class*="highlight-"]:not(.highlight)::before {
+  position: absolute;
+  top: 0.5rem;
+  right: 2.75rem;
+  padding: 0.125rem 0.4rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--lumina-text-muted);
+  background: var(--lumina-bg-secondary);
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.25rem;
+  line-height: 1.4;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+html[data-code-labels="true"] div[class*="highlight-"]:not(.highlight):hover::before,
+.literal-block-wrapper:hover > div[class*="highlight-"]:not(.highlight)::before {
+  opacity: 1;
+}
+
+/* Suppress for blocks inside a captioned wrapper — the caption already labels it */
+html[data-code-labels="true"] .literal-block-wrapper > div[class*="highlight-"]::before {
+  display: none;
+}
+
+html[data-code-labels="true"] .highlight-python::before { content: "PY"; }
+html[data-code-labels="true"] .highlight-python3::before { content: "PY"; }
+html[data-code-labels="true"] .highlight-pycon::before { content: "PY"; }
+html[data-code-labels="true"] .highlight-default::before { content: "PY"; }
+html[data-code-labels="true"] .highlight-javascript::before { content: "JS"; }
+html[data-code-labels="true"] .highlight-js::before { content: "JS"; }
+html[data-code-labels="true"] .highlight-typescript::before { content: "TS"; }
+html[data-code-labels="true"] .highlight-ts::before { content: "TS"; }
+html[data-code-labels="true"] .highlight-tsx::before { content: "TSX"; }
+html[data-code-labels="true"] .highlight-jsx::before { content: "JSX"; }
+html[data-code-labels="true"] .highlight-html::before { content: "HTML"; }
+html[data-code-labels="true"] .highlight-css::before { content: "CSS"; }
+html[data-code-labels="true"] .highlight-scss::before { content: "SCSS"; }
+html[data-code-labels="true"] .highlight-json::before { content: "JSON"; }
+html[data-code-labels="true"] .highlight-yaml::before { content: "YAML"; }
+html[data-code-labels="true"] .highlight-yml::before { content: "YAML"; }
+html[data-code-labels="true"] .highlight-toml::before { content: "TOML"; }
+html[data-code-labels="true"] .highlight-ini::before { content: "INI"; }
+html[data-code-labels="true"] .highlight-xml::before { content: "XML"; }
+html[data-code-labels="true"] .highlight-bash::before { content: "BASH"; }
+html[data-code-labels="true"] .highlight-shell::before { content: "SHELL"; }
+html[data-code-labels="true"] .highlight-sh::before { content: "SH"; }
+html[data-code-labels="true"] .highlight-zsh::before { content: "ZSH"; }
+html[data-code-labels="true"] .highlight-fish::before { content: "FISH"; }
+html[data-code-labels="true"] .highlight-console::before { content: "CONSOLE"; }
+html[data-code-labels="true"] .highlight-powershell::before { content: "PS"; }
+html[data-code-labels="true"] .highlight-dockerfile::before { content: "DOCKER"; }
+html[data-code-labels="true"] .highlight-rust::before { content: "RS"; }
+html[data-code-labels="true"] .highlight-go::before { content: "GO"; }
+html[data-code-labels="true"] .highlight-java::before { content: "JAVA"; }
+html[data-code-labels="true"] .highlight-kotlin::before { content: "KT"; }
+html[data-code-labels="true"] .highlight-swift::before { content: "SWIFT"; }
+html[data-code-labels="true"] .highlight-c::before { content: "C"; }
+html[data-code-labels="true"] .highlight-cpp::before { content: "C++"; }
+html[data-code-labels="true"] .highlight-csharp::before { content: "C#"; }
+html[data-code-labels="true"] .highlight-ruby::before { content: "RB"; }
+html[data-code-labels="true"] .highlight-php::before { content: "PHP"; }
+html[data-code-labels="true"] .highlight-sql::before { content: "SQL"; }
+html[data-code-labels="true"] .highlight-graphql::before { content: "GQL"; }
+html[data-code-labels="true"] .highlight-markdown::before { content: "MD"; }
+html[data-code-labels="true"] .highlight-md::before { content: "MD"; }
+html[data-code-labels="true"] .highlight-myst::before { content: "MYST"; }
+html[data-code-labels="true"] .highlight-rst::before { content: "RST"; }
+html[data-code-labels="true"] .highlight-restructuredtext::before { content: "RST"; }
+html[data-code-labels="true"] .highlight-http::before { content: "HTTP"; }
+html[data-code-labels="true"] .highlight-text::before { content: "TEXT"; }
+html[data-code-labels="true"] .highlight-diff::before { content: "DIFF"; }
+html[data-code-labels="true"] .highlight-makefile::before { content: "MAKE"; }
+html[data-code-labels="true"] .highlight-lua::before { content: "LUA"; }
+html[data-code-labels="true"] .highlight-elixir::before { content: "EX"; }
+html[data-code-labels="true"] .highlight-erlang::before { content: "ERL"; }
+html[data-code-labels="true"] .highlight-haskell::before { content: "HS"; }
+html[data-code-labels="true"] .highlight-scala::before { content: "SCALA"; }
+html[data-code-labels="true"] .highlight-nginx::before { content: "NGINX"; }
+html[data-code-labels="true"] .highlight-apache::before { content: "APACHE"; }
+
 /* ── Code block captions (file header bar) ── */
 .literal-block-wrapper {
   margin: 1.25rem 0;

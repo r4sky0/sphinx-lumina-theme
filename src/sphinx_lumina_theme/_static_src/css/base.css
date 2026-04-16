@@ -692,6 +692,40 @@ a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
 
 html:not(.has-announcement) #lumina-announcement { display: none; }
 
+/* ── Announcement banner ──
+   Default variant uses the theme accent. Explicit variants pin the color
+   so "warning" looks like a warning regardless of the configured accent. */
+.lumina-announcement {
+  background: color-mix(in srgb, var(--lumina-accent), black 40%);
+  color: #fff;
+}
+
+.lumina-announcement-info {
+  background: color-mix(in srgb, var(--lumina-adm-note), black 25%);
+}
+
+.lumina-announcement-success {
+  background: color-mix(in srgb, var(--lumina-adm-tip), black 25%);
+}
+
+.lumina-announcement-warning {
+  background: color-mix(in srgb, var(--lumina-adm-warning), black 20%);
+}
+
+.lumina-announcement-danger {
+  background: color-mix(in srgb, var(--lumina-adm-danger), black 20%);
+}
+
+.lumina-announcement-cta {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.lumina-announcement-cta:hover {
+  background: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
 html.has-announcement .lumina-wrapper {
   margin-top: calc(3.5rem + 2.25rem);
   min-height: calc(100vh - 3.5rem - 2.25rem);

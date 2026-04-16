@@ -23,6 +23,9 @@ import announcementBanner from "./announcement.js";
 import versionSwitcher from "./version-switcher.js";
 import layoutToggle from "./layout-toggle.js";
 import iconBrowser from "./icon-browser.js";
+import shortcutsModal from "./shortcuts-modal.js";
+import bootImportPath from "./import-path.js";
+import bootMemberFilter from "./member-filter.js";
 Alpine.data("scrollspy", scrollspy);
 Alpine.data("themeToggle", themeToggle);
 Alpine.data("searchModal", searchModal);
@@ -38,6 +41,7 @@ Alpine.data("announcementBanner", announcementBanner);
 Alpine.data("versionSwitcher", versionSwitcher);
 Alpine.data("layoutToggle", layoutToggle);
 Alpine.data("iconBrowser", iconBrowser);
+Alpine.data("shortcutsModal", shortcutsModal);
 
 window.Alpine = Alpine;
 
@@ -54,6 +58,8 @@ function boot() {
   Alpine.start();
   curlCopy();
   tryIt();
+  bootImportPath();
+  bootMemberFilter();
 }
 
 if (document.readyState === "loading") {
