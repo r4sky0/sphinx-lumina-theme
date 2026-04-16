@@ -1,5 +1,13 @@
 # Releases
 
+## v1.33.2 (2026-04-16)
+
+### Bug Fixes
+
+- Prevent typography CSS from overriding API documentation styles
+  ([#76](https://github.com/r4sky0/sphinx-lumina-theme/pull/76),
+  [`9829667`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9829667519baa2903b2f8245d42a241d5ea4d933))
+
 ## v1.33.1 (2026-04-15)
 
 ### Bug Fixes
