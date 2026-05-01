@@ -6,6 +6,8 @@
  * the rendered HTML output.
  */
 
+import { copyText } from "./utils/clipboard.js";
+
 /**
  * Factory for the copy-page Alpine component.
  * Registered as ``Alpine.data("copyPage", copyPage)``.
@@ -32,31 +34,16 @@ export default function copyPage() {
       const markdown = htmlToMarkdown(article);
 
       try {
-        await copyToClipboard(markdown);
+        await copyText(markdown);
         this.copied = true;
         setTimeout(() => {
           this.copied = false;
         }, 1500);
-      } catch (_) {
-        /* clipboard write failed — silently ignore */
+      } catch (err) {
+        console.error("Lumina: failed to copy page Markdown", err);
       }
     },
   };
-}
-
-/* ── Clipboard helper with fallback ── */
-
-async function copyToClipboard(text) {
-  if (navigator.clipboard) {
-    return navigator.clipboard.writeText(text);
-  }
-  const textarea = document.createElement("textarea");
-  textarea.value = text;
-  textarea.style.cssText = "position:fixed;opacity:0";
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand("copy");
-  document.body.removeChild(textarea);
 }
 
 /* ── HTML → Markdown converter ── */
