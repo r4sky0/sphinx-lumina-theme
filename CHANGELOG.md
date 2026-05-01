@@ -2,6 +2,29 @@
 
 <!-- releases -->
 
+## v1.39.0 (2026-05-01)
+
+### Features
+
+- Add per-block code line-wrap toggle ([#97](https://github.com/r4sky0/sphinx-lumina-theme/pull/97),
+  [`273e884`](https://github.com/r4sky0/sphinx-lumina-theme/commit/273e884ca0fb37963e73c8c3b1c6d783d8148d0c))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump pnpm/action-setup from 6.0.3 to 6.0.4 in the github-actions-minor group
+  ([#99](https://github.com/r4sky0/sphinx-lumina-theme/pull/99),
+  [`bd14ee2`](https://github.com/r4sky0/sphinx-lumina-theme/commit/bd14ee26d1c4ab345b6b45780f90c77111ddeab2))
+
+- **deps**: Bump the npm-minor group with 5 updates
+  ([#100](https://github.com/r4sky0/sphinx-lumina-theme/pull/100),
+  [`85186b8`](https://github.com/r4sky0/sphinx-lumina-theme/commit/85186b83feb60c92dfee0476a17d8be34daa1302))
+
+</details>
+
+
 ## v1.38.0 (2026-05-01)
 
 ### Features
