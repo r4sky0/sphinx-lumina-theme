@@ -70,6 +70,28 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 |----------------|--------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `doc_sections` | list   | `[]`      | Define major documentation sections with icons and colors. Adds a dropdown at the top of the sidebar that lets readers switch between sections, each with its own navigation tree. See [Navigation](../guides/navigation.md) for setup. |
 
+### Reading Time
+
+| Option              | Type   | Default   | Description                                                                                                                                                                                          |
+|---------------------|--------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `show_reading_time` | string | `"false"` | Show an estimated reading time next to the breadcrumbs at the top of every page. The estimate is computed from prose word count at 200 words per minute, ignoring code blocks, images, and toctrees. |
+
+Override per page using MyST front matter:
+
+```yaml
+---
+reading_time: false   # Hide the badge on this page only
+---
+```
+
+Or pin a manual value (rare — useful when the auto estimate undercounts complex content like math-heavy pages):
+
+```yaml
+---
+reading_time: 12      # Force "12 min read" on this page
+---
+```
+
 ### Version Switcher
 
 | Option                   | Type   | Default   | Description                                                                                            |
@@ -166,6 +188,9 @@ html_theme_options = {
 
     # Code blocks
     "code_wrap_toggle": "true",
+
+    # Reading time
+    "show_reading_time": "false",
 
     # Doc sections
     "doc_sections": [
