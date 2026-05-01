@@ -1905,7 +1905,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 1.35.0.
+This documentation is for Sphinx Lumina Theme version 1.35.1.
 
 The MyST syntax:
 
@@ -3857,6 +3857,37 @@ The token is cleared when the browser tab is closed (sessionStorage scope).
 # releases.html.md
 
 # Releases
+
+## v1.35.1 (2026-05-01)
+
+### Bug Fixes
+
+- Skip link uses configured accent color
+  ([#87](https://github.com/r4sky0/sphinx-lumina-theme/pull/87),
+  [`da1e37a`](https://github.com/r4sky0/sphinx-lumina-theme/commit/da1e37ab8957799461f77284694dbab87ef06a9a))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump actions/setup-node from 6.3.0 to 6.4.0 in the github-actions-minor group
+  ([#83](https://github.com/r4sky0/sphinx-lumina-theme/pull/83),
+  [`308bcf0`](https://github.com/r4sky0/sphinx-lumina-theme/commit/308bcf094100088daedc323320fed55547457f08))
+- **deps**: Bump pnpm/action-setup from 5.0.0 to 6.0.3
+  ([#84](https://github.com/r4sky0/sphinx-lumina-theme/pull/84),
+  [`52df117`](https://github.com/r4sky0/sphinx-lumina-theme/commit/52df117010d560d26669dab6c80986b0208cfb95))
+- **deps**: Bump the npm-minor group with 4 updates
+  ([#85](https://github.com/r4sky0/sphinx-lumina-theme/pull/85),
+  [`d67c314`](https://github.com/r4sky0/sphinx-lumina-theme/commit/d67c3145c42fe97f84800a87a0e5c57f851d3e21))
+
+#### Chores
+
+- Add issue and pull request templates
+  ([#86](https://github.com/r4sky0/sphinx-lumina-theme/pull/86),
+  [`3e487e0`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3e487e0d526171fdb336006adc5837be1fe56342))
+
+</details>
 
 ## v1.35.0 (2026-04-16)
 
