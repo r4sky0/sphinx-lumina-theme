@@ -11,7 +11,7 @@ from sphinx.util import logging
 
 logger = logging.getLogger(__name__)
 
-__version__ = "1.35.0"
+__version__ = "1.35.1"
 
 _CODE_STYLE_PRESETS = {
     "default": ("default", "monokai"),
