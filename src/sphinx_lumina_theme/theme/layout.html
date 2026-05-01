@@ -58,6 +58,9 @@
     {% if theme_code_wrap_toggle != "false" %}
         <script>document.documentElement.dataset.codeWrap = "true";</script>
     {% endif %}
+    {% if theme_image_lightbox == "true" %}
+        <script>document.documentElement.dataset.lightbox = "true";</script>
+    {% endif %}
     {% if theme_accent_color != "#10b981" %}
         <style>
             :root,[data-theme="light"]{--lumina-accent:{{ theme_accent_color }};--lumina-accent-light:color-mix(in srgb,{{ theme_accent_color }} 12%,white);}
@@ -205,6 +208,30 @@
     {% endif %}
 
     {% include "components/search-modal.html" %}
+
+    {% if theme_image_lightbox == "true" %}
+        <div x-data="imageLightbox()"
+             x-show="isOpen"
+             x-cloak
+             x-on:keydown.escape.window="close()"
+             class="lumina-lightbox-overlay"
+             role="dialog"
+             aria-modal="true"
+             x-bind:aria-label="caption || 'Image preview'">
+            <div class="lumina-lightbox-backdrop" x-on:click="close()"></div>
+            <div class="lumina-lightbox-figure">
+                <button x-on:click="close()"
+                        class="lumina-lightbox-close"
+                        aria-label="Close preview"
+                        type="button">{{ lumina_icon("x", size=20) }}</button>
+                <template x-if="contentType === 'img'">
+                    <img x-bind:src="imgSrc" x-bind:alt="imgAlt">
+                </template>
+                <div class="lumina-lightbox-svg-host" x-show="contentType === 'svg'"></div>
+                <div class="lumina-lightbox-caption" x-show="caption" x-text="caption"></div>
+            </div>
+        </div>
+    {% endif %}
 
 {%- endblock %}
 

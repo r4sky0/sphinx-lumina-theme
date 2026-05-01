@@ -24,6 +24,7 @@ import versionSwitcher from "./version-switcher.js";
 import layoutToggle from "./layout-toggle.js";
 import iconBrowser from "./icon-browser.js";
 import codeWrapToggle from "./code-wrap.js";
+import imageLightbox from "./image-lightbox.js";
 Alpine.data("scrollspy", scrollspy);
 Alpine.data("themeToggle", themeToggle);
 Alpine.data("searchModal", searchModal);
@@ -39,6 +40,7 @@ Alpine.data("announcementBanner", announcementBanner);
 Alpine.data("versionSwitcher", versionSwitcher);
 Alpine.data("layoutToggle", layoutToggle);
 Alpine.data("iconBrowser", iconBrowser);
+Alpine.data("imageLightbox", imageLightbox);
 
 window.Alpine = Alpine;
 
