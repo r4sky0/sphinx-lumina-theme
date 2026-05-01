@@ -1,0 +1,105 @@
+/* ── Print styles ──
+   Aim: a printed page should be a clean reading copy of the article. Drop
+   the chrome (header, sidebar, TOC, action buttons), force a light palette
+   regardless of the on-screen theme, and surface link URLs since hovers
+   don't survive paper. */
+
+@media print {
+  @page {
+    margin: 1.8cm;
+  }
+
+  /* Force light tokens — printing dark-mode pages produces unreadable
+     black-on-black output. */
+  html,
+  html[data-theme="dark"] {
+    color-scheme: light;
+    --lumina-bg: #fff;
+    --lumina-bg-secondary: #f4f4f5;
+    --lumina-text: #18181b;
+    --lumina-text-muted: #52525b;
+    --lumina-border: #d4d4d8;
+    --lumina-accent-light: transparent;
+    --lumina-code-bg: #f4f4f5;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  /* Drop chrome that doesn't belong on paper. */
+  #lumina-header,
+  #lumina-sidebar,
+  #lumina-toc,
+  #lumina-announcement,
+  .lumina-skip-link,
+  .lumina-content-toolbar > .lumina-copy-page,
+  .copybtn,
+  .lumina-curl-copy,
+  .lumina-try-it,
+  [data-search-trigger],
+  [data-theme-toggle],
+  [data-sidebar-toggle],
+  .lumina-back-to-top,
+  a.headerlink {
+    display: none !important;
+  }
+
+  /* Reclaim the full page width for content. */
+  .lumina-wrapper,
+  [data-layout="wide"] .lumina-wrapper {
+    display: block;
+    max-width: 100%;
+    margin: 0;
+    min-height: 0;
+  }
+
+  #lumina-content,
+  [data-layout="wide"] #lumina-content {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Reveal external link URLs (in-page anchors stay clean). */
+  .lumina-article a[href^="http"]::after,
+  .lumina-article a[href^="//"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555;
+    word-break: break-all;
+  }
+
+  /* Page-break hygiene. */
+  .lumina-article h1,
+  .lumina-article h2,
+  .lumina-article h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .lumina-article pre,
+  .lumina-article table,
+  .lumina-article figure,
+  .lumina-article .admonition,
+  .lumina-article blockquote {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Code blocks: ensure long lines wrap and the colored background prints. */
+  .lumina-article pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: 1px solid var(--lumina-border);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Admonitions: keep the colored left border visible. */
+  .lumina-article .admonition {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
