@@ -92,6 +92,61 @@ div.highlight {
   position: relative;
 }
 
+/* ── Wrap-long-lines toggle button (sits left of copy button) ── */
+.highlight .lumina-wrap-toggle {
+  position: absolute;
+  top: 0.5rem;
+  right: 2.75rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--lumina-bg-secondary);
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.375rem;
+  color: var(--lumina-text-muted);
+  cursor: pointer;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.15s, background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+div.highlight:hover .lumina-wrap-toggle,
+.literal-block-wrapper:hover .lumina-wrap-toggle,
+.lumina-wrap-toggle:focus-visible {
+  opacity: 1;
+}
+
+.lumina-wrap-toggle:hover {
+  background: var(--lumina-accent-light);
+  color: var(--lumina-accent);
+  border-color: var(--lumina-accent);
+}
+
+/* When wrap is on, keep the button visible to signal active state */
+.lumina-wrap-toggle[aria-pressed="true"] {
+  opacity: 1;
+  background: var(--lumina-accent-light);
+  color: var(--lumina-accent);
+  border-color: var(--lumina-accent);
+}
+
+/* ── Wrap-on state ── */
+div.highlight[data-lumina-wrap="on"] pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: visible;
+}
+
+/* The line-numbers gutter must stay nowrap so its rows don't shift */
+div.highlight[data-lumina-wrap="on"] .linenodiv pre {
+  white-space: pre;
+  word-break: normal;
+  overflow-x: auto;
+}
+
 /* ── Code block captions (file header bar) ── */
 .literal-block-wrapper {
   margin: 1.25rem 0;
