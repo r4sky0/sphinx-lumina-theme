@@ -862,6 +862,24 @@ a.headerlink[data-tooltip].lumina-tooltip-visible::after {
   margin-bottom: 1.5rem;
 }
 
+/* ── Reading-time badge ── */
+.lumina-reading-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  line-height: 1;
+  color: var(--lumina-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.lumina-reading-time svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+}
+
 /* ── Copy Markdown button ── */
 .lumina-copy-page {
   display: inline-flex;

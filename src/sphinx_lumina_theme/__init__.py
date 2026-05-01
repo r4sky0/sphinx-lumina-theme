@@ -31,6 +31,44 @@ _HERO_FIELDS = (
     "hero_tags",
 )
 
+# Average adult reading speed in words per minute, used by reading-time estimate.
+_READING_WPM = 200
+
+
+def _compute_reading_time(doctree):
+    """Estimate reading time in minutes from a page doctree.
+
+    Walks the doctree's text nodes, skipping content inside code blocks,
+    images, comments, and toctrees. Returns ``None`` when the doctree is
+    missing or contains no countable prose.
+    """
+    if doctree is None:
+        return None
+
+    from docutils import nodes
+
+    skip_types = (
+        nodes.literal_block,
+        nodes.image,
+        nodes.comment,
+        nodes.target,
+        nodes.system_message,
+        addnodes.toctree,
+    )
+
+    word_count = 0
+    for text_node in doctree.findall(nodes.Text):
+        ancestor = text_node.parent
+        while ancestor is not None and not isinstance(ancestor, skip_types):
+            ancestor = ancestor.parent
+        if ancestor is not None:
+            continue  # text lives inside a skipped node
+        word_count += len(text_node.astext().split())
+
+    if not word_count:
+        return None
+    return max(1, round(word_count / _READING_WPM))
+
 
 def _apply_code_style(app):
     """Map the ``code_style`` theme option to Pygments style pair.
@@ -356,6 +394,19 @@ def _add_context(app, pagename, templatename, context, doctree):
     for field in _HERO_FIELDS:
         if field in meta:
             context[field] = meta[field]
+
+    # Reading-time estimate. Opt-in via theme option; per-page override via
+    # ``reading_time`` front matter (``false`` to suppress, integer to override).
+    if app.builder.theme_options.get("show_reading_time", "false") == "true":
+        rt_meta = str(meta.get("reading_time", "")).strip().lower()
+        if rt_meta == "false":
+            pass  # explicitly suppressed for this page
+        elif rt_meta.isdigit():
+            context["lumina_reading_time"] = int(rt_meta)
+        else:
+            rt = _compute_reading_time(doctree)
+            if rt is not None:
+                context["lumina_reading_time"] = rt
 
     # Icon system: make icon renderer and sidebar filter available to templates
     from ._icon_utils import get_icon_inner, get_icon_svg

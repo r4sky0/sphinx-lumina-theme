@@ -85,6 +85,12 @@ Let readers switch between documentation versions with a dropdown loaded from a 
 Source Sans 3 and JetBrains Mono are bundled with the theme. No external CDN requests, no privacy concerns.
 :::
 
+:::{grid-item-card} Reading Time
+:icon: clock
+:icon-style: featured
+Optional per-page reading-time estimate, computed from prose word count and ignoring code blocks. Per-page overrides via MyST front matter.
+:::
+
 ::::
 
 ## Built with
