@@ -44,6 +44,22 @@
 
 @import "tailwindcss";
 
+/* Expose the Lumina design tokens as Tailwind v4 theme colors so templates
+   can use the named utilities (``bg-lumina-bg``, ``text-lumina-text-muted``,
+   etc.) instead of arbitrary ``[var(--lumina-…)]`` values. ``inline`` makes
+   the generated utilities reference ``--lumina-…`` directly so they continue
+   to react to the dark-mode toggle. */
+@theme inline {
+  --color-lumina-bg: var(--lumina-bg);
+  --color-lumina-bg-secondary: var(--lumina-bg-secondary);
+  --color-lumina-text: var(--lumina-text);
+  --color-lumina-text-muted: var(--lumina-text-muted);
+  --color-lumina-border: var(--lumina-border);
+  --color-lumina-accent: var(--lumina-accent);
+  --color-lumina-accent-light: var(--lumina-accent-light);
+  --color-lumina-code-bg: var(--lumina-code-bg);
+}
+
 /* ── Light mode (default) ── */
 :root {
   --lumina-bg: #fcfcfc;

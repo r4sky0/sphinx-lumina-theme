@@ -9,7 +9,7 @@
                 :aria-expanded="open"
                 aria-haspopup="true"
                 aria-label="Select documentation version"
-                class="flex items-center gap-1 rounded-md border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-2 py-1 text-xs font-medium text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:border-[var(--lumina-accent)] transition-colors cursor-pointer"
+                class="flex items-center gap-1 rounded-md border border-lumina-border bg-lumina-bg-secondary px-2 py-1 text-xs font-medium text-lumina-text-muted hover:text-lumina-text hover:border-lumina-accent transition-colors cursor-pointer"
                 type="button">
             <span x-text="currentLabel || '{{ lumina_version_match }}'">{{ lumina_version_match }}</span>
             <svg class="h-3 w-3 transition-transform duration-200"
@@ -33,22 +33,20 @@
              x-transition:leave="transition ease-in duration-100"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
-             class="absolute left-0 top-full mt-1 min-w-[10rem] rounded-lg border border-[var(--lumina-border)] bg-[var(--lumina-bg)] py-1 shadow-lg"
+             class="absolute left-0 top-full mt-1 min-w-[10rem] rounded-lg border border-lumina-border bg-lumina-bg py-1 shadow-lg"
              role="menu">
             <template x-for="v in versions" :key="v.version">
                 <a :href="_versionUrl(v)"
-                   class="flex items-center gap-2 px-3 py-1.5 text-[0.8125rem] text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors no-underline"
-                   :class="v.version === match && 'font-medium text-[var(--lumina-accent)]'"
+                   class="flex items-center gap-2 px-3 py-1.5 text-[0.8125rem] text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors no-underline"
+                   :class="v.version === match && 'font-medium text-lumina-accent'"
                    role="menuitem">
                     <span x-text="v.name || v.version"></span>
                     <span x-show="v.version === match"
-                          class="ml-auto text-[0.6875rem] text-[var(--lumina-accent)]">(current)</span>
+                          class="ml-auto text-[0.6875rem] text-lumina-accent">(current)</span>
                 </a>
             </template>
             <div x-show="error"
-                 class="px-3 py-1.5 text-[0.8125rem] text-[var(--lumina-text-muted)] italic">
-                Failed to load versions
-            </div>
+                 class="px-3 py-1.5 text-[0.8125rem] text-lumina-text-muted italic">Failed to load versions</div>
         </div>
     </div>
 {% endif %}

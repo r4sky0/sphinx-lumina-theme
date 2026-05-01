@@ -3,14 +3,14 @@
         {# Edit on GitHub link #}
         {% if theme_source_repository and theme_source_repository != "" %}
             <a href="{{ theme_source_repository }}/{{ theme_edit_uri }}/{{ theme_source_branch }}/{{ theme_source_directory }}{{ pagename }}{{ page_source_suffix }}"
-               class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)] no-underline hover:text-[var(--lumina-accent)] transition-colors"
+               class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted no-underline hover:text-lumina-accent transition-colors"
                target="_blank"
                rel="noopener">
                 {{ lumina_icon("square-pen", size=14) }}
                 Edit this page
             </a>
         {% endif %}
-        <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-[var(--lumina-text-muted)]">On this page</p>
+        <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-lumina-text-muted">On this page</p>
         <div class="lumina-toc-scroll">
             <nav class="lumina-toc-nav"
                  aria-label="Table of contents"
