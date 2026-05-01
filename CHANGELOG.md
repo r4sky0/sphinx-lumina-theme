@@ -2,6 +2,25 @@
 
 <!-- releases -->
 
+## v1.37.0 (2026-05-01)
+
+### Features
+
+- Fluid responsive scaling for article headings
+  ([#93](https://github.com/r4sky0/sphinx-lumina-theme/pull/93),
+  [`3ac79bf`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3ac79bf67fa195f603ef19f6c0ae0a6511388639))
+
+- **search**: Add load timeout and query memoization
+  ([#92](https://github.com/r4sky0/sphinx-lumina-theme/pull/92),
+  [`c16e251`](https://github.com/r4sky0/sphinx-lumina-theme/commit/c16e251b62854d1a53220c5093e2af7bb346e395))
+
+### Performance Improvements
+
+- **scrollspy**: Coalesce position recompute via requestAnimationFrame
+  ([#91](https://github.com/r4sky0/sphinx-lumina-theme/pull/91),
+  [`905477d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/905477dc3e53a92f41012e589a586e767aff9c5a))
+
+
 ## v1.36.0 (2026-05-01)
 
 ### Bug Fixes
