@@ -155,6 +155,38 @@ Lucide icons are designed on a 24×24 grid with 2-unit-wide strokes. When a Luci
   - Define major documentation sections with icons and colors. Adds a dropdown at the top of the sidebar that lets readers switch between sections, each with its own navigation tree. See {doc}`/guides/navigation` for setup.
 ```
 
+### Reading Time
+
+```{list-table}
+:header-rows: 1
+:widths: 25 15 15 45
+
+* - Option
+  - Type
+  - Default
+  - Description
+* - `show_reading_time`
+  - string
+  - `"false"`
+  - Show an estimated reading time next to the breadcrumbs at the top of every page. The estimate is computed from prose word count at 200 words per minute, ignoring code blocks, images, and toctrees.
+```
+
+Override per page using MyST front matter:
+
+```yaml
+---
+reading_time: false   # Hide the badge on this page only
+---
+```
+
+Or pin a manual value (rare — useful when the auto estimate undercounts complex content like math-heavy pages):
+
+```yaml
+---
+reading_time: 12      # Force "12 min read" on this page
+---
+```
+
 ### Version Switcher
 
 ```{list-table}
@@ -336,6 +368,9 @@ html_theme_options = {
     "show_prev_next": "true",
     "show_attribution": "true",
     "show_back_to_top": "true",
+
+    # Reading time
+    "show_reading_time": "false",
 
     # Doc sections
     "doc_sections": [

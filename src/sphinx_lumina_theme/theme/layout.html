@@ -116,6 +116,13 @@
 
                     </div>
                 {% endif %}
+                {% if theme_show_reading_time == "true" and lumina_reading_time is defined %}
+                    <span class="lumina-reading-time"
+                          aria-label="{{ lumina_reading_time }} minute read">
+                        {{ lumina_icon("clock", size=14) }}
+                        <span>{{ lumina_reading_time }} min read</span>
+                    </span>
+                {% endif %}
                 <button x-data="copyPage()"
                         @click="copy()"
                         class="lumina-copy-page"
