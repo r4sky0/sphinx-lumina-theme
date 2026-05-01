@@ -109,6 +109,14 @@ OpenAPI auto-generated docs and manual HTTP method directives.
 Browse all 1900+ Lucide icons available for cards, sidebar, and logo.
 :::
 
+:::{grid-item-card} CSS Variables
+:link: css-variables
+:link-type: doc
+:icon: palette
+:icon-style: featured
+Every theme token, its default in light and dark mode, and what it controls.
+:::
+
 ::::
 
 ```{toctree}
@@ -126,4 +134,5 @@ footnotes-and-references
 api-documentation
 http-api
 icons
+css-variables
 ```

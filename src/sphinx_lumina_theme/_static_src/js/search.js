@@ -9,6 +9,12 @@
 import DOMPurify from "dompurify";
 
 const EXCERPT_CONFIG = { ALLOWED_TAGS: ["mark"], ALLOWED_ATTR: [] };
+/* If Pagefind hasn't initialized in this many ms, give up and fall back to
+   the Sphinx search page so the modal doesn't sit on "Loading…" forever. */
+const PAGEFIND_LOAD_TIMEOUT_MS = 5000;
+/* Number of recent queries to memoize. Pagefind is fast but not free, and
+   users routinely retype the same query when navigating around. */
+const QUERY_CACHE_LIMIT = 10;
 
 function sectionFromUrl(url) {
   const segments = url.split("?")[0].split("#")[0]
@@ -59,6 +65,7 @@ export default function searchModal() {
     pagefind: null,
     _trigger: null,
     _trapHandler: null,
+    _resultCache: new Map(),
     backend:
       document.querySelector('meta[name="lumina-search-backend"]')?.content ||
       "pagefind",
@@ -85,7 +92,7 @@ export default function searchModal() {
       const platform = navigator.userAgentData?.platform ?? navigator.platform ?? "";
       const isMac = /mac|iphone|ipod|ipad/i.test(platform);
       document.querySelectorAll("[data-search-shortcut]").forEach((el) => {
-        el.textContent = isMac ? "\u2318K" : "Ctrl+K";
+        el.textContent = isMac ? "⌘K" : "Ctrl+K";
       });
     },
 
@@ -150,18 +157,34 @@ export default function searchModal() {
     },
 
     async loadSearchEngine() {
-      if (this.backend === "pagefind") {
+      if (this.backend !== "pagefind") {
+        this.loaded = true;
+        return;
+      }
+      try {
+        const pagefindUrl = new URL(
+          `${this.baseUrl}_pagefind/pagefind.js`,
+          document.baseURI,
+        ).href;
+        // Race the dynamic import against a timeout so a slow/missing index
+        // doesn't leave the modal stuck on "Loading…".
+        let timer;
+        const timeout = new Promise((_, reject) => {
+          timer = setTimeout(
+            () => reject(new Error("Pagefind load timed out")),
+            PAGEFIND_LOAD_TIMEOUT_MS,
+          );
+        });
         try {
-          const pagefindUrl = new URL(`${this.baseUrl}_pagefind/pagefind.js`, document.baseURI).href;
-          this.pagefind = await import(pagefindUrl);
-          await this.pagefind.init();
-          this.loaded = true;
-        } catch (e) {
-          this.error =
-            "Search requires Pagefind indexing. Use your browser\u2019s Ctrl+F to search this page, or run: pagefind --site _build/html/";
-          this.loaded = true;
+          this.pagefind = await Promise.race([import(pagefindUrl), timeout]);
+        } finally {
+          clearTimeout(timer);
         }
-      } else {
+        await this.pagefind.init();
+        this.loaded = true;
+      } catch (e) {
+        this.error =
+          "Search requires Pagefind indexing. Use your browser’s Ctrl+F to search this page, or run: pagefind --site _build/html/";
         this.loaded = true;
       }
     },
@@ -170,19 +193,26 @@ export default function searchModal() {
       if (!this.query || !this.loaded) return;
       this.selectedIndex = 0;
 
+      const cached = this._resultCache.get(this.query);
+      if (cached) {
+        this.results = cached;
+        return;
+      }
+
+      let results;
       if (this.backend === "pagefind" && this.pagefind) {
         const search = await this.pagefind.search(this.query);
-        const results = await Promise.all(
-          search.results.slice(0, 10).map((r) => r.data())
+        const data = await Promise.all(
+          search.results.slice(0, 10).map((r) => r.data()),
         );
-        this.results = results.map((r) => ({
+        results = data.map((r) => ({
           title: r.meta?.title || "Untitled",
           url: r.url,
           excerpt: DOMPurify.sanitize(r.excerpt, EXCERPT_CONFIG),
           section: sectionFromUrl(r.url),
         }));
       } else {
-        this.results = [
+        results = [
           {
             title: 'Search for "' + this.query + '"',
             url: "search.html?q=" + encodeURIComponent(this.query),
@@ -190,6 +220,19 @@ export default function searchModal() {
           },
         ];
       }
+
+      this._cacheResults(this.query, results);
+      this.results = results;
+    },
+
+    _cacheResults(query, results) {
+      // Evict the oldest entry (Map keeps insertion order) before inserting
+      // the new one so the cache stays bounded.
+      if (this._resultCache.size >= QUERY_CACHE_LIMIT) {
+        const oldest = this._resultCache.keys().next().value;
+        this._resultCache.delete(oldest);
+      }
+      this._resultCache.set(query, results);
     },
 
     moveDown() {

@@ -16,7 +16,7 @@ Then create `docs/_static/custom.css` with your overrides.
 
 ## CSS Custom Properties
 
-Lumina defines CSS custom properties for all visual tokens. Override them in your custom stylesheet.
+Lumina defines CSS custom properties for all visual tokens. Override them in your custom stylesheet. For a complete reference of every token, default value, and what each one controls, see {doc}`/reference/css-variables`.
 
 ### Core Colors
 

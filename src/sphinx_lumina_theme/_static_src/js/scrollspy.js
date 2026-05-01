@@ -29,6 +29,7 @@ export default function scrollspy() {
     _indicator: null,
     _links: [],
     _positions: new Map(),
+    _rafId: null,
 
     init() {
       const nav = this.$el;
@@ -49,10 +50,9 @@ export default function scrollspy() {
       nav.appendChild(this._indicator);
 
       this._computePositions();
-      this._resizeObserver = new ResizeObserver(() => {
-        this._computePositions();
-        if (this.activeId) this._updateIndicator();
-      });
+      // Coalesce ResizeObserver bursts (multiple ticks per frame during a
+      // window drag) into a single recompute via requestAnimationFrame.
+      this._resizeObserver = new ResizeObserver(() => this._scheduleRecompute());
       this._resizeObserver.observe(nav);
 
       this._observer = new IntersectionObserver(
@@ -73,6 +73,15 @@ export default function scrollspy() {
         const el = document.getElementById(id);
         if (el) this._observer.observe(el);
       }
+    },
+
+    _scheduleRecompute() {
+      if (this._rafId !== null) return;
+      this._rafId = requestAnimationFrame(() => {
+        this._rafId = null;
+        this._computePositions();
+        if (this.activeId) this._updateIndicator();
+      });
     },
 
     _computePositions() {
@@ -100,6 +109,7 @@ export default function scrollspy() {
     destroy() {
       if (this._observer) this._observer.disconnect();
       if (this._resizeObserver) this._resizeObserver.disconnect();
+      if (this._rafId !== null) cancelAnimationFrame(this._rafId);
       if (this._indicator) this._indicator.remove();
     },
   };

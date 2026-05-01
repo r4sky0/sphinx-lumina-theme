@@ -2,6 +2,80 @@
 
 <!-- releases -->
 
+## v1.37.0 (2026-05-01)
+
+### Features
+
+- Fluid responsive scaling for article headings
+  ([#93](https://github.com/r4sky0/sphinx-lumina-theme/pull/93),
+  [`3ac79bf`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3ac79bf67fa195f603ef19f6c0ae0a6511388639))
+
+- **search**: Add load timeout and query memoization
+  ([#92](https://github.com/r4sky0/sphinx-lumina-theme/pull/92),
+  [`c16e251`](https://github.com/r4sky0/sphinx-lumina-theme/commit/c16e251b62854d1a53220c5093e2af7bb346e395))
+
+### Performance Improvements
+
+- **scrollspy**: Coalesce position recompute via requestAnimationFrame
+  ([#91](https://github.com/r4sky0/sphinx-lumina-theme/pull/91),
+  [`905477d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/905477dc3e53a92f41012e589a586e767aff9c5a))
+
+
+## v1.36.0 (2026-05-01)
+
+### Bug Fixes
+
+- **sidebar**: Trap focus and shrink drawer on small viewports
+  ([#88](https://github.com/r4sky0/sphinx-lumina-theme/pull/88),
+  [`3206518`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3206518e75cd457765f5778c278f3f8254954d4e))
+
+### Features
+
+- Add print stylesheet for legible printed output
+  ([#89](https://github.com/r4sky0/sphinx-lumina-theme/pull/89),
+  [`6a932aa`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6a932aa79a02a42cbc3916f87c2e16675fd0a3fd))
+
+### Refactoring
+
+- Extract shared clipboard helper, drop execCommand fallback
+  ([#90](https://github.com/r4sky0/sphinx-lumina-theme/pull/90),
+  [`1e07ee1`](https://github.com/r4sky0/sphinx-lumina-theme/commit/1e07ee1c6e5696d4d9a34b14b496b4030d3856c5))
+
+
+## v1.35.1 (2026-05-01)
+
+### Bug Fixes
+
+- Skip link uses configured accent color
+  ([#87](https://github.com/r4sky0/sphinx-lumina-theme/pull/87),
+  [`da1e37a`](https://github.com/r4sky0/sphinx-lumina-theme/commit/da1e37ab8957799461f77284694dbab87ef06a9a))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump actions/setup-node from 6.3.0 to 6.4.0 in the github-actions-minor group
+  ([#83](https://github.com/r4sky0/sphinx-lumina-theme/pull/83),
+  [`308bcf0`](https://github.com/r4sky0/sphinx-lumina-theme/commit/308bcf094100088daedc323320fed55547457f08))
+
+- **deps**: Bump pnpm/action-setup from 5.0.0 to 6.0.3
+  ([#84](https://github.com/r4sky0/sphinx-lumina-theme/pull/84),
+  [`52df117`](https://github.com/r4sky0/sphinx-lumina-theme/commit/52df117010d560d26669dab6c80986b0208cfb95))
+
+- **deps**: Bump the npm-minor group with 4 updates
+  ([#85](https://github.com/r4sky0/sphinx-lumina-theme/pull/85),
+  [`d67c314`](https://github.com/r4sky0/sphinx-lumina-theme/commit/d67c3145c42fe97f84800a87a0e5c57f851d3e21))
+
+#### Chores
+
+- Add issue and pull request templates
+  ([#86](https://github.com/r4sky0/sphinx-lumina-theme/pull/86),
+  [`3e487e0`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3e487e0d526171fdb336006adc5837be1fe56342))
+
+</details>
+
+
 ## v1.35.0 (2026-04-16)
 
 ### Features

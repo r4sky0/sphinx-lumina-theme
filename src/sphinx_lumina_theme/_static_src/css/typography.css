@@ -11,10 +11,14 @@
   line-height: 1.8;
 }
 
-/* Type scale: 1.25 major-third ratio (1rem → 1.25 → 1.5 → 1.875 → 2.25) */
+/* Type scale: 1.25 major-third ratio (1rem → 1.25 → 1.5 → 1.875 → 2.25).
+   Top three levels use clamp() so they shrink slightly on phones (where the
+   fixed sizes felt heavy in narrow columns) and grow a touch on wide
+   monitors. The min/max bracket the original fixed value, so the on-screen
+   default at common laptop widths is unchanged. */
 
 .lumina-article h1 {
-  font-size: 2.25rem;
+  font-size: clamp(1.875rem, 1.5rem + 1.875vw, 2.5rem);
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.15;
@@ -24,7 +28,7 @@
 }
 
 .lumina-article h2 {
-  font-size: 1.875rem;
+  font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.25;
@@ -36,7 +40,7 @@
 }
 
 .lumina-article h3 {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 1.125rem + 0.625vw, 1.625rem);
   font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1.35;
