@@ -1271,6 +1271,28 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 |----------------|--------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `doc_sections` | list   | `[]`      | Define major documentation sections with icons and colors. Adds a dropdown at the top of the sidebar that lets readers switch between sections, each with its own navigation tree. See [Navigation](../guides/navigation.md) for setup. |
 
+### Reading Time
+
+| Option              | Type   | Default   | Description                                                                                                                                                                                          |
+|---------------------|--------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `show_reading_time` | string | `"false"` | Show an estimated reading time next to the breadcrumbs at the top of every page. The estimate is computed from prose word count at 200 words per minute, ignoring code blocks, images, and toctrees. |
+
+Override per page using MyST front matter:
+
+```yaml
+---
+reading_time: false   # Hide the badge on this page only
+---
+```
+
+Or pin a manual value (rare — useful when the auto estimate undercounts complex content like math-heavy pages):
+
+```yaml
+---
+reading_time: 12      # Force "12 min read" on this page
+---
+```
+
 ### Version Switcher
 
 | Option                   | Type   | Default   | Description                                                                                            |
@@ -1364,6 +1386,9 @@ html_theme_options = {
     "show_prev_next": "true",
     "show_attribution": "true",
     "show_back_to_top": "true",
+
+    # Reading time
+    "show_reading_time": "false",
 
     # Doc sections
     "doc_sections": [
@@ -2680,6 +2705,8 @@ Document REST endpoints from OpenAPI specs or hand-written directives. Every end
 Let readers switch between documentation versions with a dropdown loaded from a JSON file you host alongside your docs.
 
 Source Sans 3 and JetBrains Mono are bundled with the theme. No external CDN requests, no privacy concerns.
+
+Optional per-page reading-time estimate, computed from prose word count and ignoring code blocks. Per-page overrides via MyST front matter.
 
 ## Built with
 
