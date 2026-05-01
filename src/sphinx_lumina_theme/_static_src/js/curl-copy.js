@@ -17,6 +17,7 @@ import {
   extractFieldSection,
   fieldPlaceholder,
 } from "./_http-api-utils.js";
+import { copyText } from "./utils/clipboard.js";
 
 /* Module-level store — maps each injected button to its curl string */
 const _curlCmds = new WeakMap();
@@ -47,7 +48,8 @@ export function curlCopyBtn() {
       if (!curl) return;
       try {
         await copyText(curl);
-      } catch {
+      } catch (err) {
+        console.error("Lumina: failed to copy curl command", err);
         return;
       }
       this.copied = true;
@@ -179,19 +181,3 @@ function extractJsonFields(dl) {
   return extractFieldSection(dl.querySelector("dd"), "Request JSON Object");
 }
 
-/* ── Clipboard ─────────────────────────────────────────────────────── */
-
-function copyText(text) {
-  if (navigator.clipboard) {
-    return navigator.clipboard.writeText(text);
-  }
-  /* Fallback for older browsers */
-  const textarea = document.createElement("textarea");
-  textarea.value = text;
-  textarea.style.cssText = "position:fixed;opacity:0";
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand("copy");
-  document.body.removeChild(textarea);
-  return Promise.resolve();
-}
