@@ -2,6 +2,27 @@
 
 <!-- releases -->
 
+## v1.36.0 (2026-05-01)
+
+### Bug Fixes
+
+- **sidebar**: Trap focus and shrink drawer on small viewports
+  ([#88](https://github.com/r4sky0/sphinx-lumina-theme/pull/88),
+  [`3206518`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3206518e75cd457765f5778c278f3f8254954d4e))
+
+### Features
+
+- Add print stylesheet for legible printed output
+  ([#89](https://github.com/r4sky0/sphinx-lumina-theme/pull/89),
+  [`6a932aa`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6a932aa79a02a42cbc3916f87c2e16675fd0a3fd))
+
+### Refactoring
+
+- Extract shared clipboard helper, drop execCommand fallback
+  ([#90](https://github.com/r4sky0/sphinx-lumina-theme/pull/90),
+  [`1e07ee1`](https://github.com/r4sky0/sphinx-lumina-theme/commit/1e07ee1c6e5696d4d9a34b14b496b4030d3856c5))
+
+
 ## v1.35.1 (2026-05-01)
 
 ### Bug Fixes
