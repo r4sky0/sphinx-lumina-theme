@@ -5,19 +5,18 @@
 {% block body %}
 
     <div x-data="iconBrowser()" x-init="init()">
-        <p class="text-[var(--lumina-text-muted)] mb-6">
+        <p class="text-lumina-text-muted mb-6">
             Browse all {{ icon_count }} available Lucide icons. Click any icon to copy its name.
         </p>
 
         {# Search input #}
-        <div class="sticky top-16 z-10 bg-[var(--lumina-bg)] pb-4 pt-2 -mx-1 px-1">
+        <div class="sticky top-16 z-10 bg-lumina-bg pb-4 pt-2 -mx-1 px-1">
             <input type="text"
                    x-model="query"
                    @input="filter()"
                    placeholder="Search icons..."
-                   class="w-full rounded-lg border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-4 py-2.5 text-sm text-[var(--lumina-text)] placeholder-[var(--lumina-text-muted)] outline-none focus:border-[var(--lumina-accent)] transition-colors">
-            <p class="mt-2 text-xs text-[var(--lumina-text-muted)]"
-               x-show="query.length > 0">
+                   class="w-full rounded-lg border border-lumina-border bg-lumina-bg-secondary px-4 py-2.5 text-sm text-lumina-text placeholder-lumina-text-muted outline-none focus:border-lumina-accent transition-colors">
+            <p class="mt-2 text-xs text-lumina-text-muted" x-show="query.length > 0">
                 <span x-text="visible"></span> icons found
             </p>
         </div>
@@ -31,7 +30,7 @@
              x-transition:leave="transition ease-in duration-150"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
-             class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 rounded-full bg-[var(--lumina-accent)] px-5 py-2.5 text-sm text-white shadow-xl"
+             class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 rounded-full bg-lumina-accent px-5 py-2.5 text-sm text-white shadow-xl"
              style="pointer-events: none">
             <span>Copied</span>
             <span class="font-semibold"
@@ -47,7 +46,7 @@
         <div class="grid gap-2"
              style="grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr))">
             {% for name, svg in icon_entries %}
-                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-[var(--lumina-text-muted)] hover:border-[var(--lumina-border)] hover:bg-[var(--lumina-bg-secondary)] hover:text-[var(--lumina-text)] transition-all cursor-pointer"
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
                         data-icon-name="{{ name }}"
                         @click="copy('{{ name }}')"
                         x-show="matches('{{ name }}')">
@@ -61,7 +60,7 @@
                          aria-hidden="true">
                         {{ svg }}
                     </svg>
-                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-[var(--lumina-accent)] transition-colors">{{ name }}</span>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">{{ name }}</span>
                 </button>
             {% endfor %}
         </div>

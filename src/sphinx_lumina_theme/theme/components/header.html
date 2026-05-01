@@ -1,4 +1,4 @@
-<header class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--lumina-border)] bg-[var(--lumina-bg)]/80 backdrop-blur-sm">
+<header class="fixed top-0 left-0 right-0 z-50 border-b border-lumina-border bg-lumina-bg/80 backdrop-blur-sm">
 
     {% include "components/announcement.html" %}
 
@@ -6,7 +6,7 @@
         {# Logo + project name #}
         <div class="flex items-center gap-3">
             <a href="{{ pathto(root_doc) }}"
-               class="flex items-center gap-2 text-[var(--lumina-text)] no-underline hover:opacity-80 transition-opacity">
+               class="flex items-center gap-2 text-lumina-text no-underline hover:opacity-80 transition-opacity">
                 {% if lumina_light_logo is defined and lumina_dark_logo is defined and lumina_light_logo and lumina_dark_logo %}
                     <img src="{{ lumina_light_logo }}"
                          alt="{{ project }} logo"
@@ -60,7 +60,7 @@
                              @keydown="handleKeydown($event)">
                             <button x-ref="trigger"
                                     @click="toggle()"
-                                    class="flex items-center gap-1 text-[0.8125rem] font-medium text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] transition-colors cursor-pointer bg-transparent border-none p-0"
+                                    class="flex items-center gap-1 text-[0.8125rem] font-medium text-lumina-text-muted hover:text-lumina-text transition-colors cursor-pointer bg-transparent border-none p-0"
                                     :aria-expanded="open"
                                     aria-haspopup="true">
                                 {{ link.title }}
@@ -86,11 +86,11 @@
                                  x-transition:leave-end="opacity-0"
                                  @mouseenter="cancelHide()"
                                  @mouseleave="hide()"
-                                 class="absolute left-0 top-full mt-1 min-w-[10rem] rounded-lg border border-[var(--lumina-border)] bg-[var(--lumina-bg)] py-1 shadow-lg"
+                                 class="absolute left-0 top-full mt-1 min-w-[10rem] rounded-lg border border-lumina-border bg-lumina-bg py-1 shadow-lg"
                                  role="menu">
                                 {% for child in link.children %}
                                     <a href="{{ child.url }}"
-                                       class="block px-3 py-1.5 text-[0.8125rem] text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors no-underline"
+                                       class="block px-3 py-1.5 text-[0.8125rem] text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors no-underline"
                                        role="menuitem">{{ child.title }}</a>
                                 {% endfor %}
                             </div>
@@ -98,7 +98,7 @@
                     {% else %}
                         {# Flat nav link #}
                         <a href="{{ link.url }}"
-                           class="text-[0.8125rem] font-medium text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] transition-colors no-underline">{{ link.title }}</a>
+                           class="text-[0.8125rem] font-medium text-lumina-text-muted hover:text-lumina-text transition-colors no-underline">{{ link.title }}</a>
                     {% endif %}
                 {% endfor %}
             </nav>
@@ -107,19 +107,19 @@
         <div class="flex items-center gap-2">
             {# Search trigger #}
             <button data-search-trigger
-                    class="flex items-center gap-2 rounded-lg border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-3 py-2 text-[0.8125rem] text-[var(--lumina-text-muted)] hover:border-[var(--lumina-accent)] transition-colors cursor-pointer lg:min-w-56"
+                    class="flex items-center gap-2 rounded-lg border border-lumina-border bg-lumina-bg-secondary px-3 py-2 text-[0.8125rem] text-lumina-text-muted hover:border-lumina-accent transition-colors cursor-pointer lg:min-w-56"
                     aria-label="Search documentation"
                     aria-haspopup="dialog">
                 {{ lumina_icon("search", size=16, css_class="shrink-0") }}
                 <span class="hidden lg:inline flex-1 text-left">Search docs...</span>
                 <kbd data-search-shortcut
-                     class="hidden lg:inline rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-1.5 py-0.5 text-[0.6875rem] font-[family-name:'JetBrains_Mono'] tracking-[0.02em]">⌘K</kbd>
+                     class="hidden lg:inline rounded border border-lumina-border bg-lumina-bg px-1.5 py-0.5 text-[0.6875rem] font-[family-name:'JetBrains_Mono'] tracking-[0.02em]">⌘K</kbd>
             </button>
             {# Theme toggle #}
             <button data-theme-toggle
                     x-data="themeToggle()"
                     @click="cycle()"
-                    class="relative flex h-9 w-9 items-center justify-center rounded-md text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors cursor-pointer"
+                    class="relative flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors cursor-pointer"
                     :aria-label="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'"
                     :title="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'">
                 {# Sun icon (light mode active) #}
@@ -181,7 +181,7 @@
                 {# Layout width toggle — only visible on wide screens #}
                 <button x-data="layoutToggle()"
                         @click="toggle()"
-                        class="hidden xl:flex h-9 w-9 items-center justify-center rounded-md text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors cursor-pointer"
+                        class="hidden xl:flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors cursor-pointer"
                         :aria-label="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
                         :title="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
                         type="button">
@@ -216,7 +216,7 @@
             {% if theme_social_links and theme_social_links != "" %}
                 {% for link in theme_social_links %}
                     <a href="{{ link.url }}"
-                       class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] transition-colors no-underline"
+                       class="rounded-md p-2 text-lumina-text-muted hover:text-lumina-text transition-colors no-underline"
                        target="_blank"
                        rel="noopener"
                        title="{{ link.icon | capitalize }}"
@@ -235,7 +235,7 @@
             {# Mobile hamburger — hidden on landing page which has no sidebar #}
             {% if not is_landing %}
                 <button data-sidebar-toggle
-                        class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors lg:hidden cursor-pointer"
+                        class="rounded-md p-2 text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors lg:hidden cursor-pointer"
                         aria-label="Toggle navigation"
                         aria-expanded="false"
                         aria-controls="lumina-sidebar-drawer">{{ lumina_icon("menu", size=20) }}</button>

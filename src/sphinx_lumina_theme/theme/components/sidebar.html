@@ -1,6 +1,6 @@
 <div x-data="sidebar()">
     {# Desktop sidebar #}
-    <div class="lumina-sidebar-desktop hidden flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
+    <div class="lumina-sidebar-desktop hidden flex-col overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 py-6 lg:flex">
 
         {% include "components/section-switcher.html" %}
 
@@ -58,30 +58,28 @@
                  x-transition:leave="transition ease-in duration-200"
                  x-transition:leave-start="translate-x-0"
                  x-transition:leave-end="-translate-x-full"
-                 class="fixed inset-y-0 top-14 left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:hidden">
+                 class="fixed inset-y-0 top-14 left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 py-6 lg:hidden">
                 {# Close button #}
                 <button data-sidebar-close
                         @click="close()"
-                        class="absolute top-4 right-4 rounded-md p-1 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] cursor-pointer"
+                        class="absolute top-4 right-4 rounded-md p-1 text-lumina-text-muted hover:text-lumina-text cursor-pointer"
                         aria-label="Close navigation">{{ lumina_icon("x", size=20) }}</button>
 
                 {% include "components/section-switcher.html" %}
 
                 {# Flattened nav links for mobile #}
                 {% if theme_nav_links and theme_nav_links != "" %}
-                    <div class="mb-4 border-b border-[var(--lumina-border)] pb-4">
+                    <div class="mb-4 border-b border-lumina-border pb-4">
                         {% for link in theme_nav_links %}
                             {% if link.children is defined %}
-                                <p class="px-3 pt-3 pb-1 text-xs font-semibold uppercase tracking-wide text-[var(--lumina-text-muted)]">
-                                    {{ link.title }}
-                                </p>
+                                <p class="px-3 pt-3 pb-1 text-xs font-semibold uppercase tracking-wide text-lumina-text-muted">{{ link.title }}</p>
                                 {% for child in link.children %}
                                     <a href="{{ child.url }}"
-                                       class="block px-3 py-1.5 text-sm text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] rounded-md transition-colors no-underline">{{ child.title }}</a>
+                                       class="block px-3 py-1.5 text-sm text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary rounded-md transition-colors no-underline">{{ child.title }}</a>
                                 {% endfor %}
                             {% else %}
                                 <a href="{{ link.url }}"
-                                   class="block px-3 py-1.5 text-sm text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] rounded-md transition-colors no-underline">{{ link.title }}</a>
+                                   class="block px-3 py-1.5 text-sm text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary rounded-md transition-colors no-underline">{{ link.title }}</a>
                             {% endif %}
                         {% endfor %}
                     </div>
