@@ -46,7 +46,8 @@ See {doc}`javascript-api` for the full component API reference.
 
 ## Theming
 
-- CSS custom properties (`--lumina-accent`, `--lumina-bg`, `--lumina-text`, etc.) defined in `base.css`
+- CSS custom properties (`--lumina-accent`, `--lumina-bg`, `--lumina-text`, etc.) defined in `base.css`. See {doc}`/reference/css-variables` for the full token reference.
+- The same tokens are exposed as Tailwind v4 theme colors via an `@theme inline` block in `base.css`, so templates use named utilities (`bg-lumina-bg`, `text-lumina-text-muted`, `border-lumina-border`) rather than `bg-[var(--lumina-bg)]`. Add a new entry to that block when introducing a new token you want available as a Tailwind utility.
 - Dark mode toggled via `[data-theme="dark"]` attribute on `<html>`
 - User preference persisted in `localStorage` key `lumina-theme`
 - FOUC prevention: inline script in `layout.html` applies theme before paint
