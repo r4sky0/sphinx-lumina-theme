@@ -1190,6 +1190,12 @@ The MyST syntax:
 
 All code blocks include a copy-to-clipboard button provided by `sphinx-copybutton`. Hover over any code block to see it appear in the top-right corner. No configuration needed — it works automatically.
 
+## Wrap Long Lines
+
+A “wrap long lines” toggle appears alongside the copy button on every code block. Click it to wrap the current block — useful for long URLs, single-line shell commands, or any code that overflows horizontally. The toggle is per-block: turning wrap on for one block leaves the others unchanged.
+
+Disable site-wide with `code_wrap_toggle = "false"` in `html_theme_options` — see [Configuration](../getting-started/configuration.md).
+
 ## Quick Reference
 
 | Feature            | Directive              | Key option                   |
@@ -1264,6 +1270,12 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 | `show_prev_next`   | string | `"true"`  | Show or hide previous/next page navigation at the bottom.                                                                                                                                                |
 | `show_attribution` | string | `"true"`  | Show or hide the “Built with Lumina” attribution link in the sidebar footer.                                                                                                                             |
 | `show_back_to_top` | string | `"true"`  | Show or hide the back-to-top button that appears when scrolling up.                                                                                                                                      |
+
+### Code Blocks
+
+| Option             | Type   | Default   | Description                                                                                                                                                                                  |
+|--------------------|--------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `code_wrap_toggle` | string | `"true"`  | Show a “wrap long lines” button on every code block, next to the copy button. Per-block — turning wrap on for one block leaves others unaffected. Set `"false"` to hide the button entirely. |
 
 ### Doc Sections
 
@@ -1386,6 +1398,9 @@ html_theme_options = {
     "show_prev_next": "true",
     "show_attribution": "true",
     "show_back_to_top": "true",
+
+    # Code blocks
+    "code_wrap_toggle": "true",
 
     # Reading time
     "show_reading_time": "false",
@@ -2032,7 +2047,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 1.38.0.
+This documentation is for Sphinx Lumina Theme version 1.39.0.
 
 The MyST syntax:
 
@@ -3986,6 +4001,27 @@ The token is cleared when the browser tab is closed (sessionStorage scope).
 # releases.html.md
 
 # Releases
+
+## v1.39.0 (2026-05-01)
+
+### Features
+
+- Add per-block code line-wrap toggle ([#97](https://github.com/r4sky0/sphinx-lumina-theme/pull/97),
+  [`273e884`](https://github.com/r4sky0/sphinx-lumina-theme/commit/273e884ca0fb37963e73c8c3b1c6d783d8148d0c))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump pnpm/action-setup from 6.0.3 to 6.0.4 in the github-actions-minor group
+  ([#99](https://github.com/r4sky0/sphinx-lumina-theme/pull/99),
+  [`bd14ee2`](https://github.com/r4sky0/sphinx-lumina-theme/commit/bd14ee26d1c4ab345b6b45780f90c77111ddeab2))
+- **deps**: Bump the npm-minor group with 5 updates
+  ([#100](https://github.com/r4sky0/sphinx-lumina-theme/pull/100),
+  [`85186b8`](https://github.com/r4sky0/sphinx-lumina-theme/commit/85186b83feb60c92dfee0476a17d8be34daa1302))
+
+</details>
 
 ## v1.38.0 (2026-05-01)
 

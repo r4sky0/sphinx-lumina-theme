@@ -11,7 +11,7 @@
     <title>Icon Browser &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=3e232be3" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=48fc7ac1" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=0988a96e"></script>
+    <script defer="defer" src="../_static/lumina.js?v=1f6eae68"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="CSS Variables" href="css-variables.html" />
@@ -68,6 +68,9 @@
     
         <script>document.documentElement.dataset.apiBaseUrl = "https://petstore3.swagger.io/api/v3";</script>
     
+    
+    
+        <script>document.documentElement.dataset.codeWrap = "true";</script>
     
     
     
@@ -446,7 +449,7 @@
                         <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                     </svg>
                 Lumina</a>
-                <span class="lumina-sidebar-footer-version">v1.38.0</span>
+                <span class="lumina-sidebar-footer-version">v1.39.0</span>
             </div>
         
     </div>
@@ -624,7 +627,7 @@
                         <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                            target="_blank"
                            rel="noopener">Lumina</a>
-                        <span class="lumina-sidebar-footer-version">v1.38.0</span>
+                        <span class="lumina-sidebar-footer-version">v1.39.0</span>
                     </div>
                 
             </div>
@@ -703,7 +706,7 @@
 
     <div x-data="iconBrowser()" x-init="init()">
         <p class="text-lumina-text-muted mb-6">
-            Browse all 1944 available Lucide icons. Click any icon to copy its name.
+            Browse all 1952 available Lucide icons. Click any icon to copy its name.
         </p>
 
         
@@ -3090,6 +3093,23 @@
                 </button>
             
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="astroid"
+                        @click="copy('astroid')"
+                        x-show="matches('astroid')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M12.983 21.186a1 1 0 0 1-1.966 0 10 10 0 0 0-8.203-8.203 1 1 0 0 1 0-1.966 10 10 0 0 0 8.203-8.203 1 1 0 0 1 1.966 0 10 10 0 0 0 8.203 8.203 1 1 0 0 1 0 1.966 10 10 0 0 0-8.203 8.203" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">astroid</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
                         data-icon-name="at-sign"
                         @click="copy('at-sign')"
                         x-show="matches('at-sign')">
@@ -4226,6 +4246,23 @@
                         <path d="M10.268 21a2 2 0 0 0 3.464 0" /><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
                     </svg>
                     <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">bell</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="bell-check"
+                        @click="copy('bell-check')"
+                        x-show="matches('bell-check')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M10.268 21a2 2 0 0 0 3.464 0" /><path d="m15 8 2 2 4-4" /><path d="M16.8607 4.4824A6 6 0 0 0 6 8C6 12.499 4.589 13.956 3.262 15.326" /><path d="M3.262 15.326A1 1 0 0 0 4 17H20A1 1 0 0 0 20.74 15.327C20.209 14.779 19.665 14.218 19.203 13.454" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">bell-check</span>
                 </button>
             
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
@@ -14055,6 +14092,23 @@
                 </button>
             
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="folder-bookmark"
+                        @click="copy('folder-bookmark')"
+                        x-show="matches('folder-bookmark')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M12 6v8l3-3 3 3V6" /><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">folder-bookmark</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
                         data-icon-name="folder-check"
                         @click="copy('folder-check')"
                         x-show="matches('folder-check')">
@@ -16588,6 +16642,23 @@
                 </button>
             
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="heart-x"
+                        @click="copy('heart-x')"
+                        x-show="matches('heart-x')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="m15.5 12.5 5 5" /><path d="m20.5 12.5-5 5" /><path d="M21.955 8.774a5.5 5.5 0 0 0-9.546-2.95.6.6 0 0 1-.818 0A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.508 5.332a2 2 0 0 0 2.57.352" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">heart-x</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
                         data-icon-name="heater"
                         @click="copy('heater')"
                         x-show="matches('heater')">
@@ -17894,6 +17965,23 @@
                         <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
                     </svg>
                     <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">layers-3</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="layers-minus"
+                        @click="copy('layers-minus')"
+                        x-show="matches('layers-minus')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 .83.18 2 2 0 0 0 .83-.18l8.58-3.9a1 1 0 0 0 0-1.832z" /><path d="M16 17h6" /><path d="M2.003 11.995a1 1 0 0 0 .597.915l8.58 3.91a2 2 0 0 0 .83.18" /><path d="M2.003 16.995a1 1 0 0 0 .597.915l8.58 3.91a2 2 0 0 0 .83.18 2 2 0 0 0 .83-.18l2.11-.96" /><path d="M22.018 12.004a1 1 0 0 1-.598.916l-.177.08" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">layers-minus</span>
                 </button>
             
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
@@ -24833,6 +24921,23 @@
                 </button>
             
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="repeat-off"
+                        @click="copy('repeat-off')"
+                        x-show="matches('repeat-off')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M11.656 6H21l-4-4" /><path d="M17.898 17.898A4 4 0 0 1 17 18H3l4-4" /><path d="m2 2 20 20" /><path d="M21 13v1a4 4 0 0 1-.171 1.159" /><path d="m21 6-4 4" /><path d="M3 11v-1a4 4 0 0 1 3.102-3.898" /><path d="m7 22-4-4" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">repeat-off</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
                         data-icon-name="replace"
                         @click="copy('replace')"
                         x-show="matches('replace')">
@@ -25031,7 +25136,7 @@
                          stroke-linecap="round"
                          stroke-linejoin="round"
                          aria-hidden="true">
-                        <path d="M16.466 7.5C15.643 4.237 13.952 2 12 2 9.239 2 7 6.477 7 12s2.239 10 5 10c.342 0 .677-.069 1-.2" /><path d="m15.194 13.707 3.814 1.86-1.86 3.814" /><path d="M19 15.57c-1.804.885-4.274 1.43-7 1.43-5.523 0-10-2.239-10-5s4.477-5 10-5c4.838 0 8.873 1.718 9.8 4" />
+                        <path d="m15.194 13.707 3.814 1.86-1.86 3.814" /><path d="M16.47214 7.52786 A 5 10 0 1 0 13 21.79796" /><path d="M21.79796 11 A 10 5 0 1 0 19 15.57071" />
                     </svg>
                     <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">rotate-3-d</span>
                 </button>
@@ -25048,7 +25153,7 @@
                          stroke-linecap="round"
                          stroke-linejoin="round"
                          aria-hidden="true">
-                        <path d="M16.466 7.5C15.643 4.237 13.952 2 12 2 9.239 2 7 6.477 7 12s2.239 10 5 10c.342 0 .677-.069 1-.2" /><path d="m15.194 13.707 3.814 1.86-1.86 3.814" /><path d="M19 15.57c-1.804.885-4.274 1.43-7 1.43-5.523 0-10-2.239-10-5s4.477-5 10-5c4.838 0 8.873 1.718 9.8 4" />
+                        <path d="m15.194 13.707 3.814 1.86-1.86 3.814" /><path d="M16.47214 7.52786 A 5 10 0 1 0 13 21.79796" /><path d="M21.79796 11 A 10 5 0 1 0 19 15.57071" />
                     </svg>
                     <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">rotate-3d</span>
                 </button>
@@ -32936,7 +33041,7 @@
                          stroke-linecap="round"
                          stroke-linejoin="round"
                          aria-hidden="true">
-                        <path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" /><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" /><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" />
+                        <path d="M2 12q2.5 2 5 0t5 0 5 0 5 0" /><path d="M2 19q2.5 2 5 0t5 0 5 0 5 0" /><path d="M2 5q2.5 2 5 0t5 0 5 0 5 0" />
                     </svg>
                     <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">waves</span>
                 </button>
@@ -32976,6 +33081,23 @@
                 </button>
             
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="waves-horizontal"
+                        @click="copy('waves-horizontal')"
+                        x-show="matches('waves-horizontal')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M2 12q2.5 2 5 0t5 0 5 0 5 0" /><path d="M2 19q2.5 2 5 0t5 0 5 0 5 0" /><path d="M2 5q2.5 2 5 0t5 0 5 0 5 0" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">waves-horizontal</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
                         data-icon-name="waves-ladder"
                         @click="copy('waves-ladder')"
                         x-show="matches('waves-ladder')">
@@ -32990,6 +33112,23 @@
                         <path d="M19 5a2 2 0 0 0-2 2v11" /><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" /><path d="M7 13h10" /><path d="M7 9h10" /><path d="M9 5a2 2 0 0 0-2 2v11" />
                     </svg>
                     <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">waves-ladder</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="waves-vertical"
+                        @click="copy('waves-vertical')"
+                        x-show="matches('waves-vertical')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M12 2q2 2.5 0 5t0 5 0 5 0 5" /><path d="M19 2q2 2.5 0 5t0 5 0 5 0 5" /><path d="M5 2q2 2.5 0 5t0 5 0 5 0 5" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">waves-vertical</span>
                 </button>
             
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
