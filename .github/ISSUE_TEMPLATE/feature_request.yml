@@ -1,0 +1,28 @@
+name: Feature request
+description: Suggest a new theme option, component, or behavior.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's the problem?
+      description: Describe the use case or limitation you're hitting today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How would you like Lumina to handle it? Sketch the API, option name, or UI behavior if you can.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches you've thought about (and why they don't fit).
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Links to similar features in other themes, mockups, etc.
