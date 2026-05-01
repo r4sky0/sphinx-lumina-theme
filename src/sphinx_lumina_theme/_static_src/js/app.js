@@ -23,6 +23,7 @@ import announcementBanner from "./announcement.js";
 import versionSwitcher from "./version-switcher.js";
 import layoutToggle from "./layout-toggle.js";
 import iconBrowser from "./icon-browser.js";
+import codeWrapToggle from "./code-wrap.js";
 Alpine.data("scrollspy", scrollspy);
 Alpine.data("themeToggle", themeToggle);
 Alpine.data("searchModal", searchModal);
@@ -54,6 +55,7 @@ function boot() {
   Alpine.start();
   curlCopy();
   tryIt();
+  codeWrapToggle();
 }
 
 if (document.readyState === "loading") {

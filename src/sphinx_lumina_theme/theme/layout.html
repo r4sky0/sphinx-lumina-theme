@@ -55,6 +55,9 @@
         <script>document.documentElement.dataset.apiBaseUrl = {{ theme_api_base_url | tojson }};</script>
     {% endif %}
     {% if theme_try_it_out == "false" %}<script>document.documentElement.dataset.tryItOut = "false";</script>{% endif %}
+    {% if theme_code_wrap_toggle != "false" %}
+        <script>document.documentElement.dataset.codeWrap = "true";</script>
+    {% endif %}
     {% if theme_accent_color != "#10b981" %}
         <style>
             :root,[data-theme="light"]{--lumina-accent:{{ theme_accent_color }};--lumina-accent-light:color-mix(in srgb,{{ theme_accent_color }} 12%,white);}
