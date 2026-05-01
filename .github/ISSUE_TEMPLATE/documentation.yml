@@ -1,0 +1,19 @@
+name: Documentation issue
+description: Report something missing, wrong, or confusing in the docs.
+labels: ["documentation"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: URL or path under `docs/` of the affected page.
+      placeholder: https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What's wrong or missing?
+      description: Describe the problem and, if you can, what the page should say instead.
+    validations:
+      required: true
