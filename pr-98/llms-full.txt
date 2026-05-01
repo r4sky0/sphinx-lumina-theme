@@ -1265,17 +1265,39 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 | `show_attribution` | string | `"true"`  | Show or hide the “Built with Lumina” attribution link in the sidebar footer.                                                                                                                             |
 | `show_back_to_top` | string | `"true"`  | Show or hide the back-to-top button that appears when scrolling up.                                                                                                                                      |
 
-### Images & Diagrams
+### Images
 
-| Option           | Type   | Default   | Description                                                                                                                                                                                                              |
-|------------------|--------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `image_lightbox` | string | `"true"`  | Click any image or Mermaid diagram in the article to view it full-size in an overlay. Skips images wrapped in links and elements with the `no-lightbox` class or `data-no-lightbox` attribute. Set `"false"` to disable. |
+| Option           | Type   | Default   | Description                                                                                                                                                                                                                                                                                                                        |
+|------------------|--------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `image_lightbox` | string | `"true"`  | Click any image in the article to view it full-size in an overlay. Skips user-defined links wrapping images and elements with the `no-lightbox` class or `data-no-lightbox` attribute. Mermaid diagrams use their built-in fullscreen viewer instead — opt other inline SVGs in with `data-lumina-zoom`. Set `"false"` to disable. |
 
 ### Doc Sections
 
 | Option         | Type   | Default   | Description                                                                                                                                                                                                                             |
 |----------------|--------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `doc_sections` | list   | `[]`      | Define major documentation sections with icons and colors. Adds a dropdown at the top of the sidebar that lets readers switch between sections, each with its own navigation tree. See [Navigation](../guides/navigation.md) for setup. |
+
+### Reading Time
+
+| Option              | Type   | Default   | Description                                                                                                                                                                                          |
+|---------------------|--------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `show_reading_time` | string | `"false"` | Show an estimated reading time next to the breadcrumbs at the top of every page. The estimate is computed from prose word count at 200 words per minute, ignoring code blocks, images, and toctrees. |
+
+Override per page using MyST front matter:
+
+```yaml
+---
+reading_time: false   # Hide the badge on this page only
+---
+```
+
+Or pin a manual value (rare — useful when the auto estimate undercounts complex content like math-heavy pages):
+
+```yaml
+---
+reading_time: 12      # Force "12 min read" on this page
+---
+```
 
 ### Version Switcher
 
@@ -1371,8 +1393,11 @@ html_theme_options = {
     "show_attribution": "true",
     "show_back_to_top": "true",
 
-    # Images & diagrams
+    # Images
     "image_lightbox": "true",
+
+    # Reading time
+    "show_reading_time": "false",
 
     # Doc sections
     "doc_sections": [
@@ -2016,7 +2041,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 1.37.0.
+This documentation is for Sphinx Lumina Theme version 1.38.0.
 
 The MyST syntax:
 
@@ -2689,6 +2714,8 @@ Document REST endpoints from OpenAPI specs or hand-written directives. Every end
 Let readers switch between documentation versions with a dropdown loaded from a JSON file you host alongside your docs.
 
 Source Sans 3 and JetBrains Mono are bundled with the theme. No external CDN requests, no privacy concerns.
+
+Optional per-page reading-time estimate, computed from prose word count and ignoring code blocks. Per-page overrides via MyST front matter.
 
 ## Built with
 
@@ -3968,6 +3995,30 @@ The token is cleared when the browser tab is closed (sessionStorage scope).
 # releases.html.md
 
 # Releases
+
+## v1.38.0 (2026-05-01)
+
+### Features
+
+- Add opt-in reading-time estimate badge
+  ([#96](https://github.com/r4sky0/sphinx-lumina-theme/pull/96),
+  [`39acaa1`](https://github.com/r4sky0/sphinx-lumina-theme/commit/39acaa13a32590f00c585b04d35214ab255a99ef))
+
+### Refactoring
+
+- Define Lumina palette via Tailwind v4 @theme directive
+  ([#95](https://github.com/r4sky0/sphinx-lumina-theme/pull/95),
+  [`9ceb12e`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9ceb12ea83de6741ef5ab06112deb02205107746))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Documentation
+
+- Add CSS variables reference page ([#94](https://github.com/r4sky0/sphinx-lumina-theme/pull/94),
+  [`f6ec452`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f6ec452f1c8a9b9bee45fe24e6c0dd71530e79f2))
+
+</details>
 
 ## v1.37.0 (2026-05-01)
 

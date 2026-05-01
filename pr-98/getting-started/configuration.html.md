@@ -58,17 +58,39 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 | `show_attribution` | string | `"true"`  | Show or hide the “Built with Lumina” attribution link in the sidebar footer.                                                                                                                             |
 | `show_back_to_top` | string | `"true"`  | Show or hide the back-to-top button that appears when scrolling up.                                                                                                                                      |
 
-### Images & Diagrams
+### Images
 
-| Option           | Type   | Default   | Description                                                                                                                                                                                                              |
-|------------------|--------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `image_lightbox` | string | `"true"`  | Click any image or Mermaid diagram in the article to view it full-size in an overlay. Skips images wrapped in links and elements with the `no-lightbox` class or `data-no-lightbox` attribute. Set `"false"` to disable. |
+| Option           | Type   | Default   | Description                                                                                                                                                                                                                                                                                                                        |
+|------------------|--------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `image_lightbox` | string | `"true"`  | Click any image in the article to view it full-size in an overlay. Skips user-defined links wrapping images and elements with the `no-lightbox` class or `data-no-lightbox` attribute. Mermaid diagrams use their built-in fullscreen viewer instead — opt other inline SVGs in with `data-lumina-zoom`. Set `"false"` to disable. |
 
 ### Doc Sections
 
 | Option         | Type   | Default   | Description                                                                                                                                                                                                                             |
 |----------------|--------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `doc_sections` | list   | `[]`      | Define major documentation sections with icons and colors. Adds a dropdown at the top of the sidebar that lets readers switch between sections, each with its own navigation tree. See [Navigation](../guides/navigation.md) for setup. |
+
+### Reading Time
+
+| Option              | Type   | Default   | Description                                                                                                                                                                                          |
+|---------------------|--------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `show_reading_time` | string | `"false"` | Show an estimated reading time next to the breadcrumbs at the top of every page. The estimate is computed from prose word count at 200 words per minute, ignoring code blocks, images, and toctrees. |
+
+Override per page using MyST front matter:
+
+```yaml
+---
+reading_time: false   # Hide the badge on this page only
+---
+```
+
+Or pin a manual value (rare — useful when the auto estimate undercounts complex content like math-heavy pages):
+
+```yaml
+---
+reading_time: 12      # Force "12 min read" on this page
+---
+```
 
 ### Version Switcher
 
@@ -164,8 +186,11 @@ html_theme_options = {
     "show_attribution": "true",
     "show_back_to_top": "true",
 
-    # Images & diagrams
+    # Images
     "image_lightbox": "true",
+
+    # Reading time
+    "show_reading_time": "false",
 
     # Doc sections
     "doc_sections": [
