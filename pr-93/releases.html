@@ -1,0 +1,1846 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="article:modified_time" content="2026-04-16T16:43:56+00:00" />
+    <title>Releases &#8212; Sphinx Lumina Theme  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="_static/lumina.css?v=168bff84" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx_js.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <script defer="defer" src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script defer="defer" src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script defer="defer" src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script defer="defer" src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script defer="defer" src="_static/copybutton.js?v=f281be69"></script>
+    <script defer="defer" src="_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="_static/lumina.js?v=9dab3caa"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="JavaScript API" href="contributing/javascript-api.html" />
+
+    
+        
+            <link rel="icon"
+                  type="image/svg+xml"
+                  href="_static/favicon.svg">
+        
+    
+    <link rel="preload"
+          as="font"
+          type="font/woff2"
+          href="_static/fonts/source-sans-3-regular.woff2"
+          crossorigin>
+    
+    <script>
+(function() {
+  var stored = localStorage.getItem('lumina-theme');
+  if (stored === 'dark' || stored === 'light') {
+    document.documentElement.setAttribute('data-theme', stored);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+    </script>
+    
+        <script>
+(function() {
+  
+  if (localStorage.getItem('lumina-layout') === 'wide') {
+    document.documentElement.setAttribute('data-layout', 'wide');
+  }
+  
+})();
+        </script>
+    
+    <meta name="lumina-search-backend" content="pagefind">
+    <meta name="lumina-base-url" content="./">
+    
+        <script>document.documentElement.dataset.apiBaseUrl = "https://petstore3.swagger.io/api/v3";</script>
+    
+    
+    
+    
+        <script>
+(function() {
+  var id = '0f8129f2';
+  if (!id || localStorage.getItem('lumina-announce-' + id) !== '1') {
+    document.documentElement.classList.add('has-announcement');
+  }
+})();
+        </script>
+    
+    
+        <link rel="alternate"
+              type="text/markdown"
+              href="llms.txt"
+              title="LLM-friendly documentation index">
+    
+
+
+  </head><body>
+
+
+
+
+    <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
+
+    <div id="lumina-header">
+
+        <header class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--lumina-border)] bg-[var(--lumina-bg)]/80 backdrop-blur-sm">
+
+    
+    <div id="lumina-announcement"
+         x-data="announcementBanner()"
+         data-announcement-id="0f8129f2"
+         role="region"
+         aria-label="Site announcement"
+         class="bg-[color-mix(in_srgb,var(--lumina-accent),black_40%)] text-white text-center text-sm">
+        <div class="mx-auto flex max-w-[90rem] items-center justify-center gap-4 px-4 py-2">
+            <div class="flex-1 [&_a]:underline [&_a]:font-medium">A fast, modern Sphinx theme with dark mode, full-text search, and Alpine.js interactivity. <a href="https://github.com/r4sky0/sphinx-lumina-theme">Star on GitHub ★</a></div>
+            <button @click="dismiss()"
+                    class="shrink-0 rounded p-0.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    aria-label="Dismiss announcement"
+                    type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+        </div>
+    </div>
+
+
+    <div class="lumina-header-inner mx-auto flex h-14 max-w-[90rem] items-center justify-between px-4 lg:px-6">
+        
+        <div class="flex items-center gap-3">
+            <a href="index.html"
+               class="flex items-center gap-2 text-[var(--lumina-text)] no-underline hover:opacity-80 transition-opacity">
+                
+                    
+                    <svg class="lumina-logo h-7 w-7"
+                         viewBox="0 0 32 32"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg"
+                         aria-hidden="true">
+                        <path d="M16 3L28 27H4L16 3Z" stroke="var(--lumina-accent)" stroke-width="2" fill="none" />
+                        <path class="lumina-logo-facet-l" d="M16 10L8 27H16" fill="var(--lumina-accent)" />
+                        <path class="lumina-logo-facet-r" d="M16 10L24 27H16" fill="var(--lumina-accent)" />
+                        <line x1="16" y1="3" x2="16" y2="10" stroke="var(--lumina-accent)" stroke-width="2" />
+                    </svg>
+                
+                
+                    <span class="font-semibold text-base">Sphinx Lumina Theme</span>
+                
+            </a>
+
+            
+
+        </div>
+        
+        
+        
+        <div class="flex items-center gap-2">
+            
+            <button data-search-trigger
+                    class="flex items-center gap-2 rounded-lg border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-3 py-2 text-[0.8125rem] text-[var(--lumina-text-muted)] hover:border-[var(--lumina-accent)] transition-colors cursor-pointer lg:min-w-56"
+                    aria-label="Search documentation"
+                    aria-haspopup="dialog">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
+                <span class="hidden lg:inline flex-1 text-left">Search docs...</span>
+                <kbd data-search-shortcut
+                     class="hidden lg:inline rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-1.5 py-0.5 text-[0.6875rem] font-[family-name:'JetBrains_Mono'] tracking-[0.02em]">⌘K</kbd>
+            </button>
+            
+            <button data-theme-toggle
+                    x-data="themeToggle()"
+                    @click="cycle()"
+                    class="relative flex h-9 w-9 items-center justify-center rounded-md text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors cursor-pointer"
+                    :aria-label="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'"
+                    :title="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'">
+                
+                <svg x-show="mode === 'light'"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 rotate-[-90deg] scale-0"
+                     x-transition:enter-end="opacity-100 rotate-0 scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0 scale-0"
+                     class="h-5 w-5 absolute"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     viewBox="0 0 24 24"
+                     aria-hidden="true">
+                    <circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />
+                </svg>
+                
+                <svg x-show="mode === 'dark'"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 rotate-90 scale-0"
+                     x-transition:enter-end="opacity-100 rotate-0 scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0 scale-0"
+                     class="h-5 w-5 absolute"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     viewBox="0 0 24 24"
+                     aria-hidden="true">
+                    <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+                </svg>
+                
+                <svg x-show="mode === 'auto'"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 scale-0"
+                     x-transition:enter-end="opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0 scale-0"
+                     class="h-5 w-5 absolute"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     viewBox="0 0 24 24"
+                     aria-hidden="true">
+                    <rect width="20" height="14" x="2" y="3" rx="2" /><line x1="8" x2="16" y1="21" y2="21" /><line x1="12" x2="12" y1="17" y2="21" />
+                </svg>
+            </button>
+            
+                
+                <button x-data="layoutToggle()"
+                        @click="toggle()"
+                        class="hidden xl:flex h-9 w-9 items-center justify-center rounded-md text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors cursor-pointer"
+                        :aria-label="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
+                        :title="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
+                        type="button">
+                    
+                    <svg x-show="!wide"
+                         class="h-4 w-4"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         aria-hidden="true"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M15 3h6v6" /><path d="m21 3-7 7" /><path d="m3 21 7-7" /><path d="M9 21H3v-6" />
+                    </svg>
+                    
+                    <svg x-show="wide"
+                         x-cloak
+                         class="h-4 w-4"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         aria-hidden="true"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="m14 10 7-7" /><path d="M20 10h-6V4" /><path d="m3 21 7-7" /><path d="M4 14h6v6" />
+                    </svg>
+                </button>
+            
+            
+            
+                
+                    <a href="https://github.com/r4sky0/sphinx-lumina-theme"
+                       class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] transition-colors no-underline"
+                       target="_blank"
+                       rel="noopener"
+                       title="Github"
+                       aria-label="Github (opens in new tab)">
+                        
+                            <svg class="h-5 w-5"
+                                 fill="currentColor"
+                                 viewBox="0 0 24 24"
+                                 aria-hidden="true">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                            </svg>
+                        
+                    </a>
+                
+            
+            
+            
+                <button data-sidebar-toggle
+                        class="rounded-md p-2 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] hover:bg-[var(--lumina-bg-secondary)] transition-colors lg:hidden cursor-pointer"
+                        aria-label="Toggle navigation"
+                        aria-expanded="false"
+                        aria-controls="lumina-sidebar-drawer"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg></button>
+            
+        </div>
+    </div>
+</header>
+
+    </div>
+    <div class="lumina-wrapper">
+        <aside id="lumina-sidebar">
+
+            <div x-data="sidebar()">
+    
+    <div class="lumina-sidebar-desktop hidden flex-col overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:flex">
+
+        
+
+    <div id="lumina-section-switcher"
+         x-data="navDropdown()"
+         @keydown="handleKeydown($event)"
+         class="lumina-section-switcher">
+        <button x-ref="trigger"
+                @click="toggle()"
+                :aria-expanded="open"
+                aria-haspopup="true"
+                aria-label="Switch documentation section"
+                class="lumina-section-switcher-trigger"
+                type="button">
+            
+                <span class="lumina-section-switcher-icon"
+                      style="--section-color: #10b981;
+                             color: var(--section-color)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
+                </span>
+                <span class="lumina-section-switcher-label">
+                    <span class="lumina-section-switcher-name"
+                          style="color: #10b981">User Documentation</span>
+                    <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                </span>
+            
+            <svg class="lumina-section-switcher-chevron"
+                 :class="open && 'rotate-180'"
+                 width="14"
+                 height="14"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 viewBox="0 0 24 24"
+                 aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+            </svg>
+        </button>
+        <div x-show="open"
+             x-cloak
+             @click.away="open = false"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1 scale-[0.98]"
+             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="lumina-section-switcher-dropdown"
+             role="menu">
+            
+                <a href="getting-started/index.html"
+                   class="lumina-section-switcher-item active"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="--section-color: #10b981;
+                                 color: var(--section-color)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #10b981">User Documentation</span>
+                        <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                    </span>
+                </a>
+            
+                <a href="contributing/index.html"
+                   class="lumina-section-switcher-item"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="--section-color: #8b5cf6;
+                                 color: var(--section-color)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #8b5cf6">Developer Documentation</span>
+                        <span class="lumina-section-switcher-desc">Architecture & development</span>
+                    </span>
+                </a>
+            
+        </div>
+    </div>
+
+
+        
+            <nav class="lumina-sidebar-nav"
+                 aria-label="Section navigation"
+                 x-data="sidebarNav()">
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/index.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/configuration.html">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/search.html">Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/dark-mode.html">Dark Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/myst-markdown.html">MyST Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/navigation.html">Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/custom-styling.html">Custom Styling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/landing-page.html">Landing Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/wide-layout.html">Wide Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/icons.html">Icons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/development-workflow.html">Development Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extensions/index.html">Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="extensions/myst-parser.html">MyST Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/sphinx-design.html">sphinx-design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/sphinx-copybutton.html">sphinx-copybutton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/mermaid.html">Mermaid Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/openapi.html">OpenAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/sphinx-llm.html">sphinx-llm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/sphinx-js.html">sphinx-js</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/sphinx-last-updated-by-git.html">sphinx-last-updated-by-git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/mathjax.html">MathJax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/typography.html">Typography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/admonitions.html">Admonitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/code-blocks.html">Code Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/lists-and-tables.html">Lists &amp; Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/cards-and-grids.html">Cards &amp; Grids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/images-and-figures.html">Images &amp; Figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/badges-and-buttons.html">Badges &amp; Buttons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/math.html">Math</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/diagrams.html">Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/footnotes-and-references.html">Footnotes &amp; References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/api-documentation.html">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/http-api.html">HTTP API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/icons.html">Icon Browser</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Releases</a></li>
+</ul>
+
+            </nav>
+        
+        
+            <div class="lumina-sidebar-footer">
+                Built with
+                <a href="https://github.com/r4sky0/sphinx-lumina-theme"
+                   target="_blank"
+                   rel="noopener">
+                    <svg class="lumina-sidebar-footer-icon"
+                         viewBox="0 0 32 32"
+                         fill="none"
+                         aria-hidden="true">
+                        <path d="M16 3L28 27H4L16 3Z" stroke="currentColor" stroke-width="2.5" fill="none" />
+                        <path d="M16 10L8 27H16" fill="currentColor" opacity="0.15" />
+                        <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
+                    </svg>
+                Lumina</a>
+                <span class="lumina-sidebar-footer-version">v1.35.0</span>
+            </div>
+        
+    </div>
+    
+    <template x-teleport="body">
+        <div>
+            
+            <div x-show="mobileOpen"
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="fixed inset-0 top-14 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
+                 @click="close()"></div>
+            
+            <div id="lumina-sidebar-drawer"
+                 x-show="mobileOpen"
+                 x-transition:enter="transition ease-out duration-250"
+                 x-transition:enter-start="-translate-x-full"
+                 x-transition:enter-end="translate-x-0"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="translate-x-0"
+                 x-transition:leave-end="-translate-x-full"
+                 class="fixed inset-y-0 top-14 left-0 z-50 w-[280px] overflow-y-auto border-r border-[var(--lumina-border)] bg-[var(--lumina-bg)] px-4 py-6 lg:hidden">
+                
+                <button data-sidebar-close
+                        @click="close()"
+                        class="absolute top-4 right-4 rounded-md p-1 text-[var(--lumina-text-muted)] hover:text-[var(--lumina-text)] cursor-pointer"
+                        aria-label="Close navigation"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+
+                
+
+    <div id="lumina-section-switcher"
+         x-data="navDropdown()"
+         @keydown="handleKeydown($event)"
+         class="lumina-section-switcher">
+        <button x-ref="trigger"
+                @click="toggle()"
+                :aria-expanded="open"
+                aria-haspopup="true"
+                aria-label="Switch documentation section"
+                class="lumina-section-switcher-trigger"
+                type="button">
+            
+                <span class="lumina-section-switcher-icon"
+                      style="--section-color: #10b981;
+                             color: var(--section-color)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
+                </span>
+                <span class="lumina-section-switcher-label">
+                    <span class="lumina-section-switcher-name"
+                          style="color: #10b981">User Documentation</span>
+                    <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                </span>
+            
+            <svg class="lumina-section-switcher-chevron"
+                 :class="open && 'rotate-180'"
+                 width="14"
+                 height="14"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 viewBox="0 0 24 24"
+                 aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+            </svg>
+        </button>
+        <div x-show="open"
+             x-cloak
+             @click.away="open = false"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1 scale-[0.98]"
+             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="lumina-section-switcher-dropdown"
+             role="menu">
+            
+                <a href="getting-started/index.html"
+                   class="lumina-section-switcher-item active"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="--section-color: #10b981;
+                                 color: var(--section-color)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #10b981">User Documentation</span>
+                        <span class="lumina-section-switcher-desc">Installation, guides & reference</span>
+                    </span>
+                </a>
+            
+                <a href="contributing/index.html"
+                   class="lumina-section-switcher-item"
+                   role="menuitem">
+                    <span class="lumina-section-switcher-icon"
+                          style="--section-color: #8b5cf6;
+                                 color: var(--section-color)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></span>
+                    <span class="lumina-section-switcher-label">
+                        <span class="lumina-section-switcher-name"
+                              style="color: #8b5cf6">Developer Documentation</span>
+                        <span class="lumina-section-switcher-desc">Architecture & development</span>
+                    </span>
+                </a>
+            
+        </div>
+    </div>
+
+
+                
+                
+                
+                    <nav class="lumina-sidebar-nav"
+                         aria-label="Section navigation"
+                         x-data="sidebarNav()">
+                        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/index.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/configuration.html">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/search.html">Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/dark-mode.html">Dark Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/myst-markdown.html">MyST Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/navigation.html">Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/custom-styling.html">Custom Styling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/landing-page.html">Landing Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/wide-layout.html">Wide Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/icons.html">Icons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/development-workflow.html">Development Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extensions/index.html">Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="extensions/myst-parser.html">MyST Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/sphinx-design.html">sphinx-design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/sphinx-copybutton.html">sphinx-copybutton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/mermaid.html">Mermaid Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/openapi.html">OpenAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/sphinx-llm.html">sphinx-llm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/sphinx-js.html">sphinx-js</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/sphinx-last-updated-by-git.html">sphinx-last-updated-by-git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/mathjax.html">MathJax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/typography.html">Typography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/admonitions.html">Admonitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/code-blocks.html">Code Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/lists-and-tables.html">Lists &amp; Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/cards-and-grids.html">Cards &amp; Grids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/images-and-figures.html">Images &amp; Figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/badges-and-buttons.html">Badges &amp; Buttons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/math.html">Math</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/diagrams.html">Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/footnotes-and-references.html">Footnotes &amp; References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/api-documentation.html">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/http-api.html">HTTP API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/icons.html">Icon Browser</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Releases</a></li>
+</ul>
+
+                    </nav>
+                
+                
+                    <div class="lumina-sidebar-footer">
+                        <a href="https://github.com/r4sky0/sphinx-lumina-theme"
+                           target="_blank"
+                           rel="noopener">Lumina</a>
+                        <span class="lumina-sidebar-footer-version">v1.35.0</span>
+                    </div>
+                
+            </div>
+        </div>
+    </template>
+</div>
+
+        </aside>
+        <main id="lumina-content" data-pagefind-body>
+            <div class="lumina-content-toolbar" data-pagefind-ignore>
+                
+                    <div class="min-w-0 flex-1">
+
+                        <nav class="flex items-center gap-2 overflow-x-auto text-sm text-[var(--lumina-text-muted)]"
+     style="scrollbar-width:none"
+     aria-label="Breadcrumb">
+    <a href="index.html"
+       class="whitespace-nowrap hover:text-[var(--lumina-accent)] no-underline transition-colors">Sphinx Lumina Theme  documentation</a>
+    
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+    <span class="whitespace-nowrap text-[var(--lumina-text)]">Releases</span>
+</nav>
+
+                    </div>
+                
+                <button x-data="copyPage()"
+                        @click="copy()"
+                        class="lumina-copy-page"
+                        :class="{ 'is-copied': copied }"
+                        :aria-label="copied ? 'Copied to clipboard' : 'Copy page as Markdown'"
+                        :title="copied ? 'Copied!' : 'Copy page as Markdown'"
+                        type="button">
+                    <svg x-show="!copied"
+                         class="h-3.5 w-3.5"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         aria-hidden="true"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                    </svg>
+                    <svg x-show="copied"
+                         x-cloak
+                         class="h-3.5 w-3.5"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         aria-hidden="true"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                    <span class="hidden sm:inline"
+                          x-text="copied ? 'Copied!' : 'Copy Markdown'"></span>
+                </button>
+            </div>
+            <article class="lumina-article" x-data="headerLinks()">
+
+                
+
+    <section class="tex2jax_ignore mathjax_ignore" id="releases">
+<h1>Releases<a class="headerlink" href="#releases" title="Link to this heading">¶</a></h1>
+<section id="v1-35-0-2026-04-16">
+<h2>v1.35.0 (2026-04-16)<a class="headerlink" href="#v1-35-0-2026-04-16" title="Link to this heading">¶</a></h2>
+<section id="features">
+<h3>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Optimize scrollspy and improve accessibility
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/79">#79</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/31c7cb456e786e2ef23278ecda062c4a35712187"><code class="docutils literal notranslate"><span class="pre">31c7cb4</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-34-0-2026-04-16">
+<h2>v1.34.0 (2026-04-16)<a class="headerlink" href="#v1-34-0-2026-04-16" title="Link to this heading">¶</a></h2>
+<section id="id1">
+<h3>Features<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Polish API field list labels, parameter items, and status codes
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/78">#78</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/78716171b467c18a0ce74cb77d1985d0746184fe"><code class="docutils literal notranslate"><span class="pre">7871617</span></code></a>)</p></li>
+</ul>
+<details>
+<summary>Maintenance</summary>
+<section id="build-system">
+<h4>Build System<a class="headerlink" href="#build-system" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>deps</strong>: Bump dompurify from 3.3.3 to 3.4.0
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/73">#73</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/86c94c6558c5270d19476600581e6d110607c239"><code class="docutils literal notranslate"><span class="pre">86c94c6</span></code></a>)</p></li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="v1-33-3-2026-04-16">
+<h2>v1.33.3 (2026-04-16)<a class="headerlink" href="#v1-33-3-2026-04-16" title="Link to this heading">¶</a></h2>
+<section id="bug-fixes">
+<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Highlight top-level nav items when they are the current page
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/77">#77</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/9e6390d53df74980eae7650da244b5d85ec743c5"><code class="docutils literal notranslate"><span class="pre">9e6390d</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-33-2-2026-04-16">
+<h2>v1.33.2 (2026-04-16)<a class="headerlink" href="#v1-33-2-2026-04-16" title="Link to this heading">¶</a></h2>
+<section id="id2">
+<h3>Bug Fixes<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Prevent typography CSS from overriding API documentation styles
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/76">#76</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/9829667519baa2903b2f8245d42a241d5ea4d933"><code class="docutils literal notranslate"><span class="pre">9829667</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-33-1-2026-04-15">
+<h2>v1.33.1 (2026-04-15)<a class="headerlink" href="#v1-33-1-2026-04-15" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3>Bug Fixes<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add tooltips to icon-only header buttons
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/72">#72</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/c8ea143e1c8d4dfc884653d6e986f739803ce1eb"><code class="docutils literal notranslate"><span class="pre">c8ea143</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-33-0-2026-04-15">
+<h2>v1.33.0 (2026-04-15)<a class="headerlink" href="#v1-33-0-2026-04-15" title="Link to this heading">¶</a></h2>
+<section id="id4">
+<h3>Features<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Polish lists, tables &amp; typography elements
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/71">#71</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/9535d4f6e63ea53d1b3cd1056a1099ee04a2b558"><code class="docutils literal notranslate"><span class="pre">9535d4f</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-32-0-2026-04-15">
+<h2>v1.32.0 (2026-04-15)<a class="headerlink" href="#v1-32-0-2026-04-15" title="Link to this heading">¶</a></h2>
+<section id="id5">
+<h3>Features<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add code_style theme option with 5 curated Pygments presets
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/70">#70</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/b4589599b19de61b9e5165a3c2b29855d866d8dc"><code class="docutils literal notranslate"><span class="pre">b458959</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-31-3-2026-04-15">
+<h2>v1.31.3 (2026-04-15)<a class="headerlink" href="#v1-31-3-2026-04-15" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h3>Bug Fixes<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Polish doc sections switcher (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/68">#68</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/e11ad3d31e28c40f22556a6937b6a99069773e35"><code class="docutils literal notranslate"><span class="pre">e11ad3d</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-31-2-2026-04-15">
+<h2>v1.31.2 (2026-04-15)<a class="headerlink" href="#v1-31-2-2026-04-15" title="Link to this heading">¶</a></h2>
+<section id="id7">
+<h3>Bug Fixes<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Redesign sidebar active state and move chevrons to right
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/69">#69</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/7eea5d327e3bfe3c902c9af69f1b2b1e7b79c423"><code class="docutils literal notranslate"><span class="pre">7eea5d3</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-31-1-2026-04-15">
+<h2>v1.31.1 (2026-04-15)<a class="headerlink" href="#v1-31-1-2026-04-15" title="Link to this heading">¶</a></h2>
+<section id="id8">
+<h3>Bug Fixes<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Render Lucide logo icon crisply and derive favicon from it
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/67">#67</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/f5de4412157fc90974917a96a29e437d96eb0353"><code class="docutils literal notranslate"><span class="pre">f5de441</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-31-0-2026-04-15">
+<h2>v1.31.0 (2026-04-15)<a class="headerlink" href="#v1-31-0-2026-04-15" title="Link to this heading">¶</a></h2>
+<section id="id9">
+<h3>Features<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Collapsible sidebar navigation with extra depth level
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/66">#66</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/a66577e2aa03474fcba113002319a0bf5f326cdc"><code class="docutils literal notranslate"><span class="pre">a66577e</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-30-0-2026-04-15">
+<h2>v1.30.0 (2026-04-15)<a class="headerlink" href="#v1-30-0-2026-04-15" title="Link to this heading">¶</a></h2>
+<section id="id10">
+<h3>Features<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add doc sections switcher (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/63">#63</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/90e5186f9308239b1465e4b3c1f52aba37f461e5"><code class="docutils literal notranslate"><span class="pre">90e5186</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-29-0-2026-04-15">
+<h2>v1.29.0 (2026-04-15)<a class="headerlink" href="#v1-29-0-2026-04-15" title="Link to this heading">¶</a></h2>
+<section id="id11">
+<h3>Features<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add always-on wide layout mode (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/65">#65</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/cd6987ec73fdfa55ae333acb76d7bc3992d8b9a7"><code class="docutils literal notranslate"><span class="pre">cd6987e</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-28-1-2026-04-15">
+<h2>v1.28.1 (2026-04-15)<a class="headerlink" href="#v1-28-1-2026-04-15" title="Link to this heading">¶</a></h2>
+<section id="id12">
+<h3>Bug Fixes<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Tighten tab component spacing (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/64">#64</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/58c542983aa9aff1bcabadb1d712f9b3e97eed07"><code class="docutils literal notranslate"><span class="pre">58c5429</span></code></a>)</p></li>
+</ul>
+<details>
+<summary>Maintenance</summary>
+<section id="id13">
+<h4>Build System<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>deps-dev</strong>: Bump pytest from 9.0.2 to 9.0.3 in the uv group across 1 directory
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/56">#56</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/d5b1bb754e49c83e0394e07d55c60f5f3b3476aa"><code class="docutils literal notranslate"><span class="pre">d5b1bb7</span></code></a>)</p></li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="v1-28-0-2026-04-14">
+<h2>v1.28.0 (2026-04-14)<a class="headerlink" href="#v1-28-0-2026-04-14" title="Link to this heading">¶</a></h2>
+<section id="id14">
+<h3>Features<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add Lucide icon system for cards, sidebar, and logo
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/61">#61</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/d52cbb6cefcd714e5e187d2380758864c8a7e267"><code class="docutils literal notranslate"><span class="pre">d52cbb6</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-27-0-2026-04-14">
+<h2>v1.27.0 (2026-04-14)<a class="headerlink" href="#v1-27-0-2026-04-14" title="Link to this heading">¶</a></h2>
+<section id="id15">
+<h3>Features<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Redesign TOC with sliding indicator and typographic hierarchy
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/62">#62</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/5b4fa4f89dd6da38eccd2f5d2750e4521c1c7d1a"><code class="docutils literal notranslate"><span class="pre">5b4fa4f</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-26-1-2026-04-14">
+<h2>v1.26.1 (2026-04-14)<a class="headerlink" href="#v1-26-1-2026-04-14" title="Link to this heading">¶</a></h2>
+<section id="id16">
+<h3>Bug Fixes<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Improve sidebar navigation visual hierarchy and typography
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/60">#60</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/bfc78dce562a8ca63ec686601e5e30fcc270d2fe"><code class="docutils literal notranslate"><span class="pre">bfc78dc</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-26-0-2026-04-14">
+<h2>v1.26.0 (2026-04-14)<a class="headerlink" href="#v1-26-0-2026-04-14" title="Link to this heading">¶</a></h2>
+<section id="id17">
+<h3>Features<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add wide layout mode with reader toggle
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/58">#58</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/90d784f758542e0d19bf4bb1177bc33369a22b31"><code class="docutils literal notranslate"><span class="pre">90d784f</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-25-2-2026-04-14">
+<h2>v1.25.2 (2026-04-14)<a class="headerlink" href="#v1-25-2-2026-04-14" title="Link to this heading">¶</a></h2>
+<section id="id18">
+<h3>Bug Fixes<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Remove page-load transition animation
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/57">#57</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/853be35a0068b0d9bb63b76517f641c0791dba32"><code class="docutils literal notranslate"><span class="pre">853be35</span></code></a>)</p></li>
+</ul>
+<details>
+<summary>Maintenance</summary>
+<section id="id19">
+<h4>Build System<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>deps</strong>: Bump actions/github-script from 8.0.0 to 9.0.0
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/55">#55</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/6f6b1aae4983289a941273ad8fba6d1e73e6d8ea"><code class="docutils literal notranslate"><span class="pre">6f6b1aa</span></code></a>)</p></li>
+<li><p><strong>deps</strong>: Bump pypa/gh-action-pypi-publish from 1.13.0 to 1.14.0 in the github-actions-minor group
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/54">#54</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/c4f53c5e7dc703eb48873e50057c6b980dc121a2"><code class="docutils literal notranslate"><span class="pre">c4f53c5</span></code></a>)</p></li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="v1-25-1-2026-04-07">
+<h2>v1.25.1 (2026-04-07)<a class="headerlink" href="#v1-25-1-2026-04-07" title="Link to this heading">¶</a></h2>
+<section id="id20">
+<h3>Bug Fixes<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Smooth fluid simulation mouse interaction
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/53">#53</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/8364262b1ec7642123babe30bcf47049510d90dc"><code class="docutils literal notranslate"><span class="pre">8364262</span></code></a>)</p></li>
+</ul>
+<details>
+<summary>Maintenance</summary>
+<section id="chores">
+<h4>Chores<a class="headerlink" href="#chores" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Replace deprecated master_doc with root_doc in theme templates
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/52">#52</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/deb6985c5e3351a5a76f02a639cb605ad6cbd4c5"><code class="docutils literal notranslate"><span class="pre">deb6985</span></code></a>)</p></li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="v1-25-0-2026-04-06">
+<h2>v1.25.0 (2026-04-06)<a class="headerlink" href="#v1-25-0-2026-04-06" title="Link to this heading">¶</a></h2>
+<section id="id21">
+<h3>Features<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add auto-generated JavaScript API documentation
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/51">#51</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/3214fee0e37ea76249fe8573e9ce05c092b2b8b9"><code class="docutils literal notranslate"><span class="pre">3214fee</span></code></a>)</p></li>
+</ul>
+<details>
+<summary>Maintenance</summary>
+<section id="id22">
+<h4>Chores<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Add aria-hidden attribute to decorative SVG icons
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/49">#49</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/6e3af4e82f3adbb2fb71af296a00ef676ee01ea3"><code class="docutils literal notranslate"><span class="pre">6e3af4e</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="continuous-integration">
+<h4>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Refactor GitHub Actions workflows to use reusable actions
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/50">#50</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/3efa0a981c8a7354e1fdff5c96e6205fbad75208"><code class="docutils literal notranslate"><span class="pre">3efa0a9</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="documentation">
+<h4>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Getting Started documentation link in README
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/48">#48</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/795763ce15d700e3cfbfed42af665bc20f3a0ef8"><code class="docutils literal notranslate"><span class="pre">795763c</span></code></a>)</p></li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="v1-24-0-2026-04-04">
+<h2>v1.24.0 (2026-04-04)<a class="headerlink" href="#v1-24-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id23">
+<h3>Features<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Improve performance - defer scripts, optimize fluid sim, preload font
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/47">#47</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/619dd30a789297c5ab698e297d0f75d81eb74e8a"><code class="docutils literal notranslate"><span class="pre">619dd30</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-23-0-2026-04-04">
+<h2>v1.23.0 (2026-04-04)<a class="headerlink" href="#v1-23-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id24">
+<h3>Features<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add version switcher dropdown (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/41">#41</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/d4f09c17e59e33c9e73088326077d2e390f06a10"><code class="docutils literal notranslate"><span class="pre">d4f09c1</span></code></a>)</p></li>
+</ul>
+<details>
+<summary>Maintenance</summary>
+<section id="id25">
+<h4>Chores<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Add PyPI classifiers, project URLs, author, and keywords
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/44">#44</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/9b4805c84f2346721625b94179bf801ed11c6774"><code class="docutils literal notranslate"><span class="pre">9b4805c</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="id26">
+<h4>Documentation<a class="headerlink" href="#id26" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Add pip install command to README (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/45">#45</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/5eadb1c6688f17c10dafac7ab94ec673a6627448"><code class="docutils literal notranslate"><span class="pre">5eadb1c</span></code></a>)</p></li>
+<li><p>Update README demo GIF (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/46">#46</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/6c3ae46d7bc9dffd4ba9ede7038ab4e33ecefca9"><code class="docutils literal notranslate"><span class="pre">6c3ae46</span></code></a>)</p></li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="v1-22-1-2026-04-04">
+<h2>v1.22.1 (2026-04-04)<a class="headerlink" href="#v1-22-1-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id27">
+<h3>Bug Fixes<a class="headerlink" href="#id27" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Try It Out panel — Safari crash, collapsed content leak, polish
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/43">#43</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/810df2d66f0d2c805e0aae69d5bdf00876b921c5"><code class="docutils literal notranslate"><span class="pre">810df2d</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-22-0-2026-04-04">
+<h2>v1.22.0 (2026-04-04)<a class="headerlink" href="#v1-22-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id28">
+<h3>Features<a class="headerlink" href="#id28" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add dismissible announcement banner (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/38">#38</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/62fbccd6b1fb4e603ec95d30c955287d33058881"><code class="docutils literal notranslate"><span class="pre">62fbccd</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-21-1-2026-04-04">
+<h2>v1.21.1 (2026-04-04)<a class="headerlink" href="#v1-21-1-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id29">
+<h3>Bug Fixes<a class="headerlink" href="#id29" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fix README for PyPI (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/42">#42</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/95e63838506da78dda11ab221a962bde0d627a9c"><code class="docutils literal notranslate"><span class="pre">95e6383</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-21-0-2026-04-04">
+<h2>v1.21.0 (2026-04-04)<a class="headerlink" href="#v1-21-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id30">
+<h3>Features<a class="headerlink" href="#id30" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add separate light/dark mode logos (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/40">#40</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/bd5a86a9fac808bff4e0a9a32be7151e013e249a"><code class="docutils literal notranslate"><span class="pre">bd5a86a</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-20-0-2026-04-04">
+<h2>v1.20.0 (2026-04-04)<a class="headerlink" href="#v1-20-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id31">
+<h3>Features<a class="headerlink" href="#id31" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add back-to-top button (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/39">#39</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/312335e4830b2251e6ee579dd8b1a3d9a6277519"><code class="docutils literal notranslate"><span class="pre">312335e</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-19-0-2026-04-04">
+<h2>v1.19.0 (2026-04-04)<a class="headerlink" href="#v1-19-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id32">
+<h3>Features<a class="headerlink" href="#id32" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add icons to hero feature tags (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/37">#37</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/6eab5933af2ff4a5e6bcf5db77ef6a6b903c6a51"><code class="docutils literal notranslate"><span class="pre">6eab593</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-18-1-2026-04-04">
+<h2>v1.18.1 (2026-04-04)<a class="headerlink" href="#v1-18-1-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id33">
+<h3>Bug Fixes<a class="headerlink" href="#id33" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Accent color no longer bleeds emerald into derived CSS vars
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/35">#35</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/73eeacd411db8c2bc7303e2a6d52d89805d3f957"><code class="docutils literal notranslate"><span class="pre">73eeacd</span></code></a>)</p></li>
+<li><p>Use standard Apache 2.0 license and clean up sdist
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/36">#36</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/f5386195a1456b255272495043ea4396a9e5c602"><code class="docutils literal notranslate"><span class="pre">f538619</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-18-0-2026-04-04">
+<h2>v1.18.0 (2026-04-04)<a class="headerlink" href="#v1-18-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id34">
+<h3>Features<a class="headerlink" href="#id34" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Bump dev Python to 3.14 and minimum to 3.12
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/34">#34</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/17414b6071fc82c6387e662ec74cbd7752241b9d"><code class="docutils literal notranslate"><span class="pre">17414b6</span></code></a>)</p></li>
+</ul>
+<details>
+<summary>Maintenance</summary>
+<section id="id35">
+<h4>Continuous Integration<a class="headerlink" href="#id35" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Publish releases to PyPI via trusted publishers
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/33">#33</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/ae97887b3f8cbe0cca901fd4c60f4ba6f22d8818"><code class="docutils literal notranslate"><span class="pre">ae97887</span></code></a>)</p></li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="v1-17-0-2026-04-04">
+<h2>v1.17.0 (2026-04-04)<a class="headerlink" href="#v1-17-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id36">
+<h3>Features<a class="headerlink" href="#id36" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Improve Pagefind search quality and result UX
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/31">#31</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/47826f68d7a89b1a2bb5096d9269ec27dc9957fe"><code class="docutils literal notranslate"><span class="pre">47826f6</span></code></a>)</p></li>
+</ul>
+<details>
+<summary>Maintenance</summary>
+<section id="id37">
+<h4>Continuous Integration<a class="headerlink" href="#id37" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Auto-deploy docs on push to main when docs/ changes
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/32">#32</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/ecb60547164086785b642dc183130fecf876a1af"><code class="docutils literal notranslate"><span class="pre">ecb6054</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="id38">
+<h4>Documentation<a class="headerlink" href="#id38" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Document the landing page template (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/30">#30</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/b9a0c4a0a4e0b5472610e25915b5876002b80ec0"><code class="docutils literal notranslate"><span class="pre">b9a0c4a</span></code></a>)</p></li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="v1-16-1-2026-04-04">
+<h2>v1.16.1 (2026-04-04)<a class="headerlink" href="#v1-16-1-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id39">
+<h3>Bug Fixes<a class="headerlink" href="#id39" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Sanitize search excerpts to prevent XSS via x-html
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/29">#29</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/aea9974d87e94daf59c897c791302668b76a49ea"><code class="docutils literal notranslate"><span class="pre">aea9974</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-16-0-2026-04-04">
+<h2>v1.16.0 (2026-04-04)<a class="headerlink" href="#v1-16-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id40">
+<h3>Features<a class="headerlink" href="#id40" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Interactive HTTP API docs with Try it out and curl copy
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/28">#28</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/9bb8f22961bc907012eccfd39bfc4dffaf609988"><code class="docutils literal notranslate"><span class="pre">9bb8f22</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-15-0-2026-04-04">
+<h2>v1.15.0 (2026-04-04)<a class="headerlink" href="#v1-15-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id41">
+<h3>Features<a class="headerlink" href="#id41" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Switch to Apache 2.0 license and add configurable attribution
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/27">#27</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/bc3a0ab24ac739b073eabc57ba09a1af44be37d8"><code class="docutils literal notranslate"><span class="pre">bc3a0ab</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-14-0-2026-04-04">
+<h2>v1.14.0 (2026-04-04)<a class="headerlink" href="#v1-14-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id42">
+<h3>Features<a class="headerlink" href="#id42" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Style code block captions as file header bars
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/26">#26</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/f95c49578c34deb20da19e538913c7deb92fca81"><code class="docutils literal notranslate"><span class="pre">f95c495</span></code></a>)</p></li>
+</ul>
+<details>
+<summary>Maintenance</summary>
+<section id="id43">
+<h4>Documentation<a class="headerlink" href="#id43" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Remove Getting Started and Customization links from README nav
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/25">#25</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/f76b586d0a467442157ae981e1c7d2240ecfd13c"><code class="docutils literal notranslate"><span class="pre">f76b586</span></code></a>)</p></li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="v1-13-0-2026-04-04">
+<h2>v1.13.0 (2026-04-04)<a class="headerlink" href="#v1-13-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id44">
+<h3>Features<a class="headerlink" href="#id44" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add sphinx-last-updated-by-git support
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/23">#23</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/f8c25a34d955b059cef1b7bfecb28ab509507ca5"><code class="docutils literal notranslate"><span class="pre">f8c25a3</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-12-0-2026-04-04">
+<h2>v1.12.0 (2026-04-04)<a class="headerlink" href="#v1-12-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id45">
+<h3>Features<a class="headerlink" href="#id45" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add animated demo GIF recording for README
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/24">#24</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/21222ef236c7a5b424e6c80e99382ffc15641e89"><code class="docutils literal notranslate"><span class="pre">21222ef</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-11-0-2026-04-04">
+<h2>v1.11.0 (2026-04-04)<a class="headerlink" href="#v1-11-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id46">
+<h3>Features<a class="headerlink" href="#id46" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Reorganize documentation into hub-and-spoke architecture
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/22">#22</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/81ce49e49b95143d0ce75fc1abc896cc6c69ff30"><code class="docutils literal notranslate"><span class="pre">81ce49e</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-10-0-2026-04-04">
+<h2>v1.10.0 (2026-04-04)<a class="headerlink" href="#v1-10-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id47">
+<h3>Features<a class="headerlink" href="#id47" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add llms.txt integration with sphinx-llm
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/21">#21</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/e55d1d5bc494cbd3d13a5e6c00cc175586d646e3"><code class="docutils literal notranslate"><span class="pre">e55d1d5</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-9-0-2026-04-04">
+<h2>v1.9.0 (2026-04-04)<a class="headerlink" href="#v1-9-0-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id48">
+<h3>Features<a class="headerlink" href="#id48" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add sphinxcontrib-openapi showcase with curl copy
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/20">#20</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/aac58f13e9829753fc74e56202460db169672d62"><code class="docutils literal notranslate"><span class="pre">aac58f1</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-13-2026-04-04">
+<h2>v1.8.13 (2026-04-04)<a class="headerlink" href="#v1-8-13-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id49">
+<h3>Bug Fixes<a class="headerlink" href="#id49" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Polish tabs to align with design system
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/19">#19</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/475b3da3a82961ef70c40bc38fd3880aa1c33a9a"><code class="docutils literal notranslate"><span class="pre">475b3da</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-12-2026-04-04">
+<h2>v1.8.12 (2026-04-04)<a class="headerlink" href="#v1-8-12-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id50">
+<h3>Bug Fixes<a class="headerlink" href="#id50" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Align sphinx-design badges and buttons with design system
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/18">#18</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/c722f8b94ce21db624eacbff705b3cedd8a23ac8"><code class="docutils literal notranslate"><span class="pre">c722f8b</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-11-2026-04-04">
+<h2>v1.8.11 (2026-04-04)<a class="headerlink" href="#v1-8-11-2026-04-04" title="Link to this heading">¶</a></h2>
+<section id="id51">
+<h3>Bug Fixes<a class="headerlink" href="#id51" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Polish dark mode icons, clipboard fallback, and minor UI details
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/17">#17</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/e766441ce858c07a539a95a1614ac50b1eb8da7f"><code class="docutils literal notranslate"><span class="pre">e766441</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-10-2026-04-03">
+<h2>v1.8.10 (2026-04-03)<a class="headerlink" href="#v1-8-10-2026-04-03" title="Link to this heading">¶</a></h2>
+<section id="id52">
+<h3>Bug Fixes<a class="headerlink" href="#id52" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Improve README and version replacement script
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/16">#16</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/51134861e5790087dcec49facab45c64ba661da5"><code class="docutils literal notranslate"><span class="pre">5113486</span></code></a>)</p></li>
+</ul>
+<details>
+<summary>Maintenance</summary>
+<section id="id53">
+<h4>Documentation<a class="headerlink" href="#id53" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Add banner screenshot to README (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/15">#15</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/855f27168b70a6d9847c0909950e714530161dbb"><code class="docutils literal notranslate"><span class="pre">855f271</span></code></a>)</p></li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="v1-8-9-2026-04-03">
+<h2>v1.8.9 (2026-04-03)<a class="headerlink" href="#v1-8-9-2026-04-03" title="Link to this heading">¶</a></h2>
+<section id="id54">
+<h3>Bug Fixes<a class="headerlink" href="#id54" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Align tabs and mermaid with design system
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/14">#14</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/adbabb03a76ca543e327816bb328bce3d9c6aa98"><code class="docutils literal notranslate"><span class="pre">adbabb0</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-8-2026-04-03">
+<h2>v1.8.8 (2026-04-03)<a class="headerlink" href="#v1-8-8-2026-04-03" title="Link to this heading">¶</a></h2>
+<section id="id55">
+<h3>Bug Fixes<a class="headerlink" href="#id55" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Remove non-functional mobile menu from landing pages
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/13">#13</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/bd6674d87fa0a4aca3dc3e92b715224bfe21afd4"><code class="docutils literal notranslate"><span class="pre">bd6674d</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-7-2026-04-03">
+<h2>v1.8.7 (2026-04-03)<a class="headerlink" href="#v1-8-7-2026-04-03" title="Link to this heading">¶</a></h2>
+<section id="id56">
+<h3>Bug Fixes<a class="headerlink" href="#id56" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Outdated content and inaccuracies across documentation
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/12">#12</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/d996ca920dfa62dccdb57078c2e3b1adc57b4577"><code class="docutils literal notranslate"><span class="pre">d996ca9</span></code></a>)</p></li>
+</ul>
+<details>
+<summary>Maintenance</summary>
+<section id="id57">
+<h4>Build System<a class="headerlink" href="#id57" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>deps-dev</strong>: Bump esbuild from 0.27.5 to 0.28.0
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/3">#3</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/bf7e444b5cfd1f861ee9340ae3977f89ca18fd0d"><code class="docutils literal notranslate"><span class="pre">bf7e444</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="id58">
+<h4>Chores<a class="headerlink" href="#id58" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>deps</strong>: Bump actions/github-script from 7 to 8
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/2">#2</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/eaa7d5513beb7744b27e367f2a27898f89a54073"><code class="docutils literal notranslate"><span class="pre">eaa7d55</span></code></a>)</p></li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="v1-8-6-2026-04-03">
+<h2>v1.8.6 (2026-04-03)<a class="headerlink" href="#v1-8-6-2026-04-03" title="Link to this heading">¶</a></h2>
+<section id="id59">
+<h3>Bug Fixes<a class="headerlink" href="#id59" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Resolve pagefind import URL against document instead of script
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/10">#10</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/36aeff7d022c09042c72a542c030c0e38680da1d"><code class="docutils literal notranslate"><span class="pre">36aeff7</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-5-2026-04-03">
+<h2>v1.8.5 (2026-04-03)<a class="headerlink" href="#v1-8-5-2026-04-03" title="Link to this heading">¶</a></h2>
+<section id="id60">
+<h3>Bug Fixes<a class="headerlink" href="#id60" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Run semantic-release natively to use deploy key
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/8">#8</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/4ca0fe6a95afa0caf106e6e6c763ef8abf9f1e68"><code class="docutils literal notranslate"><span class="pre">4ca0fe6</span></code></a>)</p></li>
+<li><p>Switch GitHub Pages to branch-based deployment
+(<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/6">#6</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/7955fdc5ad577ccdca4991f0cf3412c7c0205a56"><code class="docutils literal notranslate"><span class="pre">7955fdc</span></code></a>)</p></li>
+</ul>
+<details>
+<summary>Maintenance</summary>
+<section id="id61">
+<h4>Chores<a class="headerlink" href="#id61" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Deployment preview in PRs (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/7">#7</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/6efd807485f2a8eda7bf537a7cd753ebe3247489"><code class="docutils literal notranslate"><span class="pre">6efd807</span></code></a>)</p></li>
+<li><p>Group dependabot updates by ecosystem (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/4">#4</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/a33986c01711d548f6a1950a3e09927b547124fb"><code class="docutils literal notranslate"><span class="pre">a33986c</span></code></a>)</p></li>
+<li><p>Update site url (<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/pull/5">#5</a>,
+<a class="reference external" href="https://github.com/r4sky0/sphinx-lumina-theme/commit/ecc343494ca8029b32a71e4d552252983240c966"><code class="docutils literal notranslate"><span class="pre">ecc3434</span></code></a>)</p></li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="v1-8-4-2026-04-03">
+<h2>v1.8.4 (2026-04-03)<a class="headerlink" href="#v1-8-4-2026-04-03" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Initial Release</p></li>
+</ul>
+</section>
+</section>
+
+
+
+
+            </article>
+            
+
+                <div data-pagefind-ignore>
+
+                    <footer class="mt-10 border-t border-[var(--lumina-border)] pt-6">
+    
+    
+        <nav class="flex justify-between gap-4 mb-8" aria-label="Page navigation">
+            
+                <a href="contributing/javascript-api.html"
+                   class="group flex flex-col items-start gap-1 rounded-lg border border-[var(--lumina-border)] p-4 no-underline hover:border-[var(--lumina-accent)] hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
+                    <span class="text-xs text-[var(--lumina-text-muted)]">Previous</span>
+                    <span class="text-sm font-medium text-[var(--lumina-text)] group-hover:text-[var(--lumina-accent)] transition-colors">&larr; JavaScript API</span>
+                </a>
+            
+            
+        </nav>
+    
+    
+    
+        <p class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+            Last updated <time>April 16, 2026</time>
+        </p>
+    
+    
+    
+</footer>
+
+                </div>
+
+
+            
+        </main>
+        
+            <aside id="lumina-toc">
+
+                
+    <div class="lumina-toc-container sticky top-14 hidden h-[calc(100vh-3.5rem)] w-[220px] shrink-0 py-6 pr-4 xl:block">
+        
+        
+            <a href="https://github.com/r4sky0/sphinx-lumina-theme/edit/main/docs/releases.md"
+               class="mb-4 flex items-center gap-1.5 text-xs text-[var(--lumina-text-muted)] no-underline hover:text-[var(--lumina-accent)] transition-colors"
+               target="_blank"
+               rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg>
+                Edit this page
+            </a>
+        
+        <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-[var(--lumina-text-muted)]">On this page</p>
+        <div class="lumina-toc-scroll">
+            <nav class="lumina-toc-nav"
+                 aria-label="Table of contents"
+                 x-data="scrollspy()"
+                 x-init="init()">
+                <ul>
+<li><a class="reference internal" href="#">Releases</a><ul>
+<li><a class="reference internal" href="#v1-35-0-2026-04-16">v1.35.0 (2026-04-16)</a><ul>
+<li><a class="reference internal" href="#features">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-34-0-2026-04-16">v1.34.0 (2026-04-16)</a><ul>
+<li><a class="reference internal" href="#id1">Features</a><ul>
+<li><a class="reference internal" href="#build-system">Build System</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-33-3-2026-04-16">v1.33.3 (2026-04-16)</a><ul>
+<li><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-33-2-2026-04-16">v1.33.2 (2026-04-16)</a><ul>
+<li><a class="reference internal" href="#id2">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-33-1-2026-04-15">v1.33.1 (2026-04-15)</a><ul>
+<li><a class="reference internal" href="#id3">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-33-0-2026-04-15">v1.33.0 (2026-04-15)</a><ul>
+<li><a class="reference internal" href="#id4">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-32-0-2026-04-15">v1.32.0 (2026-04-15)</a><ul>
+<li><a class="reference internal" href="#id5">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-31-3-2026-04-15">v1.31.3 (2026-04-15)</a><ul>
+<li><a class="reference internal" href="#id6">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-31-2-2026-04-15">v1.31.2 (2026-04-15)</a><ul>
+<li><a class="reference internal" href="#id7">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-31-1-2026-04-15">v1.31.1 (2026-04-15)</a><ul>
+<li><a class="reference internal" href="#id8">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-31-0-2026-04-15">v1.31.0 (2026-04-15)</a><ul>
+<li><a class="reference internal" href="#id9">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-30-0-2026-04-15">v1.30.0 (2026-04-15)</a><ul>
+<li><a class="reference internal" href="#id10">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-29-0-2026-04-15">v1.29.0 (2026-04-15)</a><ul>
+<li><a class="reference internal" href="#id11">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-28-1-2026-04-15">v1.28.1 (2026-04-15)</a><ul>
+<li><a class="reference internal" href="#id12">Bug Fixes</a><ul>
+<li><a class="reference internal" href="#id13">Build System</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-28-0-2026-04-14">v1.28.0 (2026-04-14)</a><ul>
+<li><a class="reference internal" href="#id14">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-27-0-2026-04-14">v1.27.0 (2026-04-14)</a><ul>
+<li><a class="reference internal" href="#id15">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-26-1-2026-04-14">v1.26.1 (2026-04-14)</a><ul>
+<li><a class="reference internal" href="#id16">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-26-0-2026-04-14">v1.26.0 (2026-04-14)</a><ul>
+<li><a class="reference internal" href="#id17">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-25-2-2026-04-14">v1.25.2 (2026-04-14)</a><ul>
+<li><a class="reference internal" href="#id18">Bug Fixes</a><ul>
+<li><a class="reference internal" href="#id19">Build System</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-25-1-2026-04-07">v1.25.1 (2026-04-07)</a><ul>
+<li><a class="reference internal" href="#id20">Bug Fixes</a><ul>
+<li><a class="reference internal" href="#chores">Chores</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-25-0-2026-04-06">v1.25.0 (2026-04-06)</a><ul>
+<li><a class="reference internal" href="#id21">Features</a><ul>
+<li><a class="reference internal" href="#id22">Chores</a></li>
+<li><a class="reference internal" href="#continuous-integration">Continuous Integration</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-24-0-2026-04-04">v1.24.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id23">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-23-0-2026-04-04">v1.23.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id24">Features</a><ul>
+<li><a class="reference internal" href="#id25">Chores</a></li>
+<li><a class="reference internal" href="#id26">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-22-1-2026-04-04">v1.22.1 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id27">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-22-0-2026-04-04">v1.22.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id28">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-21-1-2026-04-04">v1.21.1 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id29">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-21-0-2026-04-04">v1.21.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id30">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-20-0-2026-04-04">v1.20.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id31">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-19-0-2026-04-04">v1.19.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id32">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-18-1-2026-04-04">v1.18.1 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id33">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-18-0-2026-04-04">v1.18.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id34">Features</a><ul>
+<li><a class="reference internal" href="#id35">Continuous Integration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-17-0-2026-04-04">v1.17.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id36">Features</a><ul>
+<li><a class="reference internal" href="#id37">Continuous Integration</a></li>
+<li><a class="reference internal" href="#id38">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-16-1-2026-04-04">v1.16.1 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id39">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-16-0-2026-04-04">v1.16.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id40">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-15-0-2026-04-04">v1.15.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id41">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-14-0-2026-04-04">v1.14.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id42">Features</a><ul>
+<li><a class="reference internal" href="#id43">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-13-0-2026-04-04">v1.13.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id44">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-12-0-2026-04-04">v1.12.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id45">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-11-0-2026-04-04">v1.11.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id46">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-10-0-2026-04-04">v1.10.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id47">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-9-0-2026-04-04">v1.9.0 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id48">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-8-13-2026-04-04">v1.8.13 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id49">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-8-12-2026-04-04">v1.8.12 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id50">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-8-11-2026-04-04">v1.8.11 (2026-04-04)</a><ul>
+<li><a class="reference internal" href="#id51">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-8-10-2026-04-03">v1.8.10 (2026-04-03)</a><ul>
+<li><a class="reference internal" href="#id52">Bug Fixes</a><ul>
+<li><a class="reference internal" href="#id53">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-8-9-2026-04-03">v1.8.9 (2026-04-03)</a><ul>
+<li><a class="reference internal" href="#id54">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-8-8-2026-04-03">v1.8.8 (2026-04-03)</a><ul>
+<li><a class="reference internal" href="#id55">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-8-7-2026-04-03">v1.8.7 (2026-04-03)</a><ul>
+<li><a class="reference internal" href="#id56">Bug Fixes</a><ul>
+<li><a class="reference internal" href="#id57">Build System</a></li>
+<li><a class="reference internal" href="#id58">Chores</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-8-6-2026-04-03">v1.8.6 (2026-04-03)</a><ul>
+<li><a class="reference internal" href="#id59">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-8-5-2026-04-03">v1.8.5 (2026-04-03)</a><ul>
+<li><a class="reference internal" href="#id60">Bug Fixes</a><ul>
+<li><a class="reference internal" href="#id61">Chores</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-8-4-2026-04-03">v1.8.4 (2026-04-03)</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+
+
+            </aside>
+        
+    </div>
+
+    
+        <button id="lumina-back-to-top"
+                x-data="backToTop()"
+                x-show="visible"
+                x-cloak
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 translate-y-2"
+                x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0"
+                x-transition:leave-end="opacity-0 translate-y-2"
+                @click="scrollToTop()"
+                class="fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--lumina-border)] bg-[var(--lumina-bg)] text-[var(--lumina-text-muted)] shadow-md hover:text-[var(--lumina-text)] hover:border-[var(--lumina-accent)] hover:shadow-lg transition-all cursor-pointer"
+                aria-label="Back to top"
+                type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6" /></svg></button>
+    
+
+    <div id="lumina-search-modal"
+     x-data="searchModal()"
+     x-show="open"
+     x-cloak
+     @keydown.escape.window="close()"
+     @keydown.meta.k.window.prevent="toggle()"
+     @keydown.ctrl.k.window.prevent="toggle()"
+     class="fixed inset-0 z-[100]"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Search documentation">
+    
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click="close()"></div>
+    
+    <div class="relative mx-auto mt-[15vh] max-w-xl rounded-xl border border-[var(--lumina-border)] bg-[var(--lumina-bg)] shadow-2xl"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95">
+        
+        <div class="flex items-center border-b border-[var(--lumina-border)] px-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--lumina-text-muted)]" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
+            <input type="search"
+                   x-ref="searchInput"
+                   x-model="query"
+                   @input.debounce.150ms="search()"
+                   @keydown.arrow-down.prevent="moveDown()"
+                   @keydown.arrow-up.prevent="moveUp()"
+                   @keydown.enter.prevent="goToSelected()"
+                   class="w-full border-0 bg-transparent px-3 py-4 text-[var(--lumina-text)] placeholder-[var(--lumina-text-muted)] outline-none"
+                   placeholder="Search docs..."
+                   autocomplete="off">
+            <kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1.5 py-0.5 text-xs text-[var(--lumina-text-muted)]">esc</kbd>
+        </div>
+        
+        <div class="max-h-[60vh] overflow-y-auto p-2"
+             aria-live="polite"
+             aria-label="Search results"
+             role="status">
+            <template x-if="!loaded">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]">Loading search index...</p>
+            </template>
+            <template x-if="loaded && query.length > 0 && results.length === 0">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]">No results found.</p>
+            </template>
+            <template x-if="error">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]"
+                   x-text="error"></p>
+            </template>
+            <template x-for="(result, index) in results" :key="result.url">
+                <a :href="result.url"
+                   class="flex flex-col gap-0.5 rounded-lg px-3 py-2.5 no-underline transition-colors"
+                   :class="index === selectedIndex ? 'bg-[var(--lumina-accent-light)] text-[var(--lumina-accent)]' : 'hover:bg-[var(--lumina-bg-secondary)] text-[var(--lumina-text)]'"
+                   @mouseenter="selectedIndex = index">
+                    <div class="flex min-w-0 items-center justify-between gap-2">
+                        <span class="truncate text-sm font-medium" x-text="result.title"></span>
+                        <template x-if="result.section">
+                            <span class="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
+                                  :class="index === selectedIndex ? 'bg-[var(--lumina-accent)] text-white opacity-70' : 'bg-[var(--lumina-bg-secondary)] text-[var(--lumina-text-muted)]'"
+                                  x-text="result.section"></span>
+                        </template>
+                    </div>
+                    <span class="line-clamp-2 text-xs text-[var(--lumina-text-muted)]"
+                          x-html="result.excerpt"></span>
+                </a>
+            </template>
+            <template x-if="loaded && query.length === 0">
+                <p class="px-3 py-8 text-center text-sm text-[var(--lumina-text-muted)]">Type to search...</p>
+            </template>
+        </div>
+        
+        <div class="flex items-center gap-3 border-t border-[var(--lumina-border)] px-4 py-2.5 text-xs text-[var(--lumina-text-muted)]">
+            <span class="flex items-center gap-1"><kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> Navigate</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> Open</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-[var(--lumina-border)] bg-[var(--lumina-bg-secondary)] px-1 py-0.5 font-mono text-[10px]">esc</kbd> Close</span>
+        </div>
+    </div>
+</div>
+
+
+
+
+  </body>
+</html>
