@@ -2,7 +2,7 @@
  * @module sidebar
  * @description Alpine.js component for the mobile sidebar drawer.
  * Manages open/close state, body scroll locking, ARIA attributes,
- * and focus management (returns focus to the trigger on close).
+ * focus trapping, and focus return to the trigger on close.
  * Auto-closes when the viewport crosses the ``1024px`` breakpoint.
  */
 
@@ -27,6 +27,7 @@ export default function sidebar() {
   return {
     mobileOpen: false,
     _trigger: null,
+    _trapHandler: null,
 
     toggle() {
       this.mobileOpen = !this.mobileOpen;
@@ -35,9 +36,13 @@ export default function sidebar() {
 
       if (this.mobileOpen) {
         this._trigger = document.activeElement;
+        this._trapHandler = (e) => this._handleFocusTrap(e);
+        document.addEventListener("keydown", this._trapHandler);
         this.$nextTick(() => {
           document.querySelector("[data-sidebar-close]")?.focus();
         });
+      } else {
+        this._teardownFocusTrap();
       }
     },
 
@@ -45,8 +50,40 @@ export default function sidebar() {
       this.mobileOpen = false;
       document.body.style.overflow = "";
       this._updateAria();
+      this._teardownFocusTrap();
       this._trigger?.focus();
       this._trigger = null;
+    },
+
+    _teardownFocusTrap() {
+      if (this._trapHandler) {
+        document.removeEventListener("keydown", this._trapHandler);
+        this._trapHandler = null;
+      }
+    },
+
+    /* Keep Tab cycling within the drawer while it's open so keyboard users
+       can't reach the (visually hidden) page content behind it. */
+    _handleFocusTrap(e) {
+      if (e.key !== "Tab" || !this.mobileOpen) return;
+      const drawer = document.getElementById("lumina-sidebar-drawer");
+      if (!drawer) return;
+
+      const focusable = drawer.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     },
 
     _updateAria() {
