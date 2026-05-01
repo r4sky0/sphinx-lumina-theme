@@ -27,3 +27,5 @@ Python API docs with functions, classes, autodoc, and cross-referencing.
 OpenAPI auto-generated docs and manual HTTP method directives.
 
 Browse all 1900+ Lucide icons available for cards, sidebar, and logo.
+
+Every theme token, its default in light and dark mode, and what it controls.
