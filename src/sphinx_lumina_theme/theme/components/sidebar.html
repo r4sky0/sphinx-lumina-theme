@@ -49,7 +49,9 @@
                  x-transition:leave-end="opacity-0"
                  class="fixed inset-0 top-14 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
                  @click="close()"></div>
-            {# Drawer #}
+            {# Drawer — dismissed via backdrop tap, the hamburger toggle
+               in the header, or the Escape key (no in-drawer close
+               button: the backdrop is the always-visible affordance). #}
             <div id="lumina-sidebar-drawer"
                  x-show="mobileOpen"
                  x-transition:enter="transition ease-out duration-250"
@@ -58,16 +60,8 @@
                  x-transition:leave="transition ease-in duration-200"
                  x-transition:leave-start="translate-x-0"
                  x-transition:leave-end="-translate-x-full"
-                 class="fixed inset-y-0 top-14 left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 pt-3 pb-6 lg:hidden">
-                {# Close row — sits in flow so it shares the column rhythm
-                   with the section-switcher beneath it. Negative margins
-                   tuck the button tight to the drawer's top-right corner. #}
-                <div class="-mt-1 mb-2 flex items-center justify-end">
-                    <button data-sidebar-close
-                            @click="close()"
-                            class="-mr-1 inline-flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted transition-colors cursor-pointer hover:bg-lumina-bg-secondary hover:text-lumina-text"
-                            aria-label="Close navigation">{{ lumina_icon("x", size=20) }}</button>
-                </div>
+                 @keydown.escape.window="close()"
+                 class="fixed inset-y-0 top-14 left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 py-6 lg:hidden">
 
                 {% include "components/section-switcher.html" %}
 
