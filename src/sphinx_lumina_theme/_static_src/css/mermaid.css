@@ -59,24 +59,20 @@ body .mermaid-container-fullscreen {
   background: var(--lumina-bg);
   border: 1px solid var(--lumina-border);
   border-radius: 0.5rem;
-  box-shadow: 0 8px 30px color-mix(in srgb, var(--lumina-text) 10%, transparent);
-}
-
-[data-theme="dark"] .mermaid-container-fullscreen {
-  box-shadow: 0 8px 30px color-mix(in srgb, var(--lumina-text) 15%, transparent);
+  box-shadow: var(--lumina-shadow-lg);
 }
 
 body .mermaid-fullscreen-close {
   background: var(--lumina-bg);
   border: 1px solid var(--lumina-border);
   color: var(--lumina-text-muted);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--lumina-text) 8%, transparent);
+  box-shadow: var(--lumina-shadow-sm);
 }
 
 body .mermaid-fullscreen-close:hover {
   color: var(--lumina-accent);
   background: var(--lumina-bg);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--lumina-text) 12%, transparent);
+  box-shadow: var(--lumina-shadow-md);
   transform: none;
 }
 

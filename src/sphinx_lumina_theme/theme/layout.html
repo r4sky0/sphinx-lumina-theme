@@ -222,7 +222,8 @@
              role="dialog"
              aria-modal="true"
              x-bind:aria-label="caption || 'Image preview'">
-            <div class="lumina-lightbox-backdrop" x-on:click="close()"></div>
+            <div class="lumina-overlay-backdrop lumina-lightbox-backdrop"
+                 x-on:click="close()"></div>
             <button x-on:click="close()"
                     class="lumina-lightbox-close"
                     aria-label="Close preview"
