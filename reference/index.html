@@ -11,7 +11,7 @@
     <title>Reference &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=c5a3906c" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=c97e9ef8" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -465,7 +465,7 @@
                  x-transition:leave="transition ease-in duration-150"
                  x-transition:leave-start="opacity-100"
                  x-transition:leave-end="opacity-0"
-                 class="fixed inset-0 top-14 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
+                 class="lumina-overlay-backdrop fixed inset-0 top-14 z-40 lg:hidden"
                  @click="close()"></div>
             
             <div id="lumina-sidebar-drawer"
@@ -967,7 +967,7 @@ CSS Variables</div>
      aria-modal="true"
      aria-label="Search documentation">
     
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+    <div class="lumina-overlay-backdrop absolute inset-0"
          x-transition:enter="transition ease-out duration-200"
          x-transition:enter-start="opacity-0"
          x-transition:enter-end="opacity-100"
@@ -1058,7 +1058,8 @@ CSS Variables</div>
              role="dialog"
              aria-modal="true"
              x-bind:aria-label="caption || 'Image preview'">
-            <div class="lumina-lightbox-backdrop" x-on:click="close()"></div>
+            <div class="lumina-overlay-backdrop lumina-lightbox-backdrop"
+                 x-on:click="close()"></div>
             <button x-on:click="close()"
                     class="lumina-lightbox-close"
                     aria-label="Close preview"
