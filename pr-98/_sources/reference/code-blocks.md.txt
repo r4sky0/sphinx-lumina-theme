@@ -311,6 +311,12 @@ Use `:start-after:` and `:end-before:` with comment markers for resilient includ
 
 All code blocks include a copy-to-clipboard button provided by `sphinx-copybutton`. Hover over any code block to see it appear in the top-right corner. No configuration needed — it works automatically.
 
+## Wrap Long Lines
+
+A "wrap long lines" toggle appears alongside the copy button on every code block. Click it to wrap the current block — useful for long URLs, single-line shell commands, or any code that overflows horizontally. The toggle is per-block: turning wrap on for one block leaves the others unchanged.
+
+Disable site-wide with `code_wrap_toggle = "false"` in `html_theme_options` — see {doc}`/getting-started/configuration`.
+
 ## Quick Reference
 
 ```{list-table}

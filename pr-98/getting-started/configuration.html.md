@@ -58,11 +58,17 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 | `show_attribution` | string | `"true"`  | Show or hide the “Built with Lumina” attribution link in the sidebar footer.                                                                                                                             |
 | `show_back_to_top` | string | `"true"`  | Show or hide the back-to-top button that appears when scrolling up.                                                                                                                                      |
 
+### Code Blocks
+
+| Option             | Type   | Default   | Description                                                                                                                                                                                  |
+|--------------------|--------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `code_wrap_toggle` | string | `"true"`  | Show a “wrap long lines” button on every code block, next to the copy button. Per-block — turning wrap on for one block leaves others unaffected. Set `"false"` to hide the button entirely. |
+
 ### Images
 
-| Option           | Type   | Default   | Description                                                                                                                                                                                                                                                                                                                        |
-|------------------|--------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `image_lightbox` | string | `"true"`  | Click any image in the article to view it full-size in an overlay. Skips user-defined links wrapping images and elements with the `no-lightbox` class or `data-no-lightbox` attribute. Mermaid diagrams use their built-in fullscreen viewer instead — opt other inline SVGs in with `data-lumina-zoom`. Set `"false"` to disable. |
+| Option           | Type   | Default   | Description                                                                                                                                                                                                                                                                                                                    |
+|------------------|--------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `image_lightbox` | string | `"false"` | Opt-in: set to `"true"` to enable click-to-zoom on every `<img>` inside the article. Skips user-defined links wrapping images and any element with the `no-lightbox` class or `data-no-lightbox` attribute. Mermaid diagrams keep their built-in fullscreen viewer instead — opt other inline SVGs in with `data-lumina-zoom`. |
 
 ### Doc Sections
 
@@ -186,8 +192,11 @@ html_theme_options = {
     "show_attribution": "true",
     "show_back_to_top": "true",
 
+    # Code blocks
+    "code_wrap_toggle": "true",
+
     # Images
-    "image_lightbox": "true",
+    "image_lightbox": "false",
 
     # Reading time
     "show_reading_time": "false",
