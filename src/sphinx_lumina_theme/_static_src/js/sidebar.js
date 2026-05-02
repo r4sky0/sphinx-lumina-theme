@@ -39,7 +39,14 @@ export default function sidebar() {
         this._trapHandler = (e) => this._handleFocusTrap(e);
         document.addEventListener("keydown", this._trapHandler);
         this.$nextTick(() => {
-          document.querySelector("[data-sidebar-close]")?.focus();
+          // No close button in the drawer — land focus on the first
+          // focusable element so Tab cycles through the nav and Escape
+          // closes the drawer.
+          const drawer = document.getElementById("lumina-sidebar-drawer");
+          const firstFocusable = drawer?.querySelector(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          );
+          firstFocusable?.focus();
         });
       } else {
         this._teardownFocusTrap();
