@@ -105,7 +105,11 @@ export default function imageLightbox() {
       el.setAttribute("role", "button");
       el.setAttribute("tabindex", "0");
 
-      el.addEventListener("click", () => this.open(el));
+      // iOS Safari only synthesizes a `click` from a tap when the element is
+      // naturally clickable, has `cursor: pointer`, or has an `onclick`
+      // property set. `addEventListener("click", ...)` alone is silently
+      // dropped on tap, so assign via the property here.
+      el.onclick = () => this.open(el);
       el.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
