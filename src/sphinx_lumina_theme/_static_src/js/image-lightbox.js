@@ -121,11 +121,26 @@ export default function imageLightbox() {
     _tagAnchor(anchor, img) {
       if (anchor.classList.contains("lumina-zoomable")) return;
       anchor.classList.add("lumina-zoomable");
-      // Anchor is already focusable; preserve Enter/Space via native click.
-      anchor.addEventListener("click", (e) => {
+
+      const open = (e) => {
         e.preventDefault();
         this.open(img, anchor);
-      });
+      };
+
+      // Anchor handles keyboard activation (Enter/Space → native click) and
+      // desktop mouse clicks.
+      anchor.onclick = open;
+
+      // On iOS Safari the tap target is the inner <img> — and Sphinx
+      // auto-wraps a bare image with no surrounding text, so the anchor
+      // never sees the touch. iOS only synthesizes a click for an element
+      // that's naturally clickable / has cursor:pointer / has an onclick
+      // property; mirror onclick onto the img and stop propagation so we
+      // don't double-fire when the click bubbles back up to the anchor.
+      img.onclick = (e) => {
+        e.stopPropagation();
+        open(e);
+      };
     },
 
     _bestSrc(img) {
