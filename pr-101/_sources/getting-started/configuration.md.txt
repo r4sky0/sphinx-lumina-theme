@@ -155,6 +155,22 @@ Lucide icons are designed on a 24×24 grid with 2-unit-wide strokes. When a Luci
   - Show a "wrap long lines" button on every code block, next to the copy button. Per-block — turning wrap on for one block leaves others unaffected. Set `"false"` to hide the button entirely.
 ```
 
+### Images
+
+```{list-table}
+:header-rows: 1
+:widths: 25 15 15 45
+
+* - Option
+  - Type
+  - Default
+  - Description
+* - `image_lightbox`
+  - string
+  - `"false"`
+  - Opt-in: set to `"true"` to enable click-to-zoom on every `<img>` inside the article. Skips user-defined links wrapping images and any element with the `no-lightbox` class or `data-no-lightbox` attribute. Mermaid diagrams keep their built-in fullscreen viewer instead — opt other inline SVGs in with `data-lumina-zoom`.
+```
+
 ### Doc Sections
 
 ```{list-table}
@@ -387,6 +403,9 @@ html_theme_options = {
 
     # Code blocks
     "code_wrap_toggle": "true",
+
+    # Images
+    "image_lightbox": "false",
 
     # Reading time
     "show_reading_time": "false",

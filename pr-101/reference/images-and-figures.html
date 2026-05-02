@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-03T11:36:38+00:00" />
+    <meta property="article:modified_time" content="2026-05-02T08:19:43+00:00" />
     <title>Images &amp; Figures &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=d16f2bef" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=c5a3906c" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=1f6eae68"></script>
+    <script defer="defer" src="../_static/lumina.js?v=b87f03a3"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Badges &amp; Buttons" href="badges-and-buttons.html" />
@@ -72,6 +72,7 @@
     
         <script>document.documentElement.dataset.codeWrap = "true";</script>
     
+    <script>document.documentElement.dataset.lightbox = "true";</script>
     
     
         <script>
@@ -449,7 +450,7 @@
                         <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                     </svg>
                 Lumina</a>
-                <span class="lumina-sidebar-footer-version">v1.39.0</span>
+                <span class="lumina-sidebar-footer-version">v1.40.0</span>
             </div>
         
     </div>
@@ -475,14 +476,8 @@
                  x-transition:leave="transition ease-in duration-200"
                  x-transition:leave-start="translate-x-0"
                  x-transition:leave-end="-translate-x-full"
-                 class="fixed inset-y-0 top-14 left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 pt-3 pb-6 lg:hidden">
-                
-                <div class="-mt-1 mb-2 flex items-center justify-end">
-                    <button data-sidebar-close
-                            @click="close()"
-                            class="-mr-1 inline-flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted transition-colors cursor-pointer hover:bg-lumina-bg-secondary hover:text-lumina-text"
-                            aria-label="Close navigation"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
-                </div>
+                 @keydown.escape.window="close()"
+                 class="fixed inset-y-0 top-14 left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 py-6 lg:hidden">
 
                 
 
@@ -629,7 +624,7 @@
                         <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                            target="_blank"
                            rel="noopener">Lumina</a>
-                        <span class="lumina-sidebar-footer-version">v1.39.0</span>
+                        <span class="lumina-sidebar-footer-version">v1.40.0</span>
                     </div>
                 
             </div>
@@ -709,6 +704,10 @@
     <section class="tex2jax_ignore mathjax_ignore" id="images-figures">
 <h1>Images &amp; Figures<a class="headerlink" href="#images-figures" title="Link to this heading">¶</a></h1>
 <p>Embedding and formatting visual content in your documentation.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Click any image on this page to view it full-size in an overlay. The lightbox is <strong>opt-in</strong> — enable it site-wide with <code class="docutils literal notranslate"><span class="pre">image_lightbox</span> <span class="pre">=</span> <span class="pre">&quot;true&quot;</span></code>. Once enabled, opt out per-image with the <code class="docutils literal notranslate"><span class="pre">no-lightbox</span></code> CSS class or the <code class="docutils literal notranslate"><span class="pre">data-no-lightbox</span></code> attribute. User-defined links wrapping images keep their navigation behaviour.</p>
+</div>
 <section id="basic-images">
 <h2>Basic Images<a class="headerlink" href="#basic-images" title="Link to this heading">¶</a></h2>
 <p>Use standard Markdown syntax to embed an image.</p>
@@ -905,7 +904,7 @@ Caption text with <span class="gs">**Markdown**</span> support.
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>April 3, 2026</time>
+            Last updated <time>May 2, 2026</time>
         </p>
     
     
@@ -1067,6 +1066,42 @@ Caption text with <span class="gs">**Markdown**</span> support.
         </div>
     </div>
 </div>
+
+    
+        <div x-data="imageLightbox()"
+             x-show="isOpen"
+             x-cloak
+             x-on:keydown.escape.window="close()"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="lumina-lightbox-overlay"
+             role="dialog"
+             aria-modal="true"
+             x-bind:aria-label="caption || 'Image preview'">
+            <div class="lumina-lightbox-backdrop" x-on:click="close()"></div>
+            <button x-on:click="close()"
+                    class="lumina-lightbox-close"
+                    aria-label="Close preview"
+                    type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+            <div class="lumina-lightbox-figure"
+                 x-transition:enter="transition ease-out duration-250"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95">
+                <template x-if="contentType === 'img'">
+                    <img x-bind:src="imgSrc" x-bind:alt="imgAlt">
+                </template>
+                <div class="lumina-lightbox-svg-host" x-show="contentType === 'svg'"></div>
+                <div class="lumina-lightbox-caption" x-show="caption" x-text="caption"></div>
+            </div>
+        </div>
+    
 
 
 

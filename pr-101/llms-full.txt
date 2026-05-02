@@ -1277,6 +1277,12 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 |--------------------|--------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `code_wrap_toggle` | string | `"true"`  | Show a “wrap long lines” button on every code block, next to the copy button. Per-block — turning wrap on for one block leaves others unaffected. Set `"false"` to hide the button entirely. |
 
+### Images
+
+| Option           | Type   | Default   | Description                                                                                                                                                                                                                                                                                                                    |
+|------------------|--------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `image_lightbox` | string | `"false"` | Opt-in: set to `"true"` to enable click-to-zoom on every `<img>` inside the article. Skips user-defined links wrapping images and any element with the `no-lightbox` class or `data-no-lightbox` attribute. Mermaid diagrams keep their built-in fullscreen viewer instead — opt other inline SVGs in with `data-lumina-zoom`. |
+
 ### Doc Sections
 
 | Option         | Type   | Default   | Description                                                                                                                                                                                                                             |
@@ -1401,6 +1407,9 @@ html_theme_options = {
 
     # Code blocks
     "code_wrap_toggle": "true",
+
+    # Images
+    "image_lightbox": "false",
 
     # Reading time
     "show_reading_time": "false",
@@ -2047,7 +2056,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 1.39.0.
+This documentation is for Sphinx Lumina Theme version 1.40.0.
 
 The MyST syntax:
 
@@ -4001,6 +4010,13 @@ The token is cleared when the browser tab is closed (sessionStorage scope).
 # releases.html.md
 
 # Releases
+
+## v1.40.0 (2026-05-02)
+
+### Features
+
+- Click-to-zoom lightbox for images ([#98](https://github.com/r4sky0/sphinx-lumina-theme/pull/98),
+  [`7fe05d6`](https://github.com/r4sky0/sphinx-lumina-theme/commit/7fe05d64844ca2f3021af9cbcd5f59e8b592d3c7))
 
 ## v1.39.0 (2026-05-01)
 
