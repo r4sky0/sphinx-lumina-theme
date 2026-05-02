@@ -9,8 +9,10 @@
      role="dialog"
      aria-modal="true"
      aria-label="Search documentation">
-    {# Backdrop #}
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+    {# Backdrop — uses the shared frosted-glass overlay so the search
+       modal, mobile sidebar drawer, and lightbox all read as the same
+       dim-the-page-behind affordance. #}
+    <div class="lumina-overlay-backdrop absolute inset-0"
          x-transition:enter="transition ease-out duration-200"
          x-transition:enter-start="opacity-0"
          x-transition:enter-end="opacity-100"
