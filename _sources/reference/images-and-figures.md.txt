@@ -2,6 +2,10 @@
 
 Embedding and formatting visual content in your documentation.
 
+:::{tip}
+Click any image on this page to view it full-size in an overlay. The lightbox is **opt-in** — enable it site-wide with `image_lightbox = "true"`. Once enabled, opt out per-image with the `no-lightbox` CSS class or the `data-no-lightbox` attribute. User-defined links wrapping images keep their navigation behaviour.
+:::
+
 ## Basic Images
 
 Use standard Markdown syntax to embed an image.
