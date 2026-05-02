@@ -62,7 +62,7 @@
                 {# Close button #}
                 <button data-sidebar-close
                         @click="close()"
-                        class="absolute top-4 right-4 rounded-md p-1 text-lumina-text-muted hover:text-lumina-text cursor-pointer"
+                        class="absolute top-4 right-4 z-20 rounded-md p-1 text-lumina-text-muted hover:text-lumina-text cursor-pointer"
                         aria-label="Close navigation">{{ lumina_icon("x", size=20) }}</button>
 
                 {% include "components/section-switcher.html" %}
