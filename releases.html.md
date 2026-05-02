@@ -1,5 +1,12 @@
 # Releases
 
+## v1.40.0 (2026-05-02)
+
+### Features
+
+- Click-to-zoom lightbox for images ([#98](https://github.com/r4sky0/sphinx-lumina-theme/pull/98),
+  [`7fe05d6`](https://github.com/r4sky0/sphinx-lumina-theme/commit/7fe05d64844ca2f3021af9cbcd5f59e8b592d3c7))
+
 ## v1.39.0 (2026-05-01)
 
 ### Features
