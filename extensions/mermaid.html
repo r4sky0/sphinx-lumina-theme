@@ -11,7 +11,7 @@
     <title>Mermaid Diagrams &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=88cf0c7b" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=c5a3906c" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -457,7 +457,7 @@ mermaid.initialize(
 
 window.addEventListener("load", load);
 window.runMermaid = runMermaid;</script>
-    <script defer="defer" src="../_static/lumina.js?v=480ef40c"></script>
+    <script defer="defer" src="../_static/lumina.js?v=b87f03a3"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="OpenAPI" href="openapi.html" />
@@ -912,12 +912,8 @@ window.runMermaid = runMermaid;</script>
                  x-transition:leave="transition ease-in duration-200"
                  x-transition:leave-start="translate-x-0"
                  x-transition:leave-end="-translate-x-full"
+                 @keydown.escape.window="close()"
                  class="fixed inset-y-0 top-14 left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 py-6 lg:hidden">
-                
-                <button data-sidebar-close
-                        @click="close()"
-                        class="absolute top-4 right-4 rounded-md p-1 text-lumina-text-muted hover:text-lumina-text cursor-pointer"
-                        aria-label="Close navigation"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
 
                 
 
