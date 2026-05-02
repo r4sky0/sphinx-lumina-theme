@@ -58,9 +58,7 @@
     {% if theme_code_wrap_toggle != "false" %}
         <script>document.documentElement.dataset.codeWrap = "true";</script>
     {% endif %}
-    {% if theme_image_lightbox == "true" %}
-        <script>document.documentElement.dataset.lightbox = "true";</script>
-    {% endif %}
+    {% if theme_image_lightbox == "true" %}<script>document.documentElement.dataset.lightbox = "true";</script>{% endif %}
     {% if theme_accent_color != "#10b981" %}
         <style>
             :root,[data-theme="light"]{--lumina-accent:{{ theme_accent_color }};--lumina-accent-light:color-mix(in srgb,{{ theme_accent_color }} 12%,white);}
@@ -214,16 +212,28 @@
              x-show="isOpen"
              x-cloak
              x-on:keydown.escape.window="close()"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
              class="lumina-lightbox-overlay"
              role="dialog"
              aria-modal="true"
              x-bind:aria-label="caption || 'Image preview'">
             <div class="lumina-lightbox-backdrop" x-on:click="close()"></div>
-            <div class="lumina-lightbox-figure">
-                <button x-on:click="close()"
-                        class="lumina-lightbox-close"
-                        aria-label="Close preview"
-                        type="button">{{ lumina_icon("x", size=20) }}</button>
+            <button x-on:click="close()"
+                    class="lumina-lightbox-close"
+                    aria-label="Close preview"
+                    type="button">{{ lumina_icon("x", size=20) }}</button>
+            <div class="lumina-lightbox-figure"
+                 x-transition:enter="transition ease-out duration-250"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95">
                 <template x-if="contentType === 'img'">
                     <img x-bind:src="imgSrc" x-bind:alt="imgAlt">
                 </template>
