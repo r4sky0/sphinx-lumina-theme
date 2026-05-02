@@ -12,7 +12,7 @@
     <title>CSS Variables &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=7af2cdef" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=d16f2bef" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -476,12 +476,14 @@
                  x-transition:leave="transition ease-in duration-200"
                  x-transition:leave-start="translate-x-0"
                  x-transition:leave-end="-translate-x-full"
-                 class="fixed inset-y-0 top-14 left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 pt-14 pb-6 lg:hidden">
+                 class="fixed inset-y-0 top-14 left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 pt-3 pb-6 lg:hidden">
                 
-                <button data-sidebar-close
-                        @click="close()"
-                        class="absolute top-4 right-4 z-20 rounded-md p-1 text-lumina-text-muted hover:text-lumina-text cursor-pointer"
-                        aria-label="Close navigation"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+                <div class="-mt-1 mb-2 flex items-center justify-end">
+                    <button data-sidebar-close
+                            @click="close()"
+                            class="-mr-1 inline-flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted transition-colors cursor-pointer hover:bg-lumina-bg-secondary hover:text-lumina-text"
+                            aria-label="Close navigation"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+                </div>
 
                 
 
