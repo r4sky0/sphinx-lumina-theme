@@ -39,6 +39,7 @@ html_theme_options = {
     "api_base_url": "https://petstore3.swagger.io/api/v3",
     "wide_layout": "toggle",
     "show_reading_time": "true",
+    "image_lightbox": "true",
     "announcement": 'A fast, modern Sphinx theme with dark mode, full-text search, and Alpine.js interactivity. <a href="https://github.com/r4sky0/sphinx-lumina-theme">Star on GitHub ★</a>',
     "doc_sections": [
         {

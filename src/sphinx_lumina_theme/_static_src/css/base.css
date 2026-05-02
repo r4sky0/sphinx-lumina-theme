@@ -981,6 +981,7 @@ a.headerlink[data-tooltip].lumina-tooltip-visible::after {
 @import "./typography.css";
 @import "./admonitions.css";
 @import "./code.css";
+@import "./lightbox.css";
 @import "./api.css";
 @import "./landing.css";
 @import "./mermaid.css";

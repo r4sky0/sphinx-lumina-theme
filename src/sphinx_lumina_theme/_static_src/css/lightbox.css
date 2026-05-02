@@ -1,0 +1,168 @@
+/* ── Image / diagram lightbox ── */
+
+/* Zoomable affordance on tagged elements */
+.lumina-zoomable {
+  cursor: zoom-in;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.lumina-zoomable:hover,
+.lumina-zoomable:focus-visible {
+  transform: scale(1.01);
+}
+
+.lumina-zoomable:focus-visible {
+  outline: 2px solid var(--lumina-accent);
+  outline-offset: 4px;
+  border-radius: 0.25rem;
+}
+
+/* Overlay root — fills the viewport, centers the figure */
+.lumina-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  /* Honour iOS safe areas so the close button never lands under the
+     dynamic island or the rounded corners. */
+  padding-top: max(clamp(1rem, 4vw, 3rem), env(safe-area-inset-top, 0));
+  padding-right: max(clamp(1rem, 4vw, 3rem), env(safe-area-inset-right, 0));
+  padding-bottom: max(clamp(1rem, 4vw, 3rem), env(safe-area-inset-bottom, 0));
+  padding-left: max(clamp(1rem, 4vw, 3rem), env(safe-area-inset-left, 0));
+}
+
+/* Frosted-glass backdrop. Derives its tint from the active theme so the
+   overlay reads as "the same page, dimmed and out of focus" rather than
+   a context switch into gallery mode. The figure separates from the
+   backdrop via its layered shadow, not via raw contrast. */
+.lumina-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--lumina-bg-secondary) 90%, transparent);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  cursor: zoom-out;
+}
+
+/* Browsers without backdrop-filter (older Firefox) lose the frosted
+   effect, so fall back to a near-opaque tinted surface that still
+   obscures the page underneath. */
+@supports not (backdrop-filter: blur(1px)) {
+  .lumina-lightbox-backdrop {
+    background: color-mix(in srgb, var(--lumina-bg-secondary) 96%, var(--lumina-text));
+  }
+}
+
+.lumina-lightbox-figure {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1;
+}
+
+.lumina-lightbox-figure img,
+.lumina-lightbox-figure .lumina-lightbox-svg-host {
+  max-width: min(100%, 1400px);
+  max-height: calc(100vh - 8rem);
+  max-height: calc(100dvh - 8rem);
+  object-fit: contain;
+  background: var(--lumina-bg);
+  border-radius: 0.75rem;
+  /* Tight contact shadow + soft ambient halo. Tuned to read on the
+     frosted backdrop without becoming a "lifted card" effect. */
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    0 12px 24px -8px rgba(0, 0, 0, 0.18);
+}
+
+[data-theme="dark"] .lumina-lightbox-figure img,
+[data-theme="dark"] .lumina-lightbox-figure .lumina-lightbox-svg-host {
+  /* Dark backdrop swallows soft shadows; lift the image with a touch
+     more contrast and a subtle bright outline. */
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.lumina-lightbox-figure .lumina-lightbox-svg-host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  width: min(100%, 1200px);
+  height: min(calc(100vh - 8rem), 800px);
+  height: min(calc(100dvh - 8rem), 800px);
+}
+
+.lumina-lightbox-figure .lumina-lightbox-svg-host svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.lumina-lightbox-caption {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--lumina-text);
+  text-align: center;
+  max-width: min(80ch, 100%);
+}
+
+/* Close button — fixed to the viewport, glass-style. Derives its chrome
+   from theme tokens so the same affordance reads cleanly in both light
+   and dark modes. */
+.lumina-lightbox-close {
+  position: fixed;
+  top: max(1rem, env(safe-area-inset-top, 0));
+  right: max(1rem, env(safe-area-inset-right, 0));
+  z-index: 1;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--lumina-bg) 70%, transparent);
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.625rem;
+  color: var(--lumina-text);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
+}
+
+.lumina-lightbox-close:hover,
+.lumina-lightbox-close:focus-visible {
+  background: var(--lumina-accent-light);
+  border-color: var(--lumina-accent);
+  color: var(--lumina-accent);
+  transform: scale(1.04);
+}
+
+.lumina-lightbox-close:active {
+  transform: scale(0.96);
+}
+
+/* Lock body scroll when overlay is open */
+body.lumina-lightbox-open {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumina-zoomable,
+  .lumina-zoomable:hover,
+  .lumina-zoomable:focus-visible,
+  .lumina-lightbox-close,
+  .lumina-lightbox-close:hover,
+  .lumina-lightbox-close:focus-visible,
+  .lumina-lightbox-close:active {
+    transform: none;
+    transition: none;
+  }
+}
