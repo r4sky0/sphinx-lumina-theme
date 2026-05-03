@@ -158,3 +158,32 @@ def test_extract_description_truncates_to_160_chars():
     assert result is not None
     assert len(result) <= 160
     assert result.endswith("…")
+
+
+def test_meta_description_from_front_matter(tmp_path):
+    """When a page sets `description` in front matter, it appears as <meta>."""
+    out = _build(tmp_path)
+    soup = _soup(out, "seo-described.html")
+    tag = soup.find("meta", attrs={"name": "description"})
+    assert tag is not None
+    assert tag["content"] == "Custom description for the SEO sample page"
+
+
+def test_meta_description_falls_back_to_paragraph(tmp_path):
+    """When a page has no front-matter description, derive from first paragraph."""
+    out = _build(tmp_path)
+    soup = _soup(out, "index.html")
+    tag = soup.find("meta", attrs={"name": "description"})
+    assert tag is not None
+    assert (
+        "test document" in tag["content"].lower() or "welcome" in tag["content"].lower()
+    )
+
+
+def test_meta_theme_color_from_accent(tmp_path):
+    """theme-color reflects the accent_color theme option."""
+    out = _build(tmp_path, options={"accent_color": "#ff00aa"})
+    soup = _soup(out, "index.html")
+    tag = soup.find("meta", attrs={"name": "theme-color"})
+    assert tag is not None
+    assert tag["content"] == "#ff00aa"

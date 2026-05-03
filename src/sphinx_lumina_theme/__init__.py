@@ -9,6 +9,8 @@ from sphinx import addnodes
 from sphinx.environment.adapters.toctree import _resolve_toctree
 from sphinx.util import logging
 
+from . import _seo
+
 logger = logging.getLogger(__name__)
 
 __version__ = "1.40.0"
@@ -454,6 +456,23 @@ def _add_context(app, pagename, templatename, context, doctree):
         return tag
 
     context["js_tag"] = _deferred_js_tag
+
+    # SEO metadata
+    if _seo.should_emit_seo(app.builder.theme_options):
+        page_meta = app.env.metadata.get(pagename, {})
+        description = _seo.extract_description(
+            doctree=doctree,
+            meta=page_meta,
+            short_title=context.get("shorttitle", "") or app.config.project,
+        )
+        if description:
+            context["lumina_seo_description"] = description
+        context["lumina_seo_theme_color"] = app.builder.theme_options.get(
+            "accent_color", "#10b981"
+        )
+        context["lumina_seo_enabled"] = True
+    else:
+        context["lumina_seo_enabled"] = False
 
     if "template" in meta:
         # Icon browser page: inject all icon names + SVG inner content

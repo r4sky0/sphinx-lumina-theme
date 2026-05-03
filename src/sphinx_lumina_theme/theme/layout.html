@@ -18,6 +18,10 @@
                   href="{{ pathto('_static/favicon.svg', 1) }}">
         {% endif %}
     {% endif %}
+    {% if lumina_seo_enabled %}
+        {% if lumina_seo_description %}<meta name="description" content="{{ lumina_seo_description }}">{% endif %}
+        {% if lumina_seo_theme_color %}<meta name="theme-color" content="{{ lumina_seo_theme_color }}">{% endif %}
+    {% endif %}
     <link rel="preload"
           as="font"
           type="font/woff2"
