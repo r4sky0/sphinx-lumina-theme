@@ -1,0 +1,535 @@
+"""SEO primitives for the Lumina theme.
+
+All functions here are pure (no Sphinx app state mutation). They take
+the data they need and return strings, dicts, or HTML-ready values to
+be injected into the Jinja template context.
+"""
+
+from __future__ import annotations
+
+import json as _json
+import posixpath as _posixpath
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from docutils import nodes
+
+# Minimum prose length (characters) for a paragraph to be considered a
+# valid description fallback. Avoids picking up taglines like "Quick start.".
+_MIN_PROSE_LEN = 30
+
+# Hard cap on description length. 160 chars is the de-facto upper bound
+# Google uses in SERP snippets; we leave a few chars for the ellipsis.
+_MAX_DESC_LEN = 160
+
+
+__all__ = [
+    "build_article_jsonld",
+    "build_breadcrumb_jsonld",
+    "build_website_jsonld",
+    "derive_twitter_handle",
+    "extract_description",
+    "is_noindex",
+    "normalize_iso_datetime",
+    "og_locale_for_language",
+    "plain_title",
+    "resolve_og_image",
+    "resolve_publisher_logo",
+    "should_emit_seo",
+]
+
+
+def plain_title(html_title: str | None) -> str:
+    """Return a plain-text title with HTML tags and entities stripped.
+
+    Sphinx's ``context["title"]`` is rendered HTML, so a heading like
+    ``# Inline ``code`` in title`` arrives as ``Inline <code>code</code> in title``.
+    Embedding that directly in a ``<meta content="...">`` attribute leaks the
+    escaped markup into social previews. Strip tags + decode entities so the
+    OG/Twitter title reads naturally.
+    """
+    if not html_title:
+        return ""
+    import html as _html
+    import re as _re
+
+    text = _re.sub(r"<[^>]+>", "", html_title)
+    text = _html.unescape(text)
+    return " ".join(text.split())
+
+
+def should_emit_seo(theme_options: Mapping[str, Any]) -> bool:
+    """Return False when the user has disabled all SEO emission."""
+    return str(theme_options.get("disable_seo", "false")).lower() != "true"
+
+
+def extract_description(
+    doctree: nodes.document | None,
+    meta: Mapping[str, Any],
+    short_title: str | None,
+) -> str | None:
+    """Return a meta description for a page, or None if no source qualifies.
+
+    Fallback chain:
+      1. ``meta["description"]`` (MyST front matter / RST :description: field).
+      2. First paragraph in the doctree containing real prose
+         (>= _MIN_PROSE_LEN chars, not inside an admonition / code / toctree).
+      3. ``short_title`` (typically Sphinx's html_short_title).
+      4. None.
+    """
+    fm = meta.get("description")
+    if fm:
+        return _truncate(str(fm).strip())
+
+    paragraph = _first_prose_paragraph(doctree) if doctree is not None else None
+    if paragraph:
+        return _truncate(paragraph)
+
+    if short_title:
+        return _truncate(str(short_title).strip())
+
+    return None
+
+
+def _truncate(text: str) -> str:
+    text = " ".join(text.split())  # collapse whitespace
+    if len(text) <= _MAX_DESC_LEN:
+        return text
+    return text[: _MAX_DESC_LEN - 1].rstrip() + "…"
+
+
+def _first_prose_paragraph(doctree: nodes.document) -> str | None:
+    """Walk the doctree, return the first paragraph node that qualifies."""
+    from docutils import nodes
+
+    try:
+        from sphinx import addnodes
+    except ImportError:  # tests using a bare docutils doctree
+        addnodes = None
+
+    skip_ancestors: tuple[type, ...] = (
+        nodes.literal_block,
+        nodes.admonition,
+        nodes.note,
+        nodes.warning,
+        nodes.tip,
+        nodes.important,
+        nodes.caution,
+        nodes.attention,
+        nodes.hint,
+        nodes.danger,
+        nodes.error,
+        nodes.comment,
+        nodes.system_message,
+        nodes.field_list,
+        nodes.docinfo,
+    )
+    if addnodes is not None:
+        skip_ancestors = skip_ancestors + (addnodes.toctree,)
+
+    for para in doctree.findall(nodes.paragraph):
+        ancestor = para.parent
+        skip = False
+        while ancestor is not None:
+            if isinstance(ancestor, skip_ancestors):
+                skip = True
+                break
+            ancestor = ancestor.parent
+        if skip:
+            continue
+        text = para.astext().strip()
+        if len(text) >= _MIN_PROSE_LEN:
+            return text
+    return None
+
+
+# Common Sphinx language code → OG-locale mapping. We keep this small
+# and let unknown short codes fall back to "<code>_<CODE>" (e.g. "de" → "de_DE").
+_OG_LOCALE_OVERRIDES = {
+    "en": "en_US",
+    "zh-cn": "zh_CN",
+    "zh-tw": "zh_TW",
+    "pt-br": "pt_BR",
+}
+
+
+def og_locale_for_language(language: str | None) -> str:
+    """Map a Sphinx ``language`` config value to an Open Graph locale string."""
+    if not language:
+        return "en_US"
+    code = language.lower()
+    if code in _OG_LOCALE_OVERRIDES:
+        return _OG_LOCALE_OVERRIDES[code]
+    if "-" in code:
+        lang, region = code.split("-", 1)
+        return f"{lang}_{region.upper()}"
+    if "_" in code:
+        lang, region = code.split("_", 1)
+        return f"{lang}_{region.upper()}"
+    return f"{code}_{code.upper()}"
+
+
+_RASTER_EXTS = (".png", ".jpg", ".jpeg", ".webp")
+
+
+def resolve_og_image(
+    *,
+    page_meta: Mapping[str, Any],
+    theme_options: Mapping[str, Any],
+    html_logo: str | None,
+    html_baseurl: str | None,
+) -> tuple[str | None, str | None]:
+    """Return (og_image_url, og_image_alt) using the documented fallback chain.
+
+    Fallback chain:
+      1. page front-matter `og_image`
+      2. theme option `og_image`
+      3. `html_logo` (if a raster format)
+      4. None
+
+    Relative values are resolved as paths under ``_static/`` and joined to
+    ``html_baseurl`` when set, so the emitted tag is an absolute URL.
+    """
+    page_image = str(page_meta.get("og_image", "")).strip()
+    theme_image = str(theme_options.get("og_image", "")).strip()
+    alt = (
+        str(page_meta.get("og_image_alt", "")).strip()
+        or str(theme_options.get("og_image_alt", "")).strip()
+    )
+
+    candidate = page_image or theme_image
+    if not candidate and html_logo:
+        if html_logo.lower().endswith(_RASTER_EXTS):
+            candidate = html_logo
+
+    if not candidate:
+        return None, None
+
+    if candidate.startswith(("http://", "https://", "//")):
+        return candidate, alt or None
+
+    # Treat anything else as a static-asset filename.
+    rel = candidate.lstrip("/")
+    if not rel.startswith("_static/"):
+        rel = f"_static/{rel}"
+
+    if html_baseurl:
+        base = html_baseurl.rstrip("/") + "/"
+        return _posixpath.join(base, rel), alt or None
+
+    # No base URL — omit the tag. Social platforms (Slack, Twitter, LinkedIn,
+    # Facebook) require an absolute URL for og:image; emitting a relative one
+    # produces a broken-image preview that's strictly worse than no card.
+    return None, None
+
+
+def resolve_publisher_logo(
+    *,
+    theme_options: Mapping[str, Any],
+    html_logo: str | None,
+    html_baseurl: str | None,
+) -> str | None:
+    """Return an absolute URL for the publisher logo, or None.
+
+    Schema.org / Google Rich Results expects publisher.logo to be a small,
+    near-square image (think 60×60 to 600×60). This is distinct from the
+    Open Graph card image, which is a 1200×630 banner. Reusing the OG image
+    as a publisher logo can disqualify the page from Rich Results.
+
+    Fallback chain:
+      1. theme option ``publisher_logo``
+      2. ``html_logo`` (when a raster format)
+      3. None — caller should omit ``publisher.logo`` rather than substitute
+         the OG card.
+    """
+    candidate = str(theme_options.get("publisher_logo", "")).strip()
+    if not candidate and html_logo and html_logo.lower().endswith(_RASTER_EXTS):
+        candidate = html_logo
+
+    if not candidate:
+        return None
+
+    if candidate.startswith(("http://", "https://", "//")):
+        return candidate
+
+    rel = candidate.lstrip("/")
+    if not rel.startswith("_static/"):
+        rel = f"_static/{rel}"
+
+    if html_baseurl:
+        base = html_baseurl.rstrip("/") + "/"
+        return _posixpath.join(base, rel)
+    # Without a base URL we can't produce the absolute URL Schema.org requires
+    # for ``publisher.logo.url`` — better to omit than ship a relative path
+    # that disqualifies the page from Rich Results.
+    return None
+
+
+def derive_twitter_handle(theme_options: Mapping[str, Any]) -> str | None:
+    """Return a Twitter/X handle (with leading @) or None.
+
+    Looks at ``twitter_site`` first, then any Twitter/X entry in
+    ``social_links`` (icon == "twitter" or "x").
+    """
+    explicit = str(theme_options.get("twitter_site", "")).strip()
+    if explicit:
+        return explicit if explicit.startswith("@") else f"@{explicit}"
+
+    social = theme_options.get("social_links") or []
+    if not isinstance(social, list):
+        return None
+    for entry in social:
+        if not isinstance(entry, dict):
+            continue
+        icon = str(entry.get("icon", "")).strip().lower()
+        if icon not in ("twitter", "x"):
+            continue
+        url = str(entry.get("url", "")).strip()
+        handle = _handle_from_twitter_url(url)
+        if handle:
+            return handle
+    return None
+
+
+def _handle_from_twitter_url(url: str) -> str | None:
+    """Extract @handle from a Twitter/X profile URL like https://twitter.com/foo."""
+    if not url:
+        return None
+    for prefix in (
+        "https://twitter.com/",
+        "https://www.twitter.com/",
+        "https://x.com/",
+        "https://www.x.com/",
+    ):
+        if url.startswith(prefix):
+            tail = url[len(prefix) :].strip("/")
+            # Drop query string / fragment / sub-path segments before extracting
+            # the handle: ``foo?ref=x``, ``foo#bio``, ``foo/status/123`` → ``foo``.
+            for sep in ("?", "#", "/"):
+                tail = tail.split(sep, 1)[0]
+            if tail:
+                return f"@{tail}"
+    return None
+
+
+def _safe_jsonld(data) -> str:
+    """Encode JSON for embedding in <script type='application/ld+json'>.
+
+    The standard json.dumps escaping leaves <, >, & literal, which means a
+    user-controlled string containing ``</script>`` could break out of the
+    block. Apply the conventional unicode-escape replacements.
+    """
+    return (
+        _json.dumps(data, ensure_ascii=False)
+        .replace("<", "\\u003c")
+        .replace(">", "\\u003e")
+        .replace("&", "\\u0026")
+    )
+
+
+def build_breadcrumb_jsonld(
+    *,
+    parents,
+    title: str,
+    page_url: str,
+    site_url: str,
+    site_name: str,
+) -> str | None:
+    """Build a BreadcrumbList JSON-LD string. Returns None when the page is the root.
+
+    ``parents`` follows Sphinx's html-page-context format: a list of dicts with
+    ``title`` and ``link`` keys, in order from root to direct parent. ``link``
+    is relative to the *current* page, not the site root, so we resolve it
+    against the page's directory.
+    """
+    if not parents and not title:
+        return None
+
+    items = []
+    pos = 1
+    if site_url:
+        items.append(
+            {
+                "@type": "ListItem",
+                "position": pos,
+                "name": site_name,
+                "item": site_url.rstrip("/") + "/",
+            }
+        )
+        pos += 1
+
+    # Page directory (the dirname of page_url) is the base for relative parent links.
+    page_dir = _page_dir(page_url, site_url)
+
+    for parent in parents or []:
+        items.append(
+            {
+                "@type": "ListItem",
+                "position": pos,
+                "name": plain_title(parent.get("title", "")),
+                "item": _resolve_parent_url(parent.get("link", ""), page_dir, site_url),
+            }
+        )
+        pos += 1
+
+    items.append(
+        {
+            "@type": "ListItem",
+            "position": pos,
+            "name": title,
+            "item": page_url or _absolute_url("", site_url),
+        }
+    )
+
+    return _safe_jsonld(
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": items,
+        }
+    )
+
+
+def _page_dir(page_url: str, site_url: str) -> str:
+    """Return the directory portion of a page URL (with trailing slash)."""
+    if page_url:
+        # Strip the filename: "https://x/guides/seo.html" → "https://x/guides/"
+        # Use rfind on '/' to be robust to query strings (which we don't expect here).
+        slash = page_url.rfind("/")
+        if slash != -1:
+            return page_url[: slash + 1]
+        return page_url
+    if site_url:
+        return site_url.rstrip("/") + "/"
+    return ""
+
+
+def _resolve_parent_url(link: str, page_dir: str, site_url: str) -> str:
+    """Resolve a Sphinx ``parents`` link (relative to the current page)."""
+    if not link:
+        return page_dir or (site_url.rstrip("/") + "/" if site_url else "")
+    if link.startswith(("http://", "https://", "//")):
+        return link
+    # Relative link: resolve against the current page's directory.
+    if page_dir:
+        return _posixpath.normpath(_posixpath.join(page_dir, link)).replace(":/", "://")
+    return link
+
+
+def _absolute_url(relative: str, site_url: str) -> str:
+    """Make a best-effort absolute URL from a Sphinx-relative link."""
+    if not relative:
+        return site_url.rstrip("/") + "/"
+    if relative.startswith(("http://", "https://", "//")):
+        return relative
+    if not site_url:
+        return relative
+    return site_url.rstrip("/") + "/" + relative.lstrip("/")
+
+
+def normalize_iso_datetime(value: str | None) -> str | None:
+    """Normalize a date or datetime string to a full ISO 8601 datetime.
+
+    Schema.org allows date-only values, but Google's Rich Results Test
+    flags them as "could be improved". We accept either form and return
+    a UTC datetime when the input is date-only:
+
+      "2026-05-03"             → "2026-05-03T00:00:00+00:00"
+      "2026-05-03T12:34:56+00:00" → unchanged
+      None / empty             → None
+    """
+    if not value:
+        return None
+    text = str(value).strip()
+    if not text:
+        return None
+    # Already contains a time component — trust the caller.
+    if "T" in text or " " in text:
+        return text
+    return f"{text}T00:00:00+00:00"
+
+
+def build_article_jsonld(
+    *,
+    headline: str,
+    description: str | None,
+    page_url: str,
+    site_url: str,
+    site_name: str,
+    author: str | None,
+    image_url: str | None,
+    publisher_logo_url: str | None = None,
+    date_published: str | None = None,
+    date_modified: str | None = None,
+) -> str:
+    """Build a TechArticle JSON-LD string. Caller decides whether to emit."""
+    publisher: dict[str, Any] = {"@type": "Organization", "name": site_name}
+    if publisher_logo_url:
+        publisher["logo"] = {"@type": "ImageObject", "url": publisher_logo_url}
+
+    data: dict[str, Any] = {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": headline,
+        "author": {"@type": "Person", "name": author or site_name},
+        "publisher": publisher,
+    }
+    if description:
+        data["description"] = description
+    if page_url:
+        data["url"] = page_url
+        data["mainEntityOfPage"] = page_url
+    if image_url:
+        data["image"] = image_url
+    published_iso = normalize_iso_datetime(date_published)
+    if published_iso:
+        data["datePublished"] = published_iso
+    modified_iso = normalize_iso_datetime(date_modified)
+    if modified_iso:
+        data["dateModified"] = modified_iso
+
+    return _safe_jsonld(data)
+
+
+def build_website_jsonld(
+    *,
+    site_url: str,
+    site_name: str,
+    description: str | None = None,
+) -> str | None:
+    """Build a WebSite JSON-LD string with a SearchAction.
+
+    Returns None when ``site_url`` is empty (a relative WebSite URL is invalid).
+    The SearchAction points at the on-site search page; Lumina's search modal
+    accepts ``?q=`` so the SearchAction template lines up.
+    """
+    if not site_url:
+        return None
+    base = site_url.rstrip("/") + "/"
+    data: dict[str, Any] = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": site_name,
+        "url": base,
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": f"{base}search.html?q={{search_term_string}}",
+            },
+            "query-input": "required name=search_term_string",
+        },
+    }
+    if description:
+        data["description"] = description
+    return _safe_jsonld(data)
+
+
+_TRUTHY = {"true", "1", "yes", "on"}
+
+
+def is_noindex(meta: Mapping[str, Any]) -> bool:
+    """Return True when the page front matter requests noindex."""
+    raw = meta.get("noindex", "")
+    return str(raw).strip().lower() in _TRUTHY

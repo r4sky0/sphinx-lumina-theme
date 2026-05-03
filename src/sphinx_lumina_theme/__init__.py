@@ -9,6 +9,8 @@ from sphinx import addnodes
 from sphinx.environment.adapters.toctree import _resolve_toctree
 from sphinx.util import logging
 
+from . import _seo
+
 logger = logging.getLogger(__name__)
 
 __version__ = "1.40.0"
@@ -335,6 +337,118 @@ def _section_toctree(app, pagename, section, maxdepth, collapse):
     return "\n".join(fragments)
 
 
+_SPHINX_SITEMAP_DEFAULT_URL_SCHEME = "{lang}{version}{link}"
+
+
+def _apply_sitemap_defaults(app, config):
+    """Set sphinx-sitemap defaults the user hasn't overridden.
+
+    Runs at ``config-inited``, before the builder is created — so we read
+    theme options from ``config.html_theme_options`` rather than
+    ``app.builder.theme_options``. When SEO is disabled, returns early
+    without applying defaults; sphinx-sitemap's handlers are still wired,
+    but ``_suppress_sitemap_when_seo_disabled`` deletes the generated file.
+    """
+    theme_options = config.html_theme_options or {}
+    if not _seo.should_emit_seo(theme_options):
+        return
+
+    # When sphinx-sitemap is loaded, it registers ``sitemap_url_scheme``
+    # with default ``{lang}{version}{link}``. Override that default to
+    # ``{link}`` so single-language docs without a configured language
+    # produce ``<baseurl>/index.html`` rather than ``<baseurl>/en/index.html``.
+    current_scheme = getattr(config, "sitemap_url_scheme", None)
+    if current_scheme in (None, "", _SPHINX_SITEMAP_DEFAULT_URL_SCHEME):
+        config.sitemap_url_scheme = "{link}"
+    if not getattr(config, "sitemap_filename", None):
+        config.sitemap_filename = "sitemap.xml"
+    # Emit <lastmod> per URL when sphinx-last-updated-by-git is loaded
+    # (it populates env.git_last_updated, which sphinx-sitemap reads).
+    # Respect an explicit user choice (in conf.py or via -D).
+    user_set_lastmod = "sitemap_show_lastmod" in getattr(
+        config, "_raw_config", {}
+    ) or "sitemap_show_lastmod" in getattr(config, "_overrides", {})
+    if not user_set_lastmod:
+        config.sitemap_show_lastmod = "sphinx_last_updated_by_git" in app.extensions
+
+
+def _suppress_sitemap_when_seo_disabled(app, exception):
+    """Delete sitemap.xml after build if SEO is disabled.
+
+    Only deletes when Lumina was the one to auto-load ``sphinx-sitemap``.
+    If the user explicitly added it to ``extensions`` in ``conf.py``, we
+    leave the generated sitemap alone — ``disable_seo`` is meant to opt
+    out of Lumina's emissions, not override the user's own extension config.
+    """
+    if exception is not None:
+        return
+    if app.builder.format != "html":
+        return
+    if _seo.should_emit_seo(app.builder.theme_options):
+        return
+    if not getattr(app, "_lumina_sitemap_auto_loaded", False):
+        return
+    sitemap_name = (
+        getattr(app.config, "sitemap_filename", "sitemap.xml") or "sitemap.xml"
+    )
+    sitemap_path = Path(app.outdir) / sitemap_name
+    if sitemap_path.exists():
+        try:
+            sitemap_path.unlink()
+        except OSError:
+            pass
+
+
+def _check_baseurl(app):
+    """Warn once at build start if html_baseurl is missing or non-absolute.
+
+    Many SEO features (canonical URLs, sitemap entries, robots.txt sitemap
+    reference) need an absolute site URL to work. We warn rather than error
+    so local-only / preview builds aren't broken.
+    """
+    if not _seo.should_emit_seo(app.builder.theme_options):
+        return
+    baseurl = (app.config.html_baseurl or "").strip()
+    if not baseurl:
+        logger.warning(
+            "html_baseurl is not set — canonical URLs, sitemap.xml entries, "
+            "and the robots.txt sitemap reference will be skipped. "
+            "Set html_baseurl in conf.py to enable them. "
+            "[lumina.seo]"
+        )
+
+
+def _iso_last_updated(app, pagename: str) -> str | None:
+    """Return ISO-8601 last-updated date for a page, or None if unavailable.
+
+    Reads from ``sphinx_last_updated_by_git`` when active. The extension
+    populates ``app.env.git_last_updated`` as a dict keyed by docname; the
+    value is a 2-tuple ``(timestamp, show_sourcelink)`` after env-updated
+    has run, where ``timestamp`` is a Unix-timestamp string from git (or
+    ``None`` when git data is unavailable). Falls back to None so the
+    JSON-LD field is omitted rather than emitting a non-ISO string.
+    """
+    git_last_updated = getattr(app.env, "git_last_updated", None)
+    if not git_last_updated:
+        return None
+    data = git_last_updated.get(pagename)
+    if data is None:
+        return None
+    # The extension stores a 2-tuple `(timestamp, ...)` after env-updated;
+    # before then the value is None (handled above). Defensive unpacking
+    # in case the schema ever changes.
+    timestamp = data[0] if isinstance(data, tuple) and data else None
+    if timestamp is None:
+        return None
+    try:
+        from datetime import datetime, timezone
+
+        dt = datetime.fromtimestamp(int(timestamp), timezone.utc)
+        return dt.date().isoformat()  # YYYY-MM-DD
+    except (TypeError, ValueError):
+        return None
+
+
 def _add_context(app, pagename, templatename, context, doctree):
     context["lumina_version"] = __version__
     context["has_llms_txt"] = "sphinx_llm.txt" in app.extensions
@@ -455,6 +569,126 @@ def _add_context(app, pagename, templatename, context, doctree):
 
     context["js_tag"] = _deferred_js_tag
 
+    # SEO metadata
+    if _seo.should_emit_seo(app.builder.theme_options):
+        page_meta = app.env.metadata.get(pagename, {})
+        if _seo.is_noindex(page_meta):
+            context["lumina_seo_noindex"] = True
+        description = _seo.extract_description(
+            doctree=doctree,
+            meta=page_meta,
+            short_title=context.get("shorttitle", "") or app.config.project,
+        )
+        if description:
+            context["lumina_seo_description"] = description
+        context["lumina_seo_theme_color"] = app.builder.theme_options.get(
+            "accent_color", "#10b981"
+        )
+        # `pageurl` is set by Sphinx's standard html-page-context handler when
+        # html_baseurl is configured. Sphinx's basic/layout.html emits its own
+        # `<link rel="canonical">` from this — we leave that emission in place
+        # (no duplicate) and reuse the same value for og:url etc. in later tasks.
+        page_url = context.get("pageurl", "")
+        context["lumina_seo_page_url"] = page_url
+
+        # og:type is "website" for the root document, "article" elsewhere.
+        # Front matter `og_type` overrides.
+        og_type = str(page_meta.get("og_type", "")).strip()
+        if not og_type:
+            og_type = "website" if pagename == app.config.root_doc else "article"
+        context["lumina_seo_og_type"] = og_type
+        og_title = _seo.plain_title(context.get("title", "")) or app.config.project
+        context["lumina_seo_og_title"] = og_title
+        context["lumina_seo_og_site_name"] = app.config.project
+        context["lumina_seo_og_locale"] = _seo.og_locale_for_language(
+            app.config.language
+        )
+        keywords = (
+            str(page_meta.get("keywords", "")).strip()
+            or str(app.builder.theme_options.get("seo_keywords", "")).strip()
+        )
+        if keywords:
+            context["lumina_seo_keywords"] = keywords
+        og_image, og_image_alt = _seo.resolve_og_image(
+            page_meta=page_meta,
+            theme_options=app.builder.theme_options,
+            html_logo=app.config.html_logo,
+            html_baseurl=app.config.html_baseurl,
+        )
+        if og_image:
+            context["lumina_seo_og_image"] = og_image
+            if og_image_alt:
+                context["lumina_seo_og_image_alt"] = og_image_alt
+            og_image_w = str(
+                app.builder.theme_options.get("og_image_width", "")
+            ).strip()
+            og_image_h = str(
+                app.builder.theme_options.get("og_image_height", "")
+            ).strip()
+            if og_image_w:
+                context["lumina_seo_og_image_width"] = og_image_w
+            if og_image_h:
+                context["lumina_seo_og_image_height"] = og_image_h
+        publisher_logo = _seo.resolve_publisher_logo(
+            theme_options=app.builder.theme_options,
+            html_logo=app.config.html_logo,
+            html_baseurl=app.config.html_baseurl,
+        )
+        context["lumina_seo_twitter_card"] = (
+            "summary_large_image" if og_image else "summary"
+        )
+        twitter_handle = _seo.derive_twitter_handle(app.builder.theme_options)
+        if twitter_handle:
+            context["lumina_seo_twitter_site"] = twitter_handle
+        # JSON-LD: BreadcrumbList (only on non-root pages with parents)
+        parents = context.get("parents") or []
+        plain_page_title = _seo.plain_title(context.get("title", "")) or pagename
+        if pagename != app.config.root_doc:
+            crumbs = _seo.build_breadcrumb_jsonld(
+                parents=parents,
+                title=plain_page_title,
+                page_url=page_url,
+                site_url=app.config.html_baseurl or "",
+                site_name=app.config.project,
+            )
+            if crumbs:
+                context["lumina_seo_breadcrumb_jsonld"] = crumbs
+        # JSON-LD: TechArticle (content pages only)
+        if pagename != app.config.root_doc:
+            # Sphinx defaults `author` to the literal string "Author name not set"
+            # when the user has not configured one — treat that as unset.
+            author = app.config.author or None
+            if author == "Author name not set":
+                author = None
+            article_json = _seo.build_article_jsonld(
+                headline=plain_page_title,
+                description=description,
+                page_url=page_url,
+                site_url=app.config.html_baseurl or "",
+                site_name=app.config.project,
+                author=author,
+                image_url=context.get("lumina_seo_og_image"),
+                publisher_logo_url=publisher_logo,
+                date_published=_iso_last_updated(app, pagename),
+                date_modified=_iso_last_updated(app, pagename),
+            )
+            context["lumina_seo_article_jsonld"] = article_json
+        # JSON-LD: WebSite + SearchAction (root page only, requires baseurl)
+        if pagename == app.config.root_doc and app.config.html_baseurl:
+            site_json = _seo.build_website_jsonld(
+                site_url=app.config.html_baseurl,
+                site_name=app.config.project,
+                description=description,
+            )
+            if site_json:
+                context["lumina_seo_website_jsonld"] = site_json
+        context["lumina_seo_enabled"] = True
+    else:
+        # When SEO is disabled, suppress the basic theme's canonical link by
+        # clearing pageurl. (Basic's canonical emission is gated on `{% if pageurl %}`.)
+        context["pageurl"] = ""
+        context["lumina_seo_enabled"] = False
+
     if "template" in meta:
         # Icon browser page: inject all icon names + SVG inner content
         if meta["template"] == "icon-browser.html":
@@ -463,6 +697,83 @@ def _add_context(app, pagename, templatename, context, doctree):
             context["icon_entries"] = sorted(ICONS.items())
             context["icon_count"] = len(ICONS)
         return meta["template"]
+
+
+def _filter_sitemap_noindex(app, exception):
+    """Remove noindex pages from sitemap.xml after sphinx-sitemap writes it.
+
+    Implemented as a post-processor because sphinx-sitemap's URL collection
+    happens inside its own ``build-finished`` handler with no public hook
+    for exclusion. We rewrite the file in place, stripping ``<url>`` blocks
+    whose ``<loc>`` matches an excluded page.
+
+    Reads the noindex flag straight from ``app.env.metadata`` so incremental
+    builds (where some pages weren't re-rendered this run) still exclude all
+    noindex pages from the sitemap.
+    """
+    if exception:
+        return
+    if app.builder.format != "html":
+        return
+    if not _seo.should_emit_seo(app.builder.theme_options):
+        return
+    excluded = {
+        docname for docname, meta in app.env.metadata.items() if _seo.is_noindex(meta)
+    }
+    if not excluded:
+        return
+    sitemap_path = Path(app.outdir) / app.config.sitemap_filename
+    if not sitemap_path.exists():
+        return
+
+    import xml.etree.ElementTree as ET
+
+    ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
+    ET.register_namespace("", ns)
+    tree = ET.parse(sitemap_path)
+    root = tree.getroot()
+
+    # The html builder always emits .html for page outputs; sphinx-sitemap
+    # uses the same suffix. Anchor at the slash boundary so 'noindex.html'
+    # doesn't accidentally match 'seo-noindex.html' or '.../foo-noindex.html'.
+    excluded_paths = {f"/{name}.html" for name in excluded}
+
+    for url_el in list(root.findall(f"{{{ns}}}url")):
+        loc_el = url_el.find(f"{{{ns}}}loc")
+        if loc_el is None or loc_el.text is None:
+            continue
+        if any(loc_el.text.endswith(p) for p in excluded_paths):
+            root.remove(url_el)
+
+    tree.write(sitemap_path, xml_declaration=True, encoding="utf-8")
+
+
+def _write_robots_txt(app, exception):
+    """Write a default robots.txt to the build output.
+
+    Honors a user-supplied robots.txt placed via html_extra_path: by the
+    time this build-finished handler runs, html_extra_path has already
+    copied user files to the output dir, so we just check and skip.
+    """
+    if exception:
+        return
+    if app.builder.format != "html":
+        return
+    if not _seo.should_emit_seo(app.builder.theme_options):
+        return
+
+    robots_path = Path(app.outdir) / "robots.txt"
+    if robots_path.exists():
+        return  # User override already in place.
+
+    lines = ["User-agent: *", "Allow: /", ""]
+    baseurl = (app.config.html_baseurl or "").strip()
+    if baseurl:
+        sitemap_filename = getattr(app.config, "sitemap_filename", "") or "sitemap.xml"
+        sitemap_url = baseurl.rstrip("/") + "/" + sitemap_filename
+        lines.append(f"Sitemap: {sitemap_url}")
+
+    robots_path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
 
 
 def _run_pagefind(app, exception):
@@ -525,9 +836,28 @@ def setup(app):
     app.add_js_file("lumina.js", loading_method="defer", priority=900)
     app.add_directive("card", LuminaCardDirective, override=True)
     app.add_directive("grid-item-card", LuminaGridItemCardDirective, override=True)
+    # sphinx-sitemap auto-load. Themes load via the ``sphinx.html_themes``
+    # entry point during ``builder.init_templates()`` — i.e. *after*
+    # ``config-inited`` has already fired. So we call the defaults helper
+    # directly with the live config and additionally connect to
+    # ``config-inited`` to cover the (rarer) case where the user lists
+    # the theme as a regular extension and our setup runs before it.
+    # Track whether the user (vs. Lumina) put sphinx-sitemap in conf.py so
+    # disable_seo only removes auto-loaded sitemaps. Use the config list
+    # rather than ``app.extensions`` because the latter only reflects what
+    # has been loaded *so far*.
+    user_extensions = getattr(app.config, "extensions", []) or []
+    app._lumina_sitemap_auto_loaded = "sphinx_sitemap" not in user_extensions
+    app.setup_extension("sphinx_sitemap")
+    app.connect("config-inited", _apply_sitemap_defaults)
+    _apply_sitemap_defaults(app, app.config)
+    app.connect("build-finished", _suppress_sitemap_when_seo_disabled)
     app.connect("builder-inited", _apply_code_style)
+    app.connect("builder-inited", _check_baseurl)
     app.connect("html-page-context", _add_context)
     app.connect("build-finished", _run_pagefind)
+    app.connect("build-finished", _filter_sitemap_noindex)
+    app.connect("build-finished", _write_robots_txt)
     return {
         "version": __version__,
         "parallel_read_safe": True,

@@ -25,6 +25,7 @@ classifiers = [
 ]
 dependencies = [
     "sphinx>=8.0",
+    "sphinx-sitemap>=2.6",
 ]
 
 [project.urls]

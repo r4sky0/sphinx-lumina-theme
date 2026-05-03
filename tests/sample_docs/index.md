@@ -1,6 +1,6 @@
 # Welcome
 
-This is a test document.
+This is a test document used by the sphinx-lumina-theme test suite to verify rendering and metadata behaviour.
 
 ## Section One
 
@@ -73,4 +73,12 @@ typography-test
 landing-test
 icons-test
 guides/index
+seo-described
+seo-keywords
+seo-image-override
+seo-noindex
+seo-html-title
+intro
+extra-intro
+section/index
 ```

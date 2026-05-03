@@ -27,7 +27,9 @@ jobs:
         run: pnpm run build
 
       - name: Build docs
-        run: uv run sphinx-build docs docs/_build/html
+        env:
+          PREVIEW_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/
+        run: uv run sphinx-build -D html_baseurl="$PREVIEW_BASEURL" docs docs/_build/html
 
       - uses: ./.github/actions/deploy-gh-pages
         with:

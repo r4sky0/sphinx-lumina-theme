@@ -29,6 +29,7 @@ myst_enable_extensions = [
     "substitution",
 ]
 html_theme = "lumina"
+html_baseurl = "https://r4sky0.github.io/sphinx-lumina-theme/"
 html_theme_options = {
     "source_repository": "https://github.com/r4sky0/sphinx-lumina-theme",
     "source_branch": "main",
@@ -40,6 +41,11 @@ html_theme_options = {
     "wide_layout": "toggle",
     "show_reading_time": "true",
     "image_lightbox": "true",
+    "og_image": "og-card.png",
+    "og_image_alt": "Sphinx Lumina Theme — modern documentation theme with dark mode",
+    "og_image_width": "1200",
+    "og_image_height": "630",
+    "publisher_logo": "logo-square.png",
     "announcement": 'A fast, modern Sphinx theme with dark mode, full-text search, and Alpine.js interactivity. <a href="https://github.com/r4sky0/sphinx-lumina-theme">Star on GitHub ★</a>',
     "doc_sections": [
         {
