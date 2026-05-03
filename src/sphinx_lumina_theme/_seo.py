@@ -24,6 +24,7 @@ _MAX_DESC_LEN = 160
 
 __all__ = [
     "extract_description",
+    "og_locale_for_language",
     "should_emit_seo",
 ]
 
@@ -111,3 +112,29 @@ def _first_prose_paragraph(doctree: nodes.document) -> str | None:
         if len(text) >= _MIN_PROSE_LEN:
             return text
     return None
+
+
+# Common Sphinx language code → OG-locale mapping. We keep this small
+# and let unknown short codes fall back to "<code>_<CODE>" (e.g. "de" → "de_DE").
+_OG_LOCALE_OVERRIDES = {
+    "en": "en_US",
+    "zh-cn": "zh_CN",
+    "zh-tw": "zh_TW",
+    "pt-br": "pt_BR",
+}
+
+
+def og_locale_for_language(language: str | None) -> str:
+    """Map a Sphinx ``language`` config value to an Open Graph locale string."""
+    if not language:
+        return "en_US"
+    code = language.lower()
+    if code in _OG_LOCALE_OVERRIDES:
+        return _OG_LOCALE_OVERRIDES[code]
+    if "-" in code:
+        lang, region = code.split("-", 1)
+        return f"{lang}_{region.upper()}"
+    if "_" in code:
+        lang, region = code.split("_", 1)
+        return f"{lang}_{region.upper()}"
+    return f"{code}_{code.upper()}"

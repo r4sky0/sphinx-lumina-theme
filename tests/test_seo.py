@@ -204,3 +204,42 @@ def test_canonical_link_absent_when_baseurl_unset(tmp_path):
     soup = _soup(out, "index.html")
     canonical = soup.find("link", attrs={"rel": "canonical"})
     assert canonical is None
+
+
+def test_og_tags_basic(tmp_path):
+    """Index page emits og:title, og:description, og:url, og:type, og:site_name."""
+    out = _build(tmp_path, baseurl="https://example.com/", project="My Site")
+    soup = _soup(out, "index.html")
+
+    def og(prop):
+        tag = soup.find("meta", attrs={"property": f"og:{prop}"})
+        return tag["content"] if tag else None
+
+    assert og("title")
+    assert og("description")
+    assert og("url") == "https://example.com/index.html"
+    assert og("type") == "website"  # root page
+    assert og("site_name") == "My Site"
+    assert og("locale") == "en_US"
+
+
+def test_og_type_article_for_content_pages(tmp_path):
+    """Non-root pages get og:type=article."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "seo-described.html")
+    tag = soup.find("meta", attrs={"property": "og:type"})
+    assert tag is not None
+    assert tag["content"] == "article"
+
+
+def test_og_locale_from_language_config(tmp_path):
+    """og:locale comes from Sphinx language config."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        confoverrides={"language": "de"},
+    )
+    soup = _soup(out, "index.html")
+    tag = soup.find("meta", attrs={"property": "og:locale"})
+    assert tag is not None
+    assert tag["content"] == "de_DE"

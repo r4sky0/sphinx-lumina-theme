@@ -493,7 +493,20 @@ def _add_context(app, pagename, templatename, context, doctree):
         # html_baseurl is configured. Sphinx's basic/layout.html emits its own
         # `<link rel="canonical">` from this — we leave that emission in place
         # (no duplicate) and reuse the same value for og:url etc. in later tasks.
-        context["lumina_seo_page_url"] = context.get("pageurl", "")
+        page_url = context.get("pageurl", "")
+        context["lumina_seo_page_url"] = page_url
+
+        # og:type is "website" for the root document, "article" elsewhere.
+        # Front matter `og_type` overrides.
+        og_type = str(page_meta.get("og_type", "")).strip()
+        if not og_type:
+            og_type = "website" if pagename == app.config.root_doc else "article"
+        context["lumina_seo_og_type"] = og_type
+        context["lumina_seo_og_title"] = context.get("title", "") or app.config.project
+        context["lumina_seo_og_site_name"] = app.config.project
+        context["lumina_seo_og_locale"] = _seo.og_locale_for_language(
+            app.config.language
+        )
         context["lumina_seo_enabled"] = True
     else:
         # When SEO is disabled, suppress the basic theme's canonical link by
