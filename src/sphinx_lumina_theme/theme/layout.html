@@ -21,6 +21,7 @@
     {% if lumina_seo_enabled %}
         {% if lumina_seo_description %}<meta name="description" content="{{ lumina_seo_description }}">{% endif %}
         {% if lumina_seo_theme_color %}<meta name="theme-color" content="{{ lumina_seo_theme_color }}">{% endif %}
+        {% if lumina_seo_canonical %}<link rel="canonical" href="{{ lumina_seo_canonical }}">{% endif %}
     {% endif %}
     <link rel="preload"
           as="font"

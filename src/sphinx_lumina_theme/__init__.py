@@ -337,6 +337,25 @@ def _section_toctree(app, pagename, section, maxdepth, collapse):
     return "\n".join(fragments)
 
 
+def _check_baseurl(app):
+    """Warn once at build start if html_baseurl is missing or non-absolute.
+
+    Many SEO features (canonical URLs, sitemap entries, robots.txt sitemap
+    reference) need an absolute site URL to work. We warn rather than error
+    so local-only / preview builds aren't broken.
+    """
+    if not _seo.should_emit_seo(app.builder.theme_options):
+        return
+    baseurl = (app.config.html_baseurl or "").strip()
+    if not baseurl:
+        logger.warning(
+            "html_baseurl is not set — canonical URLs, sitemap.xml entries, "
+            "and the robots.txt sitemap reference will be skipped. "
+            "Set html_baseurl in conf.py to enable them. "
+            "[lumina.seo]"
+        )
+
+
 def _add_context(app, pagename, templatename, context, doctree):
     context["lumina_version"] = __version__
     context["has_llms_txt"] = "sphinx_llm.txt" in app.extensions
@@ -470,6 +489,11 @@ def _add_context(app, pagename, templatename, context, doctree):
         context["lumina_seo_theme_color"] = app.builder.theme_options.get(
             "accent_color", "#10b981"
         )
+        # `pageurl` is set by Sphinx's standard html-page-context handler
+        # when html_baseurl is configured. It already includes the suffix.
+        page_url = context.get("pageurl", "")
+        if page_url:
+            context["lumina_seo_canonical"] = page_url
         context["lumina_seo_enabled"] = True
     else:
         context["lumina_seo_enabled"] = False
@@ -545,6 +569,7 @@ def setup(app):
     app.add_directive("card", LuminaCardDirective, override=True)
     app.add_directive("grid-item-card", LuminaGridItemCardDirective, override=True)
     app.connect("builder-inited", _apply_code_style)
+    app.connect("builder-inited", _check_baseurl)
     app.connect("html-page-context", _add_context)
     app.connect("build-finished", _run_pagefind)
     return {

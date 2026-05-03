@@ -187,3 +187,20 @@ def test_meta_theme_color_from_accent(tmp_path):
     tag = soup.find("meta", attrs={"name": "theme-color"})
     assert tag is not None
     assert tag["content"] == "#ff00aa"
+
+
+def test_canonical_link_when_baseurl_set(tmp_path):
+    """When html_baseurl is set, every page emits a canonical link."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "index.html")
+    canonical = soup.find("link", attrs={"rel": "canonical"})
+    assert canonical is not None
+    assert canonical["href"] == "https://example.com/index.html"
+
+
+def test_canonical_link_absent_when_baseurl_unset(tmp_path):
+    """Without html_baseurl, no canonical tag is emitted."""
+    out = _build(tmp_path, baseurl="")
+    soup = _soup(out, "index.html")
+    canonical = soup.find("link", attrs={"rel": "canonical"})
+    assert canonical is None
