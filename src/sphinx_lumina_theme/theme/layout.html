@@ -28,6 +28,10 @@
         <meta property="og:type" content="{{ lumina_seo_og_type }}">
         <meta property="og:site_name" content="{{ lumina_seo_og_site_name }}">
         <meta property="og:locale" content="{{ lumina_seo_og_locale }}">
+        {% if lumina_seo_og_image %}
+            <meta property="og:image" content="{{ lumina_seo_og_image }}">
+            {% if lumina_seo_og_image_alt %}<meta property="og:image:alt" content="{{ lumina_seo_og_image_alt }}">{% endif %}
+        {% endif %}
     {% endif %}
     <link rel="preload"
           as="font"

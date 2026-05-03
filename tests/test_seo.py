@@ -291,3 +291,51 @@ def test_keywords_absent_when_unset(tmp_path):
     out = _build(tmp_path)
     soup = _soup(out, "index.html")
     assert soup.find("meta", attrs={"name": "keywords"}) is None
+
+
+def test_og_image_from_theme_option(tmp_path):
+    """og_image theme option becomes og:image (resolved as static asset)."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        options={"og_image": "card.png", "og_image_alt": "Site card"},
+    )
+    soup = _soup(out, "index.html")
+    img = soup.find("meta", attrs={"property": "og:image"})
+    assert img is not None
+    # Static asset resolves to absolute URL when html_baseurl is set.
+    assert img["content"] == "https://example.com/_static/card.png"
+    alt = soup.find("meta", attrs={"property": "og:image:alt"})
+    assert alt is not None
+    assert alt["content"] == "Site card"
+
+
+def test_og_image_absolute_url_passes_through(tmp_path):
+    """An absolute og_image URL is used verbatim."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        options={"og_image": "https://cdn.example.com/card.png"},
+    )
+    soup = _soup(out, "index.html")
+    img = soup.find("meta", attrs={"property": "og:image"})
+    assert img["content"] == "https://cdn.example.com/card.png"
+
+
+def test_og_image_per_page_override(tmp_path):
+    """Per-page front-matter og_image overrides the sitewide default."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        options={"og_image": "default.png"},
+    )
+    soup = _soup(out, "seo-image-override.html")
+    img = soup.find("meta", attrs={"property": "og:image"})
+    assert img["content"].endswith("/_static/page-card.png")
+
+
+def test_og_image_absent_when_no_source(tmp_path):
+    """No og_image set, no html_logo set → no og:image emitted."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "index.html")
+    assert soup.find("meta", attrs={"property": "og:image"}) is None

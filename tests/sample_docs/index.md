@@ -75,4 +75,5 @@ icons-test
 guides/index
 seo-described
 seo-keywords
+seo-image-override
 ```

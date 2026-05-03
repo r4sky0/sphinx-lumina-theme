@@ -513,6 +513,16 @@ def _add_context(app, pagename, templatename, context, doctree):
         )
         if keywords:
             context["lumina_seo_keywords"] = keywords
+        og_image, og_image_alt = _seo.resolve_og_image(
+            page_meta=page_meta,
+            theme_options=app.builder.theme_options,
+            html_logo=app.config.html_logo,
+            html_baseurl=app.config.html_baseurl,
+        )
+        if og_image:
+            context["lumina_seo_og_image"] = og_image
+            if og_image_alt:
+                context["lumina_seo_og_image_alt"] = og_image_alt
         context["lumina_seo_enabled"] = True
     else:
         # When SEO is disabled, suppress the basic theme's canonical link by

@@ -7,6 +7,7 @@ be injected into the Jinja template context.
 
 from __future__ import annotations
 
+import posixpath as _posixpath
 from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any
 
@@ -25,6 +26,7 @@ _MAX_DESC_LEN = 160
 __all__ = [
     "extract_description",
     "og_locale_for_language",
+    "resolve_og_image",
     "should_emit_seo",
 ]
 
@@ -138,3 +140,57 @@ def og_locale_for_language(language: str | None) -> str:
         lang, region = code.split("_", 1)
         return f"{lang}_{region.upper()}"
     return f"{code}_{code.upper()}"
+
+
+_RASTER_EXTS = (".png", ".jpg", ".jpeg", ".webp")
+
+
+def resolve_og_image(
+    *,
+    page_meta: Mapping[str, Any],
+    theme_options: Mapping[str, Any],
+    html_logo: str | None,
+    html_baseurl: str | None,
+) -> tuple[str | None, str | None]:
+    """Return (og_image_url, og_image_alt) using the documented fallback chain.
+
+    Fallback chain:
+      1. page front-matter `og_image`
+      2. theme option `og_image`
+      3. `html_logo` (if a raster format)
+      4. None
+
+    Relative values are resolved as paths under ``_static/`` and joined to
+    ``html_baseurl`` when set, so the emitted tag is an absolute URL.
+    """
+    page_image = str(page_meta.get("og_image", "")).strip()
+    theme_image = str(theme_options.get("og_image", "")).strip()
+    alt = (
+        str(page_meta.get("og_image_alt", "")).strip()
+        or str(theme_options.get("og_image_alt", "")).strip()
+    )
+
+    candidate = page_image or theme_image
+    if not candidate and html_logo:
+        if html_logo.lower().endswith(_RASTER_EXTS):
+            candidate = html_logo
+
+    if not candidate:
+        return None, None
+
+    if candidate.startswith(("http://", "https://", "//")):
+        return candidate, alt or None
+
+    # Treat anything else as a static-asset filename.
+    rel = candidate.lstrip("/")
+    if not rel.startswith("_static/"):
+        rel = f"_static/{rel}"
+
+    if html_baseurl:
+        base = html_baseurl.rstrip("/") + "/"
+        return _posixpath.join(base, rel), alt or None
+
+    # No base URL — emit a relative URL. Social platforms generally need
+    # an absolute URL, but a relative one is better than nothing for local
+    # previews and won't produce a "broken image" upstream.
+    return rel, alt or None
