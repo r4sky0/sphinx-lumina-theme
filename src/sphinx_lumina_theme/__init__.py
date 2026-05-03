@@ -686,6 +686,34 @@ def _filter_sitemap_noindex(app, exception):
     tree.write(sitemap_path, xml_declaration=True, encoding="utf-8")
 
 
+def _write_robots_txt(app, exception):
+    """Write a default robots.txt to the build output.
+
+    Honors a user-supplied robots.txt placed via html_extra_path: by the
+    time this build-finished handler runs, html_extra_path has already
+    copied user files to the output dir, so we just check and skip.
+    """
+    if exception:
+        return
+    if app.builder.format != "html":
+        return
+    if not _seo.should_emit_seo(app.builder.theme_options):
+        return
+
+    robots_path = Path(app.outdir) / "robots.txt"
+    if robots_path.exists():
+        return  # User override already in place.
+
+    lines = ["User-agent: *", "Allow: /", ""]
+    baseurl = (app.config.html_baseurl or "").strip()
+    if baseurl:
+        sitemap_filename = getattr(app.config, "sitemap_filename", "") or "sitemap.xml"
+        sitemap_url = baseurl.rstrip("/") + "/" + sitemap_filename
+        lines.append(f"Sitemap: {sitemap_url}")
+
+    robots_path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
 def _run_pagefind(app, exception):
     """Run Pagefind to index the built HTML for search."""
     if exception:
@@ -761,6 +789,7 @@ def setup(app):
     app.connect("html-page-context", _add_context)
     app.connect("build-finished", _run_pagefind)
     app.connect("build-finished", _filter_sitemap_noindex)
+    app.connect("build-finished", _write_robots_txt)
     return {
         "version": __version__,
         "parallel_read_safe": True,

@@ -543,3 +543,49 @@ def test_noindex_meta_absent_on_normal_pages(tmp_path):
     soup = _soup(out, "index.html")
     tag = soup.find("meta", attrs={"name": "robots"})
     assert tag is None
+
+
+def test_robots_txt_generated(tmp_path):
+    """robots.txt is written to the build output with allow-all + sitemap."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    robots = out / "robots.txt"
+    assert robots.exists()
+    text = robots.read_text()
+    assert "User-agent: *" in text
+    assert "Allow: /" in text
+    assert "Sitemap: https://example.com/sitemap.xml" in text
+
+
+def test_robots_txt_skips_sitemap_line_without_baseurl(tmp_path):
+    """robots.txt still generated, but no Sitemap line if no baseurl."""
+    out = _build(tmp_path)
+    text = (out / "robots.txt").read_text()
+    assert "User-agent: *" in text
+    assert "Sitemap:" not in text
+
+
+def test_robots_txt_user_override_wins(tmp_path):
+    """A user-supplied robots.txt in html_extra_path is preserved as-is."""
+    extra = tmp_path / "extra"
+    extra.mkdir()
+    (extra / "robots.txt").write_text("User-agent: *\nDisallow: /\n# custom\n")
+
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        confoverrides={"html_extra_path": [str(extra)]},
+    )
+    text = (out / "robots.txt").read_text()
+    assert "Disallow: /" in text
+    assert "# custom" in text
+
+
+def test_robots_txt_skipped_when_seo_disabled(tmp_path):
+    """disable_seo=true means no robots.txt is written by Lumina."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        options={"disable_seo": "true"},
+    )
+    # Sphinx itself doesn't write a robots.txt, so absence is the test.
+    assert not (out / "robots.txt").exists()
