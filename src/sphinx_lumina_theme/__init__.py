@@ -541,6 +541,25 @@ def _add_context(app, pagename, templatename, context, doctree):
             )
             if crumbs:
                 context["lumina_seo_breadcrumb_jsonld"] = crumbs
+        # JSON-LD: TechArticle (content pages only)
+        if pagename != app.config.root_doc:
+            # Sphinx defaults `author` to the literal string "Author name not set"
+            # when the user has not configured one — treat that as unset.
+            author = app.config.author or None
+            if author == "Author name not set":
+                author = None
+            article_json = _seo.build_article_jsonld(
+                headline=context.get("title", "") or pagename,
+                description=description,
+                page_url=page_url,
+                site_url=app.config.html_baseurl or "",
+                site_name=app.config.project,
+                author=author,
+                image_url=context.get("lumina_seo_og_image"),
+                date_published=context.get("last_updated"),
+                date_modified=context.get("last_updated"),
+            )
+            context["lumina_seo_article_jsonld"] = article_json
         context["lumina_seo_enabled"] = True
     else:
         # When SEO is disabled, suppress the basic theme's canonical link by

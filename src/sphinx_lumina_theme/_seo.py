@@ -25,6 +25,7 @@ _MAX_DESC_LEN = 160
 
 
 __all__ = [
+    "build_article_jsonld",
     "build_breadcrumb_jsonld",
     "derive_twitter_handle",
     "extract_description",
@@ -310,3 +311,42 @@ def _absolute_url(relative: str, site_url: str) -> str:
     if not site_url:
         return relative
     return site_url.rstrip("/") + "/" + relative.lstrip("/")
+
+
+def build_article_jsonld(
+    *,
+    headline: str,
+    description: str | None,
+    page_url: str,
+    site_url: str,
+    site_name: str,
+    author: str | None,
+    image_url: str | None,
+    date_published: str | None = None,
+    date_modified: str | None = None,
+) -> str:
+    """Build a TechArticle JSON-LD string. Caller decides whether to emit."""
+    publisher: dict[str, Any] = {"@type": "Organization", "name": site_name}
+    if image_url:
+        publisher["logo"] = {"@type": "ImageObject", "url": image_url}
+
+    data: dict[str, Any] = {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": headline,
+        "author": {"@type": "Person", "name": author or site_name},
+        "publisher": publisher,
+    }
+    if description:
+        data["description"] = description
+    if page_url:
+        data["url"] = page_url
+        data["mainEntityOfPage"] = page_url
+    if image_url:
+        data["image"] = image_url
+    if date_published:
+        data["datePublished"] = date_published
+    if date_modified:
+        data["dateModified"] = date_modified
+
+    return _json.dumps(data, ensure_ascii=False)

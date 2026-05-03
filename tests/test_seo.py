@@ -427,3 +427,39 @@ def test_breadcrumb_jsonld_absent_on_root(tmp_path):
     soup = _soup(out, "index.html")
     blocks = _ld_blocks(soup)
     assert _block_of_type(blocks, "BreadcrumbList") is None
+
+
+def test_techarticle_jsonld_on_content_page(tmp_path):
+    """A content page emits TechArticle JSON-LD with headline/description/author."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        confoverrides={"author": "Jane Dev"},
+    )
+    soup = _soup(out, "seo-described.html")
+    blocks = _ld_blocks(soup)
+    article = _block_of_type(blocks, "TechArticle")
+    assert article is not None
+    assert article["@context"] == "https://schema.org"
+    assert article["headline"]
+    assert article["description"]
+    assert article["author"]["name"] == "Jane Dev"
+    assert article["publisher"]["name"]
+
+
+def test_techarticle_jsonld_absent_on_root(tmp_path):
+    """The root document does NOT emit TechArticle (it's a website type)."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "index.html")
+    blocks = _ld_blocks(soup)
+    assert _block_of_type(blocks, "TechArticle") is None
+
+
+def test_techarticle_author_falls_back_to_project(tmp_path):
+    """Without a configured author, project name is used."""
+    out = _build(tmp_path, baseurl="https://example.com/", project="Lumina Docs")
+    soup = _soup(out, "seo-described.html")
+    blocks = _ld_blocks(soup)
+    article = _block_of_type(blocks, "TechArticle")
+    assert article is not None
+    assert article["author"]["name"] == "Lumina Docs"
