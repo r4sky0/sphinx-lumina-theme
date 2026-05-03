@@ -7,6 +7,7 @@ be injected into the Jinja template context.
 
 from __future__ import annotations
 
+import json as _json
 import posixpath as _posixpath
 from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any
@@ -24,6 +25,7 @@ _MAX_DESC_LEN = 160
 
 
 __all__ = [
+    "build_breadcrumb_jsonld",
     "derive_twitter_handle",
     "extract_description",
     "og_locale_for_language",
@@ -238,3 +240,73 @@ def _handle_from_twitter_url(url: str) -> str | None:
             if tail:
                 return f"@{tail}"
     return None
+
+
+def build_breadcrumb_jsonld(
+    *,
+    parents,
+    title: str,
+    page_url: str,
+    site_url: str,
+    site_name: str,
+) -> str | None:
+    """Build a BreadcrumbList JSON-LD string. Returns None when the page is the root.
+
+    ``parents`` follows Sphinx's html-page-context format: a list of dicts with
+    ``title`` and ``link`` keys, in order from root to direct parent.
+    """
+    if not parents and not title:
+        return None
+
+    items = []
+    pos = 1
+    if site_url:
+        items.append(
+            {
+                "@type": "ListItem",
+                "position": pos,
+                "name": site_name,
+                "item": site_url.rstrip("/") + "/",
+            }
+        )
+        pos += 1
+
+    for parent in parents or []:
+        items.append(
+            {
+                "@type": "ListItem",
+                "position": pos,
+                "name": parent.get("title", ""),
+                "item": _absolute_url(parent.get("link", ""), site_url),
+            }
+        )
+        pos += 1
+
+    items.append(
+        {
+            "@type": "ListItem",
+            "position": pos,
+            "name": title,
+            "item": page_url or _absolute_url("", site_url),
+        }
+    )
+
+    return _json.dumps(
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": items,
+        },
+        ensure_ascii=False,
+    )
+
+
+def _absolute_url(relative: str, site_url: str) -> str:
+    """Make a best-effort absolute URL from a Sphinx-relative link."""
+    if not relative:
+        return site_url.rstrip("/") + "/"
+    if relative.startswith(("http://", "https://", "//")):
+        return relative
+    if not site_url:
+        return relative
+    return site_url.rstrip("/") + "/" + relative.lstrip("/")

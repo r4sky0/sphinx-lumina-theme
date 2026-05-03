@@ -1,5 +1,7 @@
 """Tests for Lumina SEO primitives."""
 
+import json
+
 from bs4 import BeautifulSoup
 from conftest import copy_sample_docs
 from sphinx.application import Sphinx
@@ -386,3 +388,42 @@ def test_twitter_site_from_social_links(tmp_path):
     tag = soup.find("meta", attrs={"name": "twitter:site"})
     assert tag is not None
     assert tag["content"] == "@luminadocs"
+
+
+def _ld_blocks(soup):
+    """Return list of parsed JSON-LD blocks on the page."""
+    blocks = []
+    for tag in soup.find_all("script", attrs={"type": "application/ld+json"}):
+        try:
+            blocks.append(json.loads(tag.string or ""))
+        except json.JSONDecodeError:
+            pass
+    return blocks
+
+
+def _block_of_type(blocks, schema_type):
+    return next((b for b in blocks if b.get("@type") == schema_type), None)
+
+
+def test_breadcrumb_jsonld_on_nested_page(tmp_path):
+    """A non-root page emits BreadcrumbList JSON-LD with the page chain."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "seo-described.html")
+    blocks = _ld_blocks(soup)
+    crumbs = _block_of_type(blocks, "BreadcrumbList")
+    assert crumbs is not None
+    assert crumbs["@context"] == "https://schema.org"
+    items = crumbs["itemListElement"]
+    assert len(items) >= 2  # home + current page
+    assert items[0]["position"] == 1
+    assert items[-1]["name"]  # current page has a name
+    for item in items:
+        assert item["@type"] == "ListItem"
+
+
+def test_breadcrumb_jsonld_absent_on_root(tmp_path):
+    """The root document does NOT emit BreadcrumbList (it has no breadcrumb)."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "index.html")
+    blocks = _ld_blocks(soup)
+    assert _block_of_type(blocks, "BreadcrumbList") is None

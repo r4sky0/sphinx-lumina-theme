@@ -37,6 +37,9 @@
         {% if lumina_seo_description %}<meta name="twitter:description" content="{{ lumina_seo_description }}">{% endif %}
         {% if lumina_seo_og_image %}<meta name="twitter:image" content="{{ lumina_seo_og_image }}">{% endif %}
         {% if lumina_seo_twitter_site %}<meta name="twitter:site" content="{{ lumina_seo_twitter_site }}">{% endif %}
+        {% if lumina_seo_breadcrumb_jsonld %}
+            <script type="application/ld+json">{{ lumina_seo_breadcrumb_jsonld | safe }}</script>
+        {% endif %}
     {% endif %}
     <link rel="preload"
           as="font"

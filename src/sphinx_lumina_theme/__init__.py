@@ -529,6 +529,18 @@ def _add_context(app, pagename, templatename, context, doctree):
         twitter_handle = _seo.derive_twitter_handle(app.builder.theme_options)
         if twitter_handle:
             context["lumina_seo_twitter_site"] = twitter_handle
+        # JSON-LD: BreadcrumbList (only on non-root pages with parents)
+        parents = context.get("parents") or []
+        if pagename != app.config.root_doc:
+            crumbs = _seo.build_breadcrumb_jsonld(
+                parents=parents,
+                title=context.get("title", "") or pagename,
+                page_url=page_url,
+                site_url=app.config.html_baseurl or "",
+                site_name=app.config.project,
+            )
+            if crumbs:
+                context["lumina_seo_breadcrumb_jsonld"] = crumbs
         context["lumina_seo_enabled"] = True
     else:
         # When SEO is disabled, suppress the basic theme's canonical link by
