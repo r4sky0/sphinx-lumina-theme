@@ -77,6 +77,14 @@ Add Lucide icons to cards, sidebar items, and your logo.
 Live reload with sphinx-autobuild and the asset watcher.
 :::
 
+:::{grid-item-card} SEO and discoverability
+:link: seo
+:link-type: doc
+:icon: search-check
+:icon-style: featured
+Out-of-the-box meta tags, social cards, JSON-LD, sitemap, and `robots.txt`.
+:::
+
 ::::
 
 ```{toctree}
@@ -90,4 +98,5 @@ landing-page
 wide-layout
 icons
 development-workflow
+seo
 ```
