@@ -1,6 +1,5 @@
 """Tests for Lumina SEO primitives."""
 
-
 from bs4 import BeautifulSoup
 from conftest import copy_sample_docs
 from sphinx.application import Sphinx
@@ -44,6 +43,22 @@ def _build(
 
 def _soup(out_dir, page="index.html"):
     return BeautifulSoup((out_dir / page).read_text(), "html.parser")
+
+
+def test_should_emit_seo_default_true():
+    """No disable_seo key → SEO is emitted."""
+    from sphinx_lumina_theme._seo import should_emit_seo
+
+    assert should_emit_seo({}) is True
+    assert should_emit_seo({"disable_seo": "false"}) is True
+
+
+def test_should_emit_seo_disabled():
+    """disable_seo=true (case-insensitive) suppresses SEO emission."""
+    from sphinx_lumina_theme._seo import should_emit_seo
+
+    assert should_emit_seo({"disable_seo": "true"}) is False
+    assert should_emit_seo({"disable_seo": "TRUE"}) is False
 
 
 def test_seo_theme_options_accepted(tmp_path):
