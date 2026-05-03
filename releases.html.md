@@ -1,5 +1,22 @@
 # Releases
 
+## v1.41.0 (2026-05-03)
+
+### Features
+
+- **seo**: Add SEO discoverability primitives to the theme
+  ([#103](https://github.com/r4sky0/sphinx-lumina-theme/pull/103),
+  [`1ab5808`](https://github.com/r4sky0/sphinx-lumina-theme/commit/1ab5808b7502e49f1310e0c81df0a728d417d7b9))
+
+### Refactoring
+
+- Simplify mobile drawer dismissal (drop close X, add Escape)
+  ([#101](https://github.com/r4sky0/sphinx-lumina-theme/pull/101),
+  [`875310a`](https://github.com/r4sky0/sphinx-lumina-theme/commit/875310a14018b59207e2d2481c566c297fa1ea98))
+- Unify shadows behind elevation tokens and share overlay backdrop
+  ([#102](https://github.com/r4sky0/sphinx-lumina-theme/pull/102),
+  [`fa20f03`](https://github.com/r4sky0/sphinx-lumina-theme/commit/fa20f034695bcbd31527c3a8bbff87977e85992c))
+
 ## v1.40.0 (2026-05-02)
 
 ### Features
