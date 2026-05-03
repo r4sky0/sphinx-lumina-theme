@@ -243,3 +243,26 @@ def test_og_locale_from_language_config(tmp_path):
     tag = soup.find("meta", attrs={"property": "og:locale"})
     assert tag is not None
     assert tag["content"] == "de_DE"
+
+
+def test_disable_seo_suppresses_everything(tmp_path):
+    """disable_seo=true emits no description, theme-color, canonical, or OG tags."""
+    out = _build(
+        tmp_path,
+        options={"disable_seo": "true"},
+        baseurl="https://example.com/",
+    )
+    soup = _soup(out, "index.html")
+
+    assert soup.find("meta", attrs={"name": "description"}) is None
+    assert soup.find("meta", attrs={"name": "theme-color"}) is None
+    assert soup.find("link", attrs={"rel": "canonical"}) is None
+    assert soup.find("meta", attrs={"property": "og:title"}) is None
+    assert soup.find("meta", attrs={"property": "og:type"}) is None
+
+
+def test_seo_enabled_by_default(tmp_path):
+    """When disable_seo is unset, OG tags are emitted."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "index.html")
+    assert soup.find("meta", attrs={"property": "og:title"}) is not None
