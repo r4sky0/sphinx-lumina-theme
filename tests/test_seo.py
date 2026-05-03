@@ -519,3 +519,27 @@ def test_sitemap_disabled_when_seo_disabled(tmp_path):
         options={"disable_seo": "true"},
     )
     assert not (out / "sitemap.xml").exists()
+
+
+def test_noindex_meta_emitted(tmp_path):
+    """A page with noindex: true emits the robots meta tag."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "seo-noindex.html")
+    tag = soup.find("meta", attrs={"name": "robots"})
+    assert tag is not None
+    assert tag["content"] == "noindex"
+
+
+def test_noindex_excluded_from_sitemap(tmp_path):
+    """A noindex page does not appear in sitemap.xml."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    sitemap_text = (out / "sitemap.xml").read_text()
+    assert "seo-noindex.html" not in sitemap_text
+
+
+def test_noindex_meta_absent_on_normal_pages(tmp_path):
+    """Pages without the noindex flag don't emit robots noindex."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "index.html")
+    tag = soup.find("meta", attrs={"name": "robots"})
+    assert tag is None

@@ -19,6 +19,7 @@
         {% endif %}
     {% endif %}
     {% if lumina_seo_enabled %}
+        {% if lumina_seo_noindex %}<meta name="robots" content="noindex">{% endif %}
         {% if lumina_seo_description %}<meta name="description" content="{{ lumina_seo_description }}">{% endif %}
         {% if lumina_seo_keywords %}<meta name="keywords" content="{{ lumina_seo_keywords }}">{% endif %}
         {% if lumina_seo_theme_color %}<meta name="theme-color" content="{{ lumina_seo_theme_color }}">{% endif %}

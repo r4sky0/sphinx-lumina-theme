@@ -30,6 +30,7 @@ __all__ = [
     "build_website_jsonld",
     "derive_twitter_handle",
     "extract_description",
+    "is_noindex",
     "og_locale_for_language",
     "resolve_og_image",
     "should_emit_seo",
@@ -385,3 +386,12 @@ def build_website_jsonld(
     if description:
         data["description"] = description
     return _json.dumps(data, ensure_ascii=False)
+
+
+_TRUTHY = {"true", "1", "yes", "on"}
+
+
+def is_noindex(meta: Mapping[str, Any]) -> bool:
+    """Return True when the page front matter requests noindex."""
+    raw = meta.get("noindex", "")
+    return str(raw).strip().lower() in _TRUTHY

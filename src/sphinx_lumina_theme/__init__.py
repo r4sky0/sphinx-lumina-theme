@@ -532,6 +532,11 @@ def _add_context(app, pagename, templatename, context, doctree):
     # SEO metadata
     if _seo.should_emit_seo(app.builder.theme_options):
         page_meta = app.env.metadata.get(pagename, {})
+        if _seo.is_noindex(page_meta):
+            context["lumina_seo_noindex"] = True
+            no_sitemap = getattr(app.env, "_lumina_no_sitemap", set())
+            no_sitemap.add(pagename)
+            app.env._lumina_no_sitemap = no_sitemap
         description = _seo.extract_description(
             doctree=doctree,
             meta=page_meta,
@@ -639,6 +644,48 @@ def _add_context(app, pagename, templatename, context, doctree):
         return meta["template"]
 
 
+def _filter_sitemap_noindex(app, exception):
+    """Remove noindex pages from sitemap.xml after sphinx-sitemap writes it.
+
+    Implemented as a post-processor because sphinx-sitemap's URL collection
+    happens inside its own ``build-finished`` handler with no public hook
+    for exclusion. We rewrite the file in place, stripping ``<url>`` blocks
+    whose ``<loc>`` matches an excluded page.
+    """
+    if exception:
+        return
+    if app.builder.format != "html":
+        return
+    if not _seo.should_emit_seo(app.builder.theme_options):
+        return
+    excluded = getattr(app.env, "_lumina_no_sitemap", set())
+    if not excluded:
+        return
+    sitemap_path = Path(app.outdir) / app.config.sitemap_filename
+    if not sitemap_path.exists():
+        return
+
+    import xml.etree.ElementTree as ET
+
+    ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
+    ET.register_namespace("", ns)
+    tree = ET.parse(sitemap_path)
+    root = tree.getroot()
+
+    # The html builder always emits .html for page outputs; sphinx-sitemap
+    # uses the same suffix for sitemap entries.
+    excluded_suffixes = {f"{name}.html" for name in excluded}
+
+    for url_el in list(root.findall(f"{{{ns}}}url")):
+        loc_el = url_el.find(f"{{{ns}}}loc")
+        if loc_el is None or loc_el.text is None:
+            continue
+        if any(loc_el.text.endswith(s) for s in excluded_suffixes):
+            root.remove(url_el)
+
+    tree.write(sitemap_path, xml_declaration=True, encoding="utf-8")
+
+
 def _run_pagefind(app, exception):
     """Run Pagefind to index the built HTML for search."""
     if exception:
@@ -713,6 +760,7 @@ def setup(app):
     app.connect("builder-inited", _check_baseurl)
     app.connect("html-page-context", _add_context)
     app.connect("build-finished", _run_pagefind)
+    app.connect("build-finished", _filter_sitemap_noindex)
     return {
         "version": __version__,
         "parallel_read_safe": True,
