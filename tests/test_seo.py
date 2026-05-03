@@ -156,4 +156,5 @@ def test_extract_description_truncates_to_160_chars():
 
     result = extract_description(doctree=doc, meta={}, short_title="X")
     assert result is not None
-    assert len(result) <= 163  # 160 + ellipsis
+    assert len(result) <= 160
+    assert result.endswith("…")

@@ -8,7 +8,10 @@ be injected into the Jinja template context.
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from docutils import nodes
 
 # Minimum prose length (characters) for a paragraph to be considered a
 # valid description fallback. Avoids picking up taglines like "Quick start.".
@@ -30,7 +33,11 @@ def should_emit_seo(theme_options: Mapping[str, Any]) -> bool:
     return str(theme_options.get("disable_seo", "false")).lower() != "true"
 
 
-def extract_description(doctree, meta, short_title) -> str | None:
+def extract_description(
+    doctree: nodes.document | None,
+    meta: Mapping[str, Any],
+    short_title: str | None,
+) -> str | None:
     """Return a meta description for a page, or None if no source qualifies.
 
     Fallback chain:
@@ -61,7 +68,7 @@ def _truncate(text: str) -> str:
     return text[: _MAX_DESC_LEN - 1].rstrip() + "…"
 
 
-def _first_prose_paragraph(doctree) -> str | None:
+def _first_prose_paragraph(doctree: nodes.document) -> str | None:
     """Walk the doctree, return the first paragraph node that qualifies."""
     from docutils import nodes
 
