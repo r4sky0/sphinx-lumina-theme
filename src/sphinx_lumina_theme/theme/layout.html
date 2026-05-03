@@ -43,6 +43,9 @@
         {% if lumina_seo_article_jsonld %}
             <script type="application/ld+json">{{ lumina_seo_article_jsonld | safe }}</script>
         {% endif %}
+        {% if lumina_seo_website_jsonld %}
+            <script type="application/ld+json">{{ lumina_seo_website_jsonld | safe }}</script>
+        {% endif %}
     {% endif %}
     <link rel="preload"
           as="font"

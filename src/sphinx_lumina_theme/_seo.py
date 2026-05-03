@@ -27,6 +27,7 @@ _MAX_DESC_LEN = 160
 __all__ = [
     "build_article_jsonld",
     "build_breadcrumb_jsonld",
+    "build_website_jsonld",
     "derive_twitter_handle",
     "extract_description",
     "og_locale_for_language",
@@ -349,4 +350,38 @@ def build_article_jsonld(
     if date_modified:
         data["dateModified"] = date_modified
 
+    return _json.dumps(data, ensure_ascii=False)
+
+
+def build_website_jsonld(
+    *,
+    site_url: str,
+    site_name: str,
+    description: str | None = None,
+) -> str | None:
+    """Build a WebSite JSON-LD string with a SearchAction.
+
+    Returns None when ``site_url`` is empty (a relative WebSite URL is invalid).
+    The SearchAction points at the on-site search page; Lumina's search modal
+    accepts ``?q=`` so the SearchAction template lines up.
+    """
+    if not site_url:
+        return None
+    base = site_url.rstrip("/") + "/"
+    data: dict[str, Any] = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": site_name,
+        "url": base,
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": f"{base}search.html?q={{search_term_string}}",
+            },
+            "query-input": "required name=search_term_string",
+        },
+    }
+    if description:
+        data["description"] = description
     return _json.dumps(data, ensure_ascii=False)

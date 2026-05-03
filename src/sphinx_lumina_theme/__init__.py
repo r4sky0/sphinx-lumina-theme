@@ -560,6 +560,15 @@ def _add_context(app, pagename, templatename, context, doctree):
                 date_modified=context.get("last_updated"),
             )
             context["lumina_seo_article_jsonld"] = article_json
+        # JSON-LD: WebSite + SearchAction (root page only, requires baseurl)
+        if pagename == app.config.root_doc and app.config.html_baseurl:
+            site_json = _seo.build_website_jsonld(
+                site_url=app.config.html_baseurl,
+                site_name=app.config.project,
+                description=description,
+            )
+            if site_json:
+                context["lumina_seo_website_jsonld"] = site_json
         context["lumina_seo_enabled"] = True
     else:
         # When SEO is disabled, suppress the basic theme's canonical link by

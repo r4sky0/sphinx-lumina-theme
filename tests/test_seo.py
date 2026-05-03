@@ -463,3 +463,34 @@ def test_techarticle_author_falls_back_to_project(tmp_path):
     article = _block_of_type(blocks, "TechArticle")
     assert article is not None
     assert article["author"]["name"] == "Lumina Docs"
+
+
+def test_website_jsonld_on_root(tmp_path):
+    """The root page emits WebSite JSON-LD with a SearchAction."""
+    out = _build(tmp_path, baseurl="https://example.com/", project="Lumina Docs")
+    soup = _soup(out, "index.html")
+    blocks = _ld_blocks(soup)
+    site = _block_of_type(blocks, "WebSite")
+    assert site is not None
+    assert site["@context"] == "https://schema.org"
+    assert site["name"] == "Lumina Docs"
+    assert site["url"] == "https://example.com/"
+    action = site["potentialAction"]
+    assert action["@type"] == "SearchAction"
+    assert "{search_term_string}" in action["target"]["urlTemplate"]
+
+
+def test_website_jsonld_absent_on_subpages(tmp_path):
+    """Only the root page emits WebSite JSON-LD."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "seo-described.html")
+    blocks = _ld_blocks(soup)
+    assert _block_of_type(blocks, "WebSite") is None
+
+
+def test_website_jsonld_absent_without_baseurl(tmp_path):
+    """Without html_baseurl, WebSite JSON-LD is skipped (URL would be relative)."""
+    out = _build(tmp_path)
+    soup = _soup(out, "index.html")
+    blocks = _ld_blocks(soup)
+    assert _block_of_type(blocks, "WebSite") is None
