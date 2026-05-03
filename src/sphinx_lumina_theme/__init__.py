@@ -489,13 +489,16 @@ def _add_context(app, pagename, templatename, context, doctree):
         context["lumina_seo_theme_color"] = app.builder.theme_options.get(
             "accent_color", "#10b981"
         )
-        # `pageurl` is set by Sphinx's standard html-page-context handler
-        # when html_baseurl is configured. It already includes the suffix.
-        page_url = context.get("pageurl", "")
-        if page_url:
-            context["lumina_seo_canonical"] = page_url
+        # `pageurl` is set by Sphinx's standard html-page-context handler when
+        # html_baseurl is configured. Sphinx's basic/layout.html emits its own
+        # `<link rel="canonical">` from this — we leave that emission in place
+        # (no duplicate) and reuse the same value for og:url etc. in later tasks.
+        context["lumina_seo_page_url"] = context.get("pageurl", "")
         context["lumina_seo_enabled"] = True
     else:
+        # When SEO is disabled, suppress the basic theme's canonical link by
+        # clearing pageurl. (Basic's canonical emission is gated on `{% if pageurl %}`.)
+        context["pageurl"] = ""
         context["lumina_seo_enabled"] = False
 
     if "template" in meta:
