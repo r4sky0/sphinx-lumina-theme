@@ -339,3 +339,50 @@ def test_og_image_absent_when_no_source(tmp_path):
     out = _build(tmp_path, baseurl="https://example.com/")
     soup = _soup(out, "index.html")
     assert soup.find("meta", attrs={"property": "og:image"}) is None
+
+
+def test_twitter_card_summary_large_image_with_image(tmp_path):
+    """When og:image is present, Twitter card uses summary_large_image."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        options={"og_image": "card.png", "twitter_site": "@example"},
+    )
+    soup = _soup(out, "index.html")
+
+    def tw(name):
+        tag = soup.find("meta", attrs={"name": f"twitter:{name}"})
+        return tag["content"] if tag else None
+
+    assert tw("card") == "summary_large_image"
+    assert tw("title")
+    assert tw("description")
+    assert tw("image")
+    assert tw("site") == "@example"
+
+
+def test_twitter_card_summary_without_image(tmp_path):
+    """No image → Twitter card downgrades to summary."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "index.html")
+    tag = soup.find("meta", attrs={"name": "twitter:card"})
+    assert tag is not None
+    assert tag["content"] == "summary"
+    assert soup.find("meta", attrs={"name": "twitter:image"}) is None
+
+
+def test_twitter_site_from_social_links(tmp_path):
+    """Twitter handle falls back to social_links Twitter entry."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        options={
+            "social_links": [
+                {"icon": "twitter", "url": "https://twitter.com/luminadocs"},
+            ],
+        },
+    )
+    soup = _soup(out, "index.html")
+    tag = soup.find("meta", attrs={"name": "twitter:site"})
+    assert tag is not None
+    assert tag["content"] == "@luminadocs"

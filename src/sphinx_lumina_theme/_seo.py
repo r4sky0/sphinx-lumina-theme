@@ -24,6 +24,7 @@ _MAX_DESC_LEN = 160
 
 
 __all__ = [
+    "derive_twitter_handle",
     "extract_description",
     "og_locale_for_language",
     "resolve_og_image",
@@ -194,3 +195,46 @@ def resolve_og_image(
     # an absolute URL, but a relative one is better than nothing for local
     # previews and won't produce a "broken image" upstream.
     return rel, alt or None
+
+
+def derive_twitter_handle(theme_options: Mapping[str, Any]) -> str | None:
+    """Return a Twitter/X handle (with leading @) or None.
+
+    Looks at ``twitter_site`` first, then any Twitter/X entry in
+    ``social_links`` (icon == "twitter" or "x").
+    """
+    explicit = str(theme_options.get("twitter_site", "")).strip()
+    if explicit:
+        return explicit if explicit.startswith("@") else f"@{explicit}"
+
+    social = theme_options.get("social_links") or []
+    if not isinstance(social, list):
+        return None
+    for entry in social:
+        if not isinstance(entry, dict):
+            continue
+        icon = str(entry.get("icon", "")).strip().lower()
+        if icon not in ("twitter", "x"):
+            continue
+        url = str(entry.get("url", "")).strip()
+        handle = _handle_from_twitter_url(url)
+        if handle:
+            return handle
+    return None
+
+
+def _handle_from_twitter_url(url: str) -> str | None:
+    """Extract @handle from a Twitter/X profile URL like https://twitter.com/foo."""
+    if not url:
+        return None
+    for prefix in (
+        "https://twitter.com/",
+        "https://www.twitter.com/",
+        "https://x.com/",
+        "https://www.x.com/",
+    ):
+        if url.startswith(prefix):
+            tail = url[len(prefix) :].strip("/").split("/", 1)[0]
+            if tail:
+                return f"@{tail}"
+    return None

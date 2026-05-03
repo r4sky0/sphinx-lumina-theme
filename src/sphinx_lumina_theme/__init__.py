@@ -523,6 +523,12 @@ def _add_context(app, pagename, templatename, context, doctree):
             context["lumina_seo_og_image"] = og_image
             if og_image_alt:
                 context["lumina_seo_og_image_alt"] = og_image_alt
+        context["lumina_seo_twitter_card"] = (
+            "summary_large_image" if og_image else "summary"
+        )
+        twitter_handle = _seo.derive_twitter_handle(app.builder.theme_options)
+        if twitter_handle:
+            context["lumina_seo_twitter_site"] = twitter_handle
         context["lumina_seo_enabled"] = True
     else:
         # When SEO is disabled, suppress the basic theme's canonical link by
