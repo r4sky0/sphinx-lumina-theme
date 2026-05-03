@@ -337,6 +337,59 @@ def _section_toctree(app, pagename, section, maxdepth, collapse):
     return "\n".join(fragments)
 
 
+_SPHINX_SITEMAP_DEFAULT_URL_SCHEME = "{lang}{version}{link}"
+
+
+def _apply_sitemap_defaults(app, config):
+    """Set sphinx-sitemap defaults the user hasn't overridden.
+
+    Runs at ``config-inited``, before the builder is created — so we read
+    theme options from ``config.html_theme_options`` (a dict) rather than
+    ``app.builder.theme_options``. When SEO is disabled, also remove
+    sphinx_sitemap from extensions so no sitemap is generated.
+    """
+    theme_options = config.html_theme_options or {}
+    if not _seo.should_emit_seo(theme_options):
+        if "sphinx_sitemap" in config.extensions:
+            config.extensions.remove("sphinx_sitemap")
+        return
+
+    # When sphinx-sitemap is loaded, it registers ``sitemap_url_scheme``
+    # with default ``{lang}{version}{link}``. Override that default to
+    # ``{link}`` so single-language docs without a configured language
+    # produce ``<baseurl>/index.html`` rather than ``<baseurl>/en/index.html``.
+    current_scheme = getattr(config, "sitemap_url_scheme", None)
+    if current_scheme in (None, "", _SPHINX_SITEMAP_DEFAULT_URL_SCHEME):
+        config.sitemap_url_scheme = "{link}"
+    if not getattr(config, "sitemap_filename", None):
+        config.sitemap_filename = "sitemap.xml"
+
+
+def _suppress_sitemap_when_seo_disabled(app, exception):
+    """Delete sitemap.xml after build if SEO is disabled.
+
+    sphinx-sitemap may be active either because we auto-loaded it or
+    because the user added it to ``extensions`` in ``conf.py``. Either
+    way, when SEO is disabled we remove the generated sitemap so the
+    output stays consistent with ``disable_seo=true``.
+    """
+    if exception is not None:
+        return
+    if app.builder.format != "html":
+        return
+    if _seo.should_emit_seo(app.builder.theme_options):
+        return
+    sitemap_name = (
+        getattr(app.config, "sitemap_filename", "sitemap.xml") or "sitemap.xml"
+    )
+    sitemap_path = Path(app.outdir) / sitemap_name
+    if sitemap_path.exists():
+        try:
+            sitemap_path.unlink()
+        except OSError:
+            pass
+
+
 def _check_baseurl(app):
     """Warn once at build start if html_baseurl is missing or non-absolute.
 
@@ -646,6 +699,16 @@ def setup(app):
     app.add_js_file("lumina.js", loading_method="defer", priority=900)
     app.add_directive("card", LuminaCardDirective, override=True)
     app.add_directive("grid-item-card", LuminaGridItemCardDirective, override=True)
+    # sphinx-sitemap auto-load. Themes load via the ``sphinx.html_themes``
+    # entry point during ``builder.init_templates()`` — i.e. *after*
+    # ``config-inited`` has already fired. So we call the defaults helper
+    # directly with the live config and additionally connect to
+    # ``config-inited`` to cover the (rarer) case where the user lists
+    # the theme as a regular extension and our setup runs before it.
+    app.setup_extension("sphinx_sitemap")
+    app.connect("config-inited", _apply_sitemap_defaults)
+    _apply_sitemap_defaults(app, app.config)
+    app.connect("build-finished", _suppress_sitemap_when_seo_disabled)
     app.connect("builder-inited", _apply_code_style)
     app.connect("builder-inited", _check_baseurl)
     app.connect("html-page-context", _add_context)

@@ -494,3 +494,28 @@ def test_website_jsonld_absent_without_baseurl(tmp_path):
     soup = _soup(out, "index.html")
     blocks = _ld_blocks(soup)
     assert _block_of_type(blocks, "WebSite") is None
+
+
+def test_sitemap_xml_when_baseurl_set(tmp_path):
+    """sitemap.xml is produced when html_baseurl is configured."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    sitemap = out / "sitemap.xml"
+    assert sitemap.exists(), "sitemap.xml should be generated"
+    content = sitemap.read_text()
+    assert "https://example.com/index.html" in content
+
+
+def test_sitemap_absent_without_baseurl(tmp_path):
+    """sphinx-sitemap skips generation without html_baseurl."""
+    out = _build(tmp_path)
+    assert not (out / "sitemap.xml").exists()
+
+
+def test_sitemap_disabled_when_seo_disabled(tmp_path):
+    """disable_seo=true also skips sitemap generation."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        options={"disable_seo": "true"},
+    )
+    assert not (out / "sitemap.xml").exists()
