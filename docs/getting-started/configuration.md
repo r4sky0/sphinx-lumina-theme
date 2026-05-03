@@ -327,6 +327,40 @@ These options enable the "Edit on GitHub" link in the table of contents sidebar.
   - Custom text displayed in the page footer.
 ```
 
+### SEO and social previews
+
+See {doc}`/guides/seo` for the full picture, including per-page front-matter overrides and the `html_baseurl` requirement for canonical URLs and the sitemap.
+
+```{list-table}
+:header-rows: 1
+:widths: 25 15 15 45
+
+* - Option
+  - Type
+  - Default
+  - Description
+* - `og_image`
+  - string
+  - `""`
+  - Default Open Graph / Twitter image. Filename in `_static/` (e.g. `og-card.png`) or an absolute URL. Falls back to `html_logo` when unset and the logo is a raster format.
+* - `og_image_alt`
+  - string
+  - `""`
+  - Alt text for the default `og_image`.
+* - `twitter_site`
+  - string
+  - `""`
+  - Twitter/X handle (with or without leading `@`). Falls back to a Twitter/X entry in `social_links` when unset.
+* - `seo_keywords`
+  - string
+  - `""`
+  - Sitewide `<meta name="keywords">` value. Page-level `keywords` front matter overrides this.
+* - `disable_seo`
+  - string
+  - `"false"`
+  - Set to `"true"` to suppress all SEO metadata, JSON-LD, sitemap generation, and `robots.txt`.
+```
+
 ## Accent Colors
 
 The `accent_color` option controls links, active navigation items, buttons, and other interactive elements. It applies to both light and dark modes automatically.
