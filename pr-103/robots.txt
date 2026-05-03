@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://r4sky0.github.io/sphinx-lumina-theme/sitemap.xml
+Sitemap: https://r4sky0.github.io/sphinx-lumina-theme/pr-103/sitemap.xml
