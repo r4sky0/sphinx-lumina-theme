@@ -347,6 +347,18 @@ See {doc}`/guides/seo` for the full picture, including per-page front-matter ove
   - string
   - `""`
   - Alt text for the default `og_image`.
+* - `og_image_width`
+  - string
+  - `""`
+  - Width in pixels of `og_image`. Emit `1200` for the standard social card to help Facebook, LinkedIn, and Slack render it without flicker.
+* - `og_image_height`
+  - string
+  - `""`
+  - Height in pixels of `og_image`. Pair with `og_image_width` (`630` for the standard 1200×630 social card).
+* - `publisher_logo`
+  - string
+  - `""`
+  - Square-ish raster logo used in `TechArticle` JSON-LD `publisher.logo`. Filename in `_static/` or absolute URL. Distinct from `og_image` because Google requires the publisher logo to be near-square (a 1200×630 banner disqualifies the page from Rich Results). Falls back to `html_logo` when raster.
 * - `twitter_site`
   - string
   - `""`

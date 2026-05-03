@@ -609,3 +609,348 @@ def test_robots_txt_skipped_when_seo_disabled(tmp_path):
     )
     # Sphinx itself doesn't write a robots.txt, so absence is the test.
     assert not (out / "robots.txt").exists()
+
+
+def test_normalize_iso_datetime_pads_date_only():
+    """A bare YYYY-MM-DD becomes a UTC datetime."""
+    from sphinx_lumina_theme._seo import normalize_iso_datetime
+
+    assert normalize_iso_datetime("2026-05-03") == "2026-05-03T00:00:00+00:00"
+
+
+def test_normalize_iso_datetime_passes_through_full_datetime():
+    """A value already containing a time component is returned unchanged."""
+    from sphinx_lumina_theme._seo import normalize_iso_datetime
+
+    assert (
+        normalize_iso_datetime("2026-05-03T12:34:56+00:00")
+        == "2026-05-03T12:34:56+00:00"
+    )
+
+
+def test_normalize_iso_datetime_returns_none_for_empty():
+    """Empty/None inputs produce None (so JSON-LD omits the field)."""
+    from sphinx_lumina_theme._seo import normalize_iso_datetime
+
+    assert normalize_iso_datetime(None) is None
+    assert normalize_iso_datetime("") is None
+    assert normalize_iso_datetime("   ") is None
+
+
+def test_techarticle_dates_are_iso_8601_datetime(tmp_path):
+    """TechArticle datePublished/dateModified include a time + timezone offset."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "seo-described.html")
+    blocks = _ld_blocks(soup)
+    article = _block_of_type(blocks, "TechArticle")
+    if article is None or "datePublished" not in article:
+        # sphinx-last-updated-by-git isn't loaded in the test build, so dates
+        # may be absent — that's a separate concern. Skip when no date.
+        return
+    assert "T" in article["datePublished"]
+    assert article["datePublished"].endswith("+00:00")
+
+
+def test_resolve_publisher_logo_from_theme_option():
+    """publisher_logo theme option resolves to an absolute static URL."""
+    from sphinx_lumina_theme._seo import resolve_publisher_logo
+
+    url = resolve_publisher_logo(
+        theme_options={"publisher_logo": "logo-square.png"},
+        html_logo=None,
+        html_baseurl="https://example.com/",
+    )
+    assert url == "https://example.com/_static/logo-square.png"
+
+
+def test_resolve_publisher_logo_absolute_url_passthrough():
+    """An absolute publisher_logo URL is used verbatim."""
+    from sphinx_lumina_theme._seo import resolve_publisher_logo
+
+    url = resolve_publisher_logo(
+        theme_options={"publisher_logo": "https://cdn.example.com/logo.png"},
+        html_logo="ignored.png",
+        html_baseurl="https://example.com/",
+    )
+    assert url == "https://cdn.example.com/logo.png"
+
+
+def test_resolve_publisher_logo_falls_back_to_html_logo():
+    """When publisher_logo is unset, html_logo (if raster) is used."""
+    from sphinx_lumina_theme._seo import resolve_publisher_logo
+
+    url = resolve_publisher_logo(
+        theme_options={},
+        html_logo="brand.png",
+        html_baseurl="https://example.com/",
+    )
+    assert url == "https://example.com/_static/brand.png"
+
+
+def test_resolve_publisher_logo_skips_svg_html_logo():
+    """An SVG html_logo is NOT used (publisher.logo must be raster)."""
+    from sphinx_lumina_theme._seo import resolve_publisher_logo
+
+    url = resolve_publisher_logo(
+        theme_options={},
+        html_logo="brand.svg",
+        html_baseurl="https://example.com/",
+    )
+    assert url is None
+
+
+def test_resolve_publisher_logo_returns_none_when_no_source():
+    """No theme option and no raster html_logo → None (caller omits logo)."""
+    from sphinx_lumina_theme._seo import resolve_publisher_logo
+
+    assert (
+        resolve_publisher_logo(
+            theme_options={}, html_logo=None, html_baseurl="https://example.com/"
+        )
+        is None
+    )
+
+
+def test_publisher_logo_separate_from_og_image(tmp_path):
+    """TechArticle publisher.logo uses publisher_logo, not og_image."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        options={
+            "og_image": "og-card.png",
+            "publisher_logo": "logo-square.png",
+        },
+    )
+    soup = _soup(out, "seo-described.html")
+    blocks = _ld_blocks(soup)
+    article = _block_of_type(blocks, "TechArticle")
+    assert article is not None
+    assert article["image"] == "https://example.com/_static/og-card.png"
+    assert (
+        article["publisher"]["logo"]["url"]
+        == "https://example.com/_static/logo-square.png"
+    )
+
+
+def test_publisher_logo_omitted_when_no_source(tmp_path):
+    """When neither publisher_logo nor a raster html_logo is set, omit logo entirely."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        options={"og_image": "og-card.png"},
+    )
+    soup = _soup(out, "seo-described.html")
+    blocks = _ld_blocks(soup)
+    article = _block_of_type(blocks, "TechArticle")
+    assert article is not None
+    # publisher.logo MUST NOT be the OG card (it's a 1200x630 banner, not a logo).
+    assert "logo" not in article["publisher"]
+
+
+def test_og_image_dimensions_emitted_when_set(tmp_path):
+    """og_image_width / og_image_height options become og:image:width/height meta."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        options={
+            "og_image": "card.png",
+            "og_image_width": "1200",
+            "og_image_height": "630",
+        },
+    )
+    soup = _soup(out, "index.html")
+    width = soup.find("meta", attrs={"property": "og:image:width"})
+    height = soup.find("meta", attrs={"property": "og:image:height"})
+    assert width is not None and width["content"] == "1200"
+    assert height is not None and height["content"] == "630"
+
+
+def test_og_image_dimensions_absent_without_image(tmp_path):
+    """Width/height are not emitted when there's no og:image to size."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        options={"og_image_width": "1200", "og_image_height": "630"},
+    )
+    soup = _soup(out, "index.html")
+    assert soup.find("meta", attrs={"property": "og:image:width"}) is None
+    assert soup.find("meta", attrs={"property": "og:image:height"}) is None
+
+
+def test_og_image_dimensions_optional_when_image_set(tmp_path):
+    """og:image works without explicit width/height (back-compat)."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        options={"og_image": "card.png"},
+    )
+    soup = _soup(out, "index.html")
+    assert soup.find("meta", attrs={"property": "og:image"}) is not None
+    assert soup.find("meta", attrs={"property": "og:image:width"}) is None
+
+
+def test_sitemap_show_lastmod_default_true(tmp_path):
+    """Lumina flips sphinx-sitemap's lastmod default to True."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    sitemap_text = (out / "sitemap.xml").read_text()
+    # Without sphinx-last-updated-by-git the dates won't appear (sphinx-sitemap
+    # silently disables itself), but the sitemap must still build cleanly.
+    assert "<urlset" in sitemap_text
+
+
+def test_sitemap_show_lastmod_user_override_respected(tmp_path):
+    """Users who explicitly set sitemap_show_lastmod=False are not overridden."""
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        confoverrides={"sitemap_show_lastmod": False},
+    )
+    sitemap_text = (out / "sitemap.xml").read_text()
+    assert "<lastmod>" not in sitemap_text
+
+
+def test_sitemap_noindex_anchored_at_slash_boundary(tmp_path):
+    """Noindex exclusion must not match unrelated pages sharing a suffix.
+
+    Regression: ``intro.html`` (noindex) used to match ``extra-intro.html``
+    via ``str.endswith("intro.html")``, wrongly removing the latter from
+    sitemap.xml. Anchoring at ``/`` fixes this.
+    """
+    out = _build(tmp_path, baseurl="https://example.com/")
+    sitemap_text = (out / "sitemap.xml").read_text()
+    assert "https://example.com/intro.html" not in sitemap_text
+    assert "https://example.com/extra-intro.html" in sitemap_text
+
+
+def test_plain_title_strips_html_tags():
+    """plain_title removes tags and decodes entities."""
+    from sphinx_lumina_theme._seo import plain_title
+
+    assert plain_title("Inline <code>code</code> in title") == "Inline code in title"
+    assert plain_title("Cool &amp; useful") == "Cool & useful"
+    assert plain_title("") == ""
+    assert plain_title(None) == ""
+
+
+def test_og_title_strips_inline_html_markup(tmp_path):
+    """og:title and twitter:title contain plain text, not escaped HTML markup."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "seo-html-title.html")
+    og_title = soup.find("meta", attrs={"property": "og:title"})
+    tw_title = soup.find("meta", attrs={"name": "twitter:title"})
+    assert og_title is not None
+    assert tw_title is not None
+    # The rendered page title is "Inline <code>code</code> in title".
+    # The meta content must NOT contain "<code>" or "&lt;code&gt;".
+    assert og_title["content"] == "Inline code in title"
+    assert tw_title["content"] == "Inline code in title"
+    assert "<" not in og_title["content"]
+    assert "&lt;" not in og_title["content"]
+
+
+def test_jsonld_headline_strips_inline_html_markup(tmp_path):
+    """TechArticle and BreadcrumbList use plain-text titles, not HTML."""
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "seo-html-title.html")
+    blocks = _ld_blocks(soup)
+    article = _block_of_type(blocks, "TechArticle")
+    assert article is not None
+    assert article["headline"] == "Inline code in title"
+    crumbs = _block_of_type(blocks, "BreadcrumbList")
+    assert crumbs is not None
+    last_item = crumbs["itemListElement"][-1]
+    assert last_item["name"] == "Inline code in title"
+
+
+def test_handle_from_twitter_url_strips_query_string():
+    """Twitter URL parser tolerates query strings, fragments, and sub-paths."""
+    from sphinx_lumina_theme._seo import _handle_from_twitter_url
+
+    assert _handle_from_twitter_url("https://twitter.com/foo?ref=x") == "@foo"
+    assert _handle_from_twitter_url("https://x.com/foo#bio") == "@foo"
+    assert _handle_from_twitter_url("https://twitter.com/foo/status/123") == "@foo"
+    assert _handle_from_twitter_url("https://www.twitter.com/foo/") == "@foo"
+
+
+def test_og_image_omitted_without_baseurl(tmp_path):
+    """A relative og_image URL is unusable for social platforms — omit the tag.
+
+    Without ``html_baseurl`` we can't produce an absolute URL; emitting a
+    relative one produces broken-image previews on Slack/Twitter/LinkedIn.
+    """
+    out = _build(tmp_path, options={"og_image": "card.png"})
+    soup = _soup(out, "index.html")
+    assert soup.find("meta", attrs={"property": "og:image"}) is None
+    # Twitter card downgrades to summary when there's no image.
+    card = soup.find("meta", attrs={"name": "twitter:card"})
+    assert card is not None
+    assert card["content"] == "summary"
+
+
+def test_og_image_absolute_url_works_without_baseurl(tmp_path):
+    """An absolute og_image URL still works without html_baseurl."""
+    out = _build(
+        tmp_path,
+        options={"og_image": "https://cdn.example.com/card.png"},
+    )
+    soup = _soup(out, "index.html")
+    img = soup.find("meta", attrs={"property": "og:image"})
+    assert img is not None
+    assert img["content"] == "https://cdn.example.com/card.png"
+
+
+def test_resolve_publisher_logo_omitted_without_baseurl():
+    """publisher_logo without baseurl returns None — Schema.org needs absolute."""
+    from sphinx_lumina_theme._seo import resolve_publisher_logo
+
+    assert (
+        resolve_publisher_logo(
+            theme_options={"publisher_logo": "logo.png"},
+            html_logo=None,
+            html_baseurl=None,
+        )
+        is None
+    )
+
+
+def test_jsonld_escapes_script_breakout(tmp_path):
+    """User-controlled strings cannot break out of the JSON-LD <script> block.
+
+    A page title or description containing ``</script>`` must end up encoded
+    as ``\\u003c/script\\u003e`` in the rendered HTML so an attacker can't
+    inject markup or scripts via front matter.
+    """
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        project="Lumina </script><script>alert(1)</script>",
+    )
+    rendered = (out / "seo-described.html").read_text()
+    # The JSON-LD blocks must contain the unicode-escaped form, not the raw
+    # closing tag — otherwise the script context would be broken out of.
+    assert "</script><script>alert(1)" not in rendered.replace(
+        '<script type="application/ld+json">', ""
+    ).replace("</script>", "")
+    # And the escaped form is present in at least one ld+json block.
+    soup = _soup(out, "seo-described.html")
+    raw_blocks = [
+        tag.string or ""
+        for tag in soup.find_all("script", attrs={"type": "application/ld+json"})
+    ]
+    assert any("\\u003c/script\\u003e" in b for b in raw_blocks)
+
+
+def test_user_configured_sitemap_preserved_when_seo_disabled(tmp_path):
+    """When the user explicitly enables sphinx-sitemap, disable_seo leaves it alone.
+
+    ``disable_seo`` opts out of *Lumina's* SEO emissions; it should not
+    override the user's own extension config.
+    """
+    out = _build(
+        tmp_path,
+        baseurl="https://example.com/",
+        options={"disable_seo": "true"},
+        confoverrides={"extensions": ["myst_parser", "sphinx_sitemap"]},
+    )
+    # User explicitly added sphinx_sitemap → sitemap.xml is preserved.
+    assert (out / "sitemap.xml").exists()

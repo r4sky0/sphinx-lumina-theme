@@ -362,21 +362,31 @@ def _apply_sitemap_defaults(app, config):
         config.sitemap_url_scheme = "{link}"
     if not getattr(config, "sitemap_filename", None):
         config.sitemap_filename = "sitemap.xml"
+    # Emit <lastmod> per URL when sphinx-last-updated-by-git is loaded
+    # (it populates env.git_last_updated, which sphinx-sitemap reads).
+    # Respect an explicit user choice (in conf.py or via -D).
+    user_set_lastmod = "sitemap_show_lastmod" in getattr(
+        config, "_raw_config", {}
+    ) or "sitemap_show_lastmod" in getattr(config, "_overrides", {})
+    if not user_set_lastmod:
+        config.sitemap_show_lastmod = "sphinx_last_updated_by_git" in app.extensions
 
 
 def _suppress_sitemap_when_seo_disabled(app, exception):
     """Delete sitemap.xml after build if SEO is disabled.
 
-    sphinx-sitemap may be active either because we auto-loaded it or
-    because the user added it to ``extensions`` in ``conf.py``. Either
-    way, when SEO is disabled we remove the generated sitemap so the
-    output stays consistent with ``disable_seo=true``.
+    Only deletes when Lumina was the one to auto-load ``sphinx-sitemap``.
+    If the user explicitly added it to ``extensions`` in ``conf.py``, we
+    leave the generated sitemap alone — ``disable_seo`` is meant to opt
+    out of Lumina's emissions, not override the user's own extension config.
     """
     if exception is not None:
         return
     if app.builder.format != "html":
         return
     if _seo.should_emit_seo(app.builder.theme_options):
+        return
+    if not getattr(app, "_lumina_sitemap_auto_loaded", False):
         return
     sitemap_name = (
         getattr(app.config, "sitemap_filename", "sitemap.xml") or "sitemap.xml"
@@ -564,9 +574,6 @@ def _add_context(app, pagename, templatename, context, doctree):
         page_meta = app.env.metadata.get(pagename, {})
         if _seo.is_noindex(page_meta):
             context["lumina_seo_noindex"] = True
-            no_sitemap = getattr(app.env, "_lumina_no_sitemap", set())
-            no_sitemap.add(pagename)
-            app.env._lumina_no_sitemap = no_sitemap
         description = _seo.extract_description(
             doctree=doctree,
             meta=page_meta,
@@ -590,7 +597,8 @@ def _add_context(app, pagename, templatename, context, doctree):
         if not og_type:
             og_type = "website" if pagename == app.config.root_doc else "article"
         context["lumina_seo_og_type"] = og_type
-        context["lumina_seo_og_title"] = context.get("title", "") or app.config.project
+        og_title = _seo.plain_title(context.get("title", "")) or app.config.project
+        context["lumina_seo_og_title"] = og_title
         context["lumina_seo_og_site_name"] = app.config.project
         context["lumina_seo_og_locale"] = _seo.og_locale_for_language(
             app.config.language
@@ -611,6 +619,21 @@ def _add_context(app, pagename, templatename, context, doctree):
             context["lumina_seo_og_image"] = og_image
             if og_image_alt:
                 context["lumina_seo_og_image_alt"] = og_image_alt
+            og_image_w = str(
+                app.builder.theme_options.get("og_image_width", "")
+            ).strip()
+            og_image_h = str(
+                app.builder.theme_options.get("og_image_height", "")
+            ).strip()
+            if og_image_w:
+                context["lumina_seo_og_image_width"] = og_image_w
+            if og_image_h:
+                context["lumina_seo_og_image_height"] = og_image_h
+        publisher_logo = _seo.resolve_publisher_logo(
+            theme_options=app.builder.theme_options,
+            html_logo=app.config.html_logo,
+            html_baseurl=app.config.html_baseurl,
+        )
         context["lumina_seo_twitter_card"] = (
             "summary_large_image" if og_image else "summary"
         )
@@ -619,10 +642,11 @@ def _add_context(app, pagename, templatename, context, doctree):
             context["lumina_seo_twitter_site"] = twitter_handle
         # JSON-LD: BreadcrumbList (only on non-root pages with parents)
         parents = context.get("parents") or []
+        plain_page_title = _seo.plain_title(context.get("title", "")) or pagename
         if pagename != app.config.root_doc:
             crumbs = _seo.build_breadcrumb_jsonld(
                 parents=parents,
-                title=context.get("title", "") or pagename,
+                title=plain_page_title,
                 page_url=page_url,
                 site_url=app.config.html_baseurl or "",
                 site_name=app.config.project,
@@ -637,13 +661,14 @@ def _add_context(app, pagename, templatename, context, doctree):
             if author == "Author name not set":
                 author = None
             article_json = _seo.build_article_jsonld(
-                headline=context.get("title", "") or pagename,
+                headline=plain_page_title,
                 description=description,
                 page_url=page_url,
                 site_url=app.config.html_baseurl or "",
                 site_name=app.config.project,
                 author=author,
                 image_url=context.get("lumina_seo_og_image"),
+                publisher_logo_url=publisher_logo,
                 date_published=_iso_last_updated(app, pagename),
                 date_modified=_iso_last_updated(app, pagename),
             )
@@ -681,6 +706,10 @@ def _filter_sitemap_noindex(app, exception):
     happens inside its own ``build-finished`` handler with no public hook
     for exclusion. We rewrite the file in place, stripping ``<url>`` blocks
     whose ``<loc>`` matches an excluded page.
+
+    Reads the noindex flag straight from ``app.env.metadata`` so incremental
+    builds (where some pages weren't re-rendered this run) still exclude all
+    noindex pages from the sitemap.
     """
     if exception:
         return
@@ -688,7 +717,9 @@ def _filter_sitemap_noindex(app, exception):
         return
     if not _seo.should_emit_seo(app.builder.theme_options):
         return
-    excluded = getattr(app.env, "_lumina_no_sitemap", set())
+    excluded = {
+        docname for docname, meta in app.env.metadata.items() if _seo.is_noindex(meta)
+    }
     if not excluded:
         return
     sitemap_path = Path(app.outdir) / app.config.sitemap_filename
@@ -703,14 +734,15 @@ def _filter_sitemap_noindex(app, exception):
     root = tree.getroot()
 
     # The html builder always emits .html for page outputs; sphinx-sitemap
-    # uses the same suffix for sitemap entries.
-    excluded_suffixes = {f"{name}.html" for name in excluded}
+    # uses the same suffix. Anchor at the slash boundary so 'noindex.html'
+    # doesn't accidentally match 'seo-noindex.html' or '.../foo-noindex.html'.
+    excluded_paths = {f"/{name}.html" for name in excluded}
 
     for url_el in list(root.findall(f"{{{ns}}}url")):
         loc_el = url_el.find(f"{{{ns}}}loc")
         if loc_el is None or loc_el.text is None:
             continue
-        if any(loc_el.text.endswith(s) for s in excluded_suffixes):
+        if any(loc_el.text.endswith(p) for p in excluded_paths):
             root.remove(url_el)
 
     tree.write(sitemap_path, xml_declaration=True, encoding="utf-8")
@@ -810,6 +842,12 @@ def setup(app):
     # directly with the live config and additionally connect to
     # ``config-inited`` to cover the (rarer) case where the user lists
     # the theme as a regular extension and our setup runs before it.
+    # Track whether the user (vs. Lumina) put sphinx-sitemap in conf.py so
+    # disable_seo only removes auto-loaded sitemaps. Use the config list
+    # rather than ``app.extensions`` because the latter only reflects what
+    # has been loaded *so far*.
+    user_extensions = getattr(app.config, "extensions", []) or []
+    app._lumina_sitemap_auto_loaded = "sphinx_sitemap" not in user_extensions
     app.setup_extension("sphinx_sitemap")
     app.connect("config-inited", _apply_sitemap_defaults)
     _apply_sitemap_defaults(app, app.config)

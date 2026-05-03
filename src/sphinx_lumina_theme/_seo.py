@@ -31,10 +31,32 @@ __all__ = [
     "derive_twitter_handle",
     "extract_description",
     "is_noindex",
+    "normalize_iso_datetime",
     "og_locale_for_language",
+    "plain_title",
     "resolve_og_image",
+    "resolve_publisher_logo",
     "should_emit_seo",
 ]
+
+
+def plain_title(html_title: str | None) -> str:
+    """Return a plain-text title with HTML tags and entities stripped.
+
+    Sphinx's ``context["title"]`` is rendered HTML, so a heading like
+    ``# Inline ``code`` in title`` arrives as ``Inline <code>code</code> in title``.
+    Embedding that directly in a ``<meta content="...">`` attribute leaks the
+    escaped markup into social previews. Strip tags + decode entities so the
+    OG/Twitter title reads naturally.
+    """
+    if not html_title:
+        return ""
+    import html as _html
+    import re as _re
+
+    text = _re.sub(r"<[^>]+>", "", html_title)
+    text = _html.unescape(text)
+    return " ".join(text.split())
 
 
 def should_emit_seo(theme_options: Mapping[str, Any]) -> bool:
@@ -196,10 +218,52 @@ def resolve_og_image(
         base = html_baseurl.rstrip("/") + "/"
         return _posixpath.join(base, rel), alt or None
 
-    # No base URL — emit a relative URL. Social platforms generally need
-    # an absolute URL, but a relative one is better than nothing for local
-    # previews and won't produce a "broken image" upstream.
-    return rel, alt or None
+    # No base URL — omit the tag. Social platforms (Slack, Twitter, LinkedIn,
+    # Facebook) require an absolute URL for og:image; emitting a relative one
+    # produces a broken-image preview that's strictly worse than no card.
+    return None, None
+
+
+def resolve_publisher_logo(
+    *,
+    theme_options: Mapping[str, Any],
+    html_logo: str | None,
+    html_baseurl: str | None,
+) -> str | None:
+    """Return an absolute URL for the publisher logo, or None.
+
+    Schema.org / Google Rich Results expects publisher.logo to be a small,
+    near-square image (think 60×60 to 600×60). This is distinct from the
+    Open Graph card image, which is a 1200×630 banner. Reusing the OG image
+    as a publisher logo can disqualify the page from Rich Results.
+
+    Fallback chain:
+      1. theme option ``publisher_logo``
+      2. ``html_logo`` (when a raster format)
+      3. None — caller should omit ``publisher.logo`` rather than substitute
+         the OG card.
+    """
+    candidate = str(theme_options.get("publisher_logo", "")).strip()
+    if not candidate and html_logo and html_logo.lower().endswith(_RASTER_EXTS):
+        candidate = html_logo
+
+    if not candidate:
+        return None
+
+    if candidate.startswith(("http://", "https://", "//")):
+        return candidate
+
+    rel = candidate.lstrip("/")
+    if not rel.startswith("_static/"):
+        rel = f"_static/{rel}"
+
+    if html_baseurl:
+        base = html_baseurl.rstrip("/") + "/"
+        return _posixpath.join(base, rel)
+    # Without a base URL we can't produce the absolute URL Schema.org requires
+    # for ``publisher.logo.url`` — better to omit than ship a relative path
+    # that disqualifies the page from Rich Results.
+    return None
 
 
 def derive_twitter_handle(theme_options: Mapping[str, Any]) -> str | None:
@@ -239,7 +303,11 @@ def _handle_from_twitter_url(url: str) -> str | None:
         "https://www.x.com/",
     ):
         if url.startswith(prefix):
-            tail = url[len(prefix) :].strip("/").split("/", 1)[0]
+            tail = url[len(prefix) :].strip("/")
+            # Drop query string / fragment / sub-path segments before extracting
+            # the handle: ``foo?ref=x``, ``foo#bio``, ``foo/status/123`` → ``foo``.
+            for sep in ("?", "#", "/"):
+                tail = tail.split(sep, 1)[0]
             if tail:
                 return f"@{tail}"
     return None
@@ -299,7 +367,7 @@ def build_breadcrumb_jsonld(
             {
                 "@type": "ListItem",
                 "position": pos,
-                "name": parent.get("title", ""),
+                "name": plain_title(parent.get("title", "")),
                 "item": _resolve_parent_url(parent.get("link", ""), page_dir, site_url),
             }
         )
@@ -360,6 +428,28 @@ def _absolute_url(relative: str, site_url: str) -> str:
     return site_url.rstrip("/") + "/" + relative.lstrip("/")
 
 
+def normalize_iso_datetime(value: str | None) -> str | None:
+    """Normalize a date or datetime string to a full ISO 8601 datetime.
+
+    Schema.org allows date-only values, but Google's Rich Results Test
+    flags them as "could be improved". We accept either form and return
+    a UTC datetime when the input is date-only:
+
+      "2026-05-03"             → "2026-05-03T00:00:00+00:00"
+      "2026-05-03T12:34:56+00:00" → unchanged
+      None / empty             → None
+    """
+    if not value:
+        return None
+    text = str(value).strip()
+    if not text:
+        return None
+    # Already contains a time component — trust the caller.
+    if "T" in text or " " in text:
+        return text
+    return f"{text}T00:00:00+00:00"
+
+
 def build_article_jsonld(
     *,
     headline: str,
@@ -369,13 +459,14 @@ def build_article_jsonld(
     site_name: str,
     author: str | None,
     image_url: str | None,
+    publisher_logo_url: str | None = None,
     date_published: str | None = None,
     date_modified: str | None = None,
 ) -> str:
     """Build a TechArticle JSON-LD string. Caller decides whether to emit."""
     publisher: dict[str, Any] = {"@type": "Organization", "name": site_name}
-    if image_url:
-        publisher["logo"] = {"@type": "ImageObject", "url": image_url}
+    if publisher_logo_url:
+        publisher["logo"] = {"@type": "ImageObject", "url": publisher_logo_url}
 
     data: dict[str, Any] = {
         "@context": "https://schema.org",
@@ -391,10 +482,12 @@ def build_article_jsonld(
         data["mainEntityOfPage"] = page_url
     if image_url:
         data["image"] = image_url
-    if date_published:
-        data["datePublished"] = date_published
-    if date_modified:
-        data["dateModified"] = date_modified
+    published_iso = normalize_iso_datetime(date_published)
+    if published_iso:
+        data["datePublished"] = published_iso
+    modified_iso = normalize_iso_datetime(date_modified)
+    if modified_iso:
+        data["dateModified"] = modified_iso
 
     return _safe_jsonld(data)
 

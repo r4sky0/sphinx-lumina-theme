@@ -77,5 +77,8 @@ seo-described
 seo-keywords
 seo-image-override
 seo-noindex
+seo-html-title
+intro
+extra-intro
 section/index
 ```
