@@ -507,6 +507,12 @@ def _add_context(app, pagename, templatename, context, doctree):
         context["lumina_seo_og_locale"] = _seo.og_locale_for_language(
             app.config.language
         )
+        keywords = (
+            str(page_meta.get("keywords", "")).strip()
+            or str(app.builder.theme_options.get("seo_keywords", "")).strip()
+        )
+        if keywords:
+            context["lumina_seo_keywords"] = keywords
         context["lumina_seo_enabled"] = True
     else:
         # When SEO is disabled, suppress the basic theme's canonical link by

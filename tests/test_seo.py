@@ -266,3 +266,28 @@ def test_seo_enabled_by_default(tmp_path):
     out = _build(tmp_path, baseurl="https://example.com/")
     soup = _soup(out, "index.html")
     assert soup.find("meta", attrs={"property": "og:title"}) is not None
+
+
+def test_keywords_from_theme_option(tmp_path):
+    """seo_keywords theme option is rendered as <meta name=keywords>."""
+    out = _build(tmp_path, options={"seo_keywords": "sphinx, theme, dark mode"})
+    soup = _soup(out, "index.html")
+    tag = soup.find("meta", attrs={"name": "keywords"})
+    assert tag is not None
+    assert tag["content"] == "sphinx, theme, dark mode"
+
+
+def test_keywords_from_front_matter_overrides(tmp_path):
+    """Page front-matter `keywords` overrides the sitewide option."""
+    out = _build(tmp_path, options={"seo_keywords": "sitewide"})
+    soup = _soup(out, "seo-keywords.html")
+    tag = soup.find("meta", attrs={"name": "keywords"})
+    assert tag is not None
+    assert tag["content"] == "page-specific, terms"
+
+
+def test_keywords_absent_when_unset(tmp_path):
+    """No keywords are emitted when neither option nor front matter sets them."""
+    out = _build(tmp_path)
+    soup = _soup(out, "index.html")
+    assert soup.find("meta", attrs={"name": "keywords"}) is None

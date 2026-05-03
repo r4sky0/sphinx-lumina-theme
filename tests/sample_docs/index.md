@@ -74,4 +74,5 @@ landing-test
 icons-test
 guides/index
 seo-described
+seo-keywords
 ```

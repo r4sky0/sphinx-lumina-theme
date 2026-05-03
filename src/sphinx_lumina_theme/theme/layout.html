@@ -20,6 +20,7 @@
     {% endif %}
     {% if lumina_seo_enabled %}
         {% if lumina_seo_description %}<meta name="description" content="{{ lumina_seo_description }}">{% endif %}
+        {% if lumina_seo_keywords %}<meta name="keywords" content="{{ lumina_seo_keywords }}">{% endif %}
         {% if lumina_seo_theme_color %}<meta name="theme-color" content="{{ lumina_seo_theme_color }}">{% endif %}
         <meta property="og:title" content="{{ lumina_seo_og_title }}">
         {% if lumina_seo_description %}<meta property="og:description" content="{{ lumina_seo_description }}">{% endif %}
