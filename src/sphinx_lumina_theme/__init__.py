@@ -344,14 +344,13 @@ def _apply_sitemap_defaults(app, config):
     """Set sphinx-sitemap defaults the user hasn't overridden.
 
     Runs at ``config-inited``, before the builder is created — so we read
-    theme options from ``config.html_theme_options`` (a dict) rather than
-    ``app.builder.theme_options``. When SEO is disabled, also remove
-    sphinx_sitemap from extensions so no sitemap is generated.
+    theme options from ``config.html_theme_options`` rather than
+    ``app.builder.theme_options``. When SEO is disabled, returns early
+    without applying defaults; sphinx-sitemap's handlers are still wired,
+    but ``_suppress_sitemap_when_seo_disabled`` deletes the generated file.
     """
     theme_options = config.html_theme_options or {}
     if not _seo.should_emit_seo(theme_options):
-        if "sphinx_sitemap" in config.extensions:
-            config.extensions.remove("sphinx_sitemap")
         return
 
     # When sphinx-sitemap is loaded, it registers ``sitemap_url_scheme``
@@ -407,6 +406,37 @@ def _check_baseurl(app):
             "Set html_baseurl in conf.py to enable them. "
             "[lumina.seo]"
         )
+
+
+def _iso_last_updated(app, pagename: str) -> str | None:
+    """Return ISO-8601 last-updated date for a page, or None if unavailable.
+
+    Reads from ``sphinx_last_updated_by_git`` when active. The extension
+    populates ``app.env.git_last_updated`` as a dict keyed by docname; the
+    value is a 2-tuple ``(timestamp, show_sourcelink)`` after env-updated
+    has run, where ``timestamp`` is a Unix-timestamp string from git (or
+    ``None`` when git data is unavailable). Falls back to None so the
+    JSON-LD field is omitted rather than emitting a non-ISO string.
+    """
+    git_last_updated = getattr(app.env, "git_last_updated", None)
+    if not git_last_updated:
+        return None
+    data = git_last_updated.get(pagename)
+    if data is None:
+        return None
+    # The extension stores a 2-tuple `(timestamp, ...)` after env-updated;
+    # before then the value is None (handled above). Defensive unpacking
+    # in case the schema ever changes.
+    timestamp = data[0] if isinstance(data, tuple) and data else None
+    if timestamp is None:
+        return None
+    try:
+        from datetime import datetime, timezone
+
+        dt = datetime.fromtimestamp(int(timestamp), timezone.utc)
+        return dt.date().isoformat()  # YYYY-MM-DD
+    except (TypeError, ValueError):
+        return None
 
 
 def _add_context(app, pagename, templatename, context, doctree):
@@ -614,8 +644,8 @@ def _add_context(app, pagename, templatename, context, doctree):
                 site_name=app.config.project,
                 author=author,
                 image_url=context.get("lumina_seo_og_image"),
-                date_published=context.get("last_updated"),
-                date_modified=context.get("last_updated"),
+                date_published=_iso_last_updated(app, pagename),
+                date_modified=_iso_last_updated(app, pagename),
             )
             context["lumina_seo_article_jsonld"] = article_json
         # JSON-LD: WebSite + SearchAction (root page only, requires baseurl)

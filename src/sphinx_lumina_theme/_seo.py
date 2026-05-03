@@ -245,6 +245,21 @@ def _handle_from_twitter_url(url: str) -> str | None:
     return None
 
 
+def _safe_jsonld(data) -> str:
+    """Encode JSON for embedding in <script type='application/ld+json'>.
+
+    The standard json.dumps escaping leaves <, >, & literal, which means a
+    user-controlled string containing ``</script>`` could break out of the
+    block. Apply the conventional unicode-escape replacements.
+    """
+    return (
+        _json.dumps(data, ensure_ascii=False)
+        .replace("<", "\\u003c")
+        .replace(">", "\\u003e")
+        .replace("&", "\\u0026")
+    )
+
+
 def build_breadcrumb_jsonld(
     *,
     parents,
@@ -256,7 +271,9 @@ def build_breadcrumb_jsonld(
     """Build a BreadcrumbList JSON-LD string. Returns None when the page is the root.
 
     ``parents`` follows Sphinx's html-page-context format: a list of dicts with
-    ``title`` and ``link`` keys, in order from root to direct parent.
+    ``title`` and ``link`` keys, in order from root to direct parent. ``link``
+    is relative to the *current* page, not the site root, so we resolve it
+    against the page's directory.
     """
     if not parents and not title:
         return None
@@ -274,13 +291,16 @@ def build_breadcrumb_jsonld(
         )
         pos += 1
 
+    # Page directory (the dirname of page_url) is the base for relative parent links.
+    page_dir = _page_dir(page_url, site_url)
+
     for parent in parents or []:
         items.append(
             {
                 "@type": "ListItem",
                 "position": pos,
                 "name": parent.get("title", ""),
-                "item": _absolute_url(parent.get("link", ""), site_url),
+                "item": _resolve_parent_url(parent.get("link", ""), page_dir, site_url),
             }
         )
         pos += 1
@@ -294,14 +314,39 @@ def build_breadcrumb_jsonld(
         }
     )
 
-    return _json.dumps(
+    return _safe_jsonld(
         {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": items,
-        },
-        ensure_ascii=False,
+        }
     )
+
+
+def _page_dir(page_url: str, site_url: str) -> str:
+    """Return the directory portion of a page URL (with trailing slash)."""
+    if page_url:
+        # Strip the filename: "https://x/guides/seo.html" → "https://x/guides/"
+        # Use rfind on '/' to be robust to query strings (which we don't expect here).
+        slash = page_url.rfind("/")
+        if slash != -1:
+            return page_url[: slash + 1]
+        return page_url
+    if site_url:
+        return site_url.rstrip("/") + "/"
+    return ""
+
+
+def _resolve_parent_url(link: str, page_dir: str, site_url: str) -> str:
+    """Resolve a Sphinx ``parents`` link (relative to the current page)."""
+    if not link:
+        return page_dir or (site_url.rstrip("/") + "/" if site_url else "")
+    if link.startswith(("http://", "https://", "//")):
+        return link
+    # Relative link: resolve against the current page's directory.
+    if page_dir:
+        return _posixpath.normpath(_posixpath.join(page_dir, link)).replace(":/", "://")
+    return link
 
 
 def _absolute_url(relative: str, site_url: str) -> str:
@@ -351,7 +396,7 @@ def build_article_jsonld(
     if date_modified:
         data["dateModified"] = date_modified
 
-    return _json.dumps(data, ensure_ascii=False)
+    return _safe_jsonld(data)
 
 
 def build_website_jsonld(
@@ -385,7 +430,7 @@ def build_website_jsonld(
     }
     if description:
         data["description"] = description
-    return _json.dumps(data, ensure_ascii=False)
+    return _safe_jsonld(data)
 
 
 _TRUTHY = {"true", "1", "yes", "on"}

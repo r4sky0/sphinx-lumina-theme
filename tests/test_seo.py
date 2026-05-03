@@ -421,6 +421,26 @@ def test_breadcrumb_jsonld_on_nested_page(tmp_path):
         assert item["@type"] == "ListItem"
 
 
+def test_breadcrumb_jsonld_nested_page_urls(tmp_path):
+    """Nested-page breadcrumb parent URLs resolve to the correct directory.
+
+    Regresses against bug where Sphinx's `parents` link (relative to the
+    current page) was joined against the site root, producing parent URLs
+    that pointed at the homepage instead of the section index.
+    """
+    out = _build(tmp_path, baseurl="https://example.com/")
+    soup = _soup(out, "section/page.html")
+    blocks = _ld_blocks(soup)
+    crumbs = _block_of_type(blocks, "BreadcrumbList")
+    assert crumbs is not None
+    items = crumbs["itemListElement"]
+    # items[0] is the site root, items[-1] is the current page.
+    # The parent "Section" should link to /section/index.html, not /index.html.
+    parent_items = [i for i in items if i["name"] == "Section"]
+    assert len(parent_items) == 1
+    assert parent_items[0]["item"] == "https://example.com/section/index.html"
+
+
 def test_breadcrumb_jsonld_absent_on_root(tmp_path):
     """The root document does NOT emit BreadcrumbList (it has no breadcrumb)."""
     out = _build(tmp_path, baseurl="https://example.com/")
