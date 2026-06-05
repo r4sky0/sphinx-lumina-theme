@@ -1,1 +1,0 @@
-# Sphinx Lumina Theme
