@@ -64,9 +64,18 @@ export default function themeToggle() {
     apply() {
       let effectiveTheme;
       if (this.mode === "auto") {
-        effectiveTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
+        // ``dark_mode_default`` (exposed by layout.html as data-theme-default)
+        // overrides the OS preference until the reader picks an explicit theme.
+        const configured =
+          document.documentElement.getAttribute("data-theme-default");
+        if (configured === "light" || configured === "dark") {
+          effectiveTheme = configured;
+        } else {
+          effectiveTheme = window.matchMedia("(prefers-color-scheme: dark)")
+            .matches
+            ? "dark"
+            : "light";
+        }
         localStorage.removeItem("lumina-theme");
       } else {
         effectiveTheme = this.mode;
