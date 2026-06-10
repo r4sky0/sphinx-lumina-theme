@@ -120,6 +120,8 @@
                     x-data="themeToggle()"
                     @click="cycle()"
                     class="relative flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors cursor-pointer"
+                    aria-label="Toggle color theme"
+                    title="Toggle color theme"
                     :aria-label="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'"
                     :title="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'">
                 {# Sun icon (light mode active) #}
@@ -182,6 +184,8 @@
                 <button x-data="layoutToggle()"
                         @click="toggle()"
                         class="hidden xl:flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors cursor-pointer"
+                        aria-label="Toggle layout width"
+                        title="Toggle layout width"
                         :aria-label="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
                         :title="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
                         type="button">

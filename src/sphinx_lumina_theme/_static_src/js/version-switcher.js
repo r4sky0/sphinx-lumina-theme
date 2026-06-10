@@ -39,14 +39,23 @@ export default function versionSwitcher() {
       this.match = el.getAttribute("data-version-match") || "";
 
       // Compute the relative path within the docs so we can navigate
-      // to the same page on a different version's URL
+      // to the same page on a different version's URL. The meta tag holds
+      // a page-relative path to the docs root (e.g. "../"), so it must be
+      // resolved against the current URL before comparing pathnames.
       const baseUrl = document.querySelector('meta[name="lumina-base-url"]');
       if (baseUrl) {
-        const base = baseUrl.getAttribute("content").replace(/\/$/, "");
-        const current = window.location.pathname;
-        this.relPath = current.startsWith(base)
-          ? current.slice(base.length)
-          : current;
+        try {
+          const root = new URL(
+            baseUrl.getAttribute("content") || ".",
+            window.location.href,
+          );
+          const current = window.location.pathname;
+          this.relPath = current.startsWith(root.pathname)
+            ? current.slice(root.pathname.length)
+            : current.replace(/^\//, "");
+        } catch {
+          this.relPath = "";
+        }
       }
 
       if (jsonUrl) {
@@ -59,9 +68,12 @@ export default function versionSwitcher() {
     },
 
     _versionUrl(v) {
-      // Safely join version base URL with current page's relative path
+      // Safely join version base URL with current page's relative path.
+      // The trailing slash matters: without it the last path segment of
+      // ``v.url`` would be replaced instead of appended to.
       try {
-        return new URL(this.relPath, v.url).href;
+        const base = v.url.endsWith("/") ? v.url : v.url + "/";
+        return new URL(this.relPath, base).href;
       } catch {
         return v.url;
       }

@@ -45,6 +45,7 @@ export default function imageLightbox() {
     imgAlt: "",
     caption: "",
     _trigger: null,
+    _trapHandler: null,
 
     init() {
       if (!document.documentElement.hasAttribute("data-lightbox")) return;
@@ -206,12 +207,43 @@ export default function imageLightbox() {
 
       this.isOpen = true;
       document.body.classList.add("lumina-lightbox-open");
+      // Contain Tab within the overlay while it's open — the dialog is
+      // aria-modal, so focus must not escape into the page behind it.
+      this._trapHandler = (e) => this._handleFocusTrap(e);
+      document.addEventListener("keydown", this._trapHandler);
       // Focus is moved to the close button by the $watch handler in init().
+    },
+
+    _handleFocusTrap(e) {
+      if (e.key !== "Tab" || !this.isOpen) return;
+      const focusable = this.$el.querySelectorAll(
+        'button, a[href], [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (
+        !e.shiftKey &&
+        (document.activeElement === last ||
+          !this.$el.contains(document.activeElement))
+      ) {
+        e.preventDefault();
+        first.focus();
+      }
     },
 
     close() {
       this.isOpen = false;
       document.body.classList.remove("lumina-lightbox-open");
+      if (this._trapHandler) {
+        document.removeEventListener("keydown", this._trapHandler);
+        this._trapHandler = null;
+      }
       const host = this.$el.querySelector(".lumina-lightbox-svg-host");
       if (host) host.replaceChildren();
       if (this._trigger) {
