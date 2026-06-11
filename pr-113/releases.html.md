@@ -1,5 +1,30 @@
 # Releases
 
+## v1.42.0 (2026-06-11)
+
+### Features
+
+- Fix header offset variable usage and improve accessibility
+  ([#114](https://github.com/r4sky0/sphinx-lumina-theme/pull/114),
+  [`debd271`](https://github.com/r4sky0/sphinx-lumina-theme/commit/debd27199c8c5c0ab65f992acf0425d5c080c3ed))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump mistune from 3.2.0 to 3.2.1 in the uv group across 1 directory
+  ([#104](https://github.com/r4sky0/sphinx-lumina-theme/pull/104),
+  [`643a791`](https://github.com/r4sky0/sphinx-lumina-theme/commit/643a79119dc69a1fc4c27d4102f6efb8f46da21b))
+- **deps**: Bump pnpm/action-setup from 6.0.4 to 6.0.5 in the github-actions-minor group
+  ([#105](https://github.com/r4sky0/sphinx-lumina-theme/pull/105),
+  [`87d027d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/87d027d5d57f3b784795fa56ba7e7ba78d901375))
+- **deps**: Bump the github-actions-minor group across 1 directory with 2 updates
+  ([#112](https://github.com/r4sky0/sphinx-lumina-theme/pull/112),
+  [`d4cb2d4`](https://github.com/r4sky0/sphinx-lumina-theme/commit/d4cb2d4b86268d711fe1ad931f34261e64cbe12b))
+
+</details>
+
 ## v1.41.0 (2026-05-03)
 
 ### Features
