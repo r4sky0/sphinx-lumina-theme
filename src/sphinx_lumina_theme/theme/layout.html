@@ -65,6 +65,12 @@
   var stored = localStorage.getItem('lumina-theme');
   if (stored === 'dark' || stored === 'light') {
     document.documentElement.setAttribute('data-theme', stored);
+    // Sphinx gates the dark highlight stylesheet on the OS color scheme only;
+    // a stored override must rewrite its media query before first paint.
+    var pygmentsDark = document.getElementById('pygments_dark_css');
+    if (pygmentsDark) {
+      pygmentsDark.media = stored === 'dark' ? 'screen' : 'not all';
+    }
   } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.documentElement.setAttribute('data-theme', 'dark');
   } else {
