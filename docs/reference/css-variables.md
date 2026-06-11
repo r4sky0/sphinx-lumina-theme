@@ -97,8 +97,8 @@ One color per admonition type, plus a darker variant for the warning text where 
   - `#a78bfa`
   - `important`
 * - `--lumina-adm-seealso`
-  - `#14b8a6`
-  - `#2dd4bf`
+  - `#0891b2`
+  - `#22d3ee`
   - `seealso`
 ```
 

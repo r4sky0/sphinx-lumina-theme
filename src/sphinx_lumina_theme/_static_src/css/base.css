@@ -85,7 +85,8 @@
   --lumina-adm-warning-text: #d97706;
   --lumina-adm-danger: #ef4444;
   --lumina-adm-important: #8b5cf6;
-  --lumina-adm-seealso: #14b8a6;
+  /* Cyan, not teal — must stay distinguishable from the tip/hint emerald */
+  --lumina-adm-seealso: #0891b2;
 
   /* Elevation scale. Tinted with `--lumina-text` so shadows read as
      "the page's own ink falling away" rather than flat black; alpha
@@ -191,7 +192,7 @@ html:root {
   --lumina-adm-warning-text: #f59e0b;
   --lumina-adm-danger: #f87171;
   --lumina-adm-important: #a78bfa;
-  --lumina-adm-seealso: #2dd4bf;
+  --lumina-adm-seealso: #22d3ee;
 }
 
 html[data-theme="dark"] {
@@ -279,6 +280,18 @@ a:hover > .lumina-logo .lumina-logo-facet-r { opacity: 0.2; }
 ::selection {
   background-color: color-mix(in srgb, var(--lumina-accent) 25%, transparent);
   color: var(--lumina-text);
+}
+
+/* ── Highlighted text (search excerpts, <mark>) ──
+   Accent-tinted instead of the default yellow (browser <mark>, basic.css
+   span.highlighted) so highlights stay on-palette in both modes and inside
+   accent-light selected search results. */
+mark,
+span.highlighted {
+  background-color: color-mix(in srgb, var(--lumina-accent) 22%, transparent);
+  color: inherit;
+  border-radius: 0.1875rem;
+  padding: 0 0.125rem;
 }
 
 /* ── Focus visible ── */
