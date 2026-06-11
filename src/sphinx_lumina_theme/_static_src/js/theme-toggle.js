@@ -82,6 +82,18 @@ export default function themeToggle() {
         localStorage.setItem("lumina-theme", this.mode);
       }
       document.documentElement.setAttribute("data-theme", effectiveTheme);
+
+      // Sphinx gates the dark highlight stylesheet on the OS color scheme
+      // only, so a manual override must rewrite its media query — otherwise
+      // code blocks keep the other mode's Pygments palette.
+      const pygmentsDark = document.getElementById("pygments_dark_css");
+      if (pygmentsDark) {
+        if (this.mode === "auto") {
+          pygmentsDark.media = "(prefers-color-scheme: dark)";
+        } else {
+          pygmentsDark.media = effectiveTheme === "dark" ? "screen" : "not all";
+        }
+      }
     },
   };
 }
