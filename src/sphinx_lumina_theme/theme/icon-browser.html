@@ -4,13 +4,13 @@
 
 {% block body %}
 
-    <div x-data="iconBrowser()" x-init="init()">
+    <div x-data="iconBrowser()">
         <p class="text-lumina-text-muted mb-6">
             Browse all {{ icon_count }} available Lucide icons. Click any icon to copy its name.
         </p>
 
         {# Search input #}
-        <div class="sticky top-16 z-10 bg-lumina-bg pb-4 pt-2 -mx-1 px-1">
+        <div class="sticky top-[var(--lumina-header-offset)] z-10 bg-lumina-bg pb-4 pt-2 -mx-1 px-1">
             <input type="text"
                    x-model="query"
                    @input="filter()"

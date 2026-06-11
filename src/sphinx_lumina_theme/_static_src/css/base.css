@@ -767,47 +767,46 @@ span.highlighted {
 }
 
 /* ── Layout ── */
+/* Total height of the fixed header chrome: the 3.5rem header bar plus the
+   2.25rem announcement banner when one is active. Every rule that clears
+   or aligns to the fixed header derives from this single variable. */
+:root {
+  --lumina-header-offset: 3.5rem;
+}
+
+html.has-announcement {
+  --lumina-header-offset: calc(3.5rem + 2.25rem);
+}
+
+/* Anchor targets (headings, section ids, footnotes) must scroll into view
+   below the fixed header, not underneath it. */
+[id] {
+  scroll-margin-top: calc(var(--lumina-header-offset) + 1rem);
+}
+
 .lumina-wrapper {
   display: flex;
   max-width: 90rem;
-  margin: 3.5rem auto 0;
-  min-height: calc(100vh - 3.5rem);
+  margin: var(--lumina-header-offset) auto 0;
+  min-height: calc(100vh - var(--lumina-header-offset));
 }
 
 html:not(.has-announcement) #lumina-announcement { display: none; }
-
-html.has-announcement .lumina-wrapper {
-  margin-top: calc(3.5rem + 2.25rem);
-  min-height: calc(100vh - 3.5rem - 2.25rem);
-}
 
 #lumina-sidebar {
   flex-shrink: 0;
 }
 
 .lumina-sidebar-desktop {
-  height: calc(100vh - 3.5rem);
-}
-
-html.has-announcement .lumina-sidebar-desktop {
-  height: calc(100vh - 3.5rem - 2.25rem);
+  height: calc(100vh - var(--lumina-header-offset));
 }
 
 @media (min-width: 1024px) {
   #lumina-sidebar {
     position: sticky;
-    top: 3.5rem;
+    top: var(--lumina-header-offset);
     align-self: flex-start;
     width: 260px;
-  }
-
-  html.has-announcement #lumina-sidebar {
-    top: calc(3.5rem + 2.25rem);
-  }
-
-  html.has-announcement .lumina-toc-container {
-    top: calc(3.5rem + 2.25rem);
-    height: calc(100vh - 3.5rem - 2.25rem);
   }
 }
 

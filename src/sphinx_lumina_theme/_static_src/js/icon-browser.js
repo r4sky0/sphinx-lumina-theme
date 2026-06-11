@@ -3,6 +3,8 @@
  * @description Alpine.js component for the icon browser page.
  * Provides search filtering and click-to-copy for icon names.
  */
+import { copyText } from "./utils/clipboard.js";
+
 export default function iconBrowser() {
   return {
     query: "",
@@ -32,8 +34,13 @@ export default function iconBrowser() {
       return name.includes(this.query.toLowerCase().trim());
     },
 
-    copy(name) {
-      navigator.clipboard.writeText(name);
+    async copy(name) {
+      try {
+        await copyText(name);
+      } catch (err) {
+        console.warn("Lumina: copy failed —", err.message);
+        return;
+      }
       this.copiedName = name;
       this.toast = true;
       clearTimeout(this._toastTimeout);

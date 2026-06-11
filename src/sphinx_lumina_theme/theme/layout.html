@@ -9,7 +9,7 @@
 
 {% block extrahead %}
 
-    {% if not favicon %}
+    {% if not favicon_url %}
         {% if lumina_logo_icon_favicon is defined and lumina_logo_icon_favicon %}
             <link rel="icon" type="image/svg+xml" href="{{ lumina_logo_icon_favicon }}">
         {% else %}
@@ -59,10 +59,21 @@
           type="font/woff2"
           href="{{ pathto('_static/fonts/source-sans-3-regular.woff2', 1) }}"
           crossorigin>
-    {# Prevent flash of wrong theme #}
+    {# Prevent flash of wrong theme. When ``dark_mode_default`` is "light" or
+       "dark", that mode wins over the OS preference until the reader picks
+       an explicit theme; theme-toggle.js reads the same default from
+       ``data-theme-default``. #}
     <script>
 (function() {
   var stored = localStorage.getItem('lumina-theme');
+  {% if theme_dark_mode_default in ("light", "dark") %}
+  document.documentElement.setAttribute('data-theme-default', '{{ theme_dark_mode_default }}');
+  if (stored === 'dark' || stored === 'light') {
+    document.documentElement.setAttribute('data-theme', stored);
+  } else {
+    document.documentElement.setAttribute('data-theme', '{{ theme_dark_mode_default }}');
+  }
+  {% else %}
   if (stored === 'dark' || stored === 'light') {
     document.documentElement.setAttribute('data-theme', stored);
     // Sphinx gates the dark highlight stylesheet on the OS color scheme only;
@@ -76,6 +87,7 @@
   } else {
     document.documentElement.setAttribute('data-theme', 'light');
   }
+  {% endif %}
 })();
     </script>
     {% if lumina_wide_layout %}
@@ -173,6 +185,8 @@
                         @click="copy()"
                         class="lumina-copy-page"
                         :class="{ 'is-copied': copied }"
+                        aria-label="Copy page as Markdown"
+                        title="Copy page as Markdown"
                         :aria-label="copied ? 'Copied to clipboard' : 'Copy page as Markdown'"
                         :title="copied ? 'Copied!' : 'Copy page as Markdown'"
                         type="button">

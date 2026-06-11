@@ -219,12 +219,17 @@ function processListItems(list, marker, indent) {
     if (li.tagName?.toLowerCase() !== "li") continue;
 
     const prefix = marker === "-" ? "- " : `${index}. `;
-    const nested = li.querySelector(":scope > ul, :scope > ol");
+    // An <li> may contain several direct-child lists (e.g. a <ul> and an
+    // <ol>); all of them must be excluded from the inline content and
+    // rendered indented below the bullet, in document order.
+    const nestedLists = Array.from(li.children).filter((c) =>
+      ["ul", "ol"].includes(c.tagName?.toLowerCase()),
+    );
 
     // Collect content excluding nested lists
     let content = "";
     for (const child of li.childNodes) {
-      if (child === nested) continue;
+      if (nestedLists.includes(child)) continue;
       // Flatten <p> inside <li> to avoid extra blank lines
       if (
         child.nodeType === Node.ELEMENT_NODE &&
@@ -238,7 +243,7 @@ function processListItems(list, marker, indent) {
 
     result += `${indent}${prefix}${content.trim()}\n`;
 
-    if (nested) {
+    for (const nested of nestedLists) {
       const nestedMarker =
         nested.tagName.toLowerCase() === "ul" ? "-" : "1.";
       result += processListItems(nested, nestedMarker, indent + "  ");

@@ -43,11 +43,10 @@
                    autocomplete="off">
             <kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1.5 py-0.5 text-xs text-lumina-text-muted">esc</kbd>
         </div>
-        {# Results #}
-        <div class="max-h-[60vh] overflow-y-auto p-2"
-             aria-live="polite"
-             aria-label="Search results"
-             role="status">
+        {# Results. Announced via the separate visually-hidden live region
+           below — a live region must not contain the interactive result
+           links themselves. #}
+        <div class="max-h-[60vh] overflow-y-auto p-2">
             <template x-if="!loaded">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Loading search index...</p>
             </template>
@@ -78,6 +77,11 @@
             <template x-if="loaded && query.length === 0">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Type to search...</p>
             </template>
+        </div>
+        {# Screen-reader announcement of the result count #}
+        <div class="sr-only"
+             role="status"
+             x-text="loaded && query.length > 0 ? results.length + (results.length === 1 ? ' result' : ' results') : ''">
         </div>
         {# Keyboard hints #}
         <div class="flex items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
