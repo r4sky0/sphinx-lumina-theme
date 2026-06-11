@@ -9,7 +9,7 @@
     <title>Python Module Index &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="_static/lumina.css?v=6632344e" />
+    <link rel="stylesheet" type="text/css" href="_static/lumina.css?v=8b3fe358" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
@@ -455,7 +455,7 @@ mermaid.initialize(
 
 window.addEventListener("load", load);
 window.runMermaid = runMermaid;</script>
-    <script defer="defer" src="_static/lumina.js?v=1465b003"></script>
+    <script defer="defer" src="_static/lumina.js?v=2b45fd8b"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/pr-115/py-modindex.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -511,6 +511,7 @@ window.runMermaid = runMermaid;</script>
     <script>
 (function() {
   var stored = localStorage.getItem('lumina-theme');
+  
   if (stored === 'dark' || stored === 'light') {
     document.documentElement.setAttribute('data-theme', stored);
     // Sphinx gates the dark highlight stylesheet on the OS color scheme only;
@@ -524,6 +525,7 @@ window.runMermaid = runMermaid;</script>
   } else {
     document.documentElement.setAttribute('data-theme', 'light');
   }
+  
 })();
     </script>
     
@@ -645,6 +647,8 @@ window.runMermaid = runMermaid;</script>
                     x-data="themeToggle()"
                     @click="cycle()"
                     class="relative flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors cursor-pointer"
+                    aria-label="Toggle color theme"
+                    title="Toggle color theme"
                     :aria-label="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'"
                     :title="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'">
                 
@@ -707,6 +711,8 @@ window.runMermaid = runMermaid;</script>
                 <button x-data="layoutToggle()"
                         @click="toggle()"
                         class="hidden xl:flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors cursor-pointer"
+                        aria-label="Toggle layout width"
+                        title="Toggle layout width"
                         :aria-label="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
                         :title="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
                         type="button">
@@ -946,7 +952,7 @@ window.runMermaid = runMermaid;</script>
                  x-transition:leave="transition ease-in duration-150"
                  x-transition:leave-start="opacity-100"
                  x-transition:leave-end="opacity-0"
-                 class="lumina-overlay-backdrop fixed inset-0 top-14 z-40 lg:hidden"
+                 class="lumina-overlay-backdrop fixed inset-0 top-[var(--lumina-header-offset)] z-40 lg:hidden"
                  @click="close()"></div>
             
             <div id="lumina-sidebar-drawer"
@@ -958,11 +964,14 @@ window.runMermaid = runMermaid;</script>
                  x-transition:leave-start="translate-x-0"
                  x-transition:leave-end="-translate-x-full"
                  @keydown.escape.window="close()"
-                 class="fixed inset-y-0 top-14 left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 py-6 lg:hidden">
+                 class="fixed inset-y-0 top-[var(--lumina-header-offset)] left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 py-6 lg:hidden">
 
                 
+                
 
-    <div id="lumina-section-switcher"
+                    
+
+    <div 
          x-data="navDropdown()"
          @keydown="handleKeydown($event)"
          class="lumina-section-switcher">
@@ -1040,6 +1049,8 @@ window.runMermaid = runMermaid;</script>
         </div>
     </div>
 
+
+                
 
                 
                 
@@ -1137,6 +1148,8 @@ window.runMermaid = runMermaid;</script>
                         @click="copy()"
                         class="lumina-copy-page"
                         :class="{ 'is-copied': copied }"
+                        aria-label="Copy page as Markdown"
+                        title="Copy page as Markdown"
                         :aria-label="copied ? 'Copied to clipboard' : 'Copy page as Markdown'"
                         :title="copied ? 'Copied!' : 'Copy page as Markdown'"
                         type="button">
@@ -1279,10 +1292,7 @@ window.runMermaid = runMermaid;</script>
             <kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1.5 py-0.5 text-xs text-lumina-text-muted">esc</kbd>
         </div>
         
-        <div class="max-h-[60vh] overflow-y-auto p-2"
-             aria-live="polite"
-             aria-label="Search results"
-             role="status">
+        <div class="max-h-[60vh] overflow-y-auto p-2">
             <template x-if="!loaded">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Loading search index...</p>
             </template>
@@ -1313,6 +1323,11 @@ window.runMermaid = runMermaid;</script>
             <template x-if="loaded && query.length === 0">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Type to search...</p>
             </template>
+        </div>
+        
+        <div class="sr-only"
+             role="status"
+             x-text="loaded && query.length > 0 ? results.length + (results.length === 1 ? ' result' : ' results') : ''">
         </div>
         
         <div class="flex items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
