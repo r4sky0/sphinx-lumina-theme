@@ -13,7 +13,7 @@ from . import _seo
 
 logger = logging.getLogger(__name__)
 
-__version__ = "1.42.0"
+__version__ = "1.43.0"
 
 _CODE_STYLE_PRESETS = {
     "default": ("default", "monokai"),

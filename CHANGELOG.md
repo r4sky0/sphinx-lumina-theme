@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v1.43.0 (2026-06-11)
+
+### Features
+
+- Fix nested admonitions and improve visual polish
+  ([#115](https://github.com/r4sky0/sphinx-lumina-theme/pull/115),
+  [`3ba60d5`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3ba60d5c73c3b67fe80a5e622021f47929ce8e1e))
+
+
 ## v1.42.0 (2026-06-11)
 
 ### Features
