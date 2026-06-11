@@ -11,7 +11,7 @@
     <title>Typography &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=a2582f7f" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=8b3fe358" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=60025665"></script>
+    <script defer="defer" src="../_static/lumina.js?v=2b45fd8b"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/pr-113/reference/typography.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -81,6 +81,12 @@
   
   if (stored === 'dark' || stored === 'light') {
     document.documentElement.setAttribute('data-theme', stored);
+    // Sphinx gates the dark highlight stylesheet on the OS color scheme only;
+    // a stored override must rewrite its media query before first paint.
+    var pygmentsDark = document.getElementById('pygments_dark_css');
+    if (pygmentsDark) {
+      pygmentsDark.media = stored === 'dark' ? 'screen' : 'not all';
+    }
   } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.documentElement.setAttribute('data-theme', 'dark');
   } else {
@@ -492,7 +498,7 @@
                         <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                     </svg>
                 Lumina</a>
-                <span class="lumina-sidebar-footer-version">v1.42.0</span>
+                <span class="lumina-sidebar-footer-version">v1.43.0</span>
             </div>
         
     </div>
@@ -672,7 +678,7 @@
                         <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                            target="_blank"
                            rel="noopener">Lumina</a>
-                        <span class="lumina-sidebar-footer-version">v1.42.0</span>
+                        <span class="lumina-sidebar-footer-version">v1.43.0</span>
                     </div>
                 
             </div>
