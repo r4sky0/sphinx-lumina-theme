@@ -1,5 +1,5 @@
 {% if toc %}
-    <div class="lumina-toc-container sticky top-14 hidden h-[calc(100vh-3.5rem)] w-[220px] shrink-0 py-6 pr-4 xl:block">
+    <div class="lumina-toc-container sticky top-[var(--lumina-header-offset)] hidden h-[calc(100vh-var(--lumina-header-offset))] w-[220px] shrink-0 py-6 pr-4 xl:block">
         {# Edit on GitHub link #}
         {% if theme_source_repository and theme_source_repository != "" %}
             <a href="{{ theme_source_repository }}/{{ theme_edit_uri }}/{{ theme_source_branch }}/{{ theme_source_directory }}{{ pagename }}{{ page_source_suffix }}"
@@ -12,10 +12,11 @@
         {% endif %}
         <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-lumina-text-muted">On this page</p>
         <div class="lumina-toc-scroll">
+            {# Alpine auto-invokes ``init()`` on x-data components — adding
+               x-init="init()" here would run it twice and leak observers. #}
             <nav class="lumina-toc-nav"
                  aria-label="Table of contents"
-                 x-data="scrollspy()"
-                 x-init="init()">
+                 x-data="scrollspy()">
                 {{ toc }}
             </nav>
         </div>

@@ -471,7 +471,7 @@ def _add_context(app, pagename, templatename, context, doctree):
 
     # Derive a favicon from logo_icon (Lucide) when set, so the browser tab
     # matches the header logo. Sphinx's html_favicon still wins via the
-    # ``favicon`` context variable check in layout.html.
+    # ``favicon_url`` context variable check in layout.html.
     logo_icon = app.builder.theme_options.get("logo_icon", "")
     if logo_icon:
         from ._icon_utils import get_icon_data_href

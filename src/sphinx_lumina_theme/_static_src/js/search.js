@@ -190,7 +190,13 @@ export default function searchModal() {
     },
 
     async search() {
-      if (!this.query || !this.loaded) return;
+      if (!this.query) {
+        // Clearing the input must also clear the previous query's results.
+        this.results = [];
+        this.selectedIndex = 0;
+        return;
+      }
+      if (!this.loaded) return;
       this.selectedIndex = 0;
 
       const cached = this._resultCache.get(this.query);
@@ -199,9 +205,12 @@ export default function searchModal() {
         return;
       }
 
+      // Snapshot the query so a slow response can't clobber the results of
+      // a newer search that resolved first.
+      const query = this.query;
       let results;
       if (this.backend === "pagefind" && this.pagefind) {
-        const search = await this.pagefind.search(this.query);
+        const search = await this.pagefind.search(query);
         const data = await Promise.all(
           search.results.slice(0, 10).map((r) => r.data()),
         );
@@ -214,14 +223,15 @@ export default function searchModal() {
       } else {
         results = [
           {
-            title: 'Search for "' + this.query + '"',
-            url: "search.html?q=" + encodeURIComponent(this.query),
+            title: 'Search for "' + query + '"',
+            url: this.baseUrl + "search.html?q=" + encodeURIComponent(query),
             excerpt: "Open Sphinx search results page",
           },
         ];
       }
 
-      this._cacheResults(this.query, results);
+      this._cacheResults(query, results);
+      if (query !== this.query) return;
       this.results = results;
     },
 

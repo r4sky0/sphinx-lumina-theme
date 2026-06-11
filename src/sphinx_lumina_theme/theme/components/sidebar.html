@@ -47,7 +47,7 @@
                  x-transition:leave="transition ease-in duration-150"
                  x-transition:leave-start="opacity-100"
                  x-transition:leave-end="opacity-0"
-                 class="lumina-overlay-backdrop fixed inset-0 top-14 z-40 lg:hidden"
+                 class="lumina-overlay-backdrop fixed inset-0 top-[var(--lumina-header-offset)] z-40 lg:hidden"
                  @click="close()"></div>
             {# Drawer — dismissed via backdrop tap, the hamburger toggle
                in the header, or the Escape key (no in-drawer close
@@ -61,9 +61,15 @@
                  x-transition:leave-start="translate-x-0"
                  x-transition:leave-end="-translate-x-full"
                  @keydown.escape.window="close()"
-                 class="fixed inset-y-0 top-14 left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 py-6 lg:hidden">
+                 class="fixed inset-y-0 top-[var(--lumina-header-offset)] left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 py-6 lg:hidden">
 
-                {% include "components/section-switcher.html" %}
+                {# in_drawer suppresses the element id so it isn't duplicated
+                   across the desktop sidebar and this drawer. #}
+                {% with in_drawer = true %}
+
+                    {% include "components/section-switcher.html" %}
+
+                {% endwith %}
 
                 {# Flattened nav links for mobile #}
                 {% if theme_nav_links and theme_nav_links != "" %}

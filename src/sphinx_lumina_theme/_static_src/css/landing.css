@@ -8,7 +8,7 @@
     radial-gradient(ellipse 80% 60% at 50% 0%, color-mix(in srgb, var(--lumina-accent) 10%, transparent), transparent),
     linear-gradient(180deg, color-mix(in srgb, var(--lumina-accent) 4%, var(--lumina-bg)) 0%, var(--lumina-bg) 100%);
   border-bottom: 1px solid var(--lumina-border);
-  margin-top: 3.5rem; /* clear fixed header */
+  margin-top: var(--lumina-header-offset); /* clear fixed header */
 }
 
 .lumina-hero-content {
@@ -123,8 +123,13 @@
 
 .lumina-landing-content {
   max-width: 48rem;
-  margin: 0 auto;
+  margin: var(--lumina-header-offset) auto 0;
   padding: 2rem 2rem 4rem;
+}
+
+/* When a hero is present it already clears the fixed header. */
+.lumina-hero + .lumina-landing-content {
+  margin-top: 0;
 }
 
 /* ── Hero entrance animation ── */

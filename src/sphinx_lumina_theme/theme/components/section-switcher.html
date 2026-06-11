@@ -1,6 +1,6 @@
 {# Section switcher — dropdown at top of sidebar for navigating between doc sections #}
 {% if lumina_sections is defined and lumina_sections %}
-    <div id="lumina-section-switcher"
+    <div {% if in_drawer is not defined or not in_drawer %}id="lumina-section-switcher"{% endif %}
          x-data="navDropdown()"
          @keydown="handleKeydown($event)"
          class="lumina-section-switcher">
