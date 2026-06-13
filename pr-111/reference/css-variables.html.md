@@ -31,7 +31,7 @@ One color per admonition type, plus a darker variant for the warning text where 
 | `--lumina-adm-warning-text` | `#d97706`       | `#f59e0b`      | Warning title text (darker for AA contrast on light background) |
 | `--lumina-adm-danger`       | `#ef4444`       | `#f87171`      | `danger`, `error`                                               |
 | `--lumina-adm-important`    | `#8b5cf6`       | `#a78bfa`      | `important`                                                     |
-| `--lumina-adm-seealso`      | `#14b8a6`       | `#2dd4bf`      | `seealso`                                                       |
+| `--lumina-adm-seealso`      | `#0891b2`       | `#22d3ee`      | `seealso`                                                       |
 
 The visible left border, icon mask, and 5–8 % background tint of every admonition derive from these single colors via `color-mix()` — overriding the token recolors the whole admonition.
 
