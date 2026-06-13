@@ -16,7 +16,7 @@
     "*.html": "uv run djlint --reformat"
   },
   "devDependencies": {
-    "@commitlint/cli": "20.5.3",
+    "@commitlint/cli": "21.0.2",
     "@commitlint/config-conventional": "20.5.3",
     "@tailwindcss/cli": "^4.3",
     "alpinejs": "^3.15",
