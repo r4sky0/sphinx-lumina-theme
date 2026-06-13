@@ -5,79 +5,6 @@
 
 # index.html.md
 
-# Reference
-
-Visual showcase and syntax reference for every content type Lumina styles.
-
-Headings, inline formatting, block quotes, definition lists, and links.
-
-Note, tip, warning, danger, and seven more callout types with custom titles and nesting.
-
-Syntax highlighting, line numbers, emphasis, captions, diffs, and tabs.
-
-Ordered, unordered, task lists, Markdown tables, and list tables.
-
-Card layouts, responsive grids, and common layout patterns.
-
-Responsive images, figures with captions, alignment, and file format guidance.
-
-Inline status badges and clickable button links.
-
-Inline and display equations, labeled references, matrices, and symbol tables.
-
-Mermaid flowcharts, sequence diagrams, class diagrams, Gantt charts, and more.
-
-Cross-references, glossaries, intersphinx, version directives, and downloads.
-
-Python API docs with functions, classes, autodoc, and cross-referencing.
-
-OpenAPI auto-generated docs and manual HTTP method directives.
-
-Browse all 1900+ Lucide icons available for cards, sidebar, and logo.
-
-Every theme token, its default in light and dark mode, and what it controls.
-
-
-# index.html.md
-
-# Guides
-
-Go deeper with Lumina — search, styling, navigation, and development workflows.
-
-Configure Pagefind or Sphinx built-in search.
-
-Color mode settings and CSS custom properties.
-
-Write docs in Markdown with full Sphinx directive support.
-
-Header links, social icons, sidebar depth, and breadcrumbs.
-
-CSS custom properties, fonts, syntax highlighting, and templates.
-
-Create a full-width entry point with an optional hero section.
-
-Expand the content area for code-heavy docs on wide screens.
-
-Add Lucide icons to cards, sidebar items, and your logo.
-
-Live reload with sphinx-autobuild and the asset watcher.
-
-Out-of-the-box meta tags, social cards, JSON-LD, sitemap, and `robots.txt`.
-
-
-# index.html.md
-
-# Getting Started
-
-Get Lumina running in your Sphinx project in under five minutes.
-
-Install the theme, configure one line, and build your first page.
-
-Theme options, accent colors, and a complete configuration reference.
-
-
-# index.html.md
-
 # Contributing
 
 How to set up a development environment and contribute to the Sphinx Lumina Theme.
@@ -226,6 +153,79 @@ intersphinx_mapping = {
     "sphinx": ("https://www.sphinx-doc.org/en/master", None),
 }
 ```
+
+
+# index.html.md
+
+# Guides
+
+Go deeper with Lumina — search, styling, navigation, and development workflows.
+
+Configure Pagefind or Sphinx built-in search.
+
+Color mode settings and CSS custom properties.
+
+Write docs in Markdown with full Sphinx directive support.
+
+Header links, social icons, sidebar depth, and breadcrumbs.
+
+CSS custom properties, fonts, syntax highlighting, and templates.
+
+Create a full-width entry point with an optional hero section.
+
+Expand the content area for code-heavy docs on wide screens.
+
+Add Lucide icons to cards, sidebar items, and your logo.
+
+Live reload with sphinx-autobuild and the asset watcher.
+
+Out-of-the-box meta tags, social cards, JSON-LD, sitemap, and `robots.txt`.
+
+
+# index.html.md
+
+# Reference
+
+Visual showcase and syntax reference for every content type Lumina styles.
+
+Headings, inline formatting, block quotes, definition lists, and links.
+
+Note, tip, warning, danger, and seven more callout types with custom titles and nesting.
+
+Syntax highlighting, line numbers, emphasis, captions, diffs, and tabs.
+
+Ordered, unordered, task lists, Markdown tables, and list tables.
+
+Card layouts, responsive grids, and common layout patterns.
+
+Responsive images, figures with captions, alignment, and file format guidance.
+
+Inline status badges and clickable button links.
+
+Inline and display equations, labeled references, matrices, and symbol tables.
+
+Mermaid flowcharts, sequence diagrams, class diagrams, Gantt charts, and more.
+
+Cross-references, glossaries, intersphinx, version directives, and downloads.
+
+Python API docs with functions, classes, autodoc, and cross-referencing.
+
+OpenAPI auto-generated docs and manual HTTP method directives.
+
+Browse all 1900+ Lucide icons available for cards, sidebar, and logo.
+
+Every theme token, its default in light and dark mode, and what it controls.
+
+
+# index.html.md
+
+# Getting Started
+
+Get Lumina running in your Sphinx project in under five minutes.
+
+Install the theme, configure one line, and build your first page.
+
+Theme options, accent colors, and a complete configuration reference.
 
 
 # admonitions.html.md
@@ -1515,7 +1515,7 @@ One color per admonition type, plus a darker variant for the warning text where 
 | `--lumina-adm-warning-text` | `#d97706`       | `#f59e0b`      | Warning title text (darker for AA contrast on light background) |
 | `--lumina-adm-danger`       | `#ef4444`       | `#f87171`      | `danger`, `error`                                               |
 | `--lumina-adm-important`    | `#8b5cf6`       | `#a78bfa`      | `important`                                                     |
-| `--lumina-adm-seealso`      | `#14b8a6`       | `#2dd4bf`      | `seealso`                                                       |
+| `--lumina-adm-seealso`      | `#0891b2`       | `#22d3ee`      | `seealso`                                                       |
 
 The visible left border, icon mask, and 5–8 % background tint of every admonition derive from these single colors via `color-mix()` — overriding the token recolors the whole admonition.
 
@@ -2073,7 +2073,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 1.41.0.
+This documentation is for Sphinx Lumina Theme version 1.43.0.
 
 The MyST syntax:
 
@@ -2397,11 +2397,6 @@ The syntax:
 
 # icons.html.md
 
-# Icon Browser
-
-
-# icons.html.md
-
 # Icons
 
 Make your docs easier to scan by adding icons to cards, sidebar navigation, and your site logo. Lumina includes all 1900+ [Lucide](https://lucide.dev/icons/) icons — rendered as inline SVG at build time with zero runtime cost.
@@ -2500,6 +2495,11 @@ Icon names use **kebab-case** — the same format shown on [lucide.dev/icons](ht
 | Sparkles    | `sparkles`    |
 
 If you use an icon name that doesn’t exist, the build continues without errors — the icon is silently omitted.
+
+
+# icons.html.md
+
+# Icon Browser
 
 
 # images-and-figures.html.md
@@ -4027,6 +4027,39 @@ The token is cleared when the browser tab is closed (sessionStorage scope).
 # releases.html.md
 
 # Releases
+
+## v1.43.0 (2026-06-11)
+
+### Features
+
+- Fix nested admonitions and improve visual polish
+  ([#115](https://github.com/r4sky0/sphinx-lumina-theme/pull/115),
+  [`3ba60d5`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3ba60d5c73c3b67fe80a5e622021f47929ce8e1e))
+
+## v1.42.0 (2026-06-11)
+
+### Features
+
+- Fix header offset variable usage and improve accessibility
+  ([#114](https://github.com/r4sky0/sphinx-lumina-theme/pull/114),
+  [`debd271`](https://github.com/r4sky0/sphinx-lumina-theme/commit/debd27199c8c5c0ab65f992acf0425d5c080c3ed))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump mistune from 3.2.0 to 3.2.1 in the uv group across 1 directory
+  ([#104](https://github.com/r4sky0/sphinx-lumina-theme/pull/104),
+  [`643a791`](https://github.com/r4sky0/sphinx-lumina-theme/commit/643a79119dc69a1fc4c27d4102f6efb8f46da21b))
+- **deps**: Bump pnpm/action-setup from 6.0.4 to 6.0.5 in the github-actions-minor group
+  ([#105](https://github.com/r4sky0/sphinx-lumina-theme/pull/105),
+  [`87d027d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/87d027d5d57f3b784795fa56ba7e7ba78d901375))
+- **deps**: Bump the github-actions-minor group across 1 directory with 2 updates
+  ([#112](https://github.com/r4sky0/sphinx-lumina-theme/pull/112),
+  [`d4cb2d4`](https://github.com/r4sky0/sphinx-lumina-theme/commit/d4cb2d4b86268d711fe1ad931f34261e64cbe12b))
+
+</details>
 
 ## v1.41.0 (2026-05-03)
 

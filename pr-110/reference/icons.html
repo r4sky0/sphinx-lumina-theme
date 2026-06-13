@@ -11,7 +11,7 @@
     <title>Icon Browser &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=c97e9ef8" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=795beac3" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=b87f03a3"></script>
+    <script defer="defer" src="../_static/lumina.js?v=8630868a"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/pr-110/reference/icons.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -78,13 +78,21 @@
     <script>
 (function() {
   var stored = localStorage.getItem('lumina-theme');
+  
   if (stored === 'dark' || stored === 'light') {
     document.documentElement.setAttribute('data-theme', stored);
+    // Sphinx gates the dark highlight stylesheet on the OS color scheme only;
+    // a stored override must rewrite its media query before first paint.
+    var pygmentsDark = document.getElementById('pygments_dark_css');
+    if (pygmentsDark) {
+      pygmentsDark.media = stored === 'dark' ? 'screen' : 'not all';
+    }
   } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.documentElement.setAttribute('data-theme', 'dark');
   } else {
     document.documentElement.setAttribute('data-theme', 'light');
   }
+  
 })();
     </script>
     
@@ -200,6 +208,8 @@
                     x-data="themeToggle()"
                     @click="cycle()"
                     class="relative flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors cursor-pointer"
+                    aria-label="Toggle color theme"
+                    title="Toggle color theme"
                     :aria-label="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'"
                     :title="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'">
                 
@@ -262,6 +272,8 @@
                 <button x-data="layoutToggle()"
                         @click="toggle()"
                         class="hidden xl:flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors cursor-pointer"
+                        aria-label="Toggle layout width"
+                        title="Toggle layout width"
                         :aria-label="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
                         :title="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
                         type="button">
@@ -486,7 +498,7 @@
                         <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                     </svg>
                 Lumina</a>
-                <span class="lumina-sidebar-footer-version">v1.41.0</span>
+                <span class="lumina-sidebar-footer-version">v1.43.0</span>
             </div>
         
     </div>
@@ -501,7 +513,7 @@
                  x-transition:leave="transition ease-in duration-150"
                  x-transition:leave-start="opacity-100"
                  x-transition:leave-end="opacity-0"
-                 class="lumina-overlay-backdrop fixed inset-0 top-14 z-40 lg:hidden"
+                 class="lumina-overlay-backdrop fixed inset-0 top-[var(--lumina-header-offset)] z-40 lg:hidden"
                  @click="close()"></div>
             
             <div id="lumina-sidebar-drawer"
@@ -513,11 +525,14 @@
                  x-transition:leave-start="translate-x-0"
                  x-transition:leave-end="-translate-x-full"
                  @keydown.escape.window="close()"
-                 class="fixed inset-y-0 top-14 left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 py-6 lg:hidden">
+                 class="fixed inset-y-0 top-[var(--lumina-header-offset)] left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 py-6 lg:hidden">
 
                 
+                
 
-    <div id="lumina-section-switcher"
+                    
+
+    <div 
          x-data="navDropdown()"
          @keydown="handleKeydown($event)"
          class="lumina-section-switcher">
@@ -597,6 +612,8 @@
 
 
                 
+
+                
                 
                 
                     <nav class="lumina-sidebar-nav"
@@ -661,7 +678,7 @@
                         <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                            target="_blank"
                            rel="noopener">Lumina</a>
-                        <span class="lumina-sidebar-footer-version">v1.41.0</span>
+                        <span class="lumina-sidebar-footer-version">v1.43.0</span>
                     </div>
                 
             </div>
@@ -704,6 +721,8 @@
                         @click="copy()"
                         class="lumina-copy-page"
                         :class="{ 'is-copied': copied }"
+                        aria-label="Copy page as Markdown"
+                        title="Copy page as Markdown"
                         :aria-label="copied ? 'Copied to clipboard' : 'Copy page as Markdown'"
                         :title="copied ? 'Copied!' : 'Copy page as Markdown'"
                         type="button">
@@ -738,13 +757,13 @@
 
                 
 
-    <div x-data="iconBrowser()" x-init="init()">
+    <div x-data="iconBrowser()">
         <p class="text-lumina-text-muted mb-6">
-            Browse all 1952 available Lucide icons. Click any icon to copy its name.
+            Browse all 1962 available Lucide icons. Click any icon to copy its name.
         </p>
 
         
-        <div class="sticky top-16 z-10 bg-lumina-bg pb-4 pt-2 -mx-1 px-1">
+        <div class="sticky top-[var(--lumina-header-offset)] z-10 bg-lumina-bg pb-4 pt-2 -mx-1 px-1">
             <input type="text"
                    x-model="query"
                    @input="filter()"
@@ -4657,6 +4676,23 @@
                 </button>
             
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="blender"
+                        @click="copy('blender')"
+                        x-show="matches('blender')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M8 14a2 2 0 0 0-1.963 1.615l-1.018 5.193A1 1 0 0 0 6 22h12a1 1 0 0 0 .981-1.192l-1.018-5.193A2 2 0 0 0 16 14z" /><path d="m17 2-1 12" /><path d="M8.006 14 7 2" /><path d="M7.565 8.787A5 5 0 0 0 12 8a5 5 0 0 1 4.56-.75" /><path d="M19 2H5a2 2 0 0 0-2 2v5a2 2 0 0 0 .688 1.5" /><path d="M12 18h.01" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">blender</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
                         data-icon-name="blinds"
                         @click="copy('blinds')"
                         x-show="matches('blinds')">
@@ -5762,6 +5798,23 @@
                 </button>
             
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="broccoli"
+                        @click="copy('broccoli')"
+                        x-show="matches('broccoli')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M10 13a3 3 0 0 1-2.121-5.121" /><path d="M15.606 14.204c-3.5 1.5-5.899 4.503-8.899 7.503A1 1 0 0 1 6 22c-2 0-4-2-4-4a1 1 0 0 1 .293-.707c1.911-1.911 3.823-3.578 5.347-5.441" /><path d="M16.573 14.737A4 4 0 0 1 14 11" /><path d="M7.14 10.907a4 4 0 1 1 2.756-7.43A4 4 0 0 1 16.7 4.48a2 2 0 0 1 2.82 2.82 4 4 0 0 1 1.002 6.805A4 4 0 1 1 13 16" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">broccoli</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
                         data-icon-name="brush"
                         @click="copy('brush')"
                         x-show="matches('brush')">
@@ -6470,7 +6523,7 @@
                          stroke-linecap="round"
                          stroke-linejoin="round"
                          aria-hidden="true">
-                        <path d="M5.7 21a2 2 0 0 1-3.5-2l8.6-14a6 6 0 0 1 10.4 6 2 2 0 1 1-3.464-2 2 2 0 1 0-3.464-2Z" /><path d="M17.75 7 15 2.1" /><path d="M10.9 4.8 13 9" /><path d="m7.9 9.7 2 4.4" /><path d="M4.9 14.7 7 18.9" />
+                        <path d="m10.8 5 2.111 4.223" /><path d="M17.75 7 15 2.1" /><path d="m4.874 14.647 2.12 4.24" /><path d="M5.7 21a2 2 0 0 1-3.5-2l8.6-14a6 6 0 0 1 10.4 6 2 2 0 1 1-3.464-2 2 2 0 1 0-3.464-2z" /><path d="m7.906 9.712 2.005 4.411" />
                     </svg>
                     <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">candy-cane</span>
                 </button>
@@ -7133,7 +7186,7 @@
                          stroke-linecap="round"
                          stroke-linejoin="round"
                          aria-hidden="true">
-                        <path d="M12 16v5" /><path d="M16 14v7" /><path d="M20 10v11" /><path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15" /><path d="M4 18v3" /><path d="M8 14v7" />
+                        <path d="M12 16v5" /><path d="M16 14.639V21" /><path d="M20 10.656V21" /><path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15" /><path d="M4 18.463V21" /><path d="M8 14.656V21" />
                     </svg>
                     <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">chart-no-axes-combined</span>
                 </button>
@@ -15588,6 +15641,23 @@
                 </button>
             
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="globe-check"
+                        @click="copy('globe-check')"
+                        x-show="matches('globe-check')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="m15 6 2 2 4-4" /><path d="M2 12h20A10 10 0 1 1 12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 4-10" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">globe-check</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
                         data-icon-name="globe-lock"
                         @click="copy('globe-lock')"
                         x-show="matches('globe-lock')">
@@ -17809,7 +17879,7 @@
                          stroke-linecap="round"
                          stroke-linejoin="round"
                          aria-hidden="true">
-                        <path d="M10 18v-7" /><path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z" /><path d="M14 18v-7" /><path d="M18 18v-7" /><path d="M3 22h18" /><path d="M6 18v-7" />
+                        <path d="M10 18v-7" /><path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /><path d="M14 18v-7" /><path d="M18 18v-7" /><path d="M3 22h18" /><path d="M6 18v-7" />
                     </svg>
                     <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">landmark</span>
                 </button>
@@ -19713,7 +19783,7 @@
                          stroke-linecap="round"
                          stroke-linejoin="round"
                          aria-hidden="true">
-                        <path d="M8 22h8" /><path d="M12 11v11" /><path d="m19 3-7 8-7-8Z" />
+                        <path d="M12 12 4.207 4.207A.707.707 0 0 1 4.707 3h14.586a.707.707 0 0 1 .5 1.207z" /><path d="M12 12v10" /><path d="M7 22h10" />
                     </svg>
                     <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">martini</span>
                 </button>
@@ -22759,6 +22829,23 @@
                         <path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551" />
                     </svg>
                     <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">paperclip</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="parasol"
+                        @click="copy('parasol')"
+                        x-show="matches('parasol')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M12.5 11.134 18.196 21" /><path d="M20.425 5.299a10 10 0 0 0-16.941 9.78c.183.563.843.774 1.355.478L20.16 6.711c.512-.296.66-.973.264-1.413" /><path d="M21 21H3" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">parasol</span>
                 </button>
             
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
@@ -29375,6 +29462,108 @@
                 </button>
             
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="sticky-note-check"
+                        @click="copy('sticky-note-check')"
+                        x-show="matches('sticky-note-check')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="m15 19 2 2 4-4" /><path d="M15 3v5a1 1 0 0 0 1 1h5" /><path d="M21 13V9a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6.5" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">sticky-note-check</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="sticky-note-minus"
+                        @click="copy('sticky-note-minus')"
+                        x-show="matches('sticky-note-minus')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M15 3v5a1 1 0 0 0 1 1h5" /><path d="M21 14V9a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7.35" /><path d="M21 18h-6" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">sticky-note-minus</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="sticky-note-off"
+                        @click="copy('sticky-note-off')"
+                        x-show="matches('sticky-note-off')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M15 3v5a1 1 0 0 0 1 1h5" /><path d="m2 2 20 20" /><path d="M3.586 3.586A2 2 0 0 0 3 5v14a2 2 0 0 0 2 2h14a2 2 0 0 0 1.414-.586" /><path d="M8.656 3H15a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 21 9v6.344" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">sticky-note-off</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="sticky-note-plus"
+                        @click="copy('sticky-note-plus')"
+                        x-show="matches('sticky-note-plus')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M15 3v5a1 1 0 0 0 1 1h5" /><path d="M18 15v6" /><path d="M21 12.356V9a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7.355" /><path d="M21 18h-6" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">sticky-note-plus</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="sticky-note-x"
+                        @click="copy('sticky-note-x')"
+                        x-show="matches('sticky-note-x')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M15 3v5a1 1 0 0 0 1 1h5" /><path d="m16 16 5 5" /><path d="M21 12V9a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7" /><path d="m21 16-5 5" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">sticky-note-x</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
+                        data-icon-name="sticky-notes"
+                        @click="copy('sticky-notes')"
+                        x-show="matches('sticky-notes')">
+                    <svg class="h-6 w-6"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M10 8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 16 14v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2z" /><path d="M10 8v5a1 1 0 0 0 1 1h5" /><path d="M8 4a2 2 0 0 1 2-2h6a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 22 8v6a2 2 0 0 1-2 2" /><path d="M16 2v5a1 1 0 0 0 1 1h5" />
+                    </svg>
+                    <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">sticky-notes</span>
+                </button>
+            
+                <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
                         data-icon-name="stone"
                         @click="copy('stone')"
                         x-show="matches('stone')">
@@ -30355,7 +30544,7 @@
                          stroke-linecap="round"
                          stroke-linejoin="round"
                          aria-hidden="true">
-                        <path d="M17 22h-1a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h1" /><path d="M7 22h1a4 4 0 0 0 4-4v-1" /><path d="M7 2h1a4 4 0 0 1 4 4v1" />
+                        <path d="M17 22h-1a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h1" /><path d="M7 22h1a4 4 0 0 0 4-4" /><path d="M7 2h1a4 4 0 0 1 4 4" />
                     </svg>
                     <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">text-cursor</span>
                 </button>
@@ -32769,7 +32958,7 @@
                          stroke-linecap="round"
                          stroke-linejoin="round"
                          aria-hidden="true">
-                        <path d="M11.1 7.1a16.55 16.55 0 0 1 10.9 4" /><path d="M12 12a12.6 12.6 0 0 1-8.7 5" /><path d="M16.8 13.6a16.55 16.55 0 0 1-9 7.5" /><path d="M20.7 17a12.8 12.8 0 0 0-8.7-5 13.3 13.3 0 0 1 0-10" /><path d="M6.3 3.8a16.55 16.55 0 0 0 1.9 11.5" /><circle cx="12" cy="12" r="10" />
+                        <path d="M11 7a16 16 20 0 1 10.98 4.362" /><path d="M12 12a13 13 0 0 1-8.66 5" /><path d="M16.83 13.634a16 16 0 0 1-9.267 7.328" /><path d="M20.66 17A13 13 0 0 0 12 12a13 13 0 0 1 0-10" /><path d="M8.17 15.366a16 16 0 0 1-1.713-11.69" /><circle cx="12" cy="12" r="10" />
                     </svg>
                     <span class="text-[0.6875rem] leading-tight text-center break-all group-hover:text-lumina-accent transition-colors">volleyball</span>
                 </button>
@@ -34014,7 +34203,7 @@
             <aside id="lumina-toc">
 
                 
-    <div class="lumina-toc-container sticky top-14 hidden h-[calc(100vh-3.5rem)] w-[220px] shrink-0 py-6 pr-4 xl:block">
+    <div class="lumina-toc-container sticky top-[var(--lumina-header-offset)] hidden h-[calc(100vh-var(--lumina-header-offset))] w-[220px] shrink-0 py-6 pr-4 xl:block">
         
         
             <a href="https://github.com/r4sky0/sphinx-lumina-theme/edit/main/docs/reference/icons.md"
@@ -34027,10 +34216,10 @@
         
         <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-lumina-text-muted">On this page</p>
         <div class="lumina-toc-scroll">
+            
             <nav class="lumina-toc-nav"
                  aria-label="Table of contents"
-                 x-data="scrollspy()"
-                 x-init="init()">
+                 x-data="scrollspy()">
                 <ul>
 <li><a class="reference internal" href="#">Icon Browser</a></li>
 </ul>
@@ -34105,10 +34294,7 @@
             <kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1.5 py-0.5 text-xs text-lumina-text-muted">esc</kbd>
         </div>
         
-        <div class="max-h-[60vh] overflow-y-auto p-2"
-             aria-live="polite"
-             aria-label="Search results"
-             role="status">
+        <div class="max-h-[60vh] overflow-y-auto p-2">
             <template x-if="!loaded">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Loading search index...</p>
             </template>
@@ -34139,6 +34325,11 @@
             <template x-if="loaded && query.length === 0">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Type to search...</p>
             </template>
+        </div>
+        
+        <div class="sr-only"
+             role="status"
+             x-text="loaded && query.length > 0 ? results.length + (results.length === 1 ? ' result' : ' results') : ''">
         </div>
         
         <div class="flex items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
