@@ -93,11 +93,15 @@ export function tryItPanel() {
         }
       }
 
-      this.bearerToken = sessionStorage.getItem(SESSION_KEY) || "";
       this.needsAuth = this.allHeaders.some((h) => h.name.toLowerCase() === "authorization");
       this.extraHeaders = this.allHeaders.filter(
         (h) => !["authorization", "content-type"].includes(h.name.toLowerCase()),
       );
+      try {
+        this.bearerToken = sessionStorage.getItem(SESSION_KEY) || "";
+      } catch {
+        this.bearerToken = "";
+      }
     },
 
     /* Computed URL — reactive to form changes */
@@ -129,7 +133,11 @@ export function tryItPanel() {
 
       if (this.needsAuth && this.bearerToken.trim()) {
         headers["Authorization"] = `Bearer ${this.bearerToken.trim()}`;
-        sessionStorage.setItem(SESSION_KEY, this.bearerToken.trim());
+        try {
+          sessionStorage.setItem(SESSION_KEY, this.bearerToken.trim());
+        } catch {
+          /* ignore — request still sends with the token, just not persisted */
+        }
       }
 
       this.extraHeaders.forEach((h) => {

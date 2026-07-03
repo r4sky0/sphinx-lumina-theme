@@ -110,7 +110,7 @@ HTML blocks in MyST require `html_block` in `myst_enable_extensions`, or use a `
 ````
 :::
 
-The server badge (shown above the first endpoint) always reflects the global `api_base_url`. Per-block overrides affect only the curl commands and "Try it out" URLs.
+The server badge shown next to each endpoint's signature reflects whichever base URL applies to it — the closest ancestor's `data-api-base-url` override, or the global `api_base_url` if none applies. This matches the curl commands and "Try it out" URLs generated for that same endpoint.
 
 ### Disabling Try it out
 

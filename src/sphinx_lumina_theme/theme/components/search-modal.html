@@ -40,13 +40,14 @@
                    @keydown.enter.prevent="goToSelected()"
                    class="w-full border-0 bg-transparent px-3 py-4 text-lumina-text placeholder-lumina-text-muted outline-none"
                    placeholder="Search docs..."
+                   aria-label="Search documentation"
                    autocomplete="off">
             <kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1.5 py-0.5 text-xs text-lumina-text-muted">esc</kbd>
         </div>
         {# Results. Announced via the separate visually-hidden live region
            below — a live region must not contain the interactive result
            links themselves. #}
-        <div class="max-h-[60vh] overflow-y-auto p-2">
+        <div class="lumina-search-results max-h-[60vh] overflow-y-auto p-2">
             <template x-if="!loaded">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Loading search index...</p>
             </template>

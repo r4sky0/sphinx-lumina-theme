@@ -46,7 +46,7 @@ The hero only renders when `hero_title` is set. All other hero fields are option
 | `hero_primary_text` | Primary call-to-action button label. |
 | `hero_primary_url` | Internal doc path (e.g. `getting-started/installation`). Resolved relative to the Sphinx build — use the same format as a Sphinx `:doc:` reference. |
 | `hero_secondary_text` | Secondary button label. |
-| `hero_secondary_url` | URL for the secondary button. External URLs (`https://…`) open in a new tab automatically. |
+| `hero_secondary_url` | Internal doc path or external URL for the secondary button. External URLs (`https://…`) open in a new tab automatically; internal doc paths are resolved the same way as `hero_primary_url`. |
 | `hero_tags` | Comma-separated tags rendered below the buttons (e.g. `Fast, Lightweight, Open source`). |
 
 ## Adding content below the hero

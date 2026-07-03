@@ -26,10 +26,17 @@ export default function announcementBanner() {
     },
 
     dismiss() {
-      if (_id) {
-        localStorage.setItem("lumina-announce-" + _id, "1");
-      }
+      // Hide the banner first — persistence is best-effort and must not
+      // block the dismiss action if storage throws (private browsing,
+      // disabled site data, quota exceeded).
       document.documentElement.classList.remove("has-announcement");
+      if (_id) {
+        try {
+          localStorage.setItem("lumina-announce-" + _id, "1");
+        } catch {
+          /* ignore — banner stays dismissed for this page view */
+        }
+      }
     },
   };
 }

@@ -28,7 +28,12 @@ export default function themeToggle() {
     mode: "auto",
 
     init() {
-      const stored = localStorage.getItem("lumina-theme");
+      let stored = null;
+      try {
+        stored = localStorage.getItem("lumina-theme");
+      } catch {
+        /* localStorage unavailable (e.g. disabled site data) — fall back to auto */
+      }
       if (stored === "light" || stored === "dark") {
         this.mode = stored;
       } else {
@@ -63,12 +68,14 @@ export default function themeToggle() {
 
     apply() {
       let effectiveTheme;
+      // ``dark_mode_default`` (exposed by layout.html as data-theme-default)
+      // overrides the OS preference until the reader picks an explicit theme.
+      const configured =
+        document.documentElement.getAttribute("data-theme-default");
+      const forced = configured === "light" || configured === "dark";
+
       if (this.mode === "auto") {
-        // ``dark_mode_default`` (exposed by layout.html as data-theme-default)
-        // overrides the OS preference until the reader picks an explicit theme.
-        const configured =
-          document.documentElement.getAttribute("data-theme-default");
-        if (configured === "light" || configured === "dark") {
+        if (forced) {
           effectiveTheme = configured;
         } else {
           effectiveTheme = window.matchMedia("(prefers-color-scheme: dark)")
@@ -76,19 +83,31 @@ export default function themeToggle() {
             ? "dark"
             : "light";
         }
-        localStorage.removeItem("lumina-theme");
       } else {
         effectiveTheme = this.mode;
-        localStorage.setItem("lumina-theme", this.mode);
       }
+
+      // Apply the visual change first — persistence is best-effort and
+      // must not block the actual theme switch if storage throws (private
+      // browsing, disabled site data, quota exceeded).
       document.documentElement.setAttribute("data-theme", effectiveTheme);
+      try {
+        if (this.mode === "auto") {
+          localStorage.removeItem("lumina-theme");
+        } else {
+          localStorage.setItem("lumina-theme", this.mode);
+        }
+      } catch {
+        /* ignore — theme still applied for this page view */
+      }
 
       // Sphinx gates the dark highlight stylesheet on the OS color scheme
-      // only, so a manual override must rewrite its media query — otherwise
-      // code blocks keep the other mode's Pygments palette.
+      // only, so a manual override — or a forced ``dark_mode_default`` that
+      // disagrees with the OS setting — must rewrite its media query,
+      // otherwise code blocks keep the other mode's Pygments palette.
       const pygmentsDark = document.getElementById("pygments_dark_css");
       if (pygmentsDark) {
-        if (this.mode === "auto") {
+        if (this.mode === "auto" && !forced) {
           pygmentsDark.media = "(prefers-color-scheme: dark)";
         } else {
           pygmentsDark.media = effectiveTheme === "dark" ? "screen" : "not all";

@@ -15,6 +15,7 @@
                    x-model="query"
                    @input="filter()"
                    placeholder="Search icons..."
+                   aria-label="Search icons"
                    class="w-full rounded-lg border border-lumina-border bg-lumina-bg-secondary px-4 py-2.5 text-sm text-lumina-text placeholder-lumina-text-muted outline-none focus:border-lumina-accent transition-colors">
             <p class="mt-2 text-xs text-lumina-text-muted" x-show="query.length > 0">
                 <span x-text="visible"></span> icons found

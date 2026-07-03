@@ -297,8 +297,8 @@ html .sd-tab-set > label:hover {
 [data-theme="dark"] .sd-outline-primary,
 [data-theme="dark"] .sd-text-primary,
 [data-theme="dark"] .sd-btn-outline-primary {
-  color: #10b981 !important;
-  border-color: #10b981 !important;
+  color: var(--lumina-accent) !important;
+  border-color: var(--lumina-accent) !important;
 }
 
 [data-theme="dark"] .sd-outline-danger,

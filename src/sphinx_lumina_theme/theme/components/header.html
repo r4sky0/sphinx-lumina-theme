@@ -6,7 +6,8 @@
         {# Logo + project name #}
         <div class="flex items-center gap-3">
             <a href="{{ pathto(root_doc) }}"
-               class="flex items-center gap-2 text-lumina-text no-underline hover:opacity-80 transition-opacity">
+               class="flex items-center gap-2 text-lumina-text no-underline hover:opacity-80 transition-opacity"
+               {% if theme_logo_only == "true" and not ((lumina_light_logo is defined and lumina_light_logo) or (lumina_dark_logo is defined and lumina_dark_logo) or (logo_url is defined and logo_url)) %}aria-label="{{ project }}"{% endif %}>
                 {% if lumina_light_logo is defined and lumina_dark_logo is defined and lumina_light_logo and lumina_dark_logo %}
                     <img src="{{ lumina_light_logo }}"
                          alt="{{ project }} logo"

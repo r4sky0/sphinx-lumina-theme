@@ -183,6 +183,9 @@ export default function searchModal() {
         await this.pagefind.init();
         this.loaded = true;
       } catch (e) {
+        // Reset so search() falls through to the Sphinx-search-page link
+        // instead of calling .search() on a partially-loaded/failed module.
+        this.pagefind = null;
         this.error =
           "Search requires Pagefind indexing. Use your browser’s Ctrl+F to search this page, or run: pagefind --site _build/html/";
         this.loaded = true;

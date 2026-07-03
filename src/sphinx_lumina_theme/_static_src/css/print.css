@@ -41,7 +41,7 @@
   [data-search-trigger],
   [data-theme-toggle],
   [data-sidebar-toggle],
-  .lumina-back-to-top,
+  #lumina-back-to-top,
   a.headerlink {
     display: none !important;
   }

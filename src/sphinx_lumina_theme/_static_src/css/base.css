@@ -984,16 +984,16 @@ a.headerlink[data-tooltip].lumina-tooltip-visible::after {
   to { opacity: 1; transform: translateY(0); }
 }
 
-#lumina-search-modal div[aria-live] > a {
+#lumina-search-modal .lumina-search-results > a {
   animation: lumina-result-in 0.2s ease-out both;
 }
 
-#lumina-search-modal div[aria-live] > a:nth-child(1) { animation-delay: 0ms; }
-#lumina-search-modal div[aria-live] > a:nth-child(2) { animation-delay: 30ms; }
-#lumina-search-modal div[aria-live] > a:nth-child(3) { animation-delay: 60ms; }
-#lumina-search-modal div[aria-live] > a:nth-child(4) { animation-delay: 90ms; }
-#lumina-search-modal div[aria-live] > a:nth-child(5) { animation-delay: 120ms; }
-#lumina-search-modal div[aria-live] > a:nth-child(n+6) { animation-delay: 150ms; }
+#lumina-search-modal .lumina-search-results > a:nth-child(1) { animation-delay: 0ms; }
+#lumina-search-modal .lumina-search-results > a:nth-child(2) { animation-delay: 30ms; }
+#lumina-search-modal .lumina-search-results > a:nth-child(3) { animation-delay: 60ms; }
+#lumina-search-modal .lumina-search-results > a:nth-child(4) { animation-delay: 90ms; }
+#lumina-search-modal .lumina-search-results > a:nth-child(5) { animation-delay: 120ms; }
+#lumina-search-modal .lumina-search-results > a:nth-child(n+6) { animation-delay: 150ms; }
 
 /* ── Alpine.js cloak ── */
 [x-cloak] { display: none !important; }

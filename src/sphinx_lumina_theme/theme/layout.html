@@ -68,10 +68,15 @@
   var stored = localStorage.getItem('lumina-theme');
   {% if theme_dark_mode_default in ("light", "dark") %}
   document.documentElement.setAttribute('data-theme-default', '{{ theme_dark_mode_default }}');
-  if (stored === 'dark' || stored === 'light') {
-    document.documentElement.setAttribute('data-theme', stored);
-  } else {
-    document.documentElement.setAttribute('data-theme', '{{ theme_dark_mode_default }}');
+  var effective = (stored === 'dark' || stored === 'light') ? stored : '{{ theme_dark_mode_default }}';
+  document.documentElement.setAttribute('data-theme', effective);
+  // Sphinx gates the dark highlight stylesheet on the OS color scheme only;
+  // a forced default (or stored override) must rewrite its media query
+  // before first paint so code blocks don't render in the other mode's
+  // Pygments palette.
+  var pygmentsDarkForced = document.getElementById('pygments_dark_css');
+  if (pygmentsDarkForced) {
+    pygmentsDarkForced.media = effective === 'dark' ? 'screen' : 'not all';
   }
   {% else %}
   if (stored === 'dark' || stored === 'light') {
@@ -124,7 +129,11 @@
         <script>
 (function() {
   var id = '{{ announcement_id }}';
-  if (!id || localStorage.getItem('lumina-announce-' + id) !== '1') {
+  var dismissed = false;
+  try {
+    dismissed = !!id && localStorage.getItem('lumina-announce-' + id) === '1';
+  } catch (e) {}
+  if (!dismissed) {
     document.documentElement.classList.add('has-announcement');
   }
 })();

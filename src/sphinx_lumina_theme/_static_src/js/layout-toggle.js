@@ -28,7 +28,11 @@ export default function layoutToggle() {
     wide: false,
 
     init() {
-      this.wide = localStorage.getItem("lumina-layout") === "wide";
+      try {
+        this.wide = localStorage.getItem("lumina-layout") === "wide";
+      } catch {
+        this.wide = false;
+      }
       this.apply();
     },
 
@@ -38,12 +42,21 @@ export default function layoutToggle() {
     },
 
     apply() {
+      // Apply the visual change first — persistence is best-effort and
+      // must not block the actual layout switch if storage throws.
       if (this.wide) {
         document.documentElement.setAttribute("data-layout", "wide");
-        localStorage.setItem("lumina-layout", "wide");
       } else {
         document.documentElement.removeAttribute("data-layout");
-        localStorage.removeItem("lumina-layout");
+      }
+      try {
+        if (this.wide) {
+          localStorage.setItem("lumina-layout", "wide");
+        } else {
+          localStorage.removeItem("lumina-layout");
+        }
+      } catch {
+        /* ignore — layout still applied for this page view */
       }
     },
   };

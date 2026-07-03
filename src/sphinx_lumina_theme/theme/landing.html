@@ -27,9 +27,10 @@
                             {{ lumina_icon("arrow-right", stroke_width=2.5, css_class="lumina-hero-arrow") }}
                         </a>
                         {% if hero_secondary_text is defined and hero_secondary_text %}
-                            <a href="{{ hero_secondary_url if hero_secondary_url is defined else '#' }}"
+                            {% set is_external = hero_secondary_url is defined and '://' in hero_secondary_url %}
+                            <a href="{{ hero_secondary_url if is_external else (pathto(hero_secondary_url) if hero_secondary_url is defined and hero_secondary_url else '#') }}"
                                class="lumina-hero-btn lumina-hero-btn-secondary"
-                               {% if hero_secondary_url is defined and '://' in hero_secondary_url %}target="_blank" rel="noopener"{% endif %}>
+                               {% if is_external %}target="_blank" rel="noopener"{% endif %}>
                                 {{ hero_secondary_text }}
                             </a>
                         {% endif %}
