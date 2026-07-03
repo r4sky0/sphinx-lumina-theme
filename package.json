@@ -24,10 +24,10 @@
     "husky": "9.1.7",
     "jsdoc": "^4.0",
     "lint-staged": "16.4.0",
-    "lucide-static": "1.17.0",
+    "lucide-static": "1.23.0",
     "tailwindcss": "^4.3"
   },
   "dependencies": {
-    "dompurify": "3.4.9"
+    "dompurify": "3.4.11"
   }
 }
