@@ -28,6 +28,6 @@
     "tailwindcss": "^4.3"
   },
   "dependencies": {
-    "dompurify": "3.4.9"
+    "dompurify": "3.4.12"
   }
 }
