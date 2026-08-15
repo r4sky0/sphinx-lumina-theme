@@ -6,11 +6,11 @@
 ## Pages
 
 - [Sphinx Lumina Theme](index.html.md): Main documentation page
-- [Contributing](contributing/index.html.md): How to set up a development environment and contribute to the Sphinx Lumina Theme.
-- [Extensions](extensions/index.html.md): Lumina works with any Sphinx extension. These are the ones we recommend and style specifically.
-- [Guides](guides/index.html.md): Go deeper with Lumina — search, styling, navigation, and development workflows.
 - [Reference](reference/index.html.md): Visual showcase and syntax reference for every content type Lumina styles.
+- [Contributing](contributing/index.html.md): How to set up a development environment and contribute to the Sphinx Lumina Theme.
+- [Guides](guides/index.html.md): Go deeper with Lumina — search, styling, navigation, and development workflows.
 - [Getting Started](getting-started/index.html.md): Get Lumina running in your Sphinx project in under five minutes.
+- [Extensions](extensions/index.html.md): Lumina works with any Sphinx extension. These are the ones we recommend and style specifically.
 - [Admonitions](reference/admonitions.html.md): Callout boxes that highlight important information. Each type has a distinct color and icon.
 - [API Documentation](reference/api-documentation.html.md): How technical API documentation renders in the Lumina theme. This page covers manually written API d...
 - [Architecture](contributing/architecture.html.md): How the Sphinx Lumina Theme is structured internally.
@@ -25,8 +25,8 @@
 - [Diagrams](reference/diagrams.html.md): Lumina supports [Mermaid](https://mermaid.js.org/) diagrams via the `sphinxcontrib-mermaid` extensio...
 - [Footnotes & References](reference/footnotes-and-references.html.md): Cross-referencing, citations, glossaries, and linking across documents and projects.
 - [HTTP API Documentation](reference/http-api.html.md): How HTTP API endpoints render in the Lumina theme. This page covers auto-generated docs from OpenAPI...
-- [Icons](guides/icons.html.md): Make your docs easier to scan by adding icons to cards, sidebar navigation, and your site logo. Lumi...
 - [Icon Browser](reference/icons.html.md): Page content
+- [Icons](guides/icons.html.md): Make your docs easier to scan by adding icons to cards, sidebar navigation, and your site logo. Lumi...
 - [Images & Figures](reference/images-and-figures.html.md): Embedding and formatting visual content in your documentation.
 - [Installation](getting-started/installation.html.md): Install the Lumina theme and build your first page.
 - [Introduction](introduction.html.md): Sphinx is one of the most powerful documentation generators in the Python ecosystem. It handles cros...
