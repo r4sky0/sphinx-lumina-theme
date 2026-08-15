@@ -5,6 +5,41 @@
 
 # index.html.md
 
+# Reference
+
+Visual showcase and syntax reference for every content type Lumina styles.
+
+Headings, inline formatting, block quotes, definition lists, and links.
+
+Note, tip, warning, danger, and seven more callout types with custom titles and nesting.
+
+Syntax highlighting, line numbers, emphasis, captions, diffs, and tabs.
+
+Ordered, unordered, task lists, Markdown tables, and list tables.
+
+Card layouts, responsive grids, and common layout patterns.
+
+Responsive images, figures with captions, alignment, and file format guidance.
+
+Inline status badges and clickable button links.
+
+Inline and display equations, labeled references, matrices, and symbol tables.
+
+Mermaid flowcharts, sequence diagrams, class diagrams, Gantt charts, and more.
+
+Cross-references, glossaries, intersphinx, version directives, and downloads.
+
+Python API docs with functions, classes, autodoc, and cross-referencing.
+
+OpenAPI auto-generated docs and manual HTTP method directives.
+
+Browse all 1900+ Lucide icons available for cards, sidebar, and logo.
+
+Every theme token, its default in light and dark mode, and what it controls.
+
+
+# index.html.md
+
 # Contributing
 
 How to set up a development environment and contribute to the Sphinx Lumina Theme.
@@ -69,6 +104,33 @@ Tests use pytest with BeautifulSoup for HTML assertions. The `build_output` fixt
 Learn how the theme is structured — build pipeline, templates, Alpine.js components, and testing.
 
 Auto-generated reference for every Alpine.js component in the theme.
+
+
+# index.html.md
+
+# Guides
+
+Go deeper with Lumina — search, styling, navigation, and development workflows.
+
+Configure Pagefind or Sphinx built-in search.
+
+Color mode settings and CSS custom properties.
+
+Write docs in Markdown with full Sphinx directive support.
+
+Header links, social icons, sidebar depth, and breadcrumbs.
+
+CSS custom properties, fonts, syntax highlighting, and templates.
+
+Create a full-width entry point with an optional hero section.
+
+Expand the content area for code-heavy docs on wide screens.
+
+Add Lucide icons to cards, sidebar items, and your logo.
+
+Live reload with sphinx-autobuild and the asset watcher.
+
+Out-of-the-box meta tags, social cards, JSON-LD, sitemap, and `robots.txt`.
 
 
 # index.html.md
@@ -164,68 +226,6 @@ intersphinx_mapping = {
     "sphinx": ("https://www.sphinx-doc.org/en/master", None),
 }
 ```
-
-
-# index.html.md
-
-# Reference
-
-Visual showcase and syntax reference for every content type Lumina styles.
-
-Headings, inline formatting, block quotes, definition lists, and links.
-
-Note, tip, warning, danger, and seven more callout types with custom titles and nesting.
-
-Syntax highlighting, line numbers, emphasis, captions, diffs, and tabs.
-
-Ordered, unordered, task lists, Markdown tables, and list tables.
-
-Card layouts, responsive grids, and common layout patterns.
-
-Responsive images, figures with captions, alignment, and file format guidance.
-
-Inline status badges and clickable button links.
-
-Inline and display equations, labeled references, matrices, and symbol tables.
-
-Mermaid flowcharts, sequence diagrams, class diagrams, Gantt charts, and more.
-
-Cross-references, glossaries, intersphinx, version directives, and downloads.
-
-Python API docs with functions, classes, autodoc, and cross-referencing.
-
-OpenAPI auto-generated docs and manual HTTP method directives.
-
-Browse all 1900+ Lucide icons available for cards, sidebar, and logo.
-
-Every theme token, its default in light and dark mode, and what it controls.
-
-
-# index.html.md
-
-# Guides
-
-Go deeper with Lumina — search, styling, navigation, and development workflows.
-
-Configure Pagefind or Sphinx built-in search.
-
-Color mode settings and CSS custom properties.
-
-Write docs in Markdown with full Sphinx directive support.
-
-Header links, social icons, sidebar depth, and breadcrumbs.
-
-CSS custom properties, fonts, syntax highlighting, and templates.
-
-Create a full-width entry point with an optional hero section.
-
-Expand the content area for code-heavy docs on wide screens.
-
-Add Lucide icons to cards, sidebar items, and your logo.
-
-Live reload with sphinx-autobuild and the asset watcher.
-
-Out-of-the-box meta tags, social cards, JSON-LD, sitemap, and `robots.txt`.
 
 
 # admonitions.html.md
