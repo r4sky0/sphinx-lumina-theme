@@ -17,7 +17,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
 
       - uses: ./.github/actions/setup
 
@@ -38,7 +38,7 @@ jobs:
         python: ["3.12", "3.13", "3.14"]
         sphinx: ["8", "9"]
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
 
       - uses: ./.github/actions/setup
         with:
@@ -56,7 +56,7 @@ jobs:
   test-extensions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
 
       - uses: ./.github/actions/setup
 
@@ -78,7 +78,7 @@ jobs:
     needs: test-structure
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
 
       - uses: ./.github/actions/setup
 
