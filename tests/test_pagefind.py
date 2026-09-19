@@ -9,7 +9,9 @@ import sphinx_lumina_theme as theme
 def _app(**options):
     return SimpleNamespace(
         outdir="/tmp/lumina-test-build",
-        builder=SimpleNamespace(format="html", theme_options={"search_backend": "pagefind", **options}),
+        builder=SimpleNamespace(
+            format="html", theme_options={"search_backend": "pagefind", **options}
+        ),
     )
 
 
@@ -17,7 +19,9 @@ def test_missing_pagefind_is_non_fatal(monkeypatch):
     """A missing local executable should skip indexing without a warning error."""
     monkeypatch.setattr("shutil.which", lambda name: None)
     messages = []
-    monkeypatch.setattr(theme.logger, "info", lambda message, *args: messages.append(message % args))
+    monkeypatch.setattr(
+        theme.logger, "info", lambda message, *args: messages.append(message % args)
+    )
     theme._run_pagefind(_app(), None)
     assert any("skipping indexing" in message for message in messages)
 
@@ -33,7 +37,9 @@ def test_pagefind_nonzero_exit_is_reported(monkeypatch):
         ),
     )
     messages = []
-    monkeypatch.setattr(theme.logger, "warning", lambda message, *args: messages.append(message % args))
+    monkeypatch.setattr(
+        theme.logger, "warning", lambda message, *args: messages.append(message % args)
+    )
     theme._run_pagefind(_app(), None)
     assert "Pagefind indexing failed: invalid site" in messages
 
@@ -49,7 +55,9 @@ def test_pagefind_timeout_is_bounded(monkeypatch):
 
     monkeypatch.setattr(subprocess, "run", run)
     messages = []
-    monkeypatch.setattr(theme.logger, "warning", lambda message, *args: messages.append(message % args))
+    monkeypatch.setattr(
+        theme.logger, "warning", lambda message, *args: messages.append(message % args)
+    )
     theme._run_pagefind(_app(pagefind_timeout="7"), None)
     assert calls[0]["timeout"] == 7.0
     assert "Pagefind indexing timed out after 7.0 seconds" in messages

@@ -115,7 +115,9 @@ def test_header_offset_tracks_rendered_header(page: Page, live_server: str):
     page.set_viewport_size({"width": 375, "height": 667})
     page.goto(f"{live_server}/getting-started/installation.html")
     page.wait_for_function("() => window.Alpine !== undefined")
-    offset = page.evaluate("parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--lumina-header-offset'))")
+    offset = page.evaluate(
+        "parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--lumina-header-offset'))"
+    )
     header_height = page.locator("#lumina-header > header").bounding_box()["height"]
     assert abs(offset - header_height) <= 1
 
