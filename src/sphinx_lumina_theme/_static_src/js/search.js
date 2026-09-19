@@ -3,7 +3,7 @@
  * @description Alpine.js component for the full-text search modal. Supports
  * Pagefind as the primary backend with a fallback to Sphinx's built-in
  * search. Provides keyboard navigation (arrow keys, Enter, Escape),
- * a focus trap, and the ``/`` and ``Ctrl+K`` / ``⌘K`` shortcuts.
+ * a native dialog, and the ``/`` and ``Ctrl+K`` / ``⌘K`` shortcuts.
  */
 
 import DOMPurify from "dompurify";
@@ -32,7 +32,6 @@ function sectionFromUrl(url) {
  *
  * **Properties:**
  *
- * - ``open`` *(boolean)* — Whether the modal is visible.
  * - ``query`` *(string)* — Current search input value.
  * - ``results`` *(Array)* — Array of search result objects.
  * - ``selectedIndex`` *(number)* — Index of the keyboard-highlighted result.
@@ -56,7 +55,6 @@ function sectionFromUrl(url) {
  */
 export default function searchModal() {
   return {
-    open: false,
     query: "",
     results: [],
     selectedIndex: 0,
@@ -64,7 +62,6 @@ export default function searchModal() {
     error: null,
     pagefind: null,
     _trigger: null,
-    _trapHandler: null,
     _resultCache: new Map(),
     backend:
       document.querySelector('meta[name="lumina-search-backend"]')?.content ||
@@ -74,13 +71,13 @@ export default function searchModal() {
 
     async init() {
       document.querySelectorAll("[data-search-trigger]").forEach((btn) => {
-        btn.addEventListener("click", () => this.toggle());
+        btn.addEventListener("click", () => this.toggle(btn));
       });
 
       // "/" shortcut — open search when not typing in an input
       document.addEventListener("keydown", (e) => {
         if (e.key !== "/") return;
-        if (this.open) return;
+        if (this.$el.open) return;
         const tag = document.activeElement?.tagName;
         const editable = document.activeElement?.isContentEditable;
         if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || editable) return;
@@ -96,24 +93,21 @@ export default function searchModal() {
       });
     },
 
-    toggle() {
-      this.open ? this.close() : this.openModal();
+    toggle(trigger) {
+      this.$el.open ? this.close() : this.openModal(trigger);
     },
 
-    async openModal() {
-      this._trigger = document.activeElement;
-      this.open = true;
+    async openModal(trigger) {
+      if (this.$el.open) return;
+      this._trigger = trigger || document.activeElement;
       this.query = "";
       this.results = [];
       this.selectedIndex = 0;
       this.error = null;
 
+      this.$el.showModal();
       await this.$nextTick();
       this.$refs.searchInput?.focus();
-
-      // Set up focus trap
-      this._trapHandler = (e) => this._handleFocusTrap(e);
-      document.addEventListener("keydown", this._trapHandler);
 
       if (!this.loaded) {
         await this.loadSearchEngine();
@@ -121,39 +115,9 @@ export default function searchModal() {
     },
 
     close() {
-      this.open = false;
-
-      // Remove focus trap
-      if (this._trapHandler) {
-        document.removeEventListener("keydown", this._trapHandler);
-        this._trapHandler = null;
-      }
-
-      // Return focus to trigger
+      if (this.$el.open) this.$el.close();
       this._trigger?.focus();
       this._trigger = null;
-    },
-
-    _handleFocusTrap(e) {
-      if (e.key !== "Tab" || !this.open) return;
-      const modal = document.getElementById("lumina-search-modal");
-      if (!modal) return;
-
-      const focusable = modal.querySelectorAll(
-        'input, button, a[href], [tabindex]:not([tabindex="-1"])'
-      );
-      if (focusable.length === 0) return;
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
     },
 
     async loadSearchEngine() {

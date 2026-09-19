@@ -124,6 +124,7 @@
 
 {%- endblock %}
 {%- block scripts %}
+    <script defer src="{{ pathto('_static/fluid-worker.js', 1) }}"></script>
     <script defer src="{{ pathto('_static/fluid-simulation.js', 1) }}"></script>
     {{ super() }}
 {%- endblock %}

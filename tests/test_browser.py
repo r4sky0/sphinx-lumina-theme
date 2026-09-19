@@ -26,6 +26,27 @@ def test_search_modal_closes_on_escape(page: Page):
     expect(page.locator("#lumina-search-modal")).to_be_visible()
     page.keyboard.press("Escape")
     expect(page.locator("#lumina-search-modal")).to_be_hidden()
+    expect(page.locator("[data-search-trigger]")).to_be_focused()
+
+
+def test_lightbox_dialog_closes_on_escape(page: Page, live_server: str):
+    page.goto(f"{live_server}/reference/images-and-figures.html")
+    image = page.locator(".lumina-article img").first
+    image.click()
+    dialog = page.locator("dialog.lumina-lightbox-overlay")
+    expect(dialog).to_be_visible()
+    page.keyboard.press("Escape")
+    expect(dialog).to_be_hidden()
+
+
+def test_fluid_main_thread_fallback(page: Page, live_server: str):
+    page.add_init_script(
+        "Object.defineProperty(window, 'OffscreenCanvas', { value: undefined })"
+    )
+    page.goto(live_server)
+    page.wait_for_function(
+        "() => document.querySelector('.lumina-hero-canvas')?.width > 300"
+    )
 
 
 def test_search_returns_results(page: Page, live_server: str):

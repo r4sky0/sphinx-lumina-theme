@@ -1,8 +1,7 @@
 """Test the doc sections switcher."""
 
 from bs4 import BeautifulSoup
-from conftest import copy_sample_docs
-from sphinx.application import Sphinx
+from conftest import copy_sample_docs, sphinx_app
 
 
 def _build_sections(tmp_path, options=None, extra_opts=None):
@@ -10,7 +9,6 @@ def _build_sections(tmp_path, options=None, extra_opts=None):
     conf_dir = tmp_path / "conf"
     conf_dir.mkdir()
     out_dir = tmp_path / "build"
-    doctree_dir = out_dir / ".doctrees"
 
     sections = options or [
         {
@@ -36,14 +34,7 @@ def _build_sections(tmp_path, options=None, extra_opts=None):
 
     copy_sample_docs(conf_dir)
 
-    app = Sphinx(
-        srcdir=str(conf_dir),
-        confdir=str(conf_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
-    )
+    app = sphinx_app(conf_dir, out_dir)
     app.build()
     return out_dir
 

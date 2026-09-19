@@ -1,10 +1,10 @@
 """Test llms.txt integration."""
 
+from conftest import sphinx_app
 from pathlib import Path
 
 import pytest
 from bs4 import BeautifulSoup
-from sphinx.application import Sphinx
 
 
 def test_no_llms_txt_link_by_default(build_output):
@@ -20,7 +20,6 @@ def build_with_llms_txt(tmp_path_factory):
     """Build sample docs with sphinx_llm.txt faked in extensions."""
     src_dir = Path(__file__).parent / "sample_docs"
     out_dir = tmp_path_factory.mktemp("build_llms")
-    doctree_dir = out_dir / ".doctrees"
 
     confoverrides = {
         "extensions": [
@@ -30,13 +29,9 @@ def build_with_llms_txt(tmp_path_factory):
         ],
     }
 
-    app = Sphinx(
-        srcdir=str(src_dir),
-        confdir=str(src_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
+    app = sphinx_app(
+        src_dir,
+        out_dir,
         confoverrides=confoverrides,
     )
     # Inject a fake extension entry before build(). This works because

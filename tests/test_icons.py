@@ -2,7 +2,6 @@
 
 import pytest
 from bs4 import BeautifulSoup
-from sphinx.application import Sphinx
 
 from sphinx_lumina_theme._icon_utils import get_icon_svg
 
@@ -131,12 +130,11 @@ class TestSidebarIcons:
 
 def _build_with_logo_icon(tmp_path):
     """Build sample docs with logo_icon option and return parsed HTML."""
-    from conftest import copy_sample_docs
+    from conftest import copy_sample_docs, sphinx_app
 
     conf_dir = tmp_path / "conf"
     conf_dir.mkdir()
     out_dir = tmp_path / "build"
-    doctree_dir = out_dir / ".doctrees"
 
     (conf_dir / "conf.py").write_text(
         'project = "Test"\n'
@@ -149,14 +147,7 @@ def _build_with_logo_icon(tmp_path):
 
     copy_sample_docs(conf_dir)
 
-    app = Sphinx(
-        srcdir=str(conf_dir),
-        confdir=str(conf_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
-    )
+    app = sphinx_app(conf_dir, out_dir)
     app.build()
     return BeautifulSoup((out_dir / "index.html").read_text(), "html.parser")
 

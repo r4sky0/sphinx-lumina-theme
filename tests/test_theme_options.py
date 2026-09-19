@@ -1,7 +1,7 @@
 """Test theme option rendering."""
 
+from conftest import sphinx_app
 from bs4 import BeautifulSoup
-from sphinx.application import Sphinx
 
 
 def test_nav_links_render(index_html):
@@ -37,7 +37,6 @@ def test_default_options(tmp_path):
     conf_dir = tmp_path / "src"
     conf_dir.mkdir()
     out_dir = tmp_path / "build"
-    doctree_dir = out_dir / ".doctrees"
 
     (conf_dir / "conf.py").write_text(
         'project = "Defaults Test"\n'
@@ -47,14 +46,7 @@ def test_default_options(tmp_path):
     )
     (conf_dir / "index.md").write_text("# Hello\n\nMinimal page.\n")
 
-    app = Sphinx(
-        srcdir=str(conf_dir),
-        confdir=str(conf_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
-    )
+    app = sphinx_app(conf_dir, out_dir)
     app.build()
     html = BeautifulSoup((out_dir / "index.html").read_text(), "html.parser")
 

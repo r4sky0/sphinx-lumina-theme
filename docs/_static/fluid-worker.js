@@ -1,5 +1,5 @@
 /**
- * Web Worker for GPU Fluid Simulation.
+ * GPU Fluid Simulation engine shared by the worker and main-thread fallback.
  *
  * Receives an OffscreenCanvas via postMessage and runs the entire Stable Fluids
  * simulation off the main thread.  The main thread only forwards lightweight
@@ -18,8 +18,7 @@ let smoothVx = 0,
   smoothVy = 0;
 
 /* ── Message handler ── */
-self.onmessage = (e) => {
-  const d = e.data;
+function handleFluidMessage(d) {
   switch (d.type) {
     case "init":
       init(d);
@@ -48,10 +47,16 @@ self.onmessage = (e) => {
       break;
     case "stop":
       cancelAnimationFrame(frameId);
-      self.close();
+      if (typeof document === "undefined") self.close();
       break;
   }
-};
+}
+
+if (typeof document === "undefined") {
+  self.onmessage = (e) => handleFluidMessage(e.data);
+} else {
+  window.luminaFluidMessage = handleFluidMessage;
+}
 
 /* ── Simulation ── */
 function init(cfg) {
@@ -66,7 +71,10 @@ function init(cfg) {
   canvas.height = ch * dpr;
 
   gl = canvas.getContext("webgl2", { alpha: true, premultipliedAlpha: false });
-  if (!gl || !gl.getExtension("EXT_color_buffer_float")) return;
+  if (!gl || !gl.getExtension("EXT_color_buffer_float")) {
+    if (typeof document !== "undefined") canvas.style.display = "none";
+    return;
+  }
 
   const SIM = cfg.sim || 256;
   const DYE = cfg.dye || 512;

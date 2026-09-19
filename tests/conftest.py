@@ -3,6 +3,7 @@
 import shutil
 import socket
 import subprocess
+import sys
 import time
 import urllib.request
 from pathlib import Path
@@ -11,6 +12,19 @@ import pytest
 from sphinx.application import Sphinx
 
 SAMPLE_DOCS = Path(__file__).parent / "sample_docs"
+
+
+def sphinx_app(src_dir, out_dir, **kwargs):
+    """Create an HTML Sphinx app for a test site."""
+    return Sphinx(
+        str(src_dir),
+        str(src_dir),
+        str(out_dir),
+        str(out_dir / ".doctrees"),
+        "html",
+        freshenv=True,
+        **kwargs,
+    )
 
 
 def copy_sample_docs(dest_dir):
@@ -27,59 +41,28 @@ def copy_sample_docs(dest_dir):
 @pytest.fixture(scope="session")
 def build_output(tmp_path_factory):
     """Build the sample docs with the Lumina theme and return the output path."""
-    src_dir = Path(__file__).parent / "sample_docs"
     out_dir = tmp_path_factory.mktemp("build")
-    doctree_dir = out_dir / ".doctrees"
-
-    app = Sphinx(
-        srcdir=str(src_dir),
-        confdir=str(src_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
-    )
-    app.build()
+    sphinx_app(SAMPLE_DOCS, out_dir).build()
     return out_dir
 
 
 @pytest.fixture(scope="session")
 def wide_build_output(tmp_path_factory):
     """Build sample docs with wide_layout enabled."""
-    src_dir = Path(__file__).parent / "sample_docs"
     out_dir = tmp_path_factory.mktemp("wide_build")
-    doctree_dir = out_dir / ".doctrees"
-
-    app = Sphinx(
-        srcdir=str(src_dir),
-        confdir=str(src_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
-        confoverrides={"html_theme_options.wide_layout": "toggle"},
-    )
-    app.build()
+    sphinx_app(
+        SAMPLE_DOCS, out_dir, confoverrides={"html_theme_options.wide_layout": "toggle"}
+    ).build()
     return out_dir
 
 
 @pytest.fixture(scope="session")
 def always_wide_build_output(tmp_path_factory):
     """Build sample docs with wide_layout set to always."""
-    src_dir = Path(__file__).parent / "sample_docs"
     out_dir = tmp_path_factory.mktemp("always_wide_build")
-    doctree_dir = out_dir / ".doctrees"
-
-    app = Sphinx(
-        srcdir=str(src_dir),
-        confdir=str(src_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
-        confoverrides={"html_theme_options.wide_layout": "always"},
-    )
-    app.build()
+    sphinx_app(
+        SAMPLE_DOCS, out_dir, confoverrides={"html_theme_options.wide_layout": "always"}
+    ).build()
     return out_dir
 
 
@@ -114,16 +97,12 @@ def live_server(tmp_path_factory):
     out_dir = tmp_path_factory.mktemp("docs_build")
     project_root = Path(__file__).parent.parent
 
-    subprocess.run(
-        ["uv", "run", "sphinx-build", str(project_root / "docs"), str(out_dir)],
-        cwd=str(project_root),
-        check=True,
-    )
+    sphinx_app(project_root / "docs", out_dir).build()
 
     port = _find_free_port()
 
     server = subprocess.Popen(
-        ["python", "-m", "http.server", str(port)],
+        [sys.executable, "-m", "http.server", str(port)],
         cwd=str(out_dir),
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
