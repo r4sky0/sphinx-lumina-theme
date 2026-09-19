@@ -2073,7 +2073,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 1.43.0.
+This documentation is for Sphinx Lumina Theme version 1.44.0.
 
 The MyST syntax:
 
@@ -4027,6 +4027,49 @@ The token is cleared when the browser tab is closed (sessionStorage scope).
 # releases.html.md
 
 # Releases
+
+## v1.44.0 (2026-09-19)
+
+### Features
+
+- **docs**: Add Google site verification file
+  ([#133](https://github.com/r4sky0/sphinx-lumina-theme/pull/133),
+  [`40ab849`](https://github.com/r4sky0/sphinx-lumina-theme/commit/40ab8491151e9ea5bf6c506ac2f0a42771d4aa5f))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump starlette from 1.0.1 to 1.3.1 in the uv group across 1 directory
+  ([#118](https://github.com/r4sky0/sphinx-lumina-theme/pull/118),
+  [`fe23a49`](https://github.com/r4sky0/sphinx-lumina-theme/commit/fe23a4994224987725b57f9da84a91450409f1fd))
+- **deps**: Bump the github-actions-major group across 1 directory with 2 updates
+  ([#127](https://github.com/r4sky0/sphinx-lumina-theme/pull/127),
+  [`9ead58c`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9ead58c0fa2c1b3a9226dd8594aef0155027b9ae))
+- **deps**: Bump the github-actions-minor group across 1 directory with 3 updates
+  ([#129](https://github.com/r4sky0/sphinx-lumina-theme/pull/129),
+  [`865f6c4`](https://github.com/r4sky0/sphinx-lumina-theme/commit/865f6c467bc4e4d81cfdbd30dc236d9b78c2a4ab))
+- **deps**: Bump the npm-minor group across 1 directory with 5 updates
+  ([#116](https://github.com/r4sky0/sphinx-lumina-theme/pull/116),
+  [`db3155d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/db3155d1ad258677d74f7b5973ce9623c5dcc3cc))
+- **deps**: Bump the npm-minor group across 1 directory with 6 updates
+  ([#131](https://github.com/r4sky0/sphinx-lumina-theme/pull/131),
+  [`2b70ac4`](https://github.com/r4sky0/sphinx-lumina-theme/commit/2b70ac4727e8ccce3764a79599dab7fd228cb76e))
+- **deps**: Bump the uv group across 1 directory with 2 updates
+  ([#132](https://github.com/r4sky0/sphinx-lumina-theme/pull/132),
+  [`e1eff07`](https://github.com/r4sky0/sphinx-lumina-theme/commit/e1eff07e28b965d757c2002608014eff30a8a4e4))
+- **deps**: Bump the uv group across 1 directory with 3 updates
+  ([#113](https://github.com/r4sky0/sphinx-lumina-theme/pull/113),
+  [`9a82b30`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9a82b30e003233568634703883b40ef540b9525b))
+- **deps-dev**: Bump esbuild from 0.28.0 to 0.28.1
+  ([#117](https://github.com/r4sky0/sphinx-lumina-theme/pull/117),
+  [`d58a19b`](https://github.com/r4sky0/sphinx-lumina-theme/commit/d58a19b2546b510e5f7dd874250f7a79b4344e4f))
+- **deps-dev**: Bump the npm-major group across 1 directory with 3 updates
+  ([#125](https://github.com/r4sky0/sphinx-lumina-theme/pull/125),
+  [`7c9dd39`](https://github.com/r4sky0/sphinx-lumina-theme/commit/7c9dd39c20e4603218918f44440858d6124a576b))
+
+</details>
 
 ## v1.43.0 (2026-06-11)
 
