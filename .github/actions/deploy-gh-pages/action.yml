@@ -29,8 +29,18 @@ runs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
 
-        # Fetch or create gh-pages branch
-        git fetch origin gh-pages:gh-pages 2>/dev/null || true
+        # Fetch or create gh-pages branch. Fail closed when the remote cannot
+        # be queried, instead of treating a transient fetch error as absence.
+        remote_refs="$(git ls-remote --heads origin gh-pages)" || {
+          echo "Unable to query the gh-pages branch on origin." >&2
+          exit 1
+        }
+
+        if [ -n "$remote_refs" ]; then
+          git fetch origin gh-pages:gh-pages
+        else
+          echo "gh-pages branch does not exist; creating it."
+        fi
 
         if git rev-parse --verify gh-pages >/dev/null 2>&1; then
           git worktree add gh-pages-deploy gh-pages

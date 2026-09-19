@@ -16,22 +16,24 @@ concurrency:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
 
       - uses: ./.github/actions/setup
 
       - name: Ruff check
-        run: uv run ruff check .
+        run: uv run --locked ruff check .
 
       - name: Ruff format check
-        run: uv run ruff format --check .
+        run: uv run --locked ruff format --check .
 
       - name: djlint check
-        run: uv run djlint src/sphinx_lumina_theme/theme/ --check
+        run: uv run --locked djlint src/sphinx_lumina_theme/theme/ --check
 
   test-structure:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -51,10 +53,11 @@ jobs:
         run: pnpm run build
 
       - name: Run structure tests
-        run: uv run pytest tests/ --ignore=tests/test_browser.py -v
+        run: uv run --no-sync pytest tests/ --ignore=tests/test_browser.py -v
 
   test-extensions:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
 
@@ -64,7 +67,7 @@ jobs:
         run: pnpm run build
 
       - name: Build docs with all extensions (warnings as errors)
-        run: uv run sphinx-build docs docs/_build/html -W
+        run: uv run --locked sphinx-build docs docs/_build/html -W
 
       - name: Verify key output files
         run: |
@@ -72,21 +75,22 @@ jobs:
           test -f docs/_build/html/getting-started/installation.html
 
       - name: Run extension tests
-        run: uv run pytest tests/test_extensions.py -v
+        run: uv run --locked pytest tests/test_extensions.py -v
 
   test-browser:
     needs: test-structure
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
 
       - uses: ./.github/actions/setup
 
       - name: Install Playwright browsers
-        run: uv run playwright install --with-deps chromium firefox webkit
+        run: uv run --locked playwright install --with-deps chromium firefox webkit
 
       - name: Build assets
         run: pnpm run build
 
       - name: Run browser tests
-        run: uv run pytest tests/test_browser.py -v --browser chromium --browser firefox --browser webkit
+        run: uv run --locked pytest tests/test_browser.py -v --browser chromium --browser firefox --browser webkit
