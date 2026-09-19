@@ -2,7 +2,7 @@
 
 ## A fresh look for Sphinx
 
-Sphinx is one of the most powerful documentation generators in the Python ecosystem. It handles cross-referencing, API docs, versioning, and internationalization better than almost anything else. But for years, many of its themes have felt stuck in another era — cramped layouts, dated typography, and little attention to the reading experience.
+Sphinx is one of the most capable documentation generators in the Python ecosystem. It handles cross-referencing, API docs, versioning, and internationalization well. Many of its themes, however, still leave room for a more spacious layout and a more considered reading experience.
 
 **Lumina changes that.**
 
@@ -12,7 +12,7 @@ Sphinx Lumina Theme brings the polish and clarity of modern documentation sites 
 
 There's no shortage of documentation tools. But most modern ones require you to abandon Sphinx entirely and rewrite your docs in a new system. That's a significant cost, especially for projects that rely on Sphinx features like autodoc, intersphinx, or domain-specific directives.
 
-Lumina takes a different approach: **keep Sphinx, upgrade the experience.** Your existing `conf.py`, your reStructuredText or MyST Markdown, your extensions — they all work. You just get a better-looking result.
+Lumina takes a different approach: **keep Sphinx, upgrade the experience.** Your existing `conf.py`, reStructuredText or MyST Markdown, and extensions can continue to work with the standard Sphinx output model. You get a more polished result without changing your documentation toolchain.
 
 ## Features
 
