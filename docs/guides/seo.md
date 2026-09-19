@@ -4,7 +4,7 @@ description: "How Lumina handles SEO and social-share metadata, plus per-page ov
 
 # SEO and discoverability
 
-Lumina automatically emits a complete set of SEO and social-share metadata. As long as you set `html_baseurl` in your `conf.py`, you get:
+Lumina automatically emits metadata that helps search engines index your docs and social platforms render shared links. As long as you set `html_baseurl` in your `conf.py`, you get:
 
 - `<meta name="description">` with smart fallbacks
 - `<link rel="canonical">` on every page
@@ -44,7 +44,7 @@ Aim for a 1200×630 PNG. Keep your logo and a short tagline in the top-left thir
 
 ## Publisher logo (Rich Results)
 
-Lumina's `TechArticle` JSON-LD includes a `publisher.logo` for Google Rich Results. **The publisher logo is not the same as `og_image`** — Google requires it to be near-square (think 60×60 to 600×60), while a social card is a 1200×630 banner. Reusing the social card as a publisher logo can disqualify your page from Rich Results.
+Lumina's `TechArticle` JSON-LD includes a `publisher.logo` for Google Rich Results. **The publisher logo is not the same as `og_image`** — Google expects it to be near-square (for example, 60×60 to 600×600), while a social card is a 1200×630 banner. Reusing the social card as a publisher logo can make the page ineligible for Rich Results.
 
 Ship a small square logo and point Lumina at it:
 
@@ -58,7 +58,7 @@ The fallback chain is: `publisher_logo` → `html_logo` (when raster) → omit `
 
 ## Sitemap `<lastmod>`
 
-When [`sphinx_last_updated_by_git`](/extensions/sphinx-last-updated-by-git) is in your `extensions` list, Lumina automatically flips `sitemap_show_lastmod = True` so every URL in `sitemap.xml` carries the file's last-commit date. `<lastmod>` is the strongest single signal Google uses to schedule recrawls — adding it makes content updates show up in search faster.
+When {doc}`/extensions/sphinx-last-updated-by-git` is in your `extensions` list, Lumina automatically flips `sitemap_show_lastmod = True` so every URL in `sitemap.xml` carries the file's last-commit date. `<lastmod>` is one signal Google uses to schedule recrawls, so it can help search engines notice content updates sooner.
 
 ```python
 extensions = [

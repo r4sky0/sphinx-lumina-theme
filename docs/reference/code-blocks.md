@@ -77,9 +77,9 @@ database:
 ```json
 {
   "name": "sphinx-lumina-theme",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "dependencies": {
-    "sphinx": ">=7.0"
+    "sphinx": ">=8.0"
   }
 }
 ```
