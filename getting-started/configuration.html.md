@@ -186,7 +186,7 @@ html_theme_options = {
     "dark_logo": "logo-dark.svg",
 
     # Announcement
-    "announcement": 'New in v2.0 — <a href="/changelog">see what changed</a>!',
+    "announcement": 'New in v2.0 — <a href="https://example.com/changelog">see what changed</a>!',
 
     # Navigation
     "nav_links": [

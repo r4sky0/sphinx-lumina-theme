@@ -6,7 +6,7 @@ Cross-referencing, citations, glossaries, and linking across documents and proje
 
 Auto-numbered footnotes add citations to the bottom of the page.
 
-Sphinx was created by Georg Brandl<sup>[1](#id3)</sup> and is the de facto standard for Python documentation<sup>[2](#id4)</sup>.
+Sphinx was created by Georg Brandl<sup>[1](#id3)</sup>. Footnotes can also point to additional context or sources.<sup>[2](#id4)</sup>
 
 The MyST syntax:
 
@@ -115,7 +115,7 @@ Substitutions are defined in `conf.py`:
 ```python
 myst_substitutions = {
     "project_name": "Sphinx Lumina Theme",
-    "version": "0.1.0",
+    "version": "1.0.0",
 }
 ```
 
@@ -187,4 +187,4 @@ This outputs every referenceable object, which you can search for the exact role
 
 ---
 * <a id='id3'>**[1]**</a> Georg Brandl started the Sphinx project in 2008 as a successor to Python’s previous documentation toolchain.
-* <a id='id4'>**[2]**</a> Over 85% of Python packages on PyPI use Sphinx for their documentation.
+* <a id='id4'>**[2]**</a> This second footnote demonstrates how to add another reference on the same page.

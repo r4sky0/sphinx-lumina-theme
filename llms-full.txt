@@ -79,7 +79,7 @@ Visual showcase and syntax reference for every content type Lumina styles.
 
 Headings, inline formatting, block quotes, definition lists, and links.
 
-Note, tip, warning, danger, and seven more callout types with custom titles and nesting.
+Note, tip, warning, danger, and six more callout types with custom titles and nesting.
 
 Syntax highlighting, line numbers, emphasis, captions, diffs, and tabs.
 
@@ -137,7 +137,7 @@ Out-of-the-box meta tags, social cards, JSON-LD, sitemap, and `robots.txt`.
 
 # Extensions
 
-Lumina works with any Sphinx extension. These are the ones we recommend and style specifically.
+Lumina is designed to work with extensions that target standard Sphinx output. These are the ones we recommend and style specifically.
 
 Write documentation in Markdown with full Sphinx directive support.
 
@@ -980,9 +980,9 @@ database:
 ```json
 {
   "name": "sphinx-lumina-theme",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "dependencies": {
-    "sphinx": ">=7.0"
+    "sphinx": ">=8.0"
   }
 }
 ```
@@ -1401,7 +1401,7 @@ html_theme_options = {
     "dark_logo": "logo-dark.svg",
 
     # Announcement
-    "announcement": 'New in v2.0 — <a href="/changelog">see what changed</a>!',
+    "announcement": 'New in v2.0 — <a href="https://example.com/changelog">see what changed</a>!',
 
     # Navigation
     "nav_links": [
@@ -1977,7 +1977,7 @@ Cross-referencing, citations, glossaries, and linking across documents and proje
 
 Auto-numbered footnotes add citations to the bottom of the page.
 
-Sphinx was created by Georg Brandl<sup>[1](#id3)</sup> and is the de facto standard for Python documentation<sup>[2](#id4)</sup>.
+Sphinx was created by Georg Brandl<sup>[1](#id3)</sup>. Footnotes can also point to additional context or sources.<sup>[2](#id4)</sup>
 
 The MyST syntax:
 
@@ -2086,7 +2086,7 @@ Substitutions are defined in `conf.py`:
 ```python
 myst_substitutions = {
     "project_name": "Sphinx Lumina Theme",
-    "version": "0.1.0",
+    "version": "1.0.0",
 }
 ```
 
@@ -2158,7 +2158,7 @@ This outputs every referenceable object, which you can search for the exact role
 
 ---
 * <a id='id3'>**[1]**</a> Georg Brandl started the Sphinx project in 2008 as a successor to Python’s previous documentation toolchain.
-* <a id='id4'>**[2]**</a> Over 85% of Python packages on PyPI use Sphinx for their documentation.
+* <a id='id4'>**[2]**</a> This second footnote demonstrates how to add another reference on the same page.
 
 
 # http-api.html.md
@@ -2572,11 +2572,11 @@ Caption text with **Markdown** support.
 
 ## Scaled Images
 
-Control image size as a percentage of the content width.
+Control image size as a percentage of the containing block’s width.
 
-![Full-width image](reference/_images/placeholder-square.svg)
+![Image filling its grid item](reference/_images/placeholder-square.svg)
 
-`100%` width
+`100%` of the grid item
 
 ![Half-width image](reference/_images/placeholder-square.svg)
 
@@ -2709,19 +2709,25 @@ Browse the complete reference for typography, admonitions, code blocks, and more
 
 # Introduction
 
-## A fresh look for Sphinx
+## Modern documentation without leaving Sphinx
 
-Sphinx is one of the most powerful documentation generators in the Python ecosystem. It handles cross-referencing, API docs, versioning, and internationalization better than almost anything else. But for years, many of its themes have felt stuck in another era — cramped layouts, dated typography, and little attention to the reading experience.
+Your documentation is part of your product. Lumina helps Sphinx projects present it that way.
 
-**Lumina changes that.**
+If Sphinx gives your project the capabilities it needs but its default presentation feels dated, Lumina gives you a clearer, more modern reading experience without asking you to migrate. Keep the Sphinx strengths you already rely on—autodoc, cross-references, versioning, MyST, and the wider extension ecosystem—while making your documentation easier and more pleasant to use.
 
-Sphinx Lumina Theme brings the polish and clarity of modern documentation sites — think Fumadocs, Nextra, and Docusaurus — to Sphinx, without asking you to leave the ecosystem you already know.
+## Why choose Lumina?
 
-## Why another theme?
+### Keep the toolchain you trust
 
-There’s no shortage of documentation tools. But most modern ones require you to abandon Sphinx entirely and rewrite your docs in a new system. That’s a significant cost, especially for projects that rely on Sphinx features like autodoc, intersphinx, or domain-specific directives.
+Your existing `conf.py`, reStructuredText or MyST Markdown, and standard Sphinx extensions can stay in place. Lumina works with the standard Sphinx output model, so adopting the theme does not require a rewrite.
 
-Lumina takes a different approach: **keep Sphinx, upgrade the experience.** Your existing `conf.py`, your reStructuredText or MyST Markdown, your extensions — they all work. You just get a better-looking result.
+### Help readers find answers
+
+Responsive navigation, clear page outlines, keyboard-friendly search, readable typography, and dark mode help readers orient themselves and stay focused, whether they are on a large monitor or a phone.
+
+### Ship a polished site with less infrastructure
+
+Lumina produces a static site with self-hosted fonts, client-side search, and lightweight interactivity. You get a fast, self-contained documentation site without a hosted search service or a separate frontend stack.
 
 ## Features
 
@@ -3204,12 +3210,12 @@ List items can contain paragraphs, code blocks, and other block elements.
 
 Basic Markdown tables with column alignment.
 
-| Feature   | Status   | Notes                      |
-|-----------|----------|----------------------------|
-| Dark mode | Yes      | Light, dark, and auto      |
-| Search    | Yes      | Pagefind + Sphinx fallback |
-| Mobile    | Yes      | Responsive sidebar drawer  |
-| i18n      | No       | Planned for v2             |
+| Feature      | Status   | Notes                      |
+|--------------|----------|----------------------------|
+| Dark mode    | Yes      | Light, dark, and auto      |
+| Search       | Yes      | Pagefind + Sphinx fallback |
+| Mobile       | Yes      | Responsive sidebar drawer  |
+| Reading time | Yes      | Optional per-page estimate |
 
 The MyST syntax:
 
@@ -3227,17 +3233,17 @@ Alignment markers:
 
 ### Wide Tables
 
-Tables with many columns scroll horizontally when they overflow the content area.
+Tables with many columns scroll horizontally when they overflow the content area. The values below are illustrative.
 
 | Option              | Type   | Default    | Required   | Description           | Example   | Since   |
 |---------------------|--------|------------|------------|-----------------------|-----------|---------|
-| `accent_color`      | string | `#10b981`  | No         | Primary accent color  | `#3b82f6` | v0.1.0  |
-| `dark_mode_default` | string | `auto`     | No         | Initial dark mode     | `dark`    | v0.1.0  |
-| `show_toc`          | string | `true`     | No         | Show right-side TOC   | `false`   | v0.1.0  |
-| `show_breadcrumbs`  | string | `true`     | No         | Show breadcrumb trail | `false`   | v0.1.0  |
-| `show_prev_next`    | string | `true`     | No         | Show pagination       | `false`   | v0.1.0  |
-| `nav_depth`         | string | `4`        | No         | Sidebar tree depth    | `2`       | v0.1.0  |
-| `search_backend`    | string | `pagefind` | No         | Search provider       | `sphinx`  | v0.1.0  |
+| `accent_color`      | string | `#10b981`  | No         | Primary accent color  | `#3b82f6` | v1.0.0  |
+| `dark_mode_default` | string | `auto`     | No         | Initial dark mode     | `dark`    | v1.0.0  |
+| `show_toc`          | string | `true`     | No         | Show right-side TOC   | `false`   | v1.0.0  |
+| `show_breadcrumbs`  | string | `true`     | No         | Show breadcrumb trail | `false`   | v1.0.0  |
+| `show_prev_next`    | string | `true`     | No         | Show pagination       | `false`   | v1.0.0  |
+| `nav_depth`         | string | `4`        | No         | Sidebar tree depth    | `2`       | v1.0.0  |
+| `search_backend`    | string | `pagefind` | No         | Search provider       | `sphinx`  | v1.0.0  |
 
 ### List Tables
 
@@ -3967,7 +3973,7 @@ The panel pre-populates from the documented endpoint:
 After sending, the panel shows the HTTP status code, response time in milliseconds, and a syntax-highlighted JSON response body (or plain text for non-JSON responses).
 
 #### WARNING
-**CORS required.** The “Try it out” panel sends requests directly from the reader’s browser. Your API must allow CORS from the docs origin, or requests fail with a network error. Many public APIs (Stripe, GitHub, Petstore) already support this.
+**CORS required.** The “Try it out” panel sends requests directly from the reader’s browser. Your API must allow CORS from the docs origin, or requests fail with a network error. Check the API’s CORS policy before enabling this feature; public availability does not necessarily mean that browser requests are allowed.
 
 ### Overriding the base URL per block
 
@@ -4019,7 +4025,7 @@ html_theme_options = {
 
 ### Bearer token persistence
 
-When a reader enters a bearer token in the “Try it out” panel, it is saved to `sessionStorage` under the key `lumina-api-token`. The token is restored automatically when the panel is opened on any endpoint in the same browser tab. It is never sent to any server other than your API.
+When a reader enters a bearer token in the “Try it out” panel, it is saved to `sessionStorage` under the key `lumina-api-token`. The token is restored automatically when the panel is opened on any endpoint in the same browser tab. It is sent to your API when a request runs, so recommend narrowly scoped test credentials and trusted documentation hosts.
 
 The token is cleared when the browser tab is closed (sessionStorage scope).
 
@@ -4855,7 +4861,7 @@ The built-in search works without any additional setup but is slower and less fe
 
 # SEO and discoverability
 
-Lumina automatically emits a complete set of SEO and social-share metadata. As long as you set `html_baseurl` in your `conf.py`, you get:
+Lumina automatically emits metadata that helps search engines index your docs and social platforms render shared links. As long as you set `html_baseurl` in your `conf.py`, you get:
 
 - `<meta name="description">` with smart fallbacks
 - `<link rel="canonical">` on every page
@@ -4895,7 +4901,7 @@ Aim for a 1200×630 PNG. Keep your logo and a short tagline in the top-left thir
 
 ## Publisher logo (Rich Results)
 
-Lumina’s `TechArticle` JSON-LD includes a `publisher.logo` for Google Rich Results. **The publisher logo is not the same as `og_image`** — Google requires it to be near-square (think 60×60 to 600×60), while a social card is a 1200×630 banner. Reusing the social card as a publisher logo can disqualify your page from Rich Results.
+Lumina’s `TechArticle` JSON-LD includes a `publisher.logo` for Google Rich Results. **The publisher logo is not the same as `og_image`** — Google expects it to be near-square (for example, 60×60 to 600×600), while a social card is a 1200×630 banner. Reusing the social card as a publisher logo can make the page ineligible for Rich Results.
 
 Ship a small square logo and point Lumina at it:
 
@@ -4909,7 +4915,7 @@ The fallback chain is: `publisher_logo` → `html_logo` (when raster) → omit `
 
 ## Sitemap `<lastmod>`
 
-When [`sphinx_last_updated_by_git`](../extensions/sphinx-last-updated-by-git.md) is in your `extensions` list, Lumina automatically flips `sitemap_show_lastmod = True` so every URL in `sitemap.xml` carries the file’s last-commit date. `<lastmod>` is the strongest single signal Google uses to schedule recrawls — adding it makes content updates show up in search faster.
+When [sphinx-last-updated-by-git](../extensions/sphinx-last-updated-by-git.md) is in your `extensions` list, Lumina automatically flips `sitemap_show_lastmod = True` so every URL in `sitemap.xml` carries the file’s last-commit date. `<lastmod>` is one signal Google uses to schedule recrawls, so it can help search engines notice content updates sooner.
 
 ```python
 extensions = [

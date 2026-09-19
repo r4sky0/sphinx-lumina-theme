@@ -66,11 +66,11 @@ Caption text with **Markdown** support.
 
 ## Scaled Images
 
-Control image size as a percentage of the content width.
+Control image size as a percentage of the containing block’s width.
 
-![Full-width image](reference/_images/placeholder-square.svg)
+![Image filling its grid item](reference/_images/placeholder-square.svg)
 
-`100%` width
+`100%` of the grid item
 
 ![Half-width image](reference/_images/placeholder-square.svg)
 

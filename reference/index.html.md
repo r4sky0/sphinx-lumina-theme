@@ -4,7 +4,7 @@ Visual showcase and syntax reference for every content type Lumina styles.
 
 Headings, inline formatting, block quotes, definition lists, and links.
 
-Note, tip, warning, danger, and seven more callout types with custom titles and nesting.
+Note, tip, warning, danger, and six more callout types with custom titles and nesting.
 
 Syntax highlighting, line numbers, emphasis, captions, diffs, and tabs.
 

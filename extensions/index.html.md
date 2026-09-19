@@ -1,6 +1,6 @@
 # Extensions
 
-Lumina works with any Sphinx extension. These are the ones we recommend and style specifically.
+Lumina is designed to work with extensions that target standard Sphinx output. These are the ones we recommend and style specifically.
 
 Write documentation in Markdown with full Sphinx directive support.
 

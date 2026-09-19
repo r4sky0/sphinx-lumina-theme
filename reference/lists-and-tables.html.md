@@ -83,12 +83,12 @@ List items can contain paragraphs, code blocks, and other block elements.
 
 Basic Markdown tables with column alignment.
 
-| Feature   | Status   | Notes                      |
-|-----------|----------|----------------------------|
-| Dark mode | Yes      | Light, dark, and auto      |
-| Search    | Yes      | Pagefind + Sphinx fallback |
-| Mobile    | Yes      | Responsive sidebar drawer  |
-| i18n      | No       | Planned for v2             |
+| Feature      | Status   | Notes                      |
+|--------------|----------|----------------------------|
+| Dark mode    | Yes      | Light, dark, and auto      |
+| Search       | Yes      | Pagefind + Sphinx fallback |
+| Mobile       | Yes      | Responsive sidebar drawer  |
+| Reading time | Yes      | Optional per-page estimate |
 
 The MyST syntax:
 
@@ -106,17 +106,17 @@ Alignment markers:
 
 ### Wide Tables
 
-Tables with many columns scroll horizontally when they overflow the content area.
+Tables with many columns scroll horizontally when they overflow the content area. The values below are illustrative.
 
 | Option              | Type   | Default    | Required   | Description           | Example   | Since   |
 |---------------------|--------|------------|------------|-----------------------|-----------|---------|
-| `accent_color`      | string | `#10b981`  | No         | Primary accent color  | `#3b82f6` | v0.1.0  |
-| `dark_mode_default` | string | `auto`     | No         | Initial dark mode     | `dark`    | v0.1.0  |
-| `show_toc`          | string | `true`     | No         | Show right-side TOC   | `false`   | v0.1.0  |
-| `show_breadcrumbs`  | string | `true`     | No         | Show breadcrumb trail | `false`   | v0.1.0  |
-| `show_prev_next`    | string | `true`     | No         | Show pagination       | `false`   | v0.1.0  |
-| `nav_depth`         | string | `4`        | No         | Sidebar tree depth    | `2`       | v0.1.0  |
-| `search_backend`    | string | `pagefind` | No         | Search provider       | `sphinx`  | v0.1.0  |
+| `accent_color`      | string | `#10b981`  | No         | Primary accent color  | `#3b82f6` | v1.0.0  |
+| `dark_mode_default` | string | `auto`     | No         | Initial dark mode     | `dark`    | v1.0.0  |
+| `show_toc`          | string | `true`     | No         | Show right-side TOC   | `false`   | v1.0.0  |
+| `show_breadcrumbs`  | string | `true`     | No         | Show breadcrumb trail | `false`   | v1.0.0  |
+| `show_prev_next`    | string | `true`     | No         | Show pagination       | `false`   | v1.0.0  |
+| `nav_depth`         | string | `4`        | No         | Sidebar tree depth    | `2`       | v1.0.0  |
+| `search_backend`    | string | `pagefind` | No         | Search provider       | `sphinx`  | v1.0.0  |
 
 ### List Tables
 

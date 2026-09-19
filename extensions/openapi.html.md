@@ -69,7 +69,7 @@ The panel pre-populates from the documented endpoint:
 After sending, the panel shows the HTTP status code, response time in milliseconds, and a syntax-highlighted JSON response body (or plain text for non-JSON responses).
 
 #### WARNING
-**CORS required.** The “Try it out” panel sends requests directly from the reader’s browser. Your API must allow CORS from the docs origin, or requests fail with a network error. Many public APIs (Stripe, GitHub, Petstore) already support this.
+**CORS required.** The “Try it out” panel sends requests directly from the reader’s browser. Your API must allow CORS from the docs origin, or requests fail with a network error. Check the API’s CORS policy before enabling this feature; public availability does not necessarily mean that browser requests are allowed.
 
 ### Overriding the base URL per block
 
@@ -121,6 +121,6 @@ html_theme_options = {
 
 ### Bearer token persistence
 
-When a reader enters a bearer token in the “Try it out” panel, it is saved to `sessionStorage` under the key `lumina-api-token`. The token is restored automatically when the panel is opened on any endpoint in the same browser tab. It is never sent to any server other than your API.
+When a reader enters a bearer token in the “Try it out” panel, it is saved to `sessionStorage` under the key `lumina-api-token`. The token is restored automatically when the panel is opened on any endpoint in the same browser tab. It is sent to your API when a request runs, so recommend narrowly scoped test credentials and trusted documentation hosts.
 
 The token is cleared when the browser tab is closed (sessionStorage scope).
