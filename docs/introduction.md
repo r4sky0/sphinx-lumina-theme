@@ -1,18 +1,24 @@
 # Introduction
 
-## A fresh look for Sphinx
+## Modern documentation without leaving Sphinx
 
-Sphinx is one of the most capable documentation generators in the Python ecosystem. It handles cross-referencing, API docs, versioning, and internationalization well. Many of its themes, however, still leave room for a more spacious layout and a more considered reading experience.
+Your documentation is part of your product. Lumina helps Sphinx projects present it that way.
 
-**Lumina changes that.**
+If Sphinx gives your project the capabilities it needs but its default presentation feels dated, Lumina gives you a clearer, more modern reading experience without asking you to migrate. Keep the Sphinx strengths you already rely on—autodoc, cross-references, versioning, MyST, and the wider extension ecosystem—while making your documentation easier and more pleasant to use.
 
-Sphinx Lumina Theme brings the polish and clarity of modern documentation sites — think Fumadocs, Nextra, and Docusaurus — to Sphinx, without asking you to leave the ecosystem you already know.
+## Why choose Lumina?
 
-## Why another theme?
+### Keep the toolchain you trust
 
-There's no shortage of documentation tools. But most modern ones require you to abandon Sphinx entirely and rewrite your docs in a new system. That's a significant cost, especially for projects that rely on Sphinx features like autodoc, intersphinx, or domain-specific directives.
+Your existing `conf.py`, reStructuredText or MyST Markdown, and standard Sphinx extensions can stay in place. Lumina works with the standard Sphinx output model, so adopting the theme does not require a rewrite.
 
-Lumina takes a different approach: **keep Sphinx, upgrade the experience.** Your existing `conf.py`, reStructuredText or MyST Markdown, and extensions can continue to work with the standard Sphinx output model. You get a more polished result without changing your documentation toolchain.
+### Help readers find answers
+
+Responsive navigation, clear page outlines, keyboard-friendly search, readable typography, and dark mode help readers orient themselves and stay focused, whether they are on a large monitor or a phone.
+
+### Ship a polished site with less infrastructure
+
+Lumina produces a static site with self-hosted fonts, client-side search, and lightweight interactivity. You get a fast, self-contained documentation site without a hosted search service or a separate frontend stack.
 
 ## Features
 
