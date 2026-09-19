@@ -28,7 +28,8 @@ A modern Sphinx theme that treats documentation as a first-class product experie
 
 ## Quick Start
 
-Requires **Python 3.12+** and **Sphinx 8.0+**.
+Requires **Python 3.12+** and **Sphinx 8.0+**. Pagefind search also needs
+Node.js so the build can create its search index.
 
 ```bash
 pip install sphinx-lumina-theme
@@ -49,7 +50,11 @@ html_theme = "lumina"
 Build your docs:
 
 ```bash
+# With uv
 uv run sphinx-build docs docs/_build/html
+
+# With pip
+sphinx-build docs docs/_build/html
 ```
 
 That's it. For MyST Markdown setup and configuration options, see the [Getting Started](https://r4sky0.github.io/sphinx-lumina-theme/getting-started/) guide.
@@ -62,9 +67,14 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 html_theme_options = {
     "accent_color": "#10b981",
     "dark_mode_default": "auto",       # "auto", "light", or "dark"
-    "nav_links": "Guide=/guide, API=/api",
+    "nav_links": [
+        {"title": "Guide", "url": "guide"},
+        {"title": "API", "url": "api"},
+    ],
     "source_repository": "https://github.com/you/your-repo",
-    "social_links": "github=https://github.com/you",
+    "social_links": [
+        {"icon": "github", "url": "https://github.com/you"},
+    ],
     "api_base_url": "https://api.example.com/v1",  # enables interactive API features
 }
 ```

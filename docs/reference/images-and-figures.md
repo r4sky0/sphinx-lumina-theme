@@ -107,23 +107,23 @@ Use figures instead of bare images when you need a caption. Figures are also the
 
 ## Scaled Images
 
-Control image size as a percentage of the content width.
+Control image size as a percentage of the containing block's width.
 
 ::::{grid} 1 1 3 3
 :gutter: 3
 
 :::{grid-item}
 ```{image} _images/placeholder-square.svg
-:alt: Full-width image
+:alt: Image filling its grid item
 :width: 100%
 ```
-`100%` width
+`100%` of the grid item
 :::
 
 :::{grid-item}
 ```{image} _images/placeholder-square.svg
 :alt: Half-width image
-:width: 100%
+:width: 50%
 ```
 `50%` width
 :::
@@ -131,7 +131,7 @@ Control image size as a percentage of the content width.
 :::{grid-item}
 ```{image} _images/placeholder-square.svg
 :alt: Quarter-width image
-:width: 100%
+:width: 25%
 ```
 `25%` width
 :::
