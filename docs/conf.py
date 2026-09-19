@@ -68,6 +68,7 @@ html_theme_options = {
 exclude_patterns = ["_build", "superpowers"]
 templates_path = ["_templates"]
 html_static_path = ["_static"]
+html_extra_path = ["public"]
 myst_substitutions = {
     "project_name": "Sphinx Lumina Theme",
     "version": __version__,
