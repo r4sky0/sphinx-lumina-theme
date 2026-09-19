@@ -66,29 +66,48 @@
     <script>
 (function() {
   var stored = localStorage.getItem('lumina-theme');
+  var effectiveTheme;
   {% if theme_dark_mode_default in ("light", "dark") %}
   document.documentElement.setAttribute('data-theme-default', '{{ theme_dark_mode_default }}');
   if (stored === 'dark' || stored === 'light') {
-    document.documentElement.setAttribute('data-theme', stored);
+    effectiveTheme = stored;
   } else {
-    document.documentElement.setAttribute('data-theme', '{{ theme_dark_mode_default }}');
+    effectiveTheme = '{{ theme_dark_mode_default }}';
   }
   {% else %}
   if (stored === 'dark' || stored === 'light') {
-    document.documentElement.setAttribute('data-theme', stored);
-    // Sphinx gates the dark highlight stylesheet on the OS color scheme only;
-    // a stored override must rewrite its media query before first paint.
-    var pygmentsDark = document.getElementById('pygments_dark_css');
-    if (pygmentsDark) {
-      pygmentsDark.media = stored === 'dark' ? 'screen' : 'not all';
-    }
+    effectiveTheme = stored;
   } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', 'dark');
+    effectiveTheme = 'dark';
   } else {
-    document.documentElement.setAttribute('data-theme', 'light');
+    effectiveTheme = 'light';
   }
   {% endif %}
+  document.documentElement.setAttribute('data-theme', effectiveTheme);
+  // Sphinx gates the dark highlight stylesheet on the OS color scheme only;
+  // align it with the resolved Lumina theme before first paint.
+  var pygmentsDark = document.getElementById('pygments_dark_css');
+  if (pygmentsDark) pygmentsDark.media = effectiveTheme === 'dark' ? 'screen' : 'not all';
 })();
+    </script>
+    <script id="lumina-i18n" type="application/json">{{ {
+        "dialogLabel": _("Search documentation"),
+        "loading": _("Loading search index..."),
+        "noResults": _("No results found."),
+        "typeToSearch": _("Type to search..."),
+        "navigate": _("Navigate"),
+        "open": _("Open"),
+        "close": _("Close"),
+        "unavailable": _("Pagefind is unavailable. Using built-in search."),
+        "queryFailed": _("Search failed. Using built-in search."),
+        "searchFor": _("Search for"),
+        "fallbackExcerpt": _("Open built-in search results"),
+        "result": _("result"),
+        "results": _("results"),
+        "pageUnavailable": _("This page is not available in this version. Opening its documentation home."),
+        "preview": _("Preview"),
+        "unsupported": _("Unsupported")
+    } | tojson }}
     </script>
     {% if lumina_wide_layout %}
         <script>
@@ -115,8 +134,8 @@
     {% if theme_image_lightbox == "true" %}<script>document.documentElement.dataset.lightbox = "true";</script>{% endif %}
     {% if theme_accent_color != "#10b981" %}
         <style>
-            :root,[data-theme="light"]{--lumina-accent:{{ theme_accent_color }};--lumina-accent-light:color-mix(in srgb,{{ theme_accent_color }} 12%,white);}
-            [data-theme="dark"]{--lumina-accent:{{ theme_accent_color }};--lumina-accent-light:color-mix(in srgb,{{ theme_accent_color }} 15%,#09090b);}
+            :root,[data-theme="light"]{--lumina-accent:{{ theme_accent_color }};--lumina-accent-text:color-mix(in srgb,{{ theme_accent_color }} 70%,black);--lumina-accent-solid:color-mix(in srgb,{{ theme_accent_color }} 85%,black);--lumina-accent-on-solid:#fff;--lumina-accent-focus:color-mix(in srgb,{{ theme_accent_color }} 70%,black);--lumina-accent-light:color-mix(in srgb,{{ theme_accent_color }} 12%,white);}
+            [data-theme="dark"]{--lumina-accent:{{ theme_accent_color }};--lumina-accent-text:color-mix(in srgb,{{ theme_accent_color }} 55%,white);--lumina-accent-solid:color-mix(in srgb,{{ theme_accent_color }} 85%,black);--lumina-accent-on-solid:#fff;--lumina-accent-focus:color-mix(in srgb,{{ theme_accent_color }} 55%,white);--lumina-accent-light:color-mix(in srgb,{{ theme_accent_color }} 15%,#09090b);}
             html:root,html[data-theme="dark"]{--sd-color-primary:color-mix(in srgb,{{ theme_accent_color }} 85%,black);--sd-color-primary-highlight:color-mix(in srgb,{{ theme_accent_color }} 70%,black);--sd-color-primary-text:#fff;--sd-color-primary-bg:color-mix(in srgb,{{ theme_accent_color }} 12%,transparent);}
         </style>
     {% endif %}
@@ -217,6 +236,11 @@
                           x-text="copied ? 'Copied!' : 'Copy Markdown'"></span>
                 </button>
             </div>
+            {% if theme_show_toc == "true" %}
+
+                {% include "components/mobile-toc.html" %}
+
+            {% endif %}
             <article class="lumina-article" x-data="headerLinks()">
 
                 {% block body %}
@@ -224,7 +248,7 @@
                 {% endblock body %}
 
             </article>
-            {% if theme_show_prev_next == "true" %}
+            {% if theme_show_prev_next == "true" or (theme_source_repository and theme_source_repository != "") %}
 
                 <div data-pagefind-ignore>
 

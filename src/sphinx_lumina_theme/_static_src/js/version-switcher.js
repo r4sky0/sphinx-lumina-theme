@@ -31,6 +31,9 @@ export default function versionSwitcher() {
     match: "",
     currentLabel: "",
     relPath: "",
+    anchor: "",
+    notice: "",
+    messages: {},
     error: false,
 
     init() {
@@ -43,6 +46,8 @@ export default function versionSwitcher() {
       // a page-relative path to the docs root (e.g. "../"), so it must be
       // resolved against the current URL before comparing pathnames.
       const baseUrl = document.querySelector('meta[name="lumina-base-url"]');
+      this.messages = this._getMessages();
+      this.anchor = window.location.hash;
       if (baseUrl) {
         try {
           const root = new URL(
@@ -67,16 +72,60 @@ export default function versionSwitcher() {
       this.open = !this.open;
     },
 
+    _getMessages() {
+      const element = document.getElementById("lumina-i18n");
+      try {
+        return {
+          pageUnavailable:
+            "This page is not available in this version. Opening its documentation home.",
+          preview: "Preview",
+          unsupported: "Unsupported",
+          ...(element ? JSON.parse(element.textContent) : {}),
+        };
+      } catch {
+        return {
+          pageUnavailable:
+            "This page is not available in this version. Opening its documentation home.",
+          preview: "Preview",
+          unsupported: "Unsupported",
+        };
+      }
+    },
+
     _versionUrl(v) {
       // Safely join version base URL with current page's relative path.
       // The trailing slash matters: without it the last path segment of
       // ``v.url`` would be replaced instead of appended to.
       try {
         const base = v.url.endsWith("/") ? v.url : v.url + "/";
-        return new URL(this.relPath, base).href;
+        const pageMap = v.pages || v.page_map || {};
+        const mapped = Object.prototype.hasOwnProperty.call(pageMap, this.relPath)
+          ? pageMap[this.relPath]
+          : undefined;
+        const unavailable =
+          v.status === "unsupported" || v.supported === false || mapped === false;
+        const destination =
+          unavailable || mapped === undefined
+            ? unavailable
+              ? ""
+              : this.relPath
+            : typeof mapped === "string"
+              ? mapped.replace(/^\//, "")
+              : mapped && typeof mapped.path === "string"
+                ? mapped.path.replace(/^\//, "")
+                : "";
+        const target = new URL(destination, base);
+        if (destination && this.anchor) target.hash = this.anchor;
+        v._pageAvailable = !unavailable && Boolean(destination);
+        v._notice = v._pageAvailable ? "" : this.messages.pageUnavailable;
+        return target.href;
       } catch {
         return v.url;
       }
+    },
+
+    targetUrl(v) {
+      return v._targetUrl || this._versionUrl(v);
     },
 
     async _fetchVersions(url) {
@@ -87,18 +136,25 @@ export default function versionSwitcher() {
           return;
         }
         const data = await resp.json();
-        if (!Array.isArray(data)) {
+        const versions = Array.isArray(data) ? data : data?.versions;
+        if (!Array.isArray(versions)) {
           this.error = true;
           return;
         }
-        this.versions = data.filter(
+        this.versions = versions.filter(
           (v) => v && typeof v.version === "string" && typeof v.url === "string"
         );
+        this.versions.forEach((v) => {
+          v._targetUrl = this._versionUrl(v);
+          if (v.status === "preview") v._statusLabel = this.messages.preview;
+          if (v.status === "unsupported") v._statusLabel = this.messages.unsupported;
+        });
 
         // Find the current version and set the display label
         const current = this.versions.find((v) => v.version === this.match);
         if (current) {
           this.currentLabel = current.name || current.version;
+          this.notice = current._notice || "";
         }
       } catch {
         this.error = true;

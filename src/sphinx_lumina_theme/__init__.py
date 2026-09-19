@@ -788,44 +788,62 @@ def _run_pagefind(app, exception):
     import shutil
     import subprocess
 
-    npx = shutil.which("npx")
-    if not npx:
-        logger.warning(
-            "npx not found — skipping Pagefind indexing. "
-            "Install Node.js or run manually: npx pagefind --site %s",
-            app.outdir,
-        )
-        return
+    options = app.builder.theme_options
+    configured_executable = str(options.get("pagefind_executable", "")).strip()
+    executable = configured_executable or shutil.which("pagefind")
+    if executable:
+        command = [executable]
+    else:
+        npx = shutil.which("npx")
+        if not npx:
+            logger.info(
+                "Pagefind executable not found — skipping indexing. "
+                "Install Pagefind or set pagefind_executable to its path."
+            )
+            return
+        # --no-install prevents a clean build from silently downloading an
+        # unpinned CLI from the network.
+        command = [npx, "--no-install", "pagefind"]
 
-    logger.info("Running Pagefind indexing...")
+    try:
+        timeout = max(1.0, float(options.get("pagefind_timeout", "30")))
+    except (TypeError, ValueError):
+        timeout = 30.0
+
+    command.extend(
+        [
+            "--site",
+            app.outdir,
+            "--output-subdir",
+            "_pagefind",
+            # Sphinx injects ¶ anchor links into headings — exclude them so they
+            # don't corrupt page titles and result excerpts in the search index.
+            "--exclude-selectors",
+            "a.headerlink",
+            # HTTP domain signature lines contain bare method verbs (GET, POST …)
+            # which cause false positives via stemming (e.g. "Getting" → "get").
+            # The endpoint descriptions (inside dd) are still fully indexed.
+            "--exclude-selectors",
+            "dl.http dt.sig",
+        ]
+    )
+
+    logger.info("Running Pagefind indexing with %s...", " ".join(command[:3]))
     try:
         subprocess.run(
-            [
-                npx,
-                "pagefind",
-                "--site",
-                app.outdir,
-                "--output-subdir",
-                "_pagefind",
-                # Sphinx injects ¶ anchor links into headings — exclude them so they
-                # don't corrupt page titles and result excerpts in the search index.
-                "--exclude-selectors",
-                "a.headerlink",
-                # HTTP domain signature lines contain bare method verbs (GET, POST …)
-                # which cause false positives via stemming (e.g. "Getting" → "get").
-                # The endpoint descriptions (inside dd) are still fully indexed.
-                "--exclude-selectors",
-                "dl.http dt.sig",
-            ],
+            command,
             check=True,
             capture_output=True,
             text=True,
+            timeout=timeout,
         )
         logger.info("Pagefind index created successfully")
+    except subprocess.TimeoutExpired:
+        logger.warning("Pagefind indexing timed out after %.1f seconds", timeout)
     except subprocess.CalledProcessError as e:
-        logger.warning("Pagefind indexing failed: %s", e.stderr.strip())
-    except FileNotFoundError:
-        logger.warning("Pagefind not found — skipping search indexing")
+        logger.warning("Pagefind indexing failed: %s", (e.stderr or "").strip())
+    except (FileNotFoundError, OSError) as e:
+        logger.warning("Pagefind executable could not be run: %s", e)
 
 
 def setup(app):

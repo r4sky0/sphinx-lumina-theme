@@ -51,6 +51,8 @@ See {doc}`javascript-api` for the full component API reference.
 - Dark mode toggled via `[data-theme="dark"]` attribute on `<html>`
 - User preference persisted in `localStorage` key `lumina-theme`
 - FOUC prevention: inline script in `layout.html` applies theme before paint
+- The fixed header uses a `ResizeObserver` to update `--lumina-header-offset`, so wrapped or dismissed announcements keep article anchors and sticky navigation aligned.
+- The desktop table of contents and the mobile disclosure both consume Sphinx's generated `toc` HTML; they are rendered as separate responsive views.
 
 ## Template Inheritance
 

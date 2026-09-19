@@ -45,7 +45,23 @@ The core surface and text tokens. These are the variables you'll override most o
 * - `--lumina-accent`
   - `#10b981`
   - `#10b981`
-  - Links, focus ring, active TOC indicator, skip link, headerlink tooltip. Also overridable through the `accent_color` theme option.
+  - Brand accent for decorative details. Also overridable through the `accent_color` theme option.
+* - `--lumina-accent-text`
+  - `#047857`
+  - `#34d399`
+  - Accessible text links and selected navigation states.
+* - `--lumina-accent-solid`
+  - `#047857`
+  - `#047857`
+  - Filled controls and selected-result badges.
+* - `--lumina-accent-on-solid`
+  - `#ffffff`
+  - `#ffffff`
+  - Text placed on `--lumina-accent-solid` surfaces.
+* - `--lumina-accent-focus`
+  - `#047857`
+  - `#34d399`
+  - Keyboard focus indicators.
 * - `--lumina-accent-light`
   - `#ecfdf5`
   - `#022c22`
@@ -57,7 +73,7 @@ The core surface and text tokens. These are the variables you'll override most o
 ```
 
 :::{tip}
-Set the accent through the theme option rather than overriding the variable directly — `accent_color` also derives `--lumina-accent-light` automatically using `color-mix()`. Override the variable directly only when you need a different tint than the auto-derived one.
+Set the accent through the theme option rather than overriding the variable directly — `accent_color` also derives the semantic text and solid variants plus `--lumina-accent-light` using `color-mix()`. Override the semantic tokens directly when your custom brand color needs a different contrast treatment.
 :::
 
 ## Admonition tokens

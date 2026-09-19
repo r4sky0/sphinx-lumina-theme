@@ -4,11 +4,12 @@
          data-json-url="{{ lumina_version_json }}"
          data-version-match="{{ lumina_version_match }}"
          class="relative"
-         @keydown.escape="open = false">
+         @keydown.escape="open = false"
+         :aria-label="currentLabel || '{{ lumina_version_match }}'">
         <button @click="toggle()"
                 :aria-expanded="open"
                 aria-haspopup="true"
-                aria-label="Select documentation version"
+                aria-label="{{ _('Select documentation version') }}"
                 class="flex items-center gap-1 rounded-md border border-lumina-border bg-lumina-bg-secondary px-2 py-1 text-xs font-medium text-lumina-text-muted hover:text-lumina-text hover:border-lumina-accent transition-colors cursor-pointer"
                 type="button">
             <span x-text="currentLabel || '{{ lumina_version_match }}'">{{ lumina_version_match }}</span>
@@ -36,17 +37,25 @@
              class="absolute left-0 top-full mt-1 min-w-[10rem] rounded-lg border border-lumina-border bg-lumina-bg py-1 shadow-lg"
              role="menu">
             <template x-for="v in versions" :key="v.version">
-                <a :href="_versionUrl(v)"
+                <a :href="targetUrl(v)"
                    class="flex items-center gap-2 px-3 py-1.5 text-[0.8125rem] text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors no-underline"
-                   :class="v.version === match && 'font-medium text-lumina-accent'"
+                   :class="v.version === match && 'font-medium text-lumina-accent-text'"
                    role="menuitem">
                     <span x-text="v.name || v.version"></span>
+                    <span x-show="v._statusLabel"
+                          class="text-[0.6875rem] text-lumina-text-muted"
+                          x-text="v._statusLabel"></span>
                     <span x-show="v.version === match"
-                          class="ml-auto text-[0.6875rem] text-lumina-accent">(current)</span>
+                          class="ml-auto text-[0.6875rem] text-lumina-accent-text">({{ _("current") }})</span>
                 </a>
             </template>
+            <p x-show="notice"
+               x-text="notice"
+               class="max-w-[16rem] px-3 py-2 text-[0.75rem] leading-snug text-lumina-text-muted"></p>
             <div x-show="error"
-                 class="px-3 py-1.5 text-[0.8125rem] text-lumina-text-muted italic">Failed to load versions</div>
+                 class="px-3 py-1.5 text-[0.8125rem] text-lumina-text-muted italic">
+                {{ _("Failed to load versions") }}
+            </div>
         </div>
     </div>
 {% endif %}

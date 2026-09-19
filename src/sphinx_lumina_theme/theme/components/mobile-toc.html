@@ -1,0 +1,12 @@
+{% if toc %}
+    <details class="lumina-mobile-toc xl:hidden" data-pagefind-ignore>
+        <summary>{{ _("On this page") }}</summary>
+        <div class="lumina-toc-scroll">
+            <nav class="lumina-toc-nav"
+                 aria-label="{{ _('Table of contents') }}"
+                 x-data="scrollspy()">
+                {{ toc }}
+            </nav>
+        </div>
+    </details>
+{% endif %}

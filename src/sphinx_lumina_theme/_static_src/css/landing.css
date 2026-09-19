@@ -64,8 +64,8 @@
 }
 
 .lumina-hero-btn-primary {
-  background-color: var(--lumina-accent);
-  color: #fff;
+  background-color: var(--lumina-accent-solid);
+  color: var(--lumina-accent-on-solid);
   box-shadow: var(--lumina-shadow-accent-md);
 }
 
@@ -89,7 +89,7 @@
 }
 
 .lumina-hero-btn-secondary:hover {
-  color: var(--lumina-accent);
+  color: var(--lumina-accent-text);
   border-color: color-mix(in srgb, var(--lumina-accent) 40%, var(--lumina-border));
   background-color: color-mix(in srgb, var(--lumina-accent) 5%, transparent);
 }

@@ -1,12 +1,21 @@
 <footer class="mt-10 border-t border-lumina-border pt-6">
+    {% if theme_source_repository and theme_source_repository != "" %}
+        <a href="{{ theme_source_repository }}/{{ theme_edit_uri }}/{{ theme_source_branch }}/{{ theme_source_directory }}{{ pagename }}{{ page_source_suffix }}"
+           class="mb-6 flex min-h-11 items-center gap-1.5 text-sm text-lumina-text-muted no-underline hover:text-lumina-accent-text transition-colors xl:hidden"
+           target="_blank"
+           rel="noopener">
+            {{ lumina_icon("square-pen", size=14) }}
+            {{ _("Edit this page") }}
+        </a>
+    {% endif %}
     {# Prev/Next navigation #}
     {% if prev or next %}
         <nav class="flex justify-between gap-4 mb-8" aria-label="Page navigation">
             {% if prev %}
                 <a href="{{ prev.link }}"
                    class="group flex flex-col items-start gap-1 rounded-lg border border-lumina-border p-4 no-underline hover:border-lumina-accent hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
-                    <span class="text-xs text-lumina-text-muted">Previous</span>
-                    <span class="text-sm font-medium text-lumina-text group-hover:text-lumina-accent transition-colors">&larr; {{ prev.title }}</span>
+                    <span class="text-xs text-lumina-text-muted">{{ _("Previous") }}</span>
+                    <span class="text-sm font-medium text-lumina-text group-hover:text-lumina-accent-text transition-colors">&larr; {{ prev.title }}</span>
                 </a>
             {% else %}
                 <div class="flex-1"></div>
@@ -14,8 +23,8 @@
             {% if next %}
                 <a href="{{ next.link }}"
                    class="group flex flex-col items-end gap-1 rounded-lg border border-lumina-border p-4 no-underline hover:border-lumina-accent hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
-                    <span class="text-xs text-lumina-text-muted">Next</span>
-                    <span class="text-sm font-medium text-lumina-text group-hover:text-lumina-accent transition-colors">{{ next.title }} &rarr;</span>
+                    <span class="text-xs text-lumina-text-muted">{{ _("Next") }}</span>
+                    <span class="text-sm font-medium text-lumina-text group-hover:text-lumina-accent-text transition-colors">{{ next.title }} &rarr;</span>
                 </a>
             {% endif %}
         </nav>
@@ -24,7 +33,7 @@
     {% if last_updated %}
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             {{ lumina_icon("clock", size=14, css_class="shrink-0") }}
-            Last updated <time>{{ last_updated }}</time>
+            {{ _("Last updated") }} <time>{{ last_updated }}</time>
         </p>
     {% endif %}
     {# Footer text #}

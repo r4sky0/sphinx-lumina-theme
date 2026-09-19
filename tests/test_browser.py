@@ -37,6 +37,20 @@ def test_search_returns_results(page: Page, live_server: str):
     assert results.count() >= 1
 
 
+def test_search_arrow_navigation_exposes_selected_result(page: Page):
+    """Arrow navigation should expose the selected result to assistive technology."""
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    search_input = modal.locator("input[type='search']")
+    search_input.fill("getting started")
+    page.wait_for_selector("#lumina-search-results a[role='option']")
+    search_input.press("ArrowDown")
+
+    active_id = search_input.get_attribute("aria-activedescendant")
+    assert active_id == "lumina-search-result-1"
+    expect(page.locator(f"#{active_id}")).to_have_attribute("aria-selected", "true")
+
+
 def test_theme_toggle_cycles(page: Page):
     """Clicking theme toggle should cycle through modes."""
     toggle = page.locator("[data-theme-toggle]")
@@ -83,6 +97,29 @@ def test_mobile_sidebar(page: Page, live_server: str):
     expect(drawer).to_be_visible(timeout=3000)
 
 
+def test_mobile_toc_and_edit_link_are_available(page: Page, live_server: str):
+    """Heading navigation and editing should remain available on a phone viewport."""
+    page.set_viewport_size({"width": 375, "height": 667})
+    page.goto(f"{live_server}/getting-started/installation.html")
+    page.wait_for_function("() => window.Alpine !== undefined")
+
+    mobile_toc = page.locator("details.lumina-mobile-toc")
+    expect(mobile_toc).to_be_visible()
+    mobile_toc.locator("summary").click()
+    expect(mobile_toc.locator("nav[aria-label='Table of contents']")).to_be_visible()
+    expect(page.locator("footer a", has_text="Edit this page")).to_be_visible()
+
+
+def test_header_offset_tracks_rendered_header(page: Page, live_server: str):
+    """Wrapped announcements should determine the page clearance dynamically."""
+    page.set_viewport_size({"width": 375, "height": 667})
+    page.goto(f"{live_server}/getting-started/installation.html")
+    page.wait_for_function("() => window.Alpine !== undefined")
+    offset = page.evaluate("parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--lumina-header-offset'))")
+    header_height = page.locator("#lumina-header > header").bounding_box()["height"]
+    assert abs(offset - header_height) <= 1
+
+
 def test_toc_scrollspy(page: Page, live_server: str):
     """Scrolling should activate a TOC link via scrollspy."""
     # TOC sidebar requires xl breakpoint (1280px+)
@@ -93,7 +130,7 @@ def test_toc_scrollspy(page: Page, live_server: str):
     # Scroll to a heading further down the page
     page.locator("#next-steps").scroll_into_view_if_needed()
     # Wait for IntersectionObserver to fire and verify any link gets active class
-    active = page.locator(".lumina-toc-nav a.lumina-toc-active")
+    active = page.locator(".lumina-toc-container .lumina-toc-nav a.lumina-toc-active")
     expect(active).to_have_count(1, timeout=3000)
 
 
@@ -155,7 +192,7 @@ def test_pagefind_loads_without_errors(page: Page, live_server: str):
 
     # Pagefind results contain <mark> highlighted excerpts — the Sphinx
     # fallback does not. This confirms the Pagefind backend is active.
-    excerpt_html = page.inner_html("#lumina-search-modal a[href] span:last-child")
+    excerpt_html = page.inner_html("#lumina-search-modal .lumina-search-excerpt")
     assert "<mark>" in excerpt_html, (
         "Expected Pagefind excerpt with <mark> highlights, got Sphinx fallback"
     )

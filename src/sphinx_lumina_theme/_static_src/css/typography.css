@@ -83,7 +83,7 @@
 }
 
 .lumina-article a {
-  color: var(--lumina-accent);
+  color: var(--lumina-accent-text);
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-color: color-mix(in srgb, var(--lumina-accent) 40%, transparent);
@@ -166,8 +166,8 @@
 }
 
 .lumina-article .task-list-item-checkbox:checked {
-  background: var(--lumina-accent);
-  border-color: var(--lumina-accent);
+  background: var(--lumina-accent-solid);
+  border-color: var(--lumina-accent-solid);
 }
 
 .lumina-article .task-list-item-checkbox:checked::after {
