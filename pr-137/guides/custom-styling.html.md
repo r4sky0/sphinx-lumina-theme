@@ -2,6 +2,18 @@
 
 Override CSS custom properties, fonts, syntax highlighting themes, and templates for deeper customization.
 
+## Migrating to Lumina 2
+
+Lumina 2 refreshes the default design. Existing theme options still work, but custom CSS and template overrides need review.
+
+- **Page actions:** Copy Markdown and edit links now live in the page-actions menu. Reading time appears below the introduction with a clock icon. Overrides of `layout.html` or `components/toc.html` should use the new `components/page-actions.html` component.
+- **Link colors:** `--lumina-accent` controls brand accents; `--lumina-link` controls readable text links and focus outlines. Set both for each mode if you customize tokens directly. The `accent_color` option derives both automatically.
+- **Surfaces:** `--lumina-navigation-bg` and `--lumina-floating-bg` control the sidebar and floating menus separately from the page background.
+- **Content:** Cards no longer lift or cast shadows; admonitions use a thin border on all sides. Heading sizes, weights, and spacing have changed.
+- **Mobile navigation:** The page outline is now available below the breadcrumbs. `show_toc = "false"` hides both desktop and mobile outlines.
+
+Rebuild your docs and check custom styles in both color modes, including mobile layouts. Use `html_short_title` for a shorter header label without changing your Sphinx project name.
+
 ## Adding a Custom Stylesheet
 
 Create a CSS file and register it in your `conf.py`:
@@ -22,26 +34,32 @@ Lumina defines CSS custom properties for all visual tokens. Override them in you
 ```css
 /* Light mode overrides */
 :root {
-    --lumina-bg: #fcfcfc;              /* Main background */
-    --lumina-bg-secondary: #f4f4f5;    /* Secondary background (sidebar, code blocks) */
-    --lumina-text: #18181b;            /* Primary text */
-    --lumina-text-muted: #52525b;      /* Secondary text */
-    --lumina-border: #e4e4e7;          /* Borders and dividers */
-    --lumina-accent: #10b981;          /* Links, active states */
-    --lumina-accent-light: #ecfdf5;    /* Accent background tint */
-    --lumina-code-bg: #f4f4f5;         /* Inline code background */
+    --lumina-bg: #fdfdfc;              /* Main background */
+    --lumina-bg-secondary: #f4f5f4;    /* Secondary surfaces */
+    --lumina-text: #202624;            /* Primary text */
+    --lumina-text-muted: #59635e;      /* Secondary text */
+    --lumina-border: #dfe5e1;          /* Borders and dividers */
+    --lumina-accent: #10b981;          /* Brand accents and active indicators */
+    --lumina-accent-light: #eaf6ef;    /* Accent background tint */
+    --lumina-link: #08764f;            /* Readable links and focus outlines */
+    --lumina-navigation-bg: #f7f8f6;   /* Sidebar surface */
+    --lumina-floating-bg: #fdfdfc;     /* Floating menus and search */
+    --lumina-code-bg: #f6f7f6;         /* Inline code background */
 }
 
 /* Dark mode overrides */
 [data-theme="dark"] {
-    --lumina-bg: #09090b;
-    --lumina-bg-secondary: #18181b;
-    --lumina-text: #fafafa;
-    --lumina-text-muted: #a1a1aa;
-    --lumina-border: #27272a;
+    --lumina-bg: #151918;
+    --lumina-bg-secondary: #202623;
+    --lumina-text: #e9eeeb;
+    --lumina-text-muted: #a8b5ac;
+    --lumina-border: #303b34;
     --lumina-accent: #10b981;
-    --lumina-accent-light: #022c22;
-    --lumina-code-bg: #1c1c20;
+    --lumina-accent-light: #1c3329;
+    --lumina-link: #5ed9a3;
+    --lumina-navigation-bg: #111613;
+    --lumina-floating-bg: #242c27;
+    --lumina-code-bg: #1b211e;
 }
 ```
 
@@ -52,13 +70,13 @@ Each admonition type has its own color property:
 ```css
 /* Light mode */
 :root {
-    --lumina-adm-note: #3b82f6;           /* Blue */
-    --lumina-adm-tip: #10b981;            /* Green */
+    --lumina-adm-note: #2563eb;           /* Blue */
+    --lumina-adm-tip: #08764f;            /* Green */
     --lumina-adm-warning: #f59e0b;        /* Amber */
-    --lumina-adm-warning-text: #d97706;   /* Amber (darker, for text contrast) */
-    --lumina-adm-danger: #ef4444;         /* Red */
-    --lumina-adm-important: #8b5cf6;      /* Purple */
-    --lumina-adm-seealso: #14b8a6;        /* Teal */
+    --lumina-adm-warning-text: #b45309;   /* Amber (darker, for text contrast) */
+    --lumina-adm-danger: #dc2626;         /* Red */
+    --lumina-adm-important: #7c3aed;      /* Purple */
+    --lumina-adm-seealso: #0e7490;        /* Cyan */
 }
 
 /* Dark mode */
@@ -69,7 +87,7 @@ Each admonition type has its own color property:
     --lumina-adm-warning-text: #f59e0b;
     --lumina-adm-danger: #f87171;
     --lumina-adm-important: #a78bfa;
-    --lumina-adm-seealso: #2dd4bf;
+    --lumina-adm-seealso: #22d3ee;
 }
 ```
 
