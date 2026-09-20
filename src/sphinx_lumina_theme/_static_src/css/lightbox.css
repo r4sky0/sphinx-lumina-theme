@@ -32,7 +32,18 @@
   padding-right: max(clamp(1rem, 4vw, 3rem), env(safe-area-inset-right, 0));
   padding-bottom: max(clamp(1rem, 4vw, 3rem), env(safe-area-inset-bottom, 0));
   padding-left: max(clamp(1rem, 4vw, 3rem), env(safe-area-inset-left, 0));
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
 }
+
+.lumina-lightbox-overlay:not([open]) { display: none; }
+.lumina-lightbox-overlay::backdrop { background: transparent; }
 
 /* The lightbox backdrop inherits its frosted-glass styling from the
    shared `.lumina-overlay-backdrop` class; this rule only adds the

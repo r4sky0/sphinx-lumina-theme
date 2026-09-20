@@ -3,8 +3,7 @@
 import json
 
 from bs4 import BeautifulSoup
-from conftest import copy_sample_docs
-from sphinx.application import Sphinx
+from conftest import copy_sample_docs, sphinx_app
 
 
 def _build(
@@ -14,7 +13,6 @@ def _build(
     conf_dir = tmp_path / "conf"
     conf_dir.mkdir(parents=True)
     out_dir = tmp_path / "build"
-    doctree_dir = out_dir / ".doctrees"
 
     opts = options or {}
     conf_lines = [
@@ -30,13 +28,9 @@ def _build(
 
     copy_sample_docs(conf_dir)
 
-    app = Sphinx(
-        srcdir=str(conf_dir),
-        confdir=str(conf_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
+    app = sphinx_app(
+        conf_dir,
+        out_dir,
         confoverrides=confoverrides or {},
     )
     app.build()
@@ -870,6 +864,8 @@ def test_handle_from_twitter_url_strips_query_string():
     assert _handle_from_twitter_url("https://x.com/foo#bio") == "@foo"
     assert _handle_from_twitter_url("https://twitter.com/foo/status/123") == "@foo"
     assert _handle_from_twitter_url("https://www.twitter.com/foo/") == "@foo"
+    assert _handle_from_twitter_url("https://[invalid/foo") is None
+    assert _handle_from_twitter_url("https://twitter.com.evil.example/foo") is None
 
 
 def test_og_image_omitted_without_baseurl(tmp_path):

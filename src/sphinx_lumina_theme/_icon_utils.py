@@ -41,10 +41,8 @@ def get_icon_inner(name):
 def get_icon_data_href(name, stroke="currentColor", stroke_width=2):
     """Return a bare ``data:image/svg+xml,...`` URI for a Lucide icon.
 
-    Suitable for use as an ``href`` on ``<link rel="icon">``. Unlike
-    :func:`get_icon_data_uri`, no ``url("...")`` wrapping is applied, and
-    the stroke color can be customized (favicons render outside any CSS
-    context, so ``currentColor`` is not resolvable).
+    Suitable for use as an ``href`` on ``<link rel="icon">``. The stroke
+    color can be customized because favicons render outside any CSS context.
     """
     from ._icons import ICONS
 
@@ -58,12 +56,3 @@ def get_icon_data_href(name, stroke="currentColor", stroke_width=2):
         f'stroke-linecap="round" stroke-linejoin="round">{inner}</svg>'
     )
     return f"data:image/svg+xml,{quote(svg, safe='/:@!$&()*+,;=')}"
-
-
-def get_icon_data_uri(name, stroke_width=2):
-    """Return a CSS-ready data URI for a Lucide icon.
-
-    Suitable for use in mask-image or background-image CSS properties.
-    """
-    href = get_icon_data_href(name, stroke_width=stroke_width)
-    return f'url("{href}")' if href else ""

@@ -1,9 +1,9 @@
 """Tests for the code_style Pygments preset feature."""
 
+from conftest import sphinx_app
 from pathlib import Path
 
 import pytest
-from sphinx.application import Sphinx
 
 SAMPLE_DOCS = Path(__file__).parent / "sample_docs"
 
@@ -11,14 +11,9 @@ SAMPLE_DOCS = Path(__file__).parent / "sample_docs"
 def _build_with_code_style(tmp_path, code_style):
     """Build sample docs with a given code_style and return the output path."""
     out_dir = tmp_path / "build"
-    doctree_dir = out_dir / ".doctrees"
-    app = Sphinx(
-        srcdir=str(SAMPLE_DOCS),
-        confdir=str(SAMPLE_DOCS),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
+    app = sphinx_app(
+        SAMPLE_DOCS,
+        out_dir,
         confoverrides={"html_theme_options.code_style": code_style},
     )
     app.build()
@@ -46,14 +41,9 @@ def test_nord_preset_applies(tmp_path):
 def test_invalid_preset_warns(tmp_path):
     """An unknown code_style should emit a warning and fall back to default."""
     out_dir = tmp_path / "build"
-    doctree_dir = out_dir / ".doctrees"
-    app = Sphinx(
-        srcdir=str(SAMPLE_DOCS),
-        confdir=str(SAMPLE_DOCS),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
+    app = sphinx_app(
+        SAMPLE_DOCS,
+        out_dir,
         confoverrides={"html_theme_options.code_style": "nonexistent"},
         warningiserror=False,
     )

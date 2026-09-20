@@ -1,10 +1,10 @@
 """Tests for the auto-generated JavaScript API documentation page."""
 
+from conftest import sphinx_app
 from pathlib import Path
 
 import pytest
 from bs4 import BeautifulSoup
-from sphinx.application import Sphinx
 
 DOCS_DIR = Path(__file__).parent.parent / "docs"
 
@@ -32,16 +32,8 @@ EXPECTED_FUNCTIONS = [
 def docs_build(tmp_path_factory):
     """Build the full documentation site and return the output path."""
     out_dir = tmp_path_factory.mktemp("docs_build")
-    doctree_dir = out_dir / ".doctrees"
 
-    app = Sphinx(
-        srcdir=str(DOCS_DIR),
-        confdir=str(DOCS_DIR),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
-    )
+    app = sphinx_app(DOCS_DIR, out_dir)
     app.build()
     return out_dir
 

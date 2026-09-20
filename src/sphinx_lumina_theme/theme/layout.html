@@ -252,40 +252,25 @@
     {% include "components/search-modal.html" %}
 
     {% if theme_image_lightbox == "true" %}
-        <div x-data="imageLightbox()"
-             x-show="isOpen"
-             x-cloak
-             x-on:keydown.escape.window="close()"
-             x-transition:enter="transition ease-out duration-200"
-             x-transition:enter-start="opacity-0"
-             x-transition:enter-end="opacity-100"
-             x-transition:leave="transition ease-in duration-150"
-             x-transition:leave-start="opacity-100"
-             x-transition:leave-end="opacity-0"
-             class="lumina-lightbox-overlay"
-             role="dialog"
-             aria-modal="true"
-             x-bind:aria-label="caption || 'Image preview'">
+        <dialog x-data="imageLightbox()"
+                x-on:cancel.prevent="close()"
+                class="lumina-lightbox-overlay"
+                aria-modal="true"
+                x-bind:aria-label="caption || 'Image preview'">
             <div class="lumina-overlay-backdrop lumina-lightbox-backdrop"
                  x-on:click="close()"></div>
             <button x-on:click="close()"
                     class="lumina-lightbox-close"
                     aria-label="Close preview"
                     type="button">{{ lumina_icon("x", size=20) }}</button>
-            <div class="lumina-lightbox-figure"
-                 x-transition:enter="transition ease-out duration-250"
-                 x-transition:enter-start="opacity-0 scale-95"
-                 x-transition:enter-end="opacity-100 scale-100"
-                 x-transition:leave="transition ease-in duration-150"
-                 x-transition:leave-start="opacity-100 scale-100"
-                 x-transition:leave-end="opacity-0 scale-95">
+            <div class="lumina-lightbox-figure">
                 <template x-if="contentType === 'img'">
                     <img x-bind:src="imgSrc" x-bind:alt="imgAlt">
                 </template>
                 <div class="lumina-lightbox-svg-host" x-show="contentType === 'svg'"></div>
                 <div class="lumina-lightbox-caption" x-show="caption" x-text="caption"></div>
             </div>
-        </div>
+        </dialog>
     {% endif %}
 
 {%- endblock %}

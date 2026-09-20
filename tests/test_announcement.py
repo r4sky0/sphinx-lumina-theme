@@ -1,8 +1,7 @@
 """Test the announcement banner."""
 
 from bs4 import BeautifulSoup
-from conftest import copy_sample_docs
-from sphinx.application import Sphinx
+from conftest import copy_sample_docs, sphinx_app
 
 
 def _build_with_announcement(tmp_path, announcement="", extra_options=None):
@@ -10,7 +9,6 @@ def _build_with_announcement(tmp_path, announcement="", extra_options=None):
     conf_dir = tmp_path / "conf"
     conf_dir.mkdir(parents=True)
     out_dir = tmp_path / "build"
-    doctree_dir = out_dir / ".doctrees"
 
     options = {"announcement": announcement}
     if extra_options:
@@ -26,14 +24,7 @@ def _build_with_announcement(tmp_path, announcement="", extra_options=None):
 
     copy_sample_docs(conf_dir)
 
-    app = Sphinx(
-        srcdir=str(conf_dir),
-        confdir=str(conf_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
-    )
+    app = sphinx_app(conf_dir, out_dir)
     app.build()
     return BeautifulSoup((out_dir / "index.html").read_text(), "html.parser")
 

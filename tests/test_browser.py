@@ -28,6 +28,36 @@ def test_search_modal_closes_on_escape(page: Page):
     expect(page.locator("#lumina-search-modal")).to_be_visible()
     page.keyboard.press("Escape")
     expect(page.locator("#lumina-search-modal")).to_be_hidden()
+    expect(page.locator("[data-search-trigger]")).to_be_focused()
+
+
+def test_lightbox_dialog_closes_on_escape(page: Page, live_server: str):
+    page.goto(f"{live_server}/reference/images-and-figures.html")
+    image = page.locator(".lumina-article img").first
+    image.click()
+    dialog = page.locator("dialog.lumina-lightbox-overlay")
+    expect(dialog).to_be_visible()
+    page.keyboard.press("Escape")
+    expect(dialog).to_be_hidden()
+
+
+def test_fluid_without_offscreen_canvas(page: Page, live_server: str):
+    errors = []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    page.add_init_script(
+        "HTMLCanvasElement.prototype.transferControlToOffscreen = undefined;"
+        "window.requestIdleCallback = (callback) => { callback(); return 0; };"
+    )
+    page.goto(live_server)
+    expect(page.locator(".lumina-hero-title")).to_be_visible()
+    assert not errors
+
+
+def test_fluid_worker_starts(page: Page, live_server: str):
+    page.goto(live_server)
+    page.wait_for_function(
+        "() => !!window.Alpine.$data(document.querySelector('.lumina-hero'))._worker"
+    )
 
 
 def test_search_returns_results(page: Page, live_server: str):

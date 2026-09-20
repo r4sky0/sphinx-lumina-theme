@@ -128,9 +128,10 @@ function buildCurl(dl, baseUrl) {
   const method = extractMethod(dl);
   const path = extractPath(dl);
   const url = baseUrl ? baseUrl.replace(/\/$/, "") + path : path;
-  const headers = extractHeaders(dl);
-  const jsonFields = extractJsonFields(dl);
-  const queryParams = extractQueryParams(dl);
+  const dd = dl.querySelector("dd");
+  const headers = extractFieldSection(dd, "Request Headers");
+  const jsonFields = extractFieldSection(dd, "Request JSON Object");
+  const queryParams = extractFieldSection(dd, "Query Parameters").map((i) => i.name);
 
   const parts = ["curl"];
 
@@ -165,19 +166,5 @@ function buildCurl(dl, baseUrl) {
     return parts.join(" ");
   }
   return parts.join(" \\\n  ");
-}
-
-/* ── DOM extraction helpers ────────────────────────────────────────── */
-
-function extractHeaders(dl) {
-  return extractFieldSection(dl.querySelector("dd"), "Request Headers");
-}
-
-function extractQueryParams(dl) {
-  return extractFieldSection(dl.querySelector("dd"), "Query Parameters").map((i) => i.name);
-}
-
-function extractJsonFields(dl) {
-  return extractFieldSection(dl.querySelector("dd"), "Request JSON Object");
 }
 

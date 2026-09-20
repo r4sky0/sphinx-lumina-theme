@@ -1,8 +1,4 @@
 {
-  "source": {
-    "include": ["src/sphinx_lumina_theme/_static_src/js"],
-    "includePattern": ".+\\.js$"
-  },
   "opts": {
     "recurse": true
   }

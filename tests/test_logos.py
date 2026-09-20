@@ -1,8 +1,7 @@
 """Test separate light/dark logo rendering."""
 
 from bs4 import BeautifulSoup
-from conftest import copy_sample_docs
-from sphinx.application import Sphinx
+from conftest import copy_sample_docs, sphinx_app
 
 
 def _build_with_logos(tmp_path, options=None, create_logos=True):
@@ -10,7 +9,6 @@ def _build_with_logos(tmp_path, options=None, create_logos=True):
     conf_dir = tmp_path / "conf"
     conf_dir.mkdir()
     out_dir = tmp_path / "build"
-    doctree_dir = out_dir / ".doctrees"
 
     static_dir = conf_dir / "_static"
     static_dir.mkdir()
@@ -34,14 +32,7 @@ def _build_with_logos(tmp_path, options=None, create_logos=True):
 
     copy_sample_docs(conf_dir)
 
-    app = Sphinx(
-        srcdir=str(conf_dir),
-        confdir=str(conf_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
-    )
+    app = sphinx_app(conf_dir, out_dir)
     app.build()
     return BeautifulSoup((out_dir / "index.html").read_text(), "html.parser")
 
@@ -97,7 +88,6 @@ def test_html_logo_fallback(tmp_path):
     conf_dir = tmp_path / "conf"
     conf_dir.mkdir()
     out_dir = tmp_path / "build"
-    doctree_dir = out_dir / ".doctrees"
 
     static_dir = conf_dir / "_static"
     static_dir.mkdir()
@@ -116,14 +106,7 @@ def test_html_logo_fallback(tmp_path):
 
     copy_sample_docs(conf_dir)
 
-    app = Sphinx(
-        srcdir=str(conf_dir),
-        confdir=str(conf_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
-    )
+    app = sphinx_app(conf_dir, out_dir)
     app.build()
     html = BeautifulSoup((out_dir / "index.html").read_text(), "html.parser")
 
