@@ -20,6 +20,7 @@
     --lumina-text-muted: #52525b;
     --lumina-border: #d4d4d8;
     --lumina-accent-light: transparent;
+    --lumina-link: #08764f;
     --lumina-code-bg: #f4f4f5;
   }
 
@@ -34,7 +35,8 @@
   #lumina-toc,
   #lumina-announcement,
   .lumina-skip-link,
-  .lumina-content-toolbar > .lumina-copy-page,
+  .lumina-page-actions,
+  .lumina-mobile-outline,
   .copybtn,
   .lumina-curl-copy,
   .lumina-try-it,
@@ -97,7 +99,7 @@
     print-color-adjust: exact;
   }
 
-  /* Admonitions: keep the colored left border visible. */
+  /* Admonitions: preserve their semantic tint. */
   .lumina-article .admonition {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;

@@ -1,6 +1,7 @@
 """Test that theme components render correctly."""
 
 from bs4 import BeautifulSoup
+from sphinx_lumina_theme import _mark_collapsed_entries
 
 
 def _parse(build_output, page="index.html"):
@@ -70,6 +71,14 @@ def test_toc_has_page_headings(index_html):
     texts = [a.get_text(strip=True) for a in links]
     assert "Section One" in texts
     assert "Section Two" in texts
+
+
+def test_collapsed_navigation_resolves_sibling_sections():
+    html = '<li class="toctree-l1"><a href="../guides/index.html">Guides</a></li>'
+    marked = _mark_collapsed_entries(
+        html, {"guides/index"}, "getting-started/installation"
+    )
+    assert 'data-nav-collapsed="true"' in marked
 
 
 def test_sidebar_root_current_no_accent_highlight(build_output):

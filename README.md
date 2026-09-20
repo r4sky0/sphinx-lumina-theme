@@ -4,27 +4,25 @@
 [![License](https://img.shields.io/github/license/r4sky0/sphinx-lumina-theme)](https://github.com/r4sky0/sphinx-lumina-theme/blob/main/LICENSE)
 [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://r4sky0.github.io/sphinx-lumina-theme/)
 
-A modern Sphinx theme that treats documentation as a first-class product experience. Clean typography, responsive layout, dark mode, and instant search — out of the box.
+A crisp, responsive Sphinx theme with readable typography, dark mode, and instant search. Self-hosted fonts, minimal setup, no external CDN calls.
 
 <a href="https://r4sky0.github.io/sphinx-lumina-theme/">
-  <img src="https://raw.githubusercontent.com/r4sky0/sphinx-lumina-theme/main/docs/assets/demo.gif" alt="Sphinx Lumina Theme — Quick tour showing light and dark mode, sidebar navigation, content area with code blocks, and table of contents" width="100%">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/readme-dark.png">
+    <img src="docs/assets/readme-light.png" alt="Lumina installation guide with section navigation, code tabs, and a table of contents" width="100%">
+  </picture>
 </a>
 
-<p align="center">
-  <a href="https://r4sky0.github.io/sphinx-lumina-theme/"><strong>Documentation</strong></a>
-</p>
+[Live demo & documentation](https://r4sky0.github.io/sphinx-lumina-theme/) · [Configuration](https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html) · [Contributing](https://r4sky0.github.io/sphinx-lumina-theme/contributing/)
 
 ## Features
 
-- **Dark mode** — follows system preference with manual toggle, no flash of unstyled content
-- **Instant search** — Pagefind-powered search with keyboard navigation (`⌘K`)
-- **Responsive layout** — mobile-first with collapsible sidebar and sticky table of contents
-- **MyST Markdown** — write docs in Markdown with full Sphinx directive support
-- **Interactive HTTP API** — OpenAPI endpoint docs with live "Try it out" panels and curl copy buttons; no Swagger UI needed
-- **Code blocks** — syntax highlighting with one-click copy
-- **Self-hosted fonts** — Source Sans 3 and JetBrains Mono, no external CDN calls
-- **Version switcher** — dropdown to navigate between documentation versions, loaded from a JSON URL
-- **Customizable** — accent colors, navigation links, social links, and more via `conf.py`
+- **Light and dark modes** with a system-aware toggle.
+- **Instant search** powered by Pagefind, with `⌘K` / `Ctrl+K` access.
+- **Responsive navigation** with section and version switchers, a collapsible sidebar, and a mobile page outline.
+- **Rich content** with MyST Markdown, syntax highlighting, and one-click code copying.
+- **Interactive API docs** with OpenAPI support, request panels, and curl copying.
+- **Customizable branding** through `conf.py`: colors, logos, navigation, and social links.
 
 ## Quick Start
 
@@ -35,11 +33,7 @@ Node.js so the build can create its search index.
 pip install sphinx-lumina-theme
 ```
 
-or with uv:
-
-```bash
-uv add sphinx-lumina-theme
-```
+Using uv? Run `uv add sphinx-lumina-theme` instead.
 
 Set the theme in your `conf.py`:
 
@@ -50,47 +44,18 @@ html_theme = "lumina"
 Build your docs:
 
 ```bash
-# With uv
-uv run sphinx-build docs docs/_build/html
-
-# With pip
 sphinx-build docs docs/_build/html
 ```
 
-That's it. For MyST Markdown setup and configuration options, see the [Getting Started](https://r4sky0.github.io/sphinx-lumina-theme/getting-started/) guide.
+With uv, prefix the build command with `uv run`. Open `docs/_build/html/index.html` to view the result.
 
-## Configuration
+New to Sphinx? Start with the [installation guide](https://r4sky0.github.io/sphinx-lumina-theme/getting-started/installation.html), including project creation and MyST setup.
 
-All options go in `html_theme_options` in your `conf.py`. Every option has a sensible default — you only need to set what you want to change.
+Upgrading from 1.x? Review the [Lumina 2 migration notes](https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html#migrating-to-lumina-2) if you use custom CSS or templates.
 
-```python
-html_theme_options = {
-    "accent_color": "#10b981",
-    "dark_mode_default": "auto",       # "auto", "light", or "dark"
-    "nav_links": [
-        {"title": "Guide", "url": "guide"},
-        {"title": "API", "url": "api"},
-    ],
-    "source_repository": "https://github.com/you/your-repo",
-    "social_links": [
-        {"icon": "github", "url": "https://github.com/you"},
-    ],
-    "api_base_url": "https://api.example.com/v1",  # enables interactive API features
-}
-```
+## Contributing
 
-See the full [Configuration](https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html) reference for all available options.
-
-## Development
-
-```bash
-git clone https://github.com/r4sky0/sphinx-lumina-theme.git
-cd sphinx-lumina-theme
-pnpm install        # JS dependencies
-uv sync --dev       # Python dependencies
-pnpm run build      # Build CSS + JS assets
-uv run pytest       # Run tests
-```
+See the [contributing guide](https://r4sky0.github.io/sphinx-lumina-theme/contributing/) for local setup, asset builds, and tests. Bug reports and pull requests are welcome.
 
 ## License
 

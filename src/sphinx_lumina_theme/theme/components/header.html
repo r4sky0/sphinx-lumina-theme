@@ -40,7 +40,7 @@
                     </svg>
                 {% endif %}
                 {% if not theme_logo_only or theme_logo_only == "false" %}
-                    <span class="font-semibold text-base">{{ project }}</span>
+                    <span class="font-semibold text-base">{{ shorttitle if shorttitle != docstitle else project }}</span>
                 {% endif %}
             </a>
 
