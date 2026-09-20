@@ -1,15 +1,17 @@
 <nav class="flex items-center gap-2 overflow-x-auto text-sm text-lumina-text-muted"
      style="scrollbar-width:none"
      aria-label="Breadcrumb">
-    <a href="{{ pathto(root_doc) }}"
-       class="whitespace-nowrap hover:text-lumina-accent no-underline transition-colors">{{ shorttitle }}</a>
+    {% if not parents %}
+        <a href="{{ pathto(root_doc) }}"
+           class="whitespace-nowrap hover:text-lumina-accent no-underline transition-colors">{{ shorttitle }}</a>
+    {% endif %}
     {% if parents %}
         {% for parent in parents %}
-            {{ lumina_icon("chevron-right", size=14, css_class="flex-shrink-0") }}
+            {% if not loop.first %}{{ lumina_icon("chevron-right", size=14, css_class="flex-shrink-0") }}{% endif %}
             <a href="{{ parent.link }}"
                class="whitespace-nowrap hover:text-lumina-accent no-underline transition-colors">{{ parent.title }}</a>
         {% endfor %}
     {% endif %}
     {{ lumina_icon("chevron-right", size=14, css_class="flex-shrink-0") }}
-    <span class="whitespace-nowrap text-lumina-text">{{ title }}</span>
+    <span class="whitespace-nowrap text-lumina-text" aria-current="page">{{ title }}</span>
 </nav>

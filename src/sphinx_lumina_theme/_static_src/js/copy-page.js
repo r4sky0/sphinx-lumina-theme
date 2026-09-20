@@ -54,7 +54,7 @@ function htmlToMarkdown(root) {
   // Strip elements that shouldn't appear in the markdown output
   clone
     .querySelectorAll(
-      "a.headerlink, .copybtn, .linenodiv, script, style, .lumina-copy-page"
+      "a.headerlink, .copybtn, .linenodiv, script, style, .lumina-copy-page, .lumina-reading-time"
     )
     .forEach((el) => el.remove());
 

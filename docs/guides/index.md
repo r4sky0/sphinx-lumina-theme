@@ -1,3 +1,7 @@
+---
+nav_collapsed: true
+---
+
 # Guides
 
 Go deeper with Lumina — search, styling, navigation, and development workflows.

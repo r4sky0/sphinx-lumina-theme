@@ -115,8 +115,8 @@
     {% if theme_image_lightbox == "true" %}<script>document.documentElement.dataset.lightbox = "true";</script>{% endif %}
     {% if theme_accent_color != "#10b981" %}
         <style>
-            :root,[data-theme="light"]{--lumina-accent:{{ theme_accent_color }};--lumina-accent-light:color-mix(in srgb,{{ theme_accent_color }} 12%,white);}
-            [data-theme="dark"]{--lumina-accent:{{ theme_accent_color }};--lumina-accent-light:color-mix(in srgb,{{ theme_accent_color }} 15%,#09090b);}
+            :root,[data-theme="light"]{--lumina-accent:{{ theme_accent_color }};--lumina-link:color-mix(in srgb,{{ theme_accent_color }} 65%,#202624);--lumina-accent-light:color-mix(in srgb,{{ theme_accent_color }} 12%,var(--lumina-bg));}
+            [data-theme="dark"]{--lumina-accent:{{ theme_accent_color }};--lumina-link:color-mix(in srgb,{{ theme_accent_color }} 55%,#e9eeeb);--lumina-accent-light:color-mix(in srgb,{{ theme_accent_color }} 15%,var(--lumina-bg));}
             html:root,html[data-theme="dark"]{--sd-color-primary:color-mix(in srgb,{{ theme_accent_color }} 85%,black);--sd-color-primary-highlight:color-mix(in srgb,{{ theme_accent_color }} 70%,black);--sd-color-primary-text:#fff;--sd-color-primary-bg:color-mix(in srgb,{{ theme_accent_color }} 12%,transparent);}
         </style>
     {% endif %}
@@ -174,49 +174,18 @@
 
                     </div>
                 {% endif %}
-                {% if theme_show_reading_time == "true" and lumina_reading_time is defined %}
-                    <span class="lumina-reading-time"
-                          aria-label="{{ lumina_reading_time }} minute read">
-                        {{ lumina_icon("clock", size=14) }}
-                        <span>{{ lumina_reading_time }} min read</span>
-                    </span>
-                {% endif %}
-                <button x-data="copyPage()"
-                        @click="copy()"
-                        class="lumina-copy-page"
-                        :class="{ 'is-copied': copied }"
-                        aria-label="Copy page as Markdown"
-                        title="Copy page as Markdown"
-                        :aria-label="copied ? 'Copied to clipboard' : 'Copy page as Markdown'"
-                        :title="copied ? 'Copied!' : 'Copy page as Markdown'"
-                        type="button">
-                    <svg x-show="!copied"
-                         class="h-3.5 w-3.5"
-                         viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         aria-hidden="true"
-                         stroke-width="2"
-                         stroke-linecap="round"
-                         stroke-linejoin="round">
-                        {{ lumina_icon_inner("copy") }}
-                    </svg>
-                    <svg x-show="copied"
-                         x-cloak
-                         class="h-3.5 w-3.5"
-                         viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         aria-hidden="true"
-                         stroke-width="2"
-                         stroke-linecap="round"
-                         stroke-linejoin="round">
-                        {{ lumina_icon_inner("check") }}
-                    </svg>
-                    <span class="hidden sm:inline"
-                          x-text="copied ? 'Copied!' : 'Copy Markdown'"></span>
-                </button>
+
+                {% include "components/page-actions.html" %}
+
             </div>
+            {% if theme_show_toc == "true" and toc %}
+                <details class="lumina-mobile-outline" data-pagefind-ignore>
+                    <summary>On this page {{ lumina_icon("chevron-down", size=14) }}</summary>
+                    <nav aria-label="Page outline">
+                        {{ toc }}
+                    </nav>
+                </details>
+            {% endif %}
             <article class="lumina-article" x-data="headerLinks()">
 
                 {% block body %}
@@ -256,7 +225,7 @@
                 x-transition:leave-start="opacity-100 translate-y-0"
                 x-transition:leave-end="opacity-0 translate-y-2"
                 @click="scrollToTop()"
-                class="fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-lumina-border bg-lumina-bg text-lumina-text-muted shadow-md hover:text-lumina-text hover:border-lumina-accent hover:shadow-lg transition-all cursor-pointer"
+                class="lumina-back-to-top z-40 hover:border-lumina-accent transition-colors"
                 aria-label="Back to top"
                 type="button">{{ lumina_icon("chevron-up", size=20) }}</button>
     {% endif %}

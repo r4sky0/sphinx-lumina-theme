@@ -2,6 +2,7 @@
 
 import copy
 import hashlib
+import posixpath
 import re
 from pathlib import Path
 
@@ -13,7 +14,7 @@ from . import _seo
 
 logger = logging.getLogger(__name__)
 
-__version__ = "1.44.0"
+__version__ = "2.0.0"
 
 _CODE_STYLE_PRESETS = {
     "default": ("default", "monokai"),
@@ -53,6 +54,7 @@ def _compute_reading_time(doctree):
         nodes.literal_block,
         nodes.image,
         nodes.comment,
+        nodes.raw,
         nodes.target,
         nodes.system_message,
         addnodes.toctree,
@@ -70,6 +72,45 @@ def _compute_reading_time(doctree):
     if not word_count:
         return None
     return max(1, round(word_count / _READING_WPM))
+
+
+def _reading_time(app, doctree, pagename):
+    """Honor the global opt-in and per-page reading-time override."""
+    if app.builder.theme_options.get("show_reading_time", "false") != "true":
+        return None
+    value = (
+        str(app.env.metadata.get(pagename, {}).get("reading_time", "")).strip().lower()
+    )
+    if value == "false":
+        return None
+    return int(value) if value.isdigit() else _compute_reading_time(doctree)
+
+
+def _insert_reading_time(app, doctree, pagename):
+    """Render metadata after the introduction, or after the title without one."""
+    from docutils import nodes
+
+    from ._icon_utils import get_icon_svg
+
+    if app.builder.format != "html":
+        return
+    minutes = _reading_time(app, doctree, pagename)
+    section = next(
+        (node for node in doctree.children if isinstance(node, nodes.section)), None
+    )
+    if minutes is None or section is None or not isinstance(section[0], nodes.title):
+        return
+    index = 2 if len(section) > 1 and isinstance(section[1], nodes.paragraph) else 1
+    icon = get_icon_svg("clock", size=14)
+    section.insert(
+        index,
+        nodes.raw(
+            "",
+            f'<div class="lumina-reading-time" data-pagefind-ignore>'
+            f"{icon}<span>{minutes} min read</span></div>",
+            format="html",
+        ),
+    )
 
 
 def _apply_code_style(app):
@@ -119,7 +160,7 @@ def _resolve_href_to_pagename(href, pagename):
     if not target.startswith("/") and "/" in pagename:
         base = pagename.rsplit("/", 1)[0]
         target = base + "/" + target
-    return target
+    return posixpath.normpath(target)
 
 
 def _with_basename_fallback(target):
@@ -509,18 +550,9 @@ def _add_context(app, pagename, templatename, context, doctree):
         if field in meta:
             context[field] = meta[field]
 
-    # Reading-time estimate. Opt-in via theme option; per-page override via
-    # ``reading_time`` front matter (``false`` to suppress, integer to override).
-    if app.builder.theme_options.get("show_reading_time", "false") == "true":
-        rt_meta = str(meta.get("reading_time", "")).strip().lower()
-        if rt_meta == "false":
-            pass  # explicitly suppressed for this page
-        elif rt_meta.isdigit():
-            context["lumina_reading_time"] = int(rt_meta)
-        else:
-            rt = _compute_reading_time(doctree)
-            if rt is not None:
-                context["lumina_reading_time"] = rt
+    rt = _reading_time(app, doctree, pagename)
+    if rt is not None:
+        context["lumina_reading_time"] = rt
 
     # Icon system: make icon renderer and sidebar filter available to templates
     from ._icon_utils import get_icon_inner, get_icon_svg
@@ -855,6 +887,7 @@ def setup(app):
     app.connect("builder-inited", _apply_code_style)
     app.connect("builder-inited", _check_baseurl)
     app.connect("html-page-context", _add_context)
+    app.connect("doctree-resolved", _insert_reading_time)
     app.connect("build-finished", _run_pagefind)
     app.connect("build-finished", _filter_sitemap_noindex)
     app.connect("build-finished", _write_robots_txt)

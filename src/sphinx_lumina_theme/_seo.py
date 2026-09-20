@@ -265,7 +265,10 @@ def derive_twitter_handle(theme_options: Mapping[str, Any]) -> str | None:
 
 def _handle_from_twitter_url(url: str) -> str | None:
     """Extract @handle from a Twitter/X profile URL like https://twitter.com/foo."""
-    parts = urlsplit(url)
+    try:
+        parts = urlsplit(url)
+    except ValueError:
+        return None
     if parts.scheme != "https" or parts.hostname not in {
         "twitter.com",
         "www.twitter.com",

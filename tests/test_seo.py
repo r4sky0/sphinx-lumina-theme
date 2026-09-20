@@ -864,6 +864,8 @@ def test_handle_from_twitter_url_strips_query_string():
     assert _handle_from_twitter_url("https://x.com/foo#bio") == "@foo"
     assert _handle_from_twitter_url("https://twitter.com/foo/status/123") == "@foo"
     assert _handle_from_twitter_url("https://www.twitter.com/foo/") == "@foo"
+    assert _handle_from_twitter_url("https://[invalid/foo") is None
+    assert _handle_from_twitter_url("https://twitter.com.evil.example/foo") is None
 
 
 def test_og_image_omitted_without_baseurl(tmp_path):

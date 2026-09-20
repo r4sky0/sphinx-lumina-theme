@@ -47,6 +47,8 @@ docs/superpowers/
 # Screenshots
 *.png
 !docs/assets/banner.png
+!docs/assets/readme-light.png
+!docs/assets/readme-dark.png
 !docs/_static/og-card.png
 .worktrees/
 snapshot-light.md

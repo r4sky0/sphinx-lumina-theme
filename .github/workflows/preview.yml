@@ -1,23 +1,23 @@
-name: PR Preview
+name: PR Preview Build
 
 on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
 
+permissions:
+  contents: read
+
 concurrency:
   group: preview-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
-  deploy-preview:
+  build-preview:
     if: github.event.action != 'closed'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
@@ -29,62 +29,35 @@ jobs:
       - name: Build docs
         env:
           PREVIEW_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/
-        run: uv run sphinx-build -D html_baseurl="$PREVIEW_BASEURL" docs docs/_build/html
+        run: uv run --locked sphinx-build -D html_baseurl="$PREVIEW_BASEURL" docs docs/_build/html -W
 
-      - uses: ./.github/actions/deploy-gh-pages
+      - name: Record preview event
+        env:
+          PREVIEW_ACTION: ${{ github.event.action }}
+        run: echo "$PREVIEW_ACTION" > docs/_build/html/lumina-preview-event.txt
+
+      - name: Upload preview
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          source-dir: docs/_build/html
-          target-dir: pr-${{ github.event.pull_request.number }}
-          commit-message: "Deploy PR #${{ github.event.pull_request.number }} preview"
+          name: preview
+          path: docs/_build/html
+          if-no-files-found: error
+          retention-days: 1
 
-      - name: Comment on PR
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        with:
-          script: |
-            const prNumber = context.issue.number;
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
-            const marker = '<!-- lumina-preview -->';
-            const previewUrl = `https://${owner}.github.io/${repo}/pr-${prNumber}/`;
-            const body = `${marker}\n📖 **Preview ready:** ${previewUrl}`;
-
-            const { data: comments } = await github.rest.issues.listComments({
-              owner, repo, issue_number: prNumber,
-            });
-
-            const existing = comments.find(c => c.body.includes(marker));
-
-            if (existing) {
-              await github.rest.issues.updateComment({
-                owner, repo, comment_id: existing.id, body,
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner, repo, issue_number: prNumber, body,
-              });
-            }
-
-  cleanup-preview:
+  record-closed:
     if: github.event.action == 'closed'
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
-        with:
-          ref: gh-pages
-          fetch-depth: 1
-
-      - name: Remove preview directory
+      - name: Record closed event
         env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: |
-          PR_DIR="pr-${PR_NUMBER}"
-          if [ -d "$PR_DIR" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            rm -rf "$PR_DIR"
-            git add .
-            git commit -m "Clean up PR #${PR_NUMBER} preview"
-            git push origin gh-pages
-          fi
+          PREVIEW_ACTION: ${{ github.event.action }}
+        run: echo "$PREVIEW_ACTION" > lumina-preview-event.txt
+
+      - name: Upload cleanup marker
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: preview
+          path: lumina-preview-event.txt
+          if-no-files-found: error
+          retention-days: 1
