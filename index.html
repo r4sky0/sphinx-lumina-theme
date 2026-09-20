@@ -138,7 +138,7 @@
 
 
 
-    <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
+    <a href="#lumina-hero-title" class="lumina-skip-link">Skip to content</a>
     
     <div id="lumina-header">
 
@@ -321,14 +321,14 @@
             <div class="lumina-hero-badge">
                 Sphinx Theme <span class="lumina-hero-badge-sep">&middot;</span> v2.0.1
             </div>
-            <h1 class="lumina-hero-title">
+            <h1 id="lumina-hero-title" class="lumina-hero-title" tabindex="-1">
                 Your docs,
                 <br>
                 <em>illuminated</em>
             </h1>
             <p class="lumina-hero-subtitle">
-                A Sphinx theme with the craft and care
-                your documentation deserves.
+                Thoughtfully designed for the people reading your docs.
+                Effortlessly simple for the people writing them.
             </p>
             <div class="lumina-hero-actions">
                 <a href="getting-started/index.html"
@@ -355,6 +355,56 @@
                     </a>
                 
             </div>
+            <p class="lumina-hero-install">
+                <span aria-hidden="true">$</span> <code>pip install sphinx-lumina-theme</code>
+            </p>
+        </div>
+        <aside class="lumina-preview" aria-label="Theme preview">
+            <div class="lumina-preview-bar">
+                <span class="lumina-preview-brand">◬ &nbsp; Lumina</span>
+                <span>Documentation, in a new light</span>
+            </div>
+            <div class="lumina-preview-body">
+                <nav class="lumina-preview-nav" aria-label="Preview documentation">
+                    <span>THE ESSENTIALS</span>
+                    <a class="is-current" href="getting-started/index.html">Getting started</a>
+                    <a href="getting-started/configuration.html">Configuration</a>
+                    <a href="guides/custom-styling.html">Customization</a>
+                    <span>EXPLORE</span>
+                    <a href="reference/index.html">Components</a>
+                    <a href="extensions/index.html">Extensions</a>
+                </nav>
+                <div class="lumina-preview-article">
+                    <span class="lumina-preview-eyebrow">GETTING STARTED</span>
+                    <h2>
+                        A little setup.
+                        <br>
+                        A brighter reading experience.
+                    </h2>
+                    <p>
+                        Your words, beautifully presented.
+                        <br>
+                        From the first page to the last detail.
+                    </p>
+                    <div class="lumina-preview-code">
+                        <span>conf.py</span>
+                        <code>html_theme = <b>"lumina"</b></code>
+                    </div>
+                    <div class="lumina-preview-note">
+                        <strong>Ready for your next idea.</strong>
+                        <p>
+                            Write in Markdown or reStructuredText.
+                            <br>
+                            Lumina takes care of the rest.
+                        </p>
+                    </div>
+                    <a class="lumina-preview-next"
+                       href="getting-started/installation.html">Make yourself at home <span aria-hidden="true">↗</span></a>
+                </div>
+            </div>
+        </aside>
+        <footer class="lumina-hero-footer">
+            <p>Built for Sphinx. Made for readers.</p>
             <div class="lumina-hero-tags">
                 <span>
                     <svg viewBox="0 0 24 24">
@@ -399,7 +449,7 @@
                     Responsive
                 </span>
             </div>
-        </div>
+        </footer>
     </section>
     <main id="lumina-content"
           class="lumina-landing-content is-empty"
