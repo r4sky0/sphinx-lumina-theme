@@ -6,7 +6,7 @@ Override CSS custom properties, fonts, syntax highlighting themes, and templates
 
 Lumina 2 refreshes the default design. Existing theme options still work, but custom CSS and template overrides need review.
 
-- **Page actions:** Copy Markdown, edit links, and reading time now live in the page-actions menu. Overrides of `layout.html` or `components/toc.html` should use the new `components/page-actions.html` component.
+- **Page actions:** Copy Markdown and edit links now live in the page-actions menu. Reading time appears below the introduction with a clock icon. Overrides of `layout.html` or `components/toc.html` should use the new `components/page-actions.html` component.
 - **Link colors:** `--lumina-accent` controls brand accents; `--lumina-link` controls readable text links and focus outlines. Set both for each mode if you customize tokens directly. The `accent_color` option derives both automatically.
 - **Surfaces:** `--lumina-navigation-bg` and `--lumina-floating-bg` control the sidebar and floating menus separately from the page background.
 - **Content:** Cards no longer lift or cast shadows; admonitions use a thin border on all sides. Heading sizes, weights, and spacing have changed.

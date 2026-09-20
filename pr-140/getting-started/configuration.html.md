@@ -78,9 +78,9 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 
 ### Reading Time
 
-| Option              | Type   | Default   | Description                                                                                                                                                                             |
-|---------------------|--------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `show_reading_time` | string | `"false"` | Show an estimated reading time in the page-actions menu beside the breadcrumbs. The estimate uses prose word count at 200 words per minute, ignoring code blocks, images, and toctrees. |
+| Option              | Type   | Default   | Description                                                                                                                                                                                                                                  |
+|---------------------|--------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `show_reading_time` | string | `"false"` | Show an estimated reading time with a clock icon below the introductory paragraph, or below the title when there is no introduction. The estimate uses prose word count at 200 words per minute, ignoring code blocks, images, and toctrees. |
 
 Override per page using MyST front matter:
 
