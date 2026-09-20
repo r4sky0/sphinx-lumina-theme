@@ -9,7 +9,7 @@
     <title>Python Module Index &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="_static/lumina.css?v=04bc9846" />
+    <link rel="stylesheet" type="text/css" href="_static/lumina.css?v=dec04e38" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
@@ -455,7 +455,7 @@ mermaid.initialize(
 
 window.addEventListener("load", load);
 window.runMermaid = runMermaid;</script>
-    <script defer="defer" src="_static/lumina.js?v=24ae1589"></script>
+    <script defer="defer" src="_static/lumina.js?v=6efbdae5"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/py-modindex.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -1213,34 +1213,17 @@ window.runMermaid = runMermaid;</script>
                 type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6" /></svg></button>
     
 
-    <div id="lumina-search-modal"
-     x-data="searchModal()"
-     x-show="open"
-     x-cloak
-     @keydown.escape.window="close()"
-     @keydown.meta.k.window.prevent="toggle()"
-     @keydown.ctrl.k.window.prevent="toggle()"
-     class="fixed inset-0 z-[100]"
-     role="dialog"
-     aria-modal="true"
-     aria-label="Search documentation">
+    <dialog id="lumina-search-modal"
+        x-data="searchModal()"
+        @cancel.prevent="close()"
+        @keydown.meta.k.window.prevent="toggle()"
+        @keydown.ctrl.k.window.prevent="toggle()"
+        @click.self="close()"
+        class="lumina-overlay-backdrop fixed inset-0 z-[100] m-0 h-full w-full max-h-none max-w-none border-0 p-0"
+        aria-modal="true"
+        aria-label="Search documentation">
     
-    <div class="lumina-overlay-backdrop absolute inset-0"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0"
-         @click="close()"></div>
-    
-    <div class="relative mx-auto mt-[15vh] max-w-xl rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 scale-95"
-         x-transition:enter-end="opacity-100 scale-100"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100 scale-100"
-         x-transition:leave-end="opacity-0 scale-95">
+    <div class="relative mx-auto mt-[15vh] max-w-xl cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
         
         <div class="flex items-center border-b border-lumina-border px-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-lumina-text-muted" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
@@ -1301,43 +1284,28 @@ window.runMermaid = runMermaid;</script>
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">esc</kbd> Close</span>
         </div>
     </div>
-</div>
+</dialog>
 
     
-        <div x-data="imageLightbox()"
-             x-show="isOpen"
-             x-cloak
-             x-on:keydown.escape.window="close()"
-             x-transition:enter="transition ease-out duration-200"
-             x-transition:enter-start="opacity-0"
-             x-transition:enter-end="opacity-100"
-             x-transition:leave="transition ease-in duration-150"
-             x-transition:leave-start="opacity-100"
-             x-transition:leave-end="opacity-0"
-             class="lumina-lightbox-overlay"
-             role="dialog"
-             aria-modal="true"
-             x-bind:aria-label="caption || 'Image preview'">
+        <dialog x-data="imageLightbox()"
+                x-on:cancel.prevent="close()"
+                class="lumina-lightbox-overlay"
+                aria-modal="true"
+                x-bind:aria-label="caption || 'Image preview'">
             <div class="lumina-overlay-backdrop lumina-lightbox-backdrop"
                  x-on:click="close()"></div>
             <button x-on:click="close()"
                     class="lumina-lightbox-close"
                     aria-label="Close preview"
                     type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
-            <div class="lumina-lightbox-figure"
-                 x-transition:enter="transition ease-out duration-250"
-                 x-transition:enter-start="opacity-0 scale-95"
-                 x-transition:enter-end="opacity-100 scale-100"
-                 x-transition:leave="transition ease-in duration-150"
-                 x-transition:leave-start="opacity-100 scale-100"
-                 x-transition:leave-end="opacity-0 scale-95">
+            <div class="lumina-lightbox-figure">
                 <template x-if="contentType === 'img'">
                     <img x-bind:src="imgSrc" x-bind:alt="imgAlt">
                 </template>
                 <div class="lumina-lightbox-svg-host" x-show="contentType === 'svg'"></div>
                 <div class="lumina-lightbox-caption" x-show="caption" x-text="caption"></div>
             </div>
-        </div>
+        </dialog>
     
 
 
