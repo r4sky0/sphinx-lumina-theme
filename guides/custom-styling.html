@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-05-01T08:59:03+00:00" />
+    <meta property="article:modified_time" content="2026-09-20T12:05:29+00:00" />
     <title>Custom Styling &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=ae56f8f9" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=06d740c9" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=3c0d6c39"></script>
+    <script defer="defer" src="../_static/lumina.js?v=7f668866"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -65,7 +65,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://r4sky0.github.io/sphinx-lumina-theme/guides/index.html"}, {"@type": "ListItem", "position": 3, "name": "Custom Styling", "item": "https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Custom Styling", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Override CSS custom properties, fonts, syntax highlighting themes, and templates for deeper customization.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-05-01T00:00:00+00:00", "dateModified": "2026-05-01T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Custom Styling", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Override CSS custom properties, fonts, syntax highlighting themes, and templates for deeper customization.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-20T00:00:00+00:00", "dateModified": "2026-09-20T00:00:00+00:00"}</script>
         
         
     
@@ -118,15 +118,6 @@
     <script>document.documentElement.dataset.lightbox = "true";</script>
     
     
-        <script>
-(function() {
-  var id = '0f8129f2';
-  if (!id || localStorage.getItem('lumina-announce-' + id) !== '1') {
-    document.documentElement.classList.add('has-announcement');
-  }
-})();
-        </script>
-    
     
         <link rel="alternate"
               type="text/markdown"
@@ -147,21 +138,6 @@
         <header class="fixed top-0 left-0 right-0 z-50 border-b border-lumina-border bg-lumina-bg/80 backdrop-blur-sm">
 
     
-    <div id="lumina-announcement"
-         x-data="announcementBanner()"
-         data-announcement-id="0f8129f2"
-         role="region"
-         aria-label="Site announcement"
-         class="bg-[color-mix(in_srgb,var(--lumina-accent),black_40%)] text-white text-center text-sm">
-        <div class="mx-auto flex max-w-[90rem] items-center justify-center gap-4 px-4 py-2">
-            <div class="flex-1 [&_a]:underline [&_a]:font-medium">A fast, modern Sphinx theme with dark mode, full-text search, and Alpine.js interactivity. <a href="https://github.com/r4sky0/sphinx-lumina-theme">Star on GitHub ★</a></div>
-            <button @click="dismiss()"
-                    class="shrink-0 rounded p-0.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-                    aria-label="Dismiss announcement"
-                    type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
-        </div>
-    </div>
-
 
     <div class="lumina-header-inner mx-auto flex h-14 max-w-[90rem] items-center justify-between px-4 lg:px-6">
         
@@ -182,7 +158,7 @@
                     </svg>
                 
                 
-                    <span class="font-semibold text-base">Sphinx Lumina Theme</span>
+                    <span class="font-semibold text-base">Lumina</span>
                 
             </a>
 
@@ -431,12 +407,12 @@
                  x-data="sidebarNav()">
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><ul>
+<li class="toctree-l1" data-nav-collapsed="true"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../getting-started/configuration.html">Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Guides</a><ul class="current">
+<li class="toctree-l1 current" data-nav-collapsed="true"><a class="reference internal" href="index.html">Guides</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="search.html">Search</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dark-mode.html">Dark Mode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="myst-markdown.html">MyST Markdown</a></li>
@@ -449,7 +425,7 @@
 <li class="toctree-l2"><a class="reference internal" href="seo.html">SEO and discoverability</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../extensions/index.html">Extensions</a><ul>
+<li class="toctree-l1" data-nav-collapsed="true"><a class="reference internal" href="../extensions/index.html">Extensions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../extensions/myst-parser.html">MyST Parser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-design.html">sphinx-design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-copybutton.html">sphinx-copybutton</a></li>
@@ -461,7 +437,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../extensions/mathjax.html">MathJax</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a><ul>
+<li class="toctree-l1" data-nav-collapsed="true"><a class="reference internal" href="../reference/index.html">Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../reference/typography.html">Typography</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/admonitions.html">Admonitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/code-blocks.html">Code Blocks</a></li>
@@ -621,12 +597,12 @@
                          x-data="sidebarNav()">
                         <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><ul>
+<li class="toctree-l1" data-nav-collapsed="true"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../getting-started/configuration.html">Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Guides</a><ul class="current">
+<li class="toctree-l1 current" data-nav-collapsed="true"><a class="reference internal" href="index.html">Guides</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="search.html">Search</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dark-mode.html">Dark Mode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="myst-markdown.html">MyST Markdown</a></li>
@@ -639,7 +615,7 @@
 <li class="toctree-l2"><a class="reference internal" href="seo.html">SEO and discoverability</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../extensions/index.html">Extensions</a><ul>
+<li class="toctree-l1" data-nav-collapsed="true"><a class="reference internal" href="../extensions/index.html">Extensions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../extensions/myst-parser.html">MyST Parser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-design.html">sphinx-design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../extensions/sphinx-copybutton.html">sphinx-copybutton</a></li>
@@ -651,7 +627,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../extensions/mathjax.html">MathJax</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a><ul>
+<li class="toctree-l1" data-nav-collapsed="true"><a class="reference internal" href="../reference/index.html">Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../reference/typography.html">Typography</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/admonitions.html">Admonitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/code-blocks.html">Code Blocks</a></li>
@@ -695,64 +671,74 @@
                         <nav class="flex items-center gap-2 overflow-x-auto text-sm text-lumina-text-muted"
      style="scrollbar-width:none"
      aria-label="Breadcrumb">
-    <a href="../index.html"
-       class="whitespace-nowrap hover:text-lumina-accent no-underline transition-colors">Sphinx Lumina Theme  documentation</a>
+    
     
         
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+            
             <a href="index.html"
                class="whitespace-nowrap hover:text-lumina-accent no-underline transition-colors">Guides</a>
         
     
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
-    <span class="whitespace-nowrap text-lumina-text">Custom Styling</span>
+    <span class="whitespace-nowrap text-lumina-text" aria-current="page">Custom Styling</span>
 </nav>
 
                     </div>
                 
-                
-                    <span class="lumina-reading-time"
-                          aria-label="2 minute read">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-                        <span>2 min read</span>
-                    </span>
-                
-                <button x-data="copyPage()"
-                        @click="copy()"
-                        class="lumina-copy-page"
-                        :class="{ 'is-copied': copied }"
-                        aria-label="Copy page as Markdown"
-                        title="Copy page as Markdown"
-                        :aria-label="copied ? 'Copied to clipboard' : 'Copy page as Markdown'"
-                        :title="copied ? 'Copied!' : 'Copy page as Markdown'"
-                        type="button">
-                    <svg x-show="!copied"
-                         class="h-3.5 w-3.5"
-                         viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         aria-hidden="true"
-                         stroke-width="2"
-                         stroke-linecap="round"
-                         stroke-linejoin="round">
-                        <rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-                    </svg>
-                    <svg x-show="copied"
-                         x-cloak
-                         class="h-3.5 w-3.5"
-                         viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         aria-hidden="true"
-                         stroke-width="2"
-                         stroke-linecap="round"
-                         stroke-linejoin="round">
-                        <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                    <span class="hidden sm:inline"
-                          x-text="copied ? 'Copied!' : 'Copy Markdown'"></span>
-                </button>
+
+                <details class="lumina-page-actions"
+         x-data
+         @click.outside="$el.open = false"
+         @keydown.escape.stop="$el.open = false; $el.querySelector('summary').focus()">
+    <summary aria-label="Page actions" title="Page actions"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg></summary>
+    <div class="lumina-page-action-list">
+        <button x-data="copyPage()"
+                @click="copy()"
+                type="button"
+                aria-label="Copy page as Markdown">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+            <span aria-live="polite" x-text="copied ? 'Copied!' : 'Copy as Markdown'">Copy as Markdown</span>
+        </button>
+        
+            <a href="https://github.com/r4sky0/sphinx-lumina-theme/edit/main/docs/guides/custom-styling.md"
+               target="_blank"
+               rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg> Edit this page</a>
+        
+    </div>
+</details>
+
             </div>
+            
+                <details class="lumina-mobile-outline" data-pagefind-ignore>
+                    <summary>On this page <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+                    <nav aria-label="Page outline">
+                        <ul>
+<li><a class="reference internal" href="#">Custom Styling</a><ul>
+<li><a class="reference internal" href="#migrating-to-lumina-2">Migrating to Lumina 2</a></li>
+<li><a class="reference internal" href="#adding-a-custom-stylesheet">Adding a Custom Stylesheet</a></li>
+<li><a class="reference internal" href="#css-custom-properties">CSS Custom Properties</a><ul>
+<li><a class="reference internal" href="#core-colors">Core Colors</a></li>
+<li><a class="reference internal" href="#admonition-colors">Admonition Colors</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#fonts">Fonts</a></li>
+<li><a class="reference internal" href="#syntax-highlighting">Syntax Highlighting</a><ul>
+<li><a class="reference internal" href="#custom-styles">Custom styles</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hiding-page-elements">Hiding Page Elements</a><ul>
+<li><a class="reference internal" href="#globally">Globally</a></li>
+<li><a class="reference internal" href="#per-page">Per-page</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-templates">Custom Templates</a></li>
+</ul>
+</li>
+</ul>
+
+                    </nav>
+                </details>
+            
             <article class="lumina-article" x-data="headerLinks()">
 
                 
@@ -760,6 +746,18 @@
     <section class="tex2jax_ignore mathjax_ignore" id="custom-styling">
 <h1>Custom Styling<a class="headerlink" href="#custom-styling" title="Link to this heading">¶</a></h1>
 <p>Override CSS custom properties, fonts, syntax highlighting themes, and templates for deeper customization.</p>
+<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>3 min read</span></div><section id="migrating-to-lumina-2">
+<h2>Migrating to Lumina 2<a class="headerlink" href="#migrating-to-lumina-2" title="Link to this heading">¶</a></h2>
+<p>Lumina 2 refreshes the default design. Existing theme options still work, but custom CSS and template overrides need review.</p>
+<ul class="simple">
+<li><p><strong>Page actions:</strong> Copy Markdown and edit links now live in the page-actions menu. Reading time appears below the introduction with a clock icon. Overrides of <code class="docutils literal notranslate"><span class="pre">layout.html</span></code> or <code class="docutils literal notranslate"><span class="pre">components/toc.html</span></code> should use the new <code class="docutils literal notranslate"><span class="pre">components/page-actions.html</span></code> component.</p></li>
+<li><p><strong>Link colors:</strong> <code class="docutils literal notranslate"><span class="pre">--lumina-accent</span></code> controls brand accents; <code class="docutils literal notranslate"><span class="pre">--lumina-link</span></code> controls readable text links and focus outlines. Set both for each mode if you customize tokens directly. The <code class="docutils literal notranslate"><span class="pre">accent_color</span></code> option derives both automatically.</p></li>
+<li><p><strong>Surfaces:</strong> <code class="docutils literal notranslate"><span class="pre">--lumina-navigation-bg</span></code> and <code class="docutils literal notranslate"><span class="pre">--lumina-floating-bg</span></code> control the sidebar and floating menus separately from the page background.</p></li>
+<li><p><strong>Content:</strong> Cards no longer lift or cast shadows; admonitions use a thin border on all sides. Heading sizes, weights, and spacing have changed.</p></li>
+<li><p><strong>Mobile navigation:</strong> The page outline is now available below the breadcrumbs. <code class="docutils literal notranslate"><span class="pre">show_toc</span> <span class="pre">=</span> <span class="pre">&quot;false&quot;</span></code> hides both desktop and mobile outlines.</p></li>
+</ul>
+<p>Rebuild your docs and check custom styles in both color modes, including mobile layouts. Use <code class="docutils literal notranslate"><span class="pre">html_short_title</span></code> for a shorter header label without changing your Sphinx project name.</p>
+</section>
 <section id="adding-a-custom-stylesheet">
 <h2>Adding a Custom Stylesheet<a class="headerlink" href="#adding-a-custom-stylesheet" title="Link to this heading">¶</a></h2>
 <p>Create a CSS file and register it in your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>:</p>
@@ -781,26 +779,32 @@
 <div class="code-block-caption"><span class="caption-text">docs/_static/custom.css</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
 <div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="c">/* Light mode overrides */</span>
 <span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nv">--lumina-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#fcfcfc</span><span class="p">;</span><span class="w">              </span><span class="c">/* Main background */</span>
-<span class="w">    </span><span class="nv">--lumina-bg-secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#f4f4f5</span><span class="p">;</span><span class="w">    </span><span class="c">/* Secondary background (sidebar, code blocks) */</span>
-<span class="w">    </span><span class="nv">--lumina-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#18181b</span><span class="p">;</span><span class="w">            </span><span class="c">/* Primary text */</span>
-<span class="w">    </span><span class="nv">--lumina-text-muted</span><span class="p">:</span><span class="w"> </span><span class="mh">#52525b</span><span class="p">;</span><span class="w">      </span><span class="c">/* Secondary text */</span>
-<span class="w">    </span><span class="nv">--lumina-border</span><span class="p">:</span><span class="w"> </span><span class="mh">#e4e4e7</span><span class="p">;</span><span class="w">          </span><span class="c">/* Borders and dividers */</span>
-<span class="w">    </span><span class="nv">--lumina-accent</span><span class="p">:</span><span class="w"> </span><span class="mh">#10b981</span><span class="p">;</span><span class="w">          </span><span class="c">/* Links, active states */</span>
-<span class="w">    </span><span class="nv">--lumina-accent-light</span><span class="p">:</span><span class="w"> </span><span class="mh">#ecfdf5</span><span class="p">;</span><span class="w">    </span><span class="c">/* Accent background tint */</span>
-<span class="w">    </span><span class="nv">--lumina-code-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#f4f4f5</span><span class="p">;</span><span class="w">         </span><span class="c">/* Inline code background */</span>
+<span class="w">    </span><span class="nv">--lumina-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#fdfdfc</span><span class="p">;</span><span class="w">              </span><span class="c">/* Main background */</span>
+<span class="w">    </span><span class="nv">--lumina-bg-secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#f4f5f4</span><span class="p">;</span><span class="w">    </span><span class="c">/* Secondary surfaces */</span>
+<span class="w">    </span><span class="nv">--lumina-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#202624</span><span class="p">;</span><span class="w">            </span><span class="c">/* Primary text */</span>
+<span class="w">    </span><span class="nv">--lumina-text-muted</span><span class="p">:</span><span class="w"> </span><span class="mh">#59635e</span><span class="p">;</span><span class="w">      </span><span class="c">/* Secondary text */</span>
+<span class="w">    </span><span class="nv">--lumina-border</span><span class="p">:</span><span class="w"> </span><span class="mh">#dfe5e1</span><span class="p">;</span><span class="w">          </span><span class="c">/* Borders and dividers */</span>
+<span class="w">    </span><span class="nv">--lumina-accent</span><span class="p">:</span><span class="w"> </span><span class="mh">#10b981</span><span class="p">;</span><span class="w">          </span><span class="c">/* Brand accents and active indicators */</span>
+<span class="w">    </span><span class="nv">--lumina-accent-light</span><span class="p">:</span><span class="w"> </span><span class="mh">#eaf6ef</span><span class="p">;</span><span class="w">    </span><span class="c">/* Accent background tint */</span>
+<span class="w">    </span><span class="nv">--lumina-link</span><span class="p">:</span><span class="w"> </span><span class="mh">#08764f</span><span class="p">;</span><span class="w">            </span><span class="c">/* Readable links and focus outlines */</span>
+<span class="w">    </span><span class="nv">--lumina-navigation-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#f7f8f6</span><span class="p">;</span><span class="w">   </span><span class="c">/* Sidebar surface */</span>
+<span class="w">    </span><span class="nv">--lumina-floating-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#fdfdfc</span><span class="p">;</span><span class="w">     </span><span class="c">/* Floating menus and search */</span>
+<span class="w">    </span><span class="nv">--lumina-code-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#f6f7f6</span><span class="p">;</span><span class="w">         </span><span class="c">/* Inline code background */</span>
 <span class="p">}</span>
 
 <span class="c">/* Dark mode overrides */</span>
 <span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;dark&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nv">--lumina-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#09090b</span><span class="p">;</span>
-<span class="w">    </span><span class="nv">--lumina-bg-secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#18181b</span><span class="p">;</span>
-<span class="w">    </span><span class="nv">--lumina-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#fafafa</span><span class="p">;</span>
-<span class="w">    </span><span class="nv">--lumina-text-muted</span><span class="p">:</span><span class="w"> </span><span class="mh">#a1a1aa</span><span class="p">;</span>
-<span class="w">    </span><span class="nv">--lumina-border</span><span class="p">:</span><span class="w"> </span><span class="mh">#27272a</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#151918</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-bg-secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#202623</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#e9eeeb</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-text-muted</span><span class="p">:</span><span class="w"> </span><span class="mh">#a8b5ac</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-border</span><span class="p">:</span><span class="w"> </span><span class="mh">#303b34</span><span class="p">;</span>
 <span class="w">    </span><span class="nv">--lumina-accent</span><span class="p">:</span><span class="w"> </span><span class="mh">#10b981</span><span class="p">;</span>
-<span class="w">    </span><span class="nv">--lumina-accent-light</span><span class="p">:</span><span class="w"> </span><span class="mh">#022c22</span><span class="p">;</span>
-<span class="w">    </span><span class="nv">--lumina-code-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#1c1c20</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-accent-light</span><span class="p">:</span><span class="w"> </span><span class="mh">#1c3329</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-link</span><span class="p">:</span><span class="w"> </span><span class="mh">#5ed9a3</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-navigation-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#111613</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-floating-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#242c27</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-code-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#1b211e</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -811,13 +815,13 @@
 <p>Each admonition type has its own color property:</p>
 <div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="c">/* Light mode */</span>
 <span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nv">--lumina-adm-note</span><span class="p">:</span><span class="w"> </span><span class="mh">#3b82f6</span><span class="p">;</span><span class="w">           </span><span class="c">/* Blue */</span>
-<span class="w">    </span><span class="nv">--lumina-adm-tip</span><span class="p">:</span><span class="w"> </span><span class="mh">#10b981</span><span class="p">;</span><span class="w">            </span><span class="c">/* Green */</span>
+<span class="w">    </span><span class="nv">--lumina-adm-note</span><span class="p">:</span><span class="w"> </span><span class="mh">#2563eb</span><span class="p">;</span><span class="w">           </span><span class="c">/* Blue */</span>
+<span class="w">    </span><span class="nv">--lumina-adm-tip</span><span class="p">:</span><span class="w"> </span><span class="mh">#08764f</span><span class="p">;</span><span class="w">            </span><span class="c">/* Green */</span>
 <span class="w">    </span><span class="nv">--lumina-adm-warning</span><span class="p">:</span><span class="w"> </span><span class="mh">#f59e0b</span><span class="p">;</span><span class="w">        </span><span class="c">/* Amber */</span>
-<span class="w">    </span><span class="nv">--lumina-adm-warning-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#d97706</span><span class="p">;</span><span class="w">   </span><span class="c">/* Amber (darker, for text contrast) */</span>
-<span class="w">    </span><span class="nv">--lumina-adm-danger</span><span class="p">:</span><span class="w"> </span><span class="mh">#ef4444</span><span class="p">;</span><span class="w">         </span><span class="c">/* Red */</span>
-<span class="w">    </span><span class="nv">--lumina-adm-important</span><span class="p">:</span><span class="w"> </span><span class="mh">#8b5cf6</span><span class="p">;</span><span class="w">      </span><span class="c">/* Purple */</span>
-<span class="w">    </span><span class="nv">--lumina-adm-seealso</span><span class="p">:</span><span class="w"> </span><span class="mh">#14b8a6</span><span class="p">;</span><span class="w">        </span><span class="c">/* Teal */</span>
+<span class="w">    </span><span class="nv">--lumina-adm-warning-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#b45309</span><span class="p">;</span><span class="w">   </span><span class="c">/* Amber (darker, for text contrast) */</span>
+<span class="w">    </span><span class="nv">--lumina-adm-danger</span><span class="p">:</span><span class="w"> </span><span class="mh">#dc2626</span><span class="p">;</span><span class="w">         </span><span class="c">/* Red */</span>
+<span class="w">    </span><span class="nv">--lumina-adm-important</span><span class="p">:</span><span class="w"> </span><span class="mh">#7c3aed</span><span class="p">;</span><span class="w">      </span><span class="c">/* Purple */</span>
+<span class="w">    </span><span class="nv">--lumina-adm-seealso</span><span class="p">:</span><span class="w"> </span><span class="mh">#0e7490</span><span class="p">;</span><span class="w">        </span><span class="c">/* Cyan */</span>
 <span class="p">}</span>
 
 <span class="c">/* Dark mode */</span>
@@ -828,7 +832,7 @@
 <span class="w">    </span><span class="nv">--lumina-adm-warning-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#f59e0b</span><span class="p">;</span>
 <span class="w">    </span><span class="nv">--lumina-adm-danger</span><span class="p">:</span><span class="w"> </span><span class="mh">#f87171</span><span class="p">;</span>
 <span class="w">    </span><span class="nv">--lumina-adm-important</span><span class="p">:</span><span class="w"> </span><span class="mh">#a78bfa</span><span class="p">;</span>
-<span class="w">    </span><span class="nv">--lumina-adm-seealso</span><span class="p">:</span><span class="w"> </span><span class="mh">#2dd4bf</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-adm-seealso</span><span class="p">:</span><span class="w"> </span><span class="mh">#22d3ee</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -991,14 +995,14 @@
         <nav class="flex justify-between gap-4 mb-8" aria-label="Page navigation">
             
                 <a href="navigation.html"
-                   class="group flex flex-col items-start gap-1 rounded-lg border border-lumina-border p-4 no-underline hover:border-lumina-accent hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
+                   class="group flex flex-col items-start gap-1 rounded-lg border border-lumina-border p-4 no-underline hover:border-lumina-accent hover:bg-lumina-bg-secondary active:bg-lumina-accent-light transition-colors duration-150 flex-1">
                     <span class="text-xs text-lumina-text-muted">Previous</span>
                     <span class="text-sm font-medium text-lumina-text group-hover:text-lumina-accent transition-colors">&larr; Navigation</span>
                 </a>
             
             
                 <a href="landing-page.html"
-                   class="group flex flex-col items-end gap-1 rounded-lg border border-lumina-border p-4 no-underline hover:border-lumina-accent hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
+                   class="group flex flex-col items-end gap-1 rounded-lg border border-lumina-border p-4 no-underline hover:border-lumina-accent hover:bg-lumina-bg-secondary active:bg-lumina-accent-light transition-colors duration-150 flex-1">
                     <span class="text-xs text-lumina-text-muted">Next</span>
                     <span class="text-sm font-medium text-lumina-text group-hover:text-lumina-accent transition-colors">Landing Page &rarr;</span>
                 </a>
@@ -1009,7 +1013,7 @@
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>May 1, 2026</time>
+            Last updated <time>September 20, 2026</time>
         </p>
     
     
@@ -1026,16 +1030,6 @@
 
                 
     <div class="lumina-toc-container sticky top-[var(--lumina-header-offset)] hidden h-[calc(100vh-var(--lumina-header-offset))] w-[220px] shrink-0 py-6 pr-4 xl:block">
-        
-        
-            <a href="https://github.com/r4sky0/sphinx-lumina-theme/edit/main/docs/guides/custom-styling.md"
-               class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted no-underline hover:text-lumina-accent transition-colors"
-               target="_blank"
-               rel="noopener">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg>
-                Edit this page
-            </a>
-        
         <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-lumina-text-muted">On this page</p>
         <div class="lumina-toc-scroll">
             
@@ -1044,6 +1038,7 @@
                  x-data="scrollspy()">
                 <ul>
 <li><a class="reference internal" href="#">Custom Styling</a><ul>
+<li><a class="reference internal" href="#migrating-to-lumina-2">Migrating to Lumina 2</a></li>
 <li><a class="reference internal" href="#adding-a-custom-stylesheet">Adding a Custom Stylesheet</a></li>
 <li><a class="reference internal" href="#css-custom-properties">CSS Custom Properties</a><ul>
 <li><a class="reference internal" href="#core-colors">Core Colors</a></li>
@@ -1086,7 +1081,7 @@
                 x-transition:leave-start="opacity-100 translate-y-0"
                 x-transition:leave-end="opacity-0 translate-y-2"
                 @click="scrollToTop()"
-                class="fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-lumina-border bg-lumina-bg text-lumina-text-muted shadow-md hover:text-lumina-text hover:border-lumina-accent hover:shadow-lg transition-all cursor-pointer"
+                class="lumina-back-to-top z-40 hover:border-lumina-accent transition-colors"
                 aria-label="Back to top"
                 type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6" /></svg></button>
     

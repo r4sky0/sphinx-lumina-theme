@@ -1162,9 +1162,9 @@ The `literalinclude` directive pulls code directly from a file in your project. 
 from sphinx_lumina_theme import __version__
 
 project = "Sphinx Lumina Theme"
+html_short_title = "Lumina"
 extensions = [
     "myst_parser",
-    "sphinx_design",
 ```
 
 The MyST syntax:
@@ -1293,15 +1293,15 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 
 ### Reading Time
 
-| Option              | Type   | Default   | Description                                                                                                                                                                                          |
-|---------------------|--------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `show_reading_time` | string | `"false"` | Show an estimated reading time next to the breadcrumbs at the top of every page. The estimate is computed from prose word count at 200 words per minute, ignoring code blocks, images, and toctrees. |
+| Option              | Type   | Default   | Description                                                                                                                                                                                                                                  |
+|---------------------|--------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `show_reading_time` | string | `"false"` | Show an estimated reading time with a clock icon below the introductory paragraph, or below the title when there is no introduction. The estimate uses prose word count at 200 words per minute, ignoring code blocks, images, and toctrees. |
 
 Override per page using MyST front matter:
 
 ```yaml
 ---
-reading_time: false   # Hide the badge on this page only
+reading_time: false   # Hide reading time on this page only
 ---
 ```
 
@@ -1492,16 +1492,19 @@ All tokens are defined for both the default light scope (`:root` / `[data-theme=
 
 The core surface and text tokens. These are the variables you’ll override most often.
 
-| Token                   | Light default   | Dark default   | What it affects                                                                                                                   |
-|-------------------------|-----------------|----------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| `--lumina-bg`           | `#fcfcfc`       | `#09090b`      | Page background, modal background                                                                                                 |
-| `--lumina-bg-secondary` | `#f4f4f5`       | `#18181b`      | Sidebar fill, hover surfaces, table-header tint                                                                                   |
-| `--lumina-text`         | `#18181b`       | `#fafafa`      | Body and heading color                                                                                                            |
-| `--lumina-text-muted`   | `#52525b`       | `#a1a1aa`      | Secondary text (TOC links, captions, footer)                                                                                      |
-| `--lumina-border`       | `#e4e4e7`       | `#27272a`      | Dividers, table cell borders, sidebar separators                                                                                  |
-| `--lumina-accent`       | `#10b981`       | `#10b981`      | Links, focus ring, active TOC indicator, skip link, headerlink tooltip. Also overridable through the `accent_color` theme option. |
-| `--lumina-accent-light` | `#ecfdf5`       | `#022c22`      | Hover/active background tint for accent surfaces (current sidebar item, copy-page hover)                                          |
-| `--lumina-code-bg`      | `#f4f4f5`       | `#1c1c20`      | Inline code and code block background                                                                                             |
+| Token                    | Light default   | Dark default   | What it affects                                                                                                            |
+|--------------------------|-----------------|----------------|----------------------------------------------------------------------------------------------------------------------------|
+| `--lumina-bg`            | `#fdfdfc`       | `#151918`      | Page background                                                                                                            |
+| `--lumina-bg-secondary`  | `#f4f5f4`       | `#202623`      | Hover surfaces and table-header tint                                                                                       |
+| `--lumina-text`          | `#202624`       | `#e9eeeb`      | Body and heading color                                                                                                     |
+| `--lumina-text-muted`    | `#59635e`       | `#a8b5ac`      | Secondary text (TOC links, captions, footer)                                                                               |
+| `--lumina-border`        | `#dfe5e1`       | `#303b34`      | Dividers, table cell borders, sidebar separators                                                                           |
+| `--lumina-accent`        | `#10b981`       | `#10b981`      | Brand accents, active indicators, skip link, headerlink tooltip. Also overridable through the `accent_color` theme option. |
+| `--lumina-link`          | `#08764f`       | `#5ed9a3`      | Readable text links and focus outlines                                                                                     |
+| `--lumina-navigation-bg` | `#f7f8f6`       | `#111613`      | Desktop sidebar surface                                                                                                    |
+| `--lumina-floating-bg`   | `#fdfdfc`       | `#242c27`      | Section switcher, page-actions menu, search dialog, and back-to-top button                                                 |
+| `--lumina-accent-light`  | `#eaf6ef`       | `#1c3329`      | Hover/active background tint for accent surfaces, including the current sidebar item                                       |
+| `--lumina-code-bg`       | `#f6f7f6`       | `#1b211e`      | Inline code and code block background                                                                                      |
 
 ## Admonition tokens
 
@@ -1509,15 +1512,15 @@ One color per admonition type, plus a darker variant for the warning text where 
 
 | Token                       | Light default   | Dark default   | Used by                                                         |
 |-----------------------------|-----------------|----------------|-----------------------------------------------------------------|
-| `--lumina-adm-note`         | `#3b82f6`       | `#60a5fa`      | `note`                                                          |
-| `--lumina-adm-tip`          | `#10b981`       | `#34d399`      | `tip`, `hint`                                                   |
+| `--lumina-adm-note`         | `#2563eb`       | `#60a5fa`      | `note`                                                          |
+| `--lumina-adm-tip`          | `#08764f`       | `#34d399`      | `tip`, `hint`                                                   |
 | `--lumina-adm-warning`      | `#f59e0b`       | `#fbbf24`      | `warning`, `caution`, `attention`                               |
-| `--lumina-adm-warning-text` | `#d97706`       | `#f59e0b`      | Warning title text (darker for AA contrast on light background) |
-| `--lumina-adm-danger`       | `#ef4444`       | `#f87171`      | `danger`, `error`                                               |
-| `--lumina-adm-important`    | `#8b5cf6`       | `#a78bfa`      | `important`                                                     |
-| `--lumina-adm-seealso`      | `#0891b2`       | `#22d3ee`      | `seealso`                                                       |
+| `--lumina-adm-warning-text` | `#b45309`       | `#f59e0b`      | Warning title text (darker for AA contrast on light background) |
+| `--lumina-adm-danger`       | `#dc2626`       | `#f87171`      | `danger`, `error`                                               |
+| `--lumina-adm-important`    | `#7c3aed`       | `#a78bfa`      | `important`                                                     |
+| `--lumina-adm-seealso`      | `#0e7490`       | `#22d3ee`      | `seealso`                                                       |
 
-The visible left border, icon mask, and 5–8 % background tint of every admonition derive from these single colors via `color-mix()` — overriding the token recolors the whole admonition.
+The thin border, icon mask, and 4–5% background tint of every admonition derive from these colors via `color-mix()` — overriding the token recolors the whole admonition.
 
 ## sphinx-design tokens
 
@@ -1529,6 +1532,7 @@ If you want sphinx-design components to follow your accent color, override them 
 :root,
 html:root {
   --lumina-accent: #6366f1;
+  --lumina-link: #4f46e5;
   --sd-color-primary: #6366f1;
   --sd-color-primary-highlight: #4f46e5;
 }
@@ -1546,6 +1550,9 @@ html:root {
   --lumina-text-muted: #57534e;
   --lumina-border: #e7e5e4;
   --lumina-accent: #ea580c;
+  --lumina-link: #c2410c;
+  --lumina-navigation-bg: #faf3e7;
+  --lumina-floating-bg: #fffaf2;
   --lumina-accent-light: #fff7ed;
   --lumina-code-bg: #faf3e7;
 }
@@ -1568,6 +1575,7 @@ html:root {
 ```css
 [data-theme="dark"] {
   --lumina-accent: #f472b6;
+  --lumina-link: #f9a8d4;
   --lumina-accent-light: #500724;
 }
 ```
@@ -1584,6 +1592,18 @@ For non-color customization (fonts, page elements, syntax highlighting), see [Cu
 # Custom Styling
 
 Override CSS custom properties, fonts, syntax highlighting themes, and templates for deeper customization.
+
+## Migrating to Lumina 2
+
+Lumina 2 refreshes the default design. Existing theme options still work, but custom CSS and template overrides need review.
+
+- **Page actions:** Copy Markdown and edit links now live in the page-actions menu. Reading time appears below the introduction with a clock icon. Overrides of `layout.html` or `components/toc.html` should use the new `components/page-actions.html` component.
+- **Link colors:** `--lumina-accent` controls brand accents; `--lumina-link` controls readable text links and focus outlines. Set both for each mode if you customize tokens directly. The `accent_color` option derives both automatically.
+- **Surfaces:** `--lumina-navigation-bg` and `--lumina-floating-bg` control the sidebar and floating menus separately from the page background.
+- **Content:** Cards no longer lift or cast shadows; admonitions use a thin border on all sides. Heading sizes, weights, and spacing have changed.
+- **Mobile navigation:** The page outline is now available below the breadcrumbs. `show_toc = "false"` hides both desktop and mobile outlines.
+
+Rebuild your docs and check custom styles in both color modes, including mobile layouts. Use `html_short_title` for a shorter header label without changing your Sphinx project name.
 
 ## Adding a Custom Stylesheet
 
@@ -1605,26 +1625,32 @@ Lumina defines CSS custom properties for all visual tokens. Override them in you
 ```css
 /* Light mode overrides */
 :root {
-    --lumina-bg: #fcfcfc;              /* Main background */
-    --lumina-bg-secondary: #f4f4f5;    /* Secondary background (sidebar, code blocks) */
-    --lumina-text: #18181b;            /* Primary text */
-    --lumina-text-muted: #52525b;      /* Secondary text */
-    --lumina-border: #e4e4e7;          /* Borders and dividers */
-    --lumina-accent: #10b981;          /* Links, active states */
-    --lumina-accent-light: #ecfdf5;    /* Accent background tint */
-    --lumina-code-bg: #f4f4f5;         /* Inline code background */
+    --lumina-bg: #fdfdfc;              /* Main background */
+    --lumina-bg-secondary: #f4f5f4;    /* Secondary surfaces */
+    --lumina-text: #202624;            /* Primary text */
+    --lumina-text-muted: #59635e;      /* Secondary text */
+    --lumina-border: #dfe5e1;          /* Borders and dividers */
+    --lumina-accent: #10b981;          /* Brand accents and active indicators */
+    --lumina-accent-light: #eaf6ef;    /* Accent background tint */
+    --lumina-link: #08764f;            /* Readable links and focus outlines */
+    --lumina-navigation-bg: #f7f8f6;   /* Sidebar surface */
+    --lumina-floating-bg: #fdfdfc;     /* Floating menus and search */
+    --lumina-code-bg: #f6f7f6;         /* Inline code background */
 }
 
 /* Dark mode overrides */
 [data-theme="dark"] {
-    --lumina-bg: #09090b;
-    --lumina-bg-secondary: #18181b;
-    --lumina-text: #fafafa;
-    --lumina-text-muted: #a1a1aa;
-    --lumina-border: #27272a;
+    --lumina-bg: #151918;
+    --lumina-bg-secondary: #202623;
+    --lumina-text: #e9eeeb;
+    --lumina-text-muted: #a8b5ac;
+    --lumina-border: #303b34;
     --lumina-accent: #10b981;
-    --lumina-accent-light: #022c22;
-    --lumina-code-bg: #1c1c20;
+    --lumina-accent-light: #1c3329;
+    --lumina-link: #5ed9a3;
+    --lumina-navigation-bg: #111613;
+    --lumina-floating-bg: #242c27;
+    --lumina-code-bg: #1b211e;
 }
 ```
 
@@ -1635,13 +1661,13 @@ Each admonition type has its own color property:
 ```css
 /* Light mode */
 :root {
-    --lumina-adm-note: #3b82f6;           /* Blue */
-    --lumina-adm-tip: #10b981;            /* Green */
+    --lumina-adm-note: #2563eb;           /* Blue */
+    --lumina-adm-tip: #08764f;            /* Green */
     --lumina-adm-warning: #f59e0b;        /* Amber */
-    --lumina-adm-warning-text: #d97706;   /* Amber (darker, for text contrast) */
-    --lumina-adm-danger: #ef4444;         /* Red */
-    --lumina-adm-important: #8b5cf6;      /* Purple */
-    --lumina-adm-seealso: #14b8a6;        /* Teal */
+    --lumina-adm-warning-text: #b45309;   /* Amber (darker, for text contrast) */
+    --lumina-adm-danger: #dc2626;         /* Red */
+    --lumina-adm-important: #7c3aed;      /* Purple */
+    --lumina-adm-seealso: #0e7490;        /* Cyan */
 }
 
 /* Dark mode */
@@ -1652,7 +1678,7 @@ Each admonition type has its own color property:
     --lumina-adm-warning-text: #f59e0b;
     --lumina-adm-danger: #f87171;
     --lumina-adm-important: #a78bfa;
-    --lumina-adm-seealso: #2dd4bf;
+    --lumina-adm-seealso: #22d3ee;
 }
 ```
 

@@ -8,16 +8,19 @@ All tokens are defined for both the default light scope (`:root` / `[data-theme=
 
 The core surface and text tokens. These are the variables you’ll override most often.
 
-| Token                   | Light default   | Dark default   | What it affects                                                                                                                   |
-|-------------------------|-----------------|----------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| `--lumina-bg`           | `#fcfcfc`       | `#09090b`      | Page background, modal background                                                                                                 |
-| `--lumina-bg-secondary` | `#f4f4f5`       | `#18181b`      | Sidebar fill, hover surfaces, table-header tint                                                                                   |
-| `--lumina-text`         | `#18181b`       | `#fafafa`      | Body and heading color                                                                                                            |
-| `--lumina-text-muted`   | `#52525b`       | `#a1a1aa`      | Secondary text (TOC links, captions, footer)                                                                                      |
-| `--lumina-border`       | `#e4e4e7`       | `#27272a`      | Dividers, table cell borders, sidebar separators                                                                                  |
-| `--lumina-accent`       | `#10b981`       | `#10b981`      | Links, focus ring, active TOC indicator, skip link, headerlink tooltip. Also overridable through the `accent_color` theme option. |
-| `--lumina-accent-light` | `#ecfdf5`       | `#022c22`      | Hover/active background tint for accent surfaces (current sidebar item, copy-page hover)                                          |
-| `--lumina-code-bg`      | `#f4f4f5`       | `#1c1c20`      | Inline code and code block background                                                                                             |
+| Token                    | Light default   | Dark default   | What it affects                                                                                                            |
+|--------------------------|-----------------|----------------|----------------------------------------------------------------------------------------------------------------------------|
+| `--lumina-bg`            | `#fdfdfc`       | `#151918`      | Page background                                                                                                            |
+| `--lumina-bg-secondary`  | `#f4f5f4`       | `#202623`      | Hover surfaces and table-header tint                                                                                       |
+| `--lumina-text`          | `#202624`       | `#e9eeeb`      | Body and heading color                                                                                                     |
+| `--lumina-text-muted`    | `#59635e`       | `#a8b5ac`      | Secondary text (TOC links, captions, footer)                                                                               |
+| `--lumina-border`        | `#dfe5e1`       | `#303b34`      | Dividers, table cell borders, sidebar separators                                                                           |
+| `--lumina-accent`        | `#10b981`       | `#10b981`      | Brand accents, active indicators, skip link, headerlink tooltip. Also overridable through the `accent_color` theme option. |
+| `--lumina-link`          | `#08764f`       | `#5ed9a3`      | Readable text links and focus outlines                                                                                     |
+| `--lumina-navigation-bg` | `#f7f8f6`       | `#111613`      | Desktop sidebar surface                                                                                                    |
+| `--lumina-floating-bg`   | `#fdfdfc`       | `#242c27`      | Section switcher, page-actions menu, search dialog, and back-to-top button                                                 |
+| `--lumina-accent-light`  | `#eaf6ef`       | `#1c3329`      | Hover/active background tint for accent surfaces, including the current sidebar item                                       |
+| `--lumina-code-bg`       | `#f6f7f6`       | `#1b211e`      | Inline code and code block background                                                                                      |
 
 ## Admonition tokens
 
@@ -25,15 +28,15 @@ One color per admonition type, plus a darker variant for the warning text where 
 
 | Token                       | Light default   | Dark default   | Used by                                                         |
 |-----------------------------|-----------------|----------------|-----------------------------------------------------------------|
-| `--lumina-adm-note`         | `#3b82f6`       | `#60a5fa`      | `note`                                                          |
-| `--lumina-adm-tip`          | `#10b981`       | `#34d399`      | `tip`, `hint`                                                   |
+| `--lumina-adm-note`         | `#2563eb`       | `#60a5fa`      | `note`                                                          |
+| `--lumina-adm-tip`          | `#08764f`       | `#34d399`      | `tip`, `hint`                                                   |
 | `--lumina-adm-warning`      | `#f59e0b`       | `#fbbf24`      | `warning`, `caution`, `attention`                               |
-| `--lumina-adm-warning-text` | `#d97706`       | `#f59e0b`      | Warning title text (darker for AA contrast on light background) |
-| `--lumina-adm-danger`       | `#ef4444`       | `#f87171`      | `danger`, `error`                                               |
-| `--lumina-adm-important`    | `#8b5cf6`       | `#a78bfa`      | `important`                                                     |
-| `--lumina-adm-seealso`      | `#0891b2`       | `#22d3ee`      | `seealso`                                                       |
+| `--lumina-adm-warning-text` | `#b45309`       | `#f59e0b`      | Warning title text (darker for AA contrast on light background) |
+| `--lumina-adm-danger`       | `#dc2626`       | `#f87171`      | `danger`, `error`                                               |
+| `--lumina-adm-important`    | `#7c3aed`       | `#a78bfa`      | `important`                                                     |
+| `--lumina-adm-seealso`      | `#0e7490`       | `#22d3ee`      | `seealso`                                                       |
 
-The visible left border, icon mask, and 5–8 % background tint of every admonition derive from these single colors via `color-mix()` — overriding the token recolors the whole admonition.
+The thin border, icon mask, and 4–5% background tint of every admonition derive from these colors via `color-mix()` — overriding the token recolors the whole admonition.
 
 ## sphinx-design tokens
 
@@ -45,6 +48,7 @@ If you want sphinx-design components to follow your accent color, override them 
 :root,
 html:root {
   --lumina-accent: #6366f1;
+  --lumina-link: #4f46e5;
   --sd-color-primary: #6366f1;
   --sd-color-primary-highlight: #4f46e5;
 }
@@ -62,6 +66,9 @@ html:root {
   --lumina-text-muted: #57534e;
   --lumina-border: #e7e5e4;
   --lumina-accent: #ea580c;
+  --lumina-link: #c2410c;
+  --lumina-navigation-bg: #faf3e7;
+  --lumina-floating-bg: #fffaf2;
   --lumina-accent-light: #fff7ed;
   --lumina-code-bg: #faf3e7;
 }
@@ -84,6 +91,7 @@ html:root {
 ```css
 [data-theme="dark"] {
   --lumina-accent: #f472b6;
+  --lumina-link: #f9a8d4;
   --lumina-accent-light: #500724;
 }
 ```

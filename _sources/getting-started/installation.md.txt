@@ -86,6 +86,7 @@ You've got Lumina running. Next, tune it for your project or explore what it can
 
 ::::{grid} 1 1 2 3
 :gutter: 3
+:class-container: lumina-link-list
 
 :::{grid-item-card} Configuration
 :link: configuration
