@@ -2,6 +2,7 @@
 
 import copy
 import hashlib
+import posixpath
 import re
 from pathlib import Path
 
@@ -119,7 +120,7 @@ def _resolve_href_to_pagename(href, pagename):
     if not target.startswith("/") and "/" in pagename:
         base = pagename.rsplit("/", 1)[0]
         target = base + "/" + target
-    return target
+    return posixpath.normpath(target)
 
 
 def _with_basename_fallback(target):

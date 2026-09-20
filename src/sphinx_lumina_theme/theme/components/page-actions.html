@@ -1,0 +1,24 @@
+<details class="lumina-page-actions"
+         x-data
+         @click.outside="$el.open = false"
+         @keydown.escape.stop="$el.open = false; $el.querySelector('summary').focus()">
+    <summary aria-label="Page actions" title="Page actions">{{ lumina_icon("ellipsis", size=20) }}</summary>
+    <div class="lumina-page-action-list">
+        <button x-data="copyPage()"
+                @click="copy()"
+                type="button"
+                aria-label="Copy page as Markdown">
+            {{ lumina_icon("copy", size=16) }}
+            <span aria-live="polite" x-text="copied ? 'Copied!' : 'Copy as Markdown'">Copy as Markdown</span>
+        </button>
+        {% if theme_source_repository and theme_source_repository != "" %}
+            <a href="{{ theme_source_repository }}/{{ theme_edit_uri }}/{{ theme_source_branch }}/{{ theme_source_directory }}{{ pagename }}{{ page_source_suffix }}"
+               target="_blank"
+               rel="noopener">{{ lumina_icon("square-pen", size=16) }} Edit this page</a>
+        {% endif %}
+        {% if theme_show_reading_time == "true" and lumina_reading_time is defined %}
+            <span class="lumina-reading-time"
+                  aria-label="{{ lumina_reading_time }} minute read">{{ lumina_reading_time }} min read</span>
+        {% endif %}
+    </div>
+</details>

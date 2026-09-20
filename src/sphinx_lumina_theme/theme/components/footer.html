@@ -4,7 +4,7 @@
         <nav class="flex justify-between gap-4 mb-8" aria-label="Page navigation">
             {% if prev %}
                 <a href="{{ prev.link }}"
-                   class="group flex flex-col items-start gap-1 rounded-lg border border-lumina-border p-4 no-underline hover:border-lumina-accent hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
+                   class="group flex flex-col items-start gap-1 rounded-lg border border-lumina-border p-4 no-underline hover:border-lumina-accent hover:bg-lumina-bg-secondary active:bg-lumina-accent-light transition-colors duration-150 flex-1">
                     <span class="text-xs text-lumina-text-muted">Previous</span>
                     <span class="text-sm font-medium text-lumina-text group-hover:text-lumina-accent transition-colors">&larr; {{ prev.title }}</span>
                 </a>
@@ -13,7 +13,7 @@
             {% endif %}
             {% if next %}
                 <a href="{{ next.link }}"
-                   class="group flex flex-col items-end gap-1 rounded-lg border border-lumina-border p-4 no-underline hover:border-lumina-accent hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 flex-1">
+                   class="group flex flex-col items-end gap-1 rounded-lg border border-lumina-border p-4 no-underline hover:border-lumina-accent hover:bg-lumina-bg-secondary active:bg-lumina-accent-light transition-colors duration-150 flex-1">
                     <span class="text-xs text-lumina-text-muted">Next</span>
                     <span class="text-sm font-medium text-lumina-text group-hover:text-lumina-accent transition-colors">{{ next.title }} &rarr;</span>
                 </a>

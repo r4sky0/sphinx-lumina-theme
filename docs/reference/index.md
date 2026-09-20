@@ -1,3 +1,7 @@
+---
+nav_collapsed: true
+---
+
 # Reference
 
 Visual showcase and syntax reference for every content type Lumina styles.

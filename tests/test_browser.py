@@ -55,6 +55,14 @@ def test_theme_toggle_cycles(page: Page):
     assert data_theme in ("light", "dark")
 
 
+def test_showcase_uses_flat_theme_buttons(page: Page):
+    button = page.locator(".lumina-hero-btn-primary")
+    expect(button).to_have_css("box-shadow", "none")
+    button.hover()
+    expect(button).to_have_css("box-shadow", "none")
+    expect(button).to_have_css("transform", "none")
+
+
 def test_theme_persists_on_reload(page: Page, live_server: str):
     """Toggling to dark should persist after page reload."""
     toggle = page.locator("[data-theme-toggle]")
@@ -117,6 +125,100 @@ def test_prev_next_navigation(page: Page, live_server: str):
     expect(footer_nav).to_be_visible()
     nav_links = footer_nav.locator("a")
     assert nav_links.count() >= 1
+
+
+@pytest.mark.parametrize("theme", ["light", "dark"])
+def test_flat_cards_keep_interaction_feedback(page: Page, live_server: str, theme: str):
+    """Extension shadow utilities must not override flat cards or hide focus."""
+    page.emulate_media(reduced_motion="reduce")
+    page.add_init_script(f"localStorage.setItem('lumina-theme', '{theme}')")
+    page.goto(f"{live_server}/reference/cards-and-grids.html")
+
+    def appearance(card):
+        return card.evaluate(
+            """e => {
+                const s = getComputedStyle(e);
+                return [s.boxShadow, s.transform, s.backgroundColor, s.borderColor];
+            }"""
+        )
+
+    static_card = page.locator(".sd-card:not(.sd-card-hover)").first
+    before = appearance(static_card)
+    assert before[:2] == ["none", "none"]
+    static_card.hover()
+    assert appearance(static_card) == before
+
+    linked_card = page.locator(".sd-card-hover").first
+    before = appearance(linked_card)
+    linked_card.hover()
+    expect(linked_card).to_have_css("box-shadow", "none")
+    expect(linked_card).to_have_css("transform", "none")
+    assert appearance(linked_card)[2:] != before[2:]
+
+    page.keyboard.press("Tab")
+    linked_card.locator("a").first.focus()
+    expect(linked_card).to_have_css("outline-style", "solid")
+    expect(linked_card).to_have_css("outline-width", "2px")
+
+    navigation_card = page.locator("nav[aria-label='Page navigation'] a").first
+    navigation_card.hover()
+    expect(navigation_card).to_have_css("box-shadow", "none")
+    expect(navigation_card).to_have_css("translate", "none")
+
+
+@pytest.mark.parametrize("theme", ["light", "dark"])
+def test_reading_chrome(page: Page, live_server: str, theme: str):
+    """Shared reading layout works beyond the original installation preview."""
+    page.emulate_media(reduced_motion="reduce")
+    page.add_init_script(f"localStorage.setItem('lumina-theme', '{theme}')")
+    page.set_viewport_size({"width": 1440, "height": 1000})
+    page.goto(f"{live_server}/guides/search.html")
+    expect(page.locator(".lumina-article")).to_have_css("font-size", "16px")
+    expect(page.locator(".lumina-article h1")).to_have_css("font-size", "40px")
+    expect(page.locator("#lumina-header header")).to_have_css(
+        "backdrop-filter", "blur(12px)"
+    )
+
+    github = page.locator('.lumina-header-inner a[title="Github"] svg').bounding_box()
+    toggle = page.locator("[data-theme-toggle] svg:visible").bounding_box()
+    assert (
+        abs(github["y"] + github["height"] / 2 - toggle["y"] - toggle["height"] / 2) < 1
+    )
+
+    switcher = page.locator("#lumina-section-switcher")
+    trigger = switcher.locator("button").first
+    expect(trigger).to_have_css("background-color", "rgba(0, 0, 0, 0)")
+    trigger.click()
+    menu = switcher.locator('[role="menu"]')
+    expect(menu).to_be_visible()
+    for label in menu.locator(".lumina-section-switcher-desc").all():
+        assert label.evaluate("e => e.scrollWidth <= e.clientWidth")
+    page.keyboard.press("Tab")
+    expect(menu.locator("a").first).to_be_focused()
+    page.keyboard.press("Escape")
+    expect(menu).to_be_hidden()
+    expect(trigger).to_be_focused()
+    assert page.locator(".lumina-sidebar-desktop .is-collapsed").count() >= 2
+
+    actions = page.locator(".lumina-page-actions")
+    actions.locator("summary").click()
+    expect(actions.get_by_role("button", name="Copy page as Markdown")).to_be_visible()
+    expect(actions.get_by_role("link", name="Edit this page")).to_be_visible()
+    page.keyboard.press("Escape")
+    expect(actions).not_to_have_attribute("open", "")
+    expect(actions.locator("summary")).to_be_focused()
+
+    for width in (320, 390, 768, 1024, 1440):
+        page.set_viewport_size({"width": width, "height": 844})
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    page.set_viewport_size({"width": 390, "height": 844})
+    outline = page.locator(".lumina-mobile-outline")
+    outline.locator("summary").click()
+    expect(outline.locator("a:visible").first).to_be_visible()
+    outline.locator("summary").click()
+    page.emulate_media(media="print")
+    expect(actions).to_be_hidden()
+    expect(outline).to_be_hidden()
 
 
 def test_pagefind_loads_without_errors(page: Page, live_server: str):
