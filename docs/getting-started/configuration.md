@@ -200,14 +200,14 @@ Lucide icons are designed on a 24×24 grid with 2-unit-wide strokes. When a Luci
 * - `show_reading_time`
   - string
   - `"false"`
-  - Show an estimated reading time next to the breadcrumbs at the top of every page. The estimate is computed from prose word count at 200 words per minute, ignoring code blocks, images, and toctrees.
+  - Show an estimated reading time with a clock icon below the introductory paragraph, or below the title when there is no introduction. The estimate uses prose word count at 200 words per minute, ignoring code blocks, images, and toctrees.
 ```
 
 Override per page using MyST front matter:
 
 ```yaml
 ---
-reading_time: false   # Hide the badge on this page only
+reading_time: false   # Hide reading time on this page only
 ---
 ```
 
@@ -434,7 +434,7 @@ html_theme_options = {
     "dark_logo": "logo-dark.svg",
 
     # Announcement
-    "announcement": 'New in v2.0 — <a href="/changelog">see what changed</a>!',
+    "announcement": 'New in v2.0 — <a href="https://example.com/changelog">see what changed</a>!',
 
     # Navigation
     "nav_links": [

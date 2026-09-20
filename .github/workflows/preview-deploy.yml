@@ -1,0 +1,124 @@
+name: PR Preview Deploy
+
+on:
+  workflow_run:
+    workflows: [PR Preview Build]
+    types: [completed]
+
+permissions: {}
+
+jobs:
+  deploy-preview:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.pull_requests[0].number
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      actions: read
+      contents: write
+      pull-requests: write
+    concurrency:
+      group: gh-pages
+      cancel-in-progress: false
+    steps:
+      # This workflow is trusted. The downloaded artifact is treated as data;
+      # no code from the pull request is executed here.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+
+      - name: Download preview artifact
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        with:
+          name: preview
+          path: preview-artifact
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Read preview event
+        id: preview
+        shell: bash
+        env:
+          ARTIFACT_DIR: preview-artifact
+        run: |
+          action="$(cat "$ARTIFACT_DIR/lumina-preview-event.txt")"
+          case "$action" in
+            opened|synchronize|reopened)
+              test -f "$ARTIFACT_DIR/index.html"
+              ;;
+            closed)
+              ;;
+            *)
+              echo "Unsupported preview event: $action" >&2
+              exit 1
+              ;;
+          esac
+          rm "$ARTIFACT_DIR/lumina-preview-event.txt"
+          echo "action=$action" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy preview
+        if: steps.preview.outputs.action != 'closed'
+        uses: ./.github/actions/deploy-gh-pages
+        with:
+          source-dir: preview-artifact
+          target-dir: pr-${{ github.event.workflow_run.pull_requests[0].number }}
+          commit-message: "Deploy PR #${{ github.event.workflow_run.pull_requests[0].number }} preview"
+
+      - name: Remove closed preview
+        if: steps.preview.outputs.action == 'closed'
+        shell: bash
+        env:
+          PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
+        run: |
+          if ! git fetch origin gh-pages:gh-pages 2>/dev/null; then
+            echo "gh-pages does not exist; nothing to clean up."
+            exit 0
+          fi
+
+          git worktree add gh-pages-cleanup gh-pages
+          trap 'git worktree remove --force gh-pages-cleanup' EXIT
+
+          pr_dir="gh-pages-cleanup/pr-${PR_NUMBER}"
+          if [ -d "$pr_dir" ]; then
+            git -C gh-pages-cleanup config user.name "github-actions[bot]"
+            git -C gh-pages-cleanup config user.email "github-actions[bot]@users.noreply.github.com"
+            rm -rf -- "$pr_dir"
+            git -C gh-pages-cleanup add -A
+            if ! git -C gh-pages-cleanup diff --cached --quiet; then
+              git -C gh-pages-cleanup commit -m "Clean up PR #${PR_NUMBER} preview"
+              git -C gh-pages-cleanup push origin gh-pages
+            fi
+          fi
+
+      - name: Comment on PR
+        if: steps.preview.outputs.action != 'closed'
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const prNumber = ${{ github.event.workflow_run.pull_requests[0].number }};
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const marker = '<!-- lumina-preview -->';
+            const previewUrl = `https://${owner}.github.io/${repo}/pr-${prNumber}/`;
+            const body = `${marker}\n📖 **Preview ready:** ${previewUrl}`;
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner, repo, issue_number: prNumber,
+            });
+
+            const existing = comments.find(c =>
+              c.user?.login === 'github-actions[bot]' && c.body?.includes(marker),
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner, repo, comment_id: existing.id, body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner, repo, issue_number: prNumber, body,
+              });
+            }

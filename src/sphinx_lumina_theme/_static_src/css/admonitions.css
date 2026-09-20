@@ -1,11 +1,11 @@
 /* ── Admonition base ── */
 .admonition {
   margin: 1.5rem 0;
-  padding: 1rem 1.25rem;
+  padding: 1.125rem 1.25rem;
   border-radius: 0.5rem;
-  border-left: 4px solid var(--lumina-border);
+  border: 1px solid var(--lumina-border);
   background: var(--lumina-bg-secondary);
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 /* Type selectors below use child combinators so a nested admonition keeps
@@ -43,8 +43,8 @@
 
 /* ── Note ── */
 .admonition.note {
-  border-left-color: var(--lumina-adm-note);
-  background: color-mix(in srgb, var(--lumina-adm-note) 8%, var(--lumina-bg));
+  border-color: color-mix(in srgb, var(--lumina-adm-note) 22%, var(--lumina-border));
+  background: color-mix(in srgb, var(--lumina-adm-note) 4%, var(--lumina-bg));
 }
 .admonition.note > .admonition-title { color: var(--lumina-adm-note); }
 .admonition.note > .admonition-title::before {
@@ -55,8 +55,8 @@
 /* ── Tip / Hint ── */
 .admonition.tip,
 .admonition.hint {
-  border-left-color: var(--lumina-adm-tip);
-  background: color-mix(in srgb, var(--lumina-adm-tip) 8%, var(--lumina-bg));
+  border-color: color-mix(in srgb, var(--lumina-adm-tip) 22%, var(--lumina-border));
+  background: color-mix(in srgb, var(--lumina-adm-tip) 4%, var(--lumina-bg));
 }
 .admonition.tip > .admonition-title,
 .admonition.hint > .admonition-title { color: var(--lumina-adm-tip); }
@@ -70,8 +70,8 @@
 .admonition.warning,
 .admonition.caution,
 .admonition.attention {
-  border-left-color: var(--lumina-adm-warning);
-  background: color-mix(in srgb, var(--lumina-adm-warning) 8%, var(--lumina-bg));
+  border-color: color-mix(in srgb, var(--lumina-adm-warning) 22%, var(--lumina-border));
+  background: color-mix(in srgb, var(--lumina-adm-warning) 4%, var(--lumina-bg));
 }
 .admonition.warning > .admonition-title,
 .admonition.caution > .admonition-title,
@@ -86,8 +86,8 @@
 /* ── Danger / Error ── */
 .admonition.danger,
 .admonition.error {
-  border-left-color: var(--lumina-adm-danger);
-  background: color-mix(in srgb, var(--lumina-adm-danger) 8%, var(--lumina-bg));
+  border-color: color-mix(in srgb, var(--lumina-adm-danger) 22%, var(--lumina-border));
+  background: color-mix(in srgb, var(--lumina-adm-danger) 4%, var(--lumina-bg));
 }
 .admonition.danger > .admonition-title,
 .admonition.error > .admonition-title { color: var(--lumina-adm-danger); }
@@ -99,8 +99,8 @@
 
 /* ── Important ── */
 .admonition.important {
-  border-left-color: var(--lumina-adm-important);
-  background: color-mix(in srgb, var(--lumina-adm-important) 8%, var(--lumina-bg));
+  border-color: color-mix(in srgb, var(--lumina-adm-important) 22%, var(--lumina-border));
+  background: color-mix(in srgb, var(--lumina-adm-important) 4%, var(--lumina-bg));
 }
 .admonition.important > .admonition-title { color: var(--lumina-adm-important); }
 .admonition.important > .admonition-title::before {
@@ -110,8 +110,8 @@
 
 /* ── See Also ── */
 .admonition.seealso {
-  border-left-color: var(--lumina-adm-seealso);
-  background: color-mix(in srgb, var(--lumina-adm-seealso) 8%, var(--lumina-bg));
+  border-color: color-mix(in srgb, var(--lumina-adm-seealso) 22%, var(--lumina-border));
+  background: color-mix(in srgb, var(--lumina-adm-seealso) 4%, var(--lumina-bg));
 }
 .admonition.seealso > .admonition-title { color: var(--lumina-adm-seealso); }
 .admonition.seealso > .admonition-title::before {

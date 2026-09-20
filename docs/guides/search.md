@@ -6,7 +6,13 @@ Configure how readers search your documentation — Pagefind for fast client-sid
 
 [Pagefind](https://pagefind.app) provides fast, keyboard-driven search with no external services. Press {kbd}`⌘K` or {kbd}`Ctrl+K` to open the search modal.
 
-Lumina runs the pinned Pagefind CLI automatically at the end of each build. Add the theme's JavaScript development dependency with `pnpm install`, or install Pagefind separately and expose its executable on `PATH`.
+Lumina runs Pagefind automatically at the end of each build. Install the pinned CLI in your documentation project:
+
+```bash
+pnpm add -D pagefind@1.3.0
+```
+
+Theme contributors can use `pnpm install` to install the repository's locked version. You can also expose a Pagefind executable on `PATH`.
 
 Build your docs and search is ready:
 
@@ -27,7 +33,7 @@ sphinx-build docs docs/_build/html
 ::::
 
 :::{tip}
-If Pagefind is unavailable, the build completes normally and the search modal falls back to Sphinx's search page. Set an explicit executable and timeout when your build environment needs them:
+Without an index, the search modal falls back to Sphinx's search page. Failed indexing logs a warning, which fails builds using `-W`. Set an explicit executable and timeout when your build environment needs them:
 
 ```{code-block} python
 :caption: conf.py

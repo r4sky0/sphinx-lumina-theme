@@ -64,9 +64,9 @@ def test_font_preload(index_html):
 
 def test_mobile_toc_is_rendered_from_sphinx_toc(index_html):
     """The heading navigation should remain available below the desktop breakpoint."""
-    mobile_toc = index_html.find("details", class_="lumina-mobile-toc")
+    mobile_toc = index_html.find("details", class_="lumina-mobile-outline")
     assert mobile_toc is not None
-    assert mobile_toc.find("nav", attrs={"aria-label": "Table of contents"}) is not None
+    assert mobile_toc.find("nav", attrs={"aria-label": "Page outline"}) is not None
 
 
 def test_header_observer_is_registered(index_html):

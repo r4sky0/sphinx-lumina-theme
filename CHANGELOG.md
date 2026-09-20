@@ -2,6 +2,111 @@
 
 <!-- releases -->
 
+## v2.0.0 (2026-09-20)
+
+### Features
+
+- **theme**: Ship the Lumina 2 editorial redesign
+  ([#140](https://github.com/r4sky0/sphinx-lumina-theme/pull/140),
+  [`1d6cd54`](https://github.com/r4sky0/sphinx-lumina-theme/commit/1d6cd54f98b3adf0e8aa605ccec9e6fd4cc17894))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Continuous Integration
+
+- Update checkout pin comments ([#138](https://github.com/r4sky0/sphinx-lumina-theme/pull/138),
+  [`39bc1b6`](https://github.com/r4sky0/sphinx-lumina-theme/commit/39bc1b6c18d40756571498d9429de59aec421b2a))
+
+#### Documentation
+
+- Document uv workflow ([#139](https://github.com/r4sky0/sphinx-lumina-theme/pull/139),
+  [`6ffff55`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6ffff555e8cdb8619517563a6e36896b6228b162))
+
+</details>
+
+
+## v1.44.1 (2026-09-20)
+
+### Bug Fixes
+
+- **ci**: Update release action pins
+  ([`f011b91`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f011b91fb7a8d48acc3b4a4b46afa6965249fce5))
+
+- **release**: Avoid building in semantic release container
+  ([`f02b46e`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f02b46e0d9e46b7709d87883b2af29378398ed59))
+
+- **release**: Set up build tools before semantic release
+  ([`4642d5b`](https://github.com/r4sky0/sphinx-lumina-theme/commit/4642d5b7c0cad03e0628d1aa5f8f4bf09b9c00c7))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Continuous Integration
+
+- Harden GitHub Actions workflows ([#135](https://github.com/r4sky0/sphinx-lumina-theme/pull/135),
+  [`9f0f916`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9f0f9167981af7dfb4c81c06a0d991854933c6ca))
+
+#### Documentation
+
+- Polish user-facing documentation ([#134](https://github.com/r4sky0/sphinx-lumina-theme/pull/134),
+  [`f6593f0`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f6593f0b2edf5e40c34a0fe99bddb5b4007a5522))
+
+</details>
+
+
+## v1.44.0 (2026-09-19)
+
+### Features
+
+- **docs**: Add Google site verification file
+  ([#133](https://github.com/r4sky0/sphinx-lumina-theme/pull/133),
+  [`40ab849`](https://github.com/r4sky0/sphinx-lumina-theme/commit/40ab8491151e9ea5bf6c506ac2f0a42771d4aa5f))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump starlette from 1.0.1 to 1.3.1 in the uv group across 1 directory
+  ([#118](https://github.com/r4sky0/sphinx-lumina-theme/pull/118),
+  [`fe23a49`](https://github.com/r4sky0/sphinx-lumina-theme/commit/fe23a4994224987725b57f9da84a91450409f1fd))
+
+- **deps**: Bump the github-actions-major group across 1 directory with 2 updates
+  ([#127](https://github.com/r4sky0/sphinx-lumina-theme/pull/127),
+  [`9ead58c`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9ead58c0fa2c1b3a9226dd8594aef0155027b9ae))
+
+- **deps**: Bump the github-actions-minor group across 1 directory with 3 updates
+  ([#129](https://github.com/r4sky0/sphinx-lumina-theme/pull/129),
+  [`865f6c4`](https://github.com/r4sky0/sphinx-lumina-theme/commit/865f6c467bc4e4d81cfdbd30dc236d9b78c2a4ab))
+
+- **deps**: Bump the npm-minor group across 1 directory with 5 updates
+  ([#116](https://github.com/r4sky0/sphinx-lumina-theme/pull/116),
+  [`db3155d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/db3155d1ad258677d74f7b5973ce9623c5dcc3cc))
+
+- **deps**: Bump the npm-minor group across 1 directory with 6 updates
+  ([#131](https://github.com/r4sky0/sphinx-lumina-theme/pull/131),
+  [`2b70ac4`](https://github.com/r4sky0/sphinx-lumina-theme/commit/2b70ac4727e8ccce3764a79599dab7fd228cb76e))
+
+- **deps**: Bump the uv group across 1 directory with 2 updates
+  ([#132](https://github.com/r4sky0/sphinx-lumina-theme/pull/132),
+  [`e1eff07`](https://github.com/r4sky0/sphinx-lumina-theme/commit/e1eff07e28b965d757c2002608014eff30a8a4e4))
+
+- **deps**: Bump the uv group across 1 directory with 3 updates
+  ([#113](https://github.com/r4sky0/sphinx-lumina-theme/pull/113),
+  [`9a82b30`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9a82b30e003233568634703883b40ef540b9525b))
+
+- **deps-dev**: Bump esbuild from 0.28.0 to 0.28.1
+  ([#117](https://github.com/r4sky0/sphinx-lumina-theme/pull/117),
+  [`d58a19b`](https://github.com/r4sky0/sphinx-lumina-theme/commit/d58a19b2546b510e5f7dd874250f7a79b4344e4f))
+
+- **deps-dev**: Bump the npm-major group across 1 directory with 3 updates
+  ([#125](https://github.com/r4sky0/sphinx-lumina-theme/pull/125),
+  [`7c9dd39`](https://github.com/r4sky0/sphinx-lumina-theme/commit/7c9dd39c20e4603218918f44440858d6124a576b))
+
+</details>
+
+
 ## v1.43.0 (2026-06-11)
 
 ### Features

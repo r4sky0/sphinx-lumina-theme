@@ -1,3 +1,7 @@
+---
+nav_collapsed: true
+---
+
 # Reference
 
 Visual showcase and syntax reference for every content type Lumina styles.
@@ -18,7 +22,7 @@ Headings, inline formatting, block quotes, definition lists, and links.
 :link-type: doc
 :icon: message-square-warning
 :icon-style: featured
-Note, tip, warning, danger, and seven more callout types with custom titles and nesting.
+Note, tip, warning, danger, and six more callout types with custom titles and nesting.
 :::
 
 :::{grid-item-card} Code Blocks

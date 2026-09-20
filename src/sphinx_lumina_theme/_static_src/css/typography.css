@@ -11,36 +11,30 @@
   line-height: 1.8;
 }
 
-/* Type scale: 1.25 major-third ratio (1rem → 1.25 → 1.5 → 1.875 → 2.25).
-   Top three levels use clamp() so they shrink slightly on phones (where the
-   fixed sizes felt heavy in narrow columns) and grow a touch on wide
-   monitors. The min/max bracket the original fixed value, so the on-screen
-   default at common laptop widths is unchanged. */
+/* Fluid headings keep a clear title / section / subsection hierarchy. */
 
 .lumina-article h1 {
-  font-size: clamp(1.875rem, 1.5rem + 1.875vw, 2.5rem);
-  font-weight: 700;
+  font-size: clamp(2rem, 1.5rem + 1.875vw, 2.5rem);
+  font-weight: 600;
   letter-spacing: -0.025em;
   line-height: 1.15;
   margin-top: 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.875rem;
   color: var(--lumina-text);
 }
 
 .lumina-article h2 {
-  font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+  font-size: clamp(1.5rem, 1.25rem + 0.625vw, 1.75rem);
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
   line-height: 1.25;
-  margin-top: 3rem;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--lumina-accent) 20%, var(--lumina-border));
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
   color: var(--lumina-text);
 }
 
 .lumina-article h3 {
-  font-size: clamp(1.25rem, 1.125rem + 0.625vw, 1.625rem);
+  font-size: clamp(1.25rem, 1.125rem + 0.625vw, 1.375rem);
   font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1.35;
@@ -79,19 +73,29 @@
 }
 
 .lumina-article p {
-  margin-bottom: 1.25rem;
+  max-width: 70ch;
+  margin-bottom: 1.125rem;
 }
 
+.lumina-article > section > h1 + p {
+  color: var(--lumina-text-muted);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.lumina-article :is(h1, h2, h3) { text-wrap: balance; }
+
 .lumina-article a {
-  color: var(--lumina-accent-text);
+  color: var(--lumina-link);
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: color-mix(in srgb, var(--lumina-accent) 40%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--lumina-link) 40%, transparent);
   transition: text-decoration-color 0.15s;
 }
 
 .lumina-article a:hover {
-  text-decoration-color: var(--lumina-accent);
+  text-decoration-color: var(--lumina-link);
 }
 
 .lumina-article ul,
@@ -166,8 +170,8 @@
 }
 
 .lumina-article .task-list-item-checkbox:checked {
-  background: var(--lumina-accent-solid);
-  border-color: var(--lumina-accent-solid);
+  background: var(--sd-color-primary);
+  border-color: var(--sd-color-primary);
 }
 
 .lumina-article .task-list-item-checkbox:checked::after {
@@ -188,12 +192,12 @@
 
 .lumina-article code:not(pre code) {
   font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.875em;
+  font-size: 0.8125em;
   font-variant-ligatures: none;
-  background: color-mix(in srgb, var(--lumina-accent) 3%, var(--lumina-code-bg));
-  border: 1px solid color-mix(in srgb, var(--lumina-accent) 15%, var(--lumina-border));
+  background: var(--lumina-code-bg);
+  border: 1px solid var(--lumina-border);
   border-radius: 0.25rem;
-  padding: 0.125rem 0.375rem;
+  padding: 0.0625rem 0.3125rem;
 }
 
 .lumina-article kbd {

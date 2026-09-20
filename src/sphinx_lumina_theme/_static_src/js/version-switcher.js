@@ -31,8 +31,6 @@ export default function versionSwitcher() {
     match: "",
     currentLabel: "",
     relPath: "",
-    anchor: "",
-    notice: "",
     messages: {},
     error: false,
 
@@ -47,7 +45,6 @@ export default function versionSwitcher() {
       // resolved against the current URL before comparing pathnames.
       const baseUrl = document.querySelector('meta[name="lumina-base-url"]');
       this.messages = this._getMessages();
-      this.anchor = window.location.hash;
       if (baseUrl) {
         try {
           const root = new URL(
@@ -115,17 +112,17 @@ export default function versionSwitcher() {
                 ? mapped.path.replace(/^\//, "")
                 : "";
         const target = new URL(destination, base);
-        if (destination && this.anchor) target.hash = this.anchor;
-        v._pageAvailable = !unavailable && Boolean(destination);
-        v._notice = v._pageAvailable ? "" : this.messages.pageUnavailable;
+        if (!["http:", "https:"].includes(target.protocol)) return "";
+        if (destination && window.location.hash) target.hash = window.location.hash;
+        v._notice = unavailable ? this.messages.pageUnavailable : "";
         return target.href;
       } catch {
-        return v.url;
+        return "";
       }
     },
 
     targetUrl(v) {
-      return v._targetUrl || this._versionUrl(v);
+      return this._versionUrl(v);
     },
 
     async _fetchVersions(url) {
@@ -142,10 +139,10 @@ export default function versionSwitcher() {
           return;
         }
         this.versions = versions.filter(
-          (v) => v && typeof v.version === "string" && typeof v.url === "string"
+          (v) => v && typeof v.version === "string" &&
+            typeof v.url === "string" && this._versionUrl(v)
         );
         this.versions.forEach((v) => {
-          v._targetUrl = this._versionUrl(v);
           if (v.status === "preview") v._statusLabel = this.messages.preview;
           if (v.status === "unsupported") v._statusLabel = this.messages.unsupported;
         });
@@ -154,7 +151,6 @@ export default function versionSwitcher() {
         const current = this.versions.find((v) => v.version === this.match);
         if (current) {
           this.currentLabel = current.name || current.version;
-          this.notice = current._notice || "";
         }
       } catch {
         this.error = true;

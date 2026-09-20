@@ -1,8 +1,51 @@
 """Test the version switcher dropdown."""
 
+import subprocess
+from pathlib import Path
+
 from bs4 import BeautifulSoup
 from conftest import copy_sample_docs
 from sphinx.application import Sphinx
+
+
+def test_version_destinations_and_notices():
+    """Resolve mappings safely and preserve the anchor selected after page load."""
+    subprocess.run(
+        [
+            "node",
+            "--input-type=module",
+            "-e",
+            """
+import assert from "node:assert/strict";
+import versionSwitcher from "./src/sphinx_lumina_theme/_static_src/js/version-switcher.js";
+globalThis.window = {location: {hash: "#install"}};
+const switcher = versionSwitcher();
+switcher.relPath = "guide.html";
+switcher.messages = {pageUnavailable: "Unavailable"};
+const base = {version: "2", url: "https://example.com/v2/"};
+assert.equal(switcher.targetUrl(base), base.url + "guide.html#install");
+window.location.hash = "#updated";
+assert.equal(switcher.targetUrl(base), base.url + "guide.html#updated");
+const renamed = {...base, pages: {"guide.html": "new.html"}};
+assert.equal(switcher.targetUrl(renamed), base.url + "new.html#updated");
+const missing = {...base, pages: {"guide.html": false}};
+assert.equal(switcher.targetUrl(missing), base.url);
+assert.equal(missing._notice, "Unavailable");
+assert.equal(switcher.targetUrl({...base, status: "unsupported"}), base.url);
+assert.equal(switcher.targetUrl({...base, pages: {"guide.html": "javascript:alert(1)"}}), "");
+switcher.relPath = "";
+assert.equal(switcher.targetUrl(base), base.url);
+assert.equal(base._notice, "");
+globalThis.fetch = async () => ({
+    ok: true, json: async () => [base, {version: "bad", url: "javascript:alert(1)"}]
+});
+await switcher._fetchVersions("/versions.json");
+assert.equal(switcher.versions.length, 1);
+""",
+        ],
+        cwd=Path(__file__).resolve().parents[1],
+        check=True,
+    )
 
 
 def _build_with_options(tmp_path, options=None):

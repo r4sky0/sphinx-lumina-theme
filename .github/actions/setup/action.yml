@@ -18,7 +18,7 @@ runs:
         python-version: ${{ inputs.python-version }}
 
     - name: Install pnpm
-      uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5
+      uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
       with:
         version: 10
 
@@ -39,5 +39,5 @@ runs:
       if: inputs.install-deps == 'true'
       shell: bash
       run: |
-        pnpm install
-        uv sync --dev
+        pnpm install --frozen-lockfile
+        uv sync --locked --dev

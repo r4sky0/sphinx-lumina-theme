@@ -38,6 +38,7 @@
              role="menu">
             <template x-for="v in versions" :key="v.version">
                 <a :href="targetUrl(v)"
+                   @click="$el.href = targetUrl(v)"
                    class="flex items-center gap-2 px-3 py-1.5 text-[0.8125rem] text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors no-underline"
                    :class="v.version === match && 'font-medium text-lumina-accent-text'"
                    role="menuitem">
@@ -45,13 +46,13 @@
                     <span x-show="v._statusLabel"
                           class="text-[0.6875rem] text-lumina-text-muted"
                           x-text="v._statusLabel"></span>
+                    <span x-show="v._notice"
+                          class="text-[0.6875rem] text-lumina-text-muted"
+                          x-text="v._notice"></span>
                     <span x-show="v.version === match"
                           class="ml-auto text-[0.6875rem] text-lumina-accent-text">({{ _("current") }})</span>
                 </a>
             </template>
-            <p x-show="notice"
-               x-text="notice"
-               class="max-w-[16rem] px-3 py-2 text-[0.75rem] leading-snug text-lumina-text-muted"></p>
             <div x-show="error"
                  class="px-3 py-1.5 text-[0.8125rem] text-lumina-text-muted italic">
                 {{ _("Failed to load versions") }}

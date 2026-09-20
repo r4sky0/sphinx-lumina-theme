@@ -56,9 +56,9 @@
   --color-lumina-text-muted: var(--lumina-text-muted);
   --color-lumina-border: var(--lumina-border);
   --color-lumina-accent: var(--lumina-accent);
-  --color-lumina-accent-text: var(--lumina-accent-text);
-  --color-lumina-accent-solid: var(--lumina-accent-solid);
-  --color-lumina-accent-on-solid: var(--lumina-accent-on-solid);
+  --color-lumina-accent-text: var(--lumina-link);
+  --color-lumina-accent-solid: var(--sd-color-primary);
+  --color-lumina-accent-on-solid: var(--sd-color-primary-text);
   --color-lumina-accent-light: var(--lumina-accent-light);
   --color-lumina-code-bg: var(--lumina-code-bg);
 
@@ -74,26 +74,25 @@
 
 /* ── Light mode (default) ── */
 :root {
-  --lumina-bg: #fcfcfc;
-  --lumina-bg-secondary: #f4f4f5;
-  --lumina-text: #18181b;
-  --lumina-text-muted: #52525b;
-  --lumina-border: #e4e4e7;
+  --lumina-bg: #fdfdfc;
+  --lumina-bg-secondary: #f4f5f4;
+  --lumina-text: #202624;
+  --lumina-text-muted: #59635e;
+  --lumina-border: #dfe5e1;
   --lumina-accent: #10b981;
-  --lumina-accent-text: #047857;
-  --lumina-accent-solid: #047857;
-  --lumina-accent-on-solid: #ffffff;
-  --lumina-accent-focus: #047857;
-  --lumina-accent-light: #ecfdf5;
-  --lumina-code-bg: #f4f4f5;
-  --lumina-adm-note: #3b82f6;
-  --lumina-adm-tip: #10b981;
+  --lumina-accent-light: #eaf6ef;
+  --lumina-code-bg: #f6f7f6;
+  --lumina-link: #08764f;
+  --lumina-navigation-bg: #f7f8f6;
+  --lumina-floating-bg: #fdfdfc;
+  --lumina-adm-note: #2563eb;
+  --lumina-adm-tip: #08764f;
   --lumina-adm-warning: #f59e0b;
-  --lumina-adm-warning-text: #d97706;
-  --lumina-adm-danger: #ef4444;
-  --lumina-adm-important: #8b5cf6;
+  --lumina-adm-warning-text: #b45309;
+  --lumina-adm-danger: #dc2626;
+  --lumina-adm-important: #7c3aed;
   /* Cyan, not teal — must stay distinguishable from the tip/hint emerald */
-  --lumina-adm-seealso: #0891b2;
+  --lumina-adm-seealso: #0e7490;
 
   /* Elevation scale. Tinted with `--lumina-text` so shadows read as
      "the page's own ink falling away" rather than flat black; alpha
@@ -112,8 +111,7 @@
   --lumina-shadow-2xl:
     0 8px 16px color-mix(in srgb, var(--lumina-text) 10%, transparent),
     0 24px 60px color-mix(in srgb, var(--lumina-text) 20%, transparent);
-  /* Accent-tinted shadow for brand-coloured surfaces (hero CTA, card
-     hover) — the same elevation language but biased toward `--lumina-accent`. */
+  /* Accent shadows remain available for downstream custom styles. */
   --lumina-shadow-accent-sm: 0 2px 8px color-mix(in srgb, var(--lumina-accent) 12%, transparent);
   --lumina-shadow-accent-md:
     0 1px 3px color-mix(in srgb, var(--lumina-accent) 30%, transparent),
@@ -160,35 +158,32 @@ html:root {
 
 /* ── Dark mode ── */
 [data-theme="dark"] {
-  --lumina-bg: #09090b;
-  --lumina-bg-secondary: #18181b;
-  --lumina-text: #fafafa;
-  --lumina-text-muted: #a1a1aa;
-  --lumina-border: #27272a;
+  --lumina-bg: #151918;
+  --lumina-bg-secondary: #202623;
+  --lumina-text: #e9eeeb;
+  --lumina-text-muted: #a8b5ac;
+  --lumina-border: #303b34;
   --lumina-accent: #10b981;
-  --lumina-accent-text: #34d399;
-  --lumina-accent-solid: #047857;
-  --lumina-accent-on-solid: #ffffff;
-  --lumina-accent-focus: #34d399;
-  --lumina-accent-light: #022c22;
-  --lumina-code-bg: #1c1c20;
+  --lumina-accent-light: #1c3329;
+  --lumina-code-bg: #1b211e;
+  --lumina-link: #5ed9a3;
+  --lumina-navigation-bg: #111613;
+  --lumina-floating-bg: #242c27;
 
-  /* Dark mode flips the elevation language: shadows still tint with
-     `--lumina-text` (which is now near-white) but at higher opacities
-     so the soft halo separates surfaces from the dark backdrop. */
-  --lumina-shadow-sm: 0 1px 2px color-mix(in srgb, var(--lumina-text) 14%, transparent);
+  /* Floating surfaces cast dark shadows; borders provide the visible edge. */
+  --lumina-shadow-sm: 0 1px 2px rgb(0 0 0 / 16%);
   --lumina-shadow-md:
-    0 1px 2px color-mix(in srgb, var(--lumina-text) 10%, transparent),
-    0 4px 12px color-mix(in srgb, var(--lumina-text) 14%, transparent);
+    0 1px 2px rgb(0 0 0 / 16%),
+    0 4px 12px rgb(0 0 0 / 20%);
   --lumina-shadow-lg:
-    0 2px 4px color-mix(in srgb, var(--lumina-text) 10%, transparent),
-    0 8px 24px color-mix(in srgb, var(--lumina-text) 16%, transparent);
+    0 2px 4px rgb(0 0 0 / 16%),
+    0 8px 24px rgb(0 0 0 / 24%);
   --lumina-shadow-xl:
-    0 4px 8px color-mix(in srgb, var(--lumina-text) 12%, transparent),
-    0 16px 40px color-mix(in srgb, var(--lumina-text) 22%, transparent);
+    0 4px 8px rgb(0 0 0 / 20%),
+    0 16px 40px rgb(0 0 0 / 28%);
   --lumina-shadow-2xl:
-    0 8px 16px color-mix(in srgb, var(--lumina-text) 14%, transparent),
-    0 24px 60px color-mix(in srgb, var(--lumina-text) 28%, transparent);
+    0 8px 16px rgb(0 0 0 / 24%),
+    0 24px 60px rgb(0 0 0 / 32%);
   --lumina-shadow-accent-sm: 0 2px 8px color-mix(in srgb, var(--lumina-accent) 18%, transparent);
   --lumina-shadow-accent-md:
     0 1px 3px color-mix(in srgb, var(--lumina-accent) 35%, transparent),
@@ -307,7 +302,7 @@ span.highlighted {
 
 /* ── Focus visible ── */
 :focus-visible {
-  outline: 2px solid var(--lumina-accent-focus);
+  outline: 2px solid var(--lumina-link);
   outline-offset: 2px;
   border-radius: 0.25rem;
 }
@@ -324,8 +319,8 @@ span.highlighted {
   left: 1rem;
   z-index: 100;
   padding: 0.5rem 1rem;
-  background: var(--lumina-accent-solid);
-  color: var(--lumina-accent-on-solid);
+  background: var(--sd-color-primary);
+  color: var(--sd-color-primary-text);
   font-size: 0.875rem;
   font-weight: 500;
   border-radius: 0 0 0.5rem 0.5rem;
@@ -534,7 +529,7 @@ span.highlighted {
 
 .lumina-sidebar-nav li.current:not(.toctree-l1) > a,
 .lumina-sidebar-nav li.toctree-l1.current > a.current {
-  color: var(--lumina-accent-text);
+  color: var(--lumina-link);
   background-color: var(--lumina-accent-light);
   font-weight: 600;
   border-left: 3px solid var(--lumina-accent);
@@ -671,7 +666,7 @@ span.highlighted {
 }
 
 .lumina-sidebar-nav .current > a > .lumina-sidebar-icon {
-  color: var(--lumina-accent-text);
+  color: var(--lumina-link);
 }
 
 
@@ -745,7 +740,7 @@ span.highlighted {
 }
 
 .lumina-toc-nav a.lumina-toc-active {
-  color: var(--lumina-accent-text);
+  color: var(--lumina-link);
 }
 
 /* Nested items: indented, lighter weight */
@@ -765,7 +760,7 @@ span.highlighted {
   left: -0.5px;
   width: 2px;
   border-radius: 1px;
-  background-color: var(--lumina-accent-solid);
+  background-color: var(--sd-color-primary);
   clip-path: polygon(
     0 var(--ind-top, 0),
     100% var(--ind-top, 0),
@@ -786,51 +781,6 @@ span.highlighted {
 
 html.has-announcement {
   --lumina-header-offset: calc(3.5rem + 2.25rem);
-}
-
-/* ── Mobile table of contents ── */
-.lumina-mobile-toc {
-  margin-bottom: 1.5rem;
-  border: 1px solid var(--lumina-border);
-  border-radius: 0.5rem;
-  background: var(--lumina-bg-secondary);
-}
-
-.lumina-mobile-toc summary {
-  min-height: 2.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.625rem 0.875rem;
-  color: var(--lumina-text);
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  list-style: none;
-}
-
-.lumina-mobile-toc summary::-webkit-details-marker {
-  display: none;
-}
-
-.lumina-mobile-toc summary::after {
-  content: "⌄";
-  color: var(--lumina-text-muted);
-  font-size: 1rem;
-  transition: transform 0.15s ease;
-}
-
-.lumina-mobile-toc[open] summary::after {
-  transform: rotate(180deg);
-}
-
-.lumina-mobile-toc .lumina-toc-scroll {
-  max-height: min(45vh, 24rem);
-  padding: 0 0.875rem 0.875rem;
-}
-
-.lumina-mobile-toc .lumina-toc-nav > ul {
-  border-left: 0;
 }
 
 /* Anchor targets (headings, section ids, footnotes) must scroll into view
@@ -963,7 +913,7 @@ a.headerlink[data-tooltip]::after {
   font-weight: 500;
   white-space: nowrap;
   color: #fff;
-  background: var(--lumina-accent-solid);
+  background: var(--sd-color-primary);
   padding: 0.25rem 0.625rem;
   border-radius: 0.375rem;
   pointer-events: none;
@@ -974,63 +924,6 @@ a.headerlink[data-tooltip]::after {
 a.headerlink[data-tooltip].lumina-tooltip-visible::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-}
-
-/* ── Content toolbar (breadcrumbs + actions) ── */
-.lumina-content-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-}
-
-/* ── Reading-time badge ── */
-.lumina-reading-time {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.8125rem;
-  line-height: 1;
-  color: var(--lumina-text-muted);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.lumina-reading-time svg {
-  width: 0.875rem;
-  height: 0.875rem;
-  flex-shrink: 0;
-}
-
-/* ── Copy Markdown button ── */
-.lumina-copy-page {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  margin-left: auto;
-  padding: 0.25rem 0.5rem;
-  font-family: inherit;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  line-height: 1;
-  color: var(--lumina-text-muted);
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: color 0.15s, background-color 0.15s, border-color 0.15s;
-}
-
-.lumina-copy-page:hover {
-  color: var(--lumina-accent-text);
-  background-color: var(--lumina-accent-light);
-  border-color: color-mix(in srgb, var(--lumina-accent) 20%, transparent);
-}
-
-.lumina-copy-page.is-copied {
-  color: var(--lumina-accent-text);
 }
 
 /* ── Search result entrance stagger ── */
@@ -1083,7 +976,7 @@ a.headerlink[data-tooltip].lumina-tooltip-visible::after {
 }
 
 .lumina-sidebar-footer a:hover {
-  color: var(--lumina-accent-text);
+  color: var(--lumina-link);
 }
 
 .lumina-sidebar-footer-icon {
@@ -1130,4 +1023,5 @@ a.headerlink[data-tooltip].lumina-tooltip-visible::after {
 @import "./api.css";
 @import "./landing.css";
 @import "./mermaid.css";
+@import "./reading.css";
 @import "./print.css";

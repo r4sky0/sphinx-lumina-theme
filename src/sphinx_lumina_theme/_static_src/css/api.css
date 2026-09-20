@@ -186,7 +186,7 @@ dl.py > dd > p:last-child {
 
 :is(dl.py, dl.http, dl.js) dl.field-list dd li span > a.reference.external:hover {
   background: color-mix(in srgb, var(--lumina-accent) 12%, var(--lumina-bg-secondary));
-  color: var(--lumina-accent-text);
+  color: var(--lumina-link);
 }
 
 /* ── Cross-reference links ── */
@@ -195,7 +195,7 @@ dl.py > dd > p:last-child {
   border: none;
   padding: 0;
   font-size: 0.875em;
-  color: var(--lumina-accent-text);
+  color: var(--lumina-link);
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-color: color-mix(in srgb, var(--lumina-accent) 40%, transparent);
@@ -209,7 +209,7 @@ dl.py > dd > p:last-child {
 /* ── API signature syntax coloring ── */
 dt.sig .n { color: var(--lumina-text); }           /* names */
 dt.sig .k { color: #8b5cf6; }                      /* keywords (class, def) */
-dt.sig .nb { color: var(--lumina-accent-text); }    /* builtins (str, int, etc.) */
+dt.sig .nb { color: var(--lumina-link); }    /* builtins (str, int, etc.) */
 
 [data-theme="dark"] dt.sig .k { color: #a78bfa; }
 
@@ -680,13 +680,13 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
   align-items: center;
   gap: 0.375rem;
   padding: 0.4375rem 0.875rem;
-  background: var(--lumina-accent-solid);
+  background: var(--sd-color-primary);
   border: none;
   border-radius: 0.375rem;
   font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--lumina-accent-on-solid);
+  color: var(--sd-color-primary-text);
   cursor: pointer;
   transition: opacity 0.15s, transform 0.1s;
 }
@@ -780,9 +780,9 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 }
 
 .lumina-try-it-copy-res.is-copied {
-  background: var(--lumina-accent-solid);
-  color: var(--lumina-accent-on-solid);
-  border-color: var(--lumina-accent-solid);
+  background: var(--sd-color-primary);
+  color: var(--sd-color-primary-text);
+  border-color: var(--sd-color-primary);
   transform: scale(1.05);
 }
 

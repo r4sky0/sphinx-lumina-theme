@@ -23,57 +23,53 @@ The core surface and text tokens. These are the variables you'll override most o
   - Dark default
   - What it affects
 * - `--lumina-bg`
-  - `#fcfcfc`
-  - `#09090b`
-  - Page background, modal background
+  - `#fdfdfc`
+  - `#151918`
+  - Page background
 * - `--lumina-bg-secondary`
-  - `#f4f4f5`
-  - `#18181b`
-  - Sidebar fill, hover surfaces, table-header tint
+  - `#f4f5f4`
+  - `#202623`
+  - Hover surfaces and table-header tint
 * - `--lumina-text`
-  - `#18181b`
-  - `#fafafa`
+  - `#202624`
+  - `#e9eeeb`
   - Body and heading color
 * - `--lumina-text-muted`
-  - `#52525b`
-  - `#a1a1aa`
+  - `#59635e`
+  - `#a8b5ac`
   - Secondary text (TOC links, captions, footer)
 * - `--lumina-border`
-  - `#e4e4e7`
-  - `#27272a`
+  - `#dfe5e1`
+  - `#303b34`
   - Dividers, table cell borders, sidebar separators
 * - `--lumina-accent`
   - `#10b981`
   - `#10b981`
-  - Brand accent for decorative details. Also overridable through the `accent_color` theme option.
-* - `--lumina-accent-text`
-  - `#047857`
-  - `#34d399`
-  - Accessible text links and selected navigation states.
-* - `--lumina-accent-solid`
-  - `#047857`
-  - `#047857`
-  - Filled controls and selected-result badges.
-* - `--lumina-accent-on-solid`
-  - `#ffffff`
-  - `#ffffff`
-  - Text placed on `--lumina-accent-solid` surfaces.
-* - `--lumina-accent-focus`
-  - `#047857`
-  - `#34d399`
-  - Keyboard focus indicators.
+  - Brand accents, active indicators, skip link, headerlink tooltip. Also overridable through the `accent_color` theme option.
+* - `--lumina-link`
+  - `#08764f`
+  - `#5ed9a3`
+  - Readable text links and focus outlines
+* - `--lumina-navigation-bg`
+  - `#f7f8f6`
+  - `#111613`
+  - Desktop sidebar surface
+* - `--lumina-floating-bg`
+  - `#fdfdfc`
+  - `#242c27`
+  - Section switcher, page-actions menu, search dialog, and back-to-top button
 * - `--lumina-accent-light`
-  - `#ecfdf5`
-  - `#022c22`
-  - Hover/active background tint for accent surfaces (current sidebar item, copy-page hover)
+  - `#eaf6ef`
+  - `#1c3329`
+  - Hover/active background tint for accent surfaces, including the current sidebar item
 * - `--lumina-code-bg`
-  - `#f4f4f5`
-  - `#1c1c20`
+  - `#f6f7f6`
+  - `#1b211e`
   - Inline code and code block background
 ```
 
 :::{tip}
-Set the accent through the theme option rather than overriding the variable directly — `accent_color` also derives the semantic text and solid variants plus `--lumina-accent-light` using `color-mix()`. Override the semantic tokens directly when your custom brand color needs a different contrast treatment.
+Set the accent through the theme option rather than overriding the variable directly — `accent_color` also derives `--lumina-link` and `--lumina-accent-light` using `color-mix()`. When overriding tokens directly, set them separately for light and dark mode and check contrast against your backgrounds.
 :::
 
 ## Admonition tokens
@@ -89,11 +85,11 @@ One color per admonition type, plus a darker variant for the warning text where 
   - Dark default
   - Used by
 * - `--lumina-adm-note`
-  - `#3b82f6`
+  - `#2563eb`
   - `#60a5fa`
   - `note`
 * - `--lumina-adm-tip`
-  - `#10b981`
+  - `#08764f`
   - `#34d399`
   - `tip`, `hint`
 * - `--lumina-adm-warning`
@@ -101,24 +97,24 @@ One color per admonition type, plus a darker variant for the warning text where 
   - `#fbbf24`
   - `warning`, `caution`, `attention`
 * - `--lumina-adm-warning-text`
-  - `#d97706`
+  - `#b45309`
   - `#f59e0b`
   - Warning title text (darker for AA contrast on light background)
 * - `--lumina-adm-danger`
-  - `#ef4444`
+  - `#dc2626`
   - `#f87171`
   - `danger`, `error`
 * - `--lumina-adm-important`
-  - `#8b5cf6`
+  - `#7c3aed`
   - `#a78bfa`
   - `important`
 * - `--lumina-adm-seealso`
-  - `#0891b2`
+  - `#0e7490`
   - `#22d3ee`
   - `seealso`
 ```
 
-The visible left border, icon mask, and 5–8 % background tint of every admonition derive from these single colors via `color-mix()` — overriding the token recolors the whole admonition.
+The thin border, icon mask, and 4–5% background tint of every admonition derive from these colors via `color-mix()` — overriding the token recolors the whole admonition.
 
 ## sphinx-design tokens
 
@@ -130,6 +126,7 @@ If you want sphinx-design components to follow your accent color, override them 
 :root,
 html:root {
   --lumina-accent: #6366f1;
+  --lumina-link: #4f46e5;
   --sd-color-primary: #6366f1;
   --sd-color-primary-highlight: #4f46e5;
 }
@@ -147,6 +144,9 @@ html:root {
   --lumina-text-muted: #57534e;
   --lumina-border: #e7e5e4;
   --lumina-accent: #ea580c;
+  --lumina-link: #c2410c;
+  --lumina-navigation-bg: #faf3e7;
+  --lumina-floating-bg: #fffaf2;
   --lumina-accent-light: #fff7ed;
   --lumina-code-bg: #faf3e7;
 }
@@ -169,6 +169,7 @@ html:root {
 ```css
 [data-theme="dark"] {
   --lumina-accent: #f472b6;
+  --lumina-link: #f9a8d4;
   --lumina-accent-light: #500724;
 }
 ```
