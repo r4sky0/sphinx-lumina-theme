@@ -2073,7 +2073,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 1.44.0.
+This documentation is for Sphinx Lumina Theme version 1.44.1.
 
 The MyST syntax:
 
@@ -4032,6 +4032,32 @@ The token is cleared when the browser tab is closed (sessionStorage scope).
 # releases.html.md
 
 # Releases
+
+## v1.44.1 (2026-09-20)
+
+### Bug Fixes
+
+- **ci**: Update release action pins
+  ([`f011b91`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f011b91fb7a8d48acc3b4a4b46afa6965249fce5))
+- **release**: Avoid building in semantic release container
+  ([`f02b46e`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f02b46e0d9e46b7709d87883b2af29378398ed59))
+- **release**: Set up build tools before semantic release
+  ([`4642d5b`](https://github.com/r4sky0/sphinx-lumina-theme/commit/4642d5b7c0cad03e0628d1aa5f8f4bf09b9c00c7))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Continuous Integration
+
+- Harden GitHub Actions workflows ([#135](https://github.com/r4sky0/sphinx-lumina-theme/pull/135),
+  [`9f0f916`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9f0f9167981af7dfb4c81c06a0d991854933c6ca))
+
+#### Documentation
+
+- Polish user-facing documentation ([#134](https://github.com/r4sky0/sphinx-lumina-theme/pull/134),
+  [`f6593f0`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f6593f0b2edf5e40c34a0fe99bddb5b4007a5522))
+
+</details>
 
 ## v1.44.0 (2026-09-19)
 
