@@ -109,6 +109,29 @@ def test_showcase_uses_flat_theme_buttons(page: Page):
     expect(button).to_have_css("transform", "none")
 
 
+@pytest.mark.parametrize(
+    "size",
+    [
+        (1440, 900),
+        (1280, 720),
+        (768, 1024),
+        (390, 844),
+        (375, 667),
+        (320, 568),
+        (844, 390),
+    ],
+)
+def test_showcase_fits_viewport(page: Page, size):
+    page.set_viewport_size({"width": size[0], "height": size[1]})
+    page.evaluate("document.fonts.ready")
+    assert page.evaluate(
+        "() => document.documentElement.scrollHeight <= innerHeight"
+        " && document.documentElement.scrollWidth <= innerWidth"
+    )
+    expect(page.locator(".lumina-hero-btn-primary")).to_be_in_viewport()
+    expect(page.locator(".lumina-hero-tags")).to_be_in_viewport()
+
+
 def test_theme_persists_on_reload(page: Page, live_server: str):
     """Toggling to dark should persist after page reload."""
     toggle = page.locator("[data-theme-toggle]")
