@@ -91,10 +91,9 @@ ignore_token_for_push = true
 version_toml = ["pyproject.toml:project.version"]
 version_variables = ["src/sphinx_lumina_theme/__init__.py:__version__"]
 build_command = """
-python -m pip install -e '.[build]'
+python -m pip install "uv~=0.12.17"
 uv lock --upgrade-package "$PACKAGE_NAME"
 git add uv.lock
-uv build
 """
 commit_parser = "conventional"
 major_on_zero = false

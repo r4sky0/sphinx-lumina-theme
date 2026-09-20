@@ -25,10 +25,6 @@ jobs:
           fetch-depth: 0
           ssh-key: ${{ secrets.DEPLOY_KEY }}
 
-      - uses: ./.github/actions/setup
-        with:
-          install-deps: "false"
-
       - name: Semantic Release
         id: semantic
         uses: python-semantic-release/python-semantic-release@39dd2052f2ce8282a5d932c31d58a2ca06d2550e # v10.6.1
