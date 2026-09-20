@@ -56,7 +56,7 @@ def test_page_actions_respect_options(tmp_path):
     actions = html.find(class_="lumina-page-actions")
     assert actions is not None
     assert actions.find("button", attrs={"aria-label": "Copy page as Markdown"})
-    assert actions.find(class_="lumina-reading-time") is None
+    assert html.find(class_="lumina-reading-time") is None
     assert actions.find("a") is None  # No repository configured.
 
 
@@ -65,3 +65,13 @@ def test_hide_breadcrumbs(tmp_path):
     html = build_with_options(tmp_path, {"show_breadcrumbs": "false"})
     breadcrumbs = html.find(attrs={"aria-label": "Breadcrumb"})
     assert breadcrumbs is None
+
+
+def test_reading_time_below_introduction(tmp_path):
+    html = build_with_options(tmp_path, {"show_reading_time": "true"})
+    metadata = html.select_one(".lumina-article h1 + p + .lumina-reading-time")
+    assert metadata is not None
+    assert metadata.has_attr("data-pagefind-ignore")
+    assert metadata.select_one('svg[aria-hidden="true"]') is not None
+    assert "min read" in metadata.get_text()
+    assert html.select_one(".lumina-page-actions .lumina-reading-time") is None

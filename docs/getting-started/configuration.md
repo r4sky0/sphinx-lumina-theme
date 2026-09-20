@@ -200,7 +200,7 @@ Lucide icons are designed on a 24×24 grid with 2-unit-wide strokes. When a Luci
 * - `show_reading_time`
   - string
   - `"false"`
-  - Show an estimated reading time in the page-actions menu beside the breadcrumbs. The estimate uses prose word count at 200 words per minute, ignoring code blocks, images, and toctrees.
+  - Show an estimated reading time with a clock icon below the introductory paragraph, or below the title when there is no introduction. The estimate uses prose word count at 200 words per minute, ignoring code blocks, images, and toctrees.
 ```
 
 Override per page using MyST front matter:

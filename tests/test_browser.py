@@ -175,6 +175,10 @@ def test_reading_chrome(page: Page, live_server: str, theme: str):
     page.goto(f"{live_server}/guides/search.html")
     expect(page.locator(".lumina-article")).to_have_css("font-size", "16px")
     expect(page.locator(".lumina-article h1")).to_have_css("font-size", "40px")
+    reading_time = page.locator(".lumina-article h1 + p + .lumina-reading-time")
+    expect(reading_time).to_be_visible()
+    expect(reading_time.locator("svg")).to_be_visible()
+    expect(page.locator(".lumina-page-actions .lumina-reading-time")).to_have_count(0)
     expect(page.locator("#lumina-header header")).to_have_css(
         "backdrop-filter", "blur(12px)"
     )
@@ -204,6 +208,12 @@ def test_reading_chrome(page: Page, live_server: str, theme: str):
     actions.locator("summary").click()
     expect(actions.get_by_role("button", name="Copy page as Markdown")).to_be_visible()
     expect(actions.get_by_role("link", name="Edit this page")).to_be_visible()
+    page.context.grant_permissions(["clipboard-read", "clipboard-write"])
+    actions.get_by_role("button", name="Copy page as Markdown").click()
+    expect(actions.locator("button")).to_contain_text("Copied!")
+    markdown = page.evaluate("navigator.clipboard.readText()")
+    assert "# Search" in markdown
+    assert "min read" not in markdown
     page.keyboard.press("Escape")
     expect(actions).not_to_have_attribute("open", "")
     expect(actions.locator("summary")).to_be_focused()

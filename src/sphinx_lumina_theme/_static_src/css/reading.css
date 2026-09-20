@@ -132,7 +132,17 @@
   cursor: pointer;
 }
 .lumina-page-action-list a:hover, .lumina-page-action-list button:hover { background: var(--lumina-bg-secondary); }
-.lumina-reading-time { display: block; padding: 0.625rem 0.5rem 0.25rem; border-top: 1px solid var(--lumina-border); font-size: 0.75rem; color: var(--lumina-text-muted); }
+.lumina-reading-time {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0.875rem 0 2rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--lumina-text-muted);
+}
+.lumina-reading-time svg { flex-shrink: 0; width: 0.875rem; height: 0.875rem; }
+.lumina-article > section > h1 + p:has(+ .lumina-reading-time) { margin-bottom: 0; }
 .lumina-mobile-outline { display: none; }
 
 .sd-tab-set, div.highlight, pre.highlight, .literal-block-wrapper { border-color: var(--lumina-border); }
