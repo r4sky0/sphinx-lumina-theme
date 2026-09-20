@@ -5,8 +5,7 @@
  * Supports light/dark mode via a theme-aware display shader.
  *
  * The simulation runs in a Web Worker via OffscreenCanvas to keep the main
- * thread free.  Browsers without OffscreenCanvas fall back to main-thread
- * rendering.
+ * thread free. Unsupported browsers show the normal themed background.
  *
  * Exported as an Alpine.js component: attach with x-data="fluidSimulation()"
  * and provide a <canvas x-ref="canvas"> inside the element.
@@ -19,7 +18,6 @@ const _scriptSrc = document.currentScript && document.currentScript.src;
 document.addEventListener("alpine:init", () => {
   window.Alpine.data("fluidSimulation", () => ({
     _worker: null,
-    _cleanup: null,
     _workerCleanup: null,
     _observer: null,
     _idleId: null,
@@ -34,17 +32,12 @@ document.addEventListener("alpine:init", () => {
         : { sim: 256, dye: 512, jacobi: 30 };
 
       const start = () => {
-        // Try OffscreenCanvas + Worker (moves all GPU work off main thread)
-        if (typeof OffscreenCanvas !== "undefined" && _scriptSrc) {
-          try {
-            this._startWorker(canvas, container, opts);
-            return;
-          } catch (_) {
-            /* fall through to main-thread path */
-          }
+        if (!_scriptSrc || !canvas.transferControlToOffscreen) return;
+        try {
+          this._startWorker(canvas, container, opts);
+        } catch (_) {
+          canvas.hidden = true;
         }
-        // Fallback: run on main thread
-        this._cleanup = startFluid(canvas, container, opts);
       };
 
       // Defer heavy GPU init to avoid blocking initial page render.
@@ -186,66 +179,8 @@ document.addEventListener("alpine:init", () => {
       if (this._idleId) cancelIdleCallback(this._idleId);
       if (this._timerId) clearTimeout(this._timerId);
       if (this._workerCleanup) this._workerCleanup();
-      if (this._cleanup) this._cleanup();
       if (this._observer) this._observer.disconnect();
       document.documentElement.removeAttribute("data-hero-visible");
     },
   }));
 });
-
-/* Main-thread fallback uses the same engine as the worker. */
-function startFluid(canvas, container, opts = {}) {
-  const send = window.luminaFluidMessage;
-  if (!send) return () => {};
-
-  send({
-    type: "init",
-    canvas,
-    w: canvas.clientWidth,
-    h: canvas.clientHeight,
-    dpr: Math.min(window.devicePixelRatio || 1, 2),
-    dark: document.documentElement.getAttribute("data-theme") === "dark",
-    reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-    ...opts,
-  });
-
-  const point = (type, x, y) => send({
-    type,
-    x: x / canvas.clientWidth,
-    y: 1 - y / canvas.clientHeight,
-  });
-  const onMouseEnter = (e) => point("pointerenter", e.clientX, e.clientY);
-  const onMouseMove = (e) => point("pointer", e.clientX, e.clientY);
-  const onTouchStart = (e) => point("pointerenter", e.touches[0].clientX, e.touches[0].clientY);
-  const onTouchMove = (e) => point("pointer", e.touches[0].clientX, e.touches[0].clientY);
-  const onResize = () => send({
-    type: "resize",
-    w: canvas.clientWidth,
-    h: canvas.clientHeight,
-    dpr: Math.min(window.devicePixelRatio || 1, 2),
-  });
-  const themeObserver = new MutationObserver(() => send({
-    type: "theme",
-    dark: document.documentElement.getAttribute("data-theme") === "dark",
-  }));
-
-  container.addEventListener("mouseenter", onMouseEnter);
-  container.addEventListener("mousemove", onMouseMove);
-  container.addEventListener("touchstart", onTouchStart, { passive: true });
-  container.addEventListener("touchmove", onTouchMove, { passive: true });
-  window.addEventListener("resize", onResize);
-  themeObserver.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ["data-theme"],
-  });
-
-  return () => {
-    send({ type: "stop" });
-    themeObserver.disconnect();
-    window.removeEventListener("resize", onResize);
-    container.removeEventListener("mouseenter", onMouseEnter);
-    container.removeEventListener("mousemove", onMouseMove);
-    container.removeEventListener("touchstart", onTouchStart);
-    container.removeEventListener("touchmove", onTouchMove);
-  };
-}
