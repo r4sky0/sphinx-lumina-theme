@@ -23,7 +23,6 @@
  *
  * **Properties:**
  *
- * - ``isOpen`` *(boolean)* — Whether the overlay is currently visible.
  * - ``contentType`` *(string)* — ``"img"`` or ``"svg"``.
  * - ``imgSrc`` / ``imgAlt`` *(string)* — Source and alt for ``<img>`` mode.
  * - ``caption`` *(string)* — Caption text shown beneath the figure.
@@ -39,13 +38,11 @@
  */
 export default function imageLightbox() {
   return {
-    isOpen: false,
     contentType: "img",
     imgSrc: "",
     imgAlt: "",
     caption: "",
     _trigger: null,
-    _trapHandler: null,
 
     init() {
       if (!document.documentElement.hasAttribute("data-lightbox")) return;
@@ -56,17 +53,6 @@ export default function imageLightbox() {
       article
         .querySelectorAll("[data-lumina-zoom]")
         .forEach((el) => this._tag(el));
-
-      // Move focus to the close button each time the overlay opens.
-      // $watch fires after Alpine flushes the reactive DOM update.
-      this.$watch("isOpen", (open) => {
-        if (open) {
-          requestAnimationFrame(() => {
-            const btn = this.$el.querySelector(".lumina-lightbox-close");
-            if (btn) btn.focus();
-          });
-        }
-      });
     },
 
     _shouldSkipElement(el) {
@@ -205,52 +191,19 @@ export default function imageLightbox() {
         }
       }
 
-      this.isOpen = true;
       document.body.classList.add("lumina-lightbox-open");
-      // Contain Tab within the overlay while it's open — the dialog is
-      // aria-modal, so focus must not escape into the page behind it.
-      this._trapHandler = (e) => this._handleFocusTrap(e);
-      document.addEventListener("keydown", this._trapHandler);
-      // Focus is moved to the close button by the $watch handler in init().
-    },
-
-    _handleFocusTrap(e) {
-      if (e.key !== "Tab" || !this.isOpen) return;
-      const focusable = this.$el.querySelectorAll(
-        'button, a[href], [tabindex]:not([tabindex="-1"])',
-      );
-      if (focusable.length === 0) return;
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (
-        !e.shiftKey &&
-        (document.activeElement === last ||
-          !this.$el.contains(document.activeElement))
-      ) {
-        e.preventDefault();
-        first.focus();
-      }
+      this.$el.showModal();
     },
 
     close() {
-      this.isOpen = false;
       document.body.classList.remove("lumina-lightbox-open");
-      if (this._trapHandler) {
-        document.removeEventListener("keydown", this._trapHandler);
-        this._trapHandler = null;
-      }
+      if (this.$el.open) this.$el.close();
       const host = this.$el.querySelector(".lumina-lightbox-svg-host");
       if (host) host.replaceChildren();
       if (this._trigger) {
         const trigger = this._trigger;
         this._trigger = null;
-        // Restore focus after the close transition starts so the trigger
-        // is back on screen first.
+        // An image may not have been focused before the dialog opened.
         this.$nextTick(() => trigger.focus({ preventScroll: false }));
       }
     },

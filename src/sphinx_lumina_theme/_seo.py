@@ -8,9 +8,9 @@ be injected into the Jinja template context.
 from __future__ import annotations
 
 import json as _json
-import posixpath as _posixpath
 from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any
+from urllib.parse import urljoin, urlsplit
 
 if TYPE_CHECKING:
     from docutils import nodes
@@ -22,22 +22,6 @@ _MIN_PROSE_LEN = 30
 # Hard cap on description length. 160 chars is the de-facto upper bound
 # Google uses in SERP snippets; we leave a few chars for the ellipsis.
 _MAX_DESC_LEN = 160
-
-
-__all__ = [
-    "build_article_jsonld",
-    "build_breadcrumb_jsonld",
-    "build_website_jsonld",
-    "derive_twitter_handle",
-    "extract_description",
-    "is_noindex",
-    "normalize_iso_datetime",
-    "og_locale_for_language",
-    "plain_title",
-    "resolve_og_image",
-    "resolve_publisher_logo",
-    "should_emit_seo",
-]
 
 
 def plain_title(html_title: str | None) -> str:
@@ -103,30 +87,17 @@ def _first_prose_paragraph(doctree: nodes.document) -> str | None:
     """Walk the doctree, return the first paragraph node that qualifies."""
     from docutils import nodes
 
-    try:
-        from sphinx import addnodes
-    except ImportError:  # tests using a bare docutils doctree
-        addnodes = None
+    from sphinx import addnodes
 
     skip_ancestors: tuple[type, ...] = (
         nodes.literal_block,
-        nodes.admonition,
-        nodes.note,
-        nodes.warning,
-        nodes.tip,
-        nodes.important,
-        nodes.caution,
-        nodes.attention,
-        nodes.hint,
-        nodes.danger,
-        nodes.error,
+        nodes.Admonition,
         nodes.comment,
         nodes.system_message,
         nodes.field_list,
         nodes.docinfo,
     )
-    if addnodes is not None:
-        skip_ancestors = skip_ancestors + (addnodes.toctree,)
+    skip_ancestors = skip_ancestors + (addnodes.toctree,)
 
     for para in doctree.findall(nodes.paragraph):
         ancestor = para.parent
@@ -216,7 +187,7 @@ def resolve_og_image(
 
     if html_baseurl:
         base = html_baseurl.rstrip("/") + "/"
-        return _posixpath.join(base, rel), alt or None
+        return urljoin(base, rel), alt or None
 
     # No base URL — omit the tag. Social platforms (Slack, Twitter, LinkedIn,
     # Facebook) require an absolute URL for og:image; emitting a relative one
@@ -259,7 +230,7 @@ def resolve_publisher_logo(
 
     if html_baseurl:
         base = html_baseurl.rstrip("/") + "/"
-        return _posixpath.join(base, rel)
+        return urljoin(base, rel)
     # Without a base URL we can't produce the absolute URL Schema.org requires
     # for ``publisher.logo.url`` — better to omit than ship a relative path
     # that disqualifies the page from Rich Results.
@@ -294,23 +265,19 @@ def derive_twitter_handle(theme_options: Mapping[str, Any]) -> str | None:
 
 def _handle_from_twitter_url(url: str) -> str | None:
     """Extract @handle from a Twitter/X profile URL like https://twitter.com/foo."""
-    if not url:
+    try:
+        parts = urlsplit(url)
+    except ValueError:
         return None
-    for prefix in (
-        "https://twitter.com/",
-        "https://www.twitter.com/",
-        "https://x.com/",
-        "https://www.x.com/",
-    ):
-        if url.startswith(prefix):
-            tail = url[len(prefix) :].strip("/")
-            # Drop query string / fragment / sub-path segments before extracting
-            # the handle: ``foo?ref=x``, ``foo#bio``, ``foo/status/123`` → ``foo``.
-            for sep in ("?", "#", "/"):
-                tail = tail.split(sep, 1)[0]
-            if tail:
-                return f"@{tail}"
-    return None
+    if parts.scheme != "https" or parts.hostname not in {
+        "twitter.com",
+        "www.twitter.com",
+        "x.com",
+        "www.x.com",
+    }:
+        return None
+    handle = parts.path.strip("/").split("/", 1)[0]
+    return f"@{handle}" if handle else None
 
 
 def _safe_jsonld(data) -> str:
@@ -359,8 +326,7 @@ def build_breadcrumb_jsonld(
         )
         pos += 1
 
-    # Page directory (the dirname of page_url) is the base for relative parent links.
-    page_dir = _page_dir(page_url, site_url)
+    base = page_url or (site_url.rstrip("/") + "/" if site_url else "")
 
     for parent in parents or []:
         items.append(
@@ -368,7 +334,9 @@ def build_breadcrumb_jsonld(
                 "@type": "ListItem",
                 "position": pos,
                 "name": plain_title(parent.get("title", "")),
-                "item": _resolve_parent_url(parent.get("link", ""), page_dir, site_url),
+                "item": urljoin(base, parent.get("link") or ".")
+                if base
+                else parent.get("link", ""),
             }
         )
         pos += 1
@@ -378,7 +346,7 @@ def build_breadcrumb_jsonld(
             "@type": "ListItem",
             "position": pos,
             "name": title,
-            "item": page_url or _absolute_url("", site_url),
+            "item": page_url or site_url.rstrip("/") + "/",
         }
     )
 
@@ -389,43 +357,6 @@ def build_breadcrumb_jsonld(
             "itemListElement": items,
         }
     )
-
-
-def _page_dir(page_url: str, site_url: str) -> str:
-    """Return the directory portion of a page URL (with trailing slash)."""
-    if page_url:
-        # Strip the filename: "https://x/guides/seo.html" → "https://x/guides/"
-        # Use rfind on '/' to be robust to query strings (which we don't expect here).
-        slash = page_url.rfind("/")
-        if slash != -1:
-            return page_url[: slash + 1]
-        return page_url
-    if site_url:
-        return site_url.rstrip("/") + "/"
-    return ""
-
-
-def _resolve_parent_url(link: str, page_dir: str, site_url: str) -> str:
-    """Resolve a Sphinx ``parents`` link (relative to the current page)."""
-    if not link:
-        return page_dir or (site_url.rstrip("/") + "/" if site_url else "")
-    if link.startswith(("http://", "https://", "//")):
-        return link
-    # Relative link: resolve against the current page's directory.
-    if page_dir:
-        return _posixpath.normpath(_posixpath.join(page_dir, link)).replace(":/", "://")
-    return link
-
-
-def _absolute_url(relative: str, site_url: str) -> str:
-    """Make a best-effort absolute URL from a Sphinx-relative link."""
-    if not relative:
-        return site_url.rstrip("/") + "/"
-    if relative.startswith(("http://", "https://", "//")):
-        return relative
-    if not site_url:
-        return relative
-    return site_url.rstrip("/") + "/" + relative.lstrip("/")
 
 
 def normalize_iso_datetime(value: str | None) -> str | None:

@@ -1,5 +1,7 @@
 """Browser-based tests using Playwright."""
 
+import sys
+
 import pytest
 from playwright.sync_api import Page, expect
 
@@ -26,6 +28,36 @@ def test_search_modal_closes_on_escape(page: Page):
     expect(page.locator("#lumina-search-modal")).to_be_visible()
     page.keyboard.press("Escape")
     expect(page.locator("#lumina-search-modal")).to_be_hidden()
+    expect(page.locator("[data-search-trigger]")).to_be_focused()
+
+
+def test_lightbox_dialog_closes_on_escape(page: Page, live_server: str):
+    page.goto(f"{live_server}/reference/images-and-figures.html")
+    image = page.locator(".lumina-article img").first
+    image.click()
+    dialog = page.locator("dialog.lumina-lightbox-overlay")
+    expect(dialog).to_be_visible()
+    page.keyboard.press("Escape")
+    expect(dialog).to_be_hidden()
+
+
+def test_fluid_without_offscreen_canvas(page: Page, live_server: str):
+    errors = []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    page.add_init_script(
+        "HTMLCanvasElement.prototype.transferControlToOffscreen = undefined;"
+        "window.requestIdleCallback = (callback) => { callback(); return 0; };"
+    )
+    page.goto(live_server)
+    expect(page.locator(".lumina-hero-title")).to_be_visible()
+    assert not errors
+
+
+def test_fluid_worker_starts(page: Page, live_server: str):
+    page.goto(live_server)
+    page.wait_for_function(
+        "() => !!window.Alpine.$data(document.querySelector('.lumina-hero'))._worker"
+    )
 
 
 def test_search_returns_results(page: Page, live_server: str):
@@ -181,7 +213,7 @@ def test_flat_cards_keep_interaction_feedback(page: Page, live_server: str, them
 
 
 @pytest.mark.parametrize("theme", ["light", "dark"])
-def test_reading_chrome(page: Page, live_server: str, theme: str):
+def test_reading_chrome(page: Page, live_server: str, theme: str, browser_name: str):
     """Shared reading layout works beyond the original installation preview."""
     page.emulate_media(reduced_motion="reduce")
     page.add_init_script(f"localStorage.setItem('lumina-theme', '{theme}')")
@@ -211,7 +243,10 @@ def test_reading_chrome(page: Page, live_server: str, theme: str):
     expect(menu).to_be_visible()
     for label in menu.locator(".lumina-section-switcher-desc").all():
         assert label.evaluate("e => e.scrollWidth <= e.clientWidth")
-    page.keyboard.press("Tab")
+    trigger.focus()
+    page.keyboard.press(
+        "Alt+Tab" if browser_name == "webkit" and sys.platform == "darwin" else "Tab"
+    )
     expect(menu.locator("a").first).to_be_focused()
     page.keyboard.press("Escape")
     expect(menu).to_be_hidden()
@@ -219,13 +254,22 @@ def test_reading_chrome(page: Page, live_server: str, theme: str):
     assert page.locator(".lumina-sidebar-desktop .is-collapsed").count() >= 2
 
     actions = page.locator(".lumina-page-actions")
-    actions.locator("summary").click()
+    actions.locator("summary").press("Enter")
     expect(actions.get_by_role("button", name="Copy page as Markdown")).to_be_visible()
     expect(actions.get_by_role("link", name="Edit this page")).to_be_visible()
-    page.context.grant_permissions(["clipboard-read", "clipboard-write"])
-    actions.get_by_role("button", name="Copy page as Markdown").click()
+    if browser_name == "chromium":
+        page.context.grant_permissions(["clipboard-read", "clipboard-write"])
+    else:
+        page.evaluate("""() => {
+            navigator.clipboard.writeText = async text => { window.copiedMarkdown = text; };
+        }""")
+    actions.get_by_role("button", name="Copy page as Markdown").press("Enter")
     expect(actions.locator("button")).to_contain_text("Copied!")
-    markdown = page.evaluate("navigator.clipboard.readText()")
+    markdown = page.evaluate(
+        "navigator.clipboard.readText()"
+        if browser_name == "chromium"
+        else "window.copiedMarkdown"
+    )
     assert "# Search" in markdown
     assert "min read" not in markdown
     page.keyboard.press("Escape")

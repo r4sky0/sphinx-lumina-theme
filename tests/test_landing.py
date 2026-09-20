@@ -2,8 +2,7 @@
 
 import pytest
 from bs4 import BeautifulSoup
-from conftest import copy_sample_docs
-from sphinx.application import Sphinx
+from conftest import copy_sample_docs, sphinx_app
 
 
 def build_landing(tmp_path):
@@ -11,7 +10,6 @@ def build_landing(tmp_path):
     conf_dir = tmp_path / "conf"
     conf_dir.mkdir()
     out_dir = tmp_path / "build"
-    doctree_dir = out_dir / ".doctrees"
 
     conf_py = conf_dir / "conf.py"
     conf_py.write_text(
@@ -23,14 +21,7 @@ def build_landing(tmp_path):
 
     copy_sample_docs(conf_dir)
 
-    app = Sphinx(
-        srcdir=str(conf_dir),
-        confdir=str(conf_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
-    )
+    app = sphinx_app(conf_dir, out_dir)
     app.build()
     return BeautifulSoup((out_dir / "landing-test.html").read_text(), "html.parser")
 
@@ -81,7 +72,6 @@ def test_landing_no_hero_without_metadata(tmp_path):
     conf_dir = tmp_path / "conf2"
     conf_dir.mkdir()
     out_dir = tmp_path / "build2"
-    doctree_dir = out_dir / ".doctrees"
 
     conf_py = conf_dir / "conf.py"
     conf_py.write_text(
@@ -98,14 +88,7 @@ def test_landing_no_hero_without_metadata(tmp_path):
     index_md = conf_dir / "index.md"
     index_md.write_text("# Home\n\n```{toctree}\n:hidden:\nbare-landing\n```\n")
 
-    app = Sphinx(
-        srcdir=str(conf_dir),
-        confdir=str(conf_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
-    )
+    app = sphinx_app(conf_dir, out_dir)
     app.build()
     html = BeautifulSoup((out_dir / "bare-landing.html").read_text(), "html.parser")
     hero = html.find(class_="lumina-hero")

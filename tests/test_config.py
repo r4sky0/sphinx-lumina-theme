@@ -1,8 +1,7 @@
 """Test theme configuration options."""
 
 from bs4 import BeautifulSoup
-from conftest import copy_sample_docs
-from sphinx.application import Sphinx
+from conftest import copy_sample_docs, sphinx_app
 
 
 def build_with_options(tmp_path, options):
@@ -10,7 +9,6 @@ def build_with_options(tmp_path, options):
     conf_dir = tmp_path / "conf"
     conf_dir.mkdir()
     out_dir = tmp_path / "build"
-    doctree_dir = out_dir / ".doctrees"
 
     conf_py = conf_dir / "conf.py"
     conf_py.write_text(
@@ -23,14 +21,7 @@ def build_with_options(tmp_path, options):
 
     copy_sample_docs(conf_dir)
 
-    app = Sphinx(
-        srcdir=str(conf_dir),
-        confdir=str(conf_dir),
-        outdir=str(out_dir),
-        doctreedir=str(doctree_dir),
-        buildername="html",
-        freshenv=True,
-    )
+    app = sphinx_app(conf_dir, out_dir)
     app.build()
     return BeautifulSoup((out_dir / "index.html").read_text(), "html.parser")
 
