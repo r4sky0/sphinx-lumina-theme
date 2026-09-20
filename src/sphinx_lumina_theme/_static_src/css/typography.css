@@ -264,6 +264,65 @@
   padding-bottom: 0.625rem;
 }
 
+/* Stack data tables into labelled rows on narrow screens. Tables that cannot
+   be safely labelled keep the horizontal-scroll fallback above. */
+@media (max-width: 47.999rem) {
+  .lumina-article table.lumina-table-stackable {
+    overflow: visible;
+  }
+
+  .lumina-article table.lumina-table-stackable thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .lumina-article table.lumina-table-stackable tbody,
+  .lumina-article table.lumina-table-stackable tr,
+  .lumina-article table.lumina-table-stackable td {
+    display: block;
+  }
+
+  .lumina-article table.lumina-table-stackable tr {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--lumina-border);
+    border-radius: 0.5rem;
+    margin-bottom: 0.75rem;
+    background: color-mix(in srgb, var(--lumina-accent) 2%, var(--lumina-bg));
+  }
+
+  .lumina-article table.lumina-table-stackable td {
+    display: grid;
+    grid-template-columns: minmax(5.5rem, 34%) minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--lumina-border);
+  }
+
+  .lumina-article table.lumina-table-stackable td::before {
+    content: attr(data-label);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--lumina-text-muted);
+  }
+
+  .lumina-article table.lumina-table-stackable td:last-child {
+    border-bottom: none;
+  }
+
+  .lumina-article table.lumina-table-stackable tbody tr:last-child td {
+    border-bottom: 1px solid var(--lumina-border);
+  }
+
+  .lumina-article table.lumina-table-stackable tbody tr:last-child td:last-child {
+    border-bottom: none;
+  }
+}
+
 .lumina-article blockquote {
   border-left: 3px solid color-mix(in srgb, var(--lumina-accent) 30%, var(--lumina-border));
   padding-left: 1rem;
