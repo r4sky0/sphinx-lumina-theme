@@ -114,7 +114,6 @@ Registered as `Alpine.data("searchModal", searchModal)`.
 
 **Properties:**
 
-- `open`  *(boolean)* — Whether the modal is visible.
 - `query`  *(string)* — Current search input value.
 - `results`  *(Array)* — Array of search result objects.
 - `selectedIndex`  *(number)* — Index of the keyboard-highlighted result.

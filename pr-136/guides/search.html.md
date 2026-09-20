@@ -6,7 +6,13 @@ Configure how readers search your documentation — Pagefind for fast client-sid
 
 [Pagefind](https://pagefind.app) provides fast, keyboard-driven search with no external services. Press `⌘K` or `Ctrl`+`K` to open the search modal.
 
-Lumina runs the pinned Pagefind CLI automatically at the end of each build. Add the theme’s JavaScript development dependency with `pnpm install`, or install Pagefind separately and expose its executable on `PATH`.
+Lumina runs Pagefind automatically at the end of each build. Install the pinned CLI in your documentation project:
+
+```bash
+pnpm add -D pagefind@1.3.0
+```
+
+Theme contributors can use `pnpm install` to install the repository’s locked version. You can also expose a Pagefind executable on `PATH`.
 
 Build your docs and search is ready:
 

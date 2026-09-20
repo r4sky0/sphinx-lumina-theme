@@ -259,9 +259,9 @@ The `literalinclude` directive pulls code directly from a file in your project. 
 from sphinx_lumina_theme import __version__
 
 project = "Sphinx Lumina Theme"
+html_short_title = "Lumina"
 extensions = [
     "myst_parser",
-    "sphinx_design",
 ```
 
 The MyST syntax:
