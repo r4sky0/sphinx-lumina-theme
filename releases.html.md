@@ -1,5 +1,28 @@
 # Releases
 
+## v2.0.0 (2026-09-20)
+
+### Features
+
+- **theme**: Ship the Lumina 2 editorial redesign
+  ([#140](https://github.com/r4sky0/sphinx-lumina-theme/pull/140),
+  [`1d6cd54`](https://github.com/r4sky0/sphinx-lumina-theme/commit/1d6cd54f98b3adf0e8aa605ccec9e6fd4cc17894))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Continuous Integration
+
+- Update checkout pin comments ([#138](https://github.com/r4sky0/sphinx-lumina-theme/pull/138),
+  [`39bc1b6`](https://github.com/r4sky0/sphinx-lumina-theme/commit/39bc1b6c18d40756571498d9429de59aec421b2a))
+
+#### Documentation
+
+- Document uv workflow ([#139](https://github.com/r4sky0/sphinx-lumina-theme/pull/139),
+  [`6ffff55`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6ffff555e8cdb8619517563a6e36896b6228b162))
+
+</details>
+
 ## v1.44.1 (2026-09-20)
 
 ### Bug Fixes
