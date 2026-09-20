@@ -1,5 +1,18 @@
 # Releases
 
+## v2.1.0 (2026-09-20)
+
+### Features
+
+- **docs**: Redesign the single-screen landing page
+  ([#142](https://github.com/r4sky0/sphinx-lumina-theme/pull/142),
+  [`ede8473`](https://github.com/r4sky0/sphinx-lumina-theme/commit/ede84730b32bdb25b7974b10e06d876522241ad8))
+
+### Refactoring
+
+- Remove audited over-engineering ([#137](https://github.com/r4sky0/sphinx-lumina-theme/pull/137),
+  [`4f2f913`](https://github.com/r4sky0/sphinx-lumina-theme/commit/4f2f913775625b765e4b195dfb50357bc825b28b))
+
 ## v2.0.1 (2026-09-20)
 
 ### Bug Fixes
