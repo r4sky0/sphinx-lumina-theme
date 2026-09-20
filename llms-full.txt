@@ -3259,7 +3259,7 @@ Alignment markers:
 
 ### Wide Tables
 
-Tables with many columns scroll horizontally when they overflow the content area. The values below are illustrative.
+Tables with many columns scroll horizontally on larger screens when they overflow the content area. On narrow screens, simple data tables become labelled rows so each record can be read without side-to-side scrolling; complex tables keep the horizontal-scroll fallback. The values below are illustrative.
 
 | Option              | Type   | Default    | Required   | Description           | Example   | Since   |
 |---------------------|--------|------------|------------|-----------------------|-----------|---------|
