@@ -123,6 +123,20 @@ def test_mobile_sidebar(page: Page, live_server: str):
     expect(drawer).to_be_visible(timeout=3000)
 
 
+def test_mobile_tables_stack_rows(page: Page, live_server: str):
+    """Wide data tables become labelled rows on narrow screens."""
+    page.set_viewport_size({"width": 375, "height": 667})
+    page.goto(f"{live_server}/reference/lists-and-tables.html")
+    page.wait_for_function("() => window.Alpine !== undefined")
+
+    table = page.locator(".lumina-table-stackable").first
+    expect(table).to_be_visible()
+    expect(table.locator("tbody td").first).to_have_attribute("data-label", "Format")
+    assert page.evaluate(
+        """(table) => table.scrollWidth <= table.clientWidth""", table.element_handle()
+    )
+
+
 def test_toc_scrollspy(page: Page, live_server: str):
     """Scrolling should activate a TOC link via scrollspy."""
     # TOC sidebar requires xl breakpoint (1280px+)

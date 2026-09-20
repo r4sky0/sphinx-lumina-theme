@@ -25,6 +25,7 @@ import layoutToggle from "./layout-toggle.js";
 import iconBrowser from "./icon-browser.js";
 import codeWrapToggle from "./code-wrap.js";
 import imageLightbox from "./image-lightbox.js";
+import responsiveTables from "./responsive-tables.js";
 Alpine.data("scrollspy", scrollspy);
 Alpine.data("themeToggle", themeToggle);
 Alpine.data("searchModal", searchModal);
@@ -58,6 +59,7 @@ function boot() {
   curlCopy();
   tryIt();
   codeWrapToggle();
+  responsiveTables();
 }
 
 if (document.readyState === "loading") {

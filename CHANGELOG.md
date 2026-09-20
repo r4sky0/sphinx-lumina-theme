@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.0.1 (2026-09-20)
+
+### Bug Fixes
+
+- **responsive**: Improve mobile table reading
+  ([#141](https://github.com/r4sky0/sphinx-lumina-theme/pull/141),
+  [`fbee9eb`](https://github.com/r4sky0/sphinx-lumina-theme/commit/fbee9ebe489c9323459553ddb2beadc93bbf66be))
+
+
 ## v2.0.0 (2026-09-20)
 
 ### Features
