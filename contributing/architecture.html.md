@@ -32,6 +32,7 @@ The build script is `scripts/build-assets.js`. Tailwind scans HTML templates and
 ```bash
 pnpm run build          # Production build (minified, no sourcemaps)
 pnpm run dev            # Watch mode (unminified, sourcemaps)
+pnpm run build:icons    # Regenerate Python Lucide icon definitions
 ```
 
 ## Interactivity Pattern

@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-15T06:37:31+00:00" />
+    <meta property="article:modified_time" content="2026-09-21T19:46:06+00:00" />
     <title>Wide Layout &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=dec04e38" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=8267807a" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -37,11 +37,11 @@
     
     
         
-        <meta name="description" content="Lumina’s default content width (48rem) is optimized for comfortable reading at around 80-90 characters per line. If your documentation is code-heavy or include…">
+        <meta name="description" content="Lumina limits the center column to 50rem, including its padding. Paragraphs, lists, code blocks, and other content share that column’s full usable width. Wide…">
         
         <meta name="theme-color" content="#10b981">
         <meta property="og:title" content="Wide Layout">
-        <meta property="og:description" content="Lumina’s default content width (48rem) is optimized for comfortable reading at around 80-90 characters per line. If your documentation is code-heavy or include…">
+        <meta property="og:description" content="Lumina limits the center column to 50rem, including its padding. Paragraphs, lists, code blocks, and other content share that column’s full usable width. Wide…">
         <meta property="og:url" content="https://r4sky0.github.io/sphinx-lumina-theme/guides/wide-layout.html">
         <meta property="og:type" content="article">
         <meta property="og:site_name" content="Sphinx Lumina Theme">
@@ -58,14 +58,14 @@
         
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Wide Layout">
-        <meta name="twitter:description" content="Lumina’s default content width (48rem) is optimized for comfortable reading at around 80-90 characters per line. If your documentation is code-heavy or include…">
+        <meta name="twitter:description" content="Lumina limits the center column to 50rem, including its padding. Paragraphs, lists, code blocks, and other content share that column’s full usable width. Wide…">
         <meta name="twitter:image" content="https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png">
         
         
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://r4sky0.github.io/sphinx-lumina-theme/guides/index.html"}, {"@type": "ListItem", "position": 3, "name": "Wide Layout", "item": "https://r4sky0.github.io/sphinx-lumina-theme/guides/wide-layout.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Wide Layout", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Lumina’s default content width (48rem) is optimized for comfortable reading at around 80-90 characters per line. If your documentation is code-heavy or include…", "url": "https://r4sky0.github.io/sphinx-lumina-theme/guides/wide-layout.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/guides/wide-layout.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-04-15T00:00:00+00:00", "dateModified": "2026-04-15T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Wide Layout", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Lumina limits the center column to 50rem, including its padding. Paragraphs, lists, code blocks, and other content share that column’s full usable width. Wide…", "url": "https://r4sky0.github.io/sphinx-lumina-theme/guides/wide-layout.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/guides/wide-layout.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-21T00:00:00+00:00", "dateModified": "2026-09-21T00:00:00+00:00"}</script>
         
         
     
@@ -732,8 +732,9 @@
 
     <section class="tex2jax_ignore mathjax_ignore" id="wide-layout">
 <h1>Wide Layout<a class="headerlink" href="#wide-layout" title="Link to this heading">¶</a></h1>
-<p>Lumina’s default content width (48rem) is optimized for comfortable reading at around 80-90 characters per line. If your documentation is code-heavy or includes wide tables, you can enable a wider layout that expands the content area to 60rem.</p>
-<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>1 min read</span></div><section id="reader-toggle">
+<p>Lumina limits the center column to 50rem, including its padding. Paragraphs, lists, code blocks, and other content share that column’s full usable width. Wide mode expands the column to 60rem for code-heavy documentation and wide tables.</p>
+<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>2 min read</span></div><p>On large screens, the navigation background extends to the left edge of the viewport. Navigation links and the page outline stay close to the article.</p>
+<section id="reader-toggle">
 <h2>Reader Toggle<a class="headerlink" href="#reader-toggle" title="Link to this heading">¶</a></h2>
 <p>Let readers choose between normal and wide layouts with a toggle button in the header:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
@@ -763,7 +764,7 @@
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Link to this heading">¶</a></h2>
 <p>When a reader clicks the toggle, Lumina sets the <code class="docutils literal notranslate"><span class="pre">data-layout</span></code> attribute on the <code class="docutils literal notranslate"><span class="pre">&lt;html&gt;</span></code> element:</p>
 <ul class="simple">
-<li><p><strong>Normal layout:</strong> no <code class="docutils literal notranslate"><span class="pre">data-layout</span></code> attribute (content max-width: 48rem)</p></li>
+<li><p><strong>Normal layout:</strong> no <code class="docutils literal notranslate"><span class="pre">data-layout</span></code> attribute (content max-width: 50rem)</p></li>
 <li><p><strong>Wide layout:</strong> <code class="docutils literal notranslate"><span class="pre">&lt;html</span> <span class="pre">data-layout=&quot;wide&quot;&gt;</span></code> (content max-width: 60rem)</p></li>
 </ul>
 <p>The reader’s choice is persisted in <code class="docutils literal notranslate"><span class="pre">localStorage</span></code> under the key <code class="docutils literal notranslate"><span class="pre">lumina-layout</span></code>. An inline script applies the layout before the first paint, preventing layout shift on page load.</p>
@@ -779,16 +780,16 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Page wrapper</p></td>
+<td><p>80rem (1280px)</p></td>
 <td><p>90rem (1440px)</p></td>
-<td><p>100rem (1600px)</p></td>
 </tr>
-<tr class="row-odd"><td><p>Content area</p></td>
-<td><p>48rem (768px)</p></td>
+<tr class="row-odd"><td><p>Content area, including padding</p></td>
+<td><p>50rem (800px)</p></td>
 <td><p>60rem (960px)</p></td>
 </tr>
 <tr class="row-even"><td><p>Header</p></td>
+<td><p>80rem</p></td>
 <td><p>90rem</p></td>
-<td><p>100rem</p></td>
 </tr>
 <tr class="row-odd"><td><p>Sidebars</p></td>
 <td><p>Unchanged</p></td>
@@ -797,6 +798,7 @@
 </tbody>
 </table>
 <p>The left navigation sidebar (260px) and right table of contents (220px) stay the same width. All extra space goes to the content column.</p>
+<p>Paragraphs wrap at spaces by default. For automatic word separation at syllable boundaries, see the hyphenation example in <a class="reference internal" href="custom-styling.html"><span class="doc">Custom Styling</span></a>.</p>
 </section>
 <section id="customizing-wide-mode-widths">
 <h2>Customizing Wide Mode Widths<a class="headerlink" href="#customizing-wide-mode-widths" title="Link to this heading">¶</a></h2>
@@ -859,7 +861,7 @@
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>April 15, 2026</time>
+            Last updated <time>September 21, 2026</time>
         </p>
     
     

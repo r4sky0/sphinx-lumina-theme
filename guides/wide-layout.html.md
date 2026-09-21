@@ -1,6 +1,8 @@
 # Wide Layout
 
-Lumina’s default content width (48rem) is optimized for comfortable reading at around 80-90 characters per line. If your documentation is code-heavy or includes wide tables, you can enable a wider layout that expands the content area to 60rem.
+Lumina limits the center column to 50rem, including its padding. Paragraphs, lists, code blocks, and other content share that column’s full usable width. Wide mode expands the column to 60rem for code-heavy documentation and wide tables.
+
+On large screens, the navigation background extends to the left edge of the viewport. Navigation links and the page outline stay close to the article.
 
 ## Reader Toggle
 
@@ -30,21 +32,23 @@ This is useful when your entire documentation is code-heavy and you want every r
 
 When a reader clicks the toggle, Lumina sets the `data-layout` attribute on the `<html>` element:
 
-- **Normal layout:** no `data-layout` attribute (content max-width: 48rem)
+- **Normal layout:** no `data-layout` attribute (content max-width: 50rem)
 - **Wide layout:** `<html data-layout="wide">` (content max-width: 60rem)
 
 The reader’s choice is persisted in `localStorage` under the key `lumina-layout`. An inline script applies the layout before the first paint, preventing layout shift on page load.
 
 ## What Changes in Wide Mode
 
-| Element      | Normal         | Wide            |
-|--------------|----------------|-----------------|
-| Page wrapper | 90rem (1440px) | 100rem (1600px) |
-| Content area | 48rem (768px)  | 60rem (960px)   |
-| Header       | 90rem          | 100rem          |
-| Sidebars     | Unchanged      | Unchanged       |
+| Element                         | Normal         | Wide           |
+|---------------------------------|----------------|----------------|
+| Page wrapper                    | 80rem (1280px) | 90rem (1440px) |
+| Content area, including padding | 50rem (800px)  | 60rem (960px)  |
+| Header                          | 80rem          | 90rem          |
+| Sidebars                        | Unchanged      | Unchanged      |
 
 The left navigation sidebar (260px) and right table of contents (220px) stay the same width. All extra space goes to the content column.
+
+Paragraphs wrap at spaces by default. For automatic word separation at syllable boundaries, see the hyphenation example in [Custom Styling](custom-styling.md).
 
 ## Customizing Wide Mode Widths
 

@@ -116,6 +116,29 @@ code, pre, .highlight {
 If you use custom fonts, add the font files to your `_static/` directory and include the appropriate `@font-face` declarations.
 :::
 
+## Hyphenation
+
+Paragraphs fill the center column and wrap at spaces. Long unbroken text, such as URLs, can wrap to prevent overflow.
+
+To let the browser hyphenate words at language-appropriate points, add this to your custom stylesheet:
+
+```{code-block} css
+:caption: docs/_static/custom.css
+.lumina-article {
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+```
+
+Set the document language in `conf.py` so Sphinx emits the matching HTML `lang` attribute:
+
+```{code-block} python
+:caption: conf.py
+language = "en"  # Use "de" for German, for example.
+```
+
+Hyphenation depends on the browser's dictionaries for that language. Lumina excludes code and keyboard shortcuts from hyphenation. Use `manual` instead of `auto` in both declarations to return to author-supplied soft hyphens only.
+
 ## Syntax Highlighting
 
 Lumina ships five syntax highlighting presets — curated light/dark pairs tested for contrast on the theme's code block backgrounds. Set the `code_style` theme option to switch:
