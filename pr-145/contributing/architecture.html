@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-05-01T09:09:21+00:00" />
+    <meta property="article:modified_time" content="2026-09-21T19:41:08+00:00" />
     <title>Architecture &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=0b8e9bef" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=8267807a" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -65,7 +65,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/pr-145/"}, {"@type": "ListItem", "position": 2, "name": "Contributing", "item": "https://r4sky0.github.io/sphinx-lumina-theme/pr-145/contributing/index.html"}, {"@type": "ListItem", "position": 3, "name": "Architecture", "item": "https://r4sky0.github.io/sphinx-lumina-theme/pr-145/contributing/architecture.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Architecture", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/pr-145/_static/logo-square.png"}}, "description": "How the Sphinx Lumina Theme is structured internally.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/pr-145/contributing/architecture.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/pr-145/contributing/architecture.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/pr-145/_static/og-card.png", "datePublished": "2026-05-01T00:00:00+00:00", "dateModified": "2026-05-01T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Architecture", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/pr-145/_static/logo-square.png"}}, "description": "How the Sphinx Lumina Theme is structured internally.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/pr-145/contributing/architecture.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/pr-145/contributing/architecture.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/pr-145/_static/og-card.png", "datePublished": "2026-09-21T00:00:00+00:00", "dateModified": "2026-09-21T00:00:00+00:00"}</script>
         
         
     
@@ -677,6 +677,7 @@
 <p>The build script is <code class="docutils literal notranslate"><span class="pre">scripts/build-assets.js</span></code>. Tailwind scans HTML templates and JS files for class usage.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pnpm<span class="w"> </span>run<span class="w"> </span>build<span class="w">          </span><span class="c1"># Production build (minified, no sourcemaps)</span>
 pnpm<span class="w"> </span>run<span class="w"> </span>dev<span class="w">            </span><span class="c1"># Watch mode (unminified, sourcemaps)</span>
+pnpm<span class="w"> </span>run<span class="w"> </span>build:icons<span class="w">    </span><span class="c1"># Regenerate Python Lucide icon definitions</span>
 </pre></div>
 </div>
 </section>
@@ -741,7 +742,7 @@ uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </sp
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>May 1, 2026</time>
+            Last updated <time>September 21, 2026</time>
         </p>
     
     
