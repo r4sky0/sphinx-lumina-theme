@@ -1,0 +1,62 @@
+# Wide Layout
+
+Lumina lets the main content column use the space available between the navigation and page outline. Normal prose is capped at 70ch; wide mode expands it to 80ch, while code, tables, and diagrams can use the full column. If your documentation is code-heavy or includes wide tables, you can enable a wider layout that expands the page wrapper from 90rem to 100rem.
+
+## Reader Toggle
+
+Let readers choose between normal and wide layouts with a toggle button in the header:
+
+```python
+html_theme_options = {
+    "wide_layout": "toggle",
+}
+```
+
+This adds a toggle button next to the dark mode switch. The toggle is only visible on screens 1280px and wider, since narrower viewports don’t have extra space to use. The reader’s preference is persisted in `localStorage`.
+
+## Always Wide
+
+Force wide mode permanently — no toggle, always wide:
+
+```python
+html_theme_options = {
+    "wide_layout": "always",
+}
+```
+
+This is useful when your entire documentation is code-heavy and you want every reader to see the wider layout without having to discover and click a toggle.
+
+## How It Works
+
+When a reader clicks the toggle, Lumina sets the `data-layout` attribute on the `<html>` element:
+
+- **Normal layout:** no `data-layout` attribute (page wrapper max-width: 90rem)
+- **Wide layout:** `<html data-layout="wide">` (page wrapper max-width: 100rem)
+
+The reader’s choice is persisted in `localStorage` under the key `lumina-layout`. An inline script applies the layout before the first paint, preventing layout shift on page load.
+
+## What Changes in Wide Mode
+
+| Element      | Normal                                  | Wide                                    |
+|--------------|-----------------------------------------|-----------------------------------------|
+| Page wrapper | 90rem (1440px)                          | 100rem (1600px)                         |
+| Content area | Fills available space; prose up to 70ch | Fills available space; prose up to 80ch |
+| Header       | 90rem                                   | 100rem                                  |
+| Sidebars     | Unchanged                               | Unchanged                               |
+
+The left navigation sidebar (260px) and right table of contents (220px) stay the same width. All extra space goes to the content column.
+
+## Customizing Wide Mode Widths
+
+You can override the wide mode widths in a custom stylesheet:
+
+```python
+html_static_path = ["_static"]
+html_css_files = ["custom.css"]
+```
+
+```css
+[data-layout="wide"] .lumina-wrapper {
+    max-width: 110rem;
+}
+```
