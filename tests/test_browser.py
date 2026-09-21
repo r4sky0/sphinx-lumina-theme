@@ -145,6 +145,58 @@ def test_theme_persists_on_reload(page: Page, live_server: str):
     expect(page.locator("html")).to_have_attribute("data-theme", "dark")
 
 
+@pytest.mark.parametrize("theme", ["light", "dark"])
+@pytest.mark.parametrize("layout, maximum", [("normal", 800), ("wide", 960)])
+def test_article_width_and_navigation_surface(
+    page: Page, live_server, theme, layout, maximum
+):
+    page.goto(f"{live_server}/guides/wide-layout.html")
+    page.evaluate(
+        "([theme, layout]) => { document.documentElement.dataset.theme = theme;"
+        " document.documentElement.dataset.layout = layout; }",
+        [theme, layout],
+    )
+    for width in (390, 1024, 1280, 1920, 2560):
+        page.set_viewport_size({"width": width, "height": 900})
+        dimensions = page.evaluate("""() => {
+            const article = document.querySelector('.lumina-article');
+            const sidebar = document.querySelector('#lumina-sidebar');
+            const gutter = getComputedStyle(sidebar, '::before');
+            return {
+                content: document.querySelector('#lumina-content').getBoundingClientRect().width,
+                article: article.getBoundingClientRect().width,
+                paragraph: article.querySelector('p').getBoundingClientRect().width,
+                overflow: document.documentElement.scrollWidth > innerWidth,
+                gutterLeft: sidebar.getBoundingClientRect().left - parseFloat(gutter.width),
+                gutterColor: gutter.backgroundColor,
+                sidebarColor: getComputedStyle(sidebar.querySelector('.lumina-sidebar-desktop')).backgroundColor,
+            };
+        }""")
+        assert dimensions["paragraph"] == pytest.approx(dimensions["article"])
+        assert dimensions["content"] <= maximum
+        assert not dimensions["overflow"]
+        if width >= 1920:
+            assert dimensions["content"] == maximum
+            assert dimensions["gutterLeft"] <= 0
+            assert dimensions["gutterColor"] == dimensions["sidebarColor"]
+
+
+def test_prose_wrapping_and_optional_hyphenation(page: Page, live_server: str):
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(f"{live_server}/guides/wide-layout.html")
+    page.locator(".lumina-article p").first.evaluate(
+        "p => { const a = document.createElement('a');"
+        " a.href = 'https://example.com/' + 'longpath'.repeat(40);"
+        " a.textContent = a.href; p.replaceChildren(a); }"
+    )
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    page.add_style_tag(
+        content=".lumina-article { -webkit-hyphens: auto; hyphens: auto; }"
+    )
+    expect(page.locator(".lumina-article p").first).to_have_css("hyphens", "auto")
+    expect(page.locator(".lumina-article code").first).to_have_css("hyphens", "none")
+
+
 def test_mobile_sidebar(page: Page, live_server: str):
     """On mobile viewport, hamburger should open sidebar drawer."""
     # Use a regular page (not landing) where sidebar is rendered

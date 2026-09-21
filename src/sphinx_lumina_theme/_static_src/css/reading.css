@@ -7,7 +7,7 @@
     backdrop-filter: blur(12px);
   }
 }
-.lumina-header-inner { max-width: 90rem; padding-inline: 1.5rem; }
+.lumina-header-inner { max-width: 80rem; padding-inline: 1.5rem; }
 .lumina-header-inner > div:first-child a { gap: 0.625rem; }
 .lumina-header-inner > div:first-child > a > span { font-size: 1.125rem; letter-spacing: -0.025em; }
 .lumina-header-inner > div:last-child { gap: 0.25rem; }
@@ -87,7 +87,7 @@
 .lumina-sidebar-nav li > ul { border-left: 0; margin-left: 0; padding-left: 0.75rem; }
 .lumina-sidebar-nav-toggle { min-width: 1.75rem; min-height: 1.75rem; }
 
-#lumina-content { max-width: 50rem; padding: 2.25rem 2.75rem 4rem; }
+#lumina-content { padding: 2.25rem 2.75rem 4rem; }
 .lumina-content-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
 .lumina-content-toolbar nav { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: var(--lumina-text-muted); }
 .lumina-content-toolbar nav a { color: var(--lumina-link); text-decoration: none; }

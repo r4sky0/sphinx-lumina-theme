@@ -4,6 +4,13 @@
   font-size: 1rem;
   line-height: 1.75;
   color: var(--lumina-text);
+  overflow-wrap: break-word;
+}
+
+/* Hyphenation may be enabled for prose, but must not change code spelling. */
+.lumina-article :is(code, pre, kbd, samp) {
+  -webkit-hyphens: none;
+  hyphens: none;
 }
 
 /* Light-on-dark text appears thinner — give it slightly more breathing room */
@@ -73,7 +80,6 @@
 }
 
 .lumina-article p {
-  max-width: 70ch;
   margin-bottom: 1.125rem;
 }
 
