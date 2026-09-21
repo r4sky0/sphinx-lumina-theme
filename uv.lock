@@ -1067,6 +1067,7 @@ version = "2.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "sphinx" },
+    { name = "sphinx-design" },
     { name = "sphinx-sitemap" },
 ]
 
@@ -1085,7 +1086,6 @@ dev = [
     { name = "ruff" },
     { name = "sphinx-autobuild" },
     { name = "sphinx-copybutton" },
-    { name = "sphinx-design" },
     { name = "sphinx-js" },
     { name = "sphinx-last-updated-by-git" },
     { name = "sphinx-llm" },
@@ -1097,6 +1097,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "sphinx", specifier = ">=8.0" },
+    { name = "sphinx-design", specifier = ">=0.6" },
     { name = "sphinx-sitemap", specifier = ">=2.6" },
     { name = "uv", marker = "extra == 'build'", specifier = "~=0.12.17" },
 ]
@@ -1112,7 +1113,6 @@ dev = [
     { name = "ruff", specifier = ">=0.11" },
     { name = "sphinx-autobuild", specifier = ">=2024.0" },
     { name = "sphinx-copybutton", specifier = ">=0.5" },
-    { name = "sphinx-design", specifier = ">=0.6" },
     { name = "sphinx-js", specifier = ">=4.0" },
     { name = "sphinx-last-updated-by-git", specifier = ">=0.3" },
     { name = "sphinx-llm", specifier = ">=0.4.1" },
