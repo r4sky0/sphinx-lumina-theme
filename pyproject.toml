@@ -59,7 +59,7 @@ exclude = [
     ".nvmrc",
     ".python-version",
     "CHANGELOG.md",
-    "CLAUDE.md",
+    "AGENTS.md",
     "commitlint.config.js",
     "docs/",
     "docs/assets/banner.png",
