@@ -456,7 +456,7 @@ mermaid.initialize(
 
 window.addEventListener("load", load);
 window.runMermaid = runMermaid;</script>
-    <script defer="defer" src="_static/lumina.js?v=6efbdae5"></script>
+    <script defer="defer" src="_static/lumina.js?v=1c4e1867"></script>
     <script src="_static/searchtools.js"></script>
     <script src="_static/language_data.js"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/search.html" />
@@ -1297,16 +1297,17 @@ window.runMermaid = runMermaid;</script>
 
     
         <dialog x-data="imageLightbox()"
-                x-on:cancel.prevent="close()"
+                x-on:close="onClose()"
                 class="lumina-lightbox-overlay"
                 aria-modal="true"
                 x-bind:aria-label="caption || 'Image preview'">
             <div class="lumina-overlay-backdrop lumina-lightbox-backdrop"
                  x-on:click="close()"></div>
-            <button x-on:click="close()"
-                    class="lumina-lightbox-close"
-                    aria-label="Close preview"
-                    type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+            <form method="dialog">
+                <button class="lumina-lightbox-close"
+                        aria-label="Close preview"
+                        type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+            </form>
             <div class="lumina-lightbox-figure">
                 <template x-if="contentType === 'img'">
                     <img x-bind:src="imgSrc" x-bind:alt="imgAlt">
