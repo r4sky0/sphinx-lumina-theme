@@ -1,5 +1,13 @@
 # Releases
 
+## v2.1.2 (2026-09-21)
+
+### Bug Fixes
+
+- Declare sphinx-design runtime dependency
+  ([#143](https://github.com/r4sky0/sphinx-lumina-theme/pull/143),
+  [`332a5fe`](https://github.com/r4sky0/sphinx-lumina-theme/commit/332a5fe558efa77affed3c05186d92ad0e0dcc17))
+
 ## v2.1.1 (2026-09-21)
 
 ### Bug Fixes
