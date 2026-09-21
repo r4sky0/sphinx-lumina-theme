@@ -2,6 +2,26 @@
 
 <!-- releases -->
 
+## v2.2.0 (2026-09-21)
+
+### Features
+
+- **layout**: Expand wide-screen content
+  ([#145](https://github.com/r4sky0/sphinx-lumina-theme/pull/145),
+  [`6f4ea25`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6f4ea2546b79b2a2e97cc708fcd5c72665352049))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Documentation
+
+- Consolidate repository instructions
+  ([#146](https://github.com/r4sky0/sphinx-lumina-theme/pull/146),
+  [`770e3e5`](https://github.com/r4sky0/sphinx-lumina-theme/commit/770e3e5b95e95791547e5de5156e2a1af968313c))
+
+</details>
+
+
 ## v2.1.2 (2026-09-21)
 
 ### Bug Fixes
