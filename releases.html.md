@@ -1,5 +1,13 @@
 # Releases
 
+## v2.1.1 (2026-09-21)
+
+### Bug Fixes
+
+- **lightbox**: Make close button native
+  ([#144](https://github.com/r4sky0/sphinx-lumina-theme/pull/144),
+  [`facca12`](https://github.com/r4sky0/sphinx-lumina-theme/commit/facca12ba0b020cf983980b096bdba6853aa3afa))
+
 ## v2.1.0 (2026-09-20)
 
 ### Features
