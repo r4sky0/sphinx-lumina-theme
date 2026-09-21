@@ -17,7 +17,7 @@ The core surface and text tokens. These are the variables you’ll override most
 | `--lumina-border`        | `#dfe5e1`       | `#303b34`      | Dividers, table cell borders, sidebar separators                                                                           |
 | `--lumina-accent`        | `#10b981`       | `#10b981`      | Brand accents, active indicators, skip link, headerlink tooltip. Also overridable through the `accent_color` theme option. |
 | `--lumina-link`          | `#08764f`       | `#5ed9a3`      | Readable text links and focus outlines                                                                                     |
-| `--lumina-navigation-bg` | `#f7f8f6`       | `#111613`      | Desktop sidebar surface                                                                                                    |
+| `--lumina-navigation-bg` | `#f7f8f6`       | `#111613`      | Desktop sidebar surface and the outer gutter to its left                                                                   |
 | `--lumina-floating-bg`   | `#fdfdfc`       | `#242c27`      | Section switcher, page-actions menu, search dialog, and back-to-top button                                                 |
 | `--lumina-accent-light`  | `#eaf6ef`       | `#1c3329`      | Hover/active background tint for accent surfaces, including the current sidebar item                                       |
 | `--lumina-code-bg`       | `#f6f7f6`       | `#1b211e`      | Inline code and code block background                                                                                      |

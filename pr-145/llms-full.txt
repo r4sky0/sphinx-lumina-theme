@@ -1501,7 +1501,7 @@ The core surface and text tokens. These are the variables you’ll override most
 | `--lumina-border`        | `#dfe5e1`       | `#303b34`      | Dividers, table cell borders, sidebar separators                                                                           |
 | `--lumina-accent`        | `#10b981`       | `#10b981`      | Brand accents, active indicators, skip link, headerlink tooltip. Also overridable through the `accent_color` theme option. |
 | `--lumina-link`          | `#08764f`       | `#5ed9a3`      | Readable text links and focus outlines                                                                                     |
-| `--lumina-navigation-bg` | `#f7f8f6`       | `#111613`      | Desktop sidebar surface                                                                                                    |
+| `--lumina-navigation-bg` | `#f7f8f6`       | `#111613`      | Desktop sidebar surface and the outer gutter to its left                                                                   |
 | `--lumina-floating-bg`   | `#fdfdfc`       | `#242c27`      | Section switcher, page-actions menu, search dialog, and back-to-top button                                                 |
 | `--lumina-accent-light`  | `#eaf6ef`       | `#1c3329`      | Hover/active background tint for accent surfaces, including the current sidebar item                                       |
 | `--lumina-code-bg`       | `#f6f7f6`       | `#1b211e`      | Inline code and code block background                                                                                      |
@@ -1703,6 +1703,27 @@ code, pre, .highlight {
 
 #### NOTE
 If you use custom fonts, add the font files to your `_static/` directory and include the appropriate `@font-face` declarations.
+
+## Hyphenation
+
+Paragraphs fill the center column and wrap at spaces. Long unbroken text, such as URLs, can wrap to prevent overflow.
+
+To let the browser hyphenate words at language-appropriate points, add this to your custom stylesheet:
+
+```css
+.lumina-article {
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+```
+
+Set the document language in `conf.py` so Sphinx emits the matching HTML `lang` attribute:
+
+```python
+language = "en"  # Use "de" for German, for example.
+```
+
+Hyphenation depends on the browser’s dictionaries for that language. Lumina excludes code and keyboard shortcuts from hyphenation. Use `manual` instead of `auto` in both declarations to return to author-supplied soft hyphens only.
 
 ## Syntax Highlighting
 
@@ -5596,7 +5617,13 @@ See [Footnotes & References](footnotes-and-references.md) for the full cross-ref
 
 # Wide Layout
 
-Lumina lets the main content column use the space available between the navigation and page outline. Normal prose is capped at 70ch; wide mode expands it to 80ch, while code, tables, and diagrams can use the full column. If your documentation is code-heavy or includes wide tables, you can enable a wider layout that expands the page wrapper from 90rem to 100rem.
+# <<<<<<< Updated upstream<br/>Lumina lets the main content column use the space available between the navigation and page outline. Normal prose is capped at 70ch; wide mode expands it to 80ch, while code, tables, and diagrams can use the full column. If your documentation is code-heavy or includes wide tables, you can enable a wider layout that expands the page wrapper from 90rem to 100rem.
+
+Lumina limits the center column to 50rem, including its padding. Paragraphs, lists, code blocks, and other content share that column’s full usable width. Wide mode expands the column to 60rem for code-heavy documentation and wide tables.
+
+On large screens, the navigation background extends to the left edge of the viewport. Navigation links and the page outline stay close to the article.
+
+> > > > > > > Stashed changes
 
 ## Reader Toggle
 
@@ -5626,21 +5653,36 @@ This is useful when your entire documentation is code-heavy and you want every r
 
 When a reader clicks the toggle, Lumina sets the `data-layout` attribute on the `<html>` element:
 
+<<<<<<< Updated upstream
+
 - **Normal layout:** no `data-layout` attribute (page wrapper max-width: 90rem)
 - **Wide layout:** `<html data-layout="wide">` (page wrapper max-width: 100rem)
+  =======
+- **Normal layout:** no `data-layout` attribute (content max-width: 50rem)
+- **Wide layout:** `<html data-layout="wide">` (content max-width: 60rem)
+
+> > > > > > > Stashed changes
 
 The reader’s choice is persisted in `localStorage` under the key `lumina-layout`. An inline script applies the layout before the first paint, preventing layout shift on page load.
 
 ## What Changes in Wide Mode
 
-| Element      | Normal                                  | Wide                                    |
-|--------------|-----------------------------------------|-----------------------------------------|
-| Page wrapper | 90rem (1440px)                          | 100rem (1600px)                         |
-| Content area | Fills available space; prose up to 70ch | Fills available space; prose up to 80ch |
-| Header       | 90rem                                   | 100rem                                  |
-| Sidebars     | Unchanged                               | Unchanged                               |
+| Element                         | Normal                                  | Wide                                    |
+|---------------------------------|-----------------------------------------|-----------------------------------------|
+| <<<<<<< Updated upstream        |                                         |                                         |
+| Page wrapper                    | 90rem (1440px)                          | 100rem (1600px)                         |
+| Content area                    | Fills available space; prose up to 70ch | Fills available space; prose up to 80ch |
+| Header                          | 90rem                                   | 100rem                                  |
+| =======                         |                                         |                                         |
+| Page wrapper                    | 80rem (1280px)                          | 90rem (1440px)                          |
+| Content area, including padding | 50rem (800px)                           | 60rem (960px)                           |
+| Header                          | 80rem                                   | 90rem                                   |
+> > > > > > > Stashed changes
+> > > > > > > | Sidebars | Unchanged | Unchanged |
 
 The left navigation sidebar (260px) and right table of contents (220px) stay the same width. All extra space goes to the content column.
+
+Paragraphs wrap at spaces by default. For automatic word separation at syllable boundaries, see the hyphenation example in [Custom Styling](custom-styling.md).
 
 ## Customizing Wide Mode Widths
 
