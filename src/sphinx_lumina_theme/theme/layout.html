@@ -234,16 +234,17 @@
 
     {% if theme_image_lightbox == "true" %}
         <dialog x-data="imageLightbox()"
-                x-on:cancel.prevent="close()"
+                x-on:close="onClose()"
                 class="lumina-lightbox-overlay"
                 aria-modal="true"
                 x-bind:aria-label="caption || 'Image preview'">
             <div class="lumina-overlay-backdrop lumina-lightbox-backdrop"
                  x-on:click="close()"></div>
-            <button x-on:click="close()"
-                    class="lumina-lightbox-close"
-                    aria-label="Close preview"
-                    type="button">{{ lumina_icon("x", size=20) }}</button>
+            <form method="dialog">
+                <button class="lumina-lightbox-close"
+                        aria-label="Close preview"
+                        type="submit">{{ lumina_icon("x", size=20) }}</button>
+            </form>
             <div class="lumina-lightbox-figure">
                 <template x-if="contentType === 'img'">
                     <img x-bind:src="imgSrc" x-bind:alt="imgAlt">
