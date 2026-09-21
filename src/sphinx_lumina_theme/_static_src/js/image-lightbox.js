@@ -196,8 +196,11 @@ export default function imageLightbox() {
     },
 
     close() {
+      this.$el.close();
+    },
+
+    onClose() {
       document.body.classList.remove("lumina-lightbox-open");
-      if (this.$el.open) this.$el.close();
       const host = this.$el.querySelector(".lumina-lightbox-svg-host");
       if (host) host.replaceChildren();
       if (this._trigger) {

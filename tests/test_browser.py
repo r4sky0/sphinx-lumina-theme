@@ -41,6 +41,20 @@ def test_lightbox_dialog_closes_on_escape(page: Page, live_server: str):
     expect(dialog).to_be_hidden()
 
 
+def test_lightbox_close_button_uses_native_dialog(page: Page, live_server: str):
+    page.goto(f"{live_server}/reference/images-and-figures.html")
+    page.locator(".lumina-article img").first.click()
+
+    dialog = page.locator("dialog.lumina-lightbox-overlay")
+    expect(dialog).to_be_visible()
+    close = dialog.get_by_role("button", name="Close preview")
+    assert close.evaluate("button => button.form.method") == "dialog"
+    close.click()
+
+    expect(dialog).to_be_hidden()
+    expect(page.locator("body")).not_to_have_class("lumina-lightbox-open")
+
+
 def test_fluid_without_offscreen_canvas(page: Page, live_server: str):
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
