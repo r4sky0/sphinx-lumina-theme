@@ -789,7 +789,7 @@ html.has-announcement {
 
 .lumina-wrapper {
   display: flex;
-  max-width: 90rem;
+  max-width: 80rem;
   margin: var(--lumina-header-offset) auto 0;
   min-height: calc(100vh - var(--lumina-header-offset));
 }
@@ -811,19 +811,29 @@ html:not(.has-announcement) #lumina-announcement { display: none; }
     align-self: flex-start;
     width: 260px;
   }
+
+  /* Carry the navigation surface through the outer gutter on wide screens. */
+  #lumina-sidebar::before {
+    content: "";
+    position: absolute;
+    inset: 0 100% 0 auto;
+    width: 100vw;
+    background: var(--lumina-navigation-bg);
+    pointer-events: none;
+  }
 }
 
 #lumina-content {
   flex: 1;
   min-width: 0;
-  max-width: 48rem;
+  max-width: 50rem;
   margin: 0 auto;
   padding: 2rem clamp(1rem, 2vw, 2.5rem) 4rem;
 }
 
 /* ── Wide layout mode ── */
 [data-layout="wide"] .lumina-wrapper {
-  max-width: 100rem;
+  max-width: 90rem;
 }
 
 [data-layout="wide"] #lumina-content {
@@ -831,7 +841,7 @@ html:not(.has-announcement) #lumina-announcement { display: none; }
 }
 
 [data-layout="wide"] .lumina-header-inner {
-  max-width: 100rem;
+  max-width: 90rem;
 }
 
 /* Responsive: hide TOC below xl */

@@ -25,6 +25,7 @@ src/sphinx_lumina_theme/
 
 - `pnpm install` and `uv sync --dev`: install JavaScript and Python development dependencies.
 - `pnpm run build`: compile production CSS and JavaScript after changing `_static_src/`.
+- `pnpm run build:icons`: regenerate Python Lucide icon definitions from `lucide-static`.
 - `pnpm run dev`: watch theme assets during development.
 - `uv run sphinx-build docs docs/_build/html -W`: build the documentation and treat warnings as errors.
 - `uv run pytest`: run all tests; use `uv run pytest tests/test_build.py` for a focused run.
