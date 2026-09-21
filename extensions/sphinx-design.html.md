@@ -4,9 +4,7 @@
 
 ## Setup
 
-```bash
-uv add sphinx-design
-```
+Lumina installs sphinx-design automatically. Enable the extension in your Sphinx configuration:
 
 ```python
 extensions = ["sphinx_design"]
