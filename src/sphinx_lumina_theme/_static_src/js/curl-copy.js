@@ -120,6 +120,10 @@ function injectButton(dl, baseUrl) {
     </svg>
   `);
 
+  const label = document.createElement("span");
+  label.setAttribute("x-text", "copied ? 'Copied!' : 'Copy curl'");
+  btn.appendChild(label);
+
   sig.appendChild(btn);
   window.Alpine.initTree(btn);
 }
