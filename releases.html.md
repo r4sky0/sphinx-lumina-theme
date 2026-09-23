@@ -1,5 +1,13 @@
 # Releases
 
+## v2.4.0 (2026-09-23)
+
+### Features
+
+- **http-api**: Improve interactive REST API testing
+  ([#148](https://github.com/r4sky0/sphinx-lumina-theme/pull/148),
+  [`ef55c80`](https://github.com/r4sky0/sphinx-lumina-theme/commit/ef55c80d57c4d9783a0c973d23e98baa07f08730))
+
 ## v2.3.0 (2026-09-23)
 
 ### Features
