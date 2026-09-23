@@ -1,12 +1,18 @@
 # HTTP API Documentation
 
-Explore endpoints, inspect parameters, and try a request. Use an OpenAPI specification or write individual HTTP directives.
+Browse endpoints, inspect parameters, and send requests directly from your documentation.
 
 {doc}`Setup and configuration </extensions/openapi>` · {download}`Download the example spec <openapi-petstore.yml>`
 
 ## From an OpenAPI Spec
 
-These Petstore endpoints are generated from an OpenAPI specification. Start with **GET /pet/findByStatus**: open **Try it out** and enter `available` for `status`, or use **Copy curl** to take the request to your terminal. The public demo server’s availability and CORS settings may vary.
+Expand **GET /pet/findByStatus** and choose **Try it out**. Set `status` to `available` to try the public Petstore demo.
+
+
+```{eval-rst}
+.. openapi:: openapi-petstore.yml
+   :generate-examples-from-schemas:
+```
 
 :::{dropdown} Show the MyST source
 
@@ -18,10 +24,7 @@ These Petstore endpoints are generated from an OpenAPI specification. Start with
 ~~~
 :::
 
-```{eval-rst}
-.. openapi:: openapi-petstore.yml
-   :generate-examples-from-schemas:
-```
+The public demo server’s availability and CORS settings may vary.
 
 ## Manual HTTP Directives
 

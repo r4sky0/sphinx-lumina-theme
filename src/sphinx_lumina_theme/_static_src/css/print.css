@@ -39,6 +39,8 @@
   .lumina-mobile-outline,
   .copybtn,
   .lumina-curl-copy,
+  .lumina-api-toggle,
+  .lumina-api-toolbar,
   .lumina-try-it,
   [data-search-trigger],
   [data-theme-toggle],
@@ -103,5 +105,14 @@
   .lumina-article .admonition {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+  }
+}
+
+/* Match Tailwind's base layer so this wins over its important [hidden] reset. */
+@layer base {
+  @media print {
+    :is(dl.http, dl.py, dl.js) > dd[hidden] {
+      display: block !important;
+    }
   }
 }

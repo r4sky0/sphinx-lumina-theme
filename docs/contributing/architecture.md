@@ -45,6 +45,10 @@ Alpine.js components are registered via `Alpine.data()` in separate modules unde
 
 See {doc}`javascript-api` for the full component API reference.
 
+### API disclosures
+
+`api-disclosures.js` runs after the HTTP tools initialize. It adds disclosure buttons to Sphinx's Python, HTTP, and JavaScript signatures and toggles their definition bodies. It preserves links inside signatures, opens ancestor definitions for deep links, and reads the `api_expanded` theme option. Without JavaScript, definitions remain visible.
+
 ### HTTP request editor
 
 `try-it.js` and `curl-copy.js` enhance the rendered `dl.http` endpoints. `_http-api-utils.js` extracts paths, fields, and HTTP request examples. A shared curl serializer handles both documentation templates and edited requests, with POSIX shell quoting.

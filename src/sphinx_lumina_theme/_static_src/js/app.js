@@ -18,6 +18,7 @@ import copyPage from "./copy-page.js";
 import navDropdown from "./nav-dropdown.js";
 import curlCopy, { curlCopyBtn } from "./curl-copy.js";
 import tryIt, { tryItPanel } from "./try-it.js";
+import apiDisclosures from "./api-disclosures.js";
 import backToTop from "./back-to-top.js";
 import announcementBanner from "./announcement.js";
 import versionSwitcher from "./version-switcher.js";
@@ -56,8 +57,9 @@ window.Alpine = Alpine;
  */
 function boot() {
   Alpine.start();
-  curlCopy();
   tryIt();
+  curlCopy();
+  apiDisclosures();
   codeWrapToggle();
   responsiveTables();
 }

@@ -20,6 +20,9 @@ def api_page(page, live_server):
 
 def panel(page, signature):
     endpoint = page.locator(f'[id="{signature}"]').locator("..")
+    disclosure = endpoint.locator(":scope > dt > .lumina-api-toggle")
+    if disclosure.get_attribute("aria-expanded") == "false":
+        disclosure.click()
     endpoint.get_by_role("button", name="Try it out").click()
     return endpoint.locator(".lumina-try-it")
 
@@ -104,8 +107,9 @@ def test_json_example_validation_curl_and_malformed_response(api_page):
     assert form.locator("script").count() == 0
     assert requests[0].post_data == body
     assert requests[0].headers["content-type"] == "application/json"
-    # The signature button must copy the same edited request as the panel button.
-    form.locator("..").locator("..").locator(".lumina-curl-copy").click()
+    # A single copy action uses the edited request.
+    expect(api_page.locator(".lumina-curl-copy")).to_have_count(0)
+    form.get_by_role("button", name="Copy as curl").click()
     command = shlex.split(api_page.evaluate("window.copiedText"))
     assert command[command.index("--data-raw") + 1] == body
 

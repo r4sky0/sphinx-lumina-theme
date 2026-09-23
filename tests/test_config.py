@@ -66,3 +66,11 @@ def test_reading_time_below_introduction(tmp_path):
     assert metadata.select_one('svg[aria-hidden="true"]') is not None
     assert "min read" in metadata.get_text()
     assert html.select_one(".lumina-page-actions .lumina-reading-time") is None
+
+
+def test_api_expanded_option(tmp_path):
+    html = build_with_options(tmp_path, {"api_expanded": "true"})
+    assert any(
+        'dataset.apiExpanded = "true"' in script.get_text()
+        for script in html.find_all("script")
+    )

@@ -1,7 +1,7 @@
 /**
  * @module curl-copy
  * @description Scans HTTP-domain endpoints (``dl.http``) and injects a
- * "Copy as curl" button into each signature card. Builds the curl command
+ * "Copy as curl" button into signatures without a request panel. Builds the curl command
  * from the rendered method, path, query parameters, headers, and JSON body
  * fields in the DOM. The base URL comes from the ``api_base_url`` theme option.
  *
@@ -35,7 +35,7 @@ const _curlCmds = new WeakMap();
  *
  * **Methods:**
  *
- * - ``copy()`` — Copies the edited request, or the documented template, to the clipboard.
+ * - ``copy()`` — Copies the documented request template to the clipboard.
  *
  * @function curlCopyBtn
  * @returns {object} Alpine.js component data.
@@ -45,8 +45,7 @@ export function curlCopyBtn() {
     copied: false,
 
     async copy() {
-      const panel = this.$el.closest("dl.http").querySelector(".lumina-try-it");
-      const curl = panel ? window.Alpine.$data(panel).curlCommand : _curlCmds.get(this.$el);
+      const curl = _curlCmds.get(this.$el);
       if (!curl) return;
       try {
         await copyText(curl);
@@ -83,7 +82,7 @@ function injectButton(dl, baseUrl) {
   const sig = dl.querySelector("dt.sig");
   if (!sig || sig.querySelector(".lumina-curl-copy")) return;
 
-  if (baseUrl) {
+  if (baseUrl && !sig.querySelector(".lumina-api-host")) {
     let host = baseUrl.replace(/\/$/, "");
     try { host = new URL(baseUrl).hostname; } catch {}
     const tag = document.createElement("span");
@@ -91,6 +90,8 @@ function injectButton(dl, baseUrl) {
     tag.textContent = host;
     sig.appendChild(tag);
   }
+
+  if (dl.querySelector(":scope > dd > .lumina-try-it")) return;
 
   const curl = buildCurl(dl, baseUrl);
 

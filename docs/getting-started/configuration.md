@@ -255,6 +255,21 @@ reading_time: 12      # Force "12 min read" on this page
   - Search implementation. `"pagefind"` for Pagefind (recommended), `"sphinx"` for Sphinx built-in search.
 ```
 
+### API display
+
+Python, JavaScript, and HTTP API definitions start collapsed. Readers can open a signature or use **Expand all** and **Collapse all**.
+
+Set `api_expanded` to `"true"` to show every definition on page load. This does not open the separate **Try it out** request forms.
+
+```{code-block} python
+:caption: conf.py
+html_theme_options = {
+    "api_expanded": "true",  # Default: "false"
+}
+```
+
+Direct links reveal the target definition and its parents. Without JavaScript, all documentation stays visible.
+
 ### HTTP API
 
 These options control the interactive features on HTTP API endpoint pages. They require `sphinxcontrib-openapi` or `sphinxcontrib-httpdomain`. See {doc}`/extensions/openapi` for setup, authentication, and compatibility limits. Readers can edit the server URL in each request panel; credentials stay in page memory and are scoped to the full API base URL.
