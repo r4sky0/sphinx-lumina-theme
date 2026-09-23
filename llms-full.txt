@@ -2121,7 +2121,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 2.2.0.
+This documentation is for Sphinx Lumina Theme version 2.3.0.
 
 The MyST syntax:
 
@@ -4080,6 +4080,14 @@ The token is cleared when the browser tab is closed (sessionStorage scope).
 # releases.html.md
 
 # Releases
+
+## v2.3.0 (2026-09-23)
+
+### Features
+
+- **docs**: Enable prose hyphenation
+  ([#147](https://github.com/r4sky0/sphinx-lumina-theme/pull/147),
+  [`9282e15`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9282e1589c42c087dba23850a4826e1264678e87))
 
 ## v2.2.0 (2026-09-21)
 
