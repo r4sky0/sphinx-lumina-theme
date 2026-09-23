@@ -66,7 +66,7 @@ jobs:
         run: pnpm run build
 
       - name: Run structure tests
-        run: uv run --no-sync pytest tests/ --ignore=tests/test_browser.py -v
+        run: uv run --no-sync pytest tests/ --ignore=tests/test_browser.py --ignore=tests/test_http_api_browser.py -v
 
   test-extensions:
     runs-on: ubuntu-latest
@@ -106,4 +106,4 @@ jobs:
         run: pnpm run build
 
       - name: Run browser tests
-        run: uv run --locked pytest tests/test_browser.py -v --browser chromium --browser firefox --browser webkit
+        run: uv run --locked pytest tests/test_browser.py tests/test_http_api_browser.py -v --browser chromium --browser firefox --browser webkit
