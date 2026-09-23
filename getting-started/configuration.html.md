@@ -113,7 +113,7 @@ reading_time: 12      # Force "12 min read" on this page
 
 ### HTTP API
 
-These options control the interactive features on HTTP API endpoint pages. They require `sphinxcontrib-openapi` or `sphinxcontrib-httpdomain`. See [OpenAPI](../extensions/openapi.md) for setup.
+These options control the interactive features on HTTP API endpoint pages. They require `sphinxcontrib-openapi` or `sphinxcontrib-httpdomain`. See [OpenAPI](../extensions/openapi.md) for setup, authentication, and compatibility limits. Readers can edit the server URL in each request panel; credentials stay in page memory and are scoped to the full API base URL.
 
 | Option         | Type   | Default   | Description                                                                                                                                                                                                                                        |
 |----------------|--------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

@@ -1,6 +1,10 @@
 # HTTP API Documentation
 
-How HTTP API endpoints render in the Lumina theme. This page covers auto-generated docs from OpenAPI specs and manually written HTTP directives.
+Explore an API, edit a request, and inspect the response without leaving your documentation. This page demonstrates OpenAPI-generated and manually written endpoints.
+
+Start with **GET /pet/findByStatus**: open **Try it out**, enter `available` for `status`, and send the request. The Petstore example uses a public demo server; availability and CORS depend on that service. Use **Copy as curl** to run the same request in a terminal.
+
+Download the [`OpenAPI specification`](openapi-petstore.yml) to use with other API tools. See [OpenAPI](../extensions/openapi.md) for supported workflows and limitations.
 
 ## From an OpenAPI Spec
 
@@ -13,10 +17,75 @@ The `openapi` directive renders an entire API from a spec file. Point it at your
 Multiple status values can be provided with comma separated strings.
 
 * **Query Parameters:**
-  * **status** (*string*) – Status values that need to be considered for filter
-    (Required)
+  * **status** (*string:enum, required*) – Status values that need to be considered for filter
+* **Response JSON Array of Objects:**
+  * **id** (*integer:int64*)
+  * **name** (*string, required*)
+  * **category** (*object*)
+  * **category.id** (*integer:int64*)
+  * **category.name** (*string*)
+  * **photoUrls[]** (*string*)
+  * **tags[]** (*object*)
+  * **tags[].id** (*integer:int64*)
+  * **tags[].name** (*string*)
+  * **status** (*string:enum*) – pet status in the store
 * **Status Codes:**
-  * [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200) – successful operation
+  * [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200) – 
+
+    successful operation
+    ```http
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    [
+      {
+        "id": 10,
+        "name": "doggie",
+        "category": {
+          "id": 1,
+          "name": "Dogs"
+        },
+        "photoUrls": [
+          "string",
+          "string"
+        ],
+        "tags": [
+          {
+            "id": 1,
+            "name": "string"
+          },
+          {
+            "id": 1,
+            "name": "string"
+          }
+        ],
+        "status": "available"
+      },
+      {
+        "id": 10,
+        "name": "doggie",
+        "category": {
+          "id": 1,
+          "name": "Dogs"
+        },
+        "photoUrls": [
+          "string",
+          "string"
+        ],
+        "tags": [
+          {
+            "id": 1,
+            "name": "string"
+          },
+          {
+            "id": 1,
+            "name": "string"
+          }
+        ],
+        "status": "available"
+      }
+    ]
+    ```
   * [400 Bad Request](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/400) – Invalid status value
 
 ### GET /pet/{petId}
@@ -26,9 +95,50 @@ Multiple status values can be provided with comma separated strings.
 Returns a single pet.
 
 * **Parameters:**
-  * **petId** (*integer*) – ID of pet to return
+  * **petId** (*integer:int64, required*) – ID of pet to return
+* **Response JSON Object:**
+  * **id** (*integer:int64*)
+  * **name** (*string, required*)
+  * **category** (*object*)
+  * **category.id** (*integer:int64*)
+  * **category.name** (*string*)
+  * **photoUrls[]** (*string*)
+  * **tags[]** (*object*)
+  * **tags[].id** (*integer:int64*)
+  * **tags[].name** (*string*)
+  * **status** (*string:enum*) – pet status in the store
 * **Status Codes:**
-  * [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200) – successful operation
+  * [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200) – 
+
+    successful operation
+    ```http
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {
+      "id": 10,
+      "name": "doggie",
+      "category": {
+        "id": 1,
+        "name": "Dogs"
+      },
+      "photoUrls": [
+        "string",
+        "string"
+      ],
+      "tags": [
+        {
+          "id": 1,
+          "name": "string"
+        },
+        {
+          "id": 1,
+          "name": "string"
+        }
+      ],
+      "status": "available"
+    }
+    ```
   * [400 Bad Request](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/400) – Invalid ID supplied
   * [404 Not Found](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/404) – Pet not found
 
@@ -39,12 +149,53 @@ Returns a single pet.
 Updates a pet resource based on the form data.
 
 * **Parameters:**
-  * **petId** (*integer*) – ID of pet that needs to be updated
+  * **petId** (*integer:int64, required*) – ID of pet that needs to be updated
 * **Query Parameters:**
   * **name** (*string*) – Name of pet that needs to be updated
   * **status** (*string*) – Status of pet that needs to be updated
+* **Response JSON Object:**
+  * **id** (*integer:int64*)
+  * **name** (*string, required*)
+  * **category** (*object*)
+  * **category.id** (*integer:int64*)
+  * **category.name** (*string*)
+  * **photoUrls[]** (*string*)
+  * **tags[]** (*object*)
+  * **tags[].id** (*integer:int64*)
+  * **tags[].name** (*string*)
+  * **status** (*string:enum*) – pet status in the store
 * **Status Codes:**
-  * [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200) – successful operation
+  * [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200) – 
+
+    successful operation
+    ```http
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {
+      "id": 10,
+      "name": "doggie",
+      "category": {
+        "id": 1,
+        "name": "Dogs"
+      },
+      "photoUrls": [
+        "string",
+        "string"
+      ],
+      "tags": [
+        {
+          "id": 1,
+          "name": "string"
+        },
+        {
+          "id": 1,
+          "name": "string"
+        }
+      ],
+      "status": "available"
+    }
+    ```
   * [400 Bad Request](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/400) – Invalid input
 
 ### DELETE /pet/{petId}
@@ -53,13 +204,13 @@ Updates a pet resource based on the form data.
 
 Delete a pet.
 
+* **Request Headers:**
+  * **api_key** (*string*)
 * **Parameters:**
-  * **petId** (*integer*) – Pet id to delete
+  * **petId** (*integer:int64, required*) – Pet id to delete
 * **Status Codes:**
   * [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200) – Pet deleted
   * [400 Bad Request](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/400) – Invalid pet value
-* **Request Headers:**
-  * **api_key**
 
 ### POST /pet
 
@@ -67,8 +218,90 @@ Delete a pet.
 
 Add a new pet to the store.
 
+* **Request JSON Object:**
+  * **id** (*integer:int64*)
+  * **name** (*string, required*)
+  * **category** (*object*)
+  * **category.id** (*integer:int64*)
+  * **category.name** (*string*)
+  * **photoUrls[]** (*string*)
+  * **tags[]** (*object*)
+  * **tags[].id** (*integer:int64*)
+  * **tags[].name** (*string*)
+  * **status** (*string:enum*) – pet status in the store
+
+```http
+POST /pet HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 10,
+  "name": "doggie",
+  "category": {
+    "id": 1,
+    "name": "Dogs"
+  },
+  "photoUrls": [
+    "string",
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "string"
+    },
+    {
+      "id": 1,
+      "name": "string"
+    }
+  ],
+  "status": "available"
+}
+```
+
+* **Response JSON Object:**
+  * **id** (*integer:int64*)
+  * **name** (*string, required*)
+  * **category** (*object*)
+  * **category.id** (*integer:int64*)
+  * **category.name** (*string*)
+  * **photoUrls[]** (*string*)
+  * **tags[]** (*object*)
+  * **tags[].id** (*integer:int64*)
+  * **tags[].name** (*string*)
+  * **status** (*string:enum*) – pet status in the store
 * **Status Codes:**
-  * [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200) – Successful operation
+  * [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200) – 
+
+    Successful operation
+    ```http
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {
+      "id": 10,
+      "name": "doggie",
+      "category": {
+        "id": 1,
+        "name": "Dogs"
+      },
+      "photoUrls": [
+        "string",
+        "string"
+      ],
+      "tags": [
+        {
+          "id": 1,
+          "name": "string"
+        },
+        {
+          "id": 1,
+          "name": "string"
+        }
+      ],
+      "status": "available"
+    }
+    ```
   * [400 Bad Request](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/400) – Invalid input
   * [422 Unprocessable Entity](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/422) – Validation exception
 
@@ -79,7 +312,15 @@ Add a new pet to the store.
 Returns a map of status codes to quantities.
 
 * **Status Codes:**
-  * [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200) – successful operation
+  * [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200) – 
+
+    successful operation
+    ```http
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {}
+    ```
 
 ### POST /store/order
 
@@ -87,8 +328,52 @@ Returns a map of status codes to quantities.
 
 Place a new order in the store.
 
+* **Request JSON Object:**
+  * **id** (*integer:int64*)
+  * **petId** (*integer:int64*)
+  * **quantity** (*integer:int32*)
+  * **shipDate** (*string:date-time*)
+  * **status** (*string:enum*) – Order Status
+  * **complete** (*boolean*)
+
+```http
+POST /store/order HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 10,
+  "petId": 198772,
+  "quantity": 7,
+  "shipDate": "2020-01-01T01:01:01Z",
+  "status": "approved",
+  "complete": true
+}
+```
+
+* **Response JSON Object:**
+  * **id** (*integer:int64*)
+  * **petId** (*integer:int64*)
+  * **quantity** (*integer:int32*)
+  * **shipDate** (*string:date-time*)
+  * **status** (*string:enum*) – Order Status
+  * **complete** (*boolean*)
 * **Status Codes:**
-  * [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200) – successful operation
+  * [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200) – 
+
+    successful operation
+    ```http
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {
+      "id": 10,
+      "petId": 198772,
+      "quantity": 7,
+      "shipDate": "2020-01-01T01:01:01Z",
+      "status": "approved",
+      "complete": true
+    }
+    ```
   * [400 Bad Request](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/400) – Invalid input
   * [422 Unprocessable Entity](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/422) – Validation exception
 
@@ -102,7 +387,9 @@ The MyST syntax:
 
 ## Manual HTTP Directives
 
-For individual endpoints or when you need more control, use the HTTP domain directives directly.
+For individual endpoints or when you need more control, use the HTTP domain directives directly. These examples use `api.example.com`, a placeholder server. Change **Server URL** to your own API before sending a request.
+
+<div data-api-base-url="https://api.example.com/v1">
 
 ### GET Request
 
@@ -185,7 +472,7 @@ Queues a new report for generation.
 
 </div>
 
-The “Try it out” buttons above use `https://reports.api.example.com/v2` while the GET and POST `/users` endpoints above them use the global URL. The MyST syntax:
+The “Try it out” buttons above use `https://reports.api.example.com/v2` while the `/users` endpoints use `https://api.example.com/v1`. The MyST syntax:
 
 ```markdown
 ```{raw} html
@@ -214,6 +501,8 @@ The MyST syntax for manual directives:
    :status 200: Success response description.
 ```
 ```
+
+</div>
 
 ## Cross-Referencing
 

@@ -10,7 +10,10 @@ uv add sphinxcontrib-openapi
 
 ```python
 extensions = ["sphinxcontrib.openapi"]
+openapi_default_renderer = "httpdomain"
 ```
+
+Use the `httpdomain` renderer for OpenAPI 3 request schemas and examples. The extension’s legacy default renderer can omit request bodies.
 
 This also installs the HTTP domain, so you can write individual endpoints manually with `http:get::`, `http:post::`, and other method directives.
 
@@ -21,6 +24,7 @@ Point the `openapi` directive at your spec file:
 ```markdown
 ```{eval-rst}
 .. openapi:: path/to/openapi.yml
+   :generate-examples-from-schemas:
 ```
 ```
 
@@ -38,38 +42,60 @@ html_theme_options = {
 
 ### Copy as curl
 
-A **Copy as curl** button appears in the signature bar of each endpoint. Clicking it copies a ready-to-run `curl` command to your clipboard, with:
+A **Copy as curl** button appears in each endpoint’s signature and request panel. With **Try it out** enabled, both buttons copy the current server, parameters, headers, authentication, and body. Open **Request command** to inspect or manually copy the command.
 
-- The correct HTTP method and full URL (base URL + path)
-- All documented request headers (e.g., `Authorization: Bearer <token>`)
-- A JSON body template pre-populated from documented request fields
-- Query parameters shown as `?param=<value>` placeholders
+Commands use POSIX shell quoting, including apostrophes in JSON and headers. Fill in required parameters before running them. Treat copied commands as sensitive when they include credentials.
 
-For endpoints with multiple flags the command uses multi-line formatting for readability:
-
-```bash
-curl -X POST "https://api.example.com/v1/users" \
-  -H "Authorization: Bearer <token>" \
-  -H "Content-Type: application/json" \
-  -d '{"email":"","name":"","role":""}'
-```
+When **Try it out** is disabled, the signature button copies a template from the documented fields and request example. Replace parameter placeholders before running it.
 
 ### Try it out
 
-A collapsible **Try it out** panel sits below each endpoint description. It lets readers send real HTTP requests directly from the docs page without leaving the browser.
+Open an endpoint’s **Try it out** panel:
 
-The panel pre-populates from the documented endpoint:
+1. Check **Server URL**. You can change it for this endpoint without rebuilding the docs.
+2. Fill in path parameters and any query parameters marked required.
+3. Open **Authentication** if needed, then edit headers or the request body.
+4. Choose **Send Request** or **Copy as curl**. You can also send with **Ctrl+Enter** (macOS: **⌘+Enter**) from a request field.
 
-- **Path parameters** — required fields with live URL preview as you type
-- **Query parameters** — optional fields shown with their types
-- **Authorization** — bearer token input (hidden by default; persisted in `sessionStorage` across page loads)
-- **Additional headers** — any other documented request headers
-- **Request body** — JSON textarea pre-filled with a schema template for POST/PUT/PATCH endpoints
+The editor supports:
 
-After sending, the panel shows the HTTP status code, response time in milliseconds, and a syntax-highlighted JSON response body (or plain text for non-JSON responses).
+- **Path parameters** in OpenAPI `{id}` and HTTP-domain `(int:id)` notation, with URL encoding.
+- **Query parameters** and required markers from rendered documentation.
+- **Authentication** using Bearer tokens, Basic authentication, or API keys in headers or query strings.
+- **Headers**, including documented defaults written as inline code, and additional name/value pairs.
+- **Request bodies** populated from rendered HTTP request examples. Use `:generate-examples-from-schemas:` to generate nested JSON examples from your specification.
+
+Without an example, documented top-level JSON fields provide a basic template. Check it against your API’s schema. A blank editor sends no body. JSON is checked for valid syntax before sending; it is not validated against the OpenAPI schema. You can change **Content type** to send raw text, XML, or a manually encoded form body.
+
+Responses show the HTTP status, elapsed time through body download, response URL, exposed headers, and body. JSON is formatted and highlighted. Malformed JSON and non-JSON responses remain visible as text.
+
+**Cancel** stops waiting for a response; the server may still process the request. Requests time out after 30 seconds. **Clear** removes the response while retaining your inputs.
 
 #### WARNING
-**CORS required.** The “Try it out” panel sends requests directly from the reader’s browser. Your API must allow CORS from the docs origin, or requests fail with a network error. Check the API’s CORS policy before enabling this feature; public availability does not necessarily mean that browser requests are allowed.
+**CORS required.** Requests go directly from the reader’s browser to the API. Allow the docs origin, request methods, and headers in your API’s CORS configuration. Expose diagnostic response headers such as `X-Request-ID` with `Access-Control-Expose-Headers`.
+
+Browser cookies are omitted, browser-controlled headers cannot be overridden, and redirects are rejected to avoid forwarding credentials to another destination. Use the final API URL. If a request fails, check HTTPS, connectivity, and CORS, or use **Copy as curl** outside the browser.
+
+### Authentication and credential lifetime
+
+Choose the authentication type explicitly. Lumina does not infer OpenAPI `securitySchemes` or run OAuth login flows.
+
+Authentication settings are shared between endpoints with the same full API base URL on the current page. Changing **Server URL** selects that server’s separate credentials. **Clear credentials** clears authentication for all endpoints using that server.
+
+Credentials stay in page memory only. Reloading or navigating away clears them; they are not saved in browser storage. Use narrowly scoped test credentials on trusted documentation hosts. API keys sent in query strings also appear in the URL preview and may be recorded in server logs.
+
+### When this can replace Swagger UI
+
+Lumina suits documentation sites that need readable endpoint references and interactive testing of ordinary JSON or raw-body REST requests, including Bearer, Basic, and API-key authentication.
+
+It is not a complete OpenAPI execution engine. The editor reads rendered HTTP-domain documentation, so it cannot recover specification details the renderer omits. Use a dedicated OpenAPI client when you need:
+
+- Automatic server variables, security requirements, or OAuth2/OpenID Connect login flows.
+- Schema-aware validation, enum selectors, or selectable `oneOf`/`anyOf` variants.
+- OpenAPI array/object parameter serialization (`style`, `explode`, `deepObject`), repeated query keys, or cookie authentication.
+- Multipart file uploads, binary response downloads, or streaming responses.
+
+For these cases, keep the specification available to download alongside your Lumina reference. Do not assume that a rendered schema implies full interactive support.
 
 ### Overriding the base URL per block
 
@@ -106,7 +132,7 @@ HTML blocks in MyST require `html_block` in `myst_enable_extensions`, or use a `
 ```
 ```
 
-The server badge (shown above the first endpoint) always reflects the global `api_base_url`. Per-block overrides affect only the curl commands and “Try it out” URLs.
+Each signature shows its configured server hostname. The **Server URL** field and live request preview show the destination used by the request editor, including reader edits.
 
 ### Disabling Try it out
 
@@ -118,9 +144,3 @@ html_theme_options = {
     "try_it_out": "false",
 }
 ```
-
-### Bearer token persistence
-
-When a reader enters a bearer token in the “Try it out” panel, it is saved to `sessionStorage` under the key `lumina-api-token`. The token is restored automatically when the panel is opened on any endpoint in the same browser tab. It is sent to your API when a request runs, so recommend narrowly scoped test credentials and trusted documentation hosts.
-
-The token is cleared when the browser tab is closed (sessionStorage scope).
