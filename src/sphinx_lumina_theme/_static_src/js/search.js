@@ -16,6 +16,32 @@ const PAGEFIND_LOAD_TIMEOUT_MS = 5000;
    users routinely retype the same query when navigating around. */
 const QUERY_CACHE_LIMIT = 10;
 
+const DEFAULT_MESSAGES = {
+  dialogLabel: "Search documentation",
+  loading: "Loading search index...",
+  noResults: "No results found.",
+  typeToSearch: "Type to search...",
+  navigate: "Navigate",
+  open: "Open",
+  close: "Close",
+  unavailable: "Pagefind is unavailable. Using built-in search.",
+  queryFailed: "Search failed. Using built-in search.",
+  searchFor: "Search for",
+  fallbackExcerpt: "Open built-in search results",
+  result: "result",
+  results: "results",
+};
+
+function getMessages() {
+  const element = document.getElementById("lumina-i18n");
+  if (!element) return DEFAULT_MESSAGES;
+  try {
+    return { ...DEFAULT_MESSAGES, ...JSON.parse(element.textContent) };
+  } catch {
+    return DEFAULT_MESSAGES;
+  }
+}
+
 function sectionFromUrl(url) {
   const segments = url.split("?")[0].split("#")[0]
     .replace(/\.html$/, "")
@@ -61,6 +87,9 @@ export default function searchModal() {
     loaded: false,
     error: null,
     pagefind: null,
+    _loadPromise: null,
+    _searchRequest: 0,
+    messages: getMessages(),
     _trigger: null,
     _resultCache: new Map(),
     backend:
@@ -121,49 +150,74 @@ export default function searchModal() {
     },
 
     async loadSearchEngine() {
-      if (this.backend !== "pagefind") {
-        this.loaded = true;
-        return;
-      }
-      try {
-        const pagefindUrl = new URL(
-          `${this.baseUrl}_pagefind/pagefind.js`,
-          document.baseURI,
-        ).href;
-        // Race the dynamic import against a timeout so a slow/missing index
-        // doesn't leave the modal stuck on "Loading…".
-        let timer;
-        const timeout = new Promise((_, reject) => {
-          timer = setTimeout(
-            () => reject(new Error("Pagefind load timed out")),
-            PAGEFIND_LOAD_TIMEOUT_MS,
-          );
-        });
-        try {
-          this.pagefind = await Promise.race([import(pagefindUrl), timeout]);
-        } finally {
-          clearTimeout(timer);
+      if (this.loaded) return;
+      if (this._loadPromise) return this._loadPromise;
+
+      this._loadPromise = (async () => {
+        if (this.backend !== "pagefind") {
+          this.loaded = true;
+          return;
         }
-        await this.pagefind.init();
-        this.loaded = true;
-      } catch (e) {
-        this.error =
-          "Search requires Pagefind indexing. Use your browser’s Ctrl+F to search this page, or run: pagefind --site _build/html/";
-        this.loaded = true;
+
+        try {
+          const pagefindUrl = new URL(
+            `${this.baseUrl}_pagefind/pagefind.js`,
+            document.baseURI,
+          ).href;
+          // Race import and init together so a slow or broken index cannot
+          // leave the modal stuck on "Loading…".
+          let timer;
+          const timeout = new Promise((_, reject) => {
+            timer = setTimeout(
+              () => reject(new Error("Pagefind initialization timed out")),
+              PAGEFIND_LOAD_TIMEOUT_MS,
+            );
+          });
+          try {
+            this.pagefind = await Promise.race([
+              import(pagefindUrl).then(async (module) => {
+                const engine = module.default || module;
+                await engine.init();
+                return engine;
+              }),
+              timeout,
+            ]);
+          } finally {
+            clearTimeout(timer);
+          }
+        } catch {
+          // A failed engine must not be retained: subsequent searches use the
+          // built-in Sphinx endpoint immediately and can recover on retry.
+          this.pagefind = null;
+          this.backend = "sphinx";
+          this.error = this.messages.unavailable;
+        } finally {
+          this.loaded = true;
+        }
+      })();
+
+      try {
+        await this._loadPromise;
+      } finally {
+        this._loadPromise = null;
       }
     },
 
     async search() {
+      const request = ++this._searchRequest;
+      const query = this.query;
       if (!this.query) {
         // Clearing the input must also clear the previous query's results.
         this.results = [];
         this.selectedIndex = 0;
         return;
       }
-      if (!this.loaded) return;
+
+      if (!this.loaded) await this.loadSearchEngine();
+      if (request !== this._searchRequest || query !== this.query) return;
       this.selectedIndex = 0;
 
-      const cached = this._resultCache.get(this.query);
+      const cached = this._resultCache.get(query);
       if (cached) {
         this.results = cached;
         return;
@@ -171,32 +225,42 @@ export default function searchModal() {
 
       // Snapshot the query so a slow response can't clobber the results of
       // a newer search that resolved first.
-      const query = this.query;
       let results;
-      if (this.backend === "pagefind" && this.pagefind) {
-        const search = await this.pagefind.search(query);
-        const data = await Promise.all(
-          search.results.slice(0, 10).map((r) => r.data()),
-        );
-        results = data.map((r) => ({
-          title: r.meta?.title || "Untitled",
-          url: r.url,
-          excerpt: DOMPurify.sanitize(r.excerpt, EXCERPT_CONFIG),
-          section: sectionFromUrl(r.url),
-        }));
-      } else {
-        results = [
-          {
-            title: 'Search for "' + query + '"',
-            url: this.baseUrl + "search.html?q=" + encodeURIComponent(query),
-            excerpt: "Open Sphinx search results page",
-          },
-        ];
+      try {
+        if (this.backend === "pagefind" && this.pagefind) {
+          const search = await this.pagefind.search(query);
+          const data = await Promise.all(
+            search.results.slice(0, 10).map((r) => r.data()),
+          );
+          results = data.map((r) => ({
+            title: r.meta?.title || "Untitled",
+            url: r.url,
+            excerpt: DOMPurify.sanitize(r.excerpt, EXCERPT_CONFIG),
+            section: sectionFromUrl(r.url),
+          }));
+        } else {
+          results = this._fallbackResults(query);
+        }
+      } catch {
+        this.pagefind = null;
+        this.backend = "sphinx";
+        this.error = this.messages.queryFailed;
+        results = this._fallbackResults(query);
       }
 
+      if (request !== this._searchRequest || query !== this.query) return;
       this._cacheResults(query, results);
-      if (query !== this.query) return;
       this.results = results;
+    },
+
+    _fallbackResults(query) {
+      return [
+        {
+          title: `${this.messages.searchFor} "${query}"`,
+          url: this.baseUrl + "search.html?q=" + encodeURIComponent(query),
+          excerpt: this.messages.fallbackExcerpt,
+        },
+      ];
     },
 
     _cacheResults(query, results) {
@@ -211,10 +275,19 @@ export default function searchModal() {
 
     moveDown() {
       if (this.selectedIndex < this.results.length - 1) this.selectedIndex++;
+      this.$nextTick(() => this.scrollSelectedIntoView());
     },
 
     moveUp() {
       if (this.selectedIndex > 0) this.selectedIndex--;
+      this.$nextTick(() => this.scrollSelectedIntoView());
+    },
+
+    scrollSelectedIntoView() {
+      const selected = document.getElementById(
+        `lumina-search-result-${this.selectedIndex}`,
+      );
+      selected?.scrollIntoView({ block: "nearest" });
     },
 
     goToSelected() {

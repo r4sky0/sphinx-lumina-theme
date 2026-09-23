@@ -178,8 +178,8 @@
 }
 
 .lumina-article .task-list-item-checkbox:checked {
-  background: var(--lumina-accent);
-  border-color: var(--lumina-accent);
+  background: var(--sd-color-primary);
+  border-color: var(--sd-color-primary);
 }
 
 .lumina-article .task-list-item-checkbox:checked::after {

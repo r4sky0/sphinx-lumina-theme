@@ -56,6 +56,9 @@
   --color-lumina-text-muted: var(--lumina-text-muted);
   --color-lumina-border: var(--lumina-border);
   --color-lumina-accent: var(--lumina-accent);
+  --color-lumina-accent-text: var(--lumina-link);
+  --color-lumina-accent-solid: var(--sd-color-primary);
+  --color-lumina-accent-on-solid: var(--sd-color-primary-text);
   --color-lumina-accent-light: var(--lumina-accent-light);
   --color-lumina-code-bg: var(--lumina-code-bg);
 
@@ -299,7 +302,7 @@ span.highlighted {
 
 /* ── Focus visible ── */
 :focus-visible {
-  outline: 2px solid var(--lumina-accent);
+  outline: 2px solid var(--lumina-link);
   outline-offset: 2px;
   border-radius: 0.25rem;
 }
@@ -316,8 +319,8 @@ span.highlighted {
   left: 1rem;
   z-index: 100;
   padding: 0.5rem 1rem;
-  background: var(--lumina-accent);
-  color: #fff;
+  background: var(--sd-color-primary);
+  color: var(--sd-color-primary-text);
   font-size: 0.875rem;
   font-weight: 500;
   border-radius: 0 0 0.5rem 0.5rem;
@@ -526,7 +529,7 @@ span.highlighted {
 
 .lumina-sidebar-nav li.current:not(.toctree-l1) > a,
 .lumina-sidebar-nav li.toctree-l1.current > a.current {
-  color: var(--lumina-accent);
+  color: var(--lumina-link);
   background-color: var(--lumina-accent-light);
   font-weight: 600;
   border-left: 3px solid var(--lumina-accent);
@@ -663,7 +666,7 @@ span.highlighted {
 }
 
 .lumina-sidebar-nav .current > a > .lumina-sidebar-icon {
-  color: var(--lumina-accent);
+  color: var(--lumina-link);
 }
 
 
@@ -737,7 +740,7 @@ span.highlighted {
 }
 
 .lumina-toc-nav a.lumina-toc-active {
-  color: var(--lumina-accent);
+  color: var(--lumina-link);
 }
 
 /* Nested items: indented, lighter weight */
@@ -757,7 +760,7 @@ span.highlighted {
   left: -0.5px;
   width: 2px;
   border-radius: 1px;
-  background-color: var(--lumina-accent);
+  background-color: var(--sd-color-primary);
   clip-path: polygon(
     0 var(--ind-top, 0),
     100% var(--ind-top, 0),
@@ -770,9 +773,8 @@ span.highlighted {
 }
 
 /* ── Layout ── */
-/* Total height of the fixed header chrome: the 3.5rem header bar plus the
-   2.25rem announcement banner when one is active. Every rule that clears
-   or aligns to the fixed header derives from this single variable. */
+/* Fallback for the fixed header. header-offset.js replaces this with the
+   rendered height so wrapped announcements and dismissals stay aligned. */
 :root {
   --lumina-header-offset: 3.5rem;
 }
@@ -921,7 +923,7 @@ a.headerlink[data-tooltip]::after {
   font-weight: 500;
   white-space: nowrap;
   color: #fff;
-  background: var(--lumina-accent);
+  background: var(--sd-color-primary);
   padding: 0.25rem 0.625rem;
   border-radius: 0.375rem;
   pointer-events: none;
@@ -968,7 +970,7 @@ a.headerlink[data-tooltip].lumina-tooltip-visible::after {
 }
 
 .lumina-sidebar-footer a:hover {
-  color: var(--lumina-accent);
+  color: var(--lumina-link);
 }
 
 .lumina-sidebar-footer-icon {

@@ -69,16 +69,16 @@ div.highlight:hover button.copybtn {
 
 .highlight button.copybtn:hover {
   background: var(--lumina-accent-light);
-  color: var(--lumina-accent);
+  color: var(--lumina-link);
   border-color: var(--lumina-accent);
 }
 
 /* Success flash after copy — sphinx-copybutton adds .success */
 .highlight button.copybtn.success {
   opacity: 1;
-  background: var(--lumina-accent);
-  color: #fff;
-  border-color: var(--lumina-accent);
+  background: var(--sd-color-primary);
+  color: var(--sd-color-primary-text);
+  border-color: var(--sd-color-primary);
   transform: scale(1.05);
 }
 

@@ -60,3 +60,17 @@ def test_font_preload(index_html):
     link = font_preloads[0]
     assert link.get("as") == "font"
     assert link.get("crossorigin") is not None, "Font preload must have crossorigin"
+
+
+def test_mobile_toc_is_rendered_from_sphinx_toc(index_html):
+    """The heading navigation should remain available below the desktop breakpoint."""
+    mobile_toc = index_html.find("details", class_="lumina-mobile-outline")
+    assert mobile_toc is not None
+    assert mobile_toc.find("nav", attrs={"aria-label": "Page outline"}) is not None
+
+
+def test_header_observer_is_registered(index_html):
+    """The fixed header should measure its rendered height at runtime."""
+    header = index_html.find("header")
+    assert header is not None
+    assert header.get("x-data") == "headerOffset()"

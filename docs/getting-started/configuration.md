@@ -253,6 +253,14 @@ reading_time: 12      # Force "12 min read" on this page
   - string
   - `"pagefind"`
   - Search implementation. `"pagefind"` for Pagefind (recommended), `"sphinx"` for Sphinx built-in search.
+* - `pagefind_executable`
+  - string
+  - `""`
+  - Optional path to the Pagefind executable. When empty, Lumina checks `PATH` and then uses `npx --no-install pagefind`.
+* - `pagefind_timeout`
+  - string
+  - `"30"`
+  - Maximum number of seconds allowed for Pagefind indexing before the build logs a timeout and continues.
 ```
 
 ### HTTP API

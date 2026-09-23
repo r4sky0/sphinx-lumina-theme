@@ -192,9 +192,9 @@ Display a dropdown in the header that lets readers switch between documentation 
 ```{code-block} json
 :caption: versions.json
 [
-  {"version": "latest", "url": "https://example.com/en/latest/", "name": "dev (latest)"},
+  {"version": "latest", "url": "https://example.com/en/latest/", "name": "dev (latest)", "status": "preview"},
   {"version": "1.17", "url": "https://example.com/en/1.17/"},
-  {"version": "1.16", "url": "https://example.com/en/1.16/"}
+  {"version": "1.16", "url": "https://example.com/en/1.16/", "status": "unsupported", "pages": {"guides/search.html": false}}
 ]
 ```
 
@@ -202,6 +202,8 @@ Each entry has:
 - **`version`** (required) -- version identifier, used to match `version_switcher_match`
 - **`url`** (required) -- base URL for that version's docs (must end with `/`)
 - **`name`** (optional) -- display label, falls back to `version`
+- **`status`** (optional) -- `preview` or `unsupported` marks the release in the dropdown. Unsupported entries open their documentation home.
+- **`pages`** (optional) -- maps a page path to a renamed path in that version. Set a path to `false` when the page is unavailable; the switcher opens that version's home and explains the fallback.
 
 2. **Configure the theme** in your `conf.py`:
 
@@ -217,4 +219,4 @@ The `version_switcher_match` value should match a `version` field in your JSON. 
 
 ### How It Works
 
-When a reader selects a different version, the switcher navigates to the same page path on the selected version's URL. For example, viewing `https://example.com/en/1.17/guides/search.html` and selecting "latest" navigates to `https://example.com/en/latest/guides/search.html`.
+When a reader selects a different version, the switcher navigates to the same page path on the selected version's URL and preserves the anchor. A `pages` map handles renamed pages without requiring cross-origin probes. For example, viewing `https://example.com/en/1.17/guides/search.html` and selecting "latest" navigates to `https://example.com/en/latest/guides/search.html`.

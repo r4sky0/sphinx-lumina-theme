@@ -6,69 +6,86 @@
         @click.self="close()"
         class="lumina-overlay-backdrop fixed inset-0 z-[100] m-0 h-full w-full max-h-none max-w-none border-0 p-0"
         aria-modal="true"
-        aria-label="Search documentation">
+        aria-label="{{ _('Search documentation') }}">
     {# Modal #}
     <div class="relative mx-auto mt-[15vh] max-w-xl cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
         {# Search input #}
         <div class="flex items-center border-b border-lumina-border px-4">
             {{ lumina_icon("search", size=20, css_class="text-lumina-text-muted") }}
-            <input type="search"
+            <label for="lumina-search-input" class="sr-only">{{ _("Search documentation") }}</label>
+            <input id="lumina-search-input"
+                   type="search"
                    x-ref="searchInput"
                    x-model="query"
                    @input.debounce.150ms="search()"
                    @keydown.arrow-down.prevent="moveDown()"
                    @keydown.arrow-up.prevent="moveUp()"
                    @keydown.enter.prevent="goToSelected()"
+                   role="combobox"
+                   aria-controls="lumina-search-results"
+                   aria-autocomplete="list"
+                   :aria-expanded="results.length > 0"
+                   :aria-activedescendant="results.length > 0 ? 'lumina-search-result-' + selectedIndex : ''"
                    class="w-full border-0 bg-transparent px-3 py-4 text-lumina-text placeholder-lumina-text-muted outline-none"
-                   placeholder="Search docs..."
+                   placeholder="{{ _('Search docs...') }}"
                    autocomplete="off">
             <kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1.5 py-0.5 text-xs text-lumina-text-muted">esc</kbd>
         </div>
         {# Results. Announced via the separate visually-hidden live region
            below — a live region must not contain the interactive result
            links themselves. #}
-        <div class="max-h-[60vh] overflow-y-auto p-2">
+        <div id="lumina-search-results"
+             class="max-h-[60vh] overflow-y-auto p-2"
+             role="listbox"
+             aria-label="{{ _('Search results') }}"
+             x-effect="selectedIndex; scrollSelectedIntoView()">
             <template x-if="!loaded">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Loading search index...</p>
+                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted"
+                   x-text="messages.loading"></p>
             </template>
             <template x-if="loaded && query.length > 0 && results.length === 0">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">No results found.</p>
+                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted"
+                   x-text="messages.noResults"></p>
             </template>
             <template x-if="error">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted"
                    x-text="error"></p>
             </template>
             <template x-for="(result, index) in results" :key="result.url">
-                <a :href="result.url"
+                <a :id="'lumina-search-result-' + index"
+                   :href="result.url"
+                   role="option"
+                   :aria-selected="index === selectedIndex"
                    class="flex flex-col gap-0.5 rounded-lg px-3 py-2.5 no-underline transition-colors"
-                   :class="index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text'"
+                   :class="index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent-text' : 'hover:bg-lumina-bg-secondary text-lumina-text'"
                    @mouseenter="selectedIndex = index">
                     <div class="flex min-w-0 items-center justify-between gap-2">
                         <span class="truncate text-sm font-medium" x-text="result.title"></span>
                         <template x-if="result.section">
                             <span class="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
-                                  :class="index === selectedIndex ? 'bg-lumina-accent text-white opacity-70' : 'bg-lumina-bg-secondary text-lumina-text-muted'"
+                                  :class="index === selectedIndex ? 'bg-lumina-accent-solid text-lumina-accent-on-solid' : 'bg-lumina-bg-secondary text-lumina-text-muted'"
                                   x-text="result.section"></span>
                         </template>
                     </div>
-                    <span class="line-clamp-2 text-xs text-lumina-text-muted"
+                    <span class="lumina-search-excerpt line-clamp-2 text-xs text-lumina-text-muted"
                           x-html="result.excerpt"></span>
                 </a>
             </template>
             <template x-if="loaded && query.length === 0">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Type to search...</p>
+                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted"
+                   x-text="messages.typeToSearch"></p>
             </template>
         </div>
         {# Screen-reader announcement of the result count #}
         <div class="sr-only"
              role="status"
-             x-text="loaded && query.length > 0 ? results.length + (results.length === 1 ? ' result' : ' results') : ''">
+             x-text="loaded && query.length > 0 ? results.length + ' ' + (results.length === 1 ? messages.result : messages.results) + (results.length > 0 && results[selectedIndex] ? '. ' + results[selectedIndex].title : '') : ''">
         </div>
         {# Keyboard hints #}
         <div class="flex items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
-            <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> Navigate</span>
-            <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> Open</span>
-            <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">esc</kbd> Close</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> {{ _("Navigate") }}</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> {{ _("Open") }}</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">esc</kbd> {{ _("Close") }}</span>
         </div>
     </div>
 </dialog>
