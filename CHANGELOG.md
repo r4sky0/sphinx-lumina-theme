@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.3.0 (2026-09-23)
+
+### Features
+
+- **docs**: Enable prose hyphenation
+  ([#147](https://github.com/r4sky0/sphinx-lumina-theme/pull/147),
+  [`9282e15`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9282e1589c42c087dba23850a4826e1264678e87))
+
+
 ## v2.2.0 (2026-09-21)
 
 ### Features
