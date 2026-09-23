@@ -15,6 +15,9 @@ extensions = [
     "sphinx_js",
 ]
 
+# Preserve OpenAPI 3 request schemas and examples.
+openapi_default_renderer = "httpdomain"
+
 # sphinx-js configuration
 js_source_path = "../src/sphinx_lumina_theme/_static_src/js"
 jsdoc_config_path = "../jsdoc.json"

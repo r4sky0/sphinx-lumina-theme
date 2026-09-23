@@ -15,7 +15,8 @@ import {
   extractMethod,
   extractPath,
   extractFieldSection,
-  fieldPlaceholder,
+  extractBody,
+  requestToCurl,
 } from "./_http-api-utils.js";
 import { copyText } from "./utils/clipboard.js";
 
@@ -34,7 +35,7 @@ const _curlCmds = new WeakMap();
  *
  * **Methods:**
  *
- * - ``copy()`` — Copies the pre-built curl command to the clipboard.
+ * - ``copy()`` — Copies the edited request, or the documented template, to the clipboard.
  *
  * @function curlCopyBtn
  * @returns {object} Alpine.js component data.
@@ -44,7 +45,8 @@ export function curlCopyBtn() {
     copied: false,
 
     async copy() {
-      const curl = _curlCmds.get(this.$el);
+      const panel = this.$el.closest("dl.http").querySelector(".lumina-try-it");
+      const curl = panel ? window.Alpine.$data(panel).curlCommand : _curlCmds.get(this.$el);
       if (!curl) return;
       try {
         await copyText(curl);
@@ -79,7 +81,7 @@ export default function curlCopy() {
 
 function injectButton(dl, baseUrl) {
   const sig = dl.querySelector("dt.sig");
-  if (!sig) return;
+  if (!sig || sig.querySelector(".lumina-curl-copy")) return;
 
   if (baseUrl) {
     let host = baseUrl.replace(/\/$/, "");
@@ -130,41 +132,17 @@ function buildCurl(dl, baseUrl) {
   const url = baseUrl ? baseUrl.replace(/\/$/, "") + path : path;
   const dd = dl.querySelector("dd");
   const headers = extractFieldSection(dd, "Request Headers");
-  const jsonFields = extractFieldSection(dd, "Request JSON Object");
-  const queryParams = extractFieldSection(dd, "Query Parameters").map((i) => i.name);
-
-  const parts = ["curl"];
-
-  if (method !== "GET") {
-    parts.push(`-X ${method}`);
+  const example = extractBody(dd);
+  const queryParams = extractFieldSection(dd, "Query Parameters");
+  const qs = queryParams.map((p) => `${encodeURIComponent(p.name)}=<value>`).join("&");
+  const request = {
+    method,
+    url: url + (qs ? (url.includes("?") ? "&" : "?") + qs : ""),
+    headers: Object.fromEntries(headers.filter((h) => h.value).map((h) => [h.name, h.value])),
+  };
+  if (example.body && !["GET", "HEAD"].includes(method)) {
+    request.body = example.body;
+    request.headers["Content-Type"] = example.contentType;
   }
-
-  let fullUrl = url;
-  if (queryParams.length > 0) {
-    const qs = queryParams.map((p) => `${p}=<value>`).join("&");
-    fullUrl += `?${qs}`;
-  }
-  parts.push(`"${fullUrl}"`);
-
-  for (const h of headers) {
-    if (h.name.toLowerCase() === "content-type" && jsonFields.length > 0) {
-      continue;
-    }
-    parts.push(`-H "${h.name}: ${h.value}"`);
-  }
-
-  if (jsonFields.length > 0) {
-    parts.push('-H "Content-Type: application/json"');
-    const body = {};
-    for (const f of jsonFields) {
-      body[f.name] = fieldPlaceholder(f.type);
-    }
-    parts.push(`-d '${JSON.stringify(body)}'`);
-  }
-
-  if (parts.length <= 2) {
-    return parts.join(" ");
-  }
-  return parts.join(" \\\n  ");
+  return requestToCurl(request);
 }
-

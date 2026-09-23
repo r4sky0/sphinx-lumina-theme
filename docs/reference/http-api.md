@@ -1,6 +1,10 @@
 # HTTP API Documentation
 
-How HTTP API endpoints render in the Lumina theme. This page covers auto-generated docs from OpenAPI specs and manually written HTTP directives.
+Explore an API, edit a request, and inspect the response without leaving your documentation. This page demonstrates OpenAPI-generated and manually written endpoints.
+
+Start with **GET /pet/findByStatus**: open **Try it out**, enter `available` for `status`, and send the request. The Petstore example uses a public demo server; availability and CORS depend on that service. Use **Copy as curl** to run the same request in a terminal.
+
+Download the {download}`OpenAPI specification <openapi-petstore.yml>` to use with other API tools. See {doc}`/extensions/openapi` for supported workflows and limitations.
 
 :::{tip}
 See {doc}`/extensions/openapi` for installation, setup, and interactive feature documentation (copy as curl and Try it out).
@@ -12,6 +16,7 @@ The `openapi` directive renders an entire API from a spec file. Point it at your
 
 ```{eval-rst}
 .. openapi:: openapi-petstore.yml
+   :generate-examples-from-schemas:
 ```
 
 The MyST syntax:
@@ -24,7 +29,11 @@ The MyST syntax:
 
 ## Manual HTTP Directives
 
-For individual endpoints or when you need more control, use the HTTP domain directives directly.
+For individual endpoints or when you need more control, use the HTTP domain directives directly. These examples use `api.example.com`, a placeholder server. Change **Server URL** to your own API before sending a request.
+
+```{raw} html
+<div data-api-base-url="https://api.example.com/v1">
+```
 
 ### GET Request
 
@@ -105,7 +114,7 @@ When some endpoints live on a different server than the global `api_base_url`, w
 </div>
 ```
 
-The "Try it out" buttons above use `https://reports.api.example.com/v2` while the GET and POST `/users` endpoints above them use the global URL. The MyST syntax:
+The "Try it out" buttons above use `https://reports.api.example.com/v2` while the `/users` endpoints use `https://api.example.com/v1`. The MyST syntax:
 
 ~~~markdown
 ```{raw} html
@@ -134,6 +143,10 @@ The MyST syntax for manual directives:
    :status 200: Success response description.
 ```
 ~~~
+
+```{raw} html
+</div>
+```
 
 ## Cross-Referencing
 

@@ -457,6 +457,7 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 
 .lumina-try-it-panel {
   overflow: hidden;
+  min-width: 0;
 }
 
 .lumina-try-it-url-bar {
@@ -490,7 +491,7 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 .lumina-try-it-method-pill--head,
 .lumina-try-it-method-pill--options { color: var(--lumina-adm-important); background: color-mix(in srgb, var(--lumina-adm-important) 12%, var(--lumina-code-bg)); }
 
-.lumina-try-it-url-display {
+.lumina-try-it-url-bar .lumina-try-it-url-display {
   flex: 1;
   min-width: 0;
   font-family: "JetBrains Mono", ui-monospace, monospace;
@@ -499,9 +500,8 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
   background: none;
   border: none;
   padding: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .lumina-try-it-section {
@@ -520,7 +520,7 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 
 .lumina-try-it-param-row {
   display: grid;
-  grid-template-columns: 8rem 1fr;
+  grid-template-columns: minmax(7rem, 1fr) minmax(0, 3fr);
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.375rem;
@@ -531,11 +531,10 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
   font-size: 0.8125rem;
   color: var(--lumina-text);
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   gap: 0.25rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .lumina-try-it-required {
@@ -555,6 +554,8 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 }
 
 .lumina-try-it-input {
+  min-width: 0;
+  min-height: 2.5rem;
   width: 100%;
   padding: 0.3125rem 0.5rem;
   background: var(--lumina-bg);
@@ -575,67 +576,6 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 .lumina-try-it-input::placeholder {
   color: var(--lumina-text-muted);
   opacity: 0.6;
-}
-
-.lumina-try-it-bearer-wrap {
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--lumina-border);
-  border-radius: 0.375rem;
-  overflow: hidden;
-  background: var(--lumina-bg);
-  transition: border-color 0.15s, box-shadow 0.15s;
-}
-
-.lumina-try-it-bearer-wrap:focus-within {
-  border-color: var(--lumina-accent);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--lumina-accent) 20%, transparent);
-}
-
-.lumina-try-it-bearer-prefix {
-  flex-shrink: 0;
-  padding: 0.3125rem 0.5rem;
-  background: var(--lumina-code-bg);
-  border-right: 1px solid var(--lumina-border);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.75rem;
-  color: var(--lumina-text-muted);
-  user-select: none;
-}
-
-.lumina-try-it-bearer-wrap .lumina-try-it-input {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.lumina-try-it-bearer-wrap .lumina-try-it-input:focus {
-  box-shadow: none;
-}
-
-.lumina-try-it-eye-toggle {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: stretch;
-  width: 2rem;
-  padding: 0;
-  background: none;
-  border: none;
-  border-left: 1px solid var(--lumina-border);
-  color: var(--lumina-text-muted);
-  cursor: pointer;
-  transition: color 0.15s;
-}
-
-.lumina-try-it-eye-toggle:hover {
-  color: var(--lumina-text);
-}
-
-.lumina-try-it-eye-toggle:focus-visible {
-  outline: 2px solid var(--lumina-accent);
-  outline-offset: -2px;
 }
 
 .lumina-try-it-body {
@@ -670,6 +610,7 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 
 .lumina-try-it-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.875rem;
@@ -752,6 +693,7 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 
 .lumina-try-it-res-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 0.5rem;
@@ -837,6 +779,37 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
   border-color: color-mix(in srgb, var(--lumina-adm-danger) 30%, var(--lumina-border));
 }
 
+.lumina-try-it-details {
+  margin-block: 0.75rem;
+}
+
+.lumina-try-it-details > summary {
+  cursor: pointer;
+  color: var(--lumina-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding-block: 0.5rem;
+}
+
+.lumina-try-it-hint {
+  font-size: 0.8125rem;
+  color: var(--lumina-text-muted);
+  overflow-wrap: anywhere;
+  margin-block: 0.5rem;
+}
+
+.lumina-try-it-custom-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.lumina-try-it :is(button, summary):focus-visible {
+  outline: 2px solid var(--lumina-accent);
+  outline-offset: 2px;
+}
+
 /* JSON syntax highlight tokens */
 .sh-key  { color: var(--lumina-accent); }
 .sh-str  { color: var(--lumina-adm-warning); }
@@ -863,6 +836,12 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 @media (max-width: 32rem) {
   .lumina-try-it-param-row {
     grid-template-columns: 1fr;
+  }
+  .lumina-try-it-custom-header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lumina-try-it :is(button, summary, input, select) {
+    min-height: 2.75rem;
   }
 }
 

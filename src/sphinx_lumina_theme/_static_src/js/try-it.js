@@ -2,8 +2,8 @@
  * @module try-it
  * @description Injects an interactive "Try It Out" request panel into each
  * HTTP-domain endpoint (``dl.http``). Extracts parameters from the rendered
- * DOM and sends real ``fetch`` requests. Bearer tokens are persisted in
- * ``sessionStorage`` (key ``lumina-api-token``).
+ * DOM and sends real ``fetch`` requests. Credentials are shared in memory
+ * only between endpoints using the same API base URL.
  *
  * Exports two items:
  * - {@link tryItPanel} — Alpine.data factory, registered in app.js.
@@ -15,10 +15,22 @@ import {
   extractMethod,
   extractPath,
   extractFieldSection,
-  fieldPlaceholder,
+  extractBody,
+  requestToCurl,
 } from "./_http-api-utils.js";
 
-const SESSION_KEY = "lumina-api-token";
+import { copyText } from "./utils/clipboard.js";
+
+// Credentials live only on this page and are isolated by the complete API base URL.
+const credentials = new Map();
+const emptyAuth = () => ({ type: "none", token: "", username: "", password: "", keyName: "", keyValue: "", keyIn: "header" });
+function authFor(baseUrl) {
+  let key;
+  try { key = new URL(baseUrl, document.baseURI).href.replace(/\/$/, ""); }
+  catch { key = baseUrl; }
+  if (!credentials.has(key)) credentials.set(key, emptyAuth());
+  return credentials.get(key);
+}
 
 /* Module-level config store — keyed by the injected wrapper element */
 const _configs = new WeakMap();
@@ -50,173 +62,199 @@ const _configs = new WeakMap();
  */
 export function tryItPanel() {
   return {
-    /* Panel state */
     open: false,
     sending: false,
     response: null,
     showBearer: false,
     copiedResponse: false,
-
-    /* Form values */
-    bearerToken: "",
+    copiedCurl: false,
+    requestError: "",
+    copyError: "",
+    controller: null,
+    auth: emptyAuth(),
     pathValues: {},
     queryValues: {},
     headerValues: {},
-    bodyJson: "{}",
+    customHeaders: [],
+    bodyJson: "",
+    contentType: "application/json",
     bodyError: null,
-
-    /* Config — populated in init() from _configs */
     method: "GET",
     path: "/",
     baseUrl: "",
     pathParams: [],
     queryParams: [],
     allHeaders: [],
-    bodyFields: [],
     hasBody: false,
-    needsAuth: false,
     extraHeaders: [],
 
     init() {
       const cfg = _configs.get(this.$el);
       if (!cfg) return;
       Object.assign(this, cfg);
-
-      /* Default body from extracted fields */
-      if (this.hasBody) {
-        if (this.bodyFields.length) {
-          const obj = {};
-          this.bodyFields.forEach((f) => { obj[f.name] = fieldPlaceholder(f.type); });
-          this.bodyJson = JSON.stringify(obj, null, 2);
-        } else {
-          this.bodyJson = "{}";
-        }
-      }
-
-      this.bearerToken = sessionStorage.getItem(SESSION_KEY) || "";
-      this.needsAuth = this.allHeaders.some((h) => h.name.toLowerCase() === "authorization");
+      this.auth = authFor(this.baseUrl);
+      this.$watch("baseUrl", () => { this.auth = authFor(this.baseUrl); });
       this.extraHeaders = this.allHeaders.filter(
         (h) => !["authorization", "content-type"].includes(h.name.toLowerCase()),
       );
+      this.headerValues = Object.fromEntries(this.extraHeaders.map((h) => [h.name, h.value]));
     },
 
-    /* Computed URL — reactive to form changes */
     get computedUrl() {
-      let resolved = this.path;
-      this.pathParams.forEach((p) => {
-        const val = (this.pathValues[p.name] || "").trim();
-        resolved = resolved.replace(`{${p.name}}`, val ? encodeURIComponent(val) : `{${p.name}}`);
+      const resolved = this.path.replace(/\{([^}]+)\}/g, (match, name) => {
+        const value = String(this.pathValues[name] ?? "").trim();
+        return value ? encodeURIComponent(value) : match;
       });
-
-      const qps = this.queryParams
-        .filter((p) => (this.queryValues[p.name] || "").trim())
-        .map((p) => `${encodeURIComponent(p.name)}=${encodeURIComponent(this.queryValues[p.name])}`);
-
-      const base = this.baseUrl ? this.baseUrl.replace(/\/$/, "") : "";
-      return base + resolved + (qps.length ? "?" + qps.join("&") : "");
+      const query = new URLSearchParams();
+      for (const p of this.queryParams) {
+        const value = String(this.queryValues[p.name] ?? "");
+        if (value.trim()) query.append(p.name, value);
+      }
+      if (this.auth.type === "apiKey" && this.auth.keyIn === "query" && this.auth.keyName && this.auth.keyValue) {
+        query.set(this.auth.keyName, this.auth.keyValue);
+      }
+      const base = this.baseUrl.trim().replace(/\/$/, "");
+      return base + resolved + (query.size ? (resolved.includes("?") ? "&" : "?") + query : "");
     },
 
-    /* Syntax-highlighted or escaped response body */
+    get request() {
+      const headers = {};
+      for (const h of this.extraHeaders) {
+        const value = (this.headerValues[h.name] || "").trim();
+        if (value) headers[h.name.toLowerCase()] = value;
+      }
+      for (const h of this.customHeaders) {
+        if (h.name.trim()) headers[h.name.trim().toLowerCase()] = h.value;
+      }
+      if (this.auth.type === "bearer" && this.auth.token.trim()) {
+        headers.authorization = `Bearer ${this.auth.token.trim()}`;
+      } else if (this.auth.type === "basic") {
+        const bytes = new TextEncoder().encode(`${this.auth.username}:${this.auth.password}`);
+        headers.authorization = "Basic " + btoa(Array.from(bytes, (b) => String.fromCharCode(b)).join(""));
+      } else if (this.auth.type === "apiKey" && this.auth.keyIn === "header" && this.auth.keyName.trim()) {
+        headers[this.auth.keyName.trim().toLowerCase()] = this.auth.keyValue;
+      }
+      const request = { method: this.method, url: this.computedUrl, headers };
+      if (this.hasBody && this.bodyJson.trim()) {
+        request.body = this.bodyJson;
+        headers["content-type"] = this.contentType.trim();
+      }
+      return request;
+    },
+
+    get curlCommand() { return requestToCurl(this.request); },
+
     get formattedBody() {
       if (!this.response) return "";
       return this.response.isJson ? this.response.bodyHtml : esc(this.response.bodyText);
     },
 
-    /* ── Send ──────────────────────────────────────────────────────── */
+    forgetAuth() { Object.assign(this.auth, emptyAuth()); },
 
     async send() {
-      const headers = {};
-
-      if (this.needsAuth && this.bearerToken.trim()) {
-        headers["Authorization"] = `Bearer ${this.bearerToken.trim()}`;
-        sessionStorage.setItem(SESSION_KEY, this.bearerToken.trim());
+      if (this.sending) return;
+      this.requestError = "";
+      this.bodyError = null;
+      const missing = [...this.pathParams, ...this.queryParams.filter((p) => p.required)]
+        .filter((p) => !String((this.pathParams.includes(p) ? this.pathValues : this.queryValues)[p.name] ?? "").trim());
+      if (missing.length) {
+        this.requestError = `Enter required parameters: ${missing.map((p) => p.name).join(", ")}.`;
+        return;
       }
-
-      this.extraHeaders.forEach((h) => {
-        const val = (this.headerValues[h.name] || "").trim();
-        if (val) headers[h.name] = val;
-      });
-
-      let body;
-      if (this.hasBody && this.bodyJson.trim()) {
-        try {
-          JSON.parse(this.bodyJson);
-          this.bodyError = null;
-        } catch {
-          this.bodyError = "Request body is not valid JSON.";
+      if (this.hasBody && this.bodyJson.trim() && /(?:^|[/+])json(?:;|$)/i.test(this.contentType)) {
+        try { JSON.parse(this.bodyJson); }
+        catch {
+          this.bodyError = "Request body is not valid JSON. Fix it before sending.";
+          this.$refs.body.focus();
           return;
         }
-        body = this.bodyJson;
-        headers["Content-Type"] = "application/json";
       }
-
+      let request;
+      try {
+        const base = new URL(this.baseUrl.trim(), document.baseURI);
+        if (!this.baseUrl.trim() || !["http:", "https:"].includes(base.protocol) || base.username || base.password || base.search || base.hash) {
+          throw new Error("Enter an HTTP(S) server URL without credentials, a query, or a fragment.");
+        }
+        if (this.auth.type === "apiKey" && (!this.auth.keyName.trim() || !this.auth.keyValue)) {
+          throw new Error("Enter the API key name and value, or select No authentication.");
+        }
+        request = this.request;
+        new Headers(request.headers); // Validate header names and values before fetching.
+      } catch (err) {
+        this.requestError = err.message;
+        return;
+      }
       this.sending = true;
       this.response = null;
-
+      this.copiedResponse = false;
+      this.controller = new AbortController();
+      const timeout = setTimeout(() => this.controller?.abort(new DOMException("Request timed out after 30 seconds.", "TimeoutError")), 30000);
       const t0 = performance.now();
       try {
-        const res     = await fetch(this.computedUrl, { method: this.method, headers, body, credentials: "omit" });
-        const elapsed = Math.round(performance.now() - t0);
-        const ct      = res.headers.get("content-type") || "";
-        const isJson  = ct.includes("json");
-
-        /* Handle empty-body responses (e.g. 204 No Content) */
-        let raw = "";
-        let resolvedIsJson = isJson;
-        if (res.status !== 204) {
-          try {
-            raw = isJson ? JSON.stringify(await res.json(), null, 2) : await res.text();
-          } catch {
-            raw = "";
-            resolvedIsJson = false;
-          }
+        const res = await fetch(request.url, {
+          method: request.method, headers: request.headers, body: request.body,
+          credentials: "omit", redirect: "error", signal: this.controller.signal,
+        });
+        let raw = await res.text();
+        let isJson = false;
+        if (raw && /json/i.test(res.headers.get("content-type") || "")) {
+          try { raw = JSON.stringify(JSON.parse(raw), null, 2); isJson = true; }
+          catch { /* Keep malformed JSON visible for debugging. */ }
         }
-        const bodyText = raw.trim() || "(No response body)";
-
         this.response = {
-          status:     res.status,
+          status: res.status,
           statusText: res.statusText,
           statusClass: res.status >= 500 ? "error" : res.status >= 400 ? "warning" : res.status >= 300 ? "info" : "success",
-          elapsed,
-          bodyText,
-          bodyHtml: resolvedIsJson && raw.trim() ? highlight(raw) : null,
-          isJson:   resolvedIsJson && raw.trim() ? true : false,
-          error:    false,
+          elapsed: Math.round(performance.now() - t0),
+          bodyText: raw || "(No response body)",
+          bodyHtml: isJson ? highlight(raw) : null,
+          headers: [...res.headers].map(([name, value]) => `${name}: ${value}`).join("\n"),
+          url: res.url || request.url,
+          isJson,
+          error: false,
         };
       } catch (err) {
-        const elapsed = Math.round(performance.now() - t0);
         this.response = {
-          status:     null,
-          statusText: "Error",
+          status: null,
+          statusText: err.name === "AbortError" ? "Cancelled" : "Error",
           statusClass: "error",
-          elapsed,
-          bodyText: err.name === "TypeError"
-            ? `Network error — this may be a CORS restriction.\n\n${err.message}`
+          elapsed: Math.round(performance.now() - t0),
+          bodyText: err.name === "AbortError" ? "Stopped waiting for this request. The server may still process it."
+            : err.name === "TypeError" ? "Could not reach the API. Check the server URL, network, HTTPS and CORS settings. Redirects are not followed. Try Copy as curl to debug outside the browser."
             : err.message,
-          bodyHtml: null,
-          isJson:  false,
-          error:   true,
+          headers: "", url: request.url, isJson: false, error: true,
         };
       } finally {
+        clearTimeout(timeout);
         this.sending = false;
+        this.controller = null;
       }
     },
 
+    cancel() { this.controller?.abort(); },
+    destroy() { this.cancel(); },
+
+    async copyCurl() {
+      this.copyError = "";
+      try { await copyText(this.curlCommand); }
+      catch { this.copyError = "Could not copy. Select the curl command below and copy it manually."; return; }
+      this.copiedCurl = true;
+      setTimeout(() => { this.copiedCurl = false; }, 1500);
+    },
+
     async copyResponse() {
-      const text = this.response?.bodyText;
-      if (!text || text === "(No response body)") return;
-      try {
-        await navigator.clipboard.writeText(text);
-      } catch {
-        return;
-      }
+      this.copyError = "";
+      try { await copyText(this.response.bodyText); }
+      catch { this.copyError = "Could not copy. Select the response text and copy it manually."; return; }
       this.copiedResponse = true;
       setTimeout(() => { this.copiedResponse = false; }, 1500);
     },
 
     clear() {
-      this.response  = null;
+      this.response = null;
       this.bodyError = null;
+      this.requestError = "";
+      this.copyError = "";
     },
   };
 }
@@ -246,15 +284,15 @@ export default function tryIt() {
 
 function injectPanel(dl, baseUrl) {
   const dd = dl.querySelector(":scope > dd");
-  if (!dd) return;
+  if (!dd || dd.querySelector(":scope > .lumina-try-it")) return;
 
   const method      = extractMethod(dl);
   const path        = extractPath(dl);
   const pathParams  = parsePathParams(path);
   const queryParams = extractFieldSection(dd, "Query Parameters");
   const allHeaders  = extractFieldSection(dd, "Request Headers");
-  const bodyFields  = extractFieldSection(dd, "Request JSON Object");
-  const hasBody     = ["POST", "PUT", "PATCH"].includes(method);
+  const example = extractBody(dd);
+  const hasBody = !["GET", "HEAD", "OPTIONS"].includes(method);
 
   /* Wrapper is the Alpine component root */
   const wrap = document.createElement("div");
@@ -262,7 +300,8 @@ function injectPanel(dl, baseUrl) {
   wrap.setAttribute("x-data", "tryItPanel");
 
   /* Store config for Alpine init() to read via this.$el */
-  _configs.set(wrap, { method, path, baseUrl, pathParams, queryParams, allHeaders, bodyFields, hasBody });
+  _configs.set(wrap, { method, path, baseUrl, pathParams, queryParams, allHeaders, hasBody, bodyJson: example.body, contentType: example.contentType });
+  wrap.setAttribute("x-id", "['api-field']");
 
   /* Static Alpine template */
   wrap.insertAdjacentHTML("beforeend", PANEL_TEMPLATE);
@@ -279,7 +318,8 @@ const PANEL_TEMPLATE = `
   <button type="button" class="lumina-try-it-toggle"
           @click="open = !open"
           :class="{ 'is-open': open }"
-          :aria-expanded="open.toString()">
+          :aria-expanded="open.toString()"
+          :aria-controls="$id('api-field', 'panel')">
     <svg class="lumina-try-it-chevron" width="10" height="10" viewBox="0 0 24 24"
          fill="none" stroke="currentColor" stroke-width="2.5"
          stroke-linecap="round" stroke-linejoin="round"
@@ -289,9 +329,15 @@ const PANEL_TEMPLATE = `
     Try it out
   </button>
 
-  <div class="lumina-try-it-grid" :class="{ 'is-open': open }">
-    <div class="lumina-try-it-panel">
+  <div class="lumina-try-it-grid" :class="{ 'is-open': open }" :inert="!open"
+       :id="$id('api-field', 'panel')" :aria-hidden="!open">
+    <div class="lumina-try-it-panel" @keydown.ctrl.enter.prevent="send()" @keydown.meta.enter.prevent="send()">
 
+      <div class="lumina-try-it-param-row">
+        <label class="lumina-try-it-param-name" :for="$id('api-field', 'server')">Server URL</label>
+        <input class="lumina-try-it-input" :id="$id('api-field', 'server')" x-model="baseUrl"
+               type="text" autocomplete="off" spellcheck="false" />
+      </div>
       <div class="lumina-try-it-url-bar">
         <span class="lumina-try-it-method-pill"
               :class="\`lumina-try-it-method-pill--\${method.toLowerCase()}\`"
@@ -303,14 +349,14 @@ const PANEL_TEMPLATE = `
         <div class="lumina-try-it-section-label">Path Parameters</div>
         <template x-for="p in pathParams" :key="p.name">
           <div class="lumina-try-it-param-row">
-            <label class="lumina-try-it-param-name" :for="\`lumina-path-\${p.name}\`">
+            <label class="lumina-try-it-param-name" :for="$id('api-field', 'path-' + p.name)">
               <span x-text="p.name"></span>
               <span class="lumina-try-it-required" aria-label="required">*</span>
             </label>
             <input class="lumina-try-it-input"
-                   :id="\`lumina-path-\${p.name}\`"
+                   :id="$id('api-field', 'path-' + p.name)"
                    x-model="pathValues[p.name]"
-                   :placeholder="p.name"
+                   :placeholder="p.name" required aria-required="true"
                    type="text" autocomplete="off" spellcheck="false" />
           </div>
         </template>
@@ -320,58 +366,79 @@ const PANEL_TEMPLATE = `
         <div class="lumina-try-it-section-label">Query Parameters</div>
         <template x-for="p in queryParams" :key="p.name">
           <div class="lumina-try-it-param-row">
-            <label class="lumina-try-it-param-name" :for="\`lumina-query-\${p.name}\`">
+            <label class="lumina-try-it-param-name" :for="$id('api-field', 'query-' + p.name)">
               <span x-text="p.name"></span>
               <span class="lumina-try-it-type-tag" x-text="p.type" x-show="p.type"></span>
+              <span class="lumina-try-it-required" x-show="p.required" aria-label="required">*</span>
             </label>
             <input class="lumina-try-it-input"
-                   :id="\`lumina-query-\${p.name}\`"
+                   :id="$id('api-field', 'query-' + p.name)"
                    x-model="queryValues[p.name]"
-                   placeholder="optional"
+                   :placeholder="p.required ? 'required' : 'optional'" :aria-required="p.required"
                    type="text" autocomplete="off" spellcheck="false" />
           </div>
         </template>
       </div>
 
-      <div class="lumina-try-it-section" x-show="needsAuth">
-        <div class="lumina-try-it-section-label">Authorization</div>
+      <details class="lumina-try-it-section lumina-try-it-details">
+        <summary>Authentication <span x-show="auth.type !== 'none'" x-text="auth.type === 'apiKey' ? '· API key' : '· ' + auth.type"></span></summary>
+        <p class="lumina-try-it-hint">Shared for this server on this page. Cleared on reload. Copied curl commands include credentials.</p>
         <div class="lumina-try-it-param-row">
-          <label class="lumina-try-it-param-name" for="lumina-bearer-token">Bearer Token</label>
-          <div class="lumina-try-it-bearer-wrap">
-            <span class="lumina-try-it-bearer-prefix">Bearer</span>
-            <input class="lumina-try-it-input"
-                   id="lumina-bearer-token"
-                   x-model="bearerToken"
-                   :type="showBearer ? 'text' : 'password'"
-                   placeholder="your-token"
-                   autocomplete="off" spellcheck="false" />
-            <button type="button" class="lumina-try-it-eye-toggle"
-                    @click="showBearer = !showBearer"
-                    :aria-label="showBearer ? 'Hide token' : 'Show token'">
-              <svg x-show="!showBearer" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                   stroke-linejoin="round" aria-hidden="true">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                <circle cx="12" cy="12" r="3"/>
-              </svg>
-              <svg x-show="showBearer" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                   stroke-linejoin="round" aria-hidden="true">
-                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                <line x1="1" y1="1" x2="23" y2="23"/>
-              </svg>
-            </button>
+          <label class="lumina-try-it-param-name" :for="$id('api-field', 'auth-type')">Type</label>
+          <select class="lumina-try-it-input" :id="$id('api-field', 'auth-type')" x-model="auth.type">
+            <option value="none">No authentication</option>
+            <option value="bearer">Bearer token</option>
+            <option value="basic">Basic authentication</option>
+            <option value="apiKey">API key</option>
+          </select>
+        </div>
+        <div class="lumina-try-it-param-row" x-show="auth.type === 'bearer'">
+          <label class="lumina-try-it-param-name" :for="$id('api-field', 'token')">Bearer token</label>
+          <input class="lumina-try-it-input" :id="$id('api-field', 'token')" x-model="auth.token"
+                 :type="showBearer ? 'text' : 'password'" autocomplete="off" spellcheck="false" />
+        </div>
+        <div x-show="auth.type === 'basic'">
+          <div class="lumina-try-it-param-row">
+            <label class="lumina-try-it-param-name" :for="$id('api-field', 'username')">Username</label>
+            <input class="lumina-try-it-input" :id="$id('api-field', 'username')" x-model="auth.username" autocomplete="off" />
+          </div>
+          <div class="lumina-try-it-param-row">
+            <label class="lumina-try-it-param-name" :for="$id('api-field', 'password')">Password</label>
+            <input class="lumina-try-it-input" :id="$id('api-field', 'password')" x-model="auth.password"
+                   :type="showBearer ? 'text' : 'password'" autocomplete="off" />
           </div>
         </div>
-      </div>
+        <div x-show="auth.type === 'apiKey'">
+          <div class="lumina-try-it-param-row">
+            <label class="lumina-try-it-param-name" :for="$id('api-field', 'key-name')">Key name</label>
+            <input class="lumina-try-it-input" :id="$id('api-field', 'key-name')" x-model="auth.keyName" placeholder="X-API-Key" autocomplete="off" />
+          </div>
+          <div class="lumina-try-it-param-row">
+            <label class="lumina-try-it-param-name" :for="$id('api-field', 'key-value')">Key value</label>
+            <input class="lumina-try-it-input" :id="$id('api-field', 'key-value')" x-model="auth.keyValue"
+                   :type="showBearer ? 'text' : 'password'" autocomplete="off" />
+          </div>
+          <div class="lumina-try-it-param-row">
+            <label class="lumina-try-it-param-name" :for="$id('api-field', 'key-in')">Send in</label>
+            <select class="lumina-try-it-input" :id="$id('api-field', 'key-in')" x-model="auth.keyIn">
+              <option value="header">Header</option><option value="query">Query string</option>
+            </select>
+          </div>
+        </div>
+        <div class="lumina-try-it-actions" x-show="auth.type !== 'none'">
+          <button type="button" class="lumina-try-it-clear" @click="showBearer = !showBearer"
+                  :aria-pressed="showBearer" x-text="showBearer ? 'Hide credentials' : 'Show credentials'"></button>
+          <button type="button" class="lumina-try-it-clear" @click="forgetAuth()">Clear credentials</button>
+        </div>
+      </details>
 
       <div class="lumina-try-it-section" x-show="extraHeaders.length">
         <div class="lumina-try-it-section-label">Headers</div>
         <template x-for="h in extraHeaders" :key="h.name">
           <div class="lumina-try-it-param-row">
-            <label class="lumina-try-it-param-name" :for="\`lumina-header-\${h.name}\`" x-text="h.name"></label>
+            <label class="lumina-try-it-param-name" :for="$id('api-field', 'header-' + h.name)" x-text="h.name"></label>
             <input class="lumina-try-it-input"
-                   :id="\`lumina-header-\${h.name}\`"
+                   :id="$id('api-field', 'header-' + h.name)"
                    x-model="headerValues[h.name]"
                    :placeholder="h.value || h.name"
                    type="text" autocomplete="off" spellcheck="false" />
@@ -379,21 +446,37 @@ const PANEL_TEMPLATE = `
         </template>
       </div>
 
+      <details class="lumina-try-it-section lumina-try-it-details">
+        <summary>Additional headers</summary>
+        <template x-for="(h, index) in customHeaders" :key="index">
+          <div class="lumina-try-it-custom-header">
+            <input class="lumina-try-it-input" x-model="h.name" aria-label="Header name" placeholder="Header name" />
+            <input class="lumina-try-it-input" x-model="h.value" aria-label="Header value" placeholder="Value" />
+            <button type="button" class="lumina-try-it-clear" @click="customHeaders.splice(index, 1)" aria-label="Remove header">Remove</button>
+          </div>
+        </template>
+        <button type="button" class="lumina-try-it-clear" @click="customHeaders.push({name: '', value: ''})">Add header</button>
+      </details>
+
       <div class="lumina-try-it-section" x-show="hasBody">
-        <div class="lumina-try-it-section-label">
-          Request Body <span class="lumina-try-it-type-tag">JSON</span>
+        <div class="lumina-try-it-param-row">
+          <label class="lumina-try-it-param-name" :for="$id('api-field', 'content-type')">Content type</label>
+          <input class="lumina-try-it-input" :id="$id('api-field', 'content-type')" x-model="contentType" />
         </div>
+        <label class="lumina-try-it-section-label" :for="$id('api-field', 'body')">Request body</label>
         <textarea class="lumina-try-it-body"
-                  x-model="bodyJson"
+                  x-model="bodyJson" x-ref="body" :id="$id('api-field', 'body')"
+                  :aria-invalid="!!bodyError" :aria-describedby="$id('api-field', 'body-error')"
                   :class="{ 'has-error': bodyError }"
                   rows="5" spellcheck="false" autocomplete="off"
-                  placeholder="{}"></textarea>
-        <p class="lumina-try-it-body-error" x-show="bodyError" x-text="bodyError"></p>
+                  placeholder="Leave empty to send without a body"></textarea>
+        <p class="lumina-try-it-body-error" :id="$id('api-field', 'body-error')" role="alert" x-show="bodyError" x-text="bodyError"></p>
       </div>
 
+      <p class="lumina-try-it-body-error" role="alert" x-show="requestError" x-text="requestError"></p>
       <div class="lumina-try-it-actions">
         <button type="button" class="lumina-try-it-send"
-                @click="send()"
+                @click="send()" title="Send request (Ctrl/⌘ + Enter)"
                 :disabled="sending"
                 :class="{ 'is-loading': sending }"
                 :aria-label="sending ? 'Sending request\u2026' : 'Send request'">
@@ -410,10 +493,18 @@ const PANEL_TEMPLATE = `
           </svg>
           <span x-text="sending ? 'Sending\u2026' : 'Send Request'"></span>
         </button>
+        <button type="button" class="lumina-try-it-clear" @click="cancel()" x-show="sending">Cancel</button>
+        <button type="button" class="lumina-try-it-clear" @click="copyCurl()" x-text="copiedCurl ? 'Copied!' : 'Copy as curl'"></button>
         <button type="button" class="lumina-try-it-clear"
                 @click="clear()" x-show="response">Clear</button>
       </div>
 
+      <p class="lumina-try-it-body-error" role="alert" x-show="copyError" x-text="copyError"></p>
+      <details class="lumina-try-it-section lumina-try-it-details">
+        <summary>Request command</summary>
+        <pre class="lumina-try-it-res-body"><code x-text="curlCommand"></code></pre>
+      </details>
+      <p class="sr-only" role="status" x-text="sending ? 'Sending request' : response ? response.statusText : ''"></p>
       <div class="lumina-try-it-response" x-show="response || sending" x-cloak>
         <div class="lumina-try-it-sending" x-show="sending">Sending\u2026</div>
         <template x-if="response && !sending">
@@ -442,7 +533,12 @@ const PANEL_TEMPLATE = `
                 </svg>
               </button>
             </div>
-            <pre class="lumina-try-it-res-body"
+            <p class="lumina-try-it-hint" x-text="response.url"></p>
+            <details class="lumina-try-it-details" x-show="response.headers">
+              <summary>Response headers</summary>
+              <pre class="lumina-try-it-res-body"><code x-text="response.headers"></code></pre>
+            </details>
+            <pre class="lumina-try-it-res-body" tabindex="0" aria-label="Response body"
                  :class="{ 'lumina-try-it-res-body--error': response.error }"><code x-html="formattedBody"></code></pre>
           </div>
         </template>
@@ -484,9 +580,7 @@ function highlight(json) {
 /* ── DOM extraction helpers ────────────────────────────────────────── */
 
 function parsePathParams(path) {
-  const params = [];
-  for (const m of path.matchAll(/\{([^}]+)\}/g)) params.push({ name: m[1] });
-  return params;
+  return [...new Set([...path.matchAll(/\{([^}]+)\}/g)].map((m) => m[1]))].map((name) => ({ name }));
 }
 
 /* ── Utilities ─────────────────────────────────────────────────────── */
