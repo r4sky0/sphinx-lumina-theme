@@ -5,6 +5,8 @@
   line-height: 1.75;
   color: var(--lumina-text);
   overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 /* Hyphenation may be enabled for prose, but must not change code spelling. */
