@@ -2145,7 +2145,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 2.4.0.
+This documentation is for Sphinx Lumina Theme version 2.5.0.
 
 The MyST syntax:
 
@@ -4420,6 +4420,14 @@ html_theme_options = {
 # releases.html.md
 
 # Releases
+
+## v2.5.0 (2026-09-24)
+
+### Features
+
+- **api**: Streamline and collapse API reference layouts
+  ([#149](https://github.com/r4sky0/sphinx-lumina-theme/pull/149),
+  [`17dc98f`](https://github.com/r4sky0/sphinx-lumina-theme/commit/17dc98ff2870c0c2efeed2c8e85cf248c2232758))
 
 ## v2.4.0 (2026-09-23)
 
