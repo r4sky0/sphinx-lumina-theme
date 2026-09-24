@@ -580,6 +580,10 @@ See [JavaScript API](javascript-api.md) for the full component API reference.
 
 The request panel keeps authentication in memory, shared by the normalized API base URL. It sends browser `fetch` requests with cookies omitted, redirects rejected, and cancellation through `AbortController`. It does not parse the original OpenAPI specification. The showcase uses sphinxcontrib-openapi’s `httpdomain` renderer to preserve request schemas and examples.
 
+### Mermaid diagrams
+
+Mermaid rendering, theme changes, and fullscreen controls belong to `sphinxcontrib-mermaid`. Lumina’s `mermaid.js` observes rendered diagrams and records each SVG’s natural width; `mermaid.css` handles sizing, typography, and colors. The observer also handles SVG replacement after a theme change.
+
 ## Theming
 
 - CSS custom properties (`--lumina-accent`, `--lumina-bg`, `--lumina-text`, etc.) defined in `base.css`. See [CSS Variables](../reference/css-variables.md) for the full token reference.
@@ -1947,18 +1951,22 @@ Lumina supports [Mermaid](https://mermaid.js.org/) diagrams via the `sphinxcontr
 
 ## Flowchart
 
-Model decision logic, pipelines, and workflows.
+Show one decision at a time. This documentation pipeline makes the happy path and the revision loop easy to follow.
 
 The MyST syntax:
 
 ```markdown
 ```{mermaid}
 flowchart LR
-    A[Start] --> B{Decision}
-    B -->|Yes| C[Action 1]
-    B -->|No| D[Action 2]
-    C --> E[End]
-    D --> E
+    accTitle: Publish documentation
+    accDescr: Build the documentation, fix any warnings, then publish a clean build.
+    source[Write docs] --> build[Build]
+    build --> checks{Warnings?}
+    checks -->|None| publish([Publish])
+    checks -->|Found| revise[Revise]
+    revise --> build
+    classDef ready stroke-width:2px
+    class publish ready
 ```
 ```
 
@@ -2005,7 +2013,7 @@ Document database schema and table relationships.
 
 ## Pie Chart
 
-Show proportional breakdowns.
+Show proportional breakdowns. These illustrative counts use distinct colors and direct values so the proportions are easy to compare.
 
 The MyST syntax:
 
@@ -3884,7 +3892,9 @@ extensions = ["sphinxcontrib.mermaid"]
 
 ## Dark Mode Support
 
-Lumina handles Mermaid theme switching automatically — diagrams re-render when the reader toggles dark mode. No extra configuration needed.
+Lumina styles diagram labels with Source Sans 3 and uses the theme’s surface, text, and accent colors. The extension re-renders diagrams when the reader toggles dark mode; Lumina preserves their natural size after each render. No extra configuration is needed.
+
+Small diagrams stay at their natural size, while wide diagrams fit the article. Use the **fullscreen ⛶ button** for a larger view and **Escape** to close it. Pan and zoom are optional extension features: enable `mermaid_d3_zoom = True` in `conf.py` if needed.
 
 ## Usage
 
@@ -3892,13 +3902,27 @@ Write diagrams with the `mermaid` directive:
 
 ```markdown
 ```{mermaid}
-graph LR
-    A[Source] --> B[Build]
-    B --> C[Deploy]
+flowchart LR
+    accTitle: From source to published docs
+    accDescr: Sphinx builds source files, Lumina styles the pages, and the result is published.
+    source[Source files] --> build[Sphinx build]
+    build --> theme[Lumina theme]
+    theme --> publish([Publish])
 ```
 ```
 
 **Result:**
+
+## Emphasize a node
+
+Use Mermaid’s `classDef` to give an important node a stronger outline while retaining the theme’s colors:
+
+```text
+classDef ready stroke-width:2px
+class publish ready
+```
+
+Add these lines inside the diagram after the node definitions. Explicit node fills and strokes are also preserved. If you supply custom colors, check their contrast in both modes.
 
 #### SEE ALSO
 [Diagrams](../reference/diagrams.md) — flowcharts, sequence diagrams, class diagrams, Gantt charts, and more rendered examples.

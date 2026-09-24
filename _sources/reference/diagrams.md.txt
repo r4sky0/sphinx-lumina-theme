@@ -3,7 +3,7 @@
 Lumina supports [Mermaid](https://mermaid.js.org/) diagrams via the `sphinxcontrib-mermaid` extension. Diagrams automatically adapt to the current light or dark theme.
 
 :::{tip}
-See {doc}`/extensions/mermaid` for installation and setup instructions. To inspect a dense diagram up close, use the **fullscreen ⛶ button** that Mermaid renders on each diagram — it supports pan and zoom.
+See {doc}`/extensions/mermaid` for installation and setup instructions. Use the **fullscreen ⛶ button** to inspect a dense diagram at a larger size. Press **Escape** to return to the page.
 :::
 
 ## Choosing a Diagram Type
@@ -43,15 +43,19 @@ See {doc}`/extensions/mermaid` for installation and setup instructions. To inspe
 
 ## Flowchart
 
-Model decision logic, pipelines, and workflows.
+Show one decision at a time. This documentation pipeline makes the happy path and the revision loop easy to follow.
 
 ```{mermaid}
 flowchart LR
-    A[Start] --> B{Decision}
-    B -->|Yes| C[Action 1]
-    B -->|No| D[Action 2]
-    C --> E[End]
-    D --> E
+    accTitle: Publish documentation
+    accDescr: Build the documentation, fix any warnings, then publish a clean build.
+    source[Write docs] --> build[Build]
+    build --> checks{Warnings?}
+    checks -->|None| publish([Publish])
+    checks -->|Found| revise[Revise]
+    revise --> build
+    classDef ready stroke-width:2px
+    class publish ready
 ```
 
 The MyST syntax:
@@ -59,11 +63,15 @@ The MyST syntax:
 ````markdown
 ```{mermaid}
 flowchart LR
-    A[Start] --> B{Decision}
-    B -->|Yes| C[Action 1]
-    B -->|No| D[Action 2]
-    C --> E[End]
-    D --> E
+    accTitle: Publish documentation
+    accDescr: Build the documentation, fix any warnings, then publish a clean build.
+    source[Write docs] --> build[Build]
+    build --> checks{Warnings?}
+    checks -->|None| publish([Publish])
+    checks -->|Found| revise[Revise]
+    revise --> build
+    classDef ready stroke-width:2px
+    class publish ready
 ```
 ````
 
@@ -73,11 +81,10 @@ Mermaid supports different shapes to convey meaning:
 
 ```{mermaid}
 flowchart LR
-    A[Rectangle] --> B(Rounded)
-    B --> C{Diamond}
-    C --> D([Stadium])
-    D --> E[[Subroutine]]
-    E --> F[(Database)]
+    accTitle: Shapes communicate roles
+    accDescr: An input goes through validation, a decision, a build step, storage, and completion.
+    A[Input] --> B(Validate) --> C{Ready?}
+    C --> D[[Build]] --> E[(Artifacts)] --> F([Done])
 ```
 
 ### Direction options
@@ -86,8 +93,11 @@ Control layout direction with `TB` (top-bottom), `BT`, `LR` (left-right), or `RL
 
 ```{mermaid}
 flowchart TB
-    A[Top] --> B[Middle]
-    B --> C[Bottom]
+    accTitle: Documentation hierarchy
+    accDescr: A documentation hub links to tutorials, guides, and reference material.
+    hub[Documentation] --> tutorials[Tutorials]
+    hub --> guides[Guides]
+    hub --> reference[Reference]
 ```
 
 ## Sequence Diagram
@@ -96,37 +106,33 @@ Show how systems communicate over time.
 
 ```{mermaid}
 sequenceDiagram
-    participant Browser
-    participant Server
-    participant Database
-
-    Browser->>Server: GET /api/users
-    Server->>Database: SELECT * FROM users
-    Database-->>Server: Result set
-    Server-->>Browser: JSON response
+    accTitle: Search a documentation site
+    accDescr: A reader searches locally through Pagefind and follows a matching page.
+    autonumber
+    participant Reader
+    participant Search
+    participant Index as Pagefind index
+    Reader->>Search: Enter a query
+    Search->>Index: Find matching pages
+    Index-->>Search: Ranked results
+    Search-->>Reader: Titles and excerpts
 ```
 
 ### With activation and notes
 
 ```{mermaid}
 sequenceDiagram
-    participant Client
-    participant Auth
-    participant API
-
-    Client->>Auth: Login request
-    activate Auth
-    Auth-->>Client: JWT token
-    deactivate Auth
-
-    Note over Client: Stores token locally
-
-    Client->>API: Request with token
-    activate API
-    API->>Auth: Validate token
-    Auth-->>API: Valid
-    API-->>Client: Protected data
-    deactivate API
+    accTitle: Preview documentation changes
+    accDescr: Saving a source file triggers a rebuild; the browser reloads the preview when it is ready.
+    participant Author
+    participant Builder as Sphinx
+    participant Browser
+    Author->>Builder: Save a source file
+    activate Builder
+    Note over Builder: Rebuild changed pages
+    Builder-->>Browser: Preview ready
+    deactivate Builder
+    Browser-->>Author: Reload the page
 ```
 
 ## Class Diagram
@@ -135,6 +141,9 @@ Document object relationships, inheritance, and data models.
 
 ```{mermaid}
 classDiagram
+    accTitle: Documentation building blocks
+    accDescr: A document uses a theme and loads extensions.
+    direction LR
     class Document {
         +String title
         +String content
@@ -156,23 +165,22 @@ classDiagram
 
 ```{mermaid}
 classDiagram
-    class Animal {
-        +String name
-        +int age
-        +makeSound()*
+    accTitle: Sphinx builder inheritance
+    accDescr: HTML and LaTeX builders share the Builder interface.
+    direction LR
+    class Builder {
+        <<abstract>>
+        +build()
+        +write()
     }
-    class Dog {
-        +String breed
-        +makeSound()
-        +fetch()
+    class HTMLBuilder {
+        +render_page()
     }
-    class Cat {
-        +bool indoor
-        +makeSound()
-        +purr()
+    class LaTeXBuilder {
+        +write_document()
     }
-    Animal <|-- Dog
-    Animal <|-- Cat
+    Builder <|-- HTMLBuilder
+    Builder <|-- LaTeXBuilder
 ```
 
 ## State Diagram
@@ -181,12 +189,14 @@ Show how an entity transitions between states.
 
 ```{mermaid}
 stateDiagram-v2
+    accTitle: Document review lifecycle
+    accDescr: A draft is reviewed, published, and archived. A review can return it to draft.
+    direction LR
     [*] --> Draft
     Draft --> Review : Submit
     Review --> Published : Approve
     Review --> Draft : Request changes
     Published --> Archived : Archive
-    Published --> Draft : Revise
     Archived --> [*]
 ```
 
@@ -196,17 +206,21 @@ Visualize project timelines and task dependencies.
 
 ```{mermaid}
 gantt
-    title Project Timeline
-    dateFormat  YYYY-MM-DD
-    section Planning
-        Requirements     :done, req, 2024-01-01, 2024-01-14
-        Design           :done, des, after req, 14d
-    section Development
-        Implementation   :active, impl, after des, 30d
-        Testing          :test, after impl, 14d
-    section Release
-        Documentation    :doc, after test, 7d
-        Deployment       :deploy, after doc, 3d
+    accTitle: Documentation release plan
+    accDescr: Planning is complete, writing is active, and review precedes publication.
+    title Documentation release
+    dateFormat YYYY-MM-DD
+    axisFormat %d %b
+    tickInterval 1week
+    todayMarker off
+    section Plan
+        Outline       :done, plan, 2026-09-01, 5d
+    section Create
+        Write guides  :active, write, after plan, 12d
+        Add examples  :examples, after plan, 8d
+    section Ship
+        Review        :review, after write, 5d
+        Publish       :milestone, after review, 0d
 ```
 
 ## Entity-Relationship Diagram
@@ -215,9 +229,11 @@ Document database schema and table relationships.
 
 ```{mermaid}
 erDiagram
+    accTitle: Documentation content model
+    accDescr: A project contains documents, and each document has one or more pages.
+    direction LR
     PROJECT ||--o{ DOCUMENT : contains
     DOCUMENT ||--|{ PAGE : has
-    PAGE ||--o{ SECTION : includes
     PROJECT {
         string name
         string version
@@ -257,13 +273,18 @@ erDiagram
 
 ## Pie Chart
 
-Show proportional breakdowns.
+Show proportional breakdowns. These illustrative counts use distinct colors and direct values so the proportions are easy to compare.
 
 ```{mermaid}
-pie title Documentation Formats
-    "Markdown (MyST)" : 60
+:config: {"themeVariables": {"pie1": "#6ee7b7", "pie2": "#93c5fd", "pie3": "#fcd34d"}}
+
+pie showData
+    accTitle: Example documentation sources
+    accDescr: An illustrative project uses 60 Markdown pages, 30 reStructuredText pages, and 10 notebooks.
+    title Documentation sources
+    "MyST Markdown" : 60
     "reStructuredText" : 30
-    "Jupyter Notebooks" : 10
+    "Notebooks" : 10
 ```
 
 The MyST syntax:
@@ -283,22 +304,16 @@ Organize ideas hierarchically.
 
 ```{mermaid}
 mindmap
-    root((Sphinx Theme))
-        Layout
-            Sidebar
-            TOC
-            Breadcrumbs
-        Styling
-            Dark mode
-            Accent colors
-            Typography
-        Search
-            Pagefind
-            Built-in
-        Extensions
-            MyST
-            sphinx-design
-            Mermaid
+    root((Documentation))
+        Learn
+            Tutorials
+            Examples
+        Build
+            Guides
+            Configuration
+        Look up
+            API reference
+            Changelog
 ```
 
 The MyST syntax:
@@ -318,6 +333,7 @@ mindmap
 ## Tips for Writing Diagrams
 
 :::{tip}
+- **Add a text alternative.** Use `accTitle` and `accDescr` in supported diagram types, and explain the conclusion in the surrounding prose.
 - **Keep diagrams simple.** If a diagram has more than 15 nodes, consider splitting it into multiple diagrams.
 - **Use meaningful labels.** `Auth Service` is better than `S2`.
 - **Choose the right direction.** `LR` (left-right) works well for workflows; `TB` (top-bottom) for hierarchies.

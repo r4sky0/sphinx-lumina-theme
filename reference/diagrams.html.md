@@ -17,18 +17,22 @@ Lumina supports [Mermaid](https://mermaid.js.org/) diagrams via the `sphinxcontr
 
 ## Flowchart
 
-Model decision logic, pipelines, and workflows.
+Show one decision at a time. This documentation pipeline makes the happy path and the revision loop easy to follow.
 
 The MyST syntax:
 
 ```markdown
 ```{mermaid}
 flowchart LR
-    A[Start] --> B{Decision}
-    B -->|Yes| C[Action 1]
-    B -->|No| D[Action 2]
-    C --> E[End]
-    D --> E
+    accTitle: Publish documentation
+    accDescr: Build the documentation, fix any warnings, then publish a clean build.
+    source[Write docs] --> build[Build]
+    build --> checks{Warnings?}
+    checks -->|None| publish([Publish])
+    checks -->|Found| revise[Revise]
+    revise --> build
+    classDef ready stroke-width:2px
+    class publish ready
 ```
 ```
 
@@ -75,7 +79,7 @@ Document database schema and table relationships.
 
 ## Pie Chart
 
-Show proportional breakdowns.
+Show proportional breakdowns. These illustrative counts use distinct colors and direct values so the proportions are easy to compare.
 
 The MyST syntax:
 

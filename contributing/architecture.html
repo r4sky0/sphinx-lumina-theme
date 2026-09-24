@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-09-24T17:08:23+00:00" />
+    <meta property="article:modified_time" content="2026-09-24T17:10:28+00:00" />
     <title>Architecture &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=f2493ea4" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=a0049a34" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=9e719ae8"></script>
+    <script defer="defer" src="../_static/lumina.js?v=bfc332d1"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -632,6 +632,7 @@
 <li><a class="reference internal" href="#interactivity-pattern">Interactivity Pattern</a><ul>
 <li><a class="reference internal" href="#api-disclosures">API disclosures</a></li>
 <li><a class="reference internal" href="#http-request-editor">HTTP request editor</a></li>
+<li><a class="reference internal" href="#mermaid-diagrams">Mermaid diagrams</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#theming">Theming</a></li>
@@ -698,6 +699,10 @@ pnpm<span class="w"> </span>run<span class="w"> </span>build:icons<span class="w
 <h3>HTTP request editor<a class="headerlink" href="#http-request-editor" title="Link to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">try-it.js</span></code> and <code class="docutils literal notranslate"><span class="pre">curl-copy.js</span></code> enhance the rendered <code class="docutils literal notranslate"><span class="pre">dl.http</span></code> endpoints. <code class="docutils literal notranslate"><span class="pre">_http-api-utils.js</span></code> extracts paths, fields, and HTTP request examples. A shared curl serializer handles both documentation templates and edited requests, with POSIX shell quoting.</p>
 <p>The request panel keeps authentication in memory, shared by the normalized API base URL. It sends browser <code class="docutils literal notranslate"><span class="pre">fetch</span></code> requests with cookies omitted, redirects rejected, and cancellation through <code class="docutils literal notranslate"><span class="pre">AbortController</span></code>. It does not parse the original OpenAPI specification. The showcase uses sphinxcontrib-openapi’s <code class="docutils literal notranslate"><span class="pre">httpdomain</span></code> renderer to preserve request schemas and examples.</p>
+</section>
+<section id="mermaid-diagrams">
+<h3>Mermaid diagrams<a class="headerlink" href="#mermaid-diagrams" title="Link to this heading">¶</a></h3>
+<p>Mermaid rendering, theme changes, and fullscreen controls belong to <code class="docutils literal notranslate"><span class="pre">sphinxcontrib-mermaid</span></code>. Lumina’s <code class="docutils literal notranslate"><span class="pre">mermaid.js</span></code> observes rendered diagrams and records each SVG’s natural width; <code class="docutils literal notranslate"><span class="pre">mermaid.css</span></code> handles sizing, typography, and colors. The observer also handles SVG replacement after a theme change.</p>
 </section>
 </section>
 <section id="theming">
@@ -786,6 +791,7 @@ uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </sp
 <li><a class="reference internal" href="#interactivity-pattern">Interactivity Pattern</a><ul>
 <li><a class="reference internal" href="#api-disclosures">API disclosures</a></li>
 <li><a class="reference internal" href="#http-request-editor">HTTP request editor</a></li>
+<li><a class="reference internal" href="#mermaid-diagrams">Mermaid diagrams</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#theming">Theming</a></li>

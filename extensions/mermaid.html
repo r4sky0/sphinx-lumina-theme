@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-16T16:59:05+00:00" />
+    <meta property="article:modified_time" content="2026-09-24T17:10:28+00:00" />
     <title>Mermaid Diagrams &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=f2493ea4" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=a0049a34" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -457,7 +457,7 @@ mermaid.initialize(
 
 window.addEventListener("load", load);
 window.runMermaid = runMermaid;</script>
-    <script defer="defer" src="../_static/lumina.js?v=9e719ae8"></script>
+    <script defer="defer" src="../_static/lumina.js?v=bfc332d1"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/extensions/mermaid.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -501,7 +501,7 @@ window.runMermaid = runMermaid;</script>
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Extensions", "item": "https://r4sky0.github.io/sphinx-lumina-theme/extensions/index.html"}, {"@type": "ListItem", "position": 3, "name": "Mermaid Diagrams", "item": "https://r4sky0.github.io/sphinx-lumina-theme/extensions/mermaid.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Mermaid Diagrams", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "sphinxcontrib-mermaid renders Mermaid diagrams directly in your docs. Lumina automatically adjusts diagram colors to match the current light/dark theme.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/extensions/mermaid.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/extensions/mermaid.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-04-16T00:00:00+00:00", "dateModified": "2026-04-16T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Mermaid Diagrams", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "sphinxcontrib-mermaid renders Mermaid diagrams directly in your docs. Lumina automatically adjusts diagram colors to match the current light/dark theme.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/extensions/mermaid.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/extensions/mermaid.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-24T00:00:00+00:00", "dateModified": "2026-09-24T00:00:00+00:00"}</script>
         
         
     
@@ -1154,6 +1154,7 @@ window.runMermaid = runMermaid;</script>
 <li><a class="reference internal" href="#setup">Setup</a></li>
 <li><a class="reference internal" href="#dark-mode-support">Dark Mode Support</a></li>
 <li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#emphasize-a-node">Emphasize a node</a></li>
 </ul>
 </li>
 </ul>
@@ -1182,24 +1183,40 @@ window.runMermaid = runMermaid;</script>
 </section>
 <section id="dark-mode-support">
 <h2>Dark Mode Support<a class="headerlink" href="#dark-mode-support" title="Link to this heading">¶</a></h2>
-<p>Lumina handles Mermaid theme switching automatically — diagrams re-render when the reader toggles dark mode. No extra configuration needed.</p>
+<p>Lumina styles diagram labels with Source Sans 3 and uses the theme’s surface, text, and accent colors. The extension re-renders diagrams when the reader toggles dark mode; Lumina preserves their natural size after each render. No extra configuration is needed.</p>
+<p>Small diagrams stay at their natural size, while wide diagrams fit the article. Use the <strong>fullscreen ⛶ button</strong> for a larger view and <strong>Escape</strong> to close it. Pan and zoom are optional extension features: enable <code class="docutils literal notranslate"><span class="pre">mermaid_d3_zoom</span> <span class="pre">=</span> <span class="pre">True</span></code> in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> if needed.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
 <p>Write diagrams with the <code class="docutils literal notranslate"><span class="pre">mermaid</span></code> directive:</p>
 <div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{mermaid}
-graph LR
-    A[Source] --&gt; B[Build]
-    B --&gt; C[Deploy]
+flowchart LR
+    accTitle: From source to published docs
+    accDescr: Sphinx builds source files, Lumina styles the pages, and the result is published.
+    source[Source files] --&gt; build[Sphinx build]
+    build --&gt; theme[Lumina theme]
+    theme --&gt; publish([Publish])
 ```
 </pre></div>
 </div>
 <p><strong>Result:</strong></p>
 <pre  class="mermaid">
-        graph LR
-    A[Source] --&gt; B[Build]
-    B --&gt; C[Deploy]
-    </pre><div class="admonition seealso">
+        flowchart LR
+    accTitle: From source to published docs
+    accDescr: Sphinx builds source files, Lumina styles the pages, and the result is published.
+    source[Source files] --&gt; build[Sphinx build]
+    build --&gt; theme[Lumina theme]
+    theme --&gt; publish([Publish])
+    </pre></section>
+<section id="emphasize-a-node">
+<h2>Emphasize a node<a class="headerlink" href="#emphasize-a-node" title="Link to this heading">¶</a></h2>
+<p>Use Mermaid’s <code class="docutils literal notranslate"><span class="pre">classDef</span></code> to give an important node a stronger outline while retaining the theme’s colors:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>classDef ready stroke-width:2px
+class publish ready
+</pre></div>
+</div>
+<p>Add these lines inside the diagram after the node definitions. Explicit node fills and strokes are also preserved. If you supply custom colors, check their contrast in both modes.</p>
+<div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../reference/diagrams.html"><span class="doc">Diagrams</span></a> — flowcharts, sequence diagrams, class diagrams, Gantt charts, and more rendered examples.</p>
 </div>
@@ -1238,7 +1255,7 @@ graph LR
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>April 16, 2026</time>
+            Last updated <time>September 24, 2026</time>
         </p>
     
     
@@ -1266,6 +1283,7 @@ graph LR
 <li><a class="reference internal" href="#setup">Setup</a></li>
 <li><a class="reference internal" href="#dark-mode-support">Dark Mode Support</a></li>
 <li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#emphasize-a-node">Emphasize a node</a></li>
 </ul>
 </li>
 </ul>
