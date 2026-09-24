@@ -226,18 +226,56 @@ def test_mobile_tables_stack_rows(page: Page, live_server: str):
     )
 
 
-def test_toc_scrollspy(page: Page, live_server: str):
-    """Scrolling should activate a TOC link via scrollspy."""
-    # TOC sidebar requires xl breakpoint (1280px+)
+@pytest.mark.parametrize("theme", ["light", "dark"])
+def test_toc_scrollspy(page: Page, live_server: str, theme):
+    """The curved guide follows nesting, wrapped labels, and the active section."""
+    page.set_viewport_size({"width": 390, "height": 900})
+    page.goto(f"{live_server}/guides/navigation.html")
+    page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
     page.set_viewport_size({"width": 1400, "height": 900})
-    page.goto(f"{live_server}/getting-started/installation.html")
-    page.wait_for_function("() => window.Alpine !== undefined")
+    nav = page.locator(".lumina-toc-nav")
+    guide = nav.locator(".lumina-toc-guide")
+    expect(guide).to_have_attribute("aria-hidden", "true")
+    page.evaluate("document.fonts.ready")
 
-    # Scroll to a heading further down the page
-    page.locator("#next-steps").scroll_into_view_if_needed()
-    # Wait for IntersectionObserver to fire and verify any link gets active class
-    active = page.locator(".lumina-toc-nav a.lumina-toc-active")
-    expect(active).to_have_count(1, timeout=3000)
+    nested = nav.locator('a[href="#dropdown-menus"]')
+    nested.click()
+    expect(nested).to_have_attribute("aria-current", "location")
+    expect(nav.locator("a.lumina-toc-active")).to_have_count(1)
+    page.wait_for_function("""() => {
+        const nav = document.querySelector('.lumina-toc-nav');
+        return getComputedStyle(nav.querySelector('circle')).fill
+            === getComputedStyle(nav.querySelector('[aria-current]')).color;
+    }""")
+    assert (
+        guide.locator(".lumina-toc-indicator").evaluate(
+            "el => getComputedStyle(el).clipPath"
+        )
+        != "none"
+    )
+
+    # Narrowing the outline wraps labels; the guide must track the new geometry.
+    for width in (220, 180):
+        page.locator(".lumina-toc-container").evaluate(
+            "(el, width) => el.style.width = `${width}px`", width
+        )
+        page.wait_for_function("""() => {
+            const nav = document.querySelector('.lumina-toc-nav');
+            const links = [...nav.querySelectorAll('a')].filter(el => el.offsetHeight);
+            const path = nav.querySelector('.lumina-toc-track');
+            const end = path.getPointAtLength(path.getTotalLength());
+            const last = links.at(-1);
+            const active = nav.querySelector('[aria-current]');
+            const dot = nav.querySelector('circle');
+            return Math.abs(end.y - last.offsetTop - last.offsetHeight) < 1
+                && Number(dot.getAttribute('cx')) === active.offsetLeft + 1
+                && Number(dot.getAttribute('cy')) === active.offsetTop + active.offsetHeight / 2;
+        }""")
+    assert " C " in guide.locator("path").first.get_attribute("d")
+    parent = nav.locator('a[href="#header-navigation-links"]')
+    assert nested.bounding_box()["x"] > parent.bounding_box()["x"]
+    nested.focus()
+    expect(nested).to_be_focused()
 
 
 def test_breadcrumbs_link(page: Page, live_server: str):

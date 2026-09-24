@@ -45,6 +45,11 @@ Alpine.js components are registered via `Alpine.data()` in separate modules unde
 
 See {doc}`javascript-api` for the full component API reference.
 
+The page outline's `scrollspy.js` measures the nested links to draw a continuous
+SVG guide. It recalculates on resize to keep curves aligned with wrapped labels,
+and marks the active link with `aria-current="location"`. Without JavaScript,
+the nested links keep a straight CSS guide.
+
 ### API disclosures
 
 `api-disclosures.js` runs after the HTTP tools initialize. It adds disclosure buttons to Sphinx's Python, HTTP, and JavaScript signatures and toggles their definition bodies. It preserves links inside signatures, opens ancestor definitions for deep links, and reads the `api_expanded` theme option. Without JavaScript, definitions remain visible.
