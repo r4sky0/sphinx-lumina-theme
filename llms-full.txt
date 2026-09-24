@@ -570,6 +570,13 @@ Alpine.js components are registered via `Alpine.data()` in separate modules unde
 
 See [JavaScript API](javascript-api.md) for the full component API reference.
 
+The page outline’s `scrollspy.js` measures the nested links to draw a continuous
+SVG guide. It recalculates on resize to keep curves aligned with wrapped labels,
+and marks the active link with `aria-current="location"`. Scroll updates select
+the last section start above the anchor offset below the fixed header, using
+one animation frame per update. Without JavaScript,
+the nested links keep a straight CSS guide.
+
 ### API disclosures
 
 `api-disclosures.js` runs after the HTTP tools initialize. It adds disclosure buttons to Sphinx’s Python, HTTP, and JavaScript signatures and toggles their definition bodies. It preserves links inside signatures, opens ancestor definitions for deep links, and reads the `api_expanded` theme option. Without JavaScript, definitions remain visible.
@@ -4181,7 +4188,10 @@ html_theme_options = {
 
 ## Page Table of Contents
 
-The right-side page outline shows h2 and h3 headings. To hide it:
+The right-side page outline indents nested headings along a curved guide.
+An accent marker follows the current section as you scroll in either direction.
+It switches when a heading reaches the reading line below the fixed header;
+at the bottom of the page, it selects the final section. To hide it:
 
 ```python
 html_theme_options = {

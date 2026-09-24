@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-09-24T17:10:28+00:00" />
+    <meta property="article:modified_time" content="2026-09-24T17:32:13+00:00" />
     <title>Architecture &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=a0049a34" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=89a63ad0" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=bfc332d1"></script>
+    <script defer="defer" src="../_static/lumina.js?v=07263154"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -652,7 +652,7 @@
     <section class="tex2jax_ignore mathjax_ignore" id="architecture">
 <h1>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">¶</a></h1>
 <p>How the Sphinx Lumina Theme is structured internally.</p>
-<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>2 min read</span></div><section id="theme-structure">
+<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>3 min read</span></div><section id="theme-structure">
 <h2>Theme Structure<a class="headerlink" href="#theme-structure" title="Link to this heading">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>src/sphinx_lumina_theme/
 ├── __init__.py              # Sphinx setup() hook, registers theme
@@ -691,6 +691,12 @@ pnpm<span class="w"> </span>run<span class="w"> </span>build:icons<span class="w
 <h2>Interactivity Pattern<a class="headerlink" href="#interactivity-pattern" title="Link to this heading">¶</a></h2>
 <p>Alpine.js components are registered via <code class="docutils literal notranslate"><span class="pre">Alpine.data()</span></code> in separate modules under <code class="docutils literal notranslate"><span class="pre">_static_src/js/</span></code>. Each component is imported and registered in <code class="docutils literal notranslate"><span class="pre">app.js</span></code>, then referenced in templates with <code class="docutils literal notranslate"><span class="pre">x-data</span></code>.</p>
 <p>See <a class="reference internal" href="javascript-api.html"><span class="doc">JavaScript API</span></a> for the full component API reference.</p>
+<p>The page outline’s <code class="docutils literal notranslate"><span class="pre">scrollspy.js</span></code> measures the nested links to draw a continuous
+SVG guide. It recalculates on resize to keep curves aligned with wrapped labels,
+and marks the active link with <code class="docutils literal notranslate"><span class="pre">aria-current=&quot;location&quot;</span></code>. Scroll updates select
+the last section start above the anchor offset below the fixed header, using
+one animation frame per update. Without JavaScript,
+the nested links keep a straight CSS guide.</p>
 <section id="api-disclosures">
 <h3>API disclosures<a class="headerlink" href="#api-disclosures" title="Link to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">api-disclosures.js</span></code> runs after the HTTP tools initialize. It adds disclosure buttons to Sphinx’s Python, HTTP, and JavaScript signatures and toggles their definition bodies. It preserves links inside signatures, opens ancestor definitions for deep links, and reads the <code class="docutils literal notranslate"><span class="pre">api_expanded</span></code> theme option. Without JavaScript, definitions remain visible.</p>

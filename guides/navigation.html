@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-15T11:05:47+00:00" />
+    <meta property="article:modified_time" content="2026-09-24T17:32:13+00:00" />
     <title>Navigation &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=a0049a34" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=89a63ad0" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=bfc332d1"></script>
+    <script defer="defer" src="../_static/lumina.js?v=07263154"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/guides/navigation.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -65,7 +65,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://r4sky0.github.io/sphinx-lumina-theme/guides/index.html"}, {"@type": "ListItem", "position": 3, "name": "Navigation", "item": "https://r4sky0.github.io/sphinx-lumina-theme/guides/navigation.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Navigation", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Configure header links, social icons, sidebar depth, and breadcrumbs.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/guides/navigation.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/guides/navigation.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-04-15T00:00:00+00:00", "dateModified": "2026-04-15T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Navigation", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Configure header links, social icons, sidebar depth, and breadcrumbs.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/guides/navigation.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/guides/navigation.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-24T00:00:00+00:00", "dateModified": "2026-09-24T00:00:00+00:00"}</script>
         
         
     
@@ -752,7 +752,7 @@
     <section class="tex2jax_ignore mathjax_ignore" id="navigation">
 <h1>Navigation<a class="headerlink" href="#navigation" title="Link to this heading">¶</a></h1>
 <p>Configure header links, social icons, sidebar depth, and breadcrumbs.</p>
-<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>3 min read</span></div><section id="header-navigation-links">
+<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>4 min read</span></div><section id="header-navigation-links">
 <h2>Header Navigation Links<a class="headerlink" href="#header-navigation-links" title="Link to this heading">¶</a></h2>
 <p>Add links to your site header for quick access to key pages:</p>
 <div class="literal-block-wrapper docutils container" id="id3">
@@ -866,7 +866,10 @@ so collapsed-by-default entries never hide the current page.</p>
 </section>
 <section id="page-table-of-contents">
 <h2>Page Table of Contents<a class="headerlink" href="#page-table-of-contents" title="Link to this heading">¶</a></h2>
-<p>The right-side page outline shows h2 and h3 headings. To hide it:</p>
+<p>The right-side page outline indents nested headings along a curved guide.
+An accent marker follows the current section as you scroll in either direction.
+It switches when a heading reaches the reading line below the fixed header;
+at the bottom of the page, it selects the final section. To hide it:</p>
 <div class="literal-block-wrapper docutils container" id="id9">
 <div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
@@ -1013,7 +1016,7 @@ so collapsed-by-default entries never hide the current page.</p>
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>April 15, 2026</time>
+            Last updated <time>September 24, 2026</time>
         </p>
     
     
