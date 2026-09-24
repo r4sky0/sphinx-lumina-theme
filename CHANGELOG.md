@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.6.0 (2026-09-24)
+
+### Features
+
+- **mermaid**: Refine diagram design and natural sizing
+  ([#150](https://github.com/r4sky0/sphinx-lumina-theme/pull/150),
+  [`3b47b46`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3b47b467edd787e16183c1102dc28c7406697441))
+
+
 ## v2.5.0 (2026-09-24)
 
 ### Features
