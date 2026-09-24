@@ -1,5 +1,13 @@
 # Releases
 
+## v2.7.0 (2026-09-24)
+
+### Features
+
+- **toc**: Add curved heading hierarchy guide
+  ([#151](https://github.com/r4sky0/sphinx-lumina-theme/pull/151),
+  [`35db757`](https://github.com/r4sky0/sphinx-lumina-theme/commit/35db757e1e0b1dd202a6e9593d50e711f3cd7ffa))
+
 ## v2.6.0 (2026-09-24)
 
 ### Features
