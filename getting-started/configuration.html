@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-09-23T09:42:06+00:00" />
+    <meta property="article:modified_time" content="2026-09-24T17:08:23+00:00" />
     <title>Configuration &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=120d8509" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=f2493ea4" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=71fdd00c"></script>
+    <script defer="defer" src="../_static/lumina.js?v=9e719ae8"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -65,7 +65,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Getting Started", "item": "https://r4sky0.github.io/sphinx-lumina-theme/getting-started/index.html"}, {"@type": "ListItem", "position": 3, "name": "Configuration", "item": "https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Configuration", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Everything you can configure in Lumina — theme options, accent colors, and a complete reference.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-23T00:00:00+00:00", "dateModified": "2026-09-23T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Configuration", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Everything you can configure in Lumina — theme options, accent colors, and a complete reference.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-24T00:00:00+00:00", "dateModified": "2026-09-24T00:00:00+00:00"}</script>
         
         
     
@@ -110,6 +110,7 @@
     <meta name="lumina-base-url" content="../">
     
         <script>document.documentElement.dataset.apiBaseUrl = "https://petstore3.swagger.io/api/v3";</script>
+    
     
     
     
@@ -725,6 +726,7 @@
 <li><a class="reference internal" href="#reading-time">Reading Time</a></li>
 <li><a class="reference internal" href="#version-switcher">Version Switcher</a></li>
 <li><a class="reference internal" href="#search">Search</a></li>
+<li><a class="reference internal" href="#api-display">API display</a></li>
 <li><a class="reference internal" href="#http-api">HTTP API</a></li>
 <li><a class="reference internal" href="#source-links">Source Links</a></li>
 <li><a class="reference internal" href="#footer-social">Footer &amp; Social</a></li>
@@ -1094,6 +1096,20 @@ Lucide icons are designed on a 24×24 grid with 2-unit-wide strokes. When a Luci
 </tbody>
 </table>
 </section>
+<section id="api-display">
+<h3>API display<a class="headerlink" href="#api-display" title="Link to this heading">¶</a></h3>
+<p>Python, JavaScript, and HTTP API definitions start collapsed. Readers can open a signature or use <strong>Expand all</strong> and <strong>Collapse all</strong>.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">api_expanded</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;true&quot;</span></code> to show every definition on page load. This does not open the separate <strong>Try it out</strong> request forms.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;api_expanded&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>  <span class="c1"># Default: &quot;false&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Direct links reveal the target definition and its parents. Without JavaScript, all documentation stays visible.</p>
+</section>
 <section id="http-api">
 <h3>HTTP API<a class="headerlink" href="#http-api" title="Link to this heading">¶</a></h3>
 <p>These options control the interactive features on HTTP API endpoint pages. They require <code class="docutils literal notranslate"><span class="pre">sphinxcontrib-openapi</span></code> or <code class="docutils literal notranslate"><span class="pre">sphinxcontrib-httpdomain</span></code>. See <a class="reference internal" href="../extensions/openapi.html"><span class="doc">OpenAPI</span></a> for setup, authentication, and compatibility limits. Readers can edit the server URL in each request panel; credentials stay in page memory and are scoped to the full API base URL.</p>
@@ -1309,8 +1325,8 @@ Lucide icons are designed on a 24×24 grid with 2-unit-wide strokes. When a Luci
 <section id="full-configuration-example">
 <h2>Full Configuration Example<a class="headerlink" href="#full-configuration-example" title="Link to this heading">¶</a></h2>
 <p>Here’s a <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> using every theme option:</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">conf.py — Complete theme configuration</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">conf.py — Complete theme configuration</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme</span> <span class="o">=</span> <span class="s2">&quot;lumina&quot;</span>
 <span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># Appearance</span>
@@ -1447,7 +1463,7 @@ Custom Styling</div>
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>September 23, 2026</time>
+            Last updated <time>September 24, 2026</time>
         </p>
     
     
@@ -1483,6 +1499,7 @@ Custom Styling</div>
 <li><a class="reference internal" href="#reading-time">Reading Time</a></li>
 <li><a class="reference internal" href="#version-switcher">Version Switcher</a></li>
 <li><a class="reference internal" href="#search">Search</a></li>
+<li><a class="reference internal" href="#api-display">API display</a></li>
 <li><a class="reference internal" href="#http-api">HTTP API</a></li>
 <li><a class="reference internal" href="#source-links">Source Links</a></li>
 <li><a class="reference internal" href="#footer-social">Footer &amp; Social</a></li>

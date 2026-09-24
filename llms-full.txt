@@ -356,7 +356,7 @@ Expanded content here.
 
 # API Documentation
 
-How technical API documentation renders in the Lumina theme. This page covers manually written API docs and autodoc integration.
+Browse functions, classes, and module members. Open a signature to inspect its parameters and return values, or choose **Expand all**.
 
 ## Functions
 
@@ -374,7 +374,7 @@ Connect to a remote server.
   * **ConnectionError** – If the server is unreachable.
   * **ValueError** – If the port is out of range.
 
-The MyST syntax:
+### Show the MyST source
 
 ```markdown
 ```{py:function} connect(host: str, port: int) -> Connection
@@ -423,7 +423,7 @@ Remove a previously registered handler.
 
 A mapping of event names to their registered handler lists.
 
-The MyST syntax for classes:
+### Show the MyST source for classes
 
 ```markdown
 ```{py:class} ClassName()
@@ -569,6 +569,10 @@ pnpm run build:icons    # Regenerate Python Lucide icon definitions
 Alpine.js components are registered via `Alpine.data()` in separate modules under `_static_src/js/`. Each component is imported and registered in `app.js`, then referenced in templates with `x-data`.
 
 See [JavaScript API](javascript-api.md) for the full component API reference.
+
+### API disclosures
+
+`api-disclosures.js` runs after the HTTP tools initialize. It adds disclosure buttons to Sphinx’s Python, HTTP, and JavaScript signatures and toggles their definition bodies. It preserves links inside signatures, opens ancestor definitions for deep links, and reads the `api_expanded` theme option. Without JavaScript, definitions remain visible.
 
 ### HTTP request editor
 
@@ -1332,6 +1336,20 @@ reading_time: 12      # Force "12 min read" on this page
 | Option           | Type   | Default      | Description                                                                                            |
 |------------------|--------|--------------|--------------------------------------------------------------------------------------------------------|
 | `search_backend` | string | `"pagefind"` | Search implementation. `"pagefind"` for Pagefind (recommended), `"sphinx"` for Sphinx built-in search. |
+
+### API display
+
+Python, JavaScript, and HTTP API definitions start collapsed. Readers can open a signature or use **Expand all** and **Collapse all**.
+
+Set `api_expanded` to `"true"` to show every definition on page load. This does not open the separate **Try it out** request forms.
+
+```python
+html_theme_options = {
+    "api_expanded": "true",  # Default: "false"
+}
+```
+
+Direct links reveal the target definition and its parents. Without JavaScript, all documentation stays visible.
 
 ### HTTP API
 
@@ -2219,15 +2237,13 @@ This outputs every referenceable object, which you can search for the exact role
 
 # HTTP API Documentation
 
-Explore an API, edit a request, and inspect the response without leaving your documentation. This page demonstrates OpenAPI-generated and manually written endpoints.
+Browse endpoints, inspect parameters, and send requests directly from your documentation.
 
-Start with **GET /pet/findByStatus**: open **Try it out**, enter `available` for `status`, and send the request. The Petstore example uses a public demo server; availability and CORS depend on that service. Use **Copy as curl** to run the same request in a terminal.
-
-Download the [`OpenAPI specification`](openapi-petstore.yml) to use with other API tools. See [OpenAPI](../extensions/openapi.md) for supported workflows and limitations.
+[Setup and configuration](../extensions/openapi.md) · [`Download the example spec`](openapi-petstore.yml)
 
 ## From an OpenAPI Spec
 
-The `openapi` directive renders an entire API from a spec file. Point it at your OpenAPI (Swagger) YAML or JSON:
+Expand **GET /pet/findByStatus** and choose **Try it out**. Set `status` to `available` to try the public Petstore demo.
 
 ### GET /pet/findByStatus
 
@@ -2596,13 +2612,16 @@ Content-Type: application/json
   * [400 Bad Request](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/400) – Invalid input
   * [422 Unprocessable Entity](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/422) – Validation exception
 
-The MyST syntax:
+### Show the MyST source
 
 ```markdown
 ```{eval-rst}
 .. openapi:: openapi-petstore.yml
+   :generate-examples-from-schemas:
 ```
 ```
+
+The public demo server’s availability and CORS settings may vary.
 
 ## Manual HTTP Directives
 
@@ -2708,7 +2727,7 @@ The “Try it out” buttons above use `https://reports.api.example.com/v2` whil
 ```
 ```
 
-The MyST syntax for manual directives:
+### Show the MyST source for a manual endpoint
 
 ```markdown
 ```{eval-rst}
@@ -3327,7 +3346,7 @@ Registered as `Alpine.data("curlCopyBtn", curlCopyBtn)`.
 
 **Methods:**
 
-- `copy()` — Copies the edited request, or the documented template, to the clipboard.
+- `copy()` — Copies the documented request template to the clipboard.
 
 * **Returns:**
   **object** – Alpine.js component data.
@@ -4276,6 +4295,12 @@ Point the `openapi` directive at your spec file:
 
 See [HTTP API Documentation](../reference/http-api.md) for rendered examples of both auto-generated and manually written HTTP API documentation.
 
+## Expanding endpoint details
+
+Endpoints start collapsed. Select a signature to see its description, parameters, examples, and request controls. **Expand all** and **Collapse all** apply to every API definition on the page.
+
+To start with all definitions expanded, set `"api_expanded": "true"` in `html_theme_options`. This option also applies to Python and JavaScript API documentation. See [Configuration](../getting-started/configuration.md).
+
 ## Interactive Features
 
 Set `api_base_url` in your theme options to activate two interactive features on every HTTP endpoint:
@@ -4288,7 +4313,7 @@ html_theme_options = {
 
 ### Copy as curl
 
-A **Copy as curl** button appears in each endpoint’s signature and request panel. With **Try it out** enabled, both buttons copy the current server, parameters, headers, authentication, and body. Open **Request command** to inspect or manually copy the command.
+Each endpoint has one **Copy as curl** button in its request panel. It copies the current server, parameters, headers, authentication, and body. Open **Request command** to inspect or manually copy the command.
 
 Commands use POSIX shell quoting, including apostrophes in JSON and headers. Fill in required parameters before running them. Treat copied commands as sensitive when they include credentials.
 

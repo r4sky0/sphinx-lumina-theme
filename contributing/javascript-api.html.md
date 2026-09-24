@@ -209,7 +209,7 @@ Registered as `Alpine.data("curlCopyBtn", curlCopyBtn)`.
 
 **Methods:**
 
-- `copy()` — Copies the edited request, or the documented template, to the clipboard.
+- `copy()` — Copies the documented request template to the clipboard.
 
 * **Returns:**
   **object** – Alpine.js component data.

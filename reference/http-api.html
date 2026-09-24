@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-09-23T09:42:06+00:00" />
+    <meta property="article:modified_time" content="2026-09-24T17:08:23+00:00" />
     <title>HTTP API Documentation &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=120d8509" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=f2493ea4" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=71fdd00c"></script>
+    <script defer="defer" src="../_static/lumina.js?v=9e719ae8"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/reference/http-api.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -37,11 +37,11 @@
     
     
         
-        <meta name="description" content="Explore an API, edit a request, and inspect the response without leaving your documentation. This page demonstrates OpenAPI-generated and manually written endp…">
+        <meta name="description" content="Browse endpoints, inspect parameters, and send requests directly from your documentation.">
         
         <meta name="theme-color" content="#10b981">
         <meta property="og:title" content="HTTP API Documentation">
-        <meta property="og:description" content="Explore an API, edit a request, and inspect the response without leaving your documentation. This page demonstrates OpenAPI-generated and manually written endp…">
+        <meta property="og:description" content="Browse endpoints, inspect parameters, and send requests directly from your documentation.">
         <meta property="og:url" content="https://r4sky0.github.io/sphinx-lumina-theme/reference/http-api.html">
         <meta property="og:type" content="article">
         <meta property="og:site_name" content="Sphinx Lumina Theme">
@@ -58,14 +58,14 @@
         
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="HTTP API Documentation">
-        <meta name="twitter:description" content="Explore an API, edit a request, and inspect the response without leaving your documentation. This page demonstrates OpenAPI-generated and manually written endp…">
+        <meta name="twitter:description" content="Browse endpoints, inspect parameters, and send requests directly from your documentation.">
         <meta name="twitter:image" content="https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png">
         
         
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Reference", "item": "https://r4sky0.github.io/sphinx-lumina-theme/reference/index.html"}, {"@type": "ListItem", "position": 3, "name": "HTTP API Documentation", "item": "https://r4sky0.github.io/sphinx-lumina-theme/reference/http-api.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "HTTP API Documentation", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Explore an API, edit a request, and inspect the response without leaving your documentation. This page demonstrates OpenAPI-generated and manually written endp…", "url": "https://r4sky0.github.io/sphinx-lumina-theme/reference/http-api.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/reference/http-api.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-23T00:00:00+00:00", "dateModified": "2026-09-23T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "HTTP API Documentation", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Browse endpoints, inspect parameters, and send requests directly from your documentation.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/reference/http-api.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/reference/http-api.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-24T00:00:00+00:00", "dateModified": "2026-09-24T00:00:00+00:00"}</script>
         
         
     
@@ -110,6 +110,7 @@
     <meta name="lumina-base-url" content="../">
     
         <script>document.documentElement.dataset.apiBaseUrl = "https://petstore3.swagger.io/api/v3";</script>
+    
     
     
     
@@ -736,16 +737,11 @@
 
     <section class="tex2jax_ignore mathjax_ignore" id="http-api-documentation">
 <h1>HTTP API Documentation<a class="headerlink" href="#http-api-documentation" title="Link to this heading">¶</a></h1>
-<p>Explore an API, edit a request, and inspect the response without leaving your documentation. This page demonstrates OpenAPI-generated and manually written endpoints.</p>
-<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>6 min read</span></div><p>Start with <strong>GET /pet/findByStatus</strong>: open <strong>Try it out</strong>, enter <code class="docutils literal notranslate"><span class="pre">available</span></code> for <code class="docutils literal notranslate"><span class="pre">status</span></code>, and send the request. The Petstore example uses a public demo server; availability and CORS depend on that service. Use <strong>Copy as curl</strong> to run the same request in a terminal.</p>
-<p>Download the <a class="reference download internal" download="" href="../_downloads/13426272a379eb0b4476fe606652ece6/openapi-petstore.yml"><code class="xref download docutils literal notranslate"><span class="pre">OpenAPI</span> <span class="pre">specification</span></code></a> to use with other API tools. See <a class="reference internal" href="../extensions/openapi.html"><span class="doc">OpenAPI</span></a> for supported workflows and limitations.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>See <a class="reference internal" href="../extensions/openapi.html"><span class="doc">OpenAPI</span></a> for installation, setup, and interactive feature documentation (copy as curl and Try it out).</p>
-</div>
+<p>Browse endpoints, inspect parameters, and send requests directly from your documentation.</p>
+<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>5 min read</span></div><p><a class="reference internal" href="../extensions/openapi.html"><span class="doc">Setup and configuration</span></a> · <a class="reference download internal" download="" href="../_downloads/13426272a379eb0b4476fe606652ece6/openapi-petstore.yml"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">example</span> <span class="pre">spec</span></code></a></p>
 <section id="from-an-openapi-spec">
 <h2>From an OpenAPI Spec<a class="headerlink" href="#from-an-openapi-spec" title="Link to this heading">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">openapi</span></code> directive renders an entire API from a spec file. Point it at your OpenAPI (Swagger) YAML or JSON:</p>
+<p>Expand <strong>GET /pet/findByStatus</strong> and choose <strong>Try it out</strong>. Set <code class="docutils literal notranslate"><span class="pre">status</span></code> to <code class="docutils literal notranslate"><span class="pre">available</span></code> to try the public Petstore demo.</p>
 <dl class="http get">
 <dt class="sig sig-object http" id="get--pet-findByStatus">
 <span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/pet/findByStatus</span></span><a class="headerlink" href="#get--pet-findByStatus" title="Link to this definition">¶</a></dt>
@@ -1181,12 +1177,17 @@
 </dl>
 </dd></dl>
 
-<p>The MyST syntax:</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Show the MyST source</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{eval-rst}
 .. openapi:: openapi-petstore.yml
+   :generate-examples-from-schemas:
 ```
 </pre></div>
 </div>
+</div>
+</details><p>The public demo server’s availability and CORS settings may vary.</p>
 </section>
 <section id="manual-http-directives">
 <h2>Manual HTTP Directives<a class="headerlink" href="#manual-http-directives" title="Link to this heading">¶</a></h2>
@@ -1342,7 +1343,9 @@
 ```
 </pre></div>
 </div>
-<p>The MyST syntax for manual directives:</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Show the MyST source for a manual endpoint</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{eval-rst}
 .. http:get:: /endpoint
 
@@ -1353,7 +1356,8 @@
 ```
 </pre></div>
 </div>
-</div></section>
+</div>
+</details></div></section>
 </section>
 <section id="cross-referencing">
 <h2>Cross-Referencing<a class="headerlink" href="#cross-referencing" title="Link to this heading">¶</a></h2>
@@ -1400,7 +1404,7 @@
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>September 23, 2026</time>
+            Last updated <time>September 24, 2026</time>
         </p>
     
     

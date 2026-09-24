@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-09-23T09:42:06+00:00" />
+    <meta property="article:modified_time" content="2026-09-24T17:08:23+00:00" />
     <title>Architecture &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=120d8509" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=f2493ea4" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=71fdd00c"></script>
+    <script defer="defer" src="../_static/lumina.js?v=9e719ae8"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -65,7 +65,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Contributing", "item": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/index.html"}, {"@type": "ListItem", "position": 3, "name": "Architecture", "item": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Architecture", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "How the Sphinx Lumina Theme is structured internally.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-23T00:00:00+00:00", "dateModified": "2026-09-23T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Architecture", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "How the Sphinx Lumina Theme is structured internally.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-24T00:00:00+00:00", "dateModified": "2026-09-24T00:00:00+00:00"}</script>
         
         
     
@@ -110,6 +110,7 @@
     <meta name="lumina-base-url" content="../">
     
         <script>document.documentElement.dataset.apiBaseUrl = "https://petstore3.swagger.io/api/v3";</script>
+    
     
     
     
@@ -629,6 +630,7 @@
 <li><a class="reference internal" href="#theme-structure">Theme Structure</a></li>
 <li><a class="reference internal" href="#asset-build-pipeline">Asset Build Pipeline</a></li>
 <li><a class="reference internal" href="#interactivity-pattern">Interactivity Pattern</a><ul>
+<li><a class="reference internal" href="#api-disclosures">API disclosures</a></li>
 <li><a class="reference internal" href="#http-request-editor">HTTP request editor</a></li>
 </ul>
 </li>
@@ -688,6 +690,10 @@ pnpm<span class="w"> </span>run<span class="w"> </span>build:icons<span class="w
 <h2>Interactivity Pattern<a class="headerlink" href="#interactivity-pattern" title="Link to this heading">¶</a></h2>
 <p>Alpine.js components are registered via <code class="docutils literal notranslate"><span class="pre">Alpine.data()</span></code> in separate modules under <code class="docutils literal notranslate"><span class="pre">_static_src/js/</span></code>. Each component is imported and registered in <code class="docutils literal notranslate"><span class="pre">app.js</span></code>, then referenced in templates with <code class="docutils literal notranslate"><span class="pre">x-data</span></code>.</p>
 <p>See <a class="reference internal" href="javascript-api.html"><span class="doc">JavaScript API</span></a> for the full component API reference.</p>
+<section id="api-disclosures">
+<h3>API disclosures<a class="headerlink" href="#api-disclosures" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">api-disclosures.js</span></code> runs after the HTTP tools initialize. It adds disclosure buttons to Sphinx’s Python, HTTP, and JavaScript signatures and toggles their definition bodies. It preserves links inside signatures, opens ancestor definitions for deep links, and reads the <code class="docutils literal notranslate"><span class="pre">api_expanded</span></code> theme option. Without JavaScript, definitions remain visible.</p>
+</section>
 <section id="http-request-editor">
 <h3>HTTP request editor<a class="headerlink" href="#http-request-editor" title="Link to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">try-it.js</span></code> and <code class="docutils literal notranslate"><span class="pre">curl-copy.js</span></code> enhance the rendered <code class="docutils literal notranslate"><span class="pre">dl.http</span></code> endpoints. <code class="docutils literal notranslate"><span class="pre">_http-api-utils.js</span></code> extracts paths, fields, and HTTP request examples. A shared curl serializer handles both documentation templates and edited requests, with POSIX shell quoting.</p>
@@ -750,7 +756,7 @@ uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </sp
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>September 23, 2026</time>
+            Last updated <time>September 24, 2026</time>
         </p>
     
     
@@ -778,6 +784,7 @@ uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </sp
 <li><a class="reference internal" href="#theme-structure">Theme Structure</a></li>
 <li><a class="reference internal" href="#asset-build-pipeline">Asset Build Pipeline</a></li>
 <li><a class="reference internal" href="#interactivity-pattern">Interactivity Pattern</a><ul>
+<li><a class="reference internal" href="#api-disclosures">API disclosures</a></li>
 <li><a class="reference internal" href="#http-request-editor">HTTP request editor</a></li>
 </ul>
 </li>

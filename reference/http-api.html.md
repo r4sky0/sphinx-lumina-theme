@@ -1,14 +1,12 @@
 # HTTP API Documentation
 
-Explore an API, edit a request, and inspect the response without leaving your documentation. This page demonstrates OpenAPI-generated and manually written endpoints.
+Browse endpoints, inspect parameters, and send requests directly from your documentation.
 
-Start with **GET /pet/findByStatus**: open **Try it out**, enter `available` for `status`, and send the request. The Petstore example uses a public demo server; availability and CORS depend on that service. Use **Copy as curl** to run the same request in a terminal.
-
-Download the [`OpenAPI specification`](openapi-petstore.yml) to use with other API tools. See [OpenAPI](../extensions/openapi.md) for supported workflows and limitations.
+[Setup and configuration](../extensions/openapi.md) · [`Download the example spec`](openapi-petstore.yml)
 
 ## From an OpenAPI Spec
 
-The `openapi` directive renders an entire API from a spec file. Point it at your OpenAPI (Swagger) YAML or JSON:
+Expand **GET /pet/findByStatus** and choose **Try it out**. Set `status` to `available` to try the public Petstore demo.
 
 ### GET /pet/findByStatus
 
@@ -377,13 +375,16 @@ Content-Type: application/json
   * [400 Bad Request](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/400) – Invalid input
   * [422 Unprocessable Entity](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/422) – Validation exception
 
-The MyST syntax:
+### Show the MyST source
 
 ```markdown
 ```{eval-rst}
 .. openapi:: openapi-petstore.yml
+   :generate-examples-from-schemas:
 ```
 ```
+
+The public demo server’s availability and CORS settings may vary.
 
 ## Manual HTTP Directives
 
@@ -489,7 +490,7 @@ The “Try it out” buttons above use `https://reports.api.example.com/v2` whil
 ```
 ```
 
-The MyST syntax for manual directives:
+### Show the MyST source for a manual endpoint
 
 ```markdown
 ```{eval-rst}

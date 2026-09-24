@@ -1,6 +1,6 @@
 # API Documentation
 
-How technical API documentation renders in the Lumina theme. This page covers manually written API docs and autodoc integration.
+Browse functions, classes, and module members. Open a signature to inspect its parameters and return values, or choose **Expand all**.
 
 ## Functions
 
@@ -18,7 +18,7 @@ Connect to a remote server.
   * **ConnectionError** – If the server is unreachable.
   * **ValueError** – If the port is out of range.
 
-The MyST syntax:
+### Show the MyST source
 
 ```markdown
 ```{py:function} connect(host: str, port: int) -> Connection
@@ -67,7 +67,7 @@ Remove a previously registered handler.
 
 A mapping of event names to their registered handler lists.
 
-The MyST syntax for classes:
+### Show the MyST source for classes
 
 ```markdown
 ```{py:class} ClassName()
