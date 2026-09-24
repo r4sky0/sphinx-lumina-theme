@@ -226,18 +226,110 @@ def test_mobile_tables_stack_rows(page: Page, live_server: str):
     )
 
 
-def test_toc_scrollspy(page: Page, live_server: str):
-    """Scrolling should activate a TOC link via scrollspy."""
-    # TOC sidebar requires xl breakpoint (1280px+)
+@pytest.mark.parametrize("theme", ["light", "dark"])
+def test_toc_scrollspy(page: Page, live_server: str, theme):
+    """The curved guide follows nesting, wrapped labels, and the active section."""
+    page.set_viewport_size({"width": 390, "height": 900})
+    page.goto(f"{live_server}/guides/navigation.html")
+    page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
     page.set_viewport_size({"width": 1400, "height": 900})
-    page.goto(f"{live_server}/getting-started/installation.html")
-    page.wait_for_function("() => window.Alpine !== undefined")
+    nav = page.locator(".lumina-toc-nav")
+    guide = nav.locator(".lumina-toc-guide")
+    expect(guide).to_have_attribute("aria-hidden", "true")
+    page.evaluate("document.fonts.ready")
 
-    # Scroll to a heading further down the page
-    page.locator("#next-steps").scroll_into_view_if_needed()
-    # Wait for IntersectionObserver to fire and verify any link gets active class
-    active = page.locator(".lumina-toc-nav a.lumina-toc-active")
-    expect(active).to_have_count(1, timeout=3000)
+    nested = nav.locator('a[href="#dropdown-menus"]')
+    nested.click()
+    expect(nested).to_have_attribute("aria-current", "location")
+    expect(nav.locator("a.lumina-toc-active")).to_have_count(1)
+    page.wait_for_function("""() => {
+        const nav = document.querySelector('.lumina-toc-nav');
+        return getComputedStyle(nav.querySelector('circle')).fill
+            === getComputedStyle(nav.querySelector('[aria-current]')).color;
+    }""")
+    assert (
+        guide.locator(".lumina-toc-indicator").evaluate(
+            "el => getComputedStyle(el).clipPath"
+        )
+        != "none"
+    )
+
+    # Narrowing the outline wraps labels; the guide must track the new geometry.
+    for width in (220, 180):
+        page.locator(".lumina-toc-container").evaluate(
+            "(el, width) => el.style.width = `${width}px`", width
+        )
+        page.wait_for_function("""() => {
+            const nav = document.querySelector('.lumina-toc-nav');
+            const links = [...nav.querySelectorAll('a')].filter(el => el.offsetHeight);
+            const path = nav.querySelector('.lumina-toc-track');
+            const end = path.getPointAtLength(path.getTotalLength());
+            const last = links.at(-1);
+            const active = nav.querySelector('[aria-current]');
+            const dot = nav.querySelector('circle');
+            return Math.abs(end.y - last.offsetTop - last.offsetHeight) < 1
+                && Number(dot.getAttribute('cx')) === active.offsetLeft + 1
+                && Number(dot.getAttribute('cy')) === active.offsetTop + active.offsetHeight / 2;
+        }""")
+    assert " C " in guide.locator("path").first.get_attribute("d")
+    parent = nav.locator('a[href="#header-navigation-links"]')
+    assert nested.bounding_box()["x"] > parent.bounding_box()["x"]
+    nested.focus()
+    expect(nested).to_be_focused()
+
+
+def test_toc_tracks_reading_position(page: Page, live_server: str):
+    """Nested sections track the reading line in both directions and after jumps."""
+    page.set_viewport_size({"width": 1400, "height": 900})
+    page.emulate_media(reduced_motion="reduce")
+    page.goto(f"{live_server}/guides/navigation.html")
+    page.evaluate("document.fonts.ready")
+    active = page.locator('.lumina-toc-nav a[aria-current="location"]')
+    parent = "collapsible-sidebar-items"
+    child = "marking-a-branch-collapsed-by-default"
+
+    for header_height in (56, 128):
+        page.evaluate(
+            """height => {
+            document.documentElement.style.setProperty('--lumina-header-offset', `${height}px`);
+            document.querySelector('header').style.height = `${height}px`;
+        }""",
+            header_height,
+        )
+        # Cross each boundary downwards and upwards, including a large jump.
+        for target, delta, expected in [
+            ("sidebar-depth", 0, "sidebar-depth"),
+            (parent, -24, "sidebar-depth"),
+            (parent, 24, parent),
+            (child, -24, parent),
+            (child, 24, child),
+            (child, -24, parent),
+            (parent, -24, "sidebar-depth"),
+            ("breadcrumbs", 24, "breadcrumbs"),
+            (parent, 24, parent),
+        ]:
+            page.evaluate(
+                """([id, delta]) => {
+                const target = document.getElementById(id);
+                window.scrollTo({top: scrollY + target.getBoundingClientRect().top
+                    - parseFloat(getComputedStyle(target).scrollMarginTop) + delta,
+                    behavior: 'instant'});
+            }""",
+                [target, delta],
+            )
+            expect(active).to_have_attribute("href", f"#{expected}")
+
+    page.goto(f"{live_server}/guides/navigation.html#{child}")
+    expect(active).to_have_attribute("href", f"#{child}")
+    page.reload()
+    expect(active).to_have_attribute("href", f"#{child}")
+    page.evaluate(
+        "window.scrollTo({top: document.documentElement.scrollHeight, behavior: 'instant'})"
+    )
+    last = page.locator(".lumina-toc-nav a").last
+    expect(last).to_have_attribute("aria-current", "location")
+    page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
+    expect(active).to_have_attribute("href", "#header-navigation-links")
 
 
 def test_breadcrumbs_link(page: Page, live_server: str):
