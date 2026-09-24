@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.5.0 (2026-09-24)
+
+### Features
+
+- **api**: Streamline and collapse API reference layouts
+  ([#149](https://github.com/r4sky0/sphinx-lumina-theme/pull/149),
+  [`17dc98f`](https://github.com/r4sky0/sphinx-lumina-theme/commit/17dc98ff2870c0c2efeed2c8e85cf248c2232758))
+
+
 ## v2.4.0 (2026-09-23)
 
 ### Features
