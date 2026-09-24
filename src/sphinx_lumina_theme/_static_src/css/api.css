@@ -1,20 +1,22 @@
-/* ── Python domain (API documentation) ── */
+/* ── API documentation: Python, HTTP, and JavaScript domains ── */
 
-/* Signature wrapper (dl.py.function, dl.py.class, dl.py.method, etc.) */
-dl.py {
-  margin: 1.25rem 0;
+/* Keep field layouts responsive to each definition’s available width. */
+:is(dl.py, dl.http, dl.js) {
+  container-type: inline-size;
+  margin: 1.5rem 0;
 }
 
 /* Signature line */
 dt.sig {
-  background: var(--lumina-code-bg);
-  border: 1px solid color-mix(in srgb, var(--lumina-accent) 10%, var(--lumina-border));
-  border-radius: 0.5rem;
-  padding: 0.5rem 0.875rem;
+  background: transparent;
+  border: none;
+  border-block: 1px solid var(--lumina-border);
+  border-radius: 0;
+  padding: 1rem 0;
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.8125rem;
   line-height: 1.7;
-  overflow-x: auto;
+  overflow-wrap: anywhere;
   position: relative;
 }
 
@@ -94,99 +96,81 @@ dt.sig > .property {
 }
 
 /* ── Definition body ── */
-dl.py > dd {
+:is(dl.py, dl.http, dl.js) > dd {
   margin: 0;
-  padding: 0.75rem 0 0.25rem 1.25rem;
-  border-left: 2px solid color-mix(in srgb, var(--lumina-accent) 20%, var(--lumina-border));
-  margin-left: 0.5rem;
+  padding: 1.25rem 0;
+  border: none;
 }
 
-dl.py > dd > p:last-child {
+/* Label/value rows use the existing semantic definition list. */
+:is(dl.py, dl.http, dl.js) > dd > dl.field-list {
+  display: grid;
+  grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+  gap: 0 1.5rem;
+  margin: 1.25rem 0 0;
+  font-size: 0.9375rem;
+}
+
+.lumina-article :is(dl.py, dl.http, dl.js) > dd > dl.field-list > :is(dt, dd) {
+  min-width: 0;
+  margin: 0;
+  padding: 0.875rem 0;
+  border: none;
+  border-bottom: 1px solid var(--lumina-border);
+}
+
+.lumina-article :is(dl.py, dl.http, dl.js) > dd > dl.field-list > dt {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--lumina-text-muted);
+}
+
+:is(dl.py, dl.http, dl.js) dl.field-list dd ul {
+  margin: 0;
+  padding: 0;
+}
+
+:is(dl.py, dl.http, dl.js) dl.field-list dd li {
+  list-style: none;
+  padding: 0;
+  border: none;
   margin-bottom: 0.5rem;
 }
 
-/* ── Field lists (Parameters, Returns, Raises) ──
-   Scoped to API domain ancestors so standalone field lists
-   use the grid layout from typography.css instead. */
+:is(dl.py, dl.http, dl.js) dl.field-list dd li:last-child {
+  margin-bottom: 0;
+}
+
+:is(dl.py, dl.http, dl.js) dl.field-list dd li span > a.reference.external {
+  color: var(--lumina-text);
+  white-space: nowrap;
+}
+
 :is(dl.py, dl.http, dl.js) dl.field-list {
-  display: block;
   padding: 0;
   border: none;
   border-radius: 0;
   background: transparent;
-  margin: 0.75rem 0 0;
 }
 
-/* Section labels — editorial left-accent style */
-:is(dl.py, dl.http, dl.js) dl.field-list dt {
-  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
-  font-weight: 600;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--lumina-text-muted);
-  margin-top: 1rem;
-  padding: 0.125rem 0 0.125rem 0.5rem;
-  border-left: 2px solid color-mix(in srgb, var(--lumina-accent) 40%, var(--lumina-border));
-  background: transparent;
-  border-bottom: none;
-  border-radius: 0;
-}
-
-:is(dl.py, dl.http, dl.js) dl.field-list dt:first-child {
-  margin-top: 0;
-}
-
-/* Hide the colon after field labels — the uppercase label is enough */
 :is(dl.py, dl.http, dl.js) dl.field-list .colon {
   display: none;
 }
 
-:is(dl.py, dl.http, dl.js) dl.field-list dd {
-  margin: 0.375rem 0 0;
-  padding: 0;
-}
-
-/* Parameter list items — clean indented lines without disc bullets */
-:is(dl.py, dl.http, dl.js) dl.field-list dd ul {
-  margin: 0;
-  padding-left: 0.75rem;
-  list-style: none;
-}
-
-:is(dl.py, dl.http, dl.js) dl.field-list dd li {
-  margin-bottom: 0.375rem;
-  padding-left: 0.5rem;
-  border-left: 1px solid var(--lumina-border);
-}
-
-:is(dl.py, dl.http, dl.js) dl.field-list dd li p {
-  margin-bottom: 0;
-}
-
-/* Type annotations — monospace tag style */
 :is(dl.py, dl.http, dl.js) dl.field-list dd li em {
   font-style: normal;
-  font-size: 0.8125rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
   color: var(--lumina-text-muted);
 }
 
-/* Status code links — subtle badge treatment */
 :is(dl.py, dl.http, dl.js) dl.field-list dd li span > a.reference.external {
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.8125rem;
-  font-weight: 600;
   text-decoration: none;
   padding: 0.0625rem 0.375rem;
   border-radius: 0.25rem;
   background: color-mix(in srgb, var(--lumina-text-muted) 8%, var(--lumina-bg-secondary));
-  transition: background-color 0.15s, color 0.15s;
-}
-
-:is(dl.py, dl.http, dl.js) dl.field-list dd li span > a.reference.external:hover {
-  background: color-mix(in srgb, var(--lumina-accent) 12%, var(--lumina-bg-secondary));
-  color: var(--lumina-accent);
 }
 
 /* ── Cross-reference links ── */
@@ -254,134 +238,216 @@ div.deprecated > p {
   margin-bottom: 0;
 }
 
-/* ── HTTP domain (REST API documentation) ──────────────────────────
-   Uses admonition color tokens for method colors so dark mode
-   works automatically and the palette stays consistent:
-     GET    → --lumina-adm-note      (blue)     — informational
-     POST   → --lumina-adm-tip       (green)    — constructive
-     PUT    → --lumina-adm-warning   (amber)    — modification
-     PATCH  → --lumina-adm-warning   (amber)    — modification
-     DELETE → --lumina-adm-danger    (red)      — destructive
-     HEAD   → --lumina-adm-important (purple)   — meta
-     OPTIONS→ --lumina-adm-important (purple)   — meta
-   ─────────────────────────────────────────────────────────────── */
+/* ── HTTP domain (REST API documentation) ── */
 
 dl.http {
-  margin: 1.5rem 0;
+  --http-method-color: var(--lumina-adm-note);
+  margin: 2rem 0;
 }
 
 dl.http + dl.http {
-  margin-top: 1.75rem;
+  margin-top: 3rem;
 }
 
-/* Signature card — 3px left border colored by method */
+dl.http.post { --http-method-color: var(--lumina-adm-tip); }
+dl.http.put,
+dl.http.patch { --http-method-color: var(--lumina-adm-warning-text); }
+dl.http.delete { --http-method-color: var(--lumina-adm-danger); }
+dl.http.head,
+dl.http.options { --http-method-color: var(--lumina-adm-important); }
+
+/* Keep Sphinx's inline path tokens together, with room for the curl action. */
 dl.http > dt.sig {
-  position: relative;
-  border-left: 3px solid var(--lumina-border);
-  border-radius: 0.375rem 0.5rem 0.5rem 0.375rem;
+  padding: 1rem 6.5rem 1rem 0;
+  border: none;
+  border-block: 1px solid var(--lumina-border);
+  border-radius: 0;
+  background: transparent;
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+  overflow-x: visible;
 }
 
-/* Method-specific signature borders + tinted backgrounds */
-dl.http.get > dt.sig {
-  border-left-color: var(--lumina-adm-note);
-  background: color-mix(in srgb, var(--lumina-adm-note) 4%, var(--lumina-code-bg));
+dl.http > dt.sig .sig-name.descname:first-of-type {
+  display: inline-block;
+  min-width: 3.5rem;
+  margin-right: 0.625rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  background: color-mix(in srgb, var(--http-method-color) 9%, var(--lumina-bg));
+  color: var(--http-method-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: center;
 }
 
-dl.http.post > dt.sig {
-  border-left-color: var(--lumina-adm-tip);
-  background: color-mix(in srgb, var(--lumina-adm-tip) 4%, var(--lumina-code-bg));
-}
-
-dl.http.put > dt.sig {
-  border-left-color: var(--lumina-adm-warning);
-  background: color-mix(in srgb, var(--lumina-adm-warning) 4%, var(--lumina-code-bg));
-}
-
-dl.http.patch > dt.sig {
-  border-left-color: var(--lumina-adm-warning);
-  background: color-mix(in srgb, var(--lumina-adm-warning) 4%, var(--lumina-code-bg));
-}
-
-dl.http.delete > dt.sig {
-  border-left-color: var(--lumina-adm-danger);
-  background: color-mix(in srgb, var(--lumina-adm-danger) 4%, var(--lumina-code-bg));
-}
-
-dl.http.head > dt.sig,
-dl.http.options > dt.sig {
-  border-left-color: var(--lumina-adm-important);
-  background: color-mix(in srgb, var(--lumina-adm-important) 4%, var(--lumina-code-bg));
-}
-
-/* Method name — first descname is the HTTP verb (GET, POST, etc.) */
-dl.http dt.sig .sig-name.descname:first-child {
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-/* Path — lighter weight to create hierarchy against the method verb */
-dl.http dt.sig .sig-name.descname:first-child ~ .sig-name {
+dl.http > dt.sig .sig-name.descname:first-of-type ~ .sig-name {
   font-weight: 500;
 }
 
-dl.http.get dt.sig .sig-name.descname:first-child { color: var(--lumina-adm-note); }
-dl.http.post dt.sig .sig-name.descname:first-child { color: var(--lumina-adm-tip); }
-dl.http.put dt.sig .sig-name.descname:first-child { color: var(--lumina-adm-warning); }
-dl.http.patch dt.sig .sig-name.descname:first-child { color: var(--lumina-adm-warning); }
-dl.http.delete dt.sig .sig-name.descname:first-child { color: var(--lumina-adm-danger); }
-dl.http.head dt.sig .sig-name.descname:first-child,
-dl.http.options dt.sig .sig-name.descname:first-child { color: var(--lumina-adm-important); }
-
-/* ── HTTP definition body ── */
-dl.http > dd {
-  margin: 0;
-  padding: 0.75rem 0 0.5rem 1.25rem;
-  margin-left: 0.5rem;
-  border-left: 2px solid var(--lumina-border);
+dl.http > dd > p:first-child:has(> strong:only-child) {
+  font-size: 1.125rem;
+  margin-bottom: 0.375rem;
 }
 
-/* Method-specific body borders */
-dl.http.get > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-note) 20%, var(--lumina-border)); }
-dl.http.post > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-tip) 20%, var(--lumina-border)); }
-dl.http.put > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-warning) 20%, var(--lumina-border)); }
-dl.http.patch > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-warning) 20%, var(--lumina-border)); }
-dl.http.delete > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-danger) 20%, var(--lumina-border)); }
-dl.http.head > dd,
-dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-important) 20%, var(--lumina-border)); }
-
-/* ── Inline server hostname tag (inside dt.sig) ── */
+/* The host sits below the path instead of competing with it. */
 .lumina-api-host {
-  margin-left: 0.75rem;
-  font-size: 0.6875rem;
+  display: block;
+  margin-top: 0.375rem;
+  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-size: 0.8125rem;
   color: var(--lumina-text-muted);
-  opacity: 0.6;
   font-style: normal;
-  vertical-align: middle;
+}
+
+@container (max-width: 32rem) {
+  :is(dl.py, dl.http, dl.js) > dd > dl.field-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lumina-article :is(dl.py, dl.http, dl.js) > dd > dl.field-list > dt {
+    padding-bottom: 0.25rem;
+    border-bottom: none;
+  }
+
+  .lumina-article :is(dl.py, dl.http, dl.js) > dd > dl.field-list > dd {
+    padding-top: 0;
+  }
+}
+
+/* The unenhanced page stays fully readable without JavaScript. */
+:is(dl.http, dl.py, dl.js):has(> dt > .lumina-api-toggle) {
+  margin-block: 0;
+}
+
+:is(dl.http, dl.py, dl.js):has(> dt > .lumina-api-toggle) + :is(dl.http, dl.py, dl.js) > dt.sig {
+  border-top: none;
+}
+
+.lumina-article dt.sig:has(> .lumina-api-toggle) {
+  padding-left: 2.75rem;
+  padding-right: 1.5rem;
+  min-height: 3.5rem;
+  cursor: pointer;
+}
+
+.lumina-article dt.sig:has(> .lumina-curl-copy) {
+  padding-right: 7.75rem;
+}
+
+dt.sig .pre {
+  white-space: normal;
+}
+
+.lumina-api-toggle {
+  position: absolute;
+  top: 0.375rem;
+  left: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.lumina-api-toggle::before {
+  content: "";
+  position: absolute;
+  top: 1.125rem;
+  left: 1rem;
+  width: 0.375rem;
+  height: 0.375rem;
+  border: solid var(--lumina-text-muted);
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(-45deg);
+}
+
+.lumina-api-toggle[aria-expanded="true"]::before {
+  transform: rotate(45deg);
+}
+
+.lumina-article dt.sig:has(> .lumina-api-toggle):hover {
+  background: var(--lumina-code-bg);
+}
+
+.lumina-article dt.sig:has(> .lumina-api-toggle) > .headerlink {
+  position: absolute;
+  top: 1rem;
+  right: 0.25rem;
+}
+
+.lumina-article dt.sig:has(> .lumina-curl-copy) > .headerlink {
+  right: 6.5rem;
+}
+
+.lumina-article :is(dl.http, dl.py, dl.js):has(> dt > .lumina-api-toggle) > dd {
+  padding: 1.25rem 0.75rem 1.5rem 2.75rem;
+}
+
+@container (max-width: 32rem) {
+  .lumina-article :is(dl.http, dl.py, dl.js):has(> dt > .lumina-api-toggle) > dd {
+    padding: 1rem 0 1.5rem;
+  }
+}
+
+/* Source examples are a separate reading task, not another API row. */
+.lumina-article :is(dl.http, dl.py, dl.js) + details.sd-dropdown {
+  margin-top: 1.5rem;
+}
+
+.lumina-api-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-block: 1.5rem 0.5rem;
+}
+
+.lumina-api-toolbar button {
+  min-height: 2.75rem;
+  padding-inline: 0.5rem;
+  border: none;
+  background: transparent;
+  color: var(--lumina-link);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.lumina-api-toolbar button:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.lumina-api-toggle:focus-visible,
+.lumina-api-toolbar button:focus-visible {
+  outline: 2px solid var(--lumina-accent);
+  outline-offset: 2px;
 }
 
 /* ── Curl copy button ── */
 .lumina-curl-copy {
   position: absolute;
-  top: 0.375rem;
-  right: 0.375rem;
+  top: 0.75rem;
+  right: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  padding: 0;
-  border: 1px solid transparent;
+  gap: 0.375rem;
+  min-height: 2.75rem;
+  padding: 0.375rem 0.625rem;
+  border: 1px solid var(--lumina-border);
   border-radius: 0.375rem;
   background: transparent;
   color: var(--lumina-text-muted);
   cursor: pointer;
-  opacity: 0.5;
+  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-size: 0.8125rem;
   transition: color 0.15s, background-color 0.15s, border-color 0.15s, opacity 0.15s;
 }
 
 .lumina-curl-copy:hover {
   opacity: 1;
-  color: var(--lumina-accent);
+  color: var(--lumina-link);
   background: var(--lumina-accent-light);
   border-color: color-mix(in srgb, var(--lumina-accent) 20%, transparent);
 }
@@ -393,7 +459,7 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 
 .lumina-curl-copy.is-copied {
   opacity: 1;
-  color: var(--lumina-accent);
+  color: var(--lumina-link);
 }
 
 /* ── Try It Out panel ──────────────────────────────────────────────── */
@@ -401,35 +467,35 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 [x-cloak] { display: none !important; }
 
 .lumina-try-it {
-  margin-top: 1rem;
-  border-top: 1px solid var(--lumina-border);
+  margin-top: 0.75rem;
 }
 
 .lumina-try-it-toggle {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  width: 100%;
-  padding: 0.5rem 0.5rem;
-  margin-left: -0.5rem;
-  border: none;
+  width: fit-content;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.875rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--lumina-border);
   border-radius: 0.375rem;
   background: transparent;
-  color: var(--lumina-text-muted);
+  color: var(--lumina-link);
   font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
-  font-size: 0.8125rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
   cursor: pointer;
   transition: color 0.15s, background-color 0.15s;
 }
 
 .lumina-try-it-toggle:hover {
-  color: var(--lumina-accent);
+  color: var(--lumina-link);
   background: var(--lumina-accent-light);
 }
 
 .lumina-try-it-toggle.is-open {
-  color: var(--lumina-accent);
+  color: var(--lumina-link);
 }
 
 .lumina-try-it-toggle:active {
@@ -456,8 +522,8 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 }
 
 .lumina-try-it-panel {
-  overflow: hidden;
   min-width: 0;
+  overflow: hidden;
 }
 
 .lumina-try-it-url-bar {
@@ -474,6 +540,8 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 }
 
 .lumina-try-it-method-pill {
+  color: var(--http-method-color);
+  background: color-mix(in srgb, var(--http-method-color) 9%, var(--lumina-code-bg));
   flex-shrink: 0;
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.6875rem;
@@ -482,14 +550,6 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
   padding: 0.15rem 0.45rem;
   border-radius: 0.25rem;
 }
-
-.lumina-try-it-method-pill--get    { color: var(--lumina-adm-note);      background: color-mix(in srgb, var(--lumina-adm-note)      12%, var(--lumina-code-bg)); }
-.lumina-try-it-method-pill--post   { color: var(--lumina-adm-tip);       background: color-mix(in srgb, var(--lumina-adm-tip)       12%, var(--lumina-code-bg)); }
-.lumina-try-it-method-pill--put    { color: var(--lumina-adm-warning);   background: color-mix(in srgb, var(--lumina-adm-warning)   12%, var(--lumina-code-bg)); }
-.lumina-try-it-method-pill--patch  { color: var(--lumina-adm-warning);   background: color-mix(in srgb, var(--lumina-adm-warning)   12%, var(--lumina-code-bg)); }
-.lumina-try-it-method-pill--delete { color: var(--lumina-adm-danger);    background: color-mix(in srgb, var(--lumina-adm-danger)    12%, var(--lumina-code-bg)); }
-.lumina-try-it-method-pill--head,
-.lumina-try-it-method-pill--options { color: var(--lumina-adm-important); background: color-mix(in srgb, var(--lumina-adm-important) 12%, var(--lumina-code-bg)); }
 
 .lumina-try-it-url-bar .lumina-try-it-url-display {
   flex: 1;
@@ -520,7 +580,7 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 
 .lumina-try-it-param-row {
   display: grid;
-  grid-template-columns: minmax(7rem, 1fr) minmax(0, 3fr);
+  grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.375rem;
@@ -555,7 +615,7 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 
 .lumina-try-it-input {
   min-width: 0;
-  min-height: 2.5rem;
+  min-height: 2.75rem;
   width: 100%;
   padding: 0.3125rem 0.5rem;
   background: var(--lumina-bg);
@@ -621,13 +681,14 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
   align-items: center;
   gap: 0.375rem;
   padding: 0.4375rem 0.875rem;
-  background: var(--lumina-accent);
+  min-height: 2.75rem;
+  background: var(--lumina-link);
   border: none;
   border-radius: 0.375rem;
   font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--lumina-bg);
   cursor: pointer;
   transition: opacity 0.15s, transform 0.1s;
 }
@@ -664,6 +725,7 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
 }
 
 .lumina-try-it-clear {
+  min-height: 2.75rem;
   padding: 0.4375rem 0.75rem;
   background: transparent;
   border: 1px solid var(--lumina-border);
@@ -832,8 +894,8 @@ dl.http.options > dd { border-left-color: color-mix(in srgb, var(--lumina-adm-im
   animation: lumina-pulse 1.4s ease-in-out infinite;
 }
 
-/* Responsive: stack label/input on narrow viewports */
-@media (max-width: 32rem) {
+/* Adapt to the endpoint width, including narrow documentation columns. */
+@container (max-width: 32rem) {
   .lumina-try-it-param-row {
     grid-template-columns: 1fr;
   }

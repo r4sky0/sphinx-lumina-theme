@@ -109,6 +109,9 @@
         <script>document.documentElement.dataset.apiBaseUrl = {{ theme_api_base_url | tojson }};</script>
     {% endif %}
     {% if theme_try_it_out == "false" %}<script>document.documentElement.dataset.tryItOut = "false";</script>{% endif %}
+    {% if theme_api_expanded == "true" %}
+        <script>document.documentElement.dataset.apiExpanded = "true";</script>
+    {% endif %}
     {% if theme_code_wrap_toggle != "false" %}
         <script>document.documentElement.dataset.codeWrap = "true";</script>
     {% endif %}
