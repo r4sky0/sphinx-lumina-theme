@@ -51,6 +51,10 @@ See {doc}`javascript-api` for the full component API reference.
 
 The request panel keeps authentication in memory, shared by the normalized API base URL. It sends browser `fetch` requests with cookies omitted, redirects rejected, and cancellation through `AbortController`. It does not parse the original OpenAPI specification. The showcase uses sphinxcontrib-openapi's `httpdomain` renderer to preserve request schemas and examples.
 
+### Mermaid diagrams
+
+Mermaid rendering, theme changes, and fullscreen controls belong to `sphinxcontrib-mermaid`. Lumina’s `mermaid.js` observes rendered diagrams and records each SVG’s natural width; `mermaid.css` handles sizing, typography, and colors. The observer also handles SVG replacement after a theme change.
+
 ## Theming
 
 - CSS custom properties (`--lumina-accent`, `--lumina-bg`, `--lumina-text`, etc.) defined in `base.css`. See {doc}`/reference/css-variables` for the full token reference.
