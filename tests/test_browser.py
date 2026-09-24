@@ -418,3 +418,41 @@ def test_pagefind_loads_without_errors(page: Page, live_server: str):
     assert "<mark>" in excerpt_html, (
         "Expected Pagefind excerpt with <mark> highlights, got Sphinx fallback"
     )
+
+
+def test_mermaid_sizing_and_colors_survive_theme_changes(page: Page, live_server: str):
+    errors = []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    page.goto(f"{live_server}/reference/diagrams.html")
+    diagrams = page.locator(".lumina-article pre.mermaid > svg")
+    expect(diagrams).to_have_count(12, timeout=60000)
+    page.set_viewport_size({"width": 1440, "height": 1000})
+
+    for theme in ("dark", "light"):
+        page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
+        page.wait_for_function(
+            """() => {
+                const diagrams = [...document.querySelectorAll('.lumina-article pre.mermaid > svg')];
+                return diagrams.length === 12 && diagrams.every(svg =>
+                    svg.style.getPropertyValue('--lumina-diagram-width') &&
+                    svg.getBoundingClientRect().width <= svg.viewBox.baseVal.width + 1);
+            }"""
+        )
+        label = diagrams.first.locator(".nodeLabel").first
+        expect(label).to_have_css("font-family", '"Source Sans 3", sans-serif')
+        # The author's classDef highlight survives the theme defaults.
+        highlight = diagrams.first.locator(".node.ready path, .node.ready rect").first
+        expect(highlight).to_have_css("stroke-width", "2px")
+        page.locator(".mermaid-fullscreen-btn").first.click()
+        viewer = page.locator(".mermaid-fullscreen-modal.active")
+        expect(viewer).to_be_visible()
+        expect(viewer.locator("svg")).to_be_visible()
+        page.keyboard.press("Escape")
+        expect(viewer).to_have_count(0)
+
+    page.set_viewport_size({"width": 390, "height": 844})
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    assert diagrams.evaluate_all(
+        "svgs => svgs.every(svg => svg.getBoundingClientRect().width <= svg.parentElement.clientWidth)"
+    )
+    assert not errors

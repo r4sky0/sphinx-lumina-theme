@@ -27,6 +27,7 @@ import iconBrowser from "./icon-browser.js";
 import codeWrapToggle from "./code-wrap.js";
 import imageLightbox from "./image-lightbox.js";
 import responsiveTables from "./responsive-tables.js";
+import mermaidSizing from "./mermaid.js";
 Alpine.data("scrollspy", scrollspy);
 Alpine.data("themeToggle", themeToggle);
 Alpine.data("searchModal", searchModal);
@@ -62,6 +63,7 @@ function boot() {
   apiDisclosures();
   codeWrapToggle();
   responsiveTables();
+  mermaidSizing();
 }
 
 if (document.readyState === "loading") {
