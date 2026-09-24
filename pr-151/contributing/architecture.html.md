@@ -43,7 +43,9 @@ See [JavaScript API](javascript-api.md) for the full component API reference.
 
 The page outline’s `scrollspy.js` measures the nested links to draw a continuous
 SVG guide. It recalculates on resize to keep curves aligned with wrapped labels,
-and marks the active link with `aria-current="location"`. Without JavaScript,
+and marks the active link with `aria-current="location"`. Scroll updates select
+the last section start above the anchor offset below the fixed header, using
+one animation frame per update. Without JavaScript,
 the nested links keep a straight CSS guide.
 
 ### API disclosures

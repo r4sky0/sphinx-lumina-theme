@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-09-24T17:19:16+00:00" />
+    <meta property="article:modified_time" content="2026-09-24T17:29:46+00:00" />
     <title>Navigation &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=dadb416a"></script>
+    <script defer="defer" src="../_static/lumina.js?v=07263154"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/pr-151/guides/navigation.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -867,7 +867,9 @@ so collapsed-by-default entries never hide the current page.</p>
 <section id="page-table-of-contents">
 <h2>Page Table of Contents<a class="headerlink" href="#page-table-of-contents" title="Link to this heading">¶</a></h2>
 <p>The right-side page outline indents nested headings along a curved guide.
-An accent marker follows the current section as you scroll. To hide it:</p>
+An accent marker follows the current section as you scroll in either direction.
+It switches when a heading reaches the reading line below the fixed header;
+at the bottom of the page, it selects the final section. To hide it:</p>
 <div class="literal-block-wrapper docutils container" id="id9">
 <div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
