@@ -1,8 +1,8 @@
 /**
  * @module scrollspy
  * @description Alpine.js component that highlights the active table-of-contents
- * link as the user scrolls. Uses ``IntersectionObserver`` to track the current
- * heading and a curved guide that follows the heading hierarchy.
+ * link as the user scrolls. Tracks section starts at the reading line below
+ * the fixed header, with a curved guide that follows the heading hierarchy.
  */
 
 /**
@@ -24,12 +24,13 @@
 export default function scrollspy() {
   return {
     activeId: null,
-    _observer: null,
     _resizeObserver: null,
+    _scrollHandler: null,
     _indicator: null,
     _links: [],
     _positions: new Map(),
     _rafId: null,
+    _needsMeasure: false,
 
     init() {
       const nav = this.$el;
@@ -38,8 +39,10 @@ export default function scrollspy() {
       this._links = Array.from(nav.querySelectorAll("a"))
         .map((a) => {
           const href = a.getAttribute("href");
-          return href && href.startsWith("#") && getComputedStyle(a).display !== "none"
-            ? { id: href.slice(1), el: a } : null;
+          if (!href?.startsWith("#") || getComputedStyle(a).display === "none") return null;
+          const id = href.slice(1);
+          const target = document.getElementById(id);
+          return target ? { id, el: a, target } : null;
         })
         .filter(Boolean);
 
@@ -53,41 +56,46 @@ export default function scrollspy() {
       nav.appendChild(this._indicator);
 
       this._computePositions();
-      this.activeId = this._links[0].id;
-      this._updateActive();
-      this._updateIndicator();
-      // Coalesce ResizeObserver bursts (multiple ticks per frame during a
-      // window drag) into a single recompute via requestAnimationFrame.
-      this._resizeObserver = new ResizeObserver(() => this._scheduleRecompute());
-      this._resizeObserver.observe(nav);
-
-      this._observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              this.activeId = entry.target.id;
-              this._updateActive();
-              this._updateIndicator();
-              break;
-            }
-          }
-        },
-        { rootMargin: "-80px 0px -60% 0px" },
-      );
-
-      for (const { id } of this._links) {
-        const el = document.getElementById(id);
-        if (el) this._observer.observe(el);
+      this._updateCurrent();
+      this._scrollHandler = () => this._scheduleUpdate();
+      window.addEventListener("scroll", this._scrollHandler, { passive: true });
+      window.addEventListener("resize", this._scrollHandler);
+      this._resizeObserver = new ResizeObserver(() => this._scheduleUpdate(true));
+      for (const el of [nav, document.querySelector(".lumina-article"), document.querySelector("header")]) {
+        if (el) this._resizeObserver.observe(el);
       }
     },
 
-    _scheduleRecompute() {
+    _scheduleUpdate(measure = false) {
+      this._needsMeasure ||= measure;
       if (this._rafId !== null) return;
       this._rafId = requestAnimationFrame(() => {
         this._rafId = null;
-        this._computePositions();
-        if (this.activeId) this._updateIndicator();
+        if (this._needsMeasure) {
+          this._computePositions();
+          this._updateIndicator();
+          this._needsMeasure = false;
+        }
+        this._updateCurrent();
       });
+    },
+
+    _updateCurrent() {
+      // Use the same resolved offset as anchor navigation, including banners.
+      const readingLine = parseFloat(getComputedStyle(this._links[0].target).scrollMarginTop) || 0;
+      let current = this._links[0];
+      for (const link of this._links) {
+        if (link.target.getBoundingClientRect().top > readingLine + 1) break;
+        current = link;
+      }
+      // Short final sections cannot always reach the reading line.
+      if (window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+        current = this._links.at(-1);
+      }
+      if (this.activeId === current.id) return;
+      this.activeId = current.id;
+      this._updateActive();
+      this._updateIndicator();
     },
 
     _computePositions() {
@@ -137,7 +145,8 @@ export default function scrollspy() {
     },
 
     destroy() {
-      if (this._observer) this._observer.disconnect();
+      window.removeEventListener("scroll", this._scrollHandler);
+      window.removeEventListener("resize", this._scrollHandler);
       if (this._resizeObserver) this._resizeObserver.disconnect();
       if (this._rafId !== null) cancelAnimationFrame(this._rafId);
       if (this._indicator) this._indicator.remove();

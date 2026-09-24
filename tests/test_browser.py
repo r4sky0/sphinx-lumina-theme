@@ -278,6 +278,60 @@ def test_toc_scrollspy(page: Page, live_server: str, theme):
     expect(nested).to_be_focused()
 
 
+def test_toc_tracks_reading_position(page: Page, live_server: str):
+    """Nested sections track the reading line in both directions and after jumps."""
+    page.set_viewport_size({"width": 1400, "height": 900})
+    page.emulate_media(reduced_motion="reduce")
+    page.goto(f"{live_server}/guides/navigation.html")
+    page.evaluate("document.fonts.ready")
+    active = page.locator('.lumina-toc-nav a[aria-current="location"]')
+    parent = "collapsible-sidebar-items"
+    child = "marking-a-branch-collapsed-by-default"
+
+    for header_height in (56, 128):
+        page.evaluate(
+            """height => {
+            document.documentElement.style.setProperty('--lumina-header-offset', `${height}px`);
+            document.querySelector('header').style.height = `${height}px`;
+        }""",
+            header_height,
+        )
+        # Cross each boundary downwards and upwards, including a large jump.
+        for target, delta, expected in [
+            ("sidebar-depth", 0, "sidebar-depth"),
+            (parent, -24, "sidebar-depth"),
+            (parent, 24, parent),
+            (child, -24, parent),
+            (child, 24, child),
+            (child, -24, parent),
+            (parent, -24, "sidebar-depth"),
+            ("breadcrumbs", 24, "breadcrumbs"),
+            (parent, 24, parent),
+        ]:
+            page.evaluate(
+                """([id, delta]) => {
+                const target = document.getElementById(id);
+                window.scrollTo({top: scrollY + target.getBoundingClientRect().top
+                    - parseFloat(getComputedStyle(target).scrollMarginTop) + delta,
+                    behavior: 'instant'});
+            }""",
+                [target, delta],
+            )
+            expect(active).to_have_attribute("href", f"#{expected}")
+
+    page.goto(f"{live_server}/guides/navigation.html#{child}")
+    expect(active).to_have_attribute("href", f"#{child}")
+    page.reload()
+    expect(active).to_have_attribute("href", f"#{child}")
+    page.evaluate(
+        "window.scrollTo({top: document.documentElement.scrollHeight, behavior: 'instant'})"
+    )
+    last = page.locator(".lumina-toc-nav a").last
+    expect(last).to_have_attribute("aria-current", "location")
+    page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
+    expect(active).to_have_attribute("href", "#header-navigation-links")
+
+
 def test_breadcrumbs_link(page: Page, live_server: str):
     """Getting-started page should have breadcrumb with link to index."""
     page.goto(f"{live_server}/getting-started/installation.html")
