@@ -392,6 +392,43 @@ See {doc}`/guides/seo` for the full picture, including per-page front-matter ove
 
 The `accent_color` option controls links, active navigation items, buttons, and other interactive elements. It applies to both light and dark modes automatically.
 
+Choose a color to preview it on this page. The preview resets when you leave or reload.
+
+```{raw} html
+<style>
+  html[data-accent-preview] {
+    --lumina-accent: var(--preview-accent);
+    --lumina-link: color-mix(in srgb, var(--preview-accent) 65%, #202624);
+    --lumina-accent-light: color-mix(in srgb, var(--preview-accent) 12%, var(--lumina-bg));
+    --sd-color-primary: color-mix(in srgb, var(--preview-accent) 85%, black);
+    --sd-color-primary-highlight: color-mix(in srgb, var(--preview-accent) 70%, black);
+    --sd-color-primary-text: #fff;
+    --sd-color-primary-bg: color-mix(in srgb, var(--preview-accent) 12%, transparent);
+  }
+  html[data-theme="dark"][data-accent-preview] {
+    --lumina-link: color-mix(in srgb, var(--preview-accent) 55%, #e9eeeb);
+    --lumina-accent-light: color-mix(in srgb, var(--preview-accent) 15%, var(--lumina-bg));
+  }
+  .accent-picker { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: .65rem; margin: 1.25rem 0 .75rem; }
+  .accent-picker button { display: flex; align-items: center; gap: .65rem; min-height: 3rem; padding: .6rem .75rem; border: 1px solid var(--lumina-border); border-radius: .6rem; background: var(--lumina-bg-secondary); color: var(--lumina-text); text-align: left; cursor: pointer; }
+  .accent-picker button:hover, .accent-picker button[aria-pressed="true"] { border-color: var(--lumina-link); background: var(--lumina-accent-light); }
+  .accent-picker button:focus-visible { outline: 2px solid var(--lumina-link); outline-offset: 2px; }
+  .accent-picker-swatch { width: 1.25rem; height: 1.25rem; flex: none; border-radius: 50%; background: var(--swatch); }
+  .accent-picker button code { display: block; color: var(--lumina-text-muted); font-size: .75rem; }
+</style>
+<div id="accent-preview" x-data="{ color: '#10b981', pick(value) { this.color = value; document.documentElement.style.setProperty('--preview-accent', value); document.documentElement.toggleAttribute('data-accent-preview', value !== '#10b981'); } }">
+  <div class="accent-picker" role="group" aria-label="Preview accent color">
+    <button type="button" style="--swatch: #10b981" x-on:click="pick('#10b981')" x-bind:aria-pressed="color === '#10b981'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Emerald<code>#10b981</code></span></button>
+    <button type="button" style="--swatch: #3b82f6" x-on:click="pick('#3b82f6')" x-bind:aria-pressed="color === '#3b82f6'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Blue<code>#3b82f6</code></span></button>
+    <button type="button" style="--swatch: #8b5cf6" x-on:click="pick('#8b5cf6')" x-bind:aria-pressed="color === '#8b5cf6'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Violet<code>#8b5cf6</code></span></button>
+    <button type="button" style="--swatch: #f43f5e" x-on:click="pick('#f43f5e')" x-bind:aria-pressed="color === '#f43f5e'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Rose<code>#f43f5e</code></span></button>
+    <button type="button" style="--swatch: #f59e0b" x-on:click="pick('#f59e0b')" x-bind:aria-pressed="color === '#f59e0b'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Amber<code>#f59e0b</code></span></button>
+    <button type="button" style="--swatch: #14b8a6" x-on:click="pick('#14b8a6')" x-bind:aria-pressed="color === '#14b8a6'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Teal<code>#14b8a6</code></span></button>
+  </div>
+  <p>Try in <code>conf.py</code>: <code>"accent_color": "<span x-text="color">#10b981</span>"</code></p>
+</div>
+```
+
 Here are some well-tested color choices:
 
 ```{list-table}
