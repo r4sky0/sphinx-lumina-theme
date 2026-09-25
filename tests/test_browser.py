@@ -651,3 +651,136 @@ def test_mermaid_sizing_and_colors_survive_theme_changes(page: Page, live_server
         "svgs => svgs.every(svg => svg.getBoundingClientRect().width <= svg.parentElement.clientWidth)"
     )
     assert not errors
+
+
+def test_search_scopes_and_heading_links(page: Page, live_server: str):
+    """Real Pagefind filters exclude other sections and link to actual headings."""
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    scope = modal.get_by_label("Search in")
+    expect(scope).to_be_visible()
+    scope.select_option(label="Developer Documentation")
+    modal.get_by_role("searchbox").fill("search")
+    links = modal.locator("[data-search-result]")
+    expect(links.first).to_be_visible()
+    for href in links.evaluate_all("els => els.map(el => el.getAttribute('href'))"):
+        assert "/contributing/" in href
+    expect(modal.get_by_text("Contributing", exact=True).first).to_be_visible()
+    heading = modal.locator('[data-search-result][href*="#"]').first
+    expect(heading).to_be_visible()
+    href = heading.get_attribute("href")
+    heading.click()
+    expect(page).to_have_url(live_server + href)
+    assert page.evaluate(
+        "!!document.getElementById(decodeURIComponent(location.hash.slice(1)))"
+    )
+
+
+def test_search_scoped_empty_state_and_reset(page: Page):
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    scope = modal.get_by_label("Search in")
+    scope.select_option(label="Developer Documentation")
+    search = modal.get_by_role("searchbox")
+    search.fill("petstore")
+    expect(modal.get_by_text("No results in Developer Documentation.")).to_be_visible()
+    modal.get_by_role("button", name="Search all docs").click()
+    expect(search).to_have_value("petstore")
+    expect(scope).to_have_value("")
+    expect(modal.locator("[data-search-result]").first).to_be_visible()
+    scope.select_option(label="Developer Documentation")
+    expect(modal.get_by_text("No results in Developer Documentation.")).to_be_visible()
+    search.focus()
+    page.keyboard.press("Escape")
+    page.click("[data-search-trigger]")
+    expect(scope).to_have_value("")
+
+
+def test_search_ignores_stale_scope_and_query_responses(page: Page):
+    """Old responses, including errors, cannot replace a newer cached result."""
+    page.click("[data-search-trigger]")
+    expect(page.get_by_label("Search in")).to_be_visible()
+    outcome = page.evaluate("""async () => {
+        const state = Alpine.$data(document.querySelector('#lumina-search-modal'));
+        const pending = [];
+        state.pagefind = {search: () => new Promise((resolve, reject) => pending.push({resolve, reject}))};
+        const response = title => ({results: [{data: async () => ({url: '/' + title, meta: {title}, excerpt: title})}]});
+        state.query = 'same';
+        state.scope = 'User Documentation';
+        const old = state.search();
+        state.scope = 'Developer Documentation';
+        const current = state.search();
+        pending[1].resolve(response('current'));
+        await current;
+        pending[0].resolve(response('stale'));
+        await old;
+        const scoped = state.results[0].title;
+        state.query = 'older';
+        const failed = state.search();
+        state.query = 'same';
+        await state.search(); // cached scoped result
+        pending[2].reject(new Error('late failure'));
+        await failed;
+        const cached = state.results[0].title;
+        state.query = 'clear';
+        const clear = state.search();
+        state.query = '';
+        await state.search();
+        pending[3].resolve(response('stale'));
+        await clear;
+        return {scoped, cached, results: state.results.length, error: state.error};
+    }""")
+    assert outcome == {
+        "scoped": "current",
+        "cached": "current",
+        "results": 0,
+        "error": None,
+    }
+
+
+def test_search_fallback_when_pagefind_unavailable(page: Page):
+    page.route("**/_pagefind/**", lambda route: route.abort())
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    modal.get_by_role("searchbox").fill("hello world")
+    fallback = modal.get_by_role("link", name='Search for "hello world"')
+    expect(fallback).to_have_attribute("href", "./search.html?q=hello%20world")
+    expect(modal.get_by_label("Search in")).to_have_count(0)
+
+
+def test_search_keyboard_reaches_heading(page: Page, live_server: str):
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    search = modal.get_by_role("searchbox")
+    search.fill("pagefind")
+    links = modal.locator("[data-search-result]")
+    expect(links.first).to_be_visible()
+    hrefs = links.evaluate_all("els => els.map(el => el.getAttribute('href'))")
+    index = next(i for i, href in enumerate(hrefs) if "#" in href)
+    for _ in range(index):
+        search.press("ArrowDown")
+    search.press("Enter")
+    expect(page).to_have_url(live_server + hrefs[index])
+
+
+@pytest.mark.parametrize("theme", ["light", "dark"])
+def test_search_keyboard_focus_indicators(page: Page, theme: str):
+    page.emulate_media(reduced_motion="reduce")
+    page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    scope = modal.get_by_label("Search in")
+    scope.select_option(label="User Documentation")
+    search = modal.get_by_role("searchbox")
+    search.fill("search")
+    expect(modal.locator("[data-search-result]").first).to_be_visible()
+    search.focus()
+    search.press("Tab")
+    expect(scope).to_be_focused()
+    expect(scope).to_have_css("outline-width", "2px")
+    expect(scope).to_have_css("outline-style", "solid")
+    modal.locator("[data-search-result]").first.focus()
+    expect(modal.locator("[data-search-result]").first).to_be_focused()
+    expect(modal.locator("[data-search-result]").first).to_have_css(
+        "outline-width", "2px"
+    )

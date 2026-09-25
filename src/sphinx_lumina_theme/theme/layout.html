@@ -9,6 +9,14 @@
 
 {% block extrahead %}
 
+    {% if lumina_search_section %}
+        <meta data-pagefind-filter="section[content]"
+              content="{{ lumina_search_section | e }}">
+    {% endif %}
+    {% if lumina_search_breadcrumb %}
+        <meta data-pagefind-meta="breadcrumb[content]"
+              content="{{ lumina_search_breadcrumb | e }}">
+    {% endif %}
     {% if not favicon_url %}
         {% if lumina_logo_icon_favicon is defined and lumina_logo_icon_favicon %}
             <link rel="icon" type="image/svg+xml" href="{{ lumina_logo_icon_favicon }}">
