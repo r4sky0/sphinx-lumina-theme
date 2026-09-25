@@ -7,6 +7,7 @@ def test_accent_preview(page: Page, live_server: str):
     page.goto(f"{live_server}/getting-started/configuration.html#accent-colors")
     picker = page.get_by_role("group", name="Preview accent color")
     blue = picker.get_by_role("button", name="Blue #3b82f6")
+    orange = picker.get_by_role("button", name="Burnt Orange #ea580c")
     emerald = picker.get_by_role("button", name="Emerald #10b981")
     root = page.locator("html")
     sidebar_link = page.locator(".lumina-sidebar-nav a.current").first
@@ -41,6 +42,12 @@ def test_accent_preview(page: Page, live_server: str):
         )
         expect(page.locator("#accent-preview p")).to_contain_text(
             '"accent_color": "#3b82f6"'
+        )
+        orange.click()
+        expect(orange).to_have_attribute("aria-pressed", "true")
+        expect(root).to_have_css("--lumina-accent", "#ea580c")
+        expect(page.locator("#accent-preview p")).to_contain_text(
+            '"accent_color": "#ea580c"'
         )
         emerald.click()
         expect(root).not_to_have_attribute("data-accent-preview", "")
