@@ -266,9 +266,16 @@ def test_http_endpoint_controls(page, live_server, width, theme):
         has_text="Copy as curl"
     )
     expect(copy).to_have_count(1)
+    # Keep the short-lived feedback visible even on a slow CI runner, then
+    # advance explicitly to verify that the button resets.
+    page.clock.install()
+    page.clock.pause_at(page.evaluate("Date.now()"))
     copy.click()
     expect(panel.get_by_role("button", name="Copied!", exact=True)).to_be_visible()
     assert "status=available" in page.evaluate("window.copiedCurl")
+    page.clock.run_for(1500)
+    expect(copy).to_be_visible()
+    page.clock.resume()
     panel.get_by_role("button", name="Send request").click()
     expect(panel.locator(".lumina-try-it-status")).to_contain_text("200")
     expect(panel.get_by_label("Response body")).to_contain_text("Luna")

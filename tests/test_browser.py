@@ -394,6 +394,11 @@ def test_toc_tracks_reading_position(page: Page, live_server: str):
         }""",
             header_height,
         )
+        # WebKit can expose the old section geometry until the new header
+        # spacing has been resolved. Measure only after the layout catches up.
+        expect(page.locator(".lumina-wrapper")).to_have_css(
+            "margin-top", f"{header_height}px"
+        )
         # Cross each boundary downwards and upwards, including a large jump.
         for target, delta, expected in [
             ("sidebar-depth", 0, "sidebar-depth"),
