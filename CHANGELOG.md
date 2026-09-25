@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.8.1 (2026-09-25)
+
+### Bug Fixes
+
+- **tests**: Stabilize TOC and copy feedback browser checks
+  ([#156](https://github.com/r4sky0/sphinx-lumina-theme/pull/156),
+  [`19fd41e`](https://github.com/r4sky0/sphinx-lumina-theme/commit/19fd41e780b5fafbb19a67022ae61a43b98d0137))
+
+
 ## v2.8.0 (2026-09-25)
 
 ### Features
