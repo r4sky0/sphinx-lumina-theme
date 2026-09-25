@@ -291,6 +291,50 @@ def _detect_section(pagename, sections):
     return default
 
 
+def _prepare_search_sections(app, env):
+    """Map documents to their first root-toctree branch, once per build."""
+    sections = {}
+    root = env.config.root_doc
+    visited = {root}
+    for branch in env.toctree_includes.get(root, []):
+        if branch not in env.titles:
+            continue
+        name = env.titles[branch].astext()
+        pending = [branch]
+        while pending:
+            docname = pending.pop()
+            if docname in visited:
+                continue
+            visited.add(docname)
+            sections[docname] = name
+            pending.extend(reversed(env.toctree_includes.get(docname, [])))
+    app._lumina_search_sections = sections
+
+
+def _add_search_heading_ids(app, doctree, docname):
+    """Give Pagefind heading anchors without moving existing section IDs."""
+    if app.builder.format != "html":
+        return
+    from docutils import nodes
+
+    used_ids = {
+        anchor
+        for node in doctree.findall(nodes.Element)
+        for anchor in node.get("ids", [])
+    }
+    for title in doctree.findall(nodes.title):
+        section = title.parent
+        if title.get("ids") or not isinstance(section, nodes.section):
+            continue
+        if not section.get("ids"):
+            continue
+        anchor = "lumina-search-" + section["ids"][0]
+        while anchor in used_ids:
+            anchor += "-"
+        title["ids"].append(anchor)
+        used_ids.add(anchor)
+
+
 def _prepare_sections(app, sections):
     """Pre-compute cached data for doc sections (called once per build).
 
@@ -585,6 +629,17 @@ def _add_context(app, pagename, templatename, context, doctree):
             )
             if section_html:
                 context["lumina_section_toctree"] = section_html
+
+    # Index the same section names and document titles readers see in navigation.
+    if sections:
+        section = _detect_section(pagename, sections)
+        search_section = section.get("name", "") if section else ""
+    else:
+        search_section = getattr(app, "_lumina_search_sections", {}).get(pagename, "")
+    context["lumina_search_section"] = search_section
+    context["lumina_search_breadcrumb"] = " › ".join(
+        _seo.plain_title(parent["title"]) for parent in context.get("parents", [])
+    )
 
     # Make all external scripts non-render-blocking (defer).
     # Sphinx places the {%- block scripts %} inside <head>, so without defer
@@ -887,7 +942,9 @@ def setup(app):
     app.connect("builder-inited", _apply_code_style)
     app.connect("builder-inited", _check_baseurl)
     app.connect("html-page-context", _add_context)
+    app.connect("env-updated", _prepare_search_sections)
     app.connect("doctree-resolved", _insert_reading_time)
+    app.connect("doctree-resolved", _add_search_heading_ids)
     app.connect("build-finished", _run_pagefind)
     app.connect("build-finished", _filter_sitemap_noindex)
     app.connect("build-finished", _write_robots_txt)

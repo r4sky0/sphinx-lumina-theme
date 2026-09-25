@@ -16,16 +16,6 @@ const PAGEFIND_LOAD_TIMEOUT_MS = 5000;
    users routinely retype the same query when navigating around. */
 const QUERY_CACHE_LIMIT = 10;
 
-function sectionFromUrl(url) {
-  const segments = url.split("?")[0].split("#")[0]
-    .replace(/\.html$/, "")
-    .split("/")
-    .filter(Boolean);
-  if (segments.length < 2) return null;
-  const slug = segments[segments.length - 2];
-  return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-}
-
 /**
  * Factory for the search modal Alpine component.
  * Registered as ``Alpine.data("searchModal", searchModal)``.
@@ -33,7 +23,10 @@ function sectionFromUrl(url) {
  * **Properties:**
  *
  * - ``query`` *(string)* — Current search input value.
- * - ``results`` *(Array)* — Array of search result objects.
+ * - ``results`` *(Array)* — Page and heading links in keyboard navigation order.
+ * - ``scope`` *(string)* — Selected section; empty means all documentation.
+ * - ``scopes`` *(Array)* — Section names available in the index.
+ * - ``searching`` *(boolean)* — Whether the current query is pending.
  * - ``selectedIndex`` *(number)* — Index of the keyboard-highlighted result.
  * - ``loaded`` *(boolean)* — Whether the search engine has been initialized.
  * - ``error`` *(string|null)* — Error message, if search initialization failed.
@@ -57,6 +50,10 @@ export default function searchModal() {
   return {
     query: "",
     results: [],
+    scope: "",
+    scopes: [],
+    searching: false,
+    _requestId: 0,
     selectedIndex: 0,
     loaded: false,
     error: null,
@@ -101,6 +98,9 @@ export default function searchModal() {
       if (this.$el.open) return;
       this._trigger = trigger || document.activeElement;
       this.query = "";
+      this.scope = "";
+      this.searching = false;
+      this._requestId++;
       this.results = [];
       this.selectedIndex = 0;
       this.error = null;
@@ -112,9 +112,11 @@ export default function searchModal() {
       if (!this.loaded) {
         await this.loadSearchEngine();
       }
+      if (this.$el.open) await this.search();
     },
 
     close() {
+      this._requestId++;
       if (this.$el.open) this.$el.close();
       this._trigger?.focus();
       this._trigger = null;
@@ -145,58 +147,100 @@ export default function searchModal() {
           clearTimeout(timer);
         }
         await this.pagefind.init();
+        try {
+          const filters = await this.pagefind.filters();
+          this.scopes = Object.keys(filters.section || {});
+        } catch {
+          // An older index can still provide ordinary full-text search.
+          this.scopes = [];
+        }
         this.loaded = true;
       } catch (e) {
-        this.error =
-          "Search requires Pagefind indexing. Use your browser’s Ctrl+F to search this page, or run: pagefind --site _build/html/";
+        this.pagefind = null;
+        this.scopes = [];
+        this.error = "Instant search is unavailable. Use Sphinx search below.";
         this.loaded = true;
       }
     },
 
     async search() {
-      if (!this.query) {
-        // Clearing the input must also clear the previous query's results.
-        this.results = [];
-        this.selectedIndex = 0;
-        return;
-      }
-      if (!this.loaded) return;
+      this.error = null;
+      const requestId = ++this._requestId;
+      const query = this.query.trim();
+      const scope = this.scope;
       this.selectedIndex = 0;
+      this.searching = false;
+      this.results = [];
+      if (!query || !this.loaded) return;
 
-      const cached = this._resultCache.get(this.query);
+      const key = JSON.stringify([query, scope]);
+      const cached = this._resultCache.get(key);
       if (cached) {
+        this.error = null;
         this.results = cached;
         return;
       }
 
-      // Snapshot the query so a slow response can't clobber the results of
-      // a newer search that resolved first.
-      const query = this.query;
-      let results;
-      if (this.backend === "pagefind" && this.pagefind) {
-        const search = await this.pagefind.search(query);
-        const data = await Promise.all(
-          search.results.slice(0, 10).map((r) => r.data()),
-        );
-        results = data.map((r) => ({
-          title: r.meta?.title || "Untitled",
-          url: r.url,
-          excerpt: DOMPurify.sanitize(r.excerpt, EXCERPT_CONFIG),
-          section: sectionFromUrl(r.url),
-        }));
-      } else {
-        results = [
-          {
-            title: 'Search for "' + query + '"',
-            url: this.baseUrl + "search.html?q=" + encodeURIComponent(query),
-            excerpt: "Open Sphinx search results page",
-          },
-        ];
+      this.searching = true;
+      this.error = null;
+      try {
+        let results;
+        if (this.backend === "pagefind" && this.pagefind) {
+          const search = await this.pagefind.search(query, {
+            filters: scope ? { section: scope } : {},
+          });
+          const data = await Promise.all(
+            search.results.slice(0, 10).map((r) => r.data()),
+          );
+          results = data.flatMap((r) => {
+            const page = {
+              title: r.meta?.title || "Untitled",
+              url: r.url,
+              excerpt: DOMPurify.sanitize(r.excerpt, EXCERPT_CONFIG),
+              breadcrumb: r.meta?.breadcrumb || "",
+              isHeading: false,
+            };
+            const headings = (r.sub_results || [])
+              .filter((sub) => sub.anchor && sub.anchor.element !== "h1")
+              .slice(0, 3)
+              .map((sub) => ({
+                title: sub.title,
+                url: sub.url,
+                excerpt: DOMPurify.sanitize(sub.excerpt, EXCERPT_CONFIG),
+                breadcrumb: "",
+                isHeading: true,
+              }));
+            return [page, ...headings];
+          });
+          this._cacheResults(key, results);
+        } else {
+          results = this.fallbackResults(query);
+        }
+        if (requestId !== this._requestId || query !== this.query.trim() || scope !== this.scope) return;
+        this.results = results;
+      } catch {
+        if (requestId !== this._requestId || query !== this.query.trim() || scope !== this.scope) return;
+        this.error = "Instant search is unavailable. Sphinx search covers all docs.";
+        this.results = this.fallbackResults(query);
+      } finally {
+        if (requestId === this._requestId) this.searching = false;
       }
+    },
 
-      this._cacheResults(query, results);
-      if (query !== this.query) return;
-      this.results = results;
+    fallbackResults(query) {
+      return [{
+        title: 'Search for "' + query + '"',
+        url: this.baseUrl + "search.html?q=" + encodeURIComponent(query),
+        excerpt: "Open Sphinx search results page",
+        breadcrumb: "",
+        isHeading: false,
+      }];
+    },
+
+    searchAll() {
+      this.scope = "";
+      this.search();
+      this.$refs.searchInput?.focus();
     },
 
     _cacheResults(query, results) {
@@ -211,10 +255,19 @@ export default function searchModal() {
 
     moveDown() {
       if (this.selectedIndex < this.results.length - 1) this.selectedIndex++;
+      this.scrollToSelected();
     },
 
     moveUp() {
       if (this.selectedIndex > 0) this.selectedIndex--;
+      this.scrollToSelected();
+    },
+
+    scrollToSelected() {
+      this.$nextTick(() => {
+        this.$el.querySelectorAll("[data-search-result]")[this.selectedIndex]
+          ?.scrollIntoView({ block: "nearest" });
+      });
     },
 
     goToSelected() {
