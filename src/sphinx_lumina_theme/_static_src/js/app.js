@@ -28,6 +28,7 @@ import codeWrapToggle from "./code-wrap.js";
 import imageLightbox from "./image-lightbox.js";
 import responsiveTables from "./responsive-tables.js";
 import mermaidSizing from "./mermaid.js";
+import tableControls from "./table-controls.js";
 Alpine.data("scrollspy", scrollspy);
 Alpine.data("themeToggle", themeToggle);
 Alpine.data("searchModal", searchModal);
@@ -44,6 +45,7 @@ Alpine.data("versionSwitcher", versionSwitcher);
 Alpine.data("layoutToggle", layoutToggle);
 Alpine.data("iconBrowser", iconBrowser);
 Alpine.data("imageLightbox", imageLightbox);
+Alpine.data("tableControls", tableControls);
 
 window.Alpine = Alpine;
 
@@ -57,12 +59,12 @@ window.Alpine = Alpine;
  * @function boot
  */
 function boot() {
+  responsiveTables();
   Alpine.start();
   tryIt();
   curlCopy();
   apiDisclosures();
   codeWrapToggle();
-  responsiveTables();
   mermaidSizing();
 }
 

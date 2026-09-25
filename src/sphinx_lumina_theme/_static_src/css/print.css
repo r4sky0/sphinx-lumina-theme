@@ -42,12 +42,21 @@
   .lumina-api-toggle,
   .lumina-api-toolbar,
   .lumina-try-it,
+  .lumina-table-toolbar,
+  .lumina-table-empty,
+  .lumina-table-sort > [aria-hidden],
   [data-search-trigger],
   [data-theme-toggle],
   [data-sidebar-toggle],
   .lumina-back-to-top,
   a.headerlink {
     display: none !important;
+  }
+
+  .lumina-table-scroll { overflow: visible; }
+  /* Match Tailwind's layer: layered !important rules beat unlayered ones. */
+  @layer base {
+    .lumina-table-panel tr[hidden] { display: table-row !important; }
   }
 
   /* Reclaim the full page width for content. */
