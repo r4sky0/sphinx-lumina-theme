@@ -761,3 +761,26 @@ def test_search_keyboard_reaches_heading(page: Page, live_server: str):
         search.press("ArrowDown")
     search.press("Enter")
     expect(page).to_have_url(live_server + hrefs[index])
+
+
+@pytest.mark.parametrize("theme", ["light", "dark"])
+def test_search_keyboard_focus_indicators(page: Page, theme: str):
+    page.emulate_media(reduced_motion="reduce")
+    page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    scope = modal.get_by_label("Search in")
+    scope.select_option(label="User Documentation")
+    search = modal.get_by_role("searchbox")
+    search.fill("search")
+    expect(modal.locator("[data-search-result]").first).to_be_visible()
+    search.focus()
+    search.press("Tab")
+    expect(scope).to_be_focused()
+    expect(scope).to_have_css("outline-width", "2px")
+    expect(scope).to_have_css("outline-style", "solid")
+    modal.locator("[data-search-result]").first.focus()
+    expect(modal.locator("[data-search-result]").first).to_be_focused()
+    expect(modal.locator("[data-search-result]").first).to_have_css(
+        "outline-width", "2px"
+    )
