@@ -1,6 +1,6 @@
 # Lists & Tables
 
-Structured content for organizing information.
+Make steps easy to follow and reference data easy to compare.
 
 ## Unordered Lists
 
@@ -92,7 +92,7 @@ List items can contain paragraphs, code blocks, and other block elements.
   - Limitations
 * - Markdown tables
   - Simple data with short cell content
-  - No multi-line cells, no spanning, no wrapping
+  - No block content or spanning cells
 * - List tables
   - Complex content, long text, code in cells
   - More verbose syntax
@@ -135,6 +135,77 @@ Tables with many columns scroll horizontally on larger screens when they overflo
 | `show_prev_next` | string | `true` | No | Show pagination | `false` | v1.0.0 |
 | `nav_depth` | string | `4` | No | Sidebar tree depth | `2` | v1.0.0 |
 | `search_backend` | string | `pagefind` | No | Search provider | `sphinx` | v1.0.0 |
+
+### Interactive Tables
+
+Add `:class: lumina-table-interactive` to an individual `list-table` or `csv-table`
+directive to enable filtering and sorting. Try filtering by **guide**, or select
+**Pages** to sort the example below. Select the same heading again to reverse the
+order; **Reset** restores all rows in their original order.
+
+```{list-table} Documentation inventory
+:header-rows: 1
+:class: lumina-table-interactive
+
+* - Section
+  - Format
+  - Pages
+* - Getting started
+  - Guide
+  - 4
+* - Reference
+  - Reference
+  - 24
+* - Extensions
+  - Guide
+  - 12
+* - Contributing
+  - Guide
+  - 8
+* - API
+  - Reference
+  - 36
+```
+
+The MyST syntax:
+
+~~~markdown
+```{list-table} Documentation inventory
+:header-rows: 1
+:class: lumina-table-interactive
+
+* - Section
+  - Pages
+* - Getting started
+  - 4
+* - Reference
+  - 24
+```
+~~~
+
+For a Markdown pipe table, wrap it in a `table` directive:
+
+~~~markdown
+```{table} Documentation inventory
+:class: lumina-table-interactive
+
+| Section | Pages |
+|---------|------:|
+| Getting started | 4 |
+| Reference | 24 |
+```
+~~~
+
+Filtering matches text across all columns, ignoring case. Plain numbers, including
+negative values and decimals, sort numerically; other values use natural text
+order. Dates, currencies, and units are treated as text. Each table keeps its own
+filter and sort state until the page is reloaded.
+
+Interactive tables need one header row, one body, and a consistent number of
+columns, without merged cells, nested tables, footer rows, or controls in the
+headers. Unsupported tables stay static. Without JavaScript, all rows remain
+readable. On narrow screens, interactive tables scroll horizontally so sortable
+headings stay available. Printing includes all rows, even when a filter is active.
 
 ### List Tables
 
