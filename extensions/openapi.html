@@ -11,7 +11,7 @@
     <title>OpenAPI &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=3c4561f5" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=5385acde" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,13 +21,21 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=6a5d1eab"></script>
+    <script defer="defer" src="../_static/lumina.js?v=5e3b342a"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/extensions/openapi.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="sphinx-llm" href="sphinx-llm.html" />
     <link rel="prev" title="Mermaid Diagrams" href="mermaid.html" />
 
+    
+        <meta data-pagefind-filter="section[content]"
+              content="User Documentation">
+    
+    
+        <meta data-pagefind-meta="breadcrumb[content]"
+              content="Extensions">
+    
     
         
             <link rel="icon"
@@ -739,10 +747,10 @@
                 
 
     <section class="tex2jax_ignore mathjax_ignore" id="openapi">
-<h1>OpenAPI<a class="headerlink" href="#openapi" title="Link to this heading">¶</a></h1>
+<h1 id="lumina-search-openapi">OpenAPI<a class="headerlink" href="#openapi" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://sphinxcontrib-openapi.readthedocs.io/">sphinxcontrib-openapi</a> generates HTTP API documentation directly from OpenAPI (Swagger) specification files. It builds on <a class="reference external" href="https://sphinxcontrib-httpdomain.readthedocs.io/">sphinxcontrib-httpdomain</a>, which provides HTTP method directives for writing endpoint docs by hand. Lumina styles all HTTP endpoints with color-coded method indicators and adds interactive features when you configure a base URL.</p>
 <div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>5 min read</span></div><section id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-setup">Setup<a class="headerlink" href="#setup" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>sphinxcontrib-openapi
 </pre></div>
 </div>
@@ -757,7 +765,7 @@
 <p>This also installs the HTTP domain, so you can write individual endpoints manually with <code class="docutils literal notranslate"><span class="pre">http:get::</span></code>, <code class="docutils literal notranslate"><span class="pre">http:post::</span></code>, and other method directives.</p>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-usage">Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
 <p>Point the <code class="docutils literal notranslate"><span class="pre">openapi</span></code> directive at your spec file:</p>
 <div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{eval-rst}
 .. openapi:: path/to/openapi.yml
@@ -768,12 +776,12 @@
 <p>See <a class="reference internal" href="../reference/http-api.html"><span class="doc">HTTP API Documentation</span></a> for rendered examples of both auto-generated and manually written HTTP API documentation.</p>
 </section>
 <section id="expanding-endpoint-details">
-<h2>Expanding endpoint details<a class="headerlink" href="#expanding-endpoint-details" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-expanding-endpoint-details">Expanding endpoint details<a class="headerlink" href="#expanding-endpoint-details" title="Link to this heading">¶</a></h2>
 <p>Endpoints start collapsed. Select a signature to see its description, parameters, examples, and request controls. <strong>Expand all</strong> and <strong>Collapse all</strong> apply to every API definition on the page.</p>
 <p>To start with all definitions expanded, set <code class="docutils literal notranslate"><span class="pre">&quot;api_expanded&quot;:</span> <span class="pre">&quot;true&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">html_theme_options</span></code>. This option also applies to Python and JavaScript API documentation. See <a class="reference internal" href="../getting-started/configuration.html"><span class="doc">Configuration</span></a>.</p>
 </section>
 <section id="interactive-features">
-<h2>Interactive Features<a class="headerlink" href="#interactive-features" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-interactive-features">Interactive Features<a class="headerlink" href="#interactive-features" title="Link to this heading">¶</a></h2>
 <p>Set <code class="docutils literal notranslate"><span class="pre">api_base_url</span></code> in your theme options to activate two interactive features on every HTTP endpoint:</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
@@ -784,13 +792,13 @@
 </div>
 </div>
 <section id="copy-as-curl">
-<h3>Copy as curl<a class="headerlink" href="#copy-as-curl" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-copy-as-curl">Copy as curl<a class="headerlink" href="#copy-as-curl" title="Link to this heading">¶</a></h3>
 <p>Each endpoint has one <strong>Copy as curl</strong> button in its request panel. It copies the current server, parameters, headers, authentication, and body. Open <strong>Request command</strong> to inspect or manually copy the command.</p>
 <p>Commands use POSIX shell quoting, including apostrophes in JSON and headers. Fill in required parameters before running them. Treat copied commands as sensitive when they include credentials.</p>
 <p>When <strong>Try it out</strong> is disabled, the signature button copies a template from the documented fields and request example. Replace parameter placeholders before running it.</p>
 </section>
 <section id="try-it-out">
-<h3>Try it out<a class="headerlink" href="#try-it-out" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-try-it-out">Try it out<a class="headerlink" href="#try-it-out" title="Link to this heading">¶</a></h3>
 <p>Open an endpoint’s <strong>Try it out</strong> panel:</p>
 <ol class="arabic simple">
 <li><p>Check <strong>Server URL</strong>. You can change it for this endpoint without rebuilding the docs.</p></li>
@@ -816,13 +824,13 @@
 </div>
 </section>
 <section id="authentication-and-credential-lifetime">
-<h3>Authentication and credential lifetime<a class="headerlink" href="#authentication-and-credential-lifetime" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-authentication-and-credential-lifetime">Authentication and credential lifetime<a class="headerlink" href="#authentication-and-credential-lifetime" title="Link to this heading">¶</a></h3>
 <p>Choose the authentication type explicitly. Lumina does not infer OpenAPI <code class="docutils literal notranslate"><span class="pre">securitySchemes</span></code> or run OAuth login flows.</p>
 <p>Authentication settings are shared between endpoints with the same full API base URL on the current page. Changing <strong>Server URL</strong> selects that server’s separate credentials. <strong>Clear credentials</strong> clears authentication for all endpoints using that server.</p>
 <p>Credentials stay in page memory only. Reloading or navigating away clears them; they are not saved in browser storage. Use narrowly scoped test credentials on trusted documentation hosts. API keys sent in query strings also appear in the URL preview and may be recorded in server logs.</p>
 </section>
 <section id="when-this-can-replace-swagger-ui">
-<h3>When this can replace Swagger UI<a class="headerlink" href="#when-this-can-replace-swagger-ui" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-when-this-can-replace-swagger-ui">When this can replace Swagger UI<a class="headerlink" href="#when-this-can-replace-swagger-ui" title="Link to this heading">¶</a></h3>
 <p>Lumina suits documentation sites that need readable endpoint references and interactive testing of ordinary JSON or raw-body REST requests, including Bearer, Basic, and API-key authentication.</p>
 <p>It is not a complete OpenAPI execution engine. The editor reads rendered HTTP-domain documentation, so it cannot recover specification details the renderer omits. Use a dedicated OpenAPI client when you need:</p>
 <ul class="simple">
@@ -834,7 +842,7 @@
 <p>For these cases, keep the specification available to download alongside your Lumina reference. Do not assume that a rendered schema implies full interactive support.</p>
 </section>
 <section id="overriding-the-base-url-per-block">
-<h3>Overriding the base URL per block<a class="headerlink" href="#overriding-the-base-url-per-block" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-overriding-the-base-url-per-block">Overriding the base URL per block<a class="headerlink" href="#overriding-the-base-url-per-block" title="Link to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">api_base_url</span></code> sets a global default for all endpoints on all pages. To use a different server URL for a specific group of endpoints — for example, a staging environment or a separate microservice — wrap those endpoints in a <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> with a <code class="docutils literal notranslate"><span class="pre">data-api-base-url</span></code> attribute.</p>
 <p>The closest ancestor’s <code class="docutils literal notranslate"><span class="pre">data-api-base-url</span></code> takes precedence over the global setting:</p>
 <div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>&lt;div data-api-base-url=&quot;https://staging.api.example.com/v1&quot;&gt;
@@ -867,7 +875,7 @@
 <p>Each signature shows its configured server hostname. The <strong>Server URL</strong> field and live request preview show the destination used by the request editor, including reader edits.</p>
 </section>
 <section id="disabling-try-it-out">
-<h3>Disabling Try it out<a class="headerlink" href="#disabling-try-it-out" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-disabling-try-it-out">Disabling Try it out<a class="headerlink" href="#disabling-try-it-out" title="Link to this heading">¶</a></h3>
 <p>To keep the “Copy as curl” button but hide the interactive panel:</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
@@ -984,6 +992,7 @@
     <dialog id="lumina-search-modal"
         x-data="searchModal()"
         @cancel.prevent="close()"
+        @keydown.escape.stop.prevent="close()"
         @keydown.meta.k.window.prevent="toggle()"
         @keydown.ctrl.k.window.prevent="toggle()"
         @click.self="close()"
@@ -991,7 +1000,7 @@
         aria-modal="true"
         aria-label="Search documentation">
     
-    <div class="relative mx-auto mt-[15vh] max-w-xl cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
+    <div class="relative mx-auto mt-[5vh] flex max-h-[90dvh] w-[calc(100%-2rem)] max-w-xl flex-col sm:mt-[12vh] sm:max-h-[80dvh] cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
         
         <div class="flex items-center border-b border-lumina-border px-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-lumina-text-muted" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
@@ -1003,17 +1012,44 @@
                    @keydown.arrow-up.prevent="moveUp()"
                    @keydown.enter.prevent="goToSelected()"
                    class="w-full border-0 bg-transparent px-3 py-4 text-lumina-text placeholder-lumina-text-muted outline-none"
+                   aria-label="Search documentation"
                    placeholder="Search docs..."
                    autocomplete="off">
             <kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1.5 py-0.5 text-xs text-lumina-text-muted">esc</kbd>
         </div>
+        <template x-if="loaded && scopes.length > 1 && pagefind">
+            <div class="flex shrink-0 items-center gap-3 border-b border-lumina-border px-4 py-2">
+                <label for="lumina-search-scope"
+                       class="shrink-0 text-xs text-lumina-text-muted">Search in</label>
+                <select id="lumina-search-scope"
+                        x-model="scope"
+                        @change="search()"
+                        class="min-w-0 flex-1 rounded border border-lumina-border bg-lumina-bg px-2 py-2 text-sm text-lumina-text focus-visible:outline-2 focus-visible:outline-lumina-accent">
+                    <option value="">All docs</option>
+                    <template x-for="name in scopes" :key="name">
+                        <option :value="name" x-text="name"></option>
+                    </template>
+                </select>
+            </div>
+        </template>
         
-        <div class="max-h-[60vh] overflow-y-auto p-2">
-            <template x-if="!loaded">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Loading search index...</p>
+        <div class="min-h-0 overflow-y-auto p-2" :aria-busy="searching">
+            <template x-if="!loaded || searching">
+                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">
+                    <span x-text="loaded ? 'Searching…' : 'Loading search index…'"></span>
+                </p>
             </template>
-            <template x-if="loaded && query.length > 0 && results.length === 0">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">No results found.</p>
+            <template x-if="loaded && !searching && !error && query.trim().length > 0 && results.length === 0">
+                <div class="px-3 py-8 text-center text-sm text-lumina-text-muted">
+                    <p x-text="scope ? 'No results in ' + scope + '.' : 'No results found.'"></p>
+                    <template x-if="scope">
+                        <button type="button"
+                                @click="searchAll()"
+                                class="mt-2 rounded px-3 py-2 text-lumina-accent underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-lumina-accent">
+                            Search all docs
+                        </button>
+                    </template>
+                </div>
             </template>
             <template x-if="error">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted"
@@ -1021,32 +1057,33 @@
             </template>
             <template x-for="(result, index) in results" :key="result.url">
                 <a :href="result.url"
-                   class="flex flex-col gap-0.5 rounded-lg px-3 py-2.5 no-underline transition-colors"
-                   :class="index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text'"
-                   @mouseenter="selectedIndex = index">
-                    <div class="flex min-w-0 items-center justify-between gap-2">
-                        <span class="truncate text-sm font-medium" x-text="result.title"></span>
-                        <template x-if="result.section">
-                            <span class="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
-                                  :class="index === selectedIndex ? 'bg-lumina-accent text-white opacity-70' : 'bg-lumina-bg-secondary text-lumina-text-muted'"
-                                  x-text="result.section"></span>
-                        </template>
-                    </div>
+                   data-search-result
+                   class="flex flex-col gap-1 rounded-lg px-3 py-2.5 no-underline transition-colors focus-visible:outline-2 focus-visible:outline-lumina-accent"
+                   :class="[index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text', result.isHeading ? 'ml-4 border-l border-lumina-border' : 'mt-1']"
+                   @mouseenter="selectedIndex = index"
+                   @focus="selectedIndex = index">
+                    <template x-if="result.breadcrumb">
+                        <span class="truncate text-xs text-lumina-text-muted"
+                              x-text="result.breadcrumb"></span>
+                    </template>
+                    <span class="break-words text-sm"
+                          :class="result.isHeading ? '' : 'font-semibold'"
+                          x-text="result.title"></span>
                     <span class="line-clamp-2 text-xs text-lumina-text-muted"
                           x-html="result.excerpt"></span>
                 </a>
             </template>
-            <template x-if="loaded && query.length === 0">
+            <template x-if="loaded && !error && query.trim().length === 0">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Type to search...</p>
             </template>
         </div>
         
         <div class="sr-only"
              role="status"
-             x-text="loaded && query.length > 0 ? results.length + (results.length === 1 ? ' result' : ' results') : ''">
+             x-text="searching ? 'Searching…' : loaded && query.trim().length > 0 ? results.length + ' links' + (scope ? ' in ' + scope : ' across all docs') : ''">
         </div>
         
-        <div class="flex items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
+        <div class="flex shrink-0 items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> Navigate</span>
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> Open</span>
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">esc</kbd> Close</span>

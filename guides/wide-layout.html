@@ -11,7 +11,7 @@
     <title>Wide Layout &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=3c4561f5" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=5385acde" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,13 +21,21 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=6a5d1eab"></script>
+    <script defer="defer" src="../_static/lumina.js?v=5e3b342a"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/guides/wide-layout.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Icons" href="icons.html" />
     <link rel="prev" title="Landing Page" href="landing-page.html" />
 
+    
+        <meta data-pagefind-filter="section[content]"
+              content="User Documentation">
+    
+    
+        <meta data-pagefind-meta="breadcrumb[content]"
+              content="Guides">
+    
     
         
             <link rel="icon"
@@ -732,11 +740,11 @@
                 
 
     <section class="tex2jax_ignore mathjax_ignore" id="wide-layout">
-<h1>Wide Layout<a class="headerlink" href="#wide-layout" title="Link to this heading">¶</a></h1>
+<h1 id="lumina-search-wide-layout">Wide Layout<a class="headerlink" href="#wide-layout" title="Link to this heading">¶</a></h1>
 <p>Lumina limits the center column to 50rem, including its padding. Paragraphs, lists, code blocks, and other content share that column’s full usable width. Wide mode expands the column to 60rem for code-heavy documentation and wide tables.</p>
 <div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>2 min read</span></div><p>On large screens, the navigation background extends to the left edge of the viewport. Navigation links and the page outline stay close to the article.</p>
 <section id="reader-toggle">
-<h2>Reader Toggle<a class="headerlink" href="#reader-toggle" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-reader-toggle">Reader Toggle<a class="headerlink" href="#reader-toggle" title="Link to this heading">¶</a></h2>
 <p>Let readers choose between normal and wide layouts with a toggle button in the header:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
@@ -749,7 +757,7 @@
 <p>This adds a toggle button next to the dark mode switch. The toggle is only visible on screens 1280px and wider, since narrower viewports don’t have extra space to use. The reader’s preference is persisted in <code class="docutils literal notranslate"><span class="pre">localStorage</span></code>.</p>
 </section>
 <section id="always-wide">
-<h2>Always Wide<a class="headerlink" href="#always-wide" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-always-wide">Always Wide<a class="headerlink" href="#always-wide" title="Link to this heading">¶</a></h2>
 <p>Force wide mode permanently — no toggle, always wide:</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
@@ -762,7 +770,7 @@
 <p>This is useful when your entire documentation is code-heavy and you want every reader to see the wider layout without having to discover and click a toggle.</p>
 </section>
 <section id="how-it-works">
-<h2>How It Works<a class="headerlink" href="#how-it-works" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-how-it-works">How It Works<a class="headerlink" href="#how-it-works" title="Link to this heading">¶</a></h2>
 <p>When a reader clicks the toggle, Lumina sets the <code class="docutils literal notranslate"><span class="pre">data-layout</span></code> attribute on the <code class="docutils literal notranslate"><span class="pre">&lt;html&gt;</span></code> element:</p>
 <ul class="simple">
 <li><p><strong>Normal layout:</strong> no <code class="docutils literal notranslate"><span class="pre">data-layout</span></code> attribute (content max-width: 50rem)</p></li>
@@ -771,7 +779,7 @@
 <p>The reader’s choice is persisted in <code class="docutils literal notranslate"><span class="pre">localStorage</span></code> under the key <code class="docutils literal notranslate"><span class="pre">lumina-layout</span></code>. An inline script applies the layout before the first paint, preventing layout shift on page load.</p>
 </section>
 <section id="what-changes-in-wide-mode">
-<h2>What Changes in Wide Mode<a class="headerlink" href="#what-changes-in-wide-mode" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-what-changes-in-wide-mode">What Changes in Wide Mode<a class="headerlink" href="#what-changes-in-wide-mode" title="Link to this heading">¶</a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Element</p></th>
@@ -802,7 +810,7 @@
 <p>Paragraphs wrap at spaces by default. For automatic word separation at syllable boundaries, see the hyphenation example in <a class="reference internal" href="custom-styling.html"><span class="doc">Custom Styling</span></a>.</p>
 </section>
 <section id="customizing-wide-mode-widths">
-<h2>Customizing Wide Mode Widths<a class="headerlink" href="#customizing-wide-mode-widths" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-customizing-wide-mode-widths">Customizing Wide Mode Widths<a class="headerlink" href="#customizing-wide-mode-widths" title="Link to this heading">¶</a></h2>
 <p>You can override the wide mode widths in a custom stylesheet:</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
@@ -925,6 +933,7 @@
     <dialog id="lumina-search-modal"
         x-data="searchModal()"
         @cancel.prevent="close()"
+        @keydown.escape.stop.prevent="close()"
         @keydown.meta.k.window.prevent="toggle()"
         @keydown.ctrl.k.window.prevent="toggle()"
         @click.self="close()"
@@ -932,7 +941,7 @@
         aria-modal="true"
         aria-label="Search documentation">
     
-    <div class="relative mx-auto mt-[15vh] max-w-xl cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
+    <div class="relative mx-auto mt-[5vh] flex max-h-[90dvh] w-[calc(100%-2rem)] max-w-xl flex-col sm:mt-[12vh] sm:max-h-[80dvh] cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
         
         <div class="flex items-center border-b border-lumina-border px-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-lumina-text-muted" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
@@ -944,17 +953,44 @@
                    @keydown.arrow-up.prevent="moveUp()"
                    @keydown.enter.prevent="goToSelected()"
                    class="w-full border-0 bg-transparent px-3 py-4 text-lumina-text placeholder-lumina-text-muted outline-none"
+                   aria-label="Search documentation"
                    placeholder="Search docs..."
                    autocomplete="off">
             <kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1.5 py-0.5 text-xs text-lumina-text-muted">esc</kbd>
         </div>
+        <template x-if="loaded && scopes.length > 1 && pagefind">
+            <div class="flex shrink-0 items-center gap-3 border-b border-lumina-border px-4 py-2">
+                <label for="lumina-search-scope"
+                       class="shrink-0 text-xs text-lumina-text-muted">Search in</label>
+                <select id="lumina-search-scope"
+                        x-model="scope"
+                        @change="search()"
+                        class="min-w-0 flex-1 rounded border border-lumina-border bg-lumina-bg px-2 py-2 text-sm text-lumina-text focus-visible:outline-2 focus-visible:outline-lumina-accent">
+                    <option value="">All docs</option>
+                    <template x-for="name in scopes" :key="name">
+                        <option :value="name" x-text="name"></option>
+                    </template>
+                </select>
+            </div>
+        </template>
         
-        <div class="max-h-[60vh] overflow-y-auto p-2">
-            <template x-if="!loaded">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Loading search index...</p>
+        <div class="min-h-0 overflow-y-auto p-2" :aria-busy="searching">
+            <template x-if="!loaded || searching">
+                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">
+                    <span x-text="loaded ? 'Searching…' : 'Loading search index…'"></span>
+                </p>
             </template>
-            <template x-if="loaded && query.length > 0 && results.length === 0">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">No results found.</p>
+            <template x-if="loaded && !searching && !error && query.trim().length > 0 && results.length === 0">
+                <div class="px-3 py-8 text-center text-sm text-lumina-text-muted">
+                    <p x-text="scope ? 'No results in ' + scope + '.' : 'No results found.'"></p>
+                    <template x-if="scope">
+                        <button type="button"
+                                @click="searchAll()"
+                                class="mt-2 rounded px-3 py-2 text-lumina-accent underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-lumina-accent">
+                            Search all docs
+                        </button>
+                    </template>
+                </div>
             </template>
             <template x-if="error">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted"
@@ -962,32 +998,33 @@
             </template>
             <template x-for="(result, index) in results" :key="result.url">
                 <a :href="result.url"
-                   class="flex flex-col gap-0.5 rounded-lg px-3 py-2.5 no-underline transition-colors"
-                   :class="index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text'"
-                   @mouseenter="selectedIndex = index">
-                    <div class="flex min-w-0 items-center justify-between gap-2">
-                        <span class="truncate text-sm font-medium" x-text="result.title"></span>
-                        <template x-if="result.section">
-                            <span class="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
-                                  :class="index === selectedIndex ? 'bg-lumina-accent text-white opacity-70' : 'bg-lumina-bg-secondary text-lumina-text-muted'"
-                                  x-text="result.section"></span>
-                        </template>
-                    </div>
+                   data-search-result
+                   class="flex flex-col gap-1 rounded-lg px-3 py-2.5 no-underline transition-colors focus-visible:outline-2 focus-visible:outline-lumina-accent"
+                   :class="[index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text', result.isHeading ? 'ml-4 border-l border-lumina-border' : 'mt-1']"
+                   @mouseenter="selectedIndex = index"
+                   @focus="selectedIndex = index">
+                    <template x-if="result.breadcrumb">
+                        <span class="truncate text-xs text-lumina-text-muted"
+                              x-text="result.breadcrumb"></span>
+                    </template>
+                    <span class="break-words text-sm"
+                          :class="result.isHeading ? '' : 'font-semibold'"
+                          x-text="result.title"></span>
                     <span class="line-clamp-2 text-xs text-lumina-text-muted"
                           x-html="result.excerpt"></span>
                 </a>
             </template>
-            <template x-if="loaded && query.length === 0">
+            <template x-if="loaded && !error && query.trim().length === 0">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Type to search...</p>
             </template>
         </div>
         
         <div class="sr-only"
              role="status"
-             x-text="loaded && query.length > 0 ? results.length + (results.length === 1 ? ' result' : ' results') : ''">
+             x-text="searching ? 'Searching…' : loaded && query.trim().length > 0 ? results.length + ' links' + (scope ? ' in ' + scope : ' across all docs') : ''">
         </div>
         
-        <div class="flex items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
+        <div class="flex shrink-0 items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> Navigate</span>
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> Open</span>
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">esc</kbd> Close</span>

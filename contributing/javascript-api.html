@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-09-25T14:54:15+00:00" />
+    <meta property="article:modified_time" content="2026-09-25T16:48:31+00:00" />
     <title>JavaScript API &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=3c4561f5" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=5385acde" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,13 +21,21 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=6a5d1eab"></script>
+    <script defer="defer" src="../_static/lumina.js?v=5e3b342a"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/contributing/javascript-api.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Releases" href="../releases.html" />
     <link rel="prev" title="Architecture" href="architecture.html" />
 
+    
+        <meta data-pagefind-filter="section[content]"
+              content="Developer Documentation">
+    
+    
+        <meta data-pagefind-meta="breadcrumb[content]"
+              content="Contributing">
+    
     
         
             <link rel="icon"
@@ -669,10 +677,10 @@
                 
 
     <section class="tex2jax_ignore mathjax_ignore" id="javascript-api">
-<h1>JavaScript API<a class="headerlink" href="#javascript-api" title="Link to this heading">¶</a></h1>
+<h1 id="lumina-search-javascript-api">JavaScript API<a class="headerlink" href="#javascript-api" title="Link to this heading">¶</a></h1>
 <p>Auto-generated reference for the theme’s Alpine.js components. Each component is a factory function registered via <code class="docutils literal notranslate"><span class="pre">Alpine.data()</span></code> in <code class="docutils literal notranslate"><span class="pre">_static_src/js/app.js</span></code> and referenced in Jinja2 templates with <code class="docutils literal notranslate"><span class="pre">x-data</span></code>.</p>
-<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>4 min read</span></div><section id="entry-point">
-<h2>Entry Point<a class="headerlink" href="#entry-point" title="Link to this heading">¶</a></h2>
+<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>5 min read</span></div><section id="entry-point">
+<h2 id="lumina-search-entry-point">Entry Point<a class="headerlink" href="#entry-point" title="Link to this heading">¶</a></h2>
 <dl class="js function">
 <dt class="sig sig-object js" id="boot">
 <span class="sig-name descname"><span class="n"><span class="pre">boot</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#boot" title="Link to this definition">¶</a></dt>
@@ -683,7 +691,7 @@ immediately if the DOM is already ready.</p>
 
 </section>
 <section id="navigation">
-<h2>Navigation<a class="headerlink" href="#navigation" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-navigation">Navigation<a class="headerlink" href="#navigation" title="Link to this heading">¶</a></h2>
 <dl class="js function">
 <dt class="sig sig-object js" id="scrollspy">
 <span class="sig-name descname"><span class="n"><span class="pre">scrollspy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scrollspy" title="Link to this definition">¶</a></dt>
@@ -777,7 +785,7 @@ Registered as <code class="docutils literal notranslate"><span class="pre">Alpin
 
 </section>
 <section id="ui-controls">
-<h2>UI Controls<a class="headerlink" href="#ui-controls" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-ui-controls">UI Controls<a class="headerlink" href="#ui-controls" title="Link to this heading">¶</a></h2>
 <dl class="js function">
 <dt class="sig sig-object js" id="themeToggle">
 <span class="sig-name descname"><span class="n"><span class="pre">themeToggle</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#themeToggle" title="Link to this definition">¶</a></dt>
@@ -808,7 +816,10 @@ Registered as <code class="docutils literal notranslate"><span class="pre">Alpin
 <p><strong>Properties:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">query</span></code> <em>(string)</em> — Current search input value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">results</span></code> <em>(Array)</em> — Array of search result objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">results</span></code> <em>(Array)</em> — Page and heading links in keyboard navigation order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scope</span></code> <em>(string)</em> — Selected section; empty means all documentation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scopes</span></code> <em>(Array)</em> — Section names available in the index.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">searching</span></code> <em>(boolean)</em> — Whether the current query is pending.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">selectedIndex</span></code> <em>(number)</em> — Index of the keyboard-highlighted result.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">loaded</span></code> <em>(boolean)</em> — Whether the search engine has been initialized.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">error</span></code> <em>(string|null)</em> — Error message, if search initialization failed.</p></li>
@@ -873,7 +884,7 @@ Registered as <code class="docutils literal notranslate"><span class="pre">Alpin
 
 </section>
 <section id="content-utilities">
-<h2>Content Utilities<a class="headerlink" href="#content-utilities" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-content-utilities">Content Utilities<a class="headerlink" href="#content-utilities" title="Link to this heading">¶</a></h2>
 <dl class="js function">
 <dt class="sig sig-object js" id="headerLinks">
 <span class="sig-name descname"><span class="n"><span class="pre">headerLinks</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#headerLinks" title="Link to this definition">¶</a></dt>
@@ -912,7 +923,7 @@ Registered as <code class="docutils literal notranslate"><span class="pre">Alpin
 
 </section>
 <section id="api-tools">
-<h2>API Tools<a class="headerlink" href="#api-tools" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-api-tools">API Tools<a class="headerlink" href="#api-tools" title="Link to this heading">¶</a></h2>
 <dl class="js function">
 <dt class="sig sig-object js" id="curlCopyBtn">
 <span class="sig-name descname"><span class="n"><span class="pre">curlCopyBtn</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#curlCopyBtn" title="Link to this definition">¶</a></dt>
@@ -1100,6 +1111,7 @@ is set on <code class="docutils literal notranslate"><span class="pre">&lt;html&
     <dialog id="lumina-search-modal"
         x-data="searchModal()"
         @cancel.prevent="close()"
+        @keydown.escape.stop.prevent="close()"
         @keydown.meta.k.window.prevent="toggle()"
         @keydown.ctrl.k.window.prevent="toggle()"
         @click.self="close()"
@@ -1107,7 +1119,7 @@ is set on <code class="docutils literal notranslate"><span class="pre">&lt;html&
         aria-modal="true"
         aria-label="Search documentation">
     
-    <div class="relative mx-auto mt-[15vh] max-w-xl cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
+    <div class="relative mx-auto mt-[5vh] flex max-h-[90dvh] w-[calc(100%-2rem)] max-w-xl flex-col sm:mt-[12vh] sm:max-h-[80dvh] cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
         
         <div class="flex items-center border-b border-lumina-border px-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-lumina-text-muted" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
@@ -1119,17 +1131,44 @@ is set on <code class="docutils literal notranslate"><span class="pre">&lt;html&
                    @keydown.arrow-up.prevent="moveUp()"
                    @keydown.enter.prevent="goToSelected()"
                    class="w-full border-0 bg-transparent px-3 py-4 text-lumina-text placeholder-lumina-text-muted outline-none"
+                   aria-label="Search documentation"
                    placeholder="Search docs..."
                    autocomplete="off">
             <kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1.5 py-0.5 text-xs text-lumina-text-muted">esc</kbd>
         </div>
+        <template x-if="loaded && scopes.length > 1 && pagefind">
+            <div class="flex shrink-0 items-center gap-3 border-b border-lumina-border px-4 py-2">
+                <label for="lumina-search-scope"
+                       class="shrink-0 text-xs text-lumina-text-muted">Search in</label>
+                <select id="lumina-search-scope"
+                        x-model="scope"
+                        @change="search()"
+                        class="min-w-0 flex-1 rounded border border-lumina-border bg-lumina-bg px-2 py-2 text-sm text-lumina-text focus-visible:outline-2 focus-visible:outline-lumina-accent">
+                    <option value="">All docs</option>
+                    <template x-for="name in scopes" :key="name">
+                        <option :value="name" x-text="name"></option>
+                    </template>
+                </select>
+            </div>
+        </template>
         
-        <div class="max-h-[60vh] overflow-y-auto p-2">
-            <template x-if="!loaded">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Loading search index...</p>
+        <div class="min-h-0 overflow-y-auto p-2" :aria-busy="searching">
+            <template x-if="!loaded || searching">
+                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">
+                    <span x-text="loaded ? 'Searching…' : 'Loading search index…'"></span>
+                </p>
             </template>
-            <template x-if="loaded && query.length > 0 && results.length === 0">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">No results found.</p>
+            <template x-if="loaded && !searching && !error && query.trim().length > 0 && results.length === 0">
+                <div class="px-3 py-8 text-center text-sm text-lumina-text-muted">
+                    <p x-text="scope ? 'No results in ' + scope + '.' : 'No results found.'"></p>
+                    <template x-if="scope">
+                        <button type="button"
+                                @click="searchAll()"
+                                class="mt-2 rounded px-3 py-2 text-lumina-accent underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-lumina-accent">
+                            Search all docs
+                        </button>
+                    </template>
+                </div>
             </template>
             <template x-if="error">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted"
@@ -1137,32 +1176,33 @@ is set on <code class="docutils literal notranslate"><span class="pre">&lt;html&
             </template>
             <template x-for="(result, index) in results" :key="result.url">
                 <a :href="result.url"
-                   class="flex flex-col gap-0.5 rounded-lg px-3 py-2.5 no-underline transition-colors"
-                   :class="index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text'"
-                   @mouseenter="selectedIndex = index">
-                    <div class="flex min-w-0 items-center justify-between gap-2">
-                        <span class="truncate text-sm font-medium" x-text="result.title"></span>
-                        <template x-if="result.section">
-                            <span class="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
-                                  :class="index === selectedIndex ? 'bg-lumina-accent text-white opacity-70' : 'bg-lumina-bg-secondary text-lumina-text-muted'"
-                                  x-text="result.section"></span>
-                        </template>
-                    </div>
+                   data-search-result
+                   class="flex flex-col gap-1 rounded-lg px-3 py-2.5 no-underline transition-colors focus-visible:outline-2 focus-visible:outline-lumina-accent"
+                   :class="[index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text', result.isHeading ? 'ml-4 border-l border-lumina-border' : 'mt-1']"
+                   @mouseenter="selectedIndex = index"
+                   @focus="selectedIndex = index">
+                    <template x-if="result.breadcrumb">
+                        <span class="truncate text-xs text-lumina-text-muted"
+                              x-text="result.breadcrumb"></span>
+                    </template>
+                    <span class="break-words text-sm"
+                          :class="result.isHeading ? '' : 'font-semibold'"
+                          x-text="result.title"></span>
                     <span class="line-clamp-2 text-xs text-lumina-text-muted"
                           x-html="result.excerpt"></span>
                 </a>
             </template>
-            <template x-if="loaded && query.length === 0">
+            <template x-if="loaded && !error && query.trim().length === 0">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Type to search...</p>
             </template>
         </div>
         
         <div class="sr-only"
              role="status"
-             x-text="loaded && query.length > 0 ? results.length + (results.length === 1 ? ' result' : ' results') : ''">
+             x-text="searching ? 'Searching…' : loaded && query.trim().length > 0 ? results.length + ' links' + (scope ? ' in ' + scope : ' across all docs') : ''">
         </div>
         
-        <div class="flex items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
+        <div class="flex shrink-0 items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> Navigate</span>
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> Open</span>
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">esc</kbd> Close</span>

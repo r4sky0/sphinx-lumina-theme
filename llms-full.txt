@@ -600,6 +600,23 @@ from `table-controls.js` for local filtering and sorting. It moves existing rows
 to preserve their markup and state. Unsupported table structures remain static.
 See [Lists & Tables](../reference/lists-and-tables.md) for the opt-in syntax.
 
+## Search index and results
+
+At `env-updated`, Lumina maps documents to their first root-toctree branch.
+Configured `doc_sections` take precedence when rendering each page. The layout
+emits a Pagefind section filter and plain-text parent titles as breadcrumb
+metadata. These values are independent of the visible breadcrumb toggle.
+
+The `doctree-resolved` hook adds unique `lumina-search-…` IDs to section headings
+for Pagefind’s sub-results. Existing section IDs and permalink URLs stay intact.
+The `build-finished` hook indexes the rendered HTML as before.
+
+The `searchModal` Alpine component loads available filters from Pagefind and
+keys its bounded cache by query and scope. Request IDs discard outdated
+responses, including responses arriving after the dialog closes. The dialog
+lists up to ten pages with up to three heading links per page; all links share
+one keyboard navigation sequence. Excerpts are sanitized before rendering.
+
 ## Theming
 
 - CSS custom properties (`--lumina-accent`, `--lumina-bg`, `--lumina-text`, etc.) defined in `base.css`. See [CSS Variables](../reference/css-variables.md) for the full token reference.
@@ -3276,7 +3293,10 @@ Registered as `Alpine.data("searchModal", searchModal)`.
 **Properties:**
 
 - `query`  *(string)* — Current search input value.
-- `results`  *(Array)* — Array of search result objects.
+- `results`  *(Array)* — Page and heading links in keyboard navigation order.
+- `scope`  *(string)* — Selected section; empty means all documentation.
+- `scopes`  *(Array)* — Section names available in the index.
+- `searching`  *(boolean)* — Whether the current query is pending.
 - `selectedIndex`  *(number)* — Index of the keyboard-highlighted result.
 - `loaded`  *(boolean)* — Whether the search engine has been initialized.
 - `error`  *(string|null)* — Error message, if search initialization failed.
@@ -4320,6 +4340,10 @@ Each section has:
 When a reader visits a page that belongs to a section, the sidebar shows only that section’s navigation tree. The dropdown at the top highlights the active section and lets readers jump to any other section’s index page.
 
 One section can be marked as `"default": True`. That section automatically includes every page not explicitly assigned to another section — you don’t need to list every directory. This is the simplest way to split docs into two groups like “User Documentation” (everything) and “Developer Documentation” (just `contributing/`).
+
+These section names also appear in the **Search in** selector in
+[Search](search.md). Search uses the same path matching and default section
+as the sidebar switcher.
 
 Section colors are contained to the switcher dropdown — they don’t affect the rest of the page’s accent color.
 
@@ -5489,6 +5513,28 @@ uv run sphinx-build docs docs/_build/html
 sphinx-build docs docs/_build/html
 ```
 
+## Search within a section
+
+Use **Search in** below the search field to narrow results to one section, or
+choose **All docs** to search the whole documentation build. Opening the dialog
+starts with **All docs** each time. When a section has no matches, **Search all
+docs** broadens the search without changing your query.
+
+Scopes come from your [doc sections](navigation.md) configuration,
+including multi-path and default sections. Without `doc_sections`, Lumina uses
+the root toctree’s document titles and includes each entry’s descendants. A page
+listed under several branches belongs to the first one. Pages outside those
+branches remain available through **All docs**. The selector appears only when
+at least two sections are indexed; no tags or additional options are required.
+
+Results show navigation breadcrumbs and up to three matching headings beneath
+each page. Select a heading to jump directly to that passage. Use the arrow keys
+from the search field to move through page and heading links, then press
+`Enter` to open one. `Tab` reaches the scope selector and result links.
+
+Search covers the current build, not other versions or separately hosted sites.
+Rebuild your docs after changing the navigation so the index reflects it.
+
 ## Built-in Sphinx Search
 
 If you prefer not to use Pagefind, switch to Sphinx’s built-in search:
@@ -5499,7 +5545,9 @@ html_theme_options = {
 }
 ```
 
-The built-in search works without any additional setup but is slower and less featured than Pagefind.
+The built-in search works without any additional setup. It searches all pages
+and does not provide section filters or heading results in the dialog. If
+Pagefind cannot load or a query fails, Lumina offers a link to this search page.
 
 #### NOTE
 **Search during development:** Pagefind indexes your content during full builds. During live preview with `sphinx-autobuild`, search may not be available. Use `⌘F` / `Ctrl`+`F` for in-page search instead.

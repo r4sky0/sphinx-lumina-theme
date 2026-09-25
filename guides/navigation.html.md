@@ -174,6 +174,10 @@ When a reader visits a page that belongs to a section, the sidebar shows only th
 
 One section can be marked as `"default": True`. That section automatically includes every page not explicitly assigned to another section — you don’t need to list every directory. This is the simplest way to split docs into two groups like “User Documentation” (everything) and “Developer Documentation” (just `contributing/`).
 
+These section names also appear in the **Search in** selector in
+[Search](search.md). Search uses the same path matching and default section
+as the sidebar switcher.
+
 Section colors are contained to the switcher dropdown — they don’t affect the rest of the page’s accent color.
 
 ## Version Switcher

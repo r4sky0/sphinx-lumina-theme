@@ -11,7 +11,7 @@
     <title>Diagrams &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=3c4561f5" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=5385acde" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -457,13 +457,21 @@ mermaid.initialize(
 
 window.addEventListener("load", load);
 window.runMermaid = runMermaid;</script>
-    <script defer="defer" src="../_static/lumina.js?v=6a5d1eab"></script>
+    <script defer="defer" src="../_static/lumina.js?v=5e3b342a"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/reference/diagrams.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Footnotes &amp; References" href="footnotes-and-references.html" />
     <link rel="prev" title="Math" href="math.html" />
 
+    
+        <meta data-pagefind-filter="section[content]"
+              content="User Documentation">
+    
+    
+        <meta data-pagefind-meta="breadcrumb[content]"
+              content="Reference">
+    
     
         
             <link rel="icon"
@@ -1186,14 +1194,14 @@ window.runMermaid = runMermaid;</script>
                 
 
     <section class="tex2jax_ignore mathjax_ignore" id="diagrams">
-<h1>Diagrams<a class="headerlink" href="#diagrams" title="Link to this heading">¶</a></h1>
+<h1 id="lumina-search-diagrams">Diagrams<a class="headerlink" href="#diagrams" title="Link to this heading">¶</a></h1>
 <p>Lumina supports <a class="reference external" href="https://mermaid.js.org/">Mermaid</a> diagrams via the <code class="docutils literal notranslate"><span class="pre">sphinxcontrib-mermaid</span></code> extension. Diagrams automatically adapt to the current light or dark theme.</p>
 <div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>2 min read</span></div><div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>See <a class="reference internal" href="../extensions/mermaid.html"><span class="doc">Mermaid Diagrams</span></a> for installation and setup instructions. Use the <strong>fullscreen ⛶ button</strong> to inspect a dense diagram at a larger size. Press <strong>Escape</strong> to return to the page.</p>
 </div>
 <section id="choosing-a-diagram-type">
-<h2>Choosing a Diagram Type<a class="headerlink" href="#choosing-a-diagram-type" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-choosing-a-diagram-type">Choosing a Diagram Type<a class="headerlink" href="#choosing-a-diagram-type" title="Link to this heading">¶</a></h2>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 25.0%" />
@@ -1243,7 +1251,7 @@ window.runMermaid = runMermaid;</script>
 </table>
 </section>
 <section id="flowchart">
-<h2>Flowchart<a class="headerlink" href="#flowchart" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-flowchart">Flowchart<a class="headerlink" href="#flowchart" title="Link to this heading">¶</a></h2>
 <p>Show one decision at a time. This documentation pipeline makes the happy path and the revision loop easy to follow.</p>
 <pre  class="mermaid">
         flowchart LR
@@ -1272,7 +1280,7 @@ flowchart LR
 </pre></div>
 </div>
 <section id="node-shapes">
-<h3>Node shapes<a class="headerlink" href="#node-shapes" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-node-shapes">Node shapes<a class="headerlink" href="#node-shapes" title="Link to this heading">¶</a></h3>
 <p>Mermaid supports different shapes to convey meaning:</p>
 <pre  class="mermaid">
         flowchart LR
@@ -1282,7 +1290,7 @@ flowchart LR
     C --&gt; D[[Build]] --&gt; E[(Artifacts)] --&gt; F([Done])
     </pre></section>
 <section id="direction-options">
-<h3>Direction options<a class="headerlink" href="#direction-options" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-direction-options">Direction options<a class="headerlink" href="#direction-options" title="Link to this heading">¶</a></h3>
 <p>Control layout direction with <code class="docutils literal notranslate"><span class="pre">TB</span></code> (top-bottom), <code class="docutils literal notranslate"><span class="pre">BT</span></code>, <code class="docutils literal notranslate"><span class="pre">LR</span></code> (left-right), or <code class="docutils literal notranslate"><span class="pre">RL</span></code>:</p>
 <pre  class="mermaid">
         flowchart TB
@@ -1294,7 +1302,7 @@ flowchart LR
     </pre></section>
 </section>
 <section id="sequence-diagram">
-<h2>Sequence Diagram<a class="headerlink" href="#sequence-diagram" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-sequence-diagram">Sequence Diagram<a class="headerlink" href="#sequence-diagram" title="Link to this heading">¶</a></h2>
 <p>Show how systems communicate over time.</p>
 <pre  class="mermaid">
         sequenceDiagram
@@ -1309,7 +1317,7 @@ flowchart LR
     Index--&gt;&gt;Search: Ranked results
     Search--&gt;&gt;Reader: Titles and excerpts
     </pre><section id="with-activation-and-notes">
-<h3>With activation and notes<a class="headerlink" href="#with-activation-and-notes" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-with-activation-and-notes">With activation and notes<a class="headerlink" href="#with-activation-and-notes" title="Link to this heading">¶</a></h3>
 <pre  class="mermaid">
         sequenceDiagram
     accTitle: Preview documentation changes
@@ -1326,7 +1334,7 @@ flowchart LR
     </pre></section>
 </section>
 <section id="class-diagram">
-<h2>Class Diagram<a class="headerlink" href="#class-diagram" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-class-diagram">Class Diagram<a class="headerlink" href="#class-diagram" title="Link to this heading">¶</a></h2>
 <p>Document object relationships, inheritance, and data models.</p>
 <pre  class="mermaid">
         classDiagram
@@ -1349,7 +1357,7 @@ flowchart LR
     Document --&gt; Theme : uses
     Document --&gt; Extension : loads
     </pre><section id="with-inheritance">
-<h3>With inheritance<a class="headerlink" href="#with-inheritance" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-with-inheritance">With inheritance<a class="headerlink" href="#with-inheritance" title="Link to this heading">¶</a></h3>
 <pre  class="mermaid">
         classDiagram
     accTitle: Sphinx builder inheritance
@@ -1371,7 +1379,7 @@ flowchart LR
     </pre></section>
 </section>
 <section id="state-diagram">
-<h2>State Diagram<a class="headerlink" href="#state-diagram" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-state-diagram">State Diagram<a class="headerlink" href="#state-diagram" title="Link to this heading">¶</a></h2>
 <p>Show how an entity transitions between states.</p>
 <pre  class="mermaid">
         stateDiagram-v2
@@ -1386,7 +1394,7 @@ flowchart LR
     Archived --&gt; [*]
     </pre></section>
 <section id="gantt-chart">
-<h2>Gantt Chart<a class="headerlink" href="#gantt-chart" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-gantt-chart">Gantt Chart<a class="headerlink" href="#gantt-chart" title="Link to this heading">¶</a></h2>
 <p>Visualize project timelines and task dependencies.</p>
 <pre  class="mermaid">
         gantt
@@ -1407,7 +1415,7 @@ flowchart LR
         Publish       :milestone, after review, 0d
     </pre></section>
 <section id="entity-relationship-diagram">
-<h2>Entity-Relationship Diagram<a class="headerlink" href="#entity-relationship-diagram" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-entity-relationship-diagram">Entity-Relationship Diagram<a class="headerlink" href="#entity-relationship-diagram" title="Link to this heading">¶</a></h2>
 <p>Document database schema and table relationships.</p>
 <pre  class="mermaid">
         erDiagram
@@ -1429,7 +1437,7 @@ flowchart LR
         int order
     }
     </pre><section id="relationship-notation">
-<h3>Relationship notation<a class="headerlink" href="#relationship-notation" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-relationship-notation">Relationship notation<a class="headerlink" href="#relationship-notation" title="Link to this heading">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 20.0%" />
@@ -1464,7 +1472,7 @@ flowchart LR
 </section>
 </section>
 <section id="pie-chart">
-<h2>Pie Chart<a class="headerlink" href="#pie-chart" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-pie-chart">Pie Chart<a class="headerlink" href="#pie-chart" title="Link to this heading">¶</a></h2>
 <p>Show proportional breakdowns. These illustrative counts use distinct colors and direct values so the proportions are easy to compare.</p>
 <pre  class="mermaid">
         ---
@@ -1493,7 +1501,7 @@ pie title Chart Title
 </div>
 </section>
 <section id="mindmap">
-<h2>Mindmap<a class="headerlink" href="#mindmap" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-mindmap">Mindmap<a class="headerlink" href="#mindmap" title="Link to this heading">¶</a></h2>
 <p>Organize ideas hierarchically.</p>
 <pre  class="mermaid">
         mindmap
@@ -1521,7 +1529,7 @@ mindmap
 </div>
 </section>
 <section id="tips-for-writing-diagrams">
-<h2>Tips for Writing Diagrams<a class="headerlink" href="#tips-for-writing-diagrams" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-tips-for-writing-diagrams">Tips for Writing Diagrams<a class="headerlink" href="#tips-for-writing-diagrams" title="Link to this heading">¶</a></h2>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <ul class="simple">
@@ -1648,6 +1656,7 @@ mindmap
     <dialog id="lumina-search-modal"
         x-data="searchModal()"
         @cancel.prevent="close()"
+        @keydown.escape.stop.prevent="close()"
         @keydown.meta.k.window.prevent="toggle()"
         @keydown.ctrl.k.window.prevent="toggle()"
         @click.self="close()"
@@ -1655,7 +1664,7 @@ mindmap
         aria-modal="true"
         aria-label="Search documentation">
     
-    <div class="relative mx-auto mt-[15vh] max-w-xl cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
+    <div class="relative mx-auto mt-[5vh] flex max-h-[90dvh] w-[calc(100%-2rem)] max-w-xl flex-col sm:mt-[12vh] sm:max-h-[80dvh] cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
         
         <div class="flex items-center border-b border-lumina-border px-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-lumina-text-muted" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
@@ -1667,17 +1676,44 @@ mindmap
                    @keydown.arrow-up.prevent="moveUp()"
                    @keydown.enter.prevent="goToSelected()"
                    class="w-full border-0 bg-transparent px-3 py-4 text-lumina-text placeholder-lumina-text-muted outline-none"
+                   aria-label="Search documentation"
                    placeholder="Search docs..."
                    autocomplete="off">
             <kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1.5 py-0.5 text-xs text-lumina-text-muted">esc</kbd>
         </div>
+        <template x-if="loaded && scopes.length > 1 && pagefind">
+            <div class="flex shrink-0 items-center gap-3 border-b border-lumina-border px-4 py-2">
+                <label for="lumina-search-scope"
+                       class="shrink-0 text-xs text-lumina-text-muted">Search in</label>
+                <select id="lumina-search-scope"
+                        x-model="scope"
+                        @change="search()"
+                        class="min-w-0 flex-1 rounded border border-lumina-border bg-lumina-bg px-2 py-2 text-sm text-lumina-text focus-visible:outline-2 focus-visible:outline-lumina-accent">
+                    <option value="">All docs</option>
+                    <template x-for="name in scopes" :key="name">
+                        <option :value="name" x-text="name"></option>
+                    </template>
+                </select>
+            </div>
+        </template>
         
-        <div class="max-h-[60vh] overflow-y-auto p-2">
-            <template x-if="!loaded">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Loading search index...</p>
+        <div class="min-h-0 overflow-y-auto p-2" :aria-busy="searching">
+            <template x-if="!loaded || searching">
+                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">
+                    <span x-text="loaded ? 'Searching…' : 'Loading search index…'"></span>
+                </p>
             </template>
-            <template x-if="loaded && query.length > 0 && results.length === 0">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">No results found.</p>
+            <template x-if="loaded && !searching && !error && query.trim().length > 0 && results.length === 0">
+                <div class="px-3 py-8 text-center text-sm text-lumina-text-muted">
+                    <p x-text="scope ? 'No results in ' + scope + '.' : 'No results found.'"></p>
+                    <template x-if="scope">
+                        <button type="button"
+                                @click="searchAll()"
+                                class="mt-2 rounded px-3 py-2 text-lumina-accent underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-lumina-accent">
+                            Search all docs
+                        </button>
+                    </template>
+                </div>
             </template>
             <template x-if="error">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted"
@@ -1685,32 +1721,33 @@ mindmap
             </template>
             <template x-for="(result, index) in results" :key="result.url">
                 <a :href="result.url"
-                   class="flex flex-col gap-0.5 rounded-lg px-3 py-2.5 no-underline transition-colors"
-                   :class="index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text'"
-                   @mouseenter="selectedIndex = index">
-                    <div class="flex min-w-0 items-center justify-between gap-2">
-                        <span class="truncate text-sm font-medium" x-text="result.title"></span>
-                        <template x-if="result.section">
-                            <span class="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
-                                  :class="index === selectedIndex ? 'bg-lumina-accent text-white opacity-70' : 'bg-lumina-bg-secondary text-lumina-text-muted'"
-                                  x-text="result.section"></span>
-                        </template>
-                    </div>
+                   data-search-result
+                   class="flex flex-col gap-1 rounded-lg px-3 py-2.5 no-underline transition-colors focus-visible:outline-2 focus-visible:outline-lumina-accent"
+                   :class="[index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text', result.isHeading ? 'ml-4 border-l border-lumina-border' : 'mt-1']"
+                   @mouseenter="selectedIndex = index"
+                   @focus="selectedIndex = index">
+                    <template x-if="result.breadcrumb">
+                        <span class="truncate text-xs text-lumina-text-muted"
+                              x-text="result.breadcrumb"></span>
+                    </template>
+                    <span class="break-words text-sm"
+                          :class="result.isHeading ? '' : 'font-semibold'"
+                          x-text="result.title"></span>
                     <span class="line-clamp-2 text-xs text-lumina-text-muted"
                           x-html="result.excerpt"></span>
                 </a>
             </template>
-            <template x-if="loaded && query.length === 0">
+            <template x-if="loaded && !error && query.trim().length === 0">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Type to search...</p>
             </template>
         </div>
         
         <div class="sr-only"
              role="status"
-             x-text="loaded && query.length > 0 ? results.length + (results.length === 1 ? ' result' : ' results') : ''">
+             x-text="searching ? 'Searching…' : loaded && query.trim().length > 0 ? results.length + ' links' + (scope ? ' in ' + scope : ' across all docs') : ''">
         </div>
         
-        <div class="flex items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
+        <div class="flex shrink-0 items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> Navigate</span>
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> Open</span>
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">esc</kbd> Close</span>

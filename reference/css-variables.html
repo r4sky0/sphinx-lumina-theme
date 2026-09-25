@@ -12,7 +12,7 @@
     <title>CSS Variables &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=3c4561f5" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=5385acde" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -22,13 +22,21 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=6a5d1eab"></script>
+    <script defer="defer" src="../_static/lumina.js?v=5e3b342a"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/reference/css-variables.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Contributing" href="../contributing/index.html" />
     <link rel="prev" title="Icon Browser" href="icons.html" />
 
+    
+        <meta data-pagefind-filter="section[content]"
+              content="User Documentation">
+    
+    
+        <meta data-pagefind-meta="breadcrumb[content]"
+              content="Reference">
+    
     
         
             <link rel="icon"
@@ -738,11 +746,11 @@
                 
 
     <section class="tex2jax_ignore mathjax_ignore" id="css-variables">
-<h1>CSS Variables<a class="headerlink" href="#css-variables" title="Link to this heading">¶</a></h1>
+<h1 id="lumina-search-css-variables">CSS Variables<a class="headerlink" href="#css-variables" title="Link to this heading">¶</a></h1>
 <p>Every visual surface in Lumina is driven by a CSS custom property. Override any of these in your own stylesheet to retheme the docs without forking the theme. For step-by-step instructions on adding a custom stylesheet, see <a class="reference internal" href="../guides/custom-styling.html"><span class="doc">Custom Styling</span></a>.</p>
 <div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>2 min read</span></div><p>All tokens are defined for both the default light scope (<code class="docutils literal notranslate"><span class="pre">:root</span></code> / <code class="docutils literal notranslate"><span class="pre">[data-theme=&quot;light&quot;]</span></code>) and dark mode (<code class="docutils literal notranslate"><span class="pre">[data-theme=&quot;dark&quot;]</span></code>).</p>
 <section id="theme-tokens">
-<h2>Theme tokens<a class="headerlink" href="#theme-tokens" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-theme-tokens">Theme tokens<a class="headerlink" href="#theme-tokens" title="Link to this heading">¶</a></h2>
 <p>The core surface and text tokens. These are the variables you’ll override most often.</p>
 <table class="docutils align-default">
 <colgroup>
@@ -822,7 +830,7 @@
 </div>
 </section>
 <section id="admonition-tokens">
-<h2>Admonition tokens<a class="headerlink" href="#admonition-tokens" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-admonition-tokens">Admonition tokens<a class="headerlink" href="#admonition-tokens" title="Link to this heading">¶</a></h2>
 <p>One color per admonition type, plus a darker variant for the warning text where the regular hue would clip on light backgrounds.</p>
 <table class="docutils align-default">
 <colgroup>
@@ -879,7 +887,7 @@
 <p>The thin border, icon mask, and 4–5% background tint of every admonition derive from these colors via <code class="docutils literal notranslate"><span class="pre">color-mix()</span></code> — overriding the token recolors the whole admonition.</p>
 </section>
 <section id="sphinx-design-tokens">
-<h2>sphinx-design tokens<a class="headerlink" href="#sphinx-design-tokens" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-sphinx-design-tokens">sphinx-design tokens<a class="headerlink" href="#sphinx-design-tokens" title="Link to this heading">¶</a></h2>
 <p>Lumina also overrides sphinx-design’s color tokens (<code class="docutils literal notranslate"><span class="pre">--sd-color-primary</span></code>, <code class="docutils literal notranslate"><span class="pre">--sd-color-info</span></code>, etc.) so cards, buttons, and badges from <code class="docutils literal notranslate"><span class="pre">sphinx_design</span></code> blend with the rest of the theme. These are documented in <a class="reference external" href="https://sphinx-design.readthedocs.io/en/latest/css_variables.html">the sphinx-design reference</a>; Lumina’s defaults map them onto its own palette.</p>
 <p>If you want sphinx-design components to follow your accent color, override them alongside the Lumina tokens:</p>
 <div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="nd">root</span><span class="o">,</span>
@@ -893,9 +901,9 @@
 </div>
 </section>
 <section id="override-patterns">
-<h2>Override patterns<a class="headerlink" href="#override-patterns" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-override-patterns">Override patterns<a class="headerlink" href="#override-patterns" title="Link to this heading">¶</a></h2>
 <section id="switch-the-entire-palette">
-<h3>Switch the entire palette<a class="headerlink" href="#switch-the-entire-palette" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-switch-the-entire-palette">Switch the entire palette<a class="headerlink" href="#switch-the-entire-palette" title="Link to this heading">¶</a></h3>
 <div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nv">--lumina-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#fffaf2</span><span class="p">;</span>
 <span class="w">  </span><span class="nv">--lumina-bg-secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#faf3e7</span><span class="p">;</span>
@@ -913,7 +921,7 @@
 </div>
 </section>
 <section id="recolor-a-single-admonition-type">
-<h3>Recolor a single admonition type<a class="headerlink" href="#recolor-a-single-admonition-type" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-recolor-a-single-admonition-type">Recolor a single admonition type<a class="headerlink" href="#recolor-a-single-admonition-type" title="Link to this heading">¶</a></h3>
 <div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nv">--lumina-adm-note</span><span class="p">:</span><span class="w"> </span><span class="mh">#6366f1</span><span class="p">;</span><span class="w"> </span><span class="c">/* Indigo notes everywhere */</span>
 <span class="p">}</span>
@@ -925,7 +933,7 @@
 </div>
 </section>
 <section id="match-a-brand-color-in-dark-mode-only">
-<h3>Match a brand color in dark mode only<a class="headerlink" href="#match-a-brand-color-in-dark-mode-only" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-match-a-brand-color-in-dark-mode-only">Match a brand color in dark mode only<a class="headerlink" href="#match-a-brand-color-in-dark-mode-only" title="Link to this heading">¶</a></h3>
 <div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;dark&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nv">--lumina-accent</span><span class="p">:</span><span class="w"> </span><span class="mh">#f472b6</span><span class="p">;</span>
 <span class="w">  </span><span class="nv">--lumina-link</span><span class="p">:</span><span class="w"> </span><span class="mh">#f9a8d4</span><span class="p">;</span>
@@ -936,7 +944,7 @@
 </section>
 </section>
 <section id="where-each-token-is-wired-up">
-<h2>Where each token is wired up<a class="headerlink" href="#where-each-token-is-wired-up" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-where-each-token-is-wired-up">Where each token is wired up<a class="headerlink" href="#where-each-token-is-wired-up" title="Link to this heading">¶</a></h2>
 <p>Every token is consumed in <code class="docutils literal notranslate"><span class="pre">src/sphinx_lumina_theme/_static_src/css/</span></code>. If you’re customizing deeply and want to know exactly where a token is read, the easiest reference is the source — <code class="docutils literal notranslate"><span class="pre">base.css</span></code> declares the tokens; the per-feature stylesheets (<code class="docutils literal notranslate"><span class="pre">typography.css</span></code>, <code class="docutils literal notranslate"><span class="pre">code.css</span></code>, <code class="docutils literal notranslate"><span class="pre">admonitions.css</span></code>, <code class="docutils literal notranslate"><span class="pre">api.css</span></code>, <code class="docutils literal notranslate"><span class="pre">landing.css</span></code>, <code class="docutils literal notranslate"><span class="pre">mermaid.css</span></code>) consume them via <code class="docutils literal notranslate"><span class="pre">var(--…)</span></code>.</p>
 <p>For non-color customization (fonts, page elements, syntax highlighting), see <a class="reference internal" href="../guides/custom-styling.html"><span class="doc">Custom Styling</span></a>.</p>
 </section>
@@ -1042,6 +1050,7 @@
     <dialog id="lumina-search-modal"
         x-data="searchModal()"
         @cancel.prevent="close()"
+        @keydown.escape.stop.prevent="close()"
         @keydown.meta.k.window.prevent="toggle()"
         @keydown.ctrl.k.window.prevent="toggle()"
         @click.self="close()"
@@ -1049,7 +1058,7 @@
         aria-modal="true"
         aria-label="Search documentation">
     
-    <div class="relative mx-auto mt-[15vh] max-w-xl cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
+    <div class="relative mx-auto mt-[5vh] flex max-h-[90dvh] w-[calc(100%-2rem)] max-w-xl flex-col sm:mt-[12vh] sm:max-h-[80dvh] cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
         
         <div class="flex items-center border-b border-lumina-border px-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-lumina-text-muted" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
@@ -1061,17 +1070,44 @@
                    @keydown.arrow-up.prevent="moveUp()"
                    @keydown.enter.prevent="goToSelected()"
                    class="w-full border-0 bg-transparent px-3 py-4 text-lumina-text placeholder-lumina-text-muted outline-none"
+                   aria-label="Search documentation"
                    placeholder="Search docs..."
                    autocomplete="off">
             <kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1.5 py-0.5 text-xs text-lumina-text-muted">esc</kbd>
         </div>
+        <template x-if="loaded && scopes.length > 1 && pagefind">
+            <div class="flex shrink-0 items-center gap-3 border-b border-lumina-border px-4 py-2">
+                <label for="lumina-search-scope"
+                       class="shrink-0 text-xs text-lumina-text-muted">Search in</label>
+                <select id="lumina-search-scope"
+                        x-model="scope"
+                        @change="search()"
+                        class="min-w-0 flex-1 rounded border border-lumina-border bg-lumina-bg px-2 py-2 text-sm text-lumina-text focus-visible:outline-2 focus-visible:outline-lumina-accent">
+                    <option value="">All docs</option>
+                    <template x-for="name in scopes" :key="name">
+                        <option :value="name" x-text="name"></option>
+                    </template>
+                </select>
+            </div>
+        </template>
         
-        <div class="max-h-[60vh] overflow-y-auto p-2">
-            <template x-if="!loaded">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Loading search index...</p>
+        <div class="min-h-0 overflow-y-auto p-2" :aria-busy="searching">
+            <template x-if="!loaded || searching">
+                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">
+                    <span x-text="loaded ? 'Searching…' : 'Loading search index…'"></span>
+                </p>
             </template>
-            <template x-if="loaded && query.length > 0 && results.length === 0">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">No results found.</p>
+            <template x-if="loaded && !searching && !error && query.trim().length > 0 && results.length === 0">
+                <div class="px-3 py-8 text-center text-sm text-lumina-text-muted">
+                    <p x-text="scope ? 'No results in ' + scope + '.' : 'No results found.'"></p>
+                    <template x-if="scope">
+                        <button type="button"
+                                @click="searchAll()"
+                                class="mt-2 rounded px-3 py-2 text-lumina-accent underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-lumina-accent">
+                            Search all docs
+                        </button>
+                    </template>
+                </div>
             </template>
             <template x-if="error">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted"
@@ -1079,32 +1115,33 @@
             </template>
             <template x-for="(result, index) in results" :key="result.url">
                 <a :href="result.url"
-                   class="flex flex-col gap-0.5 rounded-lg px-3 py-2.5 no-underline transition-colors"
-                   :class="index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text'"
-                   @mouseenter="selectedIndex = index">
-                    <div class="flex min-w-0 items-center justify-between gap-2">
-                        <span class="truncate text-sm font-medium" x-text="result.title"></span>
-                        <template x-if="result.section">
-                            <span class="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
-                                  :class="index === selectedIndex ? 'bg-lumina-accent text-white opacity-70' : 'bg-lumina-bg-secondary text-lumina-text-muted'"
-                                  x-text="result.section"></span>
-                        </template>
-                    </div>
+                   data-search-result
+                   class="flex flex-col gap-1 rounded-lg px-3 py-2.5 no-underline transition-colors focus-visible:outline-2 focus-visible:outline-lumina-accent"
+                   :class="[index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text', result.isHeading ? 'ml-4 border-l border-lumina-border' : 'mt-1']"
+                   @mouseenter="selectedIndex = index"
+                   @focus="selectedIndex = index">
+                    <template x-if="result.breadcrumb">
+                        <span class="truncate text-xs text-lumina-text-muted"
+                              x-text="result.breadcrumb"></span>
+                    </template>
+                    <span class="break-words text-sm"
+                          :class="result.isHeading ? '' : 'font-semibold'"
+                          x-text="result.title"></span>
                     <span class="line-clamp-2 text-xs text-lumina-text-muted"
                           x-html="result.excerpt"></span>
                 </a>
             </template>
-            <template x-if="loaded && query.length === 0">
+            <template x-if="loaded && !error && query.trim().length === 0">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Type to search...</p>
             </template>
         </div>
         
         <div class="sr-only"
              role="status"
-             x-text="loaded && query.length > 0 ? results.length + (results.length === 1 ? ' result' : ' results') : ''">
+             x-text="searching ? 'Searching…' : loaded && query.trim().length > 0 ? results.length + ' links' + (scope ? ' in ' + scope : ' across all docs') : ''">
         </div>
         
-        <div class="flex items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
+        <div class="flex shrink-0 items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> Navigate</span>
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> Open</span>
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">esc</kbd> Close</span>

@@ -75,6 +75,23 @@ from `table-controls.js` for local filtering and sorting. It moves existing rows
 to preserve their markup and state. Unsupported table structures remain static.
 See {doc}`/reference/lists-and-tables` for the opt-in syntax.
 
+## Search index and results
+
+At `env-updated`, Lumina maps documents to their first root-toctree branch.
+Configured `doc_sections` take precedence when rendering each page. The layout
+emits a Pagefind section filter and plain-text parent titles as breadcrumb
+metadata. These values are independent of the visible breadcrumb toggle.
+
+The `doctree-resolved` hook adds unique `lumina-search-…` IDs to section headings
+for Pagefind's sub-results. Existing section IDs and permalink URLs stay intact.
+The `build-finished` hook indexes the rendered HTML as before.
+
+The `searchModal` Alpine component loads available filters from Pagefind and
+keys its bounded cache by query and scope. Request IDs discard outdated
+responses, including responses arriving after the dialog closes. The dialog
+lists up to ten pages with up to three heading links per page; all links share
+one keyboard navigation sequence. Excerpts are sanitized before rendering.
+
 ## Theming
 
 - CSS custom properties (`--lumina-accent`, `--lumina-bg`, `--lumina-text`, etc.) defined in `base.css`. See {doc}`/reference/css-variables` for the full token reference.

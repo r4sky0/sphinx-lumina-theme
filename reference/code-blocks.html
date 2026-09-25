@@ -11,7 +11,7 @@
     <title>Code Blocks &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=3c4561f5" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=5385acde" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,13 +21,21 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=6a5d1eab"></script>
+    <script defer="defer" src="../_static/lumina.js?v=5e3b342a"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/reference/code-blocks.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Lists &amp; Tables" href="lists-and-tables.html" />
     <link rel="prev" title="Admonitions" href="admonitions.html" />
 
+    
+        <meta data-pagefind-filter="section[content]"
+              content="User Documentation">
+    
+    
+        <meta data-pagefind-meta="breadcrumb[content]"
+              content="Reference">
+    
     
         
             <link rel="icon"
@@ -751,13 +759,13 @@
                 
 
     <section class="tex2jax_ignore mathjax_ignore" id="code-blocks">
-<h1>Code Blocks<a class="headerlink" href="#code-blocks" title="Link to this heading">¶</a></h1>
+<h1 id="lumina-search-code-blocks">Code Blocks<a class="headerlink" href="#code-blocks" title="Link to this heading">¶</a></h1>
 <p>Syntax-highlighted code with line numbers, emphasis, captions, and more.</p>
 <div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>2 min read</span></div><section id="basic-syntax-highlighting">
-<h2>Basic Syntax Highlighting<a class="headerlink" href="#basic-syntax-highlighting" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-basic-syntax-highlighting">Basic Syntax Highlighting<a class="headerlink" href="#basic-syntax-highlighting" title="Link to this heading">¶</a></h2>
 <p>Specify the language after the opening fence for syntax highlighting.</p>
 <section id="python">
-<h3>Python<a class="headerlink" href="#python" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-python">Python<a class="headerlink" href="#python" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the first n Fibonacci numbers.&quot;&quot;&quot;</span>
     <span class="n">sequence</span> <span class="o">=</span> <span class="p">[]</span>
@@ -770,7 +778,7 @@
 </div>
 </section>
 <section id="javascript">
-<h3>JavaScript<a class="headerlink" href="#javascript" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-javascript">JavaScript<a class="headerlink" href="#javascript" title="Link to this heading">¶</a></h3>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchUser</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/api/users/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -782,7 +790,7 @@
 </div>
 </section>
 <section id="rust">
-<h3>Rust<a class="headerlink" href="#rust" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-rust">Rust<a class="headerlink" href="#rust" title="Link to this heading">¶</a></h3>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span><span class="w"> </span><span class="nf">binary_search</span><span class="o">&lt;</span><span class="n">T</span><span class="p">:</span><span class="w"> </span><span class="nb">Ord</span><span class="o">&gt;</span><span class="p">(</span><span class="n">slice</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="n">T</span><span class="p">],</span><span class="w"> </span><span class="n">target</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">T</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Option</span><span class="o">&lt;</span><span class="kt">usize</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">low</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">high</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slice</span><span class="p">.</span><span class="n">len</span><span class="p">();</span>
@@ -800,7 +808,7 @@
 </div>
 </section>
 <section id="bash">
-<h3>Bash<a class="headerlink" href="#bash" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-bash">Bash<a class="headerlink" href="#bash" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.md<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing: </span><span class="nv">$file</span><span class="s2">&quot;</span>
@@ -810,7 +818,7 @@
 </div>
 </section>
 <section id="yaml">
-<h3>YAML<a class="headerlink" href="#yaml" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-yaml">YAML<a class="headerlink" href="#yaml" title="Link to this heading">¶</a></h3>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">server</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0.0.0</span>
 <span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
@@ -823,7 +831,7 @@
 </div>
 </section>
 <section id="json">
-<h3>JSON<a class="headerlink" href="#json" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-json">JSON<a class="headerlink" href="#json" title="Link to this heading">¶</a></h3>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sphinx-lumina-theme&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
@@ -835,7 +843,7 @@
 </div>
 </section>
 <section id="html">
-<h3>HTML<a class="headerlink" href="#html" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-html">HTML<a class="headerlink" href="#html" title="Link to this heading">¶</a></h3>
 <div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;navigation&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Main&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
@@ -846,7 +854,7 @@
 </div>
 </section>
 <section id="css">
-<h3>CSS<a class="headerlink" href="#css" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-css">CSS<a class="headerlink" href="#css" title="Link to this heading">¶</a></h3>
 <div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nv">--color-accent</span><span class="p">:</span><span class="w"> </span><span class="mh">#10b981</span><span class="p">;</span>
 <span class="w">  </span><span class="nv">--color-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#fcfcfc</span><span class="p">;</span>
@@ -861,7 +869,7 @@
 </div>
 </section>
 <section id="toml">
-<h3>TOML<a class="headerlink" href="#toml" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-toml">TOML<a class="headerlink" href="#toml" title="Link to this heading">¶</a></h3>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[project]</span>
 <span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my-project&quot;</span>
 <span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span>
@@ -874,7 +882,7 @@
 </section>
 </section>
 <section id="line-numbers">
-<h2>Line Numbers<a class="headerlink" href="#line-numbers" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-line-numbers">Line Numbers<a class="headerlink" href="#line-numbers" title="Link to this heading">¶</a></h2>
 <p>Add <code class="docutils literal notranslate"><span class="pre">:linenos:</span></code> to display line numbers alongside the code.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">EventEmitter</span><span class="p">:</span>
 <span class="linenos"> 2</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -897,7 +905,7 @@ your code here
 </div>
 </section>
 <section id="line-emphasis">
-<h2>Line Emphasis<a class="headerlink" href="#line-emphasis" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-line-emphasis">Line Emphasis<a class="headerlink" href="#line-emphasis" title="Link to this heading">¶</a></h2>
 <p>Highlight specific lines to draw attention to important parts.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
 <span class="linenos">2</span>    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">retries</span><span class="p">):</span>
@@ -919,7 +927,7 @@ your code here
 </div>
 </section>
 <section id="captions">
-<h2>Captions<a class="headerlink" href="#captions" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-captions">Captions<a class="headerlink" href="#captions" title="Link to this heading">¶</a></h2>
 <p>Add a caption above the code block to describe its purpose.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">conf.py — Minimal theme configuration</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
@@ -939,7 +947,7 @@ your code here
 </div>
 </section>
 <section id="diff-highlighting">
-<h2>Diff Highlighting<a class="headerlink" href="#diff-highlighting" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-diff-highlighting">Diff Highlighting<a class="headerlink" href="#diff-highlighting" title="Link to this heading">¶</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">diff</span></code> language to show additions and removals.</p>
 <div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">- html_theme = &quot;alabaster&quot;</span>
 <span class="gi">+ html_theme = &quot;lumina&quot;</span>
@@ -950,7 +958,7 @@ your code here
 </div>
 </section>
 <section id="tabbed-code-blocks">
-<h2>Tabbed Code Blocks<a class="headerlink" href="#tabbed-code-blocks" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-tabbed-code-blocks">Tabbed Code Blocks<a class="headerlink" href="#tabbed-code-blocks" title="Link to this heading">¶</a></h2>
 <p>Group related code in tabs using sphinx-design. Useful for showing the same concept in multiple languages.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
@@ -997,7 +1005,7 @@ Rust</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="including-code-from-files">
-<h2>Including Code from Files<a class="headerlink" href="#including-code-from-files" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-including-code-from-files">Including Code from Files<a class="headerlink" href="#including-code-from-files" title="Link to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">literalinclude</span></code> directive pulls code directly from a file in your project. This keeps examples in sync with real code.</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">docs/conf.py</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
@@ -1020,7 +1028,7 @@ Rust</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 <section id="useful-options">
-<h3>Useful Options<a class="headerlink" href="#useful-options" title="Link to this heading">¶</a></h3>
+<h3 id="lumina-search-useful-options">Useful Options<a class="headerlink" href="#useful-options" title="Link to this heading">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 25.0%" />
@@ -1068,16 +1076,16 @@ Rust</label><div class="sd-tab-content docutils">
 </section>
 </section>
 <section id="copy-button">
-<h2>Copy Button<a class="headerlink" href="#copy-button" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-copy-button">Copy Button<a class="headerlink" href="#copy-button" title="Link to this heading">¶</a></h2>
 <p>All code blocks include a copy-to-clipboard button provided by <code class="docutils literal notranslate"><span class="pre">sphinx-copybutton</span></code>. Hover over any code block to see it appear in the top-right corner. No configuration needed — it works automatically.</p>
 </section>
 <section id="wrap-long-lines">
-<h2>Wrap Long Lines<a class="headerlink" href="#wrap-long-lines" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-wrap-long-lines">Wrap Long Lines<a class="headerlink" href="#wrap-long-lines" title="Link to this heading">¶</a></h2>
 <p>A “wrap long lines” toggle appears alongside the copy button on every code block. Click it to wrap the current block — useful for long URLs, single-line shell commands, or any code that overflows horizontally. The toggle is per-block: turning wrap on for one block leaves the others unchanged.</p>
 <p>Disable site-wide with <code class="docutils literal notranslate"><span class="pre">code_wrap_toggle</span> <span class="pre">=</span> <span class="pre">&quot;false&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">html_theme_options</span></code> — see <a class="reference internal" href="../getting-started/configuration.html"><span class="doc">Configuration</span></a>.</p>
 </section>
 <section id="quick-reference">
-<h2>Quick Reference<a class="headerlink" href="#quick-reference" title="Link to this heading">¶</a></h2>
+<h2 id="lumina-search-quick-reference">Quick Reference<a class="headerlink" href="#quick-reference" title="Link to this heading">¶</a></h2>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 30.0%" />
@@ -1238,6 +1246,7 @@ Rust</label><div class="sd-tab-content docutils">
     <dialog id="lumina-search-modal"
         x-data="searchModal()"
         @cancel.prevent="close()"
+        @keydown.escape.stop.prevent="close()"
         @keydown.meta.k.window.prevent="toggle()"
         @keydown.ctrl.k.window.prevent="toggle()"
         @click.self="close()"
@@ -1245,7 +1254,7 @@ Rust</label><div class="sd-tab-content docutils">
         aria-modal="true"
         aria-label="Search documentation">
     
-    <div class="relative mx-auto mt-[15vh] max-w-xl cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
+    <div class="relative mx-auto mt-[5vh] flex max-h-[90dvh] w-[calc(100%-2rem)] max-w-xl flex-col sm:mt-[12vh] sm:max-h-[80dvh] cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
         
         <div class="flex items-center border-b border-lumina-border px-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-lumina-text-muted" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
@@ -1257,17 +1266,44 @@ Rust</label><div class="sd-tab-content docutils">
                    @keydown.arrow-up.prevent="moveUp()"
                    @keydown.enter.prevent="goToSelected()"
                    class="w-full border-0 bg-transparent px-3 py-4 text-lumina-text placeholder-lumina-text-muted outline-none"
+                   aria-label="Search documentation"
                    placeholder="Search docs..."
                    autocomplete="off">
             <kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1.5 py-0.5 text-xs text-lumina-text-muted">esc</kbd>
         </div>
+        <template x-if="loaded && scopes.length > 1 && pagefind">
+            <div class="flex shrink-0 items-center gap-3 border-b border-lumina-border px-4 py-2">
+                <label for="lumina-search-scope"
+                       class="shrink-0 text-xs text-lumina-text-muted">Search in</label>
+                <select id="lumina-search-scope"
+                        x-model="scope"
+                        @change="search()"
+                        class="min-w-0 flex-1 rounded border border-lumina-border bg-lumina-bg px-2 py-2 text-sm text-lumina-text focus-visible:outline-2 focus-visible:outline-lumina-accent">
+                    <option value="">All docs</option>
+                    <template x-for="name in scopes" :key="name">
+                        <option :value="name" x-text="name"></option>
+                    </template>
+                </select>
+            </div>
+        </template>
         
-        <div class="max-h-[60vh] overflow-y-auto p-2">
-            <template x-if="!loaded">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Loading search index...</p>
+        <div class="min-h-0 overflow-y-auto p-2" :aria-busy="searching">
+            <template x-if="!loaded || searching">
+                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">
+                    <span x-text="loaded ? 'Searching…' : 'Loading search index…'"></span>
+                </p>
             </template>
-            <template x-if="loaded && query.length > 0 && results.length === 0">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">No results found.</p>
+            <template x-if="loaded && !searching && !error && query.trim().length > 0 && results.length === 0">
+                <div class="px-3 py-8 text-center text-sm text-lumina-text-muted">
+                    <p x-text="scope ? 'No results in ' + scope + '.' : 'No results found.'"></p>
+                    <template x-if="scope">
+                        <button type="button"
+                                @click="searchAll()"
+                                class="mt-2 rounded px-3 py-2 text-lumina-accent underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-lumina-accent">
+                            Search all docs
+                        </button>
+                    </template>
+                </div>
             </template>
             <template x-if="error">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted"
@@ -1275,32 +1311,33 @@ Rust</label><div class="sd-tab-content docutils">
             </template>
             <template x-for="(result, index) in results" :key="result.url">
                 <a :href="result.url"
-                   class="flex flex-col gap-0.5 rounded-lg px-3 py-2.5 no-underline transition-colors"
-                   :class="index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text'"
-                   @mouseenter="selectedIndex = index">
-                    <div class="flex min-w-0 items-center justify-between gap-2">
-                        <span class="truncate text-sm font-medium" x-text="result.title"></span>
-                        <template x-if="result.section">
-                            <span class="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
-                                  :class="index === selectedIndex ? 'bg-lumina-accent text-white opacity-70' : 'bg-lumina-bg-secondary text-lumina-text-muted'"
-                                  x-text="result.section"></span>
-                        </template>
-                    </div>
+                   data-search-result
+                   class="flex flex-col gap-1 rounded-lg px-3 py-2.5 no-underline transition-colors focus-visible:outline-2 focus-visible:outline-lumina-accent"
+                   :class="[index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text', result.isHeading ? 'ml-4 border-l border-lumina-border' : 'mt-1']"
+                   @mouseenter="selectedIndex = index"
+                   @focus="selectedIndex = index">
+                    <template x-if="result.breadcrumb">
+                        <span class="truncate text-xs text-lumina-text-muted"
+                              x-text="result.breadcrumb"></span>
+                    </template>
+                    <span class="break-words text-sm"
+                          :class="result.isHeading ? '' : 'font-semibold'"
+                          x-text="result.title"></span>
                     <span class="line-clamp-2 text-xs text-lumina-text-muted"
                           x-html="result.excerpt"></span>
                 </a>
             </template>
-            <template x-if="loaded && query.length === 0">
+            <template x-if="loaded && !error && query.trim().length === 0">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Type to search...</p>
             </template>
         </div>
         
         <div class="sr-only"
              role="status"
-             x-text="loaded && query.length > 0 ? results.length + (results.length === 1 ? ' result' : ' results') : ''">
+             x-text="searching ? 'Searching…' : loaded && query.trim().length > 0 ? results.length + ' links' + (scope ? ' in ' + scope : ' across all docs') : ''">
         </div>
         
-        <div class="flex items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
+        <div class="flex shrink-0 items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> Navigate</span>
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> Open</span>
             <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">esc</kbd> Close</span>

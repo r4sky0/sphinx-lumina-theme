@@ -115,7 +115,10 @@ Registered as `Alpine.data("searchModal", searchModal)`.
 **Properties:**
 
 - `query`  *(string)* — Current search input value.
-- `results`  *(Array)* — Array of search result objects.
+- `results`  *(Array)* — Page and heading links in keyboard navigation order.
+- `scope`  *(string)* — Selected section; empty means all documentation.
+- `scopes`  *(Array)* — Section names available in the index.
+- `searching`  *(boolean)* — Whether the current query is pending.
 - `selectedIndex`  *(number)* — Index of the keyboard-highlighted result.
 - `loaded`  *(boolean)* — Whether the search engine has been initialized.
 - `error`  *(string|null)* — Error message, if search initialization failed.
