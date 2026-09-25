@@ -1,5 +1,13 @@
 # Releases
 
+## v2.8.0 (2026-09-25)
+
+### Features
+
+- **tables**: Refine lists and add opt-in table controls
+  ([#155](https://github.com/r4sky0/sphinx-lumina-theme/pull/155),
+  [`0f9e029`](https://github.com/r4sky0/sphinx-lumina-theme/commit/0f9e02999de0dc590d1a909218b51cc061b5f075))
+
 ## v2.7.0 (2026-09-24)
 
 ### Features
