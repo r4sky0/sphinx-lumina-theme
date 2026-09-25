@@ -1,5 +1,21 @@
 # Releases
 
+## v2.8.1 (2026-09-25)
+
+### Bug Fixes
+
+- **tests**: Stabilize TOC and copy feedback browser checks
+  ([#156](https://github.com/r4sky0/sphinx-lumina-theme/pull/156),
+  [`19fd41e`](https://github.com/r4sky0/sphinx-lumina-theme/commit/19fd41e780b5fafbb19a67022ae61a43b98d0137))
+
+## v2.8.0 (2026-09-25)
+
+### Features
+
+- **tables**: Refine lists and add opt-in table controls
+  ([#155](https://github.com/r4sky0/sphinx-lumina-theme/pull/155),
+  [`0f9e029`](https://github.com/r4sky0/sphinx-lumina-theme/commit/0f9e02999de0dc590d1a909218b51cc061b5f075))
+
 ## v2.7.0 (2026-09-24)
 
 ### Features

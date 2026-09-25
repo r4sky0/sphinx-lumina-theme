@@ -62,6 +62,15 @@ The request panel keeps authentication in memory, shared by the normalized API b
 
 Mermaid rendering, theme changes, and fullscreen controls belong to `sphinxcontrib-mermaid`. Lumina’s `mermaid.js` observes rendered diagrams and records each SVG’s natural width; `mermaid.css` handles sizing, typography, and colors. The observer also handles SVG replacement after a theme change.
 
+### Tables
+
+`responsive-tables.js` wraps article tables in scrollable regions before Alpine
+starts. Simple tables receive labels for the mobile layout. Tables with the
+`lumina-table-interactive` class instead use the `tableControls` Alpine component
+from `table-controls.js` for local filtering and sorting. It moves existing rows
+to preserve their markup and state. Unsupported table structures remain static.
+See [Lists & Tables](../reference/lists-and-tables.md) for the opt-in syntax.
+
 ## Theming
 
 - CSS custom properties (`--lumina-accent`, `--lumina-bg`, `--lumina-text`, etc.) defined in `base.css`. See [CSS Variables](../reference/css-variables.md) for the full token reference.
