@@ -226,6 +226,104 @@ def test_mobile_tables_stack_rows(page: Page, live_server: str):
     )
 
 
+@pytest.mark.parametrize("width", [390, 1440])
+def test_interactive_tables(page: Page, live_server: str, width):
+    """Opt-in tables filter independently and support keyboard sorting/reset."""
+    errors = []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    page.set_viewport_size({"width": width, "height": 900})
+    page.goto(f"{live_server}/reference/lists-and-tables.html")
+    panel = page.locator(".lumina-table-panel")
+    table = panel.locator("table")
+    rows = table.locator("tbody tr:visible")
+    expect(rows).to_have_count(5)
+    expect(
+        page.locator("#simple-markdown-tables button.lumina-table-sort")
+    ).to_have_count(0)
+    search = panel.get_by_role("searchbox", name="Filter rows")
+    search.fill(" GUIDE ")
+    expect(rows).to_have_count(3)
+    expect(panel.get_by_role("status")).to_have_text("3 of 5 rows")
+    pages = panel.get_by_role("button", name="Pages")
+    pages.focus()
+    pages.press("Enter")
+    expect(table.locator("th").last).to_have_attribute("aria-sort", "ascending")
+    expect(rows.locator("td:last-child")).to_have_text(["4", "8", "12"])
+    pages.press("Space")
+    expect(rows.locator("td:last-child")).to_have_text(["12", "8", "4"])
+    search.fill("no matching entry")
+    expect(rows).to_have_count(0)
+    expect(panel.locator(".lumina-table-empty")).to_be_visible()
+    page.emulate_media(media="print")
+    expect(rows).to_have_count(5)
+    expect(panel.locator(".lumina-table-toolbar")).to_be_hidden()
+    page.emulate_media(media="screen")
+    panel.get_by_role("button", name="Reset").click()
+    expect(rows.locator("td:last-child")).to_have_text(["4", "24", "12", "8", "36"])
+    expect(table.locator("th[aria-sort]")).to_have_count(0)
+    expect(panel.get_by_role("button", name="Reset")).to_be_disabled()
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    assert not errors
+
+
+def test_tables_without_javascript(browser, live_server: str):
+    context = browser.new_context(java_script_enabled=False)
+    page = context.new_page()
+    page.goto(f"{live_server}/reference/lists-and-tables.html")
+    expect(page.locator("table.lumina-table-interactive tbody tr")).to_have_count(5)
+    expect(page.locator(".lumina-table-toolbar")).to_have_count(0)
+    context.close()
+
+
+def test_table_structure_guards_and_independent_state(page: Page, live_server: str):
+    simple = """<table class="lumina-table-interactive" id="extra-table">
+    <thead><tr><th>Name</th><th>Value</th></tr></thead><tbody>
+    <tr><td><a href="#tables">Item 10</a></td><td>-2.5</td></tr>
+    <tr><td>Item 2</td><td>10</td></tr>
+    <tr><td>Item 1</td><td>0.5</td></tr></tbody></table>"""
+    unsupported = [
+        simple.replace("<td>10</td>", '<td colspan="2">10</td>'),
+        simple.replace("</thead>", "<tr><th>A</th><th>B</th></tr></thead>"),
+        simple.replace(
+            "</table>", "<tfoot><tr><td>Total</td><td>8</td></tr></tfoot></table>"
+        ),
+        simple.replace("<th>Name</th>", '<th><a href="#tables">Name</a></th>'),
+        simple.replace(
+            "</tbody>", "</tbody><tbody><tr><td>A</td><td>1</td></tr></tbody>"
+        ),
+    ]
+    extra = simple + "".join(
+        html.replace('id="extra-table"', f'id="unsupported-{index}"')
+        for index, html in enumerate(unsupported)
+    )
+
+    def inject_tables(route):
+        response = route.fetch()
+        route.fulfill(
+            response=response,
+            body=response.text().replace("</article>", extra + "</article>"),
+        )
+
+    page.route("**/reference/lists-and-tables.html", inject_tables)
+    page.goto(f"{live_server}/reference/lists-and-tables.html")
+    expect(page.locator(".lumina-table-panel")).to_have_count(2)
+    extra_table = page.locator("#extra-table")
+    extra_table.get_by_role("button", name="Value").click()
+    expect(extra_table.locator("tbody td:last-child")).to_have_text(
+        ["-2.5", "0.5", "10"]
+    )
+    extra_table.get_by_role("button", name="Name").click()
+    expect(extra_table.locator("tbody td:first-child")).to_have_text(
+        ["Item 1", "Item 2", "Item 10"]
+    )
+    expect(extra_table.get_by_role("link", name="Item 10")).to_have_attribute(
+        "href", "#tables"
+    )
+    page.locator(".lumina-table-panel").first.get_by_role("searchbox").fill("guide")
+    expect(extra_table.locator("tbody tr:visible")).to_have_count(3)
+    expect(page.locator('[id^="unsupported-"] .lumina-table-sort')).to_have_count(0)
+
+
 @pytest.mark.parametrize("theme", ["light", "dark"])
 def test_toc_scrollspy(page: Page, live_server: str, theme):
     """The curved guide follows nesting, wrapped labels, and the active section."""

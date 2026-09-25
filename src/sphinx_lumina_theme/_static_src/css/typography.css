@@ -113,7 +113,14 @@
 }
 
 .lumina-article li {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.375rem;
+  padding-inline-start: 0.25rem;
+}
+
+.lumina-article li::marker {
+  color: var(--lumina-link);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 .lumina-article ul > li {
@@ -124,16 +131,30 @@
   list-style-type: decimal;
 }
 
+.lumina-article ol ol > li { list-style-type: lower-alpha; }
+.lumina-article ol ol ol > li { list-style-type: lower-roman; }
+.lumina-article ol.loweralpha > li { list-style-type: lower-alpha; }
+.lumina-article ol.upperalpha > li { list-style-type: upper-alpha; }
+.lumina-article ol.lowerroman > li { list-style-type: lower-roman; }
+.lumina-article ol.upperroman > li { list-style-type: upper-roman; }
+
+/* Give multi-block steps room without opening up compact reference lists. */
+.lumina-article li:has(> div, > pre, > blockquote) {
+  margin-block: 0.75rem 1.25rem;
+}
+
 /* Collapse <p> margins inside block containers — Sphinx/MyST wraps
    list items, definition values, and table cells in <p> tags */
 .lumina-article li > p,
 .lumina-article dd > p,
+.lumina-article th > p,
 .lumina-article td > p {
   margin-bottom: 0.25rem;
 }
 
 .lumina-article li > p:last-child,
 .lumina-article dd > p:last-child,
+.lumina-article th > p:last-child,
 .lumina-article td > p:last-child {
   margin-bottom: 0;
 }
@@ -150,36 +171,39 @@
 /* Tighter nested list margins */
 .lumina-article li > ul,
 .lumina-article li > ol {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
+  margin-block: 0.5rem 0.625rem;
+  padding-inline-start: 1.25rem;
+}
+
+.lumina-article li li::marker {
+  color: var(--lumina-text-muted);
 }
 
 /* ── Task lists (MyST checkbox syntax) ── */
 .lumina-article .task-list-item {
   list-style: none;
+  position: relative;
 }
 
 .lumina-article .task-list-item > p {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
+  display: block;
 }
 
 .lumina-article .task-list-item-checkbox {
   appearance: none;
   width: 1.125rem;
   height: 1.125rem;
-  border: 2px solid var(--lumina-border);
+  border: 1.5px solid var(--lumina-text-muted);
   border-radius: 0.25rem;
-  flex-shrink: 0;
   cursor: default;
-  position: relative;
-  top: 0.1em;
+  position: absolute;
+  inset-inline-start: -1.5rem;
+  top: 0.3125rem;
 }
 
 .lumina-article .task-list-item-checkbox:checked {
-  background: var(--lumina-accent);
-  border-color: var(--lumina-accent);
+  background: var(--lumina-link);
+  border-color: var(--lumina-link);
 }
 
 .lumina-article .task-list-item-checkbox:checked::after {
@@ -189,7 +213,7 @@
   top: 0.125rem;
   width: 0.3125rem;
   height: 0.5625rem;
-  border: solid #fff;
+  border: solid var(--lumina-bg);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
@@ -229,26 +253,46 @@
   font-size: 0.9375rem;
   display: block;
   overflow-x: auto;
+  line-height: 1.6;
+  border-block: 1px solid var(--lumina-border);
+}
+
+/* A real table fills the column; the wrapper owns horizontal scrolling. */
+.lumina-table-scroll {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  scrollbar-width: thin;
+}
+
+.lumina-table-scroll > table {
+  display: table;
+  margin-bottom: 0;
 }
 
 .lumina-article th {
   text-align: left;
   font-weight: 600;
-  padding: 0.625rem 0.75rem;
-  border-bottom: 2px solid var(--lumina-border);
-  background: color-mix(in srgb, var(--lumina-accent) 6%, var(--lumina-bg));
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--lumina-border);
+  background: color-mix(in srgb, var(--lumina-accent) 4%, var(--lumina-bg-secondary));
   font-variant-numeric: tabular-nums;
-}
-
-[data-theme="dark"] .lumina-article th {
-  background: color-mix(in srgb, var(--lumina-accent) 8%, var(--lumina-bg-secondary));
-  border-bottom-color: color-mix(in srgb, var(--lumina-accent) 15%, var(--lumina-border));
 }
 
 .lumina-article td {
-  padding: 0.625rem 0.75rem;
+  padding: 0.875rem 1rem;
   border-bottom: 1px solid var(--lumina-border);
   font-variant-numeric: tabular-nums;
+  vertical-align: top;
+}
+
+.lumina-article th.text-center,
+.lumina-article td.text-center { text-align: center; }
+.lumina-article th.text-right,
+.lumina-article td.text-right { text-align: right; }
+
+.lumina-article tbody th {
+  background: transparent;
+  vertical-align: top;
 }
 
 .lumina-article tbody tr {
@@ -265,17 +309,101 @@
 
 .lumina-article table caption {
   caption-side: top;
-  text-align: center;
+  text-align: left;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--lumina-text);
+  padding-block: 0.25rem 0.75rem;
+}
+
+.lumina-table-toolbar {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  padding-block: 0.25rem 1rem;
+  font-size: 0.875rem;
+}
+
+.lumina-table-toolbar label {
+  flex: 1 1 12rem;
+  font-weight: 600;
+}
+
+.lumina-table-toolbar input {
+  display: block;
+  width: 100%;
+  min-height: 2.75rem;
+  margin-top: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.375rem;
+  background: var(--lumina-bg);
+  color: var(--lumina-text);
+  font: inherit;
+  font-weight: 400;
+}
+
+.lumina-table-toolbar [role="status"] {
+  padding-block: 0.75rem;
   color: var(--lumina-text-muted);
-  padding-bottom: 0.625rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.lumina-table-toolbar button {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  color: var(--lumina-link);
+  cursor: pointer;
+}
+
+.lumina-table-toolbar button:disabled {
+  color: var(--lumina-text-muted);
+  opacity: 0.6;
+  cursor: default;
+}
+
+.lumina-article th:has(.lumina-table-sort) { padding-block: 0; }
+
+.lumina-table-sort {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 2.75rem;
+  padding-block: 0.75rem;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.lumina-table-sort > [aria-hidden] { color: var(--lumina-text-muted); }
+.text-center .lumina-table-sort { justify-content: center; }
+.text-right .lumina-table-sort { justify-content: flex-end; }
+.lumina-article th[aria-sort] { color: var(--lumina-link); }
+.lumina-table-sort:hover,
+.lumina-table-toolbar button:enabled:hover { color: var(--lumina-link); background: var(--lumina-accent-light); }
+
+.lumina-table-scroll:focus-visible,
+.lumina-table-panel :is(input, button):focus-visible {
+  outline: 2px solid var(--lumina-link);
+  outline-offset: -2px;
+}
+
+.lumina-table-empty {
+  padding: 1rem;
+  text-align: center;
+  color: var(--lumina-text-muted);
 }
 
 /* Stack data tables into labelled rows on narrow screens. Tables that cannot
    be safely labelled keep the horizontal-scroll fallback above. */
-@media (max-width: 47.999rem) {
+@media screen and (max-width: 47.999rem) {
   .lumina-article table.lumina-table-stackable {
+    display: block;
+    border: 0;
     overflow: visible;
   }
 
@@ -308,6 +436,12 @@
     gap: 0.75rem;
     padding: 0.5rem 0;
     border-bottom: 1px solid var(--lumina-border);
+    text-align: start;
+  }
+
+  .lumina-article table.lumina-table-stackable td > * {
+    grid-column: 2;
+    min-width: 0;
   }
 
   .lumina-article table.lumina-table-stackable td::before {
