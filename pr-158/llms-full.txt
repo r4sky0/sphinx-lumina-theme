@@ -1464,6 +1464,7 @@ Choose a color to preview it on this page. The preview resets when you leave or 
     <button type="button" style="--swatch: #8b5cf6" x-on:click="pick('#8b5cf6')" x-bind:aria-pressed="color === '#8b5cf6'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Violet<code>#8b5cf6</code></span></button>
     <button type="button" style="--swatch: #f43f5e" x-on:click="pick('#f43f5e')" x-bind:aria-pressed="color === '#f43f5e'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Rose<code>#f43f5e</code></span></button>
     <button type="button" style="--swatch: #f59e0b" x-on:click="pick('#f59e0b')" x-bind:aria-pressed="color === '#f59e0b'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Amber<code>#f59e0b</code></span></button>
+    <button type="button" style="--swatch: #ea580c" x-on:click="pick('#ea580c')" x-bind:aria-pressed="color === '#ea580c'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Burnt Orange<code>#ea580c</code></span></button>
     <button type="button" style="--swatch: #14b8a6" x-on:click="pick('#14b8a6')" x-bind:aria-pressed="color === '#14b8a6'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Teal<code>#14b8a6</code></span></button>
   </div>
   <p>Try in <code>conf.py</code>: <code>"accent_color": "<span x-text="color">#10b981</span>"</code></p>
@@ -1471,14 +1472,15 @@ Choose a color to preview it on this page. The preview resets when you leave or 
 
 Here are some well-tested color choices:
 
-| Color   | Hex       | Best for                                               |
-|---------|-----------|--------------------------------------------------------|
-| Emerald | `#10b981` | Default. Clean and professional.                       |
-| Blue    | `#3b82f6` | Traditional documentation feel.                        |
-| Violet  | `#8b5cf6` | Creative and modern projects.                          |
-| Rose    | `#f43f5e` | Bold, attention-grabbing.                              |
-| Amber   | `#f59e0b` | Warm, energetic. Ensure contrast on light backgrounds. |
-| Teal    | `#14b8a6` | Calm, technical feel.                                  |
+| Color        | Hex       | Best for                                                                   |
+|--------------|-----------|----------------------------------------------------------------------------|
+| Emerald      | `#10b981` | Default. Clean and professional.                                           |
+| Blue         | `#3b82f6` | Traditional documentation feel.                                            |
+| Violet       | `#8b5cf6` | Creative and modern projects.                                              |
+| Rose         | `#f43f5e` | Bold, attention-grabbing.                                                  |
+| Amber        | `#f59e0b` | Warm, energetic. Ensure contrast on light backgrounds.                     |
+| Burnt Orange | `#ea580c` | Warm and grounded, with stronger contrast than amber on light backgrounds. |
+| Teal         | `#14b8a6` | Calm, technical feel.                                                      |
 
 #### WARNING
 Choose a color with sufficient contrast against both light and dark backgrounds. Avoid very light colors (pastels) — they become unreadable on white backgrounds.
