@@ -1,5 +1,13 @@
 # Releases
 
+## v2.9.0 (2026-09-25)
+
+### Features
+
+- **search**: Add section scopes and heading results
+  ([#157](https://github.com/r4sky0/sphinx-lumina-theme/pull/157),
+  [`80c35f7`](https://github.com/r4sky0/sphinx-lumina-theme/commit/80c35f75866ac8e4ee6246eddb3e6cdbac481c78))
+
 ## v2.8.1 (2026-09-25)
 
 ### Bug Fixes
