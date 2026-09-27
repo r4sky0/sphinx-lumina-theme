@@ -39,6 +39,7 @@ html_theme_options = {
         {"icon": "github", "url": "https://github.com/r4sky0/sphinx-lumina-theme"},
     ],
     "api_base_url": "https://petstore3.swagger.io/api/v3",
+    "announcement": 'Lumina 2.0 is here: explore the editorial redesign, refreshed landing page, and wide layouts in the <a href="https://github.com/r4sky0/sphinx-lumina-theme/releases">latest releases</a>.',
     "wide_layout": "toggle",
     "show_reading_time": "true",
     "image_lightbox": "true",
