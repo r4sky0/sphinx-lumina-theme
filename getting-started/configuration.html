@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-09-24T17:08:23+00:00" />
+    <meta property="article:modified_time" content="2026-09-27T14:29:24+00:00" />
     <title>Configuration &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
@@ -73,7 +73,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Getting Started", "item": "https://r4sky0.github.io/sphinx-lumina-theme/getting-started/index.html"}, {"@type": "ListItem", "position": 3, "name": "Configuration", "item": "https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Configuration", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Everything you can configure in Lumina — theme options, accent colors, and a complete reference.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-24T00:00:00+00:00", "dateModified": "2026-09-24T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Configuration", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Everything you can configure in Lumina — theme options, accent colors, and a complete reference.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/getting-started/configuration.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-27T00:00:00+00:00", "dateModified": "2026-09-27T00:00:00+00:00"}</script>
         
         
     
@@ -782,7 +782,7 @@
     <section class="tex2jax_ignore mathjax_ignore" id="configuration">
 <h1 id="lumina-search-configuration">Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h1>
 <p>Everything you can configure in Lumina — theme options, accent colors, and a complete reference.</p>
-<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>7 min read</span></div><section id="recommended-configuration">
+<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>8 min read</span></div><section id="recommended-configuration">
 <h2 id="lumina-search-recommended-configuration">Recommended Configuration<a class="headerlink" href="#recommended-configuration" title="Link to this heading">¶</a></h2>
 <p>Most projects benefit from a few extensions and settings beyond the defaults. Here’s a practical starting point:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
@@ -1309,7 +1309,40 @@ Lucide icons are designed on a 24×24 grid with 2-unit-wide strokes. When a Luci
 <section id="accent-colors">
 <h2 id="lumina-search-accent-colors">Accent Colors<a class="headerlink" href="#accent-colors" title="Link to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">accent_color</span></code> option controls links, active navigation items, buttons, and other interactive elements. It applies to both light and dark modes automatically.</p>
-<p>Here are some well-tested color choices:</p>
+<p>Choose a color to preview it on this page. The preview resets when you leave or reload.</p>
+<style>
+  html[data-accent-preview] {
+    --lumina-accent: var(--preview-accent);
+    --lumina-link: color-mix(in srgb, var(--preview-accent) 65%, #202624);
+    --lumina-accent-light: color-mix(in srgb, var(--preview-accent) 12%, var(--lumina-bg));
+    --sd-color-primary: color-mix(in srgb, var(--preview-accent) 85%, black);
+    --sd-color-primary-highlight: color-mix(in srgb, var(--preview-accent) 70%, black);
+    --sd-color-primary-text: #fff;
+    --sd-color-primary-bg: color-mix(in srgb, var(--preview-accent) 12%, transparent);
+  }
+  html[data-theme="dark"][data-accent-preview] {
+    --lumina-link: color-mix(in srgb, var(--preview-accent) 55%, #e9eeeb);
+    --lumina-accent-light: color-mix(in srgb, var(--preview-accent) 15%, var(--lumina-bg));
+  }
+  .accent-picker { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: .65rem; margin: 1.25rem 0 .75rem; }
+  .accent-picker button { display: flex; align-items: center; gap: .65rem; min-height: 3rem; padding: .6rem .75rem; border: 1px solid var(--lumina-border); border-radius: .6rem; background: var(--lumina-bg-secondary); color: var(--lumina-text); text-align: left; cursor: pointer; }
+  .accent-picker button:hover, .accent-picker button[aria-pressed="true"] { border-color: var(--lumina-link); background: var(--lumina-accent-light); }
+  .accent-picker button:focus-visible { outline: 2px solid var(--lumina-link); outline-offset: 2px; }
+  .accent-picker-swatch { width: 1.25rem; height: 1.25rem; flex: none; border-radius: 50%; background: var(--swatch); }
+  .accent-picker button code { display: block; color: var(--lumina-text-muted); font-size: .75rem; }
+</style>
+<div id="accent-preview" x-data="{ color: '#10b981', pick(value) { this.color = value; document.documentElement.style.setProperty('--preview-accent', value); document.documentElement.toggleAttribute('data-accent-preview', value !== '#10b981'); } }">
+  <div class="accent-picker" role="group" aria-label="Preview accent color">
+    <button type="button" style="--swatch: #10b981" x-on:click="pick('#10b981')" x-bind:aria-pressed="color === '#10b981'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Emerald<code>#10b981</code></span></button>
+    <button type="button" style="--swatch: #3b82f6" x-on:click="pick('#3b82f6')" x-bind:aria-pressed="color === '#3b82f6'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Blue<code>#3b82f6</code></span></button>
+    <button type="button" style="--swatch: #8b5cf6" x-on:click="pick('#8b5cf6')" x-bind:aria-pressed="color === '#8b5cf6'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Violet<code>#8b5cf6</code></span></button>
+    <button type="button" style="--swatch: #f43f5e" x-on:click="pick('#f43f5e')" x-bind:aria-pressed="color === '#f43f5e'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Rose<code>#f43f5e</code></span></button>
+    <button type="button" style="--swatch: #f59e0b" x-on:click="pick('#f59e0b')" x-bind:aria-pressed="color === '#f59e0b'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Amber<code>#f59e0b</code></span></button>
+    <button type="button" style="--swatch: #ea580c" x-on:click="pick('#ea580c')" x-bind:aria-pressed="color === '#ea580c'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Burnt Orange<code>#ea580c</code></span></button>
+    <button type="button" style="--swatch: #14b8a6" x-on:click="pick('#14b8a6')" x-bind:aria-pressed="color === '#14b8a6'"><span class="accent-picker-swatch" aria-hidden="true"></span><span>Teal<code>#14b8a6</code></span></button>
+  </div>
+  <p>Try in <code>conf.py</code>: <code>"accent_color": "<span x-text="color">#10b981</span>"</code></p>
+</div><p>Here are some well-tested color choices:</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 20.0%" />
@@ -1343,7 +1376,11 @@ Lucide icons are designed on a 24×24 grid with 2-unit-wide strokes. When a Luci
 <td><p><code class="docutils literal notranslate"><span class="pre">#f59e0b</span></code></p></td>
 <td><p>Warm, energetic. Ensure contrast on light backgrounds.</p></td>
 </tr>
-<tr class="row-odd"><td><p>Teal</p></td>
+<tr class="row-odd"><td><p>Burnt Orange</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#ea580c</span></code></p></td>
+<td><p>Warm and grounded, with stronger contrast than amber on light backgrounds.</p></td>
+</tr>
+<tr class="row-even"><td><p>Teal</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">#14b8a6</span></code></p></td>
 <td><p>Calm, technical feel.</p></td>
 </tr>
@@ -1495,7 +1532,7 @@ Custom Styling</div>
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>September 24, 2026</time>
+            Last updated <time>September 27, 2026</time>
         </p>
     
     
