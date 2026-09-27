@@ -556,6 +556,15 @@ window.runMermaid = runMermaid;</script>
     <script>document.documentElement.dataset.lightbox = "true";</script>
     
     
+        <script>
+(function() {
+  var id = 'e72acb1c';
+  if (!id || localStorage.getItem('lumina-announce-' + id) !== '1') {
+    document.documentElement.classList.add('has-announcement');
+  }
+})();
+        </script>
+    
     
         <link rel="alternate"
               type="text/markdown"
@@ -576,6 +585,21 @@ window.runMermaid = runMermaid;</script>
         <header class="fixed top-0 left-0 right-0 z-50 border-b border-lumina-border bg-lumina-bg/80 backdrop-blur-sm">
 
     
+    <div id="lumina-announcement"
+         x-data="announcementBanner()"
+         data-announcement-id="e72acb1c"
+         role="region"
+         aria-label="Site announcement"
+         class="bg-[color-mix(in_srgb,var(--lumina-accent),black_40%)] text-white text-center text-sm">
+        <div class="mx-auto flex max-w-[90rem] items-center justify-center gap-4 px-4 py-2">
+            <div class="flex-1 [&_a]:underline [&_a]:font-medium">Lumina 2.0 is here: explore the editorial redesign, refreshed landing page, and wide layouts in the <a href="https://github.com/r4sky0/sphinx-lumina-theme/releases">latest releases</a>.</div>
+            <button @click="dismiss()"
+                    class="shrink-0 rounded p-0.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    aria-label="Dismiss announcement"
+                    type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+        </div>
+    </div>
+
 
     <div class="lumina-header-inner mx-auto flex h-14 max-w-[90rem] items-center justify-between px-4 lg:px-6">
         
