@@ -187,6 +187,7 @@ def test_showcase_fits_viewport(page: Page, size):
         return parseFloat(root.style.getPropertyValue('--lumina-announcement-height'))
             === document.querySelector('#lumina-announcement').getBoundingClientRect().height;
     }""")
+    # Check the cover with the announcement visible, then dismissed below.
     assert page.evaluate(
         "() => document.documentElement.scrollHeight <= innerHeight"
         " && document.documentElement.scrollWidth <= innerWidth"
