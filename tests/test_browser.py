@@ -221,6 +221,11 @@ def test_showcase_uses_flat_theme_buttons(page: Page):
 def test_showcase_fits_viewport(page: Page, size):
     page.set_viewport_size({"width": size[0], "height": size[1]})
     page.evaluate("document.fonts.ready")
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    # Optional announcements can add height to the single-screen cover.
+    dismiss = page.get_by_role("button", name="Dismiss announcement")
+    if dismiss.is_visible():
+        dismiss.click()
     assert page.evaluate(
         "() => document.documentElement.scrollHeight <= innerHeight"
         " && document.documentElement.scrollWidth <= innerWidth"
