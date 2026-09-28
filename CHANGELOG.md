@@ -2,6 +2,51 @@
 
 <!-- releases -->
 
+## v2.9.1 (2026-09-28)
+
+### Bug Fixes
+
+- Prevent announcement overflow and mobile breadcrumb overlap
+  ([#163](https://github.com/r4sky0/sphinx-lumina-theme/pull/163),
+  [`f5c4e8d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f5c4e8d8a9c8b92863b2a2cdccdc9ed7a781b8a5))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump the github-actions-major group across 1 directory with 2 updates
+  ([#153](https://github.com/r4sky0/sphinx-lumina-theme/pull/153),
+  [`65f1cca`](https://github.com/r4sky0/sphinx-lumina-theme/commit/65f1cca5d2c4de6abd65844a6961fb8d80d2ec2d))
+
+- **deps**: Bump the github-actions-minor group across 1 directory with 2 updates
+  ([#152](https://github.com/r4sky0/sphinx-lumina-theme/pull/152),
+  [`11a154f`](https://github.com/r4sky0/sphinx-lumina-theme/commit/11a154fc11c32d7d948808b65188d2056ef75b4e))
+
+- **deps**: Bump the npm-minor group across 1 directory with 6 updates
+  ([#154](https://github.com/r4sky0/sphinx-lumina-theme/pull/154),
+  [`b502b56`](https://github.com/r4sky0/sphinx-lumina-theme/commit/b502b56d6c1d29eefdd3b68cbc75e56dbe2b71da))
+
+#### Documentation
+
+- Add accent color preview ([#158](https://github.com/r4sky0/sphinx-lumina-theme/pull/158),
+  [`2aa3df5`](https://github.com/r4sky0/sphinx-lumina-theme/commit/2aa3df52fefcef1306acbf98f9162f4ac44c5e71))
+
+- Announce Lumina 2.0 features ([#160](https://github.com/r4sky0/sphinx-lumina-theme/pull/160),
+  [`19528c8`](https://github.com/r4sky0/sphinx-lumina-theme/commit/19528c80a64811cfe7d6306631049566a596b9f1))
+
+- Improve discovery metadata and declare Python 3.14
+  ([#159](https://github.com/r4sky0/sphinx-lumina-theme/pull/159),
+  [`3b9098c`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3b9098c5f2f2f1cf199eb72a9778726a43e8239e))
+
+#### Testing
+
+- Stabilize browser checks ([#162](https://github.com/r4sky0/sphinx-lumina-theme/pull/162),
+  [`88db9ad`](https://github.com/r4sky0/sphinx-lumina-theme/commit/88db9ad3289a37e62074e8272bbf848bb9641df6))
+
+</details>
+
+
 ## v2.9.0 (2026-09-25)
 
 ### Features
