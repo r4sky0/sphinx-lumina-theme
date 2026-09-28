@@ -131,6 +131,46 @@ def test_fluid_worker_starts(page: Page, live_server: str):
     )
 
 
+def test_hero_text_has_no_entrance_animation(page: Page):
+    for selector in ("title", "subtitle", "actions", "tags"):
+        assert (
+            page.locator(f".lumina-hero-{selector}").evaluate(
+                "el => getComputedStyle(el).animationName"
+            )
+            == "none"
+        )
+
+
+def test_font_subsets_load_full_fonts_only_for_other_characters(page: Page):
+    page.evaluate("document.fonts.ready")
+    font_urls = "performance.getEntriesByType('resource').map(r => r.name).filter(n => n.endsWith('.woff2'))"
+    render = """async ({font, text}) => {
+        const p = document.createElement('p');
+        p.style.font = font;
+        p.textContent = text;
+        document.body.prepend(p);
+        p.getBoundingClientRect();
+        await document.fonts.ready;
+    }"""
+    assert all(url.endswith("-latin.woff2") for url in page.evaluate(font_urls))
+    for family, weights in (
+        ("Source Sans 3", (400, 500, 600, 700)),
+        ("JetBrains Mono", (400, 500)),
+    ):
+        for weight in weights:
+            font = f'{weight} 16px "{family}"'
+            page.evaluate(render, {"font": font, "text": "Café Cafe\u0301 → ⌘"})
+            assert all(url.endswith("-latin.woff2") for url in page.evaluate(font_urls))
+    for family, stem in (
+        ("Source Sans 3", "source-sans-3"),
+        ("JetBrains Mono", "jetbrains-mono"),
+    ):
+        page.evaluate(render, {"font": f'16px "{family}"', "text": "Ελληνικά Русский"})
+        assert any(
+            url.endswith(f"/{stem}-regular.woff2") for url in page.evaluate(font_urls)
+        )
+
+
 def test_search_returns_results(page: Page, live_server: str):
     """Typing a query should produce search results."""
     page.click("[data-search-trigger]")

@@ -58,5 +58,6 @@ def test_font_preload(index_html):
     ]
     assert len(font_preloads) == 1, "Missing preload for Source Sans 3 Regular"
     link = font_preloads[0]
+    assert link["href"].endswith("fonts/source-sans-3-regular-latin.woff2")
     assert link.get("as") == "font"
     assert link.get("crossorigin") is not None, "Font preload must have crossorigin"
