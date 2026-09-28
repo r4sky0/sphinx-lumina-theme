@@ -165,12 +165,13 @@
   .lumina-hero-footer { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
   .lumina-hero-tags { gap: 0.625rem 1.25rem; }
 }
-@media (max-height: 650px) {
+@media (max-height: 760px) {
   .lumina-hero { padding-top: calc(var(--lumina-header-offset) + 1rem); padding-bottom: 1rem; gap: 1rem 2rem; }
-  .lumina-hero-badge { margin-bottom: 0.875rem; }
-  .lumina-hero-title { font-size: clamp(2.75rem, 6vw, 4.5rem); margin-bottom: 1rem; }
-  .lumina-hero-subtitle { margin-bottom: 1rem; }
-  .lumina-hero-install { margin-top: 0.875rem; }
+  .lumina-hero-badge { margin-bottom: 0.5rem; }
+  .lumina-hero-title { font-size: clamp(2.75rem, 6vw, 4.5rem); margin-bottom: 0.75rem; }
+  .lumina-hero-subtitle { margin-bottom: 0.75rem; }
+  .lumina-hero-actions { gap: 0.5rem; }
+  .lumina-hero-install { margin-top: 0.5rem; }
   .lumina-preview-article { padding-block: 1rem; }
   .lumina-preview-code { margin-block: 1rem; }
   .lumina-hero-footer { padding-top: 0.75rem; }
