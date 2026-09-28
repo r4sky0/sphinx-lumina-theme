@@ -163,7 +163,8 @@ Registered as `Alpine.data("announcementBanner", announcementBanner)`.
 
 **Methods:**
 
-- `init()` — Reads the announcement ID from `data-announcement-id`.
+- `init()` — Reads the announcement ID and tracks the banner height.
+- `destroy()` — Disconnects the resize observer.
 - `dismiss()` — Hides the banner and persists the dismissal in localStorage.
 
 * **Returns:**

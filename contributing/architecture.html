@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-09-25T16:48:31+00:00" />
+    <meta property="article:modified_time" content="2026-09-28T07:02:10+00:00" />
     <title>Architecture &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=5385acde" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=4bcc7829" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=5d993406"></script>
+    <script defer="defer" src="../_static/lumina.js?v=c85d72fd"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -73,7 +73,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Contributing", "item": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/index.html"}, {"@type": "ListItem", "position": 3, "name": "Architecture", "item": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Architecture", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "How the Sphinx Lumina Theme is structured internally.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-25T00:00:00+00:00", "dateModified": "2026-09-25T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Architecture", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "How the Sphinx Lumina Theme is structured internally.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-28T00:00:00+00:00", "dateModified": "2026-09-28T00:00:00+00:00"}</script>
         
         
     
@@ -725,6 +725,10 @@ pnpm<span class="w"> </span>run<span class="w"> </span>build:icons<span class="w
 <h2 id="lumina-search-interactivity-pattern">Interactivity Pattern<a class="headerlink" href="#interactivity-pattern" title="Link to this heading">¶</a></h2>
 <p>Alpine.js components are registered via <code class="docutils literal notranslate"><span class="pre">Alpine.data()</span></code> in separate modules under <code class="docutils literal notranslate"><span class="pre">_static_src/js/</span></code>. Each component is imported and registered in <code class="docutils literal notranslate"><span class="pre">app.js</span></code>, then referenced in templates with <code class="docutils literal notranslate"><span class="pre">x-data</span></code>.</p>
 <p>See <a class="reference internal" href="javascript-api.html"><span class="doc">JavaScript API</span></a> for the full component API reference.</p>
+<p>The announcement component measures its banner with <code class="docutils literal notranslate"><span class="pre">ResizeObserver</span></code>. The shared
+<code class="docutils literal notranslate"><span class="pre">--lumina-header-offset</span></code> includes this height, keeping content, sticky sidebars,
+mobile navigation, and anchor targets clear of announcements that wrap on narrow
+screens. Dismissing the banner restores the regular header offset.</p>
 <p>The page outline’s <code class="docutils literal notranslate"><span class="pre">scrollspy.js</span></code> measures the nested links to draw a continuous
 SVG guide. It recalculates on resize to keep curves aligned with wrapped labels,
 and marks the active link with <code class="docutils literal notranslate"><span class="pre">aria-current=&quot;location&quot;</span></code>. Scroll updates select
@@ -825,7 +829,7 @@ uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </sp
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>September 25, 2026</time>
+            Last updated <time>September 28, 2026</time>
         </p>
     
     
