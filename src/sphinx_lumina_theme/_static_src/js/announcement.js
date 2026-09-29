@@ -12,7 +12,8 @@
  *
  * **Methods:**
  *
- * - ``init()`` — Reads the announcement ID from ``data-announcement-id``.
+ * - ``init()`` — Reads the announcement ID and tracks the banner height.
+ * - ``destroy()`` — Disconnects the resize observer.
  * - ``dismiss()`` — Hides the banner and persists the dismissal in localStorage.
  *
  * @function announcementBanner
@@ -20,9 +21,21 @@
  */
 export default function announcementBanner() {
   let _id = null;
+  let _resizeObserver = null;
   return {
     init() {
       _id = this.$el.getAttribute("data-announcement-id");
+      _resizeObserver = new ResizeObserver(() => {
+        document.documentElement.style.setProperty(
+          "--lumina-announcement-height", `${this.$el.getBoundingClientRect().height}px`,
+        );
+      });
+      _resizeObserver.observe(this.$el);
+    },
+
+    destroy() {
+      _resizeObserver.disconnect();
+      document.documentElement.style.removeProperty("--lumina-announcement-height");
     },
 
     dismiss() {

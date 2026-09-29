@@ -113,7 +113,10 @@ html_theme_options = {
 
 ## Page Table of Contents
 
-The right-side page outline shows h2 and h3 headings. To hide it:
+The right-side page outline indents nested headings along a curved guide.
+An accent marker follows the current section as you scroll in either direction.
+It switches when a heading reaches the reading line below the fixed header;
+at the bottom of the page, it selects the final section. To hide it:
 
 ```{code-block} python
 :caption: conf.py
@@ -178,6 +181,10 @@ Each section has:
 When a reader visits a page that belongs to a section, the sidebar shows only that section's navigation tree. The dropdown at the top highlights the active section and lets readers jump to any other section's index page.
 
 One section can be marked as `"default": True`. That section automatically includes every page not explicitly assigned to another section — you don't need to list every directory. This is the simplest way to split docs into two groups like "User Documentation" (everything) and "Developer Documentation" (just `contributing/`).
+
+These section names also appear in the **Search in** selector in
+{doc}`/guides/search`. Search uses the same path matching and default section
+as the sidebar switcher.
 
 Section colors are contained to the switcher dropdown — they don't affect the rest of the page's accent color.
 

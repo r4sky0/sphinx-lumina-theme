@@ -13,6 +13,63 @@ def _goto_index(page: Page, live_server: str):
     page.wait_for_function("() => window.Alpine !== undefined")
 
 
+def test_accent_preview(page: Page, live_server: str):
+    """The documentation-only accent picker previews theme colors."""
+    page.goto(f"{live_server}/getting-started/configuration.html#accent-colors")
+    picker = page.get_by_role("group", name="Preview accent color")
+    blue = picker.get_by_role("button", name="Blue #3b82f6")
+    orange = picker.get_by_role("button", name="Burnt Orange #ea580c")
+    emerald = picker.get_by_role("button", name="Emerald #10b981")
+    root = page.locator("html")
+    sidebar_link = page.locator(".lumina-sidebar-nav a.current").first
+
+    expect(emerald).to_have_attribute("aria-pressed", "true")
+    for mode in ("light", "dark"):
+        root.evaluate("(element, value) => element.dataset.theme = value", mode)
+        original_link = root.evaluate(
+            "element => getComputedStyle(element).getPropertyValue('--lumina-link')"
+        )
+        original_sidebar = sidebar_link.evaluate(
+            "element => getComputedStyle(element).color"
+        )
+        blue.click()
+        expect(root).to_have_attribute("data-accent-preview", "")
+        expect(blue).to_have_attribute("aria-pressed", "true")
+        assert (
+            root.evaluate(
+                "element => getComputedStyle(element).getPropertyValue('--lumina-accent').trim()"
+            )
+            == "#3b82f6"
+        )
+        assert (
+            root.evaluate(
+                "element => getComputedStyle(element).getPropertyValue('--lumina-link')"
+            )
+            != original_link
+        )
+        assert (
+            sidebar_link.evaluate("element => getComputedStyle(element).color")
+            != original_sidebar
+        )
+        expect(page.locator("#accent-preview p")).to_contain_text(
+            '"accent_color": "#3b82f6"'
+        )
+        orange.click()
+        expect(orange).to_have_attribute("aria-pressed", "true")
+        expect(root).to_have_css("--lumina-accent", "#ea580c")
+        expect(page.locator("#accent-preview p")).to_contain_text(
+            '"accent_color": "#ea580c"'
+        )
+        emerald.click()
+        expect(root).not_to_have_attribute("data-accent-preview", "")
+        expect(emerald).to_have_attribute("aria-pressed", "true")
+
+    blue.click()
+    page.reload()
+    expect(root).not_to_have_attribute("data-accent-preview", "")
+    expect(emerald).to_have_attribute("aria-pressed", "true")
+
+
 def test_search_modal_opens(page: Page):
     """Clicking search trigger should open the search modal."""
     page.click("[data-search-trigger]")
@@ -114,6 +171,7 @@ def test_showcase_uses_flat_theme_buttons(page: Page):
     [
         (1440, 900),
         (1280, 720),
+        (1440, 700),
         (768, 1024),
         (390, 844),
         (375, 667),
@@ -124,12 +182,20 @@ def test_showcase_uses_flat_theme_buttons(page: Page):
 def test_showcase_fits_viewport(page: Page, size):
     page.set_viewport_size({"width": size[0], "height": size[1]})
     page.evaluate("document.fonts.ready")
+    page.wait_for_function("""() => {
+        const root = document.documentElement;
+        return parseFloat(root.style.getPropertyValue('--lumina-announcement-height'))
+            === document.querySelector('#lumina-announcement').getBoundingClientRect().height;
+    }""")
+    # Check the cover with the announcement visible, then dismissed below.
     assert page.evaluate(
         "() => document.documentElement.scrollHeight <= innerHeight"
         " && document.documentElement.scrollWidth <= innerWidth"
     )
     expect(page.locator(".lumina-hero-btn-primary")).to_be_in_viewport()
     expect(page.locator(".lumina-hero-tags")).to_be_in_viewport()
+    page.get_by_role("button", name="Dismiss announcement").click()
+    assert page.evaluate("document.documentElement.scrollHeight <= innerHeight")
 
 
 def test_theme_persists_on_reload(page: Page, live_server: str):
@@ -226,18 +292,213 @@ def test_mobile_tables_stack_rows(page: Page, live_server: str):
     )
 
 
-def test_toc_scrollspy(page: Page, live_server: str):
-    """Scrolling should activate a TOC link via scrollspy."""
-    # TOC sidebar requires xl breakpoint (1280px+)
-    page.set_viewport_size({"width": 1400, "height": 900})
-    page.goto(f"{live_server}/getting-started/installation.html")
-    page.wait_for_function("() => window.Alpine !== undefined")
+@pytest.mark.parametrize("width", [390, 1440])
+def test_interactive_tables(page: Page, live_server: str, width):
+    """Opt-in tables filter independently and support keyboard sorting/reset."""
+    errors = []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    page.set_viewport_size({"width": width, "height": 900})
+    page.goto(f"{live_server}/reference/lists-and-tables.html")
+    panel = page.locator(".lumina-table-panel")
+    table = panel.locator("table")
+    rows = table.locator("tbody tr:visible")
+    expect(rows).to_have_count(5)
+    expect(
+        page.locator("#simple-markdown-tables button.lumina-table-sort")
+    ).to_have_count(0)
+    search = panel.get_by_role("searchbox", name="Filter rows")
+    search.fill(" GUIDE ")
+    expect(rows).to_have_count(3)
+    expect(panel.get_by_role("status")).to_have_text("3 of 5 rows")
+    pages = panel.get_by_role("button", name="Pages")
+    pages.focus()
+    pages.press("Enter")
+    expect(table.locator("th").last).to_have_attribute("aria-sort", "ascending")
+    expect(rows.locator("td:last-child")).to_have_text(["4", "8", "12"])
+    pages.press("Space")
+    expect(rows.locator("td:last-child")).to_have_text(["12", "8", "4"])
+    search.fill("no matching entry")
+    expect(rows).to_have_count(0)
+    expect(panel.locator(".lumina-table-empty")).to_be_visible()
+    page.emulate_media(media="print")
+    expect(rows).to_have_count(5)
+    expect(panel.locator(".lumina-table-toolbar")).to_be_hidden()
+    page.emulate_media(media="screen")
+    panel.get_by_role("button", name="Reset").click()
+    expect(rows.locator("td:last-child")).to_have_text(["4", "24", "12", "8", "36"])
+    expect(table.locator("th[aria-sort]")).to_have_count(0)
+    expect(panel.get_by_role("button", name="Reset")).to_be_disabled()
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    assert not errors
 
-    # Scroll to a heading further down the page
-    page.locator("#next-steps").scroll_into_view_if_needed()
-    # Wait for IntersectionObserver to fire and verify any link gets active class
-    active = page.locator(".lumina-toc-nav a.lumina-toc-active")
-    expect(active).to_have_count(1, timeout=3000)
+
+def test_tables_without_javascript(browser, live_server: str):
+    context = browser.new_context(java_script_enabled=False)
+    page = context.new_page()
+    page.goto(f"{live_server}/reference/lists-and-tables.html")
+    expect(page.locator("table.lumina-table-interactive tbody tr")).to_have_count(5)
+    expect(page.locator(".lumina-table-toolbar")).to_have_count(0)
+    context.close()
+
+
+def test_table_structure_guards_and_independent_state(page: Page, live_server: str):
+    simple = """<table class="lumina-table-interactive" id="extra-table">
+    <thead><tr><th>Name</th><th>Value</th></tr></thead><tbody>
+    <tr><td><a href="#tables">Item 10</a></td><td>-2.5</td></tr>
+    <tr><td>Item 2</td><td>10</td></tr>
+    <tr><td>Item 1</td><td>0.5</td></tr></tbody></table>"""
+    unsupported = [
+        simple.replace("<td>10</td>", '<td colspan="2">10</td>'),
+        simple.replace("</thead>", "<tr><th>A</th><th>B</th></tr></thead>"),
+        simple.replace(
+            "</table>", "<tfoot><tr><td>Total</td><td>8</td></tr></tfoot></table>"
+        ),
+        simple.replace("<th>Name</th>", '<th><a href="#tables">Name</a></th>'),
+        simple.replace(
+            "</tbody>", "</tbody><tbody><tr><td>A</td><td>1</td></tr></tbody>"
+        ),
+    ]
+    extra = simple + "".join(
+        html.replace('id="extra-table"', f'id="unsupported-{index}"')
+        for index, html in enumerate(unsupported)
+    )
+
+    def inject_tables(route):
+        response = route.fetch()
+        route.fulfill(
+            response=response,
+            body=response.text().replace("</article>", extra + "</article>"),
+        )
+
+    page.route("**/reference/lists-and-tables.html", inject_tables)
+    page.goto(f"{live_server}/reference/lists-and-tables.html")
+    expect(page.locator(".lumina-table-panel")).to_have_count(2)
+    extra_table = page.locator("#extra-table")
+    extra_table.get_by_role("button", name="Value").click()
+    expect(extra_table.locator("tbody td:last-child")).to_have_text(
+        ["-2.5", "0.5", "10"]
+    )
+    extra_table.get_by_role("button", name="Name").click()
+    expect(extra_table.locator("tbody td:first-child")).to_have_text(
+        ["Item 1", "Item 2", "Item 10"]
+    )
+    expect(extra_table.get_by_role("link", name="Item 10")).to_have_attribute(
+        "href", "#tables"
+    )
+    page.locator(".lumina-table-panel").first.get_by_role("searchbox").fill("guide")
+    expect(extra_table.locator("tbody tr:visible")).to_have_count(3)
+    expect(page.locator('[id^="unsupported-"] .lumina-table-sort')).to_have_count(0)
+
+
+@pytest.mark.parametrize("theme", ["light", "dark"])
+def test_toc_scrollspy(page: Page, live_server: str, theme):
+    """The curved guide follows nesting, wrapped labels, and the active section."""
+    page.set_viewport_size({"width": 390, "height": 900})
+    page.goto(f"{live_server}/guides/navigation.html")
+    page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
+    page.set_viewport_size({"width": 1400, "height": 900})
+    nav = page.locator(".lumina-toc-nav")
+    guide = nav.locator(".lumina-toc-guide")
+    expect(guide).to_have_attribute("aria-hidden", "true")
+    page.evaluate("document.fonts.ready")
+
+    nested = nav.locator('a[href="#dropdown-menus"]')
+    nested.click()
+    expect(nested).to_have_attribute("aria-current", "location")
+    expect(nav.locator("a.lumina-toc-active")).to_have_count(1)
+    page.wait_for_function("""() => {
+        const nav = document.querySelector('.lumina-toc-nav');
+        return getComputedStyle(nav.querySelector('circle')).fill
+            === getComputedStyle(nav.querySelector('[aria-current]')).color;
+    }""")
+    assert (
+        guide.locator(".lumina-toc-indicator").evaluate(
+            "el => getComputedStyle(el).clipPath"
+        )
+        != "none"
+    )
+
+    # Narrowing the outline wraps labels; the guide must track the new geometry.
+    for width in (220, 180):
+        page.locator(".lumina-toc-container").evaluate(
+            "(el, width) => el.style.width = `${width}px`", width
+        )
+        page.wait_for_function("""() => {
+            const nav = document.querySelector('.lumina-toc-nav');
+            const links = [...nav.querySelectorAll('a')].filter(el => el.offsetHeight);
+            const path = nav.querySelector('.lumina-toc-track');
+            const end = path.getPointAtLength(path.getTotalLength());
+            const last = links.at(-1);
+            const active = nav.querySelector('[aria-current]');
+            const dot = nav.querySelector('circle');
+            return Math.abs(end.y - last.offsetTop - last.offsetHeight) < 1
+                && Number(dot.getAttribute('cx')) === active.offsetLeft + 1
+                && Number(dot.getAttribute('cy')) === active.offsetTop + active.offsetHeight / 2;
+        }""")
+    assert " C " in guide.locator("path").first.get_attribute("d")
+    parent = nav.locator('a[href="#header-navigation-links"]')
+    assert nested.bounding_box()["x"] > parent.bounding_box()["x"]
+    nested.focus()
+    expect(nested).to_be_focused()
+
+
+def test_toc_tracks_reading_position(page: Page, live_server: str):
+    """Nested sections track the reading line in both directions and after jumps."""
+    page.set_viewport_size({"width": 1400, "height": 900})
+    page.emulate_media(reduced_motion="reduce")
+    page.goto(f"{live_server}/guides/navigation.html")
+    page.evaluate("document.fonts.ready")
+    active = page.locator('.lumina-toc-nav a[aria-current="location"]')
+    parent = "collapsible-sidebar-items"
+    child = "marking-a-branch-collapsed-by-default"
+
+    for header_height in (56, 128):
+        page.evaluate(
+            """height => {
+            document.documentElement.style.setProperty('--lumina-header-offset', `${height}px`);
+            document.querySelector('header').style.height = `${height}px`;
+        }""",
+            header_height,
+        )
+        # WebKit can expose the old section geometry until the new header
+        # spacing has been resolved. Measure only after the layout catches up.
+        expect(page.locator(".lumina-wrapper")).to_have_css(
+            "margin-top", f"{header_height}px"
+        )
+        # Cross each boundary downwards and upwards, including a large jump.
+        for target, delta, expected in [
+            ("sidebar-depth", 0, "sidebar-depth"),
+            (parent, -24, "sidebar-depth"),
+            (parent, 24, parent),
+            (child, -24, parent),
+            (child, 24, child),
+            (child, -24, parent),
+            (parent, -24, "sidebar-depth"),
+            ("breadcrumbs", 24, "breadcrumbs"),
+            (parent, 24, parent),
+        ]:
+            page.evaluate(
+                """([id, delta]) => {
+                const target = document.getElementById(id);
+                window.scrollTo({top: scrollY + target.getBoundingClientRect().top
+                    - parseFloat(getComputedStyle(target).scrollMarginTop) + delta,
+                    behavior: 'instant'});
+            }""",
+                [target, delta],
+            )
+            expect(active).to_have_attribute("href", f"#{expected}")
+
+    page.goto(f"{live_server}/guides/navigation.html#{child}")
+    expect(active).to_have_attribute("href", f"#{child}")
+    page.reload()
+    expect(active).to_have_attribute("href", f"#{child}")
+    page.evaluate(
+        "window.scrollTo({top: document.documentElement.scrollHeight, behavior: 'instant'})"
+    )
+    last = page.locator(".lumina-toc-nav a").last
+    expect(last).to_have_attribute("aria-current", "location")
+    page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
+    expect(active).to_have_attribute("href", "#header-navigation-links")
 
 
 def test_breadcrumbs_link(page: Page, live_server: str):
@@ -249,6 +510,49 @@ def test_breadcrumbs_link(page: Page, live_server: str):
     expect(breadcrumb).to_be_visible()
     home_link = breadcrumb.locator("a").first
     expect(home_link).to_be_visible()
+
+
+@pytest.mark.parametrize("theme", ["light", "dark"])
+def test_announcement_layout(page: Page, live_server: str, theme: str):
+    """Wrapped announcements must clear content and navigation at every size."""
+    page.goto(f"{live_server}/guides/navigation.html")
+    page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
+    page.evaluate("document.fonts.ready")
+    banner = page.locator("#lumina-announcement")
+    expect(banner).to_be_visible()
+    for width, height in ((1440, 900), (768, 1024), (390, 844), (320, 568), (844, 390)):
+        page.set_viewport_size({"width": width, "height": height})
+        page.wait_for_function("""() => {
+            const header = document.querySelector('#lumina-header header');
+            const wrapper = document.querySelector('.lumina-wrapper');
+            return Math.abs(wrapper.getBoundingClientRect().top - header.clientHeight) <= 1;
+        }""")
+        breadcrumb = page.get_by_role("navigation", name="Breadcrumb", exact=True)
+        header_bottom = page.locator("#lumina-header header").bounding_box()["height"]
+        assert breadcrumb.bounding_box()["y"] >= header_bottom
+        # Visibility alone does not detect a fixed header covering the link.
+        breadcrumb.get_by_role("link").first.click(trial=True)
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+        if width < 1024:
+            page.get_by_role("button", name="Toggle navigation").click()
+            drawer = page.locator("#lumina-sidebar-drawer")
+            expect(drawer).to_be_visible()
+            assert abs(drawer.bounding_box()["y"] - header_bottom) <= 1
+            page.keyboard.press("Escape")
+            expect(drawer).to_be_hidden()
+        else:
+            sidebar = page.locator(".lumina-sidebar-desktop").bounding_box()
+            assert abs(sidebar["y"] + sidebar["height"] - height) <= 1
+
+    page.get_by_role("button", name="Dismiss announcement").click()
+    expect(banner).to_be_hidden()
+    page.reload()
+    expect(banner).to_be_hidden()
+    assert page.locator(".lumina-wrapper").bounding_box()["y"] == 56
+    page.get_by_role("navigation", name="Breadcrumb", exact=True).get_by_role(
+        "link"
+    ).first.click()
+    expect(page).to_have_url(f"{live_server}/guides/index.html")
 
 
 def test_prev_next_navigation(page: Page, live_server: str):
@@ -417,4 +721,175 @@ def test_pagefind_loads_without_errors(page: Page, live_server: str):
     excerpt_html = page.inner_html("#lumina-search-modal a[href] span:last-child")
     assert "<mark>" in excerpt_html, (
         "Expected Pagefind excerpt with <mark> highlights, got Sphinx fallback"
+    )
+
+
+def test_mermaid_sizing_and_colors_survive_theme_changes(page: Page, live_server: str):
+    errors = []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    page.goto(f"{live_server}/reference/diagrams.html")
+    diagrams = page.locator(".lumina-article pre.mermaid > svg")
+    expect(diagrams).to_have_count(12, timeout=60000)
+    page.set_viewport_size({"width": 1440, "height": 1000})
+
+    for theme in ("dark", "light"):
+        page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
+        page.wait_for_function(
+            """() => {
+                const diagrams = [...document.querySelectorAll('.lumina-article pre.mermaid > svg')];
+                return diagrams.length === 12 && diagrams.every(svg =>
+                    svg.style.getPropertyValue('--lumina-diagram-width') &&
+                    svg.getBoundingClientRect().width <= svg.viewBox.baseVal.width + 1);
+            }"""
+        )
+        label = diagrams.first.locator(".nodeLabel").first
+        expect(label).to_have_css("font-family", '"Source Sans 3", sans-serif')
+        # The author's classDef highlight survives the theme defaults.
+        highlight = diagrams.first.locator(".node.ready path, .node.ready rect").first
+        expect(highlight).to_have_css("stroke-width", "2px")
+        page.locator(".mermaid-fullscreen-btn").first.click()
+        viewer = page.locator(".mermaid-fullscreen-modal.active")
+        expect(viewer).to_be_visible()
+        expect(viewer.locator("svg")).to_be_visible()
+        page.keyboard.press("Escape")
+        expect(viewer).to_have_count(0)
+
+    page.set_viewport_size({"width": 390, "height": 844})
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    assert diagrams.evaluate_all(
+        "svgs => svgs.every(svg => svg.getBoundingClientRect().width <= svg.parentElement.clientWidth)"
+    )
+    assert not errors
+
+
+def test_search_scopes_and_heading_links(page: Page, live_server: str):
+    """Real Pagefind filters exclude other sections and link to actual headings."""
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    scope = modal.get_by_label("Search in")
+    expect(scope).to_be_visible()
+    scope.select_option(label="Developer Documentation")
+    modal.get_by_role("searchbox").fill("search")
+    links = modal.locator("[data-search-result]")
+    expect(links.first).to_be_visible()
+    for href in links.evaluate_all("els => els.map(el => el.getAttribute('href'))"):
+        assert "/contributing/" in href
+    expect(modal.get_by_text("Contributing", exact=True).first).to_be_visible()
+    heading = modal.locator('[data-search-result][href*="#"]').first
+    expect(heading).to_be_visible()
+    href = heading.get_attribute("href")
+    heading.click()
+    expect(page).to_have_url(live_server + href)
+    assert page.evaluate(
+        "!!document.getElementById(decodeURIComponent(location.hash.slice(1)))"
+    )
+
+
+def test_search_scoped_empty_state_and_reset(page: Page):
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    scope = modal.get_by_label("Search in")
+    scope.select_option(label="Developer Documentation")
+    search = modal.get_by_role("searchbox")
+    search.fill("petstore")
+    expect(modal.get_by_text("No results in Developer Documentation.")).to_be_visible()
+    modal.get_by_role("button", name="Search all docs").click()
+    expect(search).to_have_value("petstore")
+    expect(scope).to_have_value("")
+    expect(modal.locator("[data-search-result]").first).to_be_visible()
+    scope.select_option(label="Developer Documentation")
+    expect(modal.get_by_text("No results in Developer Documentation.")).to_be_visible()
+    search.focus()
+    page.keyboard.press("Escape")
+    page.click("[data-search-trigger]")
+    expect(scope).to_have_value("")
+
+
+def test_search_ignores_stale_scope_and_query_responses(page: Page):
+    """Old responses, including errors, cannot replace a newer cached result."""
+    page.click("[data-search-trigger]")
+    expect(page.get_by_label("Search in")).to_be_visible()
+    outcome = page.evaluate("""async () => {
+        const state = Alpine.$data(document.querySelector('#lumina-search-modal'));
+        const pending = [];
+        state.pagefind = {search: () => new Promise((resolve, reject) => pending.push({resolve, reject}))};
+        const response = title => ({results: [{data: async () => ({url: '/' + title, meta: {title}, excerpt: title})}]});
+        state.query = 'same';
+        state.scope = 'User Documentation';
+        const old = state.search();
+        state.scope = 'Developer Documentation';
+        const current = state.search();
+        pending[1].resolve(response('current'));
+        await current;
+        pending[0].resolve(response('stale'));
+        await old;
+        const scoped = state.results[0].title;
+        state.query = 'older';
+        const failed = state.search();
+        state.query = 'same';
+        await state.search(); // cached scoped result
+        pending[2].reject(new Error('late failure'));
+        await failed;
+        const cached = state.results[0].title;
+        state.query = 'clear';
+        const clear = state.search();
+        state.query = '';
+        await state.search();
+        pending[3].resolve(response('stale'));
+        await clear;
+        return {scoped, cached, results: state.results.length, error: state.error};
+    }""")
+    assert outcome == {
+        "scoped": "current",
+        "cached": "current",
+        "results": 0,
+        "error": None,
+    }
+
+
+def test_search_fallback_when_pagefind_unavailable(page: Page):
+    page.route("**/_pagefind/**", lambda route: route.abort())
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    modal.get_by_role("searchbox").fill("hello world")
+    fallback = modal.get_by_role("link", name='Search for "hello world"')
+    expect(fallback).to_have_attribute("href", "./search.html?q=hello%20world")
+    expect(modal.get_by_label("Search in")).to_have_count(0)
+
+
+def test_search_keyboard_reaches_heading(page: Page, live_server: str):
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    search = modal.get_by_role("searchbox")
+    search.fill("pagefind")
+    links = modal.locator("[data-search-result]")
+    expect(links.first).to_be_visible()
+    hrefs = links.evaluate_all("els => els.map(el => el.getAttribute('href'))")
+    index = next(i for i, href in enumerate(hrefs) if "#" in href)
+    for _ in range(index):
+        search.press("ArrowDown")
+    search.press("Enter")
+    expect(page).to_have_url(live_server + hrefs[index])
+
+
+@pytest.mark.parametrize("theme", ["light", "dark"])
+def test_search_keyboard_focus_indicators(page: Page, theme: str):
+    page.emulate_media(reduced_motion="reduce")
+    page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    scope = modal.get_by_label("Search in")
+    scope.select_option(label="User Documentation")
+    search = modal.get_by_role("searchbox")
+    search.fill("search")
+    expect(modal.locator("[data-search-result]").first).to_be_visible()
+    search.focus()
+    search.press("Tab")
+    expect(scope).to_be_focused()
+    expect(scope).to_have_css("outline-width", "2px")
+    expect(scope).to_have_css("outline-style", "solid")
+    modal.locator("[data-search-result]").first.focus()
+    expect(modal.locator("[data-search-result]").first).to_be_focused()
+    expect(modal.locator("[data-search-result]").first).to_have_css(
+        "outline-width", "2px"
     )

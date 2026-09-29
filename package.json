@@ -17,18 +17,18 @@
     "*.html": "uv run djlint --reformat"
   },
   "devDependencies": {
-    "@commitlint/cli": "21.2.1",
-    "@commitlint/config-conventional": "21.2.0",
+    "@commitlint/cli": "21.2.3",
+    "@commitlint/config-conventional": "21.2.3",
     "@tailwindcss/cli": "^4.3",
-    "alpinejs": "^3.16",
+    "alpinejs": "^3.17",
     "esbuild": "^0.28",
     "husky": "9.1.7",
     "jsdoc": "^4.0",
-    "lint-staged": "17.3.0",
-    "lucide-static": "1.31.0",
+    "lint-staged": "17.5.1",
+    "lucide-static": "1.47.0",
     "tailwindcss": "^4.3"
   },
   "dependencies": {
-    "dompurify": "3.4.13"
+    "dompurify": "3.4.15"
   }
 }

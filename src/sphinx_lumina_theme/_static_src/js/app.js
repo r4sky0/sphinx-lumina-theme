@@ -18,6 +18,7 @@ import copyPage from "./copy-page.js";
 import navDropdown from "./nav-dropdown.js";
 import curlCopy, { curlCopyBtn } from "./curl-copy.js";
 import tryIt, { tryItPanel } from "./try-it.js";
+import apiDisclosures from "./api-disclosures.js";
 import backToTop from "./back-to-top.js";
 import announcementBanner from "./announcement.js";
 import versionSwitcher from "./version-switcher.js";
@@ -26,6 +27,8 @@ import iconBrowser from "./icon-browser.js";
 import codeWrapToggle from "./code-wrap.js";
 import imageLightbox from "./image-lightbox.js";
 import responsiveTables from "./responsive-tables.js";
+import mermaidSizing from "./mermaid.js";
+import tableControls from "./table-controls.js";
 Alpine.data("scrollspy", scrollspy);
 Alpine.data("themeToggle", themeToggle);
 Alpine.data("searchModal", searchModal);
@@ -42,6 +45,7 @@ Alpine.data("versionSwitcher", versionSwitcher);
 Alpine.data("layoutToggle", layoutToggle);
 Alpine.data("iconBrowser", iconBrowser);
 Alpine.data("imageLightbox", imageLightbox);
+Alpine.data("tableControls", tableControls);
 
 window.Alpine = Alpine;
 
@@ -55,11 +59,13 @@ window.Alpine = Alpine;
  * @function boot
  */
 function boot() {
-  Alpine.start();
-  curlCopy();
-  tryIt();
-  codeWrapToggle();
   responsiveTables();
+  Alpine.start();
+  tryIt();
+  curlCopy();
+  apiDisclosures();
+  codeWrapToggle();
+  mermaidSizing();
 }
 
 if (document.readyState === "loading") {

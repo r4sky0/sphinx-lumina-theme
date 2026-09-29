@@ -45,11 +45,57 @@ Alpine.js components are registered via `Alpine.data()` in separate modules unde
 
 See {doc}`javascript-api` for the full component API reference.
 
+The announcement component measures its banner with `ResizeObserver`. The shared
+`--lumina-header-offset` includes this height, keeping content, sticky sidebars,
+mobile navigation, and anchor targets clear of announcements that wrap on narrow
+screens. Dismissing the banner restores the regular header offset.
+
+The page outline's `scrollspy.js` measures the nested links to draw a continuous
+SVG guide. It recalculates on resize to keep curves aligned with wrapped labels,
+and marks the active link with `aria-current="location"`. Scroll updates select
+the last section start above the anchor offset below the fixed header, using
+one animation frame per update. Without JavaScript,
+the nested links keep a straight CSS guide.
+
+### API disclosures
+
+`api-disclosures.js` runs after the HTTP tools initialize. It adds disclosure buttons to Sphinx's Python, HTTP, and JavaScript signatures and toggles their definition bodies. It preserves links inside signatures, opens ancestor definitions for deep links, and reads the `api_expanded` theme option. Without JavaScript, definitions remain visible.
+
 ### HTTP request editor
 
 `try-it.js` and `curl-copy.js` enhance the rendered `dl.http` endpoints. `_http-api-utils.js` extracts paths, fields, and HTTP request examples. A shared curl serializer handles both documentation templates and edited requests, with POSIX shell quoting.
 
 The request panel keeps authentication in memory, shared by the normalized API base URL. It sends browser `fetch` requests with cookies omitted, redirects rejected, and cancellation through `AbortController`. It does not parse the original OpenAPI specification. The showcase uses sphinxcontrib-openapi's `httpdomain` renderer to preserve request schemas and examples.
+
+### Mermaid diagrams
+
+Mermaid rendering, theme changes, and fullscreen controls belong to `sphinxcontrib-mermaid`. Lumina’s `mermaid.js` observes rendered diagrams and records each SVG’s natural width; `mermaid.css` handles sizing, typography, and colors. The observer also handles SVG replacement after a theme change.
+
+### Tables
+
+`responsive-tables.js` wraps article tables in scrollable regions before Alpine
+starts. Simple tables receive labels for the mobile layout. Tables with the
+`lumina-table-interactive` class instead use the `tableControls` Alpine component
+from `table-controls.js` for local filtering and sorting. It moves existing rows
+to preserve their markup and state. Unsupported table structures remain static.
+See {doc}`/reference/lists-and-tables` for the opt-in syntax.
+
+## Search index and results
+
+At `env-updated`, Lumina maps documents to their first root-toctree branch.
+Configured `doc_sections` take precedence when rendering each page. The layout
+emits a Pagefind section filter and plain-text parent titles as breadcrumb
+metadata. These values are independent of the visible breadcrumb toggle.
+
+The `doctree-resolved` hook adds unique `lumina-search-…` IDs to section headings
+for Pagefind's sub-results. Existing section IDs and permalink URLs stay intact.
+The `build-finished` hook indexes the rendered HTML as before.
+
+The `searchModal` Alpine component loads available filters from Pagefind and
+keys its bounded cache by query and scope. Request IDs discard outdated
+responses, including responses arriving after the dialog closes. The dialog
+lists up to ten pages with up to three heading links per page; all links share
+one keyboard navigation sequence. Excerpts are sanitized before rendering.
 
 ## Theming
 

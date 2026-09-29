@@ -31,6 +31,12 @@ Point the `openapi` directive at your spec file:
 
 See {doc}`/reference/http-api` for rendered examples of both auto-generated and manually written HTTP API documentation.
 
+## Expanding endpoint details
+
+Endpoints start collapsed. Select a signature to see its description, parameters, examples, and request controls. **Expand all** and **Collapse all** apply to every API definition on the page.
+
+To start with all definitions expanded, set `"api_expanded": "true"` in `html_theme_options`. This option also applies to Python and JavaScript API documentation. See {doc}`/getting-started/configuration`.
+
 ## Interactive Features
 
 Set `api_base_url` in your theme options to activate two interactive features on every HTTP endpoint:
@@ -44,7 +50,7 @@ html_theme_options = {
 
 ### Copy as curl
 
-A **Copy as curl** button appears in each endpoint's signature and request panel. With **Try it out** enabled, both buttons copy the current server, parameters, headers, authentication, and body. Open **Request command** to inspect or manually copy the command.
+Each endpoint has one **Copy as curl** button in its request panel. It copies the current server, parameters, headers, authentication, and body. Open **Request command** to inspect or manually copy the command.
 
 Commands use POSIX shell quoting, including apostrophes in JSON and headers. Fill in required parameters before running them. Treat copied commands as sensitive when they include credentials.
 

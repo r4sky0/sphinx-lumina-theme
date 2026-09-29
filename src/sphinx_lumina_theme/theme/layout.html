@@ -9,6 +9,14 @@
 
 {% block extrahead %}
 
+    {% if lumina_search_section %}
+        <meta data-pagefind-filter="section[content]"
+              content="{{ lumina_search_section | e }}">
+    {% endif %}
+    {% if lumina_search_breadcrumb %}
+        <meta data-pagefind-meta="breadcrumb[content]"
+              content="{{ lumina_search_breadcrumb | e }}">
+    {% endif %}
     {% if not favicon_url %}
         {% if lumina_logo_icon_favicon is defined and lumina_logo_icon_favicon %}
             <link rel="icon" type="image/svg+xml" href="{{ lumina_logo_icon_favicon }}">
@@ -109,6 +117,9 @@
         <script>document.documentElement.dataset.apiBaseUrl = {{ theme_api_base_url | tojson }};</script>
     {% endif %}
     {% if theme_try_it_out == "false" %}<script>document.documentElement.dataset.tryItOut = "false";</script>{% endif %}
+    {% if theme_api_expanded == "true" %}
+        <script>document.documentElement.dataset.apiExpanded = "true";</script>
+    {% endif %}
     {% if theme_code_wrap_toggle != "false" %}
         <script>document.documentElement.dataset.codeWrap = "true";</script>
     {% endif %}
