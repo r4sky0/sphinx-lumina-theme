@@ -39,6 +39,13 @@ pnpm run dev            # Watch mode (unminified, sourcemaps)
 pnpm run build:icons    # Regenerate Python Lucide icon definitions
 ```
 
+Font subsets and their `@font-face` declarations are generated from the original
+WOFF2 files in `theme/static/fonts/`. After updating those originals, run
+`uv run scripts/subset-fonts.py`, then `pnpm run build`. Commit the generated
+`*-latin.woff2` files and `_static_src/css/fonts.css`; normal asset builds use
+these checked-in files without requiring FontTools. The full fonts remain
+available for characters outside the Latin subsets.
+
 ## Interactivity Pattern
 
 Alpine.js components are registered via `Alpine.data()` in separate modules under `_static_src/js/`. Each component is imported and registered in `app.js`, then referenced in templates with `x-data`.
