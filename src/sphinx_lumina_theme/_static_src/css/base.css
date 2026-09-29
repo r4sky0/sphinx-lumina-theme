@@ -745,14 +745,14 @@ span.highlighted {
 
 /* ── Layout ── */
 /* Total height of the fixed header chrome: the 3.5rem header bar plus the
-   2.25rem announcement banner when one is active. Every rule that clears
+   measured announcement banner (2.25rem before JS measures it). Every rule that clears
    or aligns to the fixed header derives from this single variable. */
 :root {
   --lumina-header-offset: 3.5rem;
 }
 
 html.has-announcement {
-  --lumina-header-offset: calc(3.5rem + 2.25rem);
+  --lumina-header-offset: calc(3.5rem + var(--lumina-announcement-height, 2.25rem));
 }
 
 /* Anchor targets (headings, section ids, footnotes) must scroll into view

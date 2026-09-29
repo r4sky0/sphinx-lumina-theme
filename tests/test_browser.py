@@ -211,6 +211,7 @@ def test_showcase_uses_flat_theme_buttons(page: Page):
     [
         (1440, 900),
         (1280, 720),
+        (1440, 700),
         (768, 1024),
         (390, 844),
         (375, 667),
@@ -221,17 +222,20 @@ def test_showcase_uses_flat_theme_buttons(page: Page):
 def test_showcase_fits_viewport(page: Page, size):
     page.set_viewport_size({"width": size[0], "height": size[1]})
     page.evaluate("document.fonts.ready")
-    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
-    # Optional announcements can add height to the single-screen cover.
-    dismiss = page.get_by_role("button", name="Dismiss announcement")
-    if dismiss.is_visible():
-        dismiss.click()
+    page.wait_for_function("""() => {
+        const root = document.documentElement;
+        return parseFloat(root.style.getPropertyValue('--lumina-announcement-height'))
+            === document.querySelector('#lumina-announcement').getBoundingClientRect().height;
+    }""")
+    # Check the cover with the announcement visible, then dismissed below.
     assert page.evaluate(
         "() => document.documentElement.scrollHeight <= innerHeight"
         " && document.documentElement.scrollWidth <= innerWidth"
     )
     expect(page.locator(".lumina-hero-btn-primary")).to_be_in_viewport()
     expect(page.locator(".lumina-hero-tags")).to_be_in_viewport()
+    page.get_by_role("button", name="Dismiss announcement").click()
+    assert page.evaluate("document.documentElement.scrollHeight <= innerHeight")
 
 
 def test_theme_persists_on_reload(page: Page, live_server: str):
@@ -546,6 +550,49 @@ def test_breadcrumbs_link(page: Page, live_server: str):
     expect(breadcrumb).to_be_visible()
     home_link = breadcrumb.locator("a").first
     expect(home_link).to_be_visible()
+
+
+@pytest.mark.parametrize("theme", ["light", "dark"])
+def test_announcement_layout(page: Page, live_server: str, theme: str):
+    """Wrapped announcements must clear content and navigation at every size."""
+    page.goto(f"{live_server}/guides/navigation.html")
+    page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
+    page.evaluate("document.fonts.ready")
+    banner = page.locator("#lumina-announcement")
+    expect(banner).to_be_visible()
+    for width, height in ((1440, 900), (768, 1024), (390, 844), (320, 568), (844, 390)):
+        page.set_viewport_size({"width": width, "height": height})
+        page.wait_for_function("""() => {
+            const header = document.querySelector('#lumina-header header');
+            const wrapper = document.querySelector('.lumina-wrapper');
+            return Math.abs(wrapper.getBoundingClientRect().top - header.clientHeight) <= 1;
+        }""")
+        breadcrumb = page.get_by_role("navigation", name="Breadcrumb", exact=True)
+        header_bottom = page.locator("#lumina-header header").bounding_box()["height"]
+        assert breadcrumb.bounding_box()["y"] >= header_bottom
+        # Visibility alone does not detect a fixed header covering the link.
+        breadcrumb.get_by_role("link").first.click(trial=True)
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+        if width < 1024:
+            page.get_by_role("button", name="Toggle navigation").click()
+            drawer = page.locator("#lumina-sidebar-drawer")
+            expect(drawer).to_be_visible()
+            assert abs(drawer.bounding_box()["y"] - header_bottom) <= 1
+            page.keyboard.press("Escape")
+            expect(drawer).to_be_hidden()
+        else:
+            sidebar = page.locator(".lumina-sidebar-desktop").bounding_box()
+            assert abs(sidebar["y"] + sidebar["height"] - height) <= 1
+
+    page.get_by_role("button", name="Dismiss announcement").click()
+    expect(banner).to_be_hidden()
+    page.reload()
+    expect(banner).to_be_hidden()
+    assert page.locator(".lumina-wrapper").bounding_box()["y"] == 56
+    page.get_by_role("navigation", name="Breadcrumb", exact=True).get_by_role(
+        "link"
+    ).first.click()
+    expect(page).to_have_url(f"{live_server}/guides/index.html")
 
 
 def test_prev_next_navigation(page: Page, live_server: str):
