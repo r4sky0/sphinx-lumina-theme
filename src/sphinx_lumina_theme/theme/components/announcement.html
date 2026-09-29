@@ -13,4 +13,11 @@
                     type="button">{{ lumina_icon("x", size=16) }}</button>
         </div>
     </div>
+    {# Reserve wrapped banner height before the page content can paint. #}
+    <script>
+document.documentElement.style.setProperty(
+  '--lumina-announcement-height',
+  document.getElementById('lumina-announcement').getBoundingClientRect().height + 'px'
+);
+    </script>
 {% endif %}

@@ -76,7 +76,7 @@
 }
 .lumina-section-switcher-item:focus-visible { outline-offset: -2px; }
 .lumina-sidebar-nav a { font-size: 0.875rem; padding-block: 0.4375rem; }
-.lumina-sidebar-nav > ul > li + li > a { margin-top: 0.625rem; }
+.lumina-sidebar-nav > ul > li + li { margin-top: 0.625rem; }
 .lumina-sidebar-nav li.current:not(.toctree-l1) > a,
 .lumina-sidebar-nav li.toctree-l1.current > a.current {
   color: var(--lumina-link);

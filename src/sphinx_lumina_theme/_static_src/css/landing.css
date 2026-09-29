@@ -23,7 +23,6 @@
   letter-spacing: -0.025em;
   color: var(--lumina-text);
   margin: 0 0 1rem;
-  animation: lumina-hero-enter 0.6s ease-out both;
 }
 
 .lumina-hero-subtitle {
@@ -32,7 +31,6 @@
   color: var(--lumina-text-muted);
   max-width: 36rem;
   margin: 0 auto 2rem;
-  animation: lumina-hero-enter 0.6s ease-out 0.1s both;
 }
 
 .lumina-hero-actions {
@@ -40,7 +38,6 @@
   justify-content: center;
   gap: 0.75rem;
   flex-wrap: wrap;
-  animation: lumina-hero-enter 0.6s ease-out 0.2s both;
 }
 
 .lumina-hero-btn {
@@ -102,7 +99,6 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 2rem;
-  animation: lumina-hero-enter 0.6s ease-out 0.3s both;
 }
 
 .lumina-hero-tags span {
@@ -127,28 +123,6 @@
 /* When a hero is present it already clears the fixed header. */
 .lumina-hero + .lumina-landing-content {
   margin-top: 0;
-}
-
-/* ── Hero entrance animation ── */
-
-@keyframes lumina-hero-enter {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .lumina-hero-title,
-  .lumina-hero-subtitle,
-  .lumina-hero-actions,
-  .lumina-hero-tags {
-    animation: none;
-  }
 }
 
 /* ── Wide layout mode ── */
