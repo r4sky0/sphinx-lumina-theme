@@ -130,7 +130,6 @@ def test_fluid_worker_starts(page: Page, live_server: str):
         "() => !!window.Alpine.$data(document.querySelector('.lumina-hero'))._worker"
     )
 
-
 @pytest.mark.parametrize("width", [390, 1440])
 def test_hero_text_has_no_entrance_animation(page: Page, width):
     page.set_viewport_size({"width": width, "height": 844})
