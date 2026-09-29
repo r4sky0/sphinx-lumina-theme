@@ -52,6 +52,11 @@ Alpine.js components are registered via `Alpine.data()` in separate modules unde
 
 See {doc}`javascript-api` for the full component API reference.
 
+The announcement component measures its banner with `ResizeObserver`. The shared
+`--lumina-header-offset` includes this height, keeping content, sticky sidebars,
+mobile navigation, and anchor targets clear of announcements that wrap on narrow
+screens. Dismissing the banner restores the regular header offset.
+
 The page outline's `scrollspy.js` measures the nested links to draw a continuous
 SVG guide. It recalculates on resize to keep curves aligned with wrapped labels,
 and marks the active link with `aria-current="location"`. Scroll updates select
