@@ -52,7 +52,8 @@ Alpine.js components are registered via `Alpine.data()` in separate modules unde
 
 See {doc}`javascript-api` for the full component API reference.
 
-The announcement component measures its banner with `ResizeObserver`. The shared
+An inline script measures the announcement before page content renders; the
+announcement component keeps that measurement current with `ResizeObserver`. The shared
 `--lumina-header-offset` includes this height, keeping content, sticky sidebars,
 mobile navigation, and anchor targets clear of announcements that wrap on narrow
 screens. Dismissing the banner restores the regular header offset.

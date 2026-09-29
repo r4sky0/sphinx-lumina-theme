@@ -130,8 +130,9 @@ def test_fluid_worker_starts(page: Page, live_server: str):
         "() => !!window.Alpine.$data(document.querySelector('.lumina-hero'))._worker"
     )
 
-
-def test_hero_text_has_no_entrance_animation(page: Page):
+@pytest.mark.parametrize("width", [390, 1440])
+def test_hero_text_has_no_entrance_animation(page: Page, width):
+    page.set_viewport_size({"width": width, "height": 844})
     for selector in ("title", "subtitle", "actions", "tags"):
         assert (
             page.locator(f".lumina-hero-{selector}").evaluate(
@@ -316,6 +317,64 @@ def test_mobile_sidebar(page: Page, live_server: str):
     # Drawer is teleported to body via Alpine x-teleport
     drawer = page.locator("#lumina-sidebar-drawer")
     expect(drawer).to_be_visible(timeout=3000)
+
+
+@pytest.mark.parametrize("width", [390, 1440])
+@pytest.mark.parametrize("theme", ["light", "dark"])
+def test_sidebar_row_alignment(page: Page, live_server: str, width, theme):
+    """Arrows and active labels stay centered, including wrapped menu labels."""
+    page.set_viewport_size({"width": width, "height": 844})
+    page.goto(f"{live_server}/getting-started/installation.html")
+    page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
+    if width < 1024:
+        page.locator("[data-sidebar-toggle]").click()
+        sidebar = page.locator("#lumina-sidebar-drawer")
+    else:
+        sidebar = page.locator(".lumina-sidebar-desktop")
+    expect(sidebar).to_be_visible()
+    page.evaluate("document.fonts.ready")
+    for wrapped in (False, True):
+        if wrapped:
+            sidebar.locator("li.has-children > a").first.evaluate(
+                "a => a.textContent = 'Getting started with installation and configuration'"
+            )
+        offsets = sidebar.locator(".lumina-sidebar-nav-toggle:visible").evaluate_all(
+            """buttons => buttons.map(button => {
+                const link = button.previousElementSibling.getBoundingClientRect();
+                const arrow = button.getBoundingClientRect();
+                return Math.abs(arrow.y + arrow.height / 2 - link.y - link.height / 2);
+            })"""
+        )
+        assert offsets and max(offsets) < 1
+    highlight_gap = sidebar.locator("a.current").evaluate(
+        """link => {
+            const box = link.getBoundingClientRect();
+            const range = document.createRange();
+            range.selectNodeContents(link);
+            const text = range.getBoundingClientRect();
+            return Math.abs((text.top - box.top) - (box.bottom - text.bottom));
+        }"""
+    )
+    assert highlight_gap < 2
+
+
+@pytest.mark.parametrize("path", ["index.html", "getting-started/installation.html"])
+def test_mobile_announcement_reserves_space_before_alpine(
+    page: Page, live_server: str, path
+):
+    """A wrapped banner must reserve its full height before deferred JS loads."""
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.route("**/lumina.js*", lambda route: route.abort())
+    page.goto(f"{live_server}/{path}")
+    heights = page.locator("#lumina-announcement").evaluate(
+        """banner => ({
+            actual: banner.getBoundingClientRect().height,
+            reserved: parseFloat(document.documentElement.style.getPropertyValue(
+                '--lumina-announcement-height')),
+        })"""
+    )
+    assert heights["actual"] > 36
+    assert heights["reserved"] == heights["actual"]
 
 
 def test_mobile_tables_stack_rows(page: Page, live_server: str):
