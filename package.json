@@ -24,11 +24,11 @@
     "esbuild": "^0.28",
     "husky": "9.1.7",
     "jsdoc": "^4.0",
-    "lint-staged": "17.5.1",
-    "lucide-static": "1.47.0",
+    "lint-staged": "17.6.0",
+    "lucide-static": "1.48.0",
     "tailwindcss": "^4.3"
   },
   "dependencies": {
-    "dompurify": "3.4.15"
+    "dompurify": "3.4.16"
   }
 }
