@@ -544,6 +544,72 @@ def test_toc_scrollspy(page: Page, live_server: str, theme):
     expect(nested).to_be_focused()
 
 
+@pytest.mark.parametrize("theme", ["light", "dark"])
+@pytest.mark.parametrize("motion", ["no-preference", "reduce"])
+def test_toc_indicator_stays_aligned_during_fast_scroll(
+    page: Page, live_server: str, theme, motion
+):
+    """The snake animates without splitting, including fast direction changes."""
+    page.set_viewport_size({"width": 1400, "height": 900})
+    page.emulate_media(reduced_motion=motion)
+    page.goto(f"{live_server}/guides/navigation.html")
+    page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
+    page.evaluate("document.fonts.ready")
+    expect(page.locator(".lumina-toc-guide")).to_be_visible()
+
+    samples = page.evaluate(r"""async () => {
+        const nav = document.querySelector('.lumina-toc-nav');
+        const indicator = nav.querySelector('.lumina-toc-indicator');
+        const dot = nav.querySelector('circle');
+        const links = [...nav.querySelectorAll('a')].filter(el => el.offsetHeight);
+        const samples = [];
+        for (const link of [...links, ...links.toReversed()]) {
+            const target = document.getElementById(link.hash.slice(1));
+            window.scrollTo({top: scrollY + target.getBoundingClientRect().top
+                - parseFloat(getComputedStyle(target).scrollMarginTop) + 2,
+                behavior: 'instant'});
+            await new Promise(requestAnimationFrame);
+            await new Promise(requestAnimationFrame);
+            const active = nav.querySelector('[aria-current]');
+            const bounds = getComputedStyle(indicator).clipPath.split(',');
+            const top = parseFloat(bounds[1].trim().split(/\s+/)[1]);
+            const bottom = parseFloat(bounds[2].trim().split(/\s+/)[1]);
+            samples.push({
+                href: active.hash,
+                top,
+                bottom,
+                expectedTop: active.offsetTop,
+                expectedBottom: active.offsetTop + active.offsetHeight,
+                dotY: Number(dot.getAttribute('cy')),
+                onGuide: nav.querySelector('.lumina-toc-track').isPointInStroke(
+                    new DOMPoint(Number(dot.getAttribute('cx')), Number(dot.getAttribute('cy')))),
+            });
+        }
+        return samples;
+    }""")
+    assert len({sample["href"] for sample in samples}) > 3
+    for sample in samples:
+        assert sample["onGuide"], sample
+        assert sample["bottom"] > sample["top"], sample
+        assert sample["dotY"] == pytest.approx(
+            (sample["top"] + sample["bottom"]) / 2, abs=0.1
+        ), sample
+    in_motion = [
+        sample for sample in samples if abs(sample["top"] - sample["expectedTop"]) > 1
+    ]
+    assert bool(in_motion) == (motion == "no-preference")
+    page.wait_for_function(r"""() => {
+        const nav = document.querySelector('.lumina-toc-nav');
+        const active = nav.querySelector('[aria-current]');
+        const clip = getComputedStyle(nav.querySelector('.lumina-toc-indicator')).clipPath;
+        const top = parseFloat(clip.split(',')[1].trim().split(/\s+/)[1]);
+        const dot = nav.querySelector('circle');
+        return Math.abs(top - active.offsetTop) < 0.1
+            && Number(dot.getAttribute('cx')) === active.offsetLeft + 1
+            && Number(dot.getAttribute('cy')) === active.offsetTop + active.offsetHeight / 2;
+    }""")
+
+
 def test_toc_tracks_reading_position(page: Page, live_server: str):
     """Nested sections track the reading line in both directions and after jumps."""
     page.set_viewport_size({"width": 1400, "height": 900})
