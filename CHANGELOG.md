@@ -2,6 +2,50 @@
 
 <!-- releases -->
 
+## v2.9.4 (2026-10-10)
+
+### Bug Fixes
+
+- **toc**: Prevent active snake highlight flicker during fast scrolling
+  ([#173](https://github.com/r4sky0/sphinx-lumina-theme/pull/173),
+  [`2ad1743`](https://github.com/r4sky0/sphinx-lumina-theme/commit/2ad1743c6cfb103376d6fa5534f019c42c49b1cb))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump fast-uri from 3.1.5 to 3.1.8
+  ([#170](https://github.com/r4sky0/sphinx-lumina-theme/pull/170),
+  [`1e74619`](https://github.com/r4sky0/sphinx-lumina-theme/commit/1e74619842ddbc88c003094362d2c89e530b6007))
+
+- **deps**: Bump js-yaml from 4.3.1 to 4.3.2
+  ([#168](https://github.com/r4sky0/sphinx-lumina-theme/pull/168),
+  [`4127190`](https://github.com/r4sky0/sphinx-lumina-theme/commit/4127190cabdd16f59316395d2380350704419eb8))
+
+- **deps**: Bump linkify-it from 5.0.0 to 5.0.2
+  ([#171](https://github.com/r4sky0/sphinx-lumina-theme/pull/171),
+  [`9efb7fa`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9efb7fae17a5f39f3180e4728065867f869176b8))
+
+- **deps**: Bump markdown-it from 14.1.1 to 14.3.2
+  ([#169](https://github.com/r4sky0/sphinx-lumina-theme/pull/169),
+  [`ec55bf5`](https://github.com/r4sky0/sphinx-lumina-theme/commit/ec55bf58981e9159d610461549456b4d43af4208))
+
+- **deps**: Bump source-map-js from 1.2.1 to 1.2.2
+  ([#167](https://github.com/r4sky0/sphinx-lumina-theme/pull/167),
+  [`f7083ea`](https://github.com/r4sky0/sphinx-lumina-theme/commit/f7083eaa5b654b59a60791ba8e74d3fc79cb8e2f))
+
+- **deps**: Bump uv from 0.12.17 to 0.12.18 in the uv group across 1 directory
+  ([#174](https://github.com/r4sky0/sphinx-lumina-theme/pull/174),
+  [`8d53ad9`](https://github.com/r4sky0/sphinx-lumina-theme/commit/8d53ad9dd5972e5e53ef7f148391fe72abac2520))
+
+- **deps-dev**: Bump mermaid from 11.12.1 to 11.16.1
+  ([#172](https://github.com/r4sky0/sphinx-lumina-theme/pull/172),
+  [`78256b6`](https://github.com/r4sky0/sphinx-lumina-theme/commit/78256b64cc33a3db517196600b2069d4561f3e12))
+
+</details>
+
+
 ## v2.9.3 (2026-10-10)
 
 ### Bug Fixes

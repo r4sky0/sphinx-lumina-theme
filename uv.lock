@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.12"
 
 [[package]]
@@ -1063,7 +1063,7 @@ wheels = [
 
 [[package]]
 name = "sphinx-lumina-theme"
-version = "2.9.3"
+version = "2.9.4"
 source = { editable = "." }
 dependencies = [
     { name = "sphinx" },
