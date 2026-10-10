@@ -112,7 +112,8 @@ def test_lightbox_close_button_uses_native_dialog(page: Page, live_server: str):
     expect(page.locator("body")).not_to_have_class("lumina-lightbox-open")
 
 
-def test_fluid_without_offscreen_canvas(page: Page, live_server: str):
+def test_fluid_without_offscreen_canvas(context, live_server: str):
+    page = context.new_page()
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.add_init_script(
@@ -129,6 +130,7 @@ def test_fluid_worker_starts(page: Page, live_server: str):
     page.wait_for_function(
         "() => !!window.Alpine.$data(document.querySelector('.lumina-hero'))._worker"
     )
+
 
 @pytest.mark.parametrize("width", [390, 1440])
 def test_hero_text_has_no_entrance_animation(page: Page, width):
@@ -374,7 +376,8 @@ def test_mobile_announcement_reserves_space_before_alpine(
         })"""
     )
     assert heights["actual"] > 36
-    assert heights["reserved"] == heights["actual"]
+    # The fallback font can differ by one pixel before the webfont finishes loading.
+    assert abs(heights["reserved"] - heights["actual"]) <= 1
 
 
 def test_mobile_tables_stack_rows(page: Page, live_server: str):
@@ -823,7 +826,8 @@ def test_pagefind_loads_without_errors(page: Page, live_server: str):
     )
 
 
-def test_mermaid_sizing_and_colors_survive_theme_changes(page: Page, live_server: str):
+def test_mermaid_sizing_and_colors_survive_theme_changes(context, live_server: str):
+    page = context.new_page()
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(f"{live_server}/reference/diagrams.html")
