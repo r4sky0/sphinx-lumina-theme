@@ -577,7 +577,8 @@ Alpine.js components are registered via `Alpine.data()` in separate modules unde
 
 See [JavaScript API](javascript-api.md) for the full component API reference.
 
-The announcement component measures its banner with `ResizeObserver`. The shared
+An inline script measures the announcement before page content renders; the
+announcement component keeps that measurement current with `ResizeObserver`. The shared
 `--lumina-header-offset` includes this height, keeping content, sticky sidebars,
 mobile navigation, and anchor targets clear of announcements that wrap on narrow
 screens. Dismissing the banner restores the regular header offset.
@@ -2238,7 +2239,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 2.9.2.
+This documentation is for Sphinx Lumina Theme version 2.9.3.
 
 The MyST syntax:
 
@@ -4597,6 +4598,25 @@ html_theme_options = {
 # releases.html.md
 
 # Releases
+
+## v2.9.3 (2026-10-10)
+
+### Bug Fixes
+
+- Prevent mobile announcement jump and align sidebar rows
+  ([#164](https://github.com/r4sky0/sphinx-lumina-theme/pull/164),
+  [`1f72bde`](https://github.com/r4sky0/sphinx-lumina-theme/commit/1f72bde908af0482135e1ab2ab0d22bf49ec3e90))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump the uv group across 1 directory with 2 updates
+  ([#166](https://github.com/r4sky0/sphinx-lumina-theme/pull/166),
+  [`72e61a4`](https://github.com/r4sky0/sphinx-lumina-theme/commit/72e61a44db1e08004ae07b5df54f6aa7cac3be4b))
+
+</details>
 
 ## v2.9.2 (2026-10-10)
 
