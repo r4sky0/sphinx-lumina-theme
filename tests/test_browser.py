@@ -544,6 +544,55 @@ def test_toc_scrollspy(page: Page, live_server: str, theme):
     expect(nested).to_be_focused()
 
 
+@pytest.mark.parametrize("theme", ["light", "dark"])
+def test_toc_indicator_stays_aligned_during_fast_scroll(
+    page: Page, live_server: str, theme
+):
+    """Rapid section changes keep the highlighted guide and dot together."""
+    page.set_viewport_size({"width": 1400, "height": 900})
+    page.emulate_media(reduced_motion="no-preference")
+    page.goto(f"{live_server}/guides/navigation.html")
+    page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
+    page.evaluate("document.fonts.ready")
+    expect(page.locator(".lumina-toc-guide")).to_be_visible()
+
+    samples = page.evaluate(r"""async () => {
+        const nav = document.querySelector('.lumina-toc-nav');
+        const indicator = nav.querySelector('.lumina-toc-indicator');
+        const dot = nav.querySelector('circle');
+        const links = [...nav.querySelectorAll('a')].filter(el => el.offsetHeight);
+        const samples = [];
+        for (const link of [...links, ...links.toReversed()]) {
+            const target = document.getElementById(link.hash.slice(1));
+            window.scrollTo({top: scrollY + target.getBoundingClientRect().top
+                - parseFloat(getComputedStyle(target).scrollMarginTop) + 2,
+                behavior: 'instant'});
+            await new Promise(requestAnimationFrame);
+            await new Promise(requestAnimationFrame);
+            const active = nav.querySelector('[aria-current]');
+            const bounds = getComputedStyle(indicator).clipPath.split(',');
+            const top = parseFloat(bounds[1].trim().split(/\s+/)[1]);
+            const bottom = parseFloat(bounds[2].trim().split(/\s+/)[1]);
+            samples.push({
+                href: active.hash,
+                top,
+                bottom,
+                expectedTop: active.offsetTop,
+                expectedBottom: active.offsetTop + active.offsetHeight,
+                dotY: Number(dot.getAttribute('cy')),
+            });
+        }
+        return samples;
+    }""")
+    assert len({sample["href"] for sample in samples}) > 3
+    for sample in samples:
+        assert sample["top"] == pytest.approx(sample["expectedTop"], abs=1), sample
+        assert sample["bottom"] == pytest.approx(sample["expectedBottom"], abs=1), (
+            sample
+        )
+        assert sample["top"] <= sample["dotY"] <= sample["bottom"], sample
+
+
 def test_toc_tracks_reading_position(page: Page, live_server: str):
     """Nested sections track the reading line in both directions and after jumps."""
     page.set_viewport_size({"width": 1400, "height": 900})

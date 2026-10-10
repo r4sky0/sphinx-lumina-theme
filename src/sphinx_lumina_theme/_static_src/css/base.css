@@ -730,13 +730,13 @@ span.highlighted {
 .lumina-toc-indicator {
   stroke: var(--lumina-link);
   stroke-width: 2;
+  /* Keep the highlight in sync with the dot when sections change rapidly. */
   clip-path: polygon(
     0 var(--ind-top, 0),
     100% var(--ind-top, 0),
     100% var(--ind-bottom, 0),
     0 var(--ind-bottom, 0)
   ) view-box;
-  transition: clip-path 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ── Layout ── */
