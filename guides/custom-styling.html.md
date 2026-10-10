@@ -98,6 +98,9 @@ Lumina ships with self-hosted fonts — no external CDN requests:
 - **Source Sans 3** (400, 500, 600, 700) — body text
 - **JetBrains Mono** (400, 500) — code blocks and inline code
 
+Latin text uses smaller font subsets. The browser loads the original full fonts
+when other characters are needed, preserving the existing language coverage.
+
 To use your own fonts, override the font-family declarations in your custom CSS:
 
 ```css
