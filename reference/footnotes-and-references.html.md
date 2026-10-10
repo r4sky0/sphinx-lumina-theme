@@ -102,7 +102,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 2.9.2.
+This documentation is for Sphinx Lumina Theme version 2.9.3.
 
 The MyST syntax:
 
