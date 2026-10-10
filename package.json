@@ -21,11 +21,13 @@
     "@commitlint/config-conventional": "21.2.3",
     "@tailwindcss/cli": "^4.3",
     "alpinejs": "^3.17",
+    "d3": "7.9.0",
     "esbuild": "^0.28",
     "husky": "9.1.7",
     "jsdoc": "^4.0",
     "lint-staged": "17.5.1",
     "lucide-static": "1.47.0",
+    "mermaid": "11.12.1",
     "tailwindcss": "^4.3"
   },
   "dependencies": {

@@ -828,6 +828,7 @@ def test_pagefind_loads_without_errors(page: Page, live_server: str):
 
 def test_mermaid_sizing_and_colors_survive_theme_changes(context, live_server: str):
     page = context.new_page()
+    page.route("https://cdn.jsdelivr.net/**", lambda route: route.abort())
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(f"{live_server}/reference/diagrams.html")
