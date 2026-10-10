@@ -2,6 +2,26 @@
 
 <!-- releases -->
 
+## v2.9.3 (2026-10-10)
+
+### Bug Fixes
+
+- Prevent mobile announcement jump and align sidebar rows
+  ([#164](https://github.com/r4sky0/sphinx-lumina-theme/pull/164),
+  [`1f72bde`](https://github.com/r4sky0/sphinx-lumina-theme/commit/1f72bde908af0482135e1ab2ab0d22bf49ec3e90))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump the uv group across 1 directory with 2 updates
+  ([#166](https://github.com/r4sky0/sphinx-lumina-theme/pull/166),
+  [`72e61a4`](https://github.com/r4sky0/sphinx-lumina-theme/commit/72e61a44db1e08004ae07b5df54f6aa7cac3be4b))
+
+</details>
+
+
 ## v2.9.2 (2026-10-10)
 
 ### Performance Improvements
