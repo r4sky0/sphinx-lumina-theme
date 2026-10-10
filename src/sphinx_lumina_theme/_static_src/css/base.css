@@ -731,6 +731,7 @@ span.highlighted {
   stroke: var(--lumina-link);
   stroke-width: 2;
   /* Scrollspy animates the clip and dot together in one animation frame. */
+  transition: none;
   clip-path: polygon(
     0 var(--ind-top, 0),
     100% var(--ind-top, 0),
