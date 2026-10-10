@@ -114,7 +114,8 @@ html_theme_options = {
 ## Page Table of Contents
 
 The right-side page outline indents nested headings along a curved guide.
-An accent marker follows the current section as you scroll in either direction.
+An accent marker smoothly follows the current section as you scroll in either direction.
+It moves immediately when reduced motion is enabled.
 It switches when a heading reaches the reading line below the fixed header;
 at the bottom of the page, it selects the final section. To hide it:
 
