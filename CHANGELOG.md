@@ -2,6 +2,26 @@
 
 <!-- releases -->
 
+## v2.9.2 (2026-10-10)
+
+### Performance Improvements
+
+- Reduce font downloads and remove hero entrance delays
+  ([#161](https://github.com/r4sky0/sphinx-lumina-theme/pull/161),
+  [`42e9028`](https://github.com/r4sky0/sphinx-lumina-theme/commit/42e90284d00d8c172f01cf5d746ba2ffde7722d9))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump the npm-minor group with 3 updates
+  ([#165](https://github.com/r4sky0/sphinx-lumina-theme/pull/165),
+  [`7fd066b`](https://github.com/r4sky0/sphinx-lumina-theme/commit/7fd066bd14cb93f248b27d037c4eb757e15b9aed))
+
+</details>
+
+
 ## v2.9.1 (2026-09-28)
 
 ### Bug Fixes
