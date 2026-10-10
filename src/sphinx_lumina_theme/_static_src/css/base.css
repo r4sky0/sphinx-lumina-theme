@@ -730,7 +730,7 @@ span.highlighted {
 .lumina-toc-indicator {
   stroke: var(--lumina-link);
   stroke-width: 2;
-  /* Keep the highlight in sync with the dot when sections change rapidly. */
+  /* Scrollspy animates the clip and dot together in one animation frame. */
   clip-path: polygon(
     0 var(--ind-top, 0),
     100% var(--ind-top, 0),

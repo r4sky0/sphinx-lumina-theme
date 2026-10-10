@@ -62,8 +62,9 @@ The page outline's `scrollspy.js` measures the nested links to draw a continuous
 SVG guide. It recalculates on resize to keep curves aligned with wrapped labels,
 and marks the active link with `aria-current="location"`. Scroll updates select
 the last section start above the anchor offset below the fixed header, using
-one animation frame per update. The highlight and its dot move together in that
-frame, without a trailing transition during rapid scrolling. Without JavaScript,
+one animation frame per update. The highlight and its dot animate together along
+the curve, retargeting from their current position during rapid scrolling.
+Reduced motion skips the animation. Without JavaScript,
 the nested links keep a straight CSS guide.
 
 ### API disclosures

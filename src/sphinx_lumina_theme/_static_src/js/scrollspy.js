@@ -27,6 +27,9 @@ export default function scrollspy() {
     _resizeObserver: null,
     _scrollHandler: null,
     _indicator: null,
+    _indicatorBounds: null,
+    _animationId: null,
+    _pathLength: 0,
     _links: [],
     _positions: new Map(),
     _rafId: null,
@@ -73,7 +76,7 @@ export default function scrollspy() {
         this._rafId = null;
         if (this._needsMeasure) {
           this._computePositions();
-          this._updateIndicator();
+          this._updateIndicator(false);
           this._needsMeasure = false;
         }
         this._updateCurrent();
@@ -122,6 +125,7 @@ export default function scrollspy() {
       for (const track of this._indicator.querySelectorAll("path")) {
         track.setAttribute("d", path);
       }
+      this._pathLength = this._indicator.querySelector("path").getTotalLength();
     },
 
     _updateActive() {
@@ -132,16 +136,57 @@ export default function scrollspy() {
       }
     },
 
-    _updateIndicator() {
+    _updateIndicator(animate = true) {
       if (!this._indicator || !this.activeId) return;
       const pos = this._positions.get(this.activeId);
       if (!pos) return;
-      const [top, bottom, x] = pos;
+      if (this._animationId !== null) cancelAnimationFrame(this._animationId);
+      this._animationId = null;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      if (!animate || !this._indicatorBounds || reducedMotion.matches) {
+        this._renderIndicator(...pos);
+        return;
+      }
+      // Retarget from the visible position so rapid reversals never restart or jump.
+      const [fromTop, fromBottom] = this._indicatorBounds;
+      const started = performance.now();
+      const tick = (now) => {
+        const progress = reducedMotion.matches ? 1 : Math.min((now - started) / 150, 1);
+        const eased = 1 - (1 - progress) ** 4;
+        if (progress === 1) {
+          this._renderIndicator(...pos);
+          this._animationId = null;
+          return;
+        }
+        this._renderIndicator(
+          fromTop + (pos[0] - fromTop) * eased,
+          fromBottom + (pos[1] - fromBottom) * eased,
+        );
+        this._animationId = requestAnimationFrame(tick);
+      };
+      this._animationId = requestAnimationFrame(tick);
+    },
+
+    _renderIndicator(top, bottom, x) {
+      this._indicatorBounds = [top, bottom];
       this._indicator.style.setProperty("--ind-top", `${top}px`);
       this._indicator.style.setProperty("--ind-bottom", `${bottom}px`);
+      const y = (top + bottom) / 2;
+      if (x === undefined) {
+        // Keep the dot on the curve while the highlight crosses an indentation.
+        const path = this._indicator.querySelector("path");
+        let low = 0;
+        let high = this._pathLength;
+        for (let i = 0; i < 16; i++) {
+          const length = (low + high) / 2;
+          if (path.getPointAtLength(length).y < y) low = length;
+          else high = length;
+        }
+        x = path.getPointAtLength((low + high) / 2).x;
+      }
       const dot = this._indicator.querySelector("circle");
       dot.setAttribute("cx", x);
-      dot.setAttribute("cy", (top + bottom) / 2);
+      dot.setAttribute("cy", y);
     },
 
     destroy() {
@@ -149,6 +194,7 @@ export default function scrollspy() {
       window.removeEventListener("resize", this._scrollHandler);
       if (this._resizeObserver) this._resizeObserver.disconnect();
       if (this._rafId !== null) cancelAnimationFrame(this._rafId);
+      if (this._animationId !== null) cancelAnimationFrame(this._animationId);
       if (this._indicator) this._indicator.remove();
     },
   };
