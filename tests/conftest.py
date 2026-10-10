@@ -97,7 +97,23 @@ def live_server(tmp_path_factory):
     out_dir = tmp_path_factory.mktemp("docs_build")
     project_root = Path(__file__).parent.parent
 
-    sphinx_app(project_root / "docs", out_dir).build()
+    # Keep diagram rendering independent of CDN latency during browser tests.
+    sphinx_app(
+        project_root / "docs",
+        out_dir,
+        confoverrides={
+            "mermaid_use_local": "/_static/mermaid/mermaid.esm.min.mjs",
+            "d3_use_local": "/_static/d3.min.js",
+        },
+    ).build()
+    shutil.copytree(
+        project_root / "node_modules/mermaid/dist",
+        out_dir / "_static/mermaid",
+        ignore=shutil.ignore_patterns("*.map"),
+    )
+    shutil.copy2(
+        project_root / "node_modules/d3/dist/d3.min.js", out_dir / "_static/d3.min.js"
+    )
 
     port = _find_free_port()
 
