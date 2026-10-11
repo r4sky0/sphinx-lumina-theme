@@ -19,6 +19,16 @@ pre.highlight {
   font-variant-ligatures: none;
 }
 
+/* Inline line numbers (``:linenos:`` with Pygments inline mode) */
+div.highlight span.linenos {
+  display: inline-block;
+  min-width: 1.5rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: var(--lumina-text-muted);
+  user-select: none;
+}
+
 .linenodiv pre {
   background: var(--lumina-bg-secondary);
   border-right: 1px solid var(--lumina-border);
