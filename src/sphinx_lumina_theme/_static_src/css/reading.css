@@ -208,5 +208,6 @@ div.highlight pre, pre.highlight { padding: 1.125rem 3rem 1.125rem 1.25rem; font
   .lumina-sidebar-nav a { min-height: 2.75rem; }
   #lumina-search-modal > .relative { margin-inline: 0.75rem; }
   .lumina-article .highlight button.copybtn { min-width: 2.75rem; min-height: 2.75rem; top: 0.25rem; right: 0.25rem; }
-  .highlight .lumina-wrap-toggle { right: 3.25rem; }
+  .highlight .lumina-wrap-toggle { right: 0.25rem; }
+  .highlight:has(> button.copybtn) .lumina-wrap-toggle { right: 3.25rem; }
 }

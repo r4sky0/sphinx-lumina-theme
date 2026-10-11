@@ -5,8 +5,8 @@
  * copy button. Click toggles ``data-lumina-wrap="on"`` on the code block;
  * CSS handles the visual wrap state.
  *
- * Disabled entirely when ``html[data-code-wrap]`` is absent (i.e., when
- * the ``code_wrap_toggle`` theme option is set to ``"false"``).
+ * Disabled entirely when ``html[data-code-wrap]`` is absent (i.e., unless
+ * the ``code_wrap_toggle`` theme option is set to ``"true"``; off by default).
  */
 
 const WRAP_ICON_SVG =

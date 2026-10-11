@@ -52,3 +52,21 @@ def test_default_options(tmp_path):
 
     assert html.find("header") is not None
     assert html.find(class_="lumina-sidebar-nav") is not None
+
+
+def test_code_wrap_toggle_is_opt_in(tmp_path):
+    """The wrap-long-lines toggle is off unless code_wrap_toggle is "true"."""
+    src = tmp_path / "src"
+    src.mkdir()
+    (src / "conf.py").write_text('project = "Wrap"\nhtml_theme = "lumina"\n')
+    (src / "index.rst").write_text("Wrap\n====\n\n::\n\n    code\n")
+
+    sphinx_app(src, tmp_path / "default").build()
+    assert "dataset.codeWrap" not in (tmp_path / "default/index.html").read_text()
+
+    sphinx_app(
+        src,
+        tmp_path / "enabled",
+        confoverrides={"html_theme_options.code_wrap_toggle": "true"},
+    ).build()
+    assert "dataset.codeWrap" in (tmp_path / "enabled/index.html").read_text()
