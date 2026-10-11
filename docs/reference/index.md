@@ -94,7 +94,7 @@ Cross-references, glossaries, intersphinx, version directives, and downloads.
 :link-type: doc
 :icon: package
 :icon-style: featured
-Python API docs with functions, classes, autodoc, and cross-referencing.
+API docs for Python, C, C++, JavaScript, and reStructuredText, with autodoc and cross-referencing.
 :::
 
 :::{grid-item-card} HTTP API
