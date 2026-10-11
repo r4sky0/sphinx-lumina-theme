@@ -397,8 +397,11 @@ def test_mobile_tables_stack_rows(page: Page, live_server: str):
 
 
 @pytest.mark.parametrize("width", [390, 1440])
-def test_interactive_tables(page: Page, live_server: str, width):
+def test_interactive_tables(context, live_server: str, width):
     """Opt-in tables filter independently and support keyboard sorting/reset."""
+    # A fresh page, so errors from the landing page's fluid worker (started by
+    # the autouse index visit) cannot leak into this page's error log.
+    page = context.new_page()
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.set_viewport_size({"width": width, "height": 900})
@@ -1042,6 +1045,23 @@ def test_search_keyboard_reaches_heading(page: Page, live_server: str):
         search.press("ArrowDown")
     search.press("Enter")
     expect(page).to_have_url(live_server + hrefs[index])
+
+
+def test_search_repeat_query_keeps_keyboard_selection(page: Page, live_server: str):
+    """A repeated search for the shown query must not reset the selection."""
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    search = modal.get_by_role("searchbox")
+    search.fill("pagefind")
+    links = modal.locator("[data-search-result]")
+    expect(links.nth(1)).to_be_visible()
+    hrefs = links.evaluate_all("els => els.map(el => el.getAttribute('href'))")
+    search.press("ArrowDown")
+    # Re-fire the debounced input search, as opening the modal does on a race.
+    search.dispatch_event("input")
+    page.wait_for_timeout(400)
+    search.press("Enter")
+    expect(page).to_have_url(live_server + hrefs[1])
 
 
 @pytest.mark.parametrize("theme", ["light", "dark"])

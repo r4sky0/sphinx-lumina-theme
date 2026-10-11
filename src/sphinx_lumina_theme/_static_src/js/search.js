@@ -60,6 +60,7 @@ export default function searchModal() {
     pagefind: null,
     _trigger: null,
     _resultCache: new Map(),
+    _shownKey: null,
     backend:
       document.querySelector('meta[name="lumina-search-backend"]')?.content ||
       "pagefind",
@@ -102,6 +103,7 @@ export default function searchModal() {
       this.searching = false;
       this._requestId++;
       this.results = [];
+      this._shownKey = null;
       this.selectedIndex = 0;
       this.error = null;
 
@@ -164,20 +166,25 @@ export default function searchModal() {
     },
 
     async search() {
-      this.error = null;
-      const requestId = ++this._requestId;
       const query = this.query.trim();
       const scope = this.scope;
+      const key = JSON.stringify([query, scope]);
+      // Opening the modal and the debounced input can both search for the same
+      // text. Re-running it must not reset a selection the reader already moved.
+      if (key === this._shownKey && this.results.length) return;
+      this.error = null;
+      const requestId = ++this._requestId;
+      this._shownKey = null;
       this.selectedIndex = 0;
       this.searching = false;
       this.results = [];
       if (!query || !this.loaded) return;
 
-      const key = JSON.stringify([query, scope]);
       const cached = this._resultCache.get(key);
       if (cached) {
         this.error = null;
         this.results = cached;
+        this._shownKey = key;
         return;
       }
 
@@ -218,6 +225,7 @@ export default function searchModal() {
         }
         if (requestId !== this._requestId || query !== this.query.trim() || scope !== this.scope) return;
         this.results = results;
+        this._shownKey = key;
       } catch {
         if (requestId !== this._requestId || query !== this.query.trim() || scope !== this.scope) return;
         this.error = "Instant search is unavailable. Sphinx search covers all docs.";
