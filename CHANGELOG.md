@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.9.8 (2026-10-11)
+
+### Bug Fixes
+
+- **tables**: Keep code blocks inside table cells from widening the table
+  ([#178](https://github.com/r4sky0/sphinx-lumina-theme/pull/178),
+  [`675cefd`](https://github.com/r4sky0/sphinx-lumina-theme/commit/675cefd84140762c7432d2969b26d93d28eaa0f4))
+
+
 ## v2.9.7 (2026-10-11)
 
 ### Bug Fixes
