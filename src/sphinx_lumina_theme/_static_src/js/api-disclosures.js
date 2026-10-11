@@ -4,7 +4,7 @@
  * nested members, cross-references, and the fully readable no-JavaScript page.
  */
 export default function apiDisclosures() {
-  const definitions = [...document.querySelectorAll("dl.http, dl.py, dl.js")];
+  const definitions = [...document.querySelectorAll("dl.http, dl.py, dl.js, dl.c, dl.cpp, dl.rst")];
   const expanded = document.documentElement.dataset.apiExpanded === "true";
   const controls = [];
 
@@ -12,6 +12,8 @@ export default function apiDisclosures() {
     const signatures = [...definition.querySelectorAll(":scope > dt.sig")];
     const body = definition.querySelector(":scope > dd");
     if (!signatures.length || !body || definition.querySelector(":scope > dt > .lumina-api-toggle")) continue;
+    // Signature-only entries have nothing to disclose.
+    if (!body.childElementCount && !body.textContent.trim()) continue;
     body.id ||= `${signatures[0].id || 'api-' + controls.length}-details`;
     const buttons = signatures.map((sig) => {
       const button = document.createElement("button");

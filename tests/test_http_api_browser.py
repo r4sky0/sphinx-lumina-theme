@@ -364,3 +364,23 @@ def test_single_curl_fallback_without_request_panels(page, live_server):
     expect(copy).to_have_text("Copied!")
     assert "/pet/findByStatus" in page.evaluate("window.copiedCurl")
     expect(endpoint.locator(":scope > dd")).to_be_hidden()
+
+
+def test_other_language_domains_share_api_layout(page, live_server):
+    """C, C++, JavaScript, and rST definitions get the same layout as Python."""
+    page.goto(f"{live_server}/reference/api-documentation.html")
+    for domain in ["c", "cpp", "js", "rst"]:
+        definition = page.locator(f"dl.{domain}").first
+        expect(definition.locator(":scope > dt > .lumina-api-toggle")).to_have_count(1)
+        signature = definition.locator(":scope > dt.sig")
+        # Identifiers never gain hyphens and `template<>` never becomes a ligature.
+        assert signature.evaluate("el => getComputedStyle(el).hyphens") == "none"
+        assert (
+            signature.evaluate("el => getComputedStyle(el).fontVariantLigatures")
+            == "none"
+        )
+    page.get_by_role("button", name="Expand all", exact=True).click()
+    fields = page.locator("dl.c > dd > dl.field-list").first
+    expect(fields).to_be_visible()
+    assert fields.evaluate("el => getComputedStyle(el).display") == "grid"
+    assert fields.evaluate("el => getComputedStyle(el).borderTopStyle") == "none"

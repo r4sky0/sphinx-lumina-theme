@@ -120,7 +120,7 @@
 /* Match Tailwind's base layer so this wins over its important [hidden] reset. */
 @layer base {
   @media print {
-    :is(dl.http, dl.py, dl.js) > dd[hidden] {
+    dl:has(> dt.sig) > dd[hidden] {
       display: block !important;
     }
   }
