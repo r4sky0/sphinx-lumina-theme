@@ -102,7 +102,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 2.9.4.
+This documentation is for Sphinx Lumina Theme version 2.9.7.
 
 The MyST syntax:
 
@@ -121,7 +121,7 @@ myst_substitutions = {
 
 ## Version Directives
 
-Document when features were added, changed, or deprecated.
+Document when features were added, changed, deprecated, or removed.
 
 #### Versionadded
 Added in version 1.2.0: The `nav_links` option now supports dropdown menus via the `children` key.
@@ -131,6 +131,9 @@ Changed in version 1.5.0: The `search_backend` option now defaults to `"pagefind
 
 #### Deprecated
 Deprecated since version 1.8.0: The `legacy_search` option. Use `search_backend` instead.
+
+#### Versionremoved
+Removed in version 2.0.0: The `legacy_search` option. Set `search_backend` instead.
 
 The MyST syntax:
 
@@ -145,6 +148,10 @@ Description of what changed.
 
 ```{deprecated} 0.3.0
 Description of what was deprecated.
+```
+
+```{versionremoved} 0.4.0
+Description of what was removed.
 ```
 ```
 

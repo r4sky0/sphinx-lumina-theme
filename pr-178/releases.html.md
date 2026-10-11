@@ -1,5 +1,29 @@
 # Releases
 
+## v2.9.7 (2026-10-11)
+
+### Bug Fixes
+
+- **css**: Style docutils elements that basic.css used to cover
+  ([#176](https://github.com/r4sky0/sphinx-lumina-theme/pull/176),
+  [`a84c862`](https://github.com/r4sky0/sphinx-lumina-theme/commit/a84c8627892d0153489856266ea65dd4586db50c))
+
+## v2.9.6 (2026-10-11)
+
+### Bug Fixes
+
+- **code**: Make the wrap toggle opt-in and fill the corner without copybutton
+  ([#177](https://github.com/r4sky0/sphinx-lumina-theme/pull/177),
+  [`5a71499`](https://github.com/r4sky0/sphinx-lumina-theme/commit/5a7149989fb286234f33f067539b7bf4304ce497))
+
+## v2.9.5 (2026-10-11)
+
+### Bug Fixes
+
+- **api**: Style C, C++, rST, and other Sphinx domains like Python
+  ([#175](https://github.com/r4sky0/sphinx-lumina-theme/pull/175),
+  [`aa8c4f5`](https://github.com/r4sky0/sphinx-lumina-theme/commit/aa8c4f535837a91c5ea84ea89bc09fb3f91f2a98))
+
 ## v2.9.4 (2026-10-10)
 
 ### Bug Fixes

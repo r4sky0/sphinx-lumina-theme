@@ -151,8 +151,8 @@ Lucide icons are designed on a 24×24 grid with 2-unit-wide strokes. When a Luci
   - Description
 * - `code_wrap_toggle`
   - string
-  - `"true"`
-  - Show a "wrap long lines" button on every code block, next to the copy button. Per-block — turning wrap on for one block leaves others unaffected. Set `"false"` to hide the button entirely.
+  - `"false"`
+  - Set `"true"` to show a "wrap long lines" button on every code block, next to the copy button. Per-block — turning wrap on for one block leaves others unaffected. Code never wraps until a reader turns it on.
 ```
 
 ### Images
@@ -504,7 +504,7 @@ html_theme_options = {
     "show_back_to_top": "true",
 
     # Code blocks
-    "code_wrap_toggle": "true",
+    "code_wrap_toggle": "false",
 
     # Images
     "image_lightbox": "false",

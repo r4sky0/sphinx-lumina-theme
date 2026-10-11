@@ -155,6 +155,56 @@ The MyST syntax:
 <kbd>Ctrl</kbd>+<kbd>C</kbd>
 ```
 
+## Topics and Sidebars
+
+A topic is a titled, self-contained block that sits in the flow of the page. A sidebar floats beside the text for asides and related notes; on narrow screens it stacks above the text instead.
+
+> ##### Before you begin
+> 
+> You need Sphinx 7 or newer and Python 3.10+. Everything else installs with the theme.
+
+Lumina styles both with the same quiet surface used for code captions, so they read as supporting material rather than warnings. Use a sidebar for tangents a reader can skip, like a historical note or an alternative approach, and keep it short so it ends before the next heading. Use a topic when the content belongs in the reading order but deserves its own frame.
+
+The MyST syntax:
+
+```markdown
+```{topic} Before you begin
+Topic body.
+```
+
+```{sidebar} Did you know?
+Sidebar body.
+```
+```
+
+## Rubrics
+
+A rubric is an informal heading: it labels the content that follows without creating a section or a table-of-contents entry.
+
+### Related options
+
+`show_toc`, `show_breadcrumbs`, and `show_prev_next` control the page chrome around the article.
+
+The MyST syntax:
+
+```markdown
+```{rubric} Related options
+```
+```
+
+## GUI Labels and Menus
+
+Mark up interface text the reader should look for on screen. Menu paths are joined with arrows.
+
+Click Save changes, then open Settings ‣ Appearance ‣ Theme.
+
+The MyST syntax:
+
+```markdown
+{guilabel}`Save changes`
+{menuselection}`Settings --> Appearance --> Theme`
+```
+
 ## Links
 
 Standard Markdown links work as expected.

@@ -61,6 +61,15 @@ e^{i\pi} + 1 = 0
 See equation {eq}`euler`.
 ```
 
+## Long Equations
+
+Equations wider than the column scroll sideways inside their own box, so the page never scrolls. The equation number stays visible beside the formula. Narrow your browser window to try it.
+
+<a id="equation-laplacian"></a>
+$$
+\nabla^2 f = \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial f}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial f}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 f}{\partial \phi^2}
+$$
+
 ## Multi-line Equations
 
 Use the `amsmath` environment for aligned multi-line equations.
@@ -75,7 +84,7 @@ $$
 \end{aligned}
 $$
 
-Maxwell’s equations [(2)](#equation-maxwell) describe classical electromagnetism.
+Maxwell’s equations [(3)](#equation-maxwell) describe classical electromagnetism.
 
 ## Piecewise Functions
 
