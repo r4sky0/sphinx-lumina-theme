@@ -1,8 +1,10 @@
 """Browser-based tests using Playwright."""
 
+import base64
 import sys
 
 import pytest
+from conftest import sphinx_app
 from playwright.sync_api import Page, expect
 
 
@@ -1092,3 +1094,165 @@ def test_code_blocks_in_tables_scroll_inside_their_cell(
     assert sizes["narrowest"] >= 200
     assert sizes["page"] <= 0
     assert sizes["scrolls"]
+
+
+def test_code_wrap_toggle_takes_corner_without_copy_button(
+    page: Page, live_server: str
+):
+    """The wrap toggle sits beside the copy button, or in the corner without one."""
+    page.goto(f"{live_server}/reference/code-blocks.html")
+    page.locator(".lumina-article div.highlight:has(> button.copybtn)").first.evaluate(
+        "el => el.dataset.testBlock = ''"
+    )
+    block = page.locator("[data-test-block]")
+    toggle = block.locator(":scope > .lumina-wrap-toggle")
+    expect(toggle).to_have_count(1)
+
+    def right_gap():
+        return block.evaluate("""el => el.getBoundingClientRect().right
+            - el.querySelector('.lumina-wrap-toggle').getBoundingClientRect().right""")
+
+    beside_copy = right_gap()
+    block.evaluate("el => el.querySelector(':scope > button.copybtn').remove()")
+    assert right_gap() < beside_copy
+    assert right_gap() <= 12
+
+
+# ── Docutils body elements (Lumina drops Sphinx basic.css) ──
+
+PIXEL = base64.b64decode(
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+)
+
+DOCUTILS_INDEX = """\
+Elements
+========
+
+.. sidebar:: Sidebar title
+
+   Sidebar body.
+
+.. topic:: Topic title
+
+   Topic body.
+
+.. rubric:: A rubric
+
+.. centered:: Centered text
+
+.. image:: pixel.png
+   :align: right
+   :width: 40px
+
+Inline |pixel| image.
+
+.. |pixel| image:: pixel.png
+
+| Line one
+|     Nested line
+
+Term : classifier
+   Definition.
+
+.. versionremoved:: 1.0
+   Gone.
+
+.. productionlist::
+   rule: "a" | "b"
+
+.. math::
+   :label: wide
+
+   a + b
+
+Footnote [#f]_.
+
+.. [#f] The footnote.
+
+=====  =========================
+A      body row with several words
+=====  =========================
+
+Section
+-------
+
+Body.
+"""
+
+
+@pytest.fixture(scope="module")
+def docutils_elements_page(tmp_path_factory):
+    src = tmp_path_factory.mktemp("docutils_src")
+    (src / "conf.py").write_text('project = "Elements"\nhtml_theme = "lumina"\n')
+    (src / "index.rst").write_text(DOCUTILS_INDEX)
+    (src / "pixel.png").write_bytes(PIXEL)
+    out = tmp_path_factory.mktemp("docutils_build")
+    sphinx_app(src, out).build()
+    return (out / "index.html").as_uri()
+
+
+def computed_style(
+    page: Page, selector: str, prop: str, pseudo: str | None = None
+) -> str:
+    return page.locator(f".lumina-article {selector}").first.evaluate(
+        "(el, [prop, pseudo]) => getComputedStyle(el, pseudo)[prop]", [prop, pseudo]
+    )
+
+
+def test_docutils_elements_are_styled(page: Page, docutils_elements_page: str):
+    page.set_viewport_size({"width": 1280, "height": 900})
+    page.goto(docutils_elements_page)
+
+    assert computed_style(page, "aside.sidebar", "float") == "right"
+    assert computed_style(page, "img.align-right", "float") == "right"
+    assert computed_style(page, "aside.topic", "borderTopStyle") == "solid"
+    assert computed_style(page, "p.rubric", "fontWeight") == "600"
+    assert computed_style(page, "p.centered", "textAlign") == "center"
+    assert computed_style(page, "p img", "display") == "inline-block"
+    assert computed_style(page, ".line-block .line-block", "marginLeft") != "0px"
+    assert computed_style(page, "dt .classifier", "content", "::before") == '":"'
+    assert computed_style(page, "div.versionremoved", "borderLeftStyle") == "solid"
+    assert computed_style(page, "pre:has(> strong)", "overflowX") == "auto"
+    assert computed_style(page, "aside.footnote > span.label", "float") == "left"
+    assert computed_style(page, "td", "hyphens") == "none"
+    assert computed_style(page, "section > h2", "clear") == "both"
+
+
+def test_floats_stack_on_narrow_screens(page: Page, docutils_elements_page: str):
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(docutils_elements_page)
+
+    assert computed_style(page, "aside.sidebar", "float") == "none"
+    assert computed_style(page, "img.align-right", "float") == "none"
+
+
+@pytest.mark.parametrize("width", [390, 1280])
+def test_wide_math_scrolls_beside_its_number(
+    page: Page, docutils_elements_page: str, width: int
+):
+    """A wide equation scrolls in its own box; its number stays visible beside it."""
+    page.set_viewport_size({"width": width, "height": 900})
+    page.goto(docutils_elements_page)
+    # Stand in for MathJax output so the check needs no network access.
+    layout = page.locator(".lumina-article div.math").evaluate("""math => {
+        const formula = document.createElement('mjx-container');
+        formula.setAttribute('display', 'true');
+        formula.style.display = 'block';
+        formula.innerHTML = '<span style="display:inline-block;width:1500px;height:1em"></span>';
+        [...math.childNodes].filter(n => n.nodeType === Node.TEXT_NODE).forEach(n => n.remove());
+        math.append(formula);
+        const box = formula.getBoundingClientRect();
+        const number = math.querySelector('.eqno').getBoundingClientRect();
+        return {
+            page: document.documentElement.scrollWidth - innerWidth,
+            scrolls: formula.scrollWidth > formula.clientWidth,
+            numberAfterFormula: number.left >= box.right,
+            numberInside: number.right <= math.getBoundingClientRect().right + 1,
+        };
+    }""")
+    assert layout == {
+        "page": 0,
+        "scrolls": True,
+        "numberAfterFormula": True,
+        "numberInside": True,
+    }

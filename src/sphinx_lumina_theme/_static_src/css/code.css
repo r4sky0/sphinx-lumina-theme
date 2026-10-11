@@ -19,6 +19,16 @@ pre.highlight {
   font-variant-ligatures: none;
 }
 
+/* Inline line numbers (``:linenos:`` with Pygments inline mode) */
+div.highlight span.linenos {
+  display: inline-block;
+  min-width: 1.5rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: var(--lumina-text-muted);
+  user-select: none;
+}
+
 .linenodiv pre {
   background: var(--lumina-bg-secondary);
   border-right: 1px solid var(--lumina-border);
@@ -92,11 +102,13 @@ div.highlight {
   position: relative;
 }
 
-/* ── Wrap-long-lines toggle button (sits left of copy button) ── */
+/* ── Wrap-long-lines toggle button ──
+   Takes the corner on its own; moves left only when sphinx-copybutton
+   has added a copy button to the same block. */
 .highlight .lumina-wrap-toggle {
   position: absolute;
   top: 0.5rem;
-  right: 2.75rem;
+  right: 0.5rem;
   width: 2rem;
   height: 2rem;
   padding: 0;
@@ -111,6 +123,10 @@ div.highlight {
   opacity: 0;
   z-index: 1;
   transition: opacity 0.15s, background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.highlight:has(> button.copybtn) .lumina-wrap-toggle {
+  right: 2.75rem;
 }
 
 div.highlight:hover .lumina-wrap-toggle,

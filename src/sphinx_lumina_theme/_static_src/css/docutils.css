@@ -1,0 +1,277 @@
+/* ── Docutils / Sphinx body elements ──
+   Lumina replaces Sphinx's basic.css, so every element basic.css used to
+   lay out (floats, sidebars, topics, rubrics, footnotes, equation numbers …)
+   is styled here with Lumina tokens. */
+
+/* ── Alignment (images, figures, tables) ── */
+.lumina-article .align-left {
+  float: left;
+  clear: left;
+  margin: 0.25rem 1.5rem 1rem 0;
+}
+
+.lumina-article .align-right {
+  float: right;
+  clear: right;
+  margin: 0.25rem 0 1rem 1.5rem;
+}
+
+.lumina-article img.align-center,
+.lumina-article figure.align-center > img,
+.lumina-article figure.align-center > a > img {
+  margin-inline: auto;
+}
+
+.lumina-article figure.align-center {
+  text-align: center;
+}
+
+/* Standalone images get the same vertical rhythm as other blocks. */
+.lumina-article section > img,
+.lumina-article section > a.image-reference > img {
+  margin-block: 1.25rem;
+}
+
+/* Floats never leak past the next heading. */
+.lumina-article section > :is(h1, h2, h3, h4, h5, h6) {
+  clear: both;
+}
+
+/* Inline images (substitutions, badges) stay on the text line. */
+.lumina-article :is(p, li, td, th, h1, h2, h3, h4, h5, h6) img:not([class*="align-"]) {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ── Figures ── */
+.lumina-article figure {
+  margin-block: 1.5rem;
+}
+
+.lumina-article figure.align-left,
+.lumina-article figure.align-right {
+  max-width: 50%;
+  margin-top: 0.25rem;
+}
+
+.lumina-article figcaption {
+  margin-top: 0.625rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--lumina-text-muted);
+}
+
+.lumina-article figcaption > p {
+  margin-bottom: 0.25rem;
+}
+
+.lumina-article figcaption:hover > p > a.headerlink {
+  opacity: 0.6;
+}
+
+.lumina-article figcaption .legend {
+  margin-top: 0.5rem;
+  text-align: start;
+}
+
+/* ── Sidebar directive ── */
+.lumina-article aside.sidebar {
+  float: right;
+  clear: right;
+  width: min(40%, 18rem);
+  margin: 0.25rem 0 1.25rem 1.5rem;
+  padding: 1rem 1.125rem;
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.5rem;
+  background: var(--lumina-bg-secondary);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.lumina-article aside.sidebar > :last-child {
+  margin-bottom: 0;
+}
+
+.lumina-article aside.sidebar img {
+  margin-block: 0.5rem;
+}
+
+/* ── Topic directive and docutils ``contents`` ── */
+.lumina-article :is(aside.topic, div.topic, nav.contents) {
+  margin-block: 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.5rem;
+  background: var(--lumina-bg-secondary);
+}
+
+.lumina-article :is(aside.topic, div.topic, nav.contents) > :last-child {
+  margin-bottom: 0;
+}
+
+.lumina-article :is(.sidebar-title, .topic-title) {
+  margin-bottom: 0.375rem;
+  font-weight: 600;
+  color: var(--lumina-text);
+}
+
+.lumina-article .sidebar-subtitle {
+  margin-top: -0.25rem;
+  font-size: 0.8125rem;
+  color: var(--lumina-text-muted);
+}
+
+/* ── Rubric (informal heading) ── */
+.lumina-article p.rubric {
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--lumina-text);
+}
+
+/* ── Centered text ── */
+.lumina-article p.centered {
+  text-align: center;
+}
+
+/* ── Line blocks keep nested indentation ── */
+.lumina-article div.line-block {
+  margin-bottom: 1.25rem;
+}
+
+.lumina-article div.line-block div.line-block {
+  margin: 0 0 0 1.5rem;
+}
+
+/* ── Production lists (Sphinx grammar) ── */
+.lumina-article :is(pre.productionlist, .productionlist > pre, pre:has(> strong[id^="grammar-token"])) {
+  margin-block: 1.25rem;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  border: 1px solid color-mix(in srgb, var(--lumina-accent) 10%, var(--lumina-border));
+  border-radius: 0.5rem;
+  background: var(--lumina-code-bg);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  font-variant-ligatures: none;
+}
+
+.lumina-article pre strong[id^="grammar-token"] {
+  font-weight: 600;
+  color: var(--lumina-text);
+}
+
+/* ── Definition list classifiers (``term : classifier``) ── */
+.lumina-article dt .classifier {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--lumina-text-muted);
+}
+
+.lumina-article dt .classifier::before {
+  content: ":";
+  display: inline-block;
+  margin-inline: 0.4em;
+  font-style: normal;
+}
+
+/* ── Option lists: options are typed, so use the code face ── */
+.lumina-article dl.option-list kbd {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 400;
+  font-variant-ligatures: none;
+  color: var(--lumina-text);
+}
+
+/* ── GUI labels and menu selections ── */
+.lumina-article :is(.guilabel, .menuselection) {
+  padding: 0.0625rem 0.375rem;
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.25rem;
+  background: var(--lumina-bg-secondary);
+  font-size: 0.9375em;
+  font-weight: 500;
+  white-space: normal;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ── Display math ──
+   Wide equations scroll inside their own box instead of widening the page.
+   The equation number sits beside that box, so it stays visible and never
+   covers the formula. Works for MathJax, KaTeX, and imgmath output. */
+.lumina-article div.math {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lumina-article div.math > :not(.eqno) {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+}
+
+.lumina-article span.eqno {
+  order: 1;
+  flex: none;
+  color: var(--lumina-text-muted);
+}
+
+.lumina-article div.math:hover a.headerlink {
+  opacity: 0.6;
+}
+
+/* ── Footnotes and citations ── */
+.lumina-article :is(aside.footnote-list, div.citation-list) {
+  margin-block: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.lumina-article :is(aside.footnote, div.citation) {
+  display: flow-root;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  scroll-margin-top: 6rem;
+}
+
+.lumina-article :is(aside.footnote, div.citation) > span.label {
+  float: left;
+  min-width: 2.5rem;
+  font-weight: 600;
+  color: var(--lumina-text);
+}
+
+.lumina-article :is(aside.footnote, div.citation) > span.backrefs {
+  float: left;
+  margin-right: 0.5em;
+  color: var(--lumina-text-muted);
+}
+
+.lumina-article :is(aside.footnote, div.citation) > :not(span) {
+  margin-left: 2.5rem;
+  margin-bottom: 0.375rem;
+}
+
+.lumina-article :is(aside.footnote, div.citation) > :last-child {
+  margin-bottom: 0;
+}
+
+.lumina-article :is(aside.footnote, div.citation):target {
+  background: var(--lumina-accent-light);
+}
+
+/* ── Narrow screens: stack instead of float ── */
+@media (max-width: 39.999rem) {
+  .lumina-article :is(.align-left, .align-right, aside.sidebar) {
+    float: none;
+    width: auto;
+    max-width: 100%;
+    margin-inline: 0;
+  }
+}

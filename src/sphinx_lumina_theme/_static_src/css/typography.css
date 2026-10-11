@@ -9,8 +9,9 @@
   hyphens: auto;
 }
 
-/* Hyphenation may be enabled for prose, but must not change code spelling. */
-.lumina-article :is(code, pre, kbd, samp) {
+/* Hyphenation may be enabled for prose, but must not change code spelling
+   or break words in narrow table columns. */
+.lumina-article :is(code, pre, kbd, samp, th, td) {
   -webkit-hyphens: none;
   hyphens: none;
 }

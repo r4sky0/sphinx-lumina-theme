@@ -980,6 +980,7 @@ a.headerlink[data-tooltip].lumina-tooltip-visible::after {
 }
 
 @import "./typography.css";
+@import "./docutils.css";
 @import "./admonitions.css";
 @import "./code.css";
 @import "./lightbox.css";
