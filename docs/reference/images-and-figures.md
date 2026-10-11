@@ -77,6 +77,32 @@ Images can be aligned left, center, or right within the content area.
 
 ::::
 
+### Wrapping Text Around Images
+
+Left- and right-aligned images float, so the paragraphs that follow wrap around them. Floats end at the next heading, and on narrow screens the image stacks above the text.
+
+```{image} _images/placeholder-square.svg
+:alt: Right-aligned image with wrapping text
+:width: 160px
+:align: right
+```
+
+Lumina keeps the gutter between a floated image and the text at the same spacing as other blocks, so the column stays easy to scan. This paragraph and the next wrap around the image on the right. Put the image just before the text it illustrates, and keep it small enough that a few lines still fit beside it.
+
+A centered image or figure stands alone, with its caption centered underneath. Use centering for diagrams that need the full attention of the reader, and floats for supporting pictures.
+
+The MyST syntax:
+
+~~~markdown
+```{image} path/to/image.png
+:alt: Description
+:width: 160px
+:align: right
+```
+
+Text that wraps around the image.
+~~~
+
 ## Figures
 
 Figures wrap an image with a caption and optional legend. Use them when an image needs explanation or attribution.
