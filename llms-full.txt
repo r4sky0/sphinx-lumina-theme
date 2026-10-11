@@ -2357,7 +2357,7 @@ myst_substitutions = {
 
 ## Version Directives
 
-Document when features were added, changed, or deprecated.
+Document when features were added, changed, deprecated, or removed.
 
 #### Versionadded
 Added in version 1.2.0: The `nav_links` option now supports dropdown menus via the `children` key.
@@ -2367,6 +2367,9 @@ Changed in version 1.5.0: The `search_backend` option now defaults to `"pagefind
 
 #### Deprecated
 Deprecated since version 1.8.0: The `legacy_search` option. Use `search_backend` instead.
+
+#### Versionremoved
+Removed in version 2.0.0: The `legacy_search` option. Set `search_backend` instead.
 
 The MyST syntax:
 
@@ -2381,6 +2384,10 @@ Description of what changed.
 
 ```{deprecated} 0.3.0
 Description of what was deprecated.
+```
+
+```{versionremoved} 0.4.0
+Description of what was removed.
 ```
 ```
 
@@ -3106,6 +3113,28 @@ Images can be aligned left, center, or right within the content area.
 ![Right-aligned image](reference/_images/placeholder-square.svg)
 
 **Right** — text wraps around the left side.
+
+### Wrapping Text Around Images
+
+Left- and right-aligned images float, so the paragraphs that follow wrap around them. Floats end at the next heading, and on narrow screens the image stacks above the text.
+
+![Right-aligned image with wrapping text](reference/_images/placeholder-square.svg)
+
+Lumina keeps the gutter between a floated image and the text at the same spacing as other blocks, so the column stays easy to scan. This paragraph and the next wrap around the image on the right. Put the image just before the text it illustrates, and keep it small enough that a few lines still fit beside it.
+
+A centered image or figure stands alone, with its caption centered underneath. Use centering for diagrams that need the full attention of the reader, and floats for supporting pictures.
+
+The MyST syntax:
+
+```markdown
+```{image} path/to/image.png
+:alt: Description
+:width: 160px
+:align: right
+```
+
+Text that wraps around the image.
+```
 
 ## Figures
 
@@ -3967,6 +3996,15 @@ e^{i\pi} + 1 = 0
 See equation {eq}`euler`.
 ```
 
+## Long Equations
+
+Equations wider than the column scroll sideways inside their own box, so the page never scrolls. The equation number stays visible beside the formula. Narrow your browser window to try it.
+
+<a id="equation-laplacian"></a>
+$$
+\nabla^2 f = \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial f}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial f}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 f}{\partial \phi^2}
+$$
+
 ## Multi-line Equations
 
 Use the `amsmath` environment for aligned multi-line equations.
@@ -3981,7 +4019,7 @@ $$
 \end{aligned}
 $$
 
-Maxwell’s equations [(2)](#equation-maxwell) describe classical electromagnetism.
+Maxwell’s equations [(3)](#equation-maxwell) describe classical electromagnetism.
 
 ## Piecewise Functions
 
@@ -6447,6 +6485,56 @@ The MyST syntax:
 
 ```html
 <kbd>Ctrl</kbd>+<kbd>C</kbd>
+```
+
+## Topics and Sidebars
+
+A topic is a titled, self-contained block that sits in the flow of the page. A sidebar floats beside the text for asides and related notes; on narrow screens it stacks above the text instead.
+
+> ##### Before you begin
+> 
+> You need Sphinx 7 or newer and Python 3.10+. Everything else installs with the theme.
+
+Lumina styles both with the same quiet surface used for code captions, so they read as supporting material rather than warnings. Use a sidebar for tangents a reader can skip, like a historical note or an alternative approach, and keep it short so it ends before the next heading. Use a topic when the content belongs in the reading order but deserves its own frame.
+
+The MyST syntax:
+
+```markdown
+```{topic} Before you begin
+Topic body.
+```
+
+```{sidebar} Did you know?
+Sidebar body.
+```
+```
+
+## Rubrics
+
+A rubric is an informal heading: it labels the content that follows without creating a section or a table-of-contents entry.
+
+### Related options
+
+`show_toc`, `show_breadcrumbs`, and `show_prev_next` control the page chrome around the article.
+
+The MyST syntax:
+
+```markdown
+```{rubric} Related options
+```
+```
+
+## GUI Labels and Menus
+
+Mark up interface text the reader should look for on screen. Menu paths are joined with arrows.
+
+Click Save changes, then open Settings ‣ Appearance ‣ Theme.
+
+The MyST syntax:
+
+```markdown
+{guilabel}`Save changes`
+{menuselection}`Settings --> Appearance --> Theme`
 ```
 
 ## Links

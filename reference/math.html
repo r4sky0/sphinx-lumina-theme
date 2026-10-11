@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-04T09:02:51+00:00" />
+    <meta property="article:modified_time" content="2026-10-11T09:07:11+00:00" />
     <title>Math &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=43737dba" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=83c3d055" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -75,7 +75,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Reference", "item": "https://r4sky0.github.io/sphinx-lumina-theme/reference/index.html"}, {"@type": "ListItem", "position": 3, "name": "Math", "item": "https://r4sky0.github.io/sphinx-lumina-theme/reference/math.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Math", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Mathematical notation rendered by MathJax. Enabled by the dollarmath and amsmath MyST extensions.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/reference/math.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/reference/math.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-04-04T00:00:00+00:00", "dateModified": "2026-04-04T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Math", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Mathematical notation rendered by MathJax. Enabled by the dollarmath and amsmath MyST extensions.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/reference/math.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/reference/math.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-10-11T00:00:00+00:00", "dateModified": "2026-10-11T00:00:00+00:00"}</script>
         
         
     
@@ -759,6 +759,7 @@ document.documentElement.style.setProperty(
 <li><a class="reference internal" href="#inline-math">Inline Math</a></li>
 <li><a class="reference internal" href="#display-math">Display Math</a></li>
 <li><a class="reference internal" href="#labeled-equations">Labeled Equations</a></li>
+<li><a class="reference internal" href="#long-equations">Long Equations</a></li>
 <li><a class="reference internal" href="#multi-line-equations">Multi-line Equations</a></li>
 <li><a class="reference internal" href="#piecewise-functions">Piecewise Functions</a></li>
 <li><a class="reference internal" href="#matrix-notation">Matrix Notation</a></li>
@@ -830,17 +831,23 @@ See equation {eq}`euler`.
 </pre></div>
 </div>
 </section>
+<section id="long-equations">
+<h2 id="lumina-search-long-equations">Long Equations<a class="headerlink" href="#long-equations" title="Link to this heading">¶</a></h2>
+<p>Equations wider than the column scroll sideways inside their own box, so the page never scrolls. The equation number stays visible beside the formula. Narrow your browser window to try it.</p>
+<div class="math notranslate nohighlight" id="equation-laplacian">
+<span class="eqno">(2)<a class="headerlink" href="#equation-laplacian" title="Link to this equation">¶</a></span>\[\nabla^2 f = \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial f}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial f}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 f}{\partial \phi^2}\]</div>
+</section>
 <section id="multi-line-equations">
 <h2 id="lumina-search-multi-line-equations">Multi-line Equations<a class="headerlink" href="#multi-line-equations" title="Link to this heading">¶</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">amsmath</span></code> environment for aligned multi-line equations.</p>
 <div class="math notranslate nohighlight" id="equation-maxwell">
-<span class="eqno">(2)<a class="headerlink" href="#equation-maxwell" title="Link to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(3)<a class="headerlink" href="#equation-maxwell" title="Link to this equation">¶</a></span>\[\begin{split}\begin{aligned}
 \nabla \cdot \mathbf{E} &amp;= \frac{\rho}{\varepsilon_0} \\
 \nabla \cdot \mathbf{B} &amp;= 0 \\
 \nabla \times \mathbf{E} &amp;= -\frac{\partial \mathbf{B}}{\partial t} \\
 \nabla \times \mathbf{B} &amp;= \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
 \end{aligned}\end{split}\]</div>
-<p>Maxwell’s equations <a class="reference internal" href="#equation-maxwell">(2)</a> describe classical electromagnetism.</p>
+<p>Maxwell’s equations <a class="reference internal" href="#equation-maxwell">(3)</a> describe classical electromagnetism.</p>
 </section>
 <section id="piecewise-functions">
 <h2 id="lumina-search-piecewise-functions">Piecewise Functions<a class="headerlink" href="#piecewise-functions" title="Link to this heading">¶</a></h2>
@@ -1108,7 +1115,7 @@ a_{31} &amp; a_{32} &amp; a_{33}
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>April 4, 2026</time>
+            Last updated <time>October 11, 2026</time>
         </p>
     
     
@@ -1136,6 +1143,7 @@ a_{31} &amp; a_{32} &amp; a_{33}
 <li><a class="reference internal" href="#inline-math">Inline Math</a></li>
 <li><a class="reference internal" href="#display-math">Display Math</a></li>
 <li><a class="reference internal" href="#labeled-equations">Labeled Equations</a></li>
+<li><a class="reference internal" href="#long-equations">Long Equations</a></li>
 <li><a class="reference internal" href="#multi-line-equations">Multi-line Equations</a></li>
 <li><a class="reference internal" href="#piecewise-functions">Piecewise Functions</a></li>
 <li><a class="reference internal" href="#matrix-notation">Matrix Notation</a></li>
