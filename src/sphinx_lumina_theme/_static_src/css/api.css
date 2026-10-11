@@ -213,7 +213,8 @@ dt.sig .nb { color: var(--lumina-accent); }         /* builtins (str, int, etc.)
 /* ── Version directives ── */
 .versionadded,
 .versionchanged,
-div.deprecated {
+div.deprecated,
+div.versionremoved {
   margin: 1rem 0;
   padding: 0.5rem 0.75rem;
   border-radius: 0.375rem;
@@ -235,6 +236,11 @@ div.deprecated {
   background: color-mix(in srgb, var(--lumina-adm-warning) 5%, var(--lumina-bg));
 }
 
+div.versionremoved {
+  border-left: 3px solid var(--lumina-adm-danger);
+  background: color-mix(in srgb, var(--lumina-adm-danger) 5%, var(--lumina-bg));
+}
+
 .versionmodified {
   font-weight: 600;
   font-size: 0.8125rem;
@@ -243,11 +249,13 @@ div.deprecated {
 .versionmodified.added { color: var(--lumina-adm-tip); }
 .versionmodified.changed { color: var(--lumina-adm-note); }
 .versionmodified.deprecated { color: var(--lumina-adm-warning-text); }
+.versionmodified.removed { color: var(--lumina-adm-danger); }
 
 /* Version directives contain a single p — remove its margin */
 .versionadded > p,
 .versionchanged > p,
-div.deprecated > p {
+div.deprecated > p,
+div.versionremoved > p {
   margin-bottom: 0;
 }
 

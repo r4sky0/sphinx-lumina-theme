@@ -118,7 +118,7 @@ myst_substitutions = {
 
 ## Version Directives
 
-Document when features were added, changed, or deprecated.
+Document when features were added, changed, deprecated, or removed.
 
 ```{versionadded} 1.2.0
 The `nav_links` option now supports dropdown menus via the `children` key.
@@ -130,6 +130,10 @@ The `search_backend` option now defaults to `"pagefind"` instead of `"sphinx"`.
 
 ```{deprecated} 1.8.0
 The `legacy_search` option. Use `search_backend` instead.
+```
+
+```{versionremoved} 2.0.0
+The `legacy_search` option. Set `search_backend` instead.
 ```
 
 The MyST syntax:
@@ -145,6 +149,10 @@ Description of what changed.
 
 ```{deprecated} 0.3.0
 Description of what was deprecated.
+```
+
+```{versionremoved} 0.4.0
+Description of what was removed.
 ```
 ~~~
 
