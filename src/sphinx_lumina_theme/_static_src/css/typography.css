@@ -285,6 +285,19 @@
   vertical-align: top;
 }
 
+/* Auto table layout sizes a column to its longest unbreakable line, so one
+   long code line widened the whole table. Zero width removes the block from
+   that calculation; min-width fills the cell, and the pre scrolls. The cell
+   claims the spare width so the code column does not collapse. */
+.lumina-article :is(td, th):has(> :is(div[class*="highlight"], .literal-block-wrapper)) {
+  width: 100%;
+}
+
+.lumina-article :is(td, th) > :is(div[class*="highlight"], .literal-block-wrapper) {
+  width: 0;
+  min-width: 100%;
+}
+
 .lumina-article th.text-center,
 .lumina-article td.text-center { text-align: center; }
 .lumina-article th.text-right,
@@ -428,6 +441,12 @@
     border-radius: 0.5rem;
     margin-bottom: 0.75rem;
     background: color-mix(in srgb, var(--lumina-accent) 2%, var(--lumina-bg));
+  }
+
+  /* Stacked cells are grids that already bound their content. */
+  .lumina-article table.lumina-table-stackable td > :is(div[class*="highlight"], .literal-block-wrapper) {
+    width: auto;
+    min-width: 0;
   }
 
   .lumina-article table.lumina-table-stackable td {

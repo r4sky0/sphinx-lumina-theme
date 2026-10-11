@@ -1063,3 +1063,32 @@ def test_search_keyboard_focus_indicators(page: Page, theme: str):
     expect(modal.locator("[data-search-result]").first).to_have_css(
         "outline-width", "2px"
     )
+
+
+@pytest.mark.parametrize("width", [390, 1440])
+def test_code_blocks_in_tables_scroll_inside_their_cell(
+    page: Page, live_server: str, width: int
+):
+    """A long code line scrolls in its cell instead of widening the table."""
+    page.set_viewport_size({"width": width, "height": 900})
+    page.goto(f"{live_server}/reference/lists-and-tables.html")
+    page.wait_for_function("() => window.Alpine !== undefined")
+
+    table = page.locator(".lumina-article table:has(pre)").first
+    table.scroll_into_view_if_needed()
+    sizes = table.evaluate("""table => {
+        const article = document.querySelector('.lumina-article');
+        const pres = [...table.querySelectorAll('pre')];
+        return {
+            table: table.getBoundingClientRect().right,
+            article: article.getBoundingClientRect().right,
+            page: document.documentElement.scrollWidth - innerWidth,
+            scrolls: pres.some(pre => pre.scrollWidth > pre.clientWidth),
+            narrowest: Math.min(...pres.map(pre => pre.clientWidth)),
+        };
+    }""")
+    assert sizes["table"] <= sizes["article"] + 1
+    # The code column keeps a usable width instead of collapsing.
+    assert sizes["narrowest"] >= 200
+    assert sizes["page"] <= 0
+    assert sizes["scrolls"]
