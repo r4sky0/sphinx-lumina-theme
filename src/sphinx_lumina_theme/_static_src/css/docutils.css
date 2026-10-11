@@ -197,17 +197,27 @@
   box-decoration-break: clone;
 }
 
-/* ── Display math: equation numbers sit to the right ── */
+/* ── Display math ──
+   Wide equations scroll inside their own box instead of widening the page.
+   The equation number sits beside that box, so it stays visible and never
+   covers the formula. Works for MathJax, KaTeX, and imgmath output. */
 .lumina-article div.math {
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lumina-article div.math > :not(.eqno) {
+  flex: 1 1 auto;
+  min-width: 0;
   overflow-x: auto;
   overflow-y: hidden;
+  scrollbar-width: thin;
 }
 
 .lumina-article span.eqno {
-  float: right;
-  margin-left: 1rem;
-  line-height: 3;
+  order: 1;
+  flex: none;
   color: var(--lumina-text-muted);
 }
 

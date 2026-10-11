@@ -1131,6 +1131,11 @@ Term : classifier
 .. productionlist::
    rule: "a" | "b"
 
+.. math::
+   :label: wide
+
+   a + b
+
 Footnote [#f]_.
 
 .. [#f] The footnote.
@@ -1190,3 +1195,35 @@ def test_floats_stack_on_narrow_screens(page: Page, docutils_elements_page: str)
 
     assert computed_style(page, "aside.sidebar", "float") == "none"
     assert computed_style(page, "img.align-right", "float") == "none"
+
+
+@pytest.mark.parametrize("width", [390, 1280])
+def test_wide_math_scrolls_beside_its_number(
+    page: Page, docutils_elements_page: str, width: int
+):
+    """A wide equation scrolls in its own box; its number stays visible beside it."""
+    page.set_viewport_size({"width": width, "height": 900})
+    page.goto(docutils_elements_page)
+    # Stand in for MathJax output so the check needs no network access.
+    layout = page.locator(".lumina-article div.math").evaluate("""math => {
+        const formula = document.createElement('mjx-container');
+        formula.setAttribute('display', 'true');
+        formula.style.display = 'block';
+        formula.innerHTML = '<span style="display:inline-block;width:1500px;height:1em"></span>';
+        [...math.childNodes].filter(n => n.nodeType === Node.TEXT_NODE).forEach(n => n.remove());
+        math.append(formula);
+        const box = formula.getBoundingClientRect();
+        const number = math.querySelector('.eqno').getBoundingClientRect();
+        return {
+            page: document.documentElement.scrollWidth - innerWidth,
+            scrolls: formula.scrollWidth > formula.clientWidth,
+            numberAfterFormula: number.left >= box.right,
+            numberInside: number.right <= math.getBoundingClientRect().right + 1,
+        };
+    }""")
+    assert layout == {
+        "page": 0,
+        "scrolls": True,
+        "numberAfterFormula": True,
+        "numberInside": True,
+    }
