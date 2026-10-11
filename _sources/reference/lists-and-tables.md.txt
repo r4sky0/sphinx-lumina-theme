@@ -282,6 +282,24 @@ List tables can contain code, badges, and other inline elements.
   - JSON array of `{title, url}` objects
 ```
 
+Code blocks inside a table keep the table within the page: long lines scroll inside their cell instead of widening every column.
+
+```{list-table}
+:header-rows: 1
+:widths: 25 75
+
+* - Source
+  - Install command
+* - PyPI
+  - ```bash
+    pip install sphinx-lumina-theme
+    ```
+* - Git
+  - ```bash
+    pip install "sphinx-lumina-theme @ git+https://github.com/r4sky0/sphinx-lumina-theme.git@main"
+    ```
+```
+
 :::{tip}
 Use `:widths:` to control column proportions. Values are relative — `20 20 60` gives the third column three times the width of each first two.
 :::

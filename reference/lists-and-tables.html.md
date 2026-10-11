@@ -215,3 +215,10 @@ List tables can contain code, badges, and other inline elements.
 | `accent_color`   | stable   | Set with `"accent_color": "#hex"`    |
 | `search_backend` | stable   | `"pagefind"` or `"sphinx"`           |
 | `nav_links`      | stable   | JSON array of `{title, url}` objects |
+
+Code blocks inside a table keep the table within the page: long lines scroll inside their cell instead of widening every column.
+
+| Source   | Install command                                                                                                    |
+|----------|--------------------------------------------------------------------------------------------------------------------|
+| PyPI     | ```bash<br/>pip install sphinx-lumina-theme<br/>```                                                                |
+| Git      | ```bash<br/>pip install "sphinx-lumina-theme @ git+https://github.com/r4sky0/sphinx-lumina-theme.git@main"<br/>``` |
