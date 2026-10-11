@@ -1,5 +1,13 @@
 # Releases
 
+## v2.9.9 (2026-10-11)
+
+### Bug Fixes
+
+- **search**: Keep the keyboard selection when a search repeats
+  ([#179](https://github.com/r4sky0/sphinx-lumina-theme/pull/179),
+  [`e0c5678`](https://github.com/r4sky0/sphinx-lumina-theme/commit/e0c5678bcb47383cd035d508b6e188d387d1f059))
+
 ## v2.9.8 (2026-10-11)
 
 ### Bug Fixes
