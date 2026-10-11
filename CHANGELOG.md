@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.9.5 (2026-10-11)
+
+### Bug Fixes
+
+- **api**: Style C, C++, rST, and other Sphinx domains like Python
+  ([#175](https://github.com/r4sky0/sphinx-lumina-theme/pull/175),
+  [`aa8c4f5`](https://github.com/r4sky0/sphinx-lumina-theme/commit/aa8c4f535837a91c5ea84ea89bc09fb3f91f2a98))
+
+
 ## v2.9.4 (2026-10-10)
 
 ### Bug Fixes
