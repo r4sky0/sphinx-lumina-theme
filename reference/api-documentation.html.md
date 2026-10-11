@@ -116,6 +116,105 @@ The default accent color used when no custom `accent_color` is configured.
 
 Tuple of supported search backend identifiers.
 
+## Other Languages
+
+Every Sphinx domain uses the same signature layout, so C, C++, JavaScript, and reStructuredText reference pages look and collapse like the Python ones.
+
+### C
+
+### struct lumina_config
+
+Theme settings passed to [`lumina_render()`](#c.lumina_render).
+
+### int lumina_render(const [lumina_config](#c.lumina_config) \*config, const char \*path)
+
+Render a single page to disk.
+
+* **Parameters:**
+  * **config** – Theme settings to apply.
+  * **path** – Output file path.
+* **Returns:**
+  `0` on success, a negative error code otherwise.
+
+### LUMINA_MAX_DEPTH
+
+Deepest navigation level rendered in the sidebar.
+
+### C++
+
+### template<typename T>class lumina::Cache
+
+A fixed-size cache for rendered fragments.
+
+### std::optional<T> lumina::[Cache](#_CPPv4I0EN6lumina5CacheE)::get(const std::string &key) const noexcept
+
+Look up a cached fragment.
+
+* **Parameters:**
+  **key** – The fragment identifier.
+* **Returns:**
+  The cached value, or `std::nullopt` if the key is missing.
+
+### JavaScript
+
+### initSearch(selector, options)
+
+Attach the search dialog to an input element.
+
+* **Arguments:**
+  * **selector** (*string*) – CSS selector for the search input.
+  * **options** (*object*) – Search backend options.
+* **Returns:**
+  A handle with `open()` and `close()` methods.
+
+### *class* ThemeToggle(root)
+
+Switches between light, dark, and system color schemes.
+
+* **Arguments:**
+  * **root** (*HTMLElement*) – The element that receives `data-theme`.
+
+### reStructuredText
+
+Document your own directives and roles with the `rst` domain.
+
+### .. lumina-card:: title
+
+Render a linked card.
+
+### :link: *target* *(document name or URL)*
+
+Where the card points.
+
+### :lumina-icon:
+
+Insert an inline Lucide icon by name.
+
+### Show the MyST source
+
+```markdown
+```{c:function} int lumina_render(const lumina_config *config, const char *path)
+Render a single page to disk.
+
+:param config: Theme settings to apply.
+:returns: `0` on success.
+```
+
+```{cpp:class} template<typename T> lumina::Cache
+A fixed-size cache for rendered fragments.
+```
+
+```{js:function} initSearch(selector, options)
+Attach the search dialog to an input element.
+
+:param string selector: CSS selector for the search input.
+```
+
+```{rst:directive} .. lumina-card:: title
+Render a linked card.
+```
+```
+
 ## Using autodoc
 
 For real projects, you’ll typically generate API docs from your source code using `sphinx.ext.autodoc` instead of writing signatures by hand.

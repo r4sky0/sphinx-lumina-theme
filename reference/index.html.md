@@ -22,7 +22,7 @@ Mermaid flowcharts, sequence diagrams, class diagrams, Gantt charts, and more.
 
 Cross-references, glossaries, intersphinx, version directives, and downloads.
 
-Python API docs with functions, classes, autodoc, and cross-referencing.
+API docs for Python, C, C++, JavaScript, and reStructuredText, with autodoc and cross-referencing.
 
 OpenAPI auto-generated docs and manual HTTP method directives.
 
