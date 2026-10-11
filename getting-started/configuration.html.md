@@ -60,9 +60,9 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 
 ### Code Blocks
 
-| Option             | Type   | Default   | Description                                                                                                                                                                                  |
-|--------------------|--------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `code_wrap_toggle` | string | `"true"`  | Show a “wrap long lines” button on every code block, next to the copy button. Per-block — turning wrap on for one block leaves others unaffected. Set `"false"` to hide the button entirely. |
+| Option             | Type   | Default   | Description                                                                                                                                                                                                    |
+|--------------------|--------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `code_wrap_toggle` | string | `"false"` | Set `"true"` to show a “wrap long lines” button on every code block, next to the copy button. Per-block — turning wrap on for one block leaves others unaffected. Code never wraps until a reader turns it on. |
 
 ### Images
 
@@ -259,7 +259,7 @@ html_theme_options = {
     "show_back_to_top": "true",
 
     # Code blocks
-    "code_wrap_toggle": "true",
+    "code_wrap_toggle": "false",
 
     # Images
     "image_lightbox": "false",
