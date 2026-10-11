@@ -46,6 +46,7 @@ html_theme_options = {
     "wide_layout": "toggle",
     "show_reading_time": "true",
     "image_lightbox": "true",
+    "code_wrap_toggle": "true",
     "og_image": "og-card.png",
     "og_image_alt": "Sphinx Lumina Theme — modern documentation theme with dark mode",
     "og_image_width": "1200",

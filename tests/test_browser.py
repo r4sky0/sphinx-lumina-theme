@@ -1063,3 +1063,25 @@ def test_search_keyboard_focus_indicators(page: Page, theme: str):
     expect(modal.locator("[data-search-result]").first).to_have_css(
         "outline-width", "2px"
     )
+
+
+def test_code_wrap_toggle_takes_corner_without_copy_button(
+    page: Page, live_server: str
+):
+    """The wrap toggle sits beside the copy button, or in the corner without one."""
+    page.goto(f"{live_server}/reference/code-blocks.html")
+    page.locator(".lumina-article div.highlight:has(> button.copybtn)").first.evaluate(
+        "el => el.dataset.testBlock = ''"
+    )
+    block = page.locator("[data-test-block]")
+    toggle = block.locator(":scope > .lumina-wrap-toggle")
+    expect(toggle).to_have_count(1)
+
+    def right_gap():
+        return block.evaluate("""el => el.getBoundingClientRect().right
+            - el.querySelector('.lumina-wrap-toggle').getBoundingClientRect().right""")
+
+    beside_copy = right_gap()
+    block.evaluate("el => el.querySelector(':scope > button.copybtn').remove()")
+    assert right_gap() < beside_copy
+    assert right_gap() <= 12
