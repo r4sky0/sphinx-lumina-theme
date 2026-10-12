@@ -1,3 +1,27 @@
 {%- extends "basic/search.html" %}
 {# Lumina defers the core scripts, so the search scripts must run after doctools.js too. #}
-{%- block scripts %}{{ super() | replace('<script src=', '<script defer="defer" src=') }}{%- endblock %}
+{%- block scripts %}
+    {{ super.super() }}
+    <script defer="defer" src="{{ pathto('_static/searchtools.js', 1) }}"></script>
+    <script defer="defer" src="{{ pathto('_static/language_data.js', 1) }}"></script>
+{%- endblock %}
+
+{% block searchbox %}
+
+    <form class="lumina-search-page-form" action="" method="get" role="search">
+        <label class="lumina-search-page-field">
+            {{ lumina_icon("search", size=16, css_class="shrink-0") }}
+            <input type="search"
+                   name="q"
+                   aria-labelledby="search-documentation"
+                   value=""
+                   autocomplete="off"
+                   autocorrect="off"
+                   autocapitalize="off"
+                   spellcheck="false">
+        </label>
+        <button type="submit">{{ _("Search") }}</button>
+        <span id="search-progress" role="status"></span>
+    </form>
+
+{% endblock %}

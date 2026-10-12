@@ -1078,6 +1078,17 @@ def test_sphinx_search_page_lists_results(page: Page, live_server: str):
     expect(page.locator("#search-results li").first).to_be_visible()
     assert errors == []
 
+    form = page.locator(".lumina-search-page-form")
+    field = form.locator("input[name='q']")
+    expect(field).to_have_value("pagefind")
+    expect(form.locator(".lumina-search-page-field")).to_have_css(
+        "border-top-style", "solid"
+    )
+    field.fill("sidebar")
+    form.get_by_role("button", name="Search").click()
+    expect(page).to_have_url(f"{live_server}/search.html?q=sidebar")
+    expect(page.locator("#search-results li").first).to_be_visible()
+
 
 def test_search_keyboard_reaches_heading(page: Page, live_server: str):
     page.click("[data-search-trigger]")
