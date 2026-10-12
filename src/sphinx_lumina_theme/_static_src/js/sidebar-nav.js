@@ -5,11 +5,8 @@
  * injects a chevron toggle button before every link that has a nested
  * ``<ul>``, and sets the initial open/closed state per branch:
  *
- * - Branches that contain the ``.current`` page are always expanded
- *   (auto-expand the current path).
- * - Branches whose ``<li>`` was tagged with ``data-nav-collapsed="true"``
- *   by the Python ``_mark_collapsed_entries`` helper start collapsed.
- * - Everything else starts expanded.
+ * - The current page and the branches that contain it start expanded.
+ * - Everything else starts collapsed, like Sphinx's default ``toctree()``.
  *
  * State is recomputed on every page load — there is no ``localStorage``
  * persistence.
@@ -71,13 +68,11 @@ export default function sidebarNav() {
         // Mark the li so CSS can style branches specifically.
         li.classList.add("has-children");
 
-        // Determine initial state.  Auto-expand if the current page is
-        // inside this branch, otherwise honor the server-side opt-in.
+        // Expand only the current page and the branches that contain it.
         const hasCurrent = li.querySelector(".current") !== null ||
           li.classList.contains("current");
-        const optCollapsed = li.dataset.navCollapsed === "true";
 
-        if (!hasCurrent && optCollapsed) {
+        if (!hasCurrent) {
           li.classList.add("is-collapsed");
           button.setAttribute("aria-expanded", "false");
         } else {

@@ -1,7 +1,7 @@
 """Test that theme components render correctly."""
 
 from bs4 import BeautifulSoup
-from sphinx_lumina_theme import _add_name_breaks, _mark_collapsed_entries
+from sphinx_lumina_theme import _add_name_breaks
 
 
 def _parse(build_output, page="index.html"):
@@ -50,20 +50,6 @@ def test_sidebar_nav_has_alpine_hook(index_html):
     assert nav is not None, "Sidebar nav is missing x-data='sidebarNav()'"
 
 
-def test_sidebar_marks_nav_collapsed_metadata(index_html):
-    """Pages with ``nav_collapsed: true`` metadata should get the
-    ``data-nav-collapsed`` attribute on their toctree <li>."""
-    sidebar = index_html.find(id="lumina-sidebar")
-    nav = sidebar.find("nav", class_="lumina-sidebar-nav")
-    # guides/index.md in sample_docs has nav_collapsed: true
-    collapsed_li = nav.find("li", attrs={"data-nav-collapsed": "true"})
-    assert collapsed_li is not None, (
-        "Expected a toctree <li> tagged data-nav-collapsed=true for guides/index"
-    )
-    link = collapsed_li.find("a")
-    assert link is not None and "Guides" in link.get_text()
-
-
 def test_toc_has_page_headings(index_html):
     """Right TOC should contain links to page sections."""
     toc = index_html.find(id="lumina-toc")
@@ -71,14 +57,6 @@ def test_toc_has_page_headings(index_html):
     texts = [a.get_text(strip=True) for a in links]
     assert "Section One" in texts
     assert "Section Two" in texts
-
-
-def test_collapsed_navigation_resolves_sibling_sections():
-    html = '<li class="toctree-l1"><a href="../guides/index.html">Guides</a></li>'
-    marked = _mark_collapsed_entries(
-        html, {"guides/index"}, "getting-started/installation"
-    )
-    assert 'data-nav-collapsed="true"' in marked
 
 
 def test_navigation_names_break_after_dots():

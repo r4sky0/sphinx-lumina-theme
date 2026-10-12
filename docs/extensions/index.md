@@ -1,7 +1,3 @@
----
-nav_collapsed: true
----
-
 # Extensions
 
 Lumina is designed to work with extensions that target standard Sphinx output. These are the ones we recommend and style specifically.

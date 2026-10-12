@@ -1,7 +1,3 @@
----
-nav_collapsed: true
----
-
 # Guides
 
 Overview of guides.

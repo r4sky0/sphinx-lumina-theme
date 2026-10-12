@@ -204,15 +204,6 @@ def _add_sidebar_icons(toctree_html, page_icons, pagename, get_icon_fn):
     return re.sub(r'<a\b[^>]*href="([^"]*)"[^>]*>', _replace_link, toctree_html)
 
 
-# Matches an opening <li ...> followed by a direct child <a href="...">.
-# Splitting the match into three groups lets us rewrite just the <li> tag
-# while preserving any whitespace that Sphinx emits between it and the <a>.
-_LI_WITH_ANCHOR_RE = re.compile(
-    r'(?P<open><li(?P<attrs>[^>]*)>)(?P<gap>\s*)(?P<anchor><a\b[^>]*href="(?P<href>[^"]*)"[^>]*>)',
-    re.IGNORECASE,
-)
-
-
 _TEXT_RE = re.compile(r">([^<]+)<")
 _NAME_DOT_RE = re.compile(r"(?<=\w)\.(?=\w)")
 
@@ -222,41 +213,6 @@ def _add_name_breaks(nav_html):
     return _TEXT_RE.sub(
         lambda m: ">" + _NAME_DOT_RE.sub(".<wbr>", m.group(1)) + "<", nav_html
     )
-
-
-def _mark_collapsed_entries(toctree_html, collapsed_docs, pagename):
-    """Tag toctree ``<li>`` elements whose page opts into starting collapsed.
-
-    For any ``<li>`` whose first child ``<a>`` resolves to a pagename in
-    ``collapsed_docs``, append ``data-nav-collapsed="true"`` to the ``<li>``
-    attributes.  The client-side ``sidebarNav`` Alpine component reads this
-    attribute on init and starts that branch in the collapsed state
-    (unless it contains the current page, in which case it is auto-expanded).
-    """
-    if not collapsed_docs:
-        return toctree_html
-
-    def _replace(match):
-        attrs = match.group("attrs")
-        if "data-nav-collapsed" in attrs:
-            return match.group(0)
-        target = _resolve_href_to_pagename(match.group("href"), pagename)
-        if not any(k in collapsed_docs for k in _with_basename_fallback(target)):
-            return match.group(0)
-        new_open = f'<li{attrs} data-nav-collapsed="true">'
-        return new_open + match.group("gap") + match.group("anchor")
-
-    return _LI_WITH_ANCHOR_RE.sub(_replace, toctree_html)
-
-
-def _build_collapsed_docs(app):
-    """Build the set of pagenames with ``nav_collapsed`` metadata set."""
-    collapsed = set()
-    for pagename, meta in app.env.metadata.items():
-        raw = meta.get("nav_collapsed", "")
-        if str(raw).strip().lower() in ("true", "1", "yes"):
-            collapsed.add(pagename)
-    return collapsed
 
 
 def _section_paths(section):
@@ -616,11 +572,9 @@ def _add_context(app, pagename, templatename, context, doctree):
     context["lumina_icon_inner"] = get_icon_inner
 
     page_icons = _build_page_icons(app)
-    collapsed_docs = _build_collapsed_docs(app)
 
     def _post_process_sidebar(html):
         html = _add_sidebar_icons(html, page_icons, pagename, get_icon_svg)
-        html = _mark_collapsed_entries(html, collapsed_docs, pagename)
         return _add_name_breaks(html)
 
     context["add_sidebar_icons"] = _post_process_sidebar
