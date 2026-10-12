@@ -362,6 +362,30 @@ def test_sidebar_row_alignment(page: Page, live_server: str, width, theme):
     assert highlight_gap < 2
 
 
+@pytest.mark.parametrize("width", [390, 1440])
+def test_navigation_wraps_long_names(page: Page, live_server: str, width):
+    """Names without spaces, like Java packages, wrap inside sidebar and TOC links."""
+    page.set_viewport_size({"width": width, "height": 844})
+    page.goto(f"{live_server}/getting-started/installation.html")
+    if width < 1024:
+        page.locator("[data-sidebar-toggle]").click()
+        links = [page.locator("#lumina-sidebar-drawer li.has-children > a").first]
+    else:
+        links = [
+            page.locator(".lumina-sidebar-desktop li.has-children > a").first,
+            page.locator(".lumina-toc-nav a:visible").first,
+        ]
+    for link in links:
+        expect(link).to_be_visible()
+        overflow = link.evaluate(
+            """a => {
+                a.textContent = 'org.apache.commons.lang3.concurrent.locks.LockingVisitors';
+                return a.scrollWidth - a.clientWidth;
+            }"""
+        )
+        assert overflow <= 0
+
+
 @pytest.mark.parametrize("path", ["index.html", "getting-started/installation.html"])
 def test_mobile_announcement_reserves_space_before_alpine(
     page: Page, live_server: str, path

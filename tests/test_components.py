@@ -1,7 +1,7 @@
 """Test that theme components render correctly."""
 
 from bs4 import BeautifulSoup
-from sphinx_lumina_theme import _mark_collapsed_entries
+from sphinx_lumina_theme import _add_name_breaks, _mark_collapsed_entries
 
 
 def _parse(build_output, page="index.html"):
@@ -79,6 +79,13 @@ def test_collapsed_navigation_resolves_sibling_sections():
         html, {"guides/index"}, "getting-started/installation"
     )
     assert 'data-nav-collapsed="true"' in marked
+
+
+def test_navigation_names_break_after_dots():
+    html = '<a href="org.example.Type.html" title="a.b">org.example.Type 3.21</a>'
+    assert _add_name_breaks(html) == (
+        '<a href="org.example.Type.html" title="a.b">org.<wbr>example.<wbr>Type 3.<wbr>21</a>'
+    )
 
 
 def test_sidebar_root_current_no_accent_highlight(build_output):
