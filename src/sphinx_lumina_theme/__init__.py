@@ -213,6 +213,17 @@ _LI_WITH_ANCHOR_RE = re.compile(
 )
 
 
+_TEXT_RE = re.compile(r">([^<]+)<")
+_NAME_DOT_RE = re.compile(r"(?<=\w)\.(?=\w)")
+
+
+def _add_name_breaks(nav_html):
+    """Let qualified names such as ``org.example.Type`` wrap after their dots."""
+    return _TEXT_RE.sub(
+        lambda m: ">" + _NAME_DOT_RE.sub(".<wbr>", m.group(1)) + "<", nav_html
+    )
+
+
 def _mark_collapsed_entries(toctree_html, collapsed_docs, pagename):
     """Tag toctree ``<li>`` elements whose page opts into starting collapsed.
 
@@ -610,9 +621,11 @@ def _add_context(app, pagename, templatename, context, doctree):
     def _post_process_sidebar(html):
         html = _add_sidebar_icons(html, page_icons, pagename, get_icon_svg)
         html = _mark_collapsed_entries(html, collapsed_docs, pagename)
-        return html
+        return _add_name_breaks(html)
 
     context["add_sidebar_icons"] = _post_process_sidebar
+    if context.get("toc"):
+        context["toc"] = _add_name_breaks(context["toc"])
 
     # Doc sections switcher
     sections = app.builder.theme_options.get("doc_sections", "")
