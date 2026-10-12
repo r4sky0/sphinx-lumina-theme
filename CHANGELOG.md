@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.10.1 (2026-10-12)
+
+### Bug Fixes
+
+- **search**: Style Sphinx's search page
+  ([#183](https://github.com/r4sky0/sphinx-lumina-theme/pull/183),
+  [`3943977`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3943977c56bfda1a8be0c6639e06170025e37951))
+
+
 ## v2.10.0 (2026-10-12)
 
 ### Features
