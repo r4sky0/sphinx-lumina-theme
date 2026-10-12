@@ -323,6 +323,20 @@ def test_mobile_sidebar(page: Page, live_server: str):
     expect(drawer).to_be_visible(timeout=3000)
 
 
+def test_sidebar_expands_only_current_path(page: Page, live_server: str):
+    """Like Sphinx's default toctree, branches off the current path start collapsed."""
+    page.goto(f"{live_server}/getting-started/installation.html")
+    branches = page.locator(".lumina-sidebar-desktop li.has-children").evaluate_all(
+        """items => items.map(li => [
+            li.classList.contains("current") || !!li.querySelector(".current"),
+            li.classList.contains("is-collapsed"),
+        ])"""
+    )
+    assert [True, False] in branches
+    assert [False, True] in branches
+    assert all(current != collapsed for current, collapsed in branches)
+
+
 @pytest.mark.parametrize("width", [390, 1440])
 @pytest.mark.parametrize("theme", ["light", "dark"])
 def test_sidebar_row_alignment(page: Page, live_server: str, width, theme):
@@ -639,51 +653,49 @@ def test_toc_indicator_stays_aligned_during_fast_scroll(
     }""")
 
 
-def test_toc_tracks_reading_position(page: Page, live_server: str):
+@pytest.mark.parametrize("header_height", [56, 128])
+def test_toc_tracks_reading_position(page: Page, live_server: str, header_height):
     """Nested sections track the reading line in both directions and after jumps."""
     page.set_viewport_size({"width": 1400, "height": 900})
     page.emulate_media(reduced_motion="reduce")
+    # Apply the header size before every load, so deep links and reloads see it too.
+    page.add_init_script(f"""
+        const sheet = new CSSStyleSheet();
+        sheet.replaceSync(':root {{ --lumina-header-offset: {header_height}px !important; }}'
+            + 'header {{ height: {header_height}px !important; }}');
+        document.adoptedStyleSheets = [sheet];
+    """)
     page.goto(f"{live_server}/guides/navigation.html")
     page.evaluate("document.fonts.ready")
+    expect(page.locator(".lumina-wrapper")).to_have_css(
+        "margin-top", f"{header_height}px"
+    )
     active = page.locator('.lumina-toc-nav a[aria-current="location"]')
-    parent = "collapsible-sidebar-items"
-    child = "marking-a-branch-collapsed-by-default"
+    parent = "doc-sections"
+    child = "setup"
 
-    for header_height in (56, 128):
+    # Cross each boundary downwards and upwards, including a large jump.
+    for target, delta, expected in [
+        ("previous-next-navigation", 0, "previous-next-navigation"),
+        (parent, -24, "previous-next-navigation"),
+        (parent, 24, parent),
+        (child, -24, parent),
+        (child, 24, child),
+        (child, -24, parent),
+        (parent, -24, "previous-next-navigation"),
+        ("version-switcher", 24, "version-switcher"),
+        (parent, 24, parent),
+    ]:
         page.evaluate(
-            """height => {
-            document.documentElement.style.setProperty('--lumina-header-offset', `${height}px`);
-            document.querySelector('header').style.height = `${height}px`;
+            """([id, delta]) => {
+            const target = document.getElementById(id);
+            window.scrollTo({top: scrollY + target.getBoundingClientRect().top
+                - parseFloat(getComputedStyle(target).scrollMarginTop) + delta,
+                behavior: 'instant'});
         }""",
-            header_height,
+            [target, delta],
         )
-        # WebKit can expose the old section geometry until the new header
-        # spacing has been resolved. Measure only after the layout catches up.
-        expect(page.locator(".lumina-wrapper")).to_have_css(
-            "margin-top", f"{header_height}px"
-        )
-        # Cross each boundary downwards and upwards, including a large jump.
-        for target, delta, expected in [
-            ("sidebar-depth", 0, "sidebar-depth"),
-            (parent, -24, "sidebar-depth"),
-            (parent, 24, parent),
-            (child, -24, parent),
-            (child, 24, child),
-            (child, -24, parent),
-            (parent, -24, "sidebar-depth"),
-            ("breadcrumbs", 24, "breadcrumbs"),
-            (parent, 24, parent),
-        ]:
-            page.evaluate(
-                """([id, delta]) => {
-                const target = document.getElementById(id);
-                window.scrollTo({top: scrollY + target.getBoundingClientRect().top
-                    - parseFloat(getComputedStyle(target).scrollMarginTop) + delta,
-                    behavior: 'instant'});
-            }""",
-                [target, delta],
-            )
-            expect(active).to_have_attribute("href", f"#{expected}")
+        expect(active).to_have_attribute("href", f"#{expected}")
 
     page.goto(f"{live_server}/guides/navigation.html#{child}")
     expect(active).to_have_attribute("href", f"#{child}")
