@@ -958,6 +958,118 @@ a.headerlink[data-tooltip].lumina-tooltip-visible::after {
   color: color-mix(in srgb, var(--lumina-text-muted) 45%, transparent);
 }
 
+/* ── Search page ── Sphinx's own search page (search_backend = "sphinx" and
+   the search dialog's fallback). The field matches the header search button. */
+.lumina-search-page-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.lumina-search-page-field {
+  display: flex;
+  flex: 1 1 16rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.75rem;
+  color: var(--lumina-text-muted);
+  background: var(--lumina-bg-secondary);
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.5rem;
+  transition: border-color 0.15s;
+}
+
+.lumina-search-page-field:hover,
+.lumina-search-page-field:focus-within {
+  border-color: var(--lumina-accent);
+}
+
+/* The field draws the focus ring, so the input inside it does not. */
+.lumina-search-page-field:has(input:focus-visible) {
+  outline: 2px solid var(--lumina-accent);
+  outline-offset: 2px;
+}
+
+.lumina-search-page-field input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0;
+  font: inherit;
+  color: var(--lumina-text);
+  background: none;
+  border: 0;
+  outline: none;
+}
+
+.lumina-search-page-form button {
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--lumina-text);
+  background: var(--lumina-bg);
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+}
+
+.lumina-search-page-form button:hover {
+  color: var(--lumina-link);
+  background: var(--lumina-accent-light);
+  border-color: var(--lumina-accent);
+}
+
+#search-progress {
+  flex-basis: 100%;
+  font-size: 0.875rem;
+  color: var(--lumina-text-muted);
+}
+
+#search-progress:empty {
+  display: none;
+}
+
+#search-results .search-summary {
+  color: var(--lumina-text-muted);
+}
+
+/* Results read as a ruled list: the page title, then its excerpt. */
+#search-results ul.search {
+  padding: 0;
+  margin: 1rem 0 0;
+  border-bottom: 1px solid var(--lumina-border);
+}
+
+#search-results ul.search > li {
+  list-style: none;
+  padding: 0.875rem 0;
+  margin: 0;
+  border-top: 1px solid var(--lumina-border);
+}
+
+#search-results ul.search > li > a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+#search-results ul.search > li > a:hover {
+  text-decoration: underline;
+}
+
+#search-results ul.search > li > span,
+#search-results ul.search p.context {
+  color: var(--lumina-text-muted);
+}
+
+#search-results ul.search p.context {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  -webkit-hyphens: none;
+  hyphens: none;
+}
+
 /* ── Overlay backdrop ── Shared by the search modal, the mobile sidebar
    drawer, and the image lightbox. Reads as "the same page, dimmed and
    out of focus" rather than a context switch — derives its tint from
