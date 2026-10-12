@@ -1,0 +1,3 @@
+{%- extends "basic/search.html" %}
+{# Lumina defers the core scripts, so the search scripts must run after doctools.js too. #}
+{%- block scripts %}{{ super() | replace('<script src=', '<script defer="defer" src=') }}{%- endblock %}
