@@ -1,5 +1,13 @@
 # Releases
 
+## v2.9.11 (2026-10-12)
+
+### Bug Fixes
+
+- **search**: Make Sphinx’s search page list results
+  ([#180](https://github.com/r4sky0/sphinx-lumina-theme/pull/180),
+  [`96d32b3`](https://github.com/r4sky0/sphinx-lumina-theme/commit/96d32b31e120d58094480b17c739a7f0fa297d0b))
+
 ## v2.9.10 (2026-10-12)
 
 ### Bug Fixes
