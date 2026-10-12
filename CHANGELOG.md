@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.10.0 (2026-10-12)
+
+### Features
+
+- **nav**: Expand only the current path in the sidebar by default
+  ([#182](https://github.com/r4sky0/sphinx-lumina-theme/pull/182),
+  [`b1a1019`](https://github.com/r4sky0/sphinx-lumina-theme/commit/b1a1019875900838dfe2514b17e623a12130da5a))
+
+
 ## v2.9.11 (2026-10-12)
 
 ### Bug Fixes
