@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.9.10 (2026-10-12)
+
+### Bug Fixes
+
+- **nav**: Wrap long names in the sidebar and page TOC
+  ([#181](https://github.com/r4sky0/sphinx-lumina-theme/pull/181),
+  [`71c1860`](https://github.com/r4sky0/sphinx-lumina-theme/commit/71c1860cc108afd1dfc75132449230cf08ac6659))
+
+
 ## v2.9.9 (2026-10-11)
 
 ### Bug Fixes
