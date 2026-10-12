@@ -1034,6 +1034,8 @@ def test_search_fallback_when_pagefind_unavailable(page: Page):
 
 def test_sphinx_search_page_lists_results(page: Page, live_server: str):
     """The fallback search page runs Sphinx's search after deferred scripts load."""
+    # Leave the index first: WebKit reports its cancelled hero worker as a page error.
+    page.goto("about:blank")
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(f"{live_server}/search.html?q=pagefind")
