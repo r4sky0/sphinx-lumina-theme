@@ -831,6 +831,42 @@ def _write_robots_txt(app, exception):
     robots_path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
 
 
+def _write_search_symbols(app, exception):
+    """Write the domains' searchable objects so the search modal can match API names.
+
+    Pagefind only knows headings, so API members never become results of their
+    own. This applies the rules of Sphinx's own search: priority 0 or higher and
+    no ``:nosearch:`` pages.
+    """
+    if exception or not getattr(app.builder, "search", False):
+        return
+    import json
+
+    env = app.env
+    sections = getattr(app, "_lumina_search_sections", {})
+    rows = set()
+    for domain in env.domains.values():
+        for _, dispname, objtype, docname, anchor, priority in domain.get_objects():
+            if priority < 0 or "nosearch" in env.metadata.get(docname, {}):
+                continue
+            otype = domain.object_types.get(objtype)
+            kind = str(domain.get_type_name(otype)) if otype else objtype
+            # Split like Sphinx's search, but never inside a parameter list.
+            prefix = dispname.split("(", 1)[0].rpartition(".")[0]
+            name = dispname[len(prefix) + 1 :] if prefix else dispname
+            uri = app.builder.get_target_uri(docname)
+            rows.add((name, prefix, kind, uri, sections.get(docname, ""), anchor))
+
+    pages, kinds, symbols = {}, {}, []
+    for name, prefix, kind, uri, section, anchor in sorted(rows):
+        page = pages.setdefault((uri, section), len(pages))
+        symbols.append([name, prefix, kinds.setdefault(kind, len(kinds)), page, anchor])
+    data = {"pages": list(pages), "kinds": list(kinds), "symbols": symbols}
+    Path(app.outdir, "_static", "lumina-symbols.json").write_text(
+        json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8"
+    )
+
+
 def _run_pagefind(app, exception):
     """Run Pagefind to index the built HTML for search."""
     if exception:
@@ -913,6 +949,7 @@ def setup(app):
     app.connect("env-updated", _prepare_search_sections)
     app.connect("doctree-resolved", _insert_reading_time)
     app.connect("doctree-resolved", _add_search_heading_ids)
+    app.connect("build-finished", _write_search_symbols)
     app.connect("build-finished", _run_pagefind)
     app.connect("build-finished", _filter_sitemap_noindex)
     app.connect("build-finished", _write_robots_txt)

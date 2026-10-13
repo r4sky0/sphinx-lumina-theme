@@ -3,7 +3,9 @@
  * @description Alpine.js component for the full-text search modal. Supports
  * Pagefind as the primary backend with a fallback to Sphinx's built-in
  * search. Provides keyboard navigation (arrow keys, Enter, Escape),
- * a native dialog, and the ``/`` and ``Ctrl+K`` / ``⌘K`` shortcuts.
+ * a native dialog, and the ``/`` and ``Ctrl+K`` / ``⌘K`` shortcuts. API objects
+ * from ``_static/lumina-symbols.json`` (written at build time from the Sphinx
+ * domains) are matched by name and listed before the full-text results.
  */
 
 import DOMPurify from "dompurify";
@@ -15,6 +17,40 @@ const PAGEFIND_LOAD_TIMEOUT_MS = 5000;
 /* Number of recent queries to memoize. Pagefind is fast but not free, and
    users routinely retype the same query when navigating around. */
 const QUERY_CACHE_LIMIT = 10;
+/* Symbol matches shown above the full-text results. */
+const SYMBOL_LIMIT = 5;
+
+/**
+ * Rank API symbols by name: exact names and qualified suffixes first, then
+ * name prefixes, then any part of the qualified name; shorter names win ties.
+ *
+ * @param {Array} symbols — Entries prepared by ``_loadSymbols()``.
+ * @param {string} query — The trimmed search text.
+ * @param {string} scope — Selected section; empty means all documentation.
+ * @returns {Array} Result entries for the modal.
+ */
+function matchSymbols(symbols, query, scope) {
+  const q = query.toLowerCase().replaceAll("#", ".");
+  const ranked = [];
+  for (const symbol of symbols) {
+    if (scope && symbol.section !== scope) continue;
+    let rank;
+    if (symbol.base === q || symbol.qualified === q || symbol.qualified.endsWith("." + q)) rank = 0;
+    else if (symbol.lower.startsWith(q)) rank = 1;
+    else if (symbol.full.includes(q)) rank = 2;
+    else continue;
+    ranked.push([rank, symbol.lower.length, symbol]);
+  }
+  ranked.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  return ranked.slice(0, SYMBOL_LIMIT).map(([, , symbol]) => ({
+    title: symbol.name,
+    url: symbol.url,
+    excerpt: "",
+    breadcrumb: symbol.prefix ? `${symbol.kind} in ${symbol.prefix}` : symbol.kind,
+    isHeading: false,
+    isSymbol: true,
+  }));
+}
 
 /**
  * Factory for the search modal Alpine component.
@@ -23,7 +59,7 @@ const QUERY_CACHE_LIMIT = 10;
  * **Properties:**
  *
  * - ``query`` *(string)* — Current search input value.
- * - ``results`` *(Array)* — Page and heading links in keyboard navigation order.
+ * - ``results`` *(Array)* — Symbol, page and heading links in keyboard navigation order.
  * - ``scope`` *(string)* — Selected section; empty means all documentation.
  * - ``scopes`` *(Array)* — Section names available in the index.
  * - ``searching`` *(boolean)* — Whether the current query is pending.
@@ -47,6 +83,8 @@ const QUERY_CACHE_LIMIT = 10;
  * @returns {object} Alpine.js component data.
  */
 export default function searchModal() {
+  // Thousands of entries on API sites; kept outside Alpine's reactive state.
+  let symbols = [];
   return {
     query: "",
     results: [],
@@ -70,6 +108,11 @@ export default function searchModal() {
     async init() {
       document.querySelectorAll("[data-search-trigger]").forEach((btn) => {
         btn.addEventListener("click", () => this.toggle(btn));
+      });
+
+      // A result on the current page only changes the hash; close so the target shows.
+      window.addEventListener("hashchange", () => {
+        if (this.$el.open) this.close();
       });
 
       // "/" shortcut — open search when not typing in an input
@@ -125,10 +168,41 @@ export default function searchModal() {
     },
 
     async loadSearchEngine() {
-      if (this.backend !== "pagefind") {
-        this.loaded = true;
-        return;
+      await Promise.all([this._loadPagefind(), this._loadSymbols()]);
+      this.loaded = true;
+    },
+
+    async _loadSymbols() {
+      try {
+        const url = new URL(`${this.baseUrl}_static/lumina-symbols.json`, document.baseURI);
+        const response = await fetch(url, { signal: AbortSignal.timeout(PAGEFIND_LOAD_TIMEOUT_MS) });
+        if (!response.ok) return;
+        const data = await response.json();
+        symbols = data.symbols.map(([name, prefix, kind, page, anchor]) => {
+          const [uri, section] = data.pages[page];
+          const lower = name.toLowerCase();
+          const base = lower.split("(", 1)[0];
+          const owner = prefix ? prefix.toLowerCase() + "." : "";
+          return {
+            name,
+            prefix,
+            kind: data.kinds[kind],
+            section,
+            url: this.baseUrl + uri + (anchor ? "#" + anchor : ""),
+            lower,
+            base,
+            qualified: owner + base,
+            full: owner + lower,
+          };
+        });
+      } catch {
+        // Full-text search still works without symbols.
+        symbols = [];
       }
+    },
+
+    async _loadPagefind() {
+      if (this.backend !== "pagefind") return;
       try {
         const pagefindUrl = new URL(
           `${this.baseUrl}_pagefind/pagefind.js`,
@@ -156,12 +230,10 @@ export default function searchModal() {
           // An older index can still provide ordinary full-text search.
           this.scopes = [];
         }
-        this.loaded = true;
       } catch (e) {
         this.pagefind = null;
         this.scopes = [];
         this.error = "Instant search is unavailable. Use Sphinx search below.";
-        this.loaded = true;
       }
     },
 
@@ -219,9 +291,10 @@ export default function searchModal() {
               }));
             return [page, ...headings];
           });
+          results = [...matchSymbols(symbols, query, scope), ...results];
           this._cacheResults(key, results);
         } else {
-          results = this.fallbackResults(query);
+          results = [...matchSymbols(symbols, query, scope), ...this.fallbackResults(query)];
         }
         if (requestId !== this._requestId || query !== this.query.trim() || scope !== this.scope) return;
         this.results = results;
@@ -229,7 +302,7 @@ export default function searchModal() {
       } catch {
         if (requestId !== this._requestId || query !== this.query.trim() || scope !== this.scope) return;
         this.error = "Instant search is unavailable. Sphinx search covers all docs.";
-        this.results = this.fallbackResults(query);
+        this.results = [...matchSymbols(symbols, query, scope), ...this.fallbackResults(query)];
       } finally {
         if (requestId === this._requestId) this.searching = false;
       }

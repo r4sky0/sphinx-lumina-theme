@@ -1,6 +1,7 @@
 """Browser-based tests using Playwright."""
 
 import base64
+import re
 import sys
 
 import pytest
@@ -1334,6 +1335,29 @@ def test_wide_math_scrolls_beside_its_number(
         "numberAfterFormula": True,
         "numberInside": True,
     }
+
+
+def test_search_lists_api_symbols_first(page: Page, live_server: str):
+    """Domain objects match by qualified name and lead to their definitions."""
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    search = modal.get_by_role("searchbox")
+    search.fill("EventEmitter.on")
+    first = modal.locator("[data-search-result]").first
+    expect(first).to_contain_text("Python method in EventEmitter")
+    expect(first).to_have_attribute("href", re.compile(r"#EventEmitter\.on$"))
+    search.press("Enter")
+    expect(page).to_have_url(re.compile(r"#EventEmitter\.on$"))
+
+    # A symbol on the current page only changes the hash; the modal must close.
+    page.click("[data-search-trigger]")
+    search.fill("EventEmitter.emit")
+    expect(modal.locator("[data-search-result]").first).to_have_attribute(
+        "href", re.compile(r"#EventEmitter\.emit$")
+    )
+    search.press("Enter")
+    expect(page).to_have_url(re.compile(r"#EventEmitter\.emit$"))
+    expect(modal).not_to_have_attribute("open", "")
 
 
 IN_PANEL = """([panel, link]) => {

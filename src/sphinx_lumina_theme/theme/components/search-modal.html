@@ -78,9 +78,10 @@
                               x-text="result.breadcrumb"></span>
                     </template>
                     <span class="break-words text-sm"
-                          :class="result.isHeading ? '' : 'font-semibold'"
+                          :class="result.isSymbol ? 'font-mono' : result.isHeading ? '' : 'font-semibold'"
                           x-text="result.title"></span>
-                    <span class="line-clamp-2 text-xs text-lumina-text-muted"
+                    <span x-show="result.excerpt"
+                          class="line-clamp-2 text-xs text-lumina-text-muted"
                           x-html="result.excerpt"></span>
                 </a>
             </template>
