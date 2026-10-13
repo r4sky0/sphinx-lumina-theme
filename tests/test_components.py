@@ -59,10 +59,14 @@ def test_toc_has_page_headings(index_html):
     assert "Section Two" in texts
 
 
-def test_navigation_names_break_after_dots():
+def test_navigation_names_break_after_dots_and_parentheses():
     html = '<a href="org.example.Type.html" title="a.b">org.example.Type 3.21</a>'
     assert _add_name_breaks(html) == (
         '<a href="org.example.Type.html" title="a.b">org.<wbr>example.<wbr>Type 3.<wbr>21</a>'
+    )
+    html = "<code>abbreviateMiddle(String, int)</code><code>get()</code>"
+    assert _add_name_breaks(html) == (
+        "<code>abbreviateMiddle(<wbr>String, int)</code><code>get()</code>"
     )
 
 

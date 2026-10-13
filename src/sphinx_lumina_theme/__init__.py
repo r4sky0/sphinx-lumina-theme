@@ -205,13 +205,14 @@ def _add_sidebar_icons(toctree_html, page_icons, pagename, get_icon_fn):
 
 
 _TEXT_RE = re.compile(r">([^<]+)<")
-_NAME_DOT_RE = re.compile(r"(?<=\w)\.(?=\w)")
+_NAME_BREAK_RE = re.compile(r"(?<=\w)([.(])(?=\w)")
 
 
 def _add_name_breaks(nav_html):
-    """Let qualified names such as ``org.example.Type`` wrap after their dots."""
+    """Let names such as ``org.example.Type`` and ``join(String, int)`` wrap after
+    their dots and opening parentheses instead of inside a word."""
     return _TEXT_RE.sub(
-        lambda m: ">" + _NAME_DOT_RE.sub(".<wbr>", m.group(1)) + "<", nav_html
+        lambda m: ">" + _NAME_BREAK_RE.sub(r"\1<wbr>", m.group(1)) + "<", nav_html
     )
 
 
