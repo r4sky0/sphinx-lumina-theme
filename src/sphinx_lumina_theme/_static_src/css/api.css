@@ -34,6 +34,23 @@ dt.sig:hover > a.headerlink {
   opacity: 0.6;
 }
 
+/* [source] links from sphinx.ext.viewcode and sphinx.ext.linkcode sit apart from the signature */
+dt.sig > a:has(> .viewcode-link) {
+  float: right;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+dt.sig .viewcode-link {
+  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-size: 0.75rem;
+  color: var(--lumina-text-muted);
+}
+
+dt.sig > a:has(> .viewcode-link):hover .viewcode-link {
+  color: var(--lumina-accent);
+}
+
 /* Function / class / attribute name */
 .sig-name.descname {
   font-weight: 600;
@@ -192,21 +209,21 @@ dl:has(> dt.sig) dl.field-list dd li span > a.reference.external {
   border: none;
   padding: 0;
   font-size: 0.875em;
-  color: var(--lumina-accent);
+  color: var(--lumina-link);
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: color-mix(in srgb, var(--lumina-accent) 40%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--lumina-link) 40%, transparent);
   transition: text-decoration-color 0.15s;
 }
 
 .lumina-article a:hover code.xref {
-  text-decoration-color: var(--lumina-accent);
+  text-decoration-color: var(--lumina-link);
 }
 
 /* ── API signature syntax coloring ── */
 dt.sig .n { color: var(--lumina-text); }           /* names */
-dt.sig .k { color: #8b5cf6; }                      /* keywords (class, def) */
-dt.sig .nb { color: var(--lumina-accent); }         /* builtins (str, int, etc.) */
+dt.sig .k { color: #7c3aed; }                      /* keywords (class, def); AA on light backgrounds */
+dt.sig .nb { color: var(--lumina-link); }           /* builtins (str, int, etc.) */
 
 [data-theme="dark"] dt.sig .k { color: #a78bfa; }
 
