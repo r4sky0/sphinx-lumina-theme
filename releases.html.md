@@ -1,5 +1,13 @@
 # Releases
 
+## v2.11.0 (2026-10-13)
+
+### Features
+
+- **search**: Find API symbols and keep API reference navigation readable
+  ([#184](https://github.com/r4sky0/sphinx-lumina-theme/pull/184),
+  [`bc197ed`](https://github.com/r4sky0/sphinx-lumina-theme/commit/bc197ed240f91e96a9164b77bd4a6609b4abfe88))
+
 ## v2.10.1 (2026-10-12)
 
 ### Bug Fixes
