@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-09-25T16:48:31+00:00" />
+    <meta property="article:modified_time" content="2026-10-13T20:02:55+00:00" />
     <title>Search &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=3956061e" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=ab94207c" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=8cc1ad25"></script>
+    <script defer="defer" src="../_static/lumina.js?v=a652dae0"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/guides/search.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -73,7 +73,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://r4sky0.github.io/sphinx-lumina-theme/guides/index.html"}, {"@type": "ListItem", "position": 3, "name": "Search", "item": "https://r4sky0.github.io/sphinx-lumina-theme/guides/search.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Search", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Configure how readers search your documentation — Pagefind for fast client-side search, or Sphinx’s built-in search as a fallback.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/guides/search.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/guides/search.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-25T00:00:00+00:00", "dateModified": "2026-09-25T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Search", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Configure how readers search your documentation — Pagefind for fast client-side search, or Sphinx’s built-in search as a fallback.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/guides/search.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/guides/search.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-10-13T00:00:00+00:00", "dateModified": "2026-10-13T00:00:00+00:00"}</script>
         
         
     
@@ -715,12 +715,14 @@ document.documentElement.style.setProperty(
     
         
             
+            
             <a href="index.html"
-               class="whitespace-nowrap hover:text-lumina-accent no-underline transition-colors">Guides</a>
+               class="min-w-0 truncate hover:text-lumina-accent no-underline transition-colors">Guides</a>
         
     
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
-    <span class="whitespace-nowrap text-lumina-text" aria-current="page">Search</span>
+    <span class="shrink-0 whitespace-nowrap text-lumina-text"
+          aria-current="page">Search</span>
 </nav>
 
                     </div>
@@ -756,6 +758,7 @@ document.documentElement.style.setProperty(
 <li><a class="reference internal" href="#">Search</a><ul>
 <li><a class="reference internal" href="#pagefind-default">Pagefind (default)</a></li>
 <li><a class="reference internal" href="#search-within-a-section">Search within a section</a></li>
+<li><a class="reference internal" href="#api-symbols">API symbols</a></li>
 <li><a class="reference internal" href="#built-in-sphinx-search">Built-in Sphinx Search</a></li>
 </ul>
 </li>
@@ -816,6 +819,17 @@ from the search field to move through page and heading links, then press
 <p>Search covers the current build, not other versions or separately hosted sites.
 Rebuild your docs after changing the navigation so the index reflects it.</p>
 </section>
+<section id="api-symbols">
+<h2 id="lumina-search-api-symbols">API symbols<a class="headerlink" href="#api-symbols" title="Link to this heading">¶</a></h2>
+<p>Functions, classes and other objects documented with Sphinx domains, such as
+<code class="docutils literal notranslate"><span class="pre">py:function</span></code> or a third-party API domain, are matched by name and listed above
+the page results, up to five at a time. Type a member name such as <code class="docutils literal notranslate"><span class="pre">connect</span></code> or a
+qualified name such as <code class="docutils literal notranslate"><span class="pre">EventEmitter.on</span></code>, then select a result to jump to its
+definition. Symbols follow the rules of Sphinx’s own search: objects with a
+negative search priority and pages marked <code class="docutils literal notranslate"><span class="pre">:nosearch:</span></code> are left out. Lumina writes
+them to <code class="docutils literal notranslate"><span class="pre">_static/lumina-symbols.json</span></code> at the end of each build, for both search
+backends.</p>
+</section>
 <section id="built-in-sphinx-search">
 <h2 id="lumina-search-built-in-sphinx-search">Built-in Sphinx Search<a class="headerlink" href="#built-in-sphinx-search" title="Link to this heading">¶</a></h2>
 <p>If you prefer not to use Pagefind, switch to Sphinx’s built-in search:</p>
@@ -869,7 +883,7 @@ Pagefind cannot load or a query fails, Lumina offers a link to this search page.
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>September 25, 2026</time>
+            Last updated <time>October 13, 2026</time>
         </p>
     
     
@@ -896,6 +910,7 @@ Pagefind cannot load or a query fails, Lumina offers a link to this search page.
 <li><a class="reference internal" href="#">Search</a><ul>
 <li><a class="reference internal" href="#pagefind-default">Pagefind (default)</a></li>
 <li><a class="reference internal" href="#search-within-a-section">Search within a section</a></li>
+<li><a class="reference internal" href="#api-symbols">API symbols</a></li>
 <li><a class="reference internal" href="#built-in-sphinx-search">Built-in Sphinx Search</a></li>
 </ul>
 </li>
@@ -1005,9 +1020,10 @@ Pagefind cannot load or a query fails, Lumina offers a link to this search page.
                               x-text="result.breadcrumb"></span>
                     </template>
                     <span class="break-words text-sm"
-                          :class="result.isHeading ? '' : 'font-semibold'"
+                          :class="result.isSymbol ? 'font-mono' : result.isHeading ? '' : 'font-semibold'"
                           x-text="result.title"></span>
-                    <span class="line-clamp-2 text-xs text-lumina-text-muted"
+                    <span x-show="result.excerpt"
+                          class="line-clamp-2 text-xs text-lumina-text-muted"
                           x-html="result.excerpt"></span>
                 </a>
             </template>

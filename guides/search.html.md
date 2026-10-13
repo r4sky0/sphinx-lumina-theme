@@ -44,6 +44,17 @@ from the search field to move through page and heading links, then press
 Search covers the current build, not other versions or separately hosted sites.
 Rebuild your docs after changing the navigation so the index reflects it.
 
+## API symbols
+
+Functions, classes and other objects documented with Sphinx domains, such as
+`py:function` or a third-party API domain, are matched by name and listed above
+the page results, up to five at a time. Type a member name such as `connect` or a
+qualified name such as `EventEmitter.on`, then select a result to jump to its
+definition. Symbols follow the rules of Sphinx’s own search: objects with a
+negative search priority and pages marked `:nosearch:` are left out. Lumina writes
+them to `_static/lumina-symbols.json` at the end of each build, for both search
+backends.
+
 ## Built-in Sphinx Search
 
 If you prefer not to use Pagefind, switch to Sphinx’s built-in search:
