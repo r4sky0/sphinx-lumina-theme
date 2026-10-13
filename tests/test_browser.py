@@ -1334,3 +1334,30 @@ def test_wide_math_scrolls_beside_its_number(
         "numberAfterFormula": True,
         "numberInside": True,
     }
+
+
+IN_PANEL = """([panel, link]) => {
+  const box = document.querySelector(panel).getBoundingClientRect();
+  const rect = document.querySelector(link).getBoundingClientRect();
+  return rect.height > 0 && rect.top >= box.top && rect.bottom <= box.bottom;
+}"""
+
+
+def test_sidebar_and_toc_keep_current_entries_in_view(page: Page, live_server: str):
+    """Panels taller than the viewport scroll to the current page and section."""
+    page.emulate_media(reduced_motion="reduce")
+    page.set_viewport_size({"width": 1280, "height": 360})
+    page.goto(f"{live_server}/reference/typography.html")
+    page.wait_for_function("() => window.Alpine !== undefined")
+    sidebar = ".lumina-sidebar-desktop"
+    assert page.locator(sidebar).evaluate("el => el.scrollTop") > 0
+    current = f"{sidebar} a.current[href='#']"
+    assert page.evaluate(IN_PANEL, [sidebar, current])
+
+    toc = ".lumina-toc-scroll"
+    assert page.locator(toc).evaluate("el => el.scrollHeight > el.clientHeight")
+    page.evaluate("window.scrollTo(0, document.documentElement.scrollHeight)")
+    page.wait_for_function(
+        f"args => document.querySelector('{toc}').scrollTop > 0 && ({IN_PANEL})(args)",
+        arg=[toc, ".lumina-toc-active"],
+    )
