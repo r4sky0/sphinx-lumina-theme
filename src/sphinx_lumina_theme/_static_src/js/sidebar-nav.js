@@ -9,8 +9,10 @@
  * - Everything else starts collapsed, like Sphinx's default ``toctree()``.
  *
  * State is recomputed on every page load — there is no ``localStorage``
- * persistence.
+ * persistence. The current page is scrolled into view in the sidebar.
  */
+
+import { revealInContainer } from "./utils/reveal.js";
 
 const CHEVRON_SVG =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" ' +
@@ -79,6 +81,10 @@ export default function sidebarNav() {
           button.setAttribute("aria-expanded", "true");
         }
       });
+
+      // Sphinx marks the whole path as current; the last such link is this page.
+      const current = nav.querySelectorAll("a.current");
+      revealInContainer(nav.closest(".overflow-y-auto"), current[current.length - 1]);
     },
 
     /**

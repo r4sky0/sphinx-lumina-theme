@@ -126,3 +126,34 @@ def test_search_heading_alias_collision():
     )
     assert section["ids"] == ["example"]
     assert title["ids"] == ["lumina-search-example-"]
+
+
+def test_search_symbols_follow_sphinx_search_rules(tmp_path):
+    """Domain objects are written for the modal; labels and nosearch pages are not."""
+    import json
+
+    from conftest import sphinx_app
+
+    (tmp_path / "conf.py").write_text('html_theme = "lumina"\n')
+    (tmp_path / "index.rst").write_text(
+        "API\n===\n\n.. toctree::\n\n   hidden\n\n"
+        ".. py:function:: connect(host)\n\n"
+        ".. py:class:: Widget\n\n   .. py:method:: draw(canvas)\n"
+    )
+    (tmp_path / "hidden.rst").write_text(
+        ":nosearch:\n\nHidden\n======\n\n.. py:function:: secret()\n"
+    )
+    out = tmp_path / "_build"
+    sphinx_app(
+        tmp_path, out, confoverrides={"html_theme_options.search_backend": "sphinx"}
+    ).build()
+    data = json.loads((out / "_static/lumina-symbols.json").read_text())
+    symbols = {
+        (name, prefix, data["kinds"][kind], *data["pages"][page], anchor)
+        for name, prefix, kind, page, anchor in data["symbols"]
+    }
+    assert symbols == {
+        ("connect", "", "Python function", "index.html", "", "connect"),
+        ("Widget", "", "Python class", "index.html", "", "Widget"),
+        ("draw", "Widget", "Python method", "index.html", "", "Widget.draw"),
+    }

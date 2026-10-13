@@ -5,6 +5,8 @@
  * the fixed header, with a curved guide that follows the heading hierarchy.
  */
 
+import { revealInContainer } from "./utils/reveal.js";
+
 /**
  * Factory for the scrollspy Alpine component.
  * Registered as ``Alpine.data("scrollspy", scrollspy)``.
@@ -134,6 +136,11 @@ export default function scrollspy() {
         if (id === this.activeId) el.setAttribute("aria-current", "location");
         else el.removeAttribute("aria-current");
       }
+      // API pages can have TOCs far taller than the viewport; keep the active entry in view.
+      revealInContainer(
+        this.$el.closest(".lumina-toc-scroll"),
+        this._links.find((link) => link.id === this.activeId)?.el,
+      );
     },
 
     _updateIndicator(animate = true) {

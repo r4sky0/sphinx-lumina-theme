@@ -274,8 +274,8 @@ span.highlighted {
   left: 1rem;
   z-index: 100;
   padding: 0.5rem 1rem;
-  background: var(--lumina-accent);
-  color: #fff;
+  background: var(--lumina-link);
+  color: var(--lumina-bg);
   font-size: 0.875rem;
   font-weight: 500;
   border-radius: 0 0 0.5rem 0.5rem;
