@@ -25,7 +25,7 @@
     <script defer="defer" src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="_static/lumina.js?v=a652dae0"></script>
+    <script defer="defer" src="_static/lumina.js?v=cdc4b938"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/index.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -137,6 +137,7 @@
         </script>
     
     
+    
         <link rel="alternate"
               type="text/markdown"
               href="llms.txt"
@@ -230,8 +231,8 @@ document.documentElement.style.setProperty(
                     class="relative flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors cursor-pointer"
                     aria-label="Toggle color theme"
                     title="Toggle color theme"
-                    :aria-label="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'"
-                    :title="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'">
+                    :aria-label="mode === 'light' ? $t('Switch to dark mode') : mode === 'dark' ? $t('Switch to system theme') : $t('Switch to light mode')"
+                    :title="mode === 'light' ? $t('Switch to dark mode') : mode === 'dark' ? $t('Switch to system theme') : $t('Switch to light mode')">
                 
                 <svg x-show="mode === 'light'"
                      x-transition:enter="transition ease-out duration-200"
@@ -294,8 +295,8 @@ document.documentElement.style.setProperty(
                         class="hidden xl:flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors cursor-pointer"
                         aria-label="Toggle layout width"
                         title="Toggle layout width"
-                        :aria-label="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
-                        :title="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
+                        :aria-label="wide ? $t('Switch to normal layout') : $t('Switch to wide layout')"
+                        :title="wide ? $t('Switch to normal layout') : $t('Switch to wide layout')"
                         type="button">
                     
                     <svg x-show="!wide"
@@ -551,12 +552,12 @@ document.documentElement.style.setProperty(
         <div class="min-h-0 overflow-y-auto p-2" :aria-busy="searching">
             <template x-if="!loaded || searching">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">
-                    <span x-text="loaded ? 'Searching…' : 'Loading search index…'"></span>
+                    <span x-text="loaded ? $t('Searching…') : $t('Loading search index…')"></span>
                 </p>
             </template>
             <template x-if="loaded && !searching && !error && query.trim().length > 0 && results.length === 0">
                 <div class="px-3 py-8 text-center text-sm text-lumina-text-muted">
-                    <p x-text="scope ? 'No results in ' + scope + '.' : 'No results found.'"></p>
+                    <p x-text="scope ? $t('No results in {scope}.', { scope }) : $t('No results found.')"></p>
                     <template x-if="scope">
                         <button type="button"
                                 @click="searchAll()"
@@ -596,7 +597,7 @@ document.documentElement.style.setProperty(
         
         <div class="sr-only"
              role="status"
-             x-text="searching ? 'Searching…' : loaded && query.trim().length > 0 ? results.length + ' links' + (scope ? ' in ' + scope : ' across all docs') : ''">
+             x-text="searching ? $t('Searching…') : loaded && query.trim().length > 0 ? (scope ? $t('{count} links in {scope}', { count: results.length, scope }) : $t('{count} links across all docs', { count: results.length })) : ''">
         </div>
         
         <div class="flex shrink-0 items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">

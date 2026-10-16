@@ -7,6 +7,7 @@ How the Sphinx Lumina Theme is structured internally.
 ```default
 src/sphinx_lumina_theme/
 ├── __init__.py              # Sphinx setup() hook, registers theme
+├── locale/                  # gettext catalogs (sphinx.pot, <lang>/LC_MESSAGES/sphinx.po/.mo)
 ├── _static_src/             # SOURCE assets (edit these)
 │   ├── css/                 # base.css imports admonitions/code/typography
 │   └── js/                  # app.js is entry point, loads Alpine components
@@ -69,7 +70,7 @@ the nested links keep a straight CSS guide.
 
 ### HTTP request editor
 
-`try-it.js` and `curl-copy.js` enhance the rendered `dl.http` endpoints. `_http-api-utils.js` extracts paths, fields, and HTTP request examples. A shared curl serializer handles both documentation templates and edited requests, with POSIX shell quoting.
+`try-it.js` and `curl-copy.js` enhance the rendered `dl.http` endpoints. `_http-api-utils.js` extracts paths, fields, and HTTP request examples. At build time, `_tag_http_fields()` classes each httpdomain field name by its field type, such as `lumina-http-requestheader`, so the scripts find query parameters, headers, and JSON fields whatever language the labels use. A shared curl serializer handles both documentation templates and edited requests, with POSIX shell quoting.
 
 The request panel keeps authentication in memory, shared by the normalized API base URL. It sends browser `fetch` requests with cookies omitted, redirects rejected, and cancellation through `AbortController`. It does not parse the original OpenAPI specification. The showcase uses sphinxcontrib-openapi’s `httpdomain` renderer to preserve request schemas and examples.
 
@@ -102,6 +103,12 @@ keys its bounded cache by query and scope. Request IDs discard outdated
 responses, including responses arriving after the dialog closes. The dialog
 lists up to ten pages with up to three heading links per page; all links share
 one keyboard navigation sequence. Excerpts are sanitized before rendering.
+
+## Translations
+
+`setup()` registers `locale/` as an additional `sphinx` message catalog, so templates translate strings with the `_()` function that Sphinx provides. Sphinx’s own translations and the project’s `locale_dirs` take precedence over the bundled catalog.
+
+JavaScript can’t call gettext, so for non-English builds `layout.html` includes `components/i18n.html`, which renders every JavaScript string through `_()` into a `<script id="lumina-i18n" type="application/json">` block. `utils/i18n.js` exports `t(key, vars)`, which looks up that catalog and falls back to the English key; `app.js` exposes it to Alpine expressions as `$t`. See [Translations](translations.md) for the contributor workflow.
 
 ## Theming
 

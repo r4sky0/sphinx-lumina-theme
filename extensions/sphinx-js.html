@@ -21,7 +21,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=a652dae0"></script>
+    <script defer="defer" src="../_static/lumina.js?v=cdc4b938"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/extensions/sphinx-js.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -137,6 +137,7 @@
         </script>
     
     
+    
         <link rel="alternate"
               type="text/markdown"
               href="../llms.txt"
@@ -226,8 +227,8 @@ document.documentElement.style.setProperty(
                     class="relative flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors cursor-pointer"
                     aria-label="Toggle color theme"
                     title="Toggle color theme"
-                    :aria-label="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'"
-                    :title="mode === 'light' ? 'Switch to dark mode' : mode === 'dark' ? 'Switch to system theme' : 'Switch to light mode'">
+                    :aria-label="mode === 'light' ? $t('Switch to dark mode') : mode === 'dark' ? $t('Switch to system theme') : $t('Switch to light mode')"
+                    :title="mode === 'light' ? $t('Switch to dark mode') : mode === 'dark' ? $t('Switch to system theme') : $t('Switch to light mode')">
                 
                 <svg x-show="mode === 'light'"
                      x-transition:enter="transition ease-out duration-200"
@@ -290,8 +291,8 @@ document.documentElement.style.setProperty(
                         class="hidden xl:flex h-9 w-9 items-center justify-center rounded-md text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors cursor-pointer"
                         aria-label="Toggle layout width"
                         title="Toggle layout width"
-                        :aria-label="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
-                        :title="wide ? 'Switch to normal layout' : 'Switch to wide layout'"
+                        :aria-label="wide ? $t('Switch to normal layout') : $t('Switch to wide layout')"
+                        :title="wide ? $t('Switch to normal layout') : $t('Switch to wide layout')"
                         type="button">
                     
                     <svg x-show="!wide"
@@ -463,6 +464,7 @@ document.documentElement.style.setProperty(
 <li class="toctree-l2"><a class="reference internal" href="../guides/icons.html">Icons</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/development-workflow.html">Development Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/seo.html">SEO and discoverability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/internationalization.html">Internationalization</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Extensions</a><ul class="current">
@@ -653,6 +655,7 @@ document.documentElement.style.setProperty(
 <li class="toctree-l2"><a class="reference internal" href="../guides/icons.html">Icons</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/development-workflow.html">Development Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/seo.html">SEO and discoverability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/internationalization.html">Internationalization</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Extensions</a><ul class="current">
@@ -732,14 +735,17 @@ document.documentElement.style.setProperty(
          x-data
          @click.outside="$el.open = false"
          @keydown.escape.stop="$el.open = false; $el.querySelector('summary').focus()">
-    <summary aria-label="Page actions" title="Page actions"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg></summary>
+    <summary aria-label="Page actions" title="Page actions">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg>
+    </summary>
     <div class="lumina-page-action-list">
         <button x-data="copyPage()"
                 @click="copy()"
                 type="button"
                 aria-label="Copy page as Markdown">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
-            <span aria-live="polite" x-text="copied ? 'Copied!' : 'Copy as Markdown'">Copy as Markdown</span>
+            <span aria-live="polite"
+                  x-text="copied ? $t('Copied!') : $t('Copy as Markdown')">Copy as Markdown</span>
         </button>
         
             <a href="https://github.com/r4sky0/sphinx-lumina-theme/edit/main/docs/extensions/sphinx-js.md"
@@ -979,7 +985,8 @@ pnpm<span class="w"> </span>add<span class="w"> </span>-D<span class="w"> </span
                     <footer class="mt-10 border-t border-lumina-border pt-6">
     
     
-        <nav class="flex justify-between gap-4 mb-8" aria-label="Page navigation">
+        <nav class="flex justify-between gap-4 mb-8"
+             aria-label="Page navigation">
             
                 <a href="sphinx-llm.html"
                    class="group flex flex-col items-start gap-1 rounded-lg border border-lumina-border p-4 no-underline hover:border-lumina-accent hover:bg-lumina-bg-secondary active:bg-lumina-accent-light transition-colors duration-150 flex-1">
@@ -1119,12 +1126,12 @@ pnpm<span class="w"> </span>add<span class="w"> </span>-D<span class="w"> </span
         <div class="min-h-0 overflow-y-auto p-2" :aria-busy="searching">
             <template x-if="!loaded || searching">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">
-                    <span x-text="loaded ? 'Searching…' : 'Loading search index…'"></span>
+                    <span x-text="loaded ? $t('Searching…') : $t('Loading search index…')"></span>
                 </p>
             </template>
             <template x-if="loaded && !searching && !error && query.trim().length > 0 && results.length === 0">
                 <div class="px-3 py-8 text-center text-sm text-lumina-text-muted">
-                    <p x-text="scope ? 'No results in ' + scope + '.' : 'No results found.'"></p>
+                    <p x-text="scope ? $t('No results in {scope}.', { scope }) : $t('No results found.')"></p>
                     <template x-if="scope">
                         <button type="button"
                                 @click="searchAll()"
@@ -1164,7 +1171,7 @@ pnpm<span class="w"> </span>add<span class="w"> </span>-D<span class="w"> </span
         
         <div class="sr-only"
              role="status"
-             x-text="searching ? 'Searching…' : loaded && query.trim().length > 0 ? results.length + ' links' + (scope ? ' in ' + scope : ' across all docs') : ''">
+             x-text="searching ? $t('Searching…') : loaded && query.trim().length > 0 ? (scope ? $t('{count} links in {scope}', { count: results.length, scope }) : $t('{count} links across all docs', { count: results.length })) : ''">
         </div>
         
         <div class="flex shrink-0 items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
@@ -1180,7 +1187,7 @@ pnpm<span class="w"> </span>add<span class="w"> </span>-D<span class="w"> </span
                 x-on:close="onClose()"
                 class="lumina-lightbox-overlay"
                 aria-modal="true"
-                x-bind:aria-label="caption || 'Image preview'">
+                x-bind:aria-label="caption || $t('Image preview')">
             <div class="lumina-overlay-backdrop lumina-lightbox-backdrop"
                  x-on:click="close()"></div>
             <form method="dialog">

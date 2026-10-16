@@ -21,3 +21,5 @@ Add Lucide icons to cards, sidebar items, and your logo.
 Live reload with sphinx-autobuild and the asset watcher.
 
 Out-of-the-box meta tags, social cards, JSON-LD, sitemap, and `robots.txt`.
+
+Translate the theme’s interface text with Sphinx’s `language` setting.

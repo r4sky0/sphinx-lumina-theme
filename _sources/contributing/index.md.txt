@@ -82,10 +82,19 @@ Learn how the theme is structured — build pipeline, templates, Alpine.js compo
 Auto-generated reference for every Alpine.js component in the theme.
 :::
 
+:::{grid-item-card} Translations
+:link: translations
+:link-type: doc
+:icon: languages
+:icon-style: featured
+Fix or add a bundled translation and make new interface text translatable.
+:::
+
 ::::
 
 ```{toctree}
 :hidden:
 architecture
 javascript-api
+translations
 ```

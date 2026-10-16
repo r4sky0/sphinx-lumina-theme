@@ -113,6 +113,8 @@ Live reload with sphinx-autobuild and the asset watcher.
 
 Out-of-the-box meta tags, social cards, JSON-LD, sitemap, and `robots.txt`.
 
+Translate the theme’s interface text with Sphinx’s `language` setting.
+
 
 # index.html.md
 
@@ -226,6 +228,8 @@ Tests use pytest with BeautifulSoup for HTML assertions. The `build_output` fixt
 Learn how the theme is structured — build pipeline, templates, Alpine.js components, and testing.
 
 Auto-generated reference for every Alpine.js component in the theme.
+
+Fix or add a bundled translation and make new interface text translatable.
 
 
 # admonitions.html.md
@@ -635,6 +639,7 @@ How the Sphinx Lumina Theme is structured internally.
 ```default
 src/sphinx_lumina_theme/
 ├── __init__.py              # Sphinx setup() hook, registers theme
+├── locale/                  # gettext catalogs (sphinx.pot, <lang>/LC_MESSAGES/sphinx.po/.mo)
 ├── _static_src/             # SOURCE assets (edit these)
 │   ├── css/                 # base.css imports admonitions/code/typography
 │   └── js/                  # app.js is entry point, loads Alpine components
@@ -697,7 +702,7 @@ the nested links keep a straight CSS guide.
 
 ### HTTP request editor
 
-`try-it.js` and `curl-copy.js` enhance the rendered `dl.http` endpoints. `_http-api-utils.js` extracts paths, fields, and HTTP request examples. A shared curl serializer handles both documentation templates and edited requests, with POSIX shell quoting.
+`try-it.js` and `curl-copy.js` enhance the rendered `dl.http` endpoints. `_http-api-utils.js` extracts paths, fields, and HTTP request examples. At build time, `_tag_http_fields()` classes each httpdomain field name by its field type, such as `lumina-http-requestheader`, so the scripts find query parameters, headers, and JSON fields whatever language the labels use. A shared curl serializer handles both documentation templates and edited requests, with POSIX shell quoting.
 
 The request panel keeps authentication in memory, shared by the normalized API base URL. It sends browser `fetch` requests with cookies omitted, redirects rejected, and cancellation through `AbortController`. It does not parse the original OpenAPI specification. The showcase uses sphinxcontrib-openapi’s `httpdomain` renderer to preserve request schemas and examples.
 
@@ -730,6 +735,12 @@ keys its bounded cache by query and scope. Request IDs discard outdated
 responses, including responses arriving after the dialog closes. The dialog
 lists up to ten pages with up to three heading links per page; all links share
 one keyboard navigation sequence. Excerpts are sanitized before rendering.
+
+## Translations
+
+`setup()` registers `locale/` as an additional `sphinx` message catalog, so templates translate strings with the `_()` function that Sphinx provides. Sphinx’s own translations and the project’s `locale_dirs` take precedence over the bundled catalog.
+
+JavaScript can’t call gettext, so for non-English builds `layout.html` includes `components/i18n.html`, which renders every JavaScript string through `_()` into a `<script id="lumina-i18n" type="application/json">` block. `utils/i18n.js` exports `t(key, vars)`, which looks up that catalog and falls back to the English key; `app.js` exposes it to Alpine expressions as `$t`. See [Translations](translations.md) for the contributor workflow.
 
 ## Theming
 
@@ -3287,6 +3298,54 @@ Explore all theme options, accent colors, and the recommended setup.
 Set up search, dark mode, MyST Markdown, navigation, and more.
 
 Browse the complete reference for typography, admonitions, code blocks, and more.
+
+
+# internationalization.html.md
+
+# Internationalization
+
+Lumina’s interface text — navigation labels, the search modal, copy buttons, the HTTP request editor, and screen-reader labels — follows your project’s Sphinx `language` setting. Your page content is translated separately with Sphinx’s own [internationalization workflow](https://www.sphinx-doc.org/en/master/usage/advanced/intl.html).
+
+## Set the language
+
+```python
+language = "de"
+```
+
+Lumina ships translations for these languages:
+
+| Code    | Language           |
+|---------|--------------------|
+| `de`    | German             |
+| `es`    | Spanish            |
+| `fr`    | French             |
+| `ja`    | Japanese           |
+| `zh_CN` | Simplified Chinese |
+
+Any other language falls back to English for Lumina’s strings, while Sphinx still translates its own text. The page’s `<html lang>` attribute and the Pagefind search index follow the same `language` value.
+
+#### NOTE
+The bundled translations were drafted with machine assistance. Corrections from native speakers are welcome — see [Translations](../contributing/translations.md).
+
+## Override a translation
+
+To change a string for your project, add a catalog named `sphinx.po` to your own `locale_dirs`. Your catalog takes precedence over the one bundled with Lumina:
+
+```python
+language = "de"
+locale_dirs = ["locale/"]
+```
+
+```po
+msgid "Copy as Markdown"
+msgstr "Als Markdown übernehmen"
+```
+
+Sphinx compiles `sphinx.po` files in `locale_dirs` automatically on each build. Copy the message IDs from Lumina’s template at `sphinx_lumina_theme/locale/sphinx.pot`.
+
+The same approach adds a language Lumina doesn’t ship. For a language that Sphinx itself has no translations for, Lumina’s templates stay in English.
+
+To fix or add a bundled translation, see [Translations](../contributing/translations.md).
 
 
 # introduction.html.md
@@ -6381,6 +6440,35 @@ All options are optional — the defaults work well for most projects:
 The extension runs a parallel Sphinx build using a markdown builder. All directives (including `autodoc`, `toctree`, cross-references) are fully expanded in the output — you get clean, rendered markdown, not raw source.
 
 Each entry in `llms.txt` includes a description sourced from the page’s `meta` description or the first 100 characters of content.
+
+
+# translations.html.md
+
+# Translations
+
+How to fix or add a bundled translation, and how to make new interface text translatable. For setting a site’s language, see [Internationalization](../guides/internationalization.md).
+
+## Contributing a translation
+
+Lumina’s catalogs live in `src/sphinx_lumina_theme/locale/<language>/LC_MESSAGES/sphinx.po`.
+
+1. For a new language, create its catalog from the template:
+   ```console
+   $ uv run pybabel init -i src/sphinx_lumina_theme/locale/sphinx.pot -d src/sphinx_lumina_theme/locale -D sphinx -l pt_BR
+   ```
+2. Fill in each `msgstr`. Keep placeholders such as `{count}` and `%(minutes)s` unchanged, and don’t use `<`, `>`, `&`, or straight double quotes — use the typographic quotes of your language instead.
+3. Run `pnpm run i18n` to refresh the template and compile the `.mo` files, then commit both the `.po` and `.mo` files.
+4. Add the language to the table in [Internationalization](../guides/internationalization.md).
+
+### Adding translatable strings
+
+When you add interface text to the theme:
+
+- In templates, wrap it as `{{ _("Text") }}`.
+- In JavaScript, call `t("Text")` from `utils/i18n.js`. In Alpine expressions, use the `$t('Text')` magic. Placeholders use braces: `t("{count} rows", { count })`.
+- List every JavaScript string in `theme/components/i18n.html`, which emits the translated strings for non-English builds.
+
+Then run `pnpm run i18n`. `tests/test_i18n.py` fails when a JavaScript string is missing from `i18n.html`, the template is stale, or a `.mo` file doesn’t match its `.po` file.
 
 
 # typography.html.md
