@@ -19,6 +19,7 @@ import {
   requestToCurl,
 } from "./_http-api-utils.js";
 import { copyText } from "./utils/clipboard.js";
+import { t } from "./utils/i18n.js";
 
 /* Module-level store — maps each injected button to its curl string */
 const _curlCmds = new WeakMap();
@@ -100,9 +101,9 @@ function injectButton(dl, baseUrl) {
   btn.setAttribute("x-data", "curlCopyBtn");
   btn.setAttribute("x-on:click", "copy()");
   btn.setAttribute("x-bind:class", "{ 'is-copied': copied }");
-  btn.setAttribute("x-bind:aria-label", "copied ? 'Copied!' : 'Copy as curl'");
-  btn.setAttribute("title", "Copy as curl");
-  btn.setAttribute("aria-label", "Copy as curl");
+  btn.setAttribute("x-bind:aria-label", "copied ? $t('Copied!') : $t('Copy as curl')");
+  btn.setAttribute("title", t("Copy as curl"));
+  btn.setAttribute("aria-label", t("Copy as curl"));
 
   _curlCmds.set(btn, curl);
 
@@ -122,7 +123,7 @@ function injectButton(dl, baseUrl) {
   `);
 
   const label = document.createElement("span");
-  label.setAttribute("x-text", "copied ? 'Copied!' : 'Copy curl'");
+  label.setAttribute("x-text", "copied ? $t('Copied!') : $t('Copy curl')");
   btn.appendChild(label);
 
   sig.appendChild(btn);

@@ -6,6 +6,7 @@
  */
 
 import { copyText } from "./utils/clipboard.js";
+import { t } from "./utils/i18n.js";
 
 /**
  * Factory for the header-links Alpine component.
@@ -29,7 +30,7 @@ export default function headerLinks() {
 
           copyText(url)
             .then(() => {
-              link.setAttribute("data-tooltip", "Copied!");
+              link.setAttribute("data-tooltip", t("Copied!"));
               link.classList.add("lumina-tooltip-visible");
 
               setTimeout(() => {

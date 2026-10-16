@@ -9,6 +9,7 @@
  */
 
 import DOMPurify from "dompurify";
+import { t } from "./utils/i18n.js";
 
 const EXCERPT_CONFIG = { ALLOWED_TAGS: ["mark"], ALLOWED_ATTR: [] };
 /* If Pagefind hasn't initialized in this many ms, give up and fall back to
@@ -233,7 +234,7 @@ export default function searchModal() {
       } catch (e) {
         this.pagefind = null;
         this.scopes = [];
-        this.error = "Instant search is unavailable. Use Sphinx search below.";
+        this.error = t("Instant search is unavailable. Use Sphinx search below.");
       }
     },
 
@@ -273,7 +274,7 @@ export default function searchModal() {
           );
           results = data.flatMap((r) => {
             const page = {
-              title: r.meta?.title || "Untitled",
+              title: r.meta?.title || t("Untitled"),
               url: r.url,
               excerpt: DOMPurify.sanitize(r.excerpt, EXCERPT_CONFIG),
               breadcrumb: r.meta?.breadcrumb || "",
@@ -301,7 +302,7 @@ export default function searchModal() {
         this._shownKey = key;
       } catch {
         if (requestId !== this._requestId || query !== this.query.trim() || scope !== this.scope) return;
-        this.error = "Instant search is unavailable. Sphinx search covers all docs.";
+        this.error = t("Instant search is unavailable. Sphinx search covers all docs.");
         this.results = [...matchSymbols(symbols, query, scope), ...this.fallbackResults(query)];
       } finally {
         if (requestId === this._requestId) this.searching = false;
@@ -310,9 +311,9 @@ export default function searchModal() {
 
     fallbackResults(query) {
       return [{
-        title: 'Search for "' + query + '"',
+        title: t('Search for "{query}"', { query }),
         url: this.baseUrl + "search.html?q=" + encodeURIComponent(query),
-        excerpt: "Open Sphinx search results page",
+        excerpt: t("Open Sphinx search results page"),
         breadcrumb: "",
         isHeading: false,
       }];

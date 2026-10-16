@@ -8,11 +8,13 @@ from pathlib import Path
 
 from sphinx import addnodes
 from sphinx.environment.adapters.toctree import _resolve_toctree
+from sphinx.locale import get_translation
 from sphinx.util import logging
 
 from . import _seo
 
 logger = logging.getLogger(__name__)
+_ = get_translation("sphinx")
 
 __version__ = "2.11.0"
 
@@ -107,7 +109,7 @@ def _insert_reading_time(app, doctree, pagename):
         nodes.raw(
             "",
             f'<div class="lumina-reading-time" data-pagefind-ignore>'
-            f"{icon}<span>{minutes} min read</span></div>",
+            f"{icon}<span>{_('%(minutes)s min read') % {'minutes': minutes}}</span></div>",
             format="html",
         ),
     )
@@ -924,6 +926,7 @@ def setup(app):
     from ._directives import LuminaCardDirective, LuminaGridItemCardDirective
 
     app.add_html_theme("lumina", str(Path(__file__).parent / "theme"))
+    app.add_message_catalog("sphinx", str(Path(__file__).parent / "locale"))
     app.add_js_file("lumina.js", loading_method="defer", priority=900)
     app.add_directive("card", LuminaCardDirective, override=True)
     app.add_directive("grid-item-card", LuminaGridItemCardDirective, override=True)

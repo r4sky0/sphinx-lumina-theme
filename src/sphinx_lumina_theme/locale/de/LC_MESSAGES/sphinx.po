@@ -1,0 +1,459 @@
+# German translations for sphinx-lumina-theme.
+# Copyright (C) 2026 Ralph Offinger
+# This file is distributed under the same license as the sphinx-lumina-theme
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sphinx-lumina-theme VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-10-16 08:54+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#, python-format
+msgid "%(minutes)s min read"
+msgstr "%(minutes)s Min. Lesezeit"
+
+msgid "(No response body)"
+msgstr "(Kein Antwortinhalt)"
+
+msgid "(current)"
+msgstr "(aktuell)"
+
+msgid "(opens in new tab)"
+msgstr "(öffnet in neuem Tab)"
+
+msgid "API display"
+msgstr "API-Anzeige"
+
+msgid "API key"
+msgstr "API-Schlüssel"
+
+msgid "Add header"
+msgstr "Header hinzufügen"
+
+msgid "Additional headers"
+msgstr "Weitere Header"
+
+msgid "All docs"
+msgstr "Alle Dokumente"
+
+msgid "Authentication"
+msgstr "Authentifizierung"
+
+msgid "Back to top"
+msgstr "Nach oben"
+
+msgid "Basic authentication"
+msgstr "Basic-Authentifizierung"
+
+msgid "Bearer token"
+msgstr "Bearer-Token"
+
+msgid "Breadcrumb"
+msgstr "Brotkrümelnavigation"
+
+msgid "Browse sections"
+msgstr "Bereiche anzeigen"
+
+msgid "Built with"
+msgstr "Erstellt mit"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Cancelled"
+msgstr "Abgebrochen"
+
+msgid "Clear"
+msgstr "Leeren"
+
+msgid "Clear credentials"
+msgstr "Zugangsdaten löschen"
+
+msgid "Close"
+msgstr "Schließen"
+
+msgid "Close preview"
+msgstr "Vorschau schließen"
+
+msgid "Collapse all"
+msgstr "Alle einklappen"
+
+msgid "Content type"
+msgstr "Inhaltstyp"
+
+msgid "Copied"
+msgstr "Kopiert"
+
+msgid "Copied!"
+msgstr "Kopiert!"
+
+msgid "Copy as Markdown"
+msgstr "Als Markdown kopieren"
+
+msgid "Copy as curl"
+msgstr "Als curl kopieren"
+
+msgid "Copy curl"
+msgstr "curl kopieren"
+
+msgid "Copy page as Markdown"
+msgstr "Seite als Markdown kopieren"
+
+msgid "Copy response"
+msgstr "Antwort kopieren"
+
+msgid "Could not copy. Select the curl command below and copy it manually."
+msgstr ""
+"Kopieren fehlgeschlagen. Markieren Sie den curl-Befehl unten und kopieren"
+" Sie ihn manuell."
+
+msgid "Could not copy. Select the response text and copy it manually."
+msgstr ""
+"Kopieren fehlgeschlagen. Markieren Sie den Antworttext und kopieren Sie "
+"ihn manuell."
+
+msgid ""
+"Could not reach the API. Check the server URL, network, HTTPS and CORS "
+"settings. Redirects are not followed. Try Copy as curl to debug outside "
+"the browser."
+msgstr ""
+"Die API ist nicht erreichbar. Prüfen Sie Server-URL, Netzwerk sowie "
+"HTTPS- und CORS-Einstellungen. Weiterleitungen werden nicht verfolgt. Mit"
+" „Als curl kopieren“ können Sie außerhalb des Browsers debuggen."
+
+#, python-brace-format
+msgid "Details for {name}"
+msgstr "Details zu {name}"
+
+msgid "Dismiss announcement"
+msgstr "Ankündigung schließen"
+
+msgid "Enter an HTTP(S) server URL without credentials, a query, or a fragment."
+msgstr ""
+"Geben Sie eine HTTP(S)-Server-URL ohne Zugangsdaten, Query oder Fragment "
+"ein."
+
+#, python-brace-format
+msgid "Enter required parameters: {names}."
+msgstr "Pflichtparameter eingeben: {names}."
+
+msgid "Enter the API key name and value, or select No authentication."
+msgstr ""
+"Geben Sie Name und Wert des API-Schlüssels ein oder wählen Sie „Keine "
+"Authentifizierung“."
+
+msgid "Error"
+msgstr "Fehler"
+
+msgid "Expand all"
+msgstr "Alle ausklappen"
+
+msgid "Failed to load versions"
+msgstr "Versionen konnten nicht geladen werden"
+
+msgid "Filter rows"
+msgstr "Zeilen filtern"
+
+msgid "Header"
+msgstr "Header"
+
+msgid "Header name"
+msgstr "Header-Name"
+
+msgid "Header value"
+msgstr "Header-Wert"
+
+msgid "Headers"
+msgstr "Header"
+
+msgid "Hide credentials"
+msgstr "Zugangsdaten ausblenden"
+
+msgid "Image preview"
+msgstr "Bildvorschau"
+
+msgid "Instant search is unavailable. Sphinx search covers all docs."
+msgstr ""
+"Die Sofortsuche ist nicht verfügbar. Die Sphinx-Suche durchsucht alle "
+"Dokumente."
+
+msgid "Instant search is unavailable. Use Sphinx search below."
+msgstr "Die Sofortsuche ist nicht verfügbar. Nutzen Sie die Sphinx-Suche unten."
+
+msgid "Key name"
+msgstr "Schlüsselname"
+
+msgid "Key value"
+msgstr "Schlüsselwert"
+
+msgid "LLM-friendly documentation index"
+msgstr "LLM-freundlicher Dokumentationsindex"
+
+msgid "Leave empty to send without a body"
+msgstr "Leer lassen, um ohne Body zu senden"
+
+msgid "Loading search index…"
+msgstr "Suchindex wird geladen…"
+
+msgid "Main navigation"
+msgstr "Hauptnavigation"
+
+msgid "Navigate"
+msgstr "Navigieren"
+
+msgid "Next"
+msgstr "Weiter"
+
+msgid "No authentication"
+msgstr "Keine Authentifizierung"
+
+msgid "No matching rows. Try another term or reset the table."
+msgstr ""
+"Keine passenden Zeilen. Versuchen Sie einen anderen Begriff oder setzen "
+"Sie die Tabelle zurück."
+
+msgid "No results found."
+msgstr "Keine Ergebnisse gefunden."
+
+#, python-brace-format
+msgid "No results in {scope}."
+msgstr "Keine Ergebnisse in {scope}."
+
+msgid "On this page"
+msgstr "Auf dieser Seite"
+
+msgid "Open"
+msgstr "Öffnen"
+
+msgid "Open Sphinx search results page"
+msgstr "Sphinx-Suchergebnisseite öffnen"
+
+msgid "Page actions"
+msgstr "Seitenaktionen"
+
+msgid "Page navigation"
+msgstr "Seitennavigation"
+
+msgid "Page outline"
+msgstr "Seitengliederung"
+
+msgid "Password"
+msgstr "Passwort"
+
+msgid "Path Parameters"
+msgstr "Pfadparameter"
+
+msgid "Previous"
+msgstr "Zurück"
+
+msgid "Query Parameters"
+msgstr "Query-Parameter"
+
+msgid "Query string"
+msgstr "Query-String"
+
+msgid "Remove"
+msgstr "Entfernen"
+
+msgid "Remove header"
+msgstr "Header entfernen"
+
+msgid "Request body"
+msgstr "Request-Body"
+
+msgid "Request body is not valid JSON. Fix it before sending."
+msgstr ""
+"Der Request-Body ist kein gültiges JSON. Korrigieren Sie ihn vor dem "
+"Senden."
+
+msgid "Request command"
+msgstr "Request-Befehl"
+
+msgid "Request timed out after 30 seconds."
+msgstr "Zeitüberschreitung der Anfrage nach 30 Sekunden."
+
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+msgid "Response body"
+msgstr "Antwort-Body"
+
+msgid "Response headers"
+msgstr "Antwort-Header"
+
+msgid "Search"
+msgstr "Suchen"
+
+msgid "Search all docs"
+msgstr "Alle Dokumente durchsuchen"
+
+msgid "Search docs..."
+msgstr "Dokumentation durchsuchen…"
+
+msgid "Search documentation"
+msgstr "Dokumentation durchsuchen"
+
+#, python-brace-format
+msgid "Search for \"{query}\""
+msgstr "Nach „{query}“ suchen"
+
+msgid "Search icons..."
+msgstr "Icons durchsuchen…"
+
+msgid "Search in"
+msgstr "Suchen in"
+
+msgid "Searching…"
+msgstr "Suche läuft…"
+
+msgid "Section navigation"
+msgstr "Bereichsnavigation"
+
+msgid "Select documentation version"
+msgstr "Dokumentationsversion auswählen"
+
+msgid "Send Request"
+msgstr "Anfrage senden"
+
+msgid "Send in"
+msgstr "Senden in"
+
+msgid "Send request"
+msgstr "Anfrage senden"
+
+msgid "Send request (Ctrl/⌘ + Enter)"
+msgstr "Anfrage senden (Strg/⌘ + Eingabe)"
+
+msgid "Sending request…"
+msgstr "Anfrage wird gesendet…"
+
+msgid "Sending…"
+msgstr "Wird gesendet…"
+
+msgid "Server URL"
+msgstr "Server-URL"
+
+msgid ""
+"Shared for this server on this page. Cleared on reload. Copied curl "
+"commands include credentials."
+msgstr ""
+"Gilt für diesen Server auf dieser Seite und wird beim Neuladen gelöscht. "
+"Kopierte curl-Befehle enthalten die Zugangsdaten."
+
+msgid "Show credentials"
+msgstr "Zugangsdaten anzeigen"
+
+msgid "Site announcement"
+msgstr "Website-Ankündigung"
+
+msgid "Skip to content"
+msgstr "Zum Inhalt springen"
+
+msgid "Stop wrapping long lines"
+msgstr "Lange Zeilen nicht mehr umbrechen"
+
+msgid "Stopped waiting for this request. The server may still process it."
+msgstr ""
+"Warten auf diese Anfrage beendet. Der Server verarbeitet sie "
+"möglicherweise noch."
+
+msgid "Switch documentation area"
+msgstr "Dokumentationsbereich wechseln"
+
+msgid "Switch documentation section"
+msgstr "Dokumentationsabschnitt wechseln"
+
+msgid "Switch to dark mode"
+msgstr "Zum dunklen Modus wechseln"
+
+msgid "Switch to light mode"
+msgstr "Zum hellen Modus wechseln"
+
+msgid "Switch to normal layout"
+msgstr "Zur normalen Breite wechseln"
+
+msgid "Switch to system theme"
+msgstr "Zum Systemdesign wechseln"
+
+msgid "Switch to wide layout"
+msgstr "Zur breiten Ansicht wechseln"
+
+msgid "Table"
+msgstr "Tabelle"
+
+msgid "Table of contents"
+msgstr "Inhaltsverzeichnis"
+
+msgid "Toggle color theme"
+msgstr "Farbschema umschalten"
+
+msgid "Toggle layout width"
+msgstr "Layoutbreite umschalten"
+
+msgid "Toggle navigation"
+msgstr "Navigation umschalten"
+
+#, python-brace-format
+msgid "Toggle {name}"
+msgstr "{name} ein-/ausklappen"
+
+msgid "Top navigation"
+msgstr "Obere Navigation"
+
+msgid "Try it out"
+msgstr "Ausprobieren"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Type to filter…"
+msgstr "Zum Filtern tippen…"
+
+msgid "Type to search..."
+msgstr "Zum Suchen tippen…"
+
+msgid "Untitled"
+msgstr "Ohne Titel"
+
+msgid "Username"
+msgstr "Benutzername"
+
+msgid "Value"
+msgstr "Wert"
+
+msgid "Wrap long lines"
+msgstr "Lange Zeilen umbrechen"
+
+msgid "optional"
+msgstr "optional"
+
+msgid "required"
+msgstr "erforderlich"
+
+#, python-brace-format
+msgid "{count} icons found"
+msgstr "{count} Icons gefunden"
+
+#, python-brace-format
+msgid "{count} links across all docs"
+msgstr "{count} Links in allen Dokumenten"
+
+#, python-brace-format
+msgid "{count} links in {scope}"
+msgstr "{count} Links in {scope}"
+
+#, python-brace-format
+msgid "{visible} of {total} rows"
+msgstr "{visible} von {total} Zeilen"
+

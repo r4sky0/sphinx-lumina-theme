@@ -2,6 +2,8 @@
  * Wraps tables for scrolling and prepares mobile labels or opt-in controls
  * before Alpine starts. Complex tables keep the horizontal-scroll fallback.
  */
+
+import { t } from "./utils/i18n.js";
 export default function responsiveTables() {
   document.querySelectorAll(".lumina-article table").forEach((table) => {
     if (table.parentElement.classList.contains("lumina-table-scroll")) return;
@@ -9,7 +11,7 @@ export default function responsiveTables() {
     scroll.className = "lumina-table-scroll";
     scroll.tabIndex = 0;
     scroll.setAttribute("role", "region");
-    scroll.setAttribute("aria-label", table.caption?.textContent.trim() || "Table");
+    scroll.setAttribute("aria-label", table.caption?.textContent.trim() || t("Table"));
     table.before(scroll);
     scroll.append(table);
 

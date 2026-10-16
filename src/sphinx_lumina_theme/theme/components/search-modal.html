@@ -7,7 +7,7 @@
         @click.self="close()"
         class="lumina-overlay-backdrop fixed inset-0 z-[100] m-0 h-full w-full max-h-none max-w-none border-0 p-0"
         aria-modal="true"
-        aria-label="Search documentation">
+        aria-label="{{ _('Search documentation') }}">
     {# Modal #}
     <div class="relative mx-auto mt-[5vh] flex max-h-[90dvh] w-[calc(100%-2rem)] max-w-xl flex-col sm:mt-[12vh] sm:max-h-[80dvh] cursor-auto rounded-xl border border-lumina-border bg-lumina-bg shadow-2xl">
         {# Search input #}
@@ -21,20 +21,20 @@
                    @keydown.arrow-up.prevent="moveUp()"
                    @keydown.enter.prevent="goToSelected()"
                    class="w-full border-0 bg-transparent px-3 py-4 text-lumina-text placeholder-lumina-text-muted outline-none"
-                   aria-label="Search documentation"
-                   placeholder="Search docs..."
+                   aria-label="{{ _('Search documentation') }}"
+                   placeholder="{{ _('Search docs...') }}"
                    autocomplete="off">
             <kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1.5 py-0.5 text-xs text-lumina-text-muted">esc</kbd>
         </div>
         <template x-if="loaded && scopes.length > 1 && pagefind">
             <div class="flex shrink-0 items-center gap-3 border-b border-lumina-border px-4 py-2">
                 <label for="lumina-search-scope"
-                       class="shrink-0 text-xs text-lumina-text-muted">Search in</label>
+                       class="shrink-0 text-xs text-lumina-text-muted">{{ _("Search in") }}</label>
                 <select id="lumina-search-scope"
                         x-model="scope"
                         @change="search()"
                         class="min-w-0 flex-1 rounded border border-lumina-border bg-lumina-bg px-2 py-2 text-sm text-lumina-text focus-visible:outline-2 focus-visible:outline-lumina-accent">
-                    <option value="">All docs</option>
+                    <option value="">{{ _("All docs") }}</option>
                     <template x-for="name in scopes" :key="name">
                         <option :value="name" x-text="name"></option>
                     </template>
@@ -47,17 +47,17 @@
         <div class="min-h-0 overflow-y-auto p-2" :aria-busy="searching">
             <template x-if="!loaded || searching">
                 <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">
-                    <span x-text="loaded ? 'Searching…' : 'Loading search index…'"></span>
+                    <span x-text="loaded ? $t('Searching…') : $t('Loading search index…')"></span>
                 </p>
             </template>
             <template x-if="loaded && !searching && !error && query.trim().length > 0 && results.length === 0">
                 <div class="px-3 py-8 text-center text-sm text-lumina-text-muted">
-                    <p x-text="scope ? 'No results in ' + scope + '.' : 'No results found.'"></p>
+                    <p x-text="scope ? $t('No results in {scope}.', { scope }) : $t('No results found.')"></p>
                     <template x-if="scope">
                         <button type="button"
                                 @click="searchAll()"
                                 class="mt-2 rounded px-3 py-2 text-lumina-accent underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-lumina-accent">
-                            Search all docs
+                            {{ _("Search all docs") }}
                         </button>
                     </template>
                 </div>
@@ -86,19 +86,19 @@
                 </a>
             </template>
             <template x-if="loaded && !error && query.trim().length === 0">
-                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">Type to search...</p>
+                <p class="px-3 py-8 text-center text-sm text-lumina-text-muted">{{ _("Type to search...") }}</p>
             </template>
         </div>
         {# Screen-reader announcement of the result count #}
         <div class="sr-only"
              role="status"
-             x-text="searching ? 'Searching…' : loaded && query.trim().length > 0 ? results.length + ' links' + (scope ? ' in ' + scope : ' across all docs') : ''">
+             x-text="searching ? $t('Searching…') : loaded && query.trim().length > 0 ? (scope ? $t('{count} links in {scope}', { count: results.length, scope }) : $t('{count} links across all docs', { count: results.length })) : ''">
         </div>
         {# Keyboard hints #}
         <div class="flex shrink-0 items-center gap-3 border-t border-lumina-border px-4 py-2.5 text-xs text-lumina-text-muted">
-            <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> Navigate</span>
-            <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> Open</span>
-            <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">esc</kbd> Close</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&uarr;&darr;</kbd> {{ _("Navigate") }}</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">&crarr;</kbd> {{ _("Open") }}</span>
+            <span class="flex items-center gap-1"><kbd class="rounded border border-lumina-border bg-lumina-bg-secondary px-1 py-0.5 font-mono text-[10px]">esc</kbd> {{ _("Close") }}</span>
         </div>
     </div>
 </dialog>

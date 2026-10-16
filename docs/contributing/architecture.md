@@ -7,6 +7,7 @@ How the Sphinx Lumina Theme is structured internally.
 ```
 src/sphinx_lumina_theme/
 ├── __init__.py              # Sphinx setup() hook, registers theme
+├── locale/                  # gettext catalogs (sphinx.pot, <lang>/LC_MESSAGES/sphinx.po/.mo)
 ├── _static_src/             # SOURCE assets (edit these)
 │   ├── css/                 # base.css imports admonitions/code/typography
 │   └── js/                  # app.js is entry point, loads Alpine components
@@ -106,6 +107,12 @@ keys its bounded cache by query and scope. Request IDs discard outdated
 responses, including responses arriving after the dialog closes. The dialog
 lists up to ten pages with up to three heading links per page; all links share
 one keyboard navigation sequence. Excerpts are sanitized before rendering.
+
+## Translations
+
+`setup()` registers `locale/` as an additional `sphinx` message catalog, so templates translate strings with the `_()` function that Sphinx provides. Sphinx's own translations and the project's `locale_dirs` take precedence over the bundled catalog.
+
+JavaScript can't call gettext, so for non-English builds `layout.html` includes `components/i18n.html`, which renders every JavaScript string through `_()` into a `<script id="lumina-i18n" type="application/json">` block. `utils/i18n.js` exports `t(key, vars)`, which looks up that catalog and falls back to the English key; `app.js` exposes it to Alpine expressions as `$t`. See {doc}`/guides/internationalization` for the contributor workflow.
 
 ## Theming
 

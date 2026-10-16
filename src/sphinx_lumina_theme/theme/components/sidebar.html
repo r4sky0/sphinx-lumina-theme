@@ -6,20 +6,20 @@
 
         {% if lumina_section_toctree is defined and lumina_section_toctree %}
             <nav class="lumina-sidebar-nav"
-                 aria-label="Section navigation"
+                 aria-label="{{ _('Section navigation') }}"
                  x-data="sidebarNav()">
                 {{ add_sidebar_icons(lumina_section_toctree) }}
             </nav>
         {% else %}
             <nav class="lumina-sidebar-nav"
-                 aria-label="Main navigation"
+                 aria-label="{{ _('Main navigation') }}"
                  x-data="sidebarNav()">
                 {{ add_sidebar_icons(toctree(maxdepth=theme_nav_depth|int, collapse=False, titles_only=True, includehidden=True) ) }}
             </nav>
         {% endif %}
         {% if theme_show_attribution == "true" %}
             <div class="lumina-sidebar-footer">
-                Built with
+                {{ _("Built with") }}
                 <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                    target="_blank"
                    rel="noopener">
@@ -90,13 +90,13 @@
                 {% endif %}
                 {% if lumina_section_toctree is defined and lumina_section_toctree %}
                     <nav class="lumina-sidebar-nav"
-                         aria-label="Section navigation"
+                         aria-label="{{ _('Section navigation') }}"
                          x-data="sidebarNav()">
                         {{ add_sidebar_icons(lumina_section_toctree) }}
                     </nav>
                 {% else %}
                     <nav class="lumina-sidebar-nav"
-                         aria-label="Main navigation"
+                         aria-label="{{ _('Main navigation') }}"
                          x-data="sidebarNav()">
                         {{ add_sidebar_icons(toctree(maxdepth=theme_nav_depth|int, collapse=False, titles_only=True, includehidden=True) ) }}
                     </nav>

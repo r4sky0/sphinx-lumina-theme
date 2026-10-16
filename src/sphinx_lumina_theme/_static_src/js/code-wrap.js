@@ -9,6 +9,8 @@
  * the ``code_wrap_toggle`` theme option is set to ``"true"``; off by default).
  */
 
+import { t } from "./utils/i18n.js";
+
 const WRAP_ICON_SVG =
   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" ' +
   'stroke="currentColor" stroke-width="2" stroke-linecap="round" ' +
@@ -33,9 +35,9 @@ function injectButton(highlight) {
   const btn = document.createElement("button");
   btn.type = "button";
   btn.className = "lumina-wrap-toggle";
-  btn.setAttribute("aria-label", "Wrap long lines");
+  btn.setAttribute("aria-label", t("Wrap long lines"));
   btn.setAttribute("aria-pressed", "false");
-  btn.title = "Wrap long lines";
+  btn.title = t("Wrap long lines");
   btn.insertAdjacentHTML("beforeend", WRAP_ICON_SVG);
   btn.addEventListener("click", () => toggle(highlight, btn));
   highlight.insertBefore(btn, highlight.firstChild);
@@ -46,10 +48,10 @@ function toggle(highlight, btn) {
   if (on) {
     highlight.removeAttribute("data-lumina-wrap");
     btn.setAttribute("aria-pressed", "false");
-    btn.setAttribute("aria-label", "Wrap long lines");
+    btn.setAttribute("aria-label", t("Wrap long lines"));
   } else {
     highlight.setAttribute("data-lumina-wrap", "on");
     btn.setAttribute("aria-pressed", "true");
-    btn.setAttribute("aria-label", "Stop wrapping long lines");
+    btn.setAttribute("aria-label", t("Stop wrapping long lines"));
   }
 }

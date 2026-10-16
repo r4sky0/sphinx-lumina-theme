@@ -1,0 +1,438 @@
+# Chinese (Simplified, China) translations for sphinx-lumina-theme.
+# Copyright (C) 2026 Ralph Offinger
+# This file is distributed under the same license as the sphinx-lumina-theme
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sphinx-lumina-theme VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-10-16 08:54+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#, python-format
+msgid "%(minutes)s min read"
+msgstr "阅读时间 %(minutes)s 分钟"
+
+msgid "(No response body)"
+msgstr "（无响应体）"
+
+msgid "(current)"
+msgstr "（当前）"
+
+msgid "(opens in new tab)"
+msgstr "（在新标签页中打开）"
+
+msgid "API display"
+msgstr "API 显示"
+
+msgid "API key"
+msgstr "API 密钥"
+
+msgid "Add header"
+msgstr "添加请求头"
+
+msgid "Additional headers"
+msgstr "其他请求头"
+
+msgid "All docs"
+msgstr "全部文档"
+
+msgid "Authentication"
+msgstr "身份验证"
+
+msgid "Back to top"
+msgstr "返回顶部"
+
+msgid "Basic authentication"
+msgstr "Basic 认证"
+
+msgid "Bearer token"
+msgstr "Bearer 令牌"
+
+msgid "Breadcrumb"
+msgstr "面包屑导航"
+
+msgid "Browse sections"
+msgstr "浏览各部分"
+
+msgid "Built with"
+msgstr "基于"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Cancelled"
+msgstr "已取消"
+
+msgid "Clear"
+msgstr "清除"
+
+msgid "Clear credentials"
+msgstr "清除凭据"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Close preview"
+msgstr "关闭预览"
+
+msgid "Collapse all"
+msgstr "全部折叠"
+
+msgid "Content type"
+msgstr "内容类型"
+
+msgid "Copied"
+msgstr "已复制"
+
+msgid "Copied!"
+msgstr "已复制！"
+
+msgid "Copy as Markdown"
+msgstr "复制为 Markdown"
+
+msgid "Copy as curl"
+msgstr "复制为 curl"
+
+msgid "Copy curl"
+msgstr "复制 curl"
+
+msgid "Copy page as Markdown"
+msgstr "将页面复制为 Markdown"
+
+msgid "Copy response"
+msgstr "复制响应"
+
+msgid "Could not copy. Select the curl command below and copy it manually."
+msgstr "无法复制。请选中下方的 curl 命令并手动复制。"
+
+msgid "Could not copy. Select the response text and copy it manually."
+msgstr "无法复制。请选中响应文本并手动复制。"
+
+msgid ""
+"Could not reach the API. Check the server URL, network, HTTPS and CORS "
+"settings. Redirects are not followed. Try Copy as curl to debug outside "
+"the browser."
+msgstr "无法连接到 API。请检查服务器 URL、网络以及 HTTPS 和 CORS 设置。不会跟随重定向。可使用“复制为 curl”在浏览器外调试。"
+
+#, python-brace-format
+msgid "Details for {name}"
+msgstr "{name} 的详细信息"
+
+msgid "Dismiss announcement"
+msgstr "关闭公告"
+
+msgid "Enter an HTTP(S) server URL without credentials, a query, or a fragment."
+msgstr "请输入不含凭据、查询参数或片段的 HTTP(S) 服务器 URL。"
+
+#, python-brace-format
+msgid "Enter required parameters: {names}."
+msgstr "请填写必填参数：{names}。"
+
+msgid "Enter the API key name and value, or select No authentication."
+msgstr "请输入 API 密钥的名称和值，或选择“无身份验证”。"
+
+msgid "Error"
+msgstr "错误"
+
+msgid "Expand all"
+msgstr "全部展开"
+
+msgid "Failed to load versions"
+msgstr "无法加载版本"
+
+msgid "Filter rows"
+msgstr "筛选行"
+
+msgid "Header"
+msgstr "请求头"
+
+msgid "Header name"
+msgstr "请求头名称"
+
+msgid "Header value"
+msgstr "请求头值"
+
+msgid "Headers"
+msgstr "请求头"
+
+msgid "Hide credentials"
+msgstr "隐藏凭据"
+
+msgid "Image preview"
+msgstr "图片预览"
+
+msgid "Instant search is unavailable. Sphinx search covers all docs."
+msgstr "即时搜索不可用。Sphinx 搜索可覆盖全部文档。"
+
+msgid "Instant search is unavailable. Use Sphinx search below."
+msgstr "即时搜索不可用。请使用下方的 Sphinx 搜索。"
+
+msgid "Key name"
+msgstr "密钥名称"
+
+msgid "Key value"
+msgstr "密钥值"
+
+msgid "LLM-friendly documentation index"
+msgstr "适用于 LLM 的文档索引"
+
+msgid "Leave empty to send without a body"
+msgstr "留空则不带请求体发送"
+
+msgid "Loading search index…"
+msgstr "正在加载搜索索引…"
+
+msgid "Main navigation"
+msgstr "主导航"
+
+msgid "Navigate"
+msgstr "导航"
+
+msgid "Next"
+msgstr "下一页"
+
+msgid "No authentication"
+msgstr "无身份验证"
+
+msgid "No matching rows. Try another term or reset the table."
+msgstr "没有匹配的行。请尝试其他关键词或重置表格。"
+
+msgid "No results found."
+msgstr "未找到结果。"
+
+#, python-brace-format
+msgid "No results in {scope}."
+msgstr "{scope} 中没有结果。"
+
+msgid "On this page"
+msgstr "本页内容"
+
+msgid "Open"
+msgstr "打开"
+
+msgid "Open Sphinx search results page"
+msgstr "打开 Sphinx 搜索结果页"
+
+msgid "Page actions"
+msgstr "页面操作"
+
+msgid "Page navigation"
+msgstr "页面导航"
+
+msgid "Page outline"
+msgstr "页面大纲"
+
+msgid "Password"
+msgstr "密码"
+
+msgid "Path Parameters"
+msgstr "路径参数"
+
+msgid "Previous"
+msgstr "上一页"
+
+msgid "Query Parameters"
+msgstr "查询参数"
+
+msgid "Query string"
+msgstr "查询字符串"
+
+msgid "Remove"
+msgstr "移除"
+
+msgid "Remove header"
+msgstr "移除请求头"
+
+msgid "Request body"
+msgstr "请求体"
+
+msgid "Request body is not valid JSON. Fix it before sending."
+msgstr "请求体不是有效的 JSON。请在发送前修正。"
+
+msgid "Request command"
+msgstr "请求命令"
+
+msgid "Request timed out after 30 seconds."
+msgstr "请求在 30 秒后超时。"
+
+msgid "Reset"
+msgstr "重置"
+
+msgid "Response body"
+msgstr "响应体"
+
+msgid "Response headers"
+msgstr "响应头"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Search all docs"
+msgstr "搜索全部文档"
+
+msgid "Search docs..."
+msgstr "搜索文档…"
+
+msgid "Search documentation"
+msgstr "搜索文档"
+
+#, python-brace-format
+msgid "Search for \"{query}\""
+msgstr "搜索“{query}”"
+
+msgid "Search icons..."
+msgstr "搜索图标…"
+
+msgid "Search in"
+msgstr "搜索范围"
+
+msgid "Searching…"
+msgstr "正在搜索…"
+
+msgid "Section navigation"
+msgstr "分区导航"
+
+msgid "Select documentation version"
+msgstr "选择文档版本"
+
+msgid "Send Request"
+msgstr "发送请求"
+
+msgid "Send in"
+msgstr "发送位置"
+
+msgid "Send request"
+msgstr "发送请求"
+
+msgid "Send request (Ctrl/⌘ + Enter)"
+msgstr "发送请求 (Ctrl/⌘ + Enter)"
+
+msgid "Sending request…"
+msgstr "正在发送请求…"
+
+msgid "Sending…"
+msgstr "正在发送…"
+
+msgid "Server URL"
+msgstr "服务器 URL"
+
+msgid ""
+"Shared for this server on this page. Cleared on reload. Copied curl "
+"commands include credentials."
+msgstr "在此页面中对该服务器共享，重新加载后清除。复制的 curl 命令包含凭据。"
+
+msgid "Show credentials"
+msgstr "显示凭据"
+
+msgid "Site announcement"
+msgstr "站点公告"
+
+msgid "Skip to content"
+msgstr "跳到正文"
+
+msgid "Stop wrapping long lines"
+msgstr "取消长行换行"
+
+msgid "Stopped waiting for this request. The server may still process it."
+msgstr "已停止等待此请求。服务器可能仍在处理。"
+
+msgid "Switch documentation area"
+msgstr "切换文档区域"
+
+msgid "Switch documentation section"
+msgstr "切换文档分区"
+
+msgid "Switch to dark mode"
+msgstr "切换到深色模式"
+
+msgid "Switch to light mode"
+msgstr "切换到浅色模式"
+
+msgid "Switch to normal layout"
+msgstr "切换到常规布局"
+
+msgid "Switch to system theme"
+msgstr "切换到系统主题"
+
+msgid "Switch to wide layout"
+msgstr "切换到宽屏布局"
+
+msgid "Table"
+msgstr "表格"
+
+msgid "Table of contents"
+msgstr "目录"
+
+msgid "Toggle color theme"
+msgstr "切换配色主题"
+
+msgid "Toggle layout width"
+msgstr "切换布局宽度"
+
+msgid "Toggle navigation"
+msgstr "切换导航"
+
+#, python-brace-format
+msgid "Toggle {name}"
+msgstr "展开或折叠 {name}"
+
+msgid "Top navigation"
+msgstr "顶部导航"
+
+msgid "Try it out"
+msgstr "试一试"
+
+msgid "Type"
+msgstr "类型"
+
+msgid "Type to filter…"
+msgstr "输入以筛选…"
+
+msgid "Type to search..."
+msgstr "输入以搜索…"
+
+msgid "Untitled"
+msgstr "无标题"
+
+msgid "Username"
+msgstr "用户名"
+
+msgid "Value"
+msgstr "值"
+
+msgid "Wrap long lines"
+msgstr "长行自动换行"
+
+msgid "optional"
+msgstr "可选"
+
+msgid "required"
+msgstr "必填"
+
+#, python-brace-format
+msgid "{count} icons found"
+msgstr "找到 {count} 个图标"
+
+#, python-brace-format
+msgid "{count} links across all docs"
+msgstr "全部文档中共 {count} 个链接"
+
+#, python-brace-format
+msgid "{count} links in {scope}"
+msgstr "{scope} 中共 {count} 个链接"
+
+#, python-brace-format
+msgid "{visible} of {total} rows"
+msgstr "{total} 行中的 {visible} 行"
+

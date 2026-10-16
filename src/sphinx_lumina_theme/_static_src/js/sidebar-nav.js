@@ -12,6 +12,7 @@
  * persistence. The current page is scrolled into view in the sidebar.
  */
 
+import { t } from "./utils/i18n.js";
 import { revealInContainer } from "./utils/reveal.js";
 
 const CHEVRON_SVG =
@@ -57,7 +58,7 @@ export default function sidebarNav() {
         button.setAttribute("aria-controls", nestedList.id);
         button.setAttribute(
           "aria-label",
-          `Toggle ${link.textContent.trim()}`,
+          t("Toggle {name}", { name: link.textContent.trim() }),
         );
         button.innerHTML = CHEVRON_SVG;
         button.addEventListener("click", (event) => {
