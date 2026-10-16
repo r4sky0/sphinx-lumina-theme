@@ -305,6 +305,28 @@ def _add_search_heading_ids(app, doctree, docname):
         used_ids.add(anchor)
 
 
+def _tag_http_fields(app, doctree, docname):
+    """Class httpdomain field names by field type, e.g. ``lumina-http-requestheader``.
+
+    The HTTP request scripts find query parameters, headers, and JSON fields by
+    these classes, because the visible labels follow the httpdomain translation.
+    """
+    try:
+        from sphinxcontrib.httpdomain import HTTPResource
+    except ImportError:
+        return
+    from docutils import nodes
+
+    # Labels are compared as rendered in this build, so any language matches.
+    kinds = {str(field.label): field.name for field in HTTPResource.doc_field_types}
+    for desc in doctree.findall(addnodes.desc):
+        if desc.get("domain") != "http":
+            continue
+        for name in desc.findall(nodes.field_name):
+            if kind := kinds.get(name.astext()):
+                name["classes"].append(f"lumina-http-{kind}")
+
+
 def _prepare_sections(app, sections):
     """Pre-compute cached data for doc sections (called once per build).
 
@@ -952,6 +974,7 @@ def setup(app):
     app.connect("env-updated", _prepare_search_sections)
     app.connect("doctree-resolved", _insert_reading_time)
     app.connect("doctree-resolved", _add_search_heading_ids)
+    app.connect("doctree-resolved", _tag_http_fields)
     app.connect("build-finished", _write_search_symbols)
     app.connect("build-finished", _run_pagefind)
     app.connect("build-finished", _filter_sitemap_noindex)

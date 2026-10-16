@@ -2,6 +2,7 @@
 
 import json
 import re
+import tomllib
 from pathlib import Path
 
 import pytest
@@ -9,33 +10,23 @@ from babel.messages.extract import extract_from_dir
 from babel.messages.mofile import read_mo
 from babel.messages.pofile import read_po
 from bs4 import BeautifulSoup
-from conftest import sphinx_app
-from sphinx import locale
+from conftest import (
+    HTTP_ENDPOINT_RST,
+    HTTPDOMAIN_TRANSLATED_CONF,
+    build_translated_site,
+)
 
 PACKAGE = Path(__file__).parent.parent / "src" / "sphinx_lumina_theme"
 LOCALE = PACKAGE / "locale"
+LANGUAGES = sorted(path.name for path in LOCALE.iterdir() if path.is_dir())
 I18N_TEMPLATE = PACKAGE / "theme" / "components" / "i18n.html"
+PYPROJECT = PACKAGE.parents[1] / "pyproject.toml"
 PLACEHOLDER = re.compile(r"\{\w+\}|%\(\w+\)s")
 
 
-def _site(tmp_path, language):
-    src = tmp_path / "src"
-    src.mkdir()
-    (src / "conf.py").write_text(
-        'project = "I18n"\nhtml_theme = "lumina"\n'
-        'html_theme_options = {"show_reading_time": "true"}\n'
-        f"language = {language!r}\n"
-    )
-    (src / "index.rst").write_text(
-        "Home\n====\n\nIntro.\n\nPart\n----\n\nText.\n\n.. toctree::\n\n   other\n"
-    )
-    (src / "other.rst").write_text("Other\n=====\n\nText.\n")
-    locale.translators.clear()  # Sphinx keeps catalogs in module-global state.
-    try:
-        sphinx_app(src, tmp_path / "out").build()
-    finally:
-        locale.translators.clear()
-    return BeautifulSoup((tmp_path / "out" / "index.html").read_text(), "html.parser")
+def _site(tmp_path, language, **kwargs):
+    out = build_translated_site(tmp_path, language, **kwargs)
+    return BeautifulSoup((out / "index.html").read_text(), "html.parser")
 
 
 @pytest.fixture(scope="module")
@@ -66,6 +57,28 @@ def test_js_catalog_is_omitted_for_english(tmp_path):
     assert _site(tmp_path, "en").select_one("#lumina-i18n") is None
 
 
+@pytest.mark.parametrize("language", LANGUAGES)
+def test_every_bundled_language_is_translated(tmp_path, language):
+    html = _site(tmp_path, language)
+    assert html.select_one(".lumina-skip-link").get_text() != "Skip to content"
+    assert json.loads(html.select_one("#lumina-i18n").string)["Copied!"] != "Copied!"
+
+
+def test_http_fields_are_tagged_whatever_the_label_language(tmp_path):
+    html = _site(
+        tmp_path, "es_ES", conf=HTTPDOMAIN_TRANSLATED_CONF, rst=HTTP_ENDPOINT_RST
+    )
+    labels = {
+        kind: html.select_one(f"dt.lumina-http-{kind}").get_text(strip=True)
+        for kind in ("queryparameter", "requestheader", "requestjsonobject")
+    }
+    assert labels == {
+        "queryparameter": "Parámetros de consulta:",
+        "requestheader": "Encabezados de solicitud:",
+        "requestjsonobject": "Objeto JSON de solicitud:",
+    }
+
+
 def test_every_js_key_is_in_the_catalog_template():
     listed = set(re.findall(r"'([^']+)': _\('\1'\)", I18N_TEMPLATE.read_text()))
     used = set()
@@ -83,7 +96,8 @@ def test_every_js_key_is_in_the_catalog_template():
 
 
 def test_template_is_current():
-    method_map = [("**.py", "python"), ("**/theme/**.html", "jinja2.ext:babel_extract")]
+    mappings = tomllib.loads(PYPROJECT.read_text())["tool"]["babel"]["mappings"]
+    method_map = [(mapping["pattern"], mapping["method"]) for mapping in mappings]
     extracted = {
         message for _, _, message, _, _ in extract_from_dir(PACKAGE, method_map)
     }

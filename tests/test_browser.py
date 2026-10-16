@@ -5,7 +5,12 @@ import re
 import sys
 
 import pytest
-from conftest import sphinx_app
+from conftest import (
+    HTTP_ENDPOINT_RST,
+    HTTPDOMAIN_TRANSLATED_CONF,
+    build_translated_site,
+    sphinx_app,
+)
 from playwright.sync_api import Page, expect
 
 
@@ -1384,4 +1389,30 @@ def test_sidebar_and_toc_keep_current_entries_in_view(page: Page, live_server: s
     page.wait_for_function(
         f"args => document.querySelector('{toc}').scrollTop > 0 && ({IN_PANEL})(args)",
         arg=[toc, ".lumina-toc-active"],
+    )
+
+
+@pytest.fixture(scope="module")
+def spanish_page(tmp_path_factory):
+    out = build_translated_site(
+        tmp_path_factory.mktemp("i18n_es"),
+        "es_ES",
+        conf=HTTPDOMAIN_TRANSLATED_CONF,
+        rst=HTTP_ENDPOINT_RST,
+    )
+    return (out / "index.html").as_uri()
+
+
+def test_scripts_follow_the_page_language(page: Page, spanish_page: str):
+    """Script-built text is translated, and the request editor reads translated fields."""
+    page.goto(spanish_page)
+    expect(page.locator(".lumina-wrap-toggle").first).to_have_attribute(
+        "aria-label", "Ajustar las líneas largas"
+    )
+    page.get_by_role("button", name="Expandir todo").click()
+    page.get_by_role("button", name="Probar").click()
+    panel = page.locator(".lumina-try-it-panel")
+    expect(panel.locator(".lumina-try-it-param-name", has_text="limit")).to_be_visible()
+    expect(panel.get_by_label("Accept")).to_have_attribute(
+        "placeholder", "application/json"
     )

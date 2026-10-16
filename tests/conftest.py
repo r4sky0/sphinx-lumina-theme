@@ -9,6 +9,7 @@ import urllib.request
 from pathlib import Path
 
 import pytest
+from sphinx import locale
 from sphinx.application import Sphinx
 
 SAMPLE_DOCS = Path(__file__).parent / "sample_docs"
@@ -25,6 +26,52 @@ def sphinx_app(src_dir, out_dir, **kwargs):
         freshenv=True,
         **kwargs,
     )
+
+
+# httpdomain 2.0.0 registers the wrong folder for its own catalogs, so its labels
+# stay English; this conf loads them to test translated labels.
+HTTPDOMAIN_TRANSLATED_CONF = """
+extensions = ["sphinxcontrib.httpdomain"]
+html_theme_options["api_base_url"] = "https://api.example.com"
+from pathlib import Path
+import sphinxcontrib.httpdomain
+
+def setup(app):
+    locale_dir = Path(sphinxcontrib.httpdomain.__file__).parents[1] / "locale"
+    app.add_message_catalog("httpdomain", str(locale_dir))
+"""
+
+HTTP_ENDPOINT_RST = """
+.. http:get:: /items
+
+   List items.
+
+   :query limit: Max items.
+   :reqheader Accept: ``application/json``
+   :<json string name: Item name.
+"""
+
+
+def build_translated_site(root, language, conf="", rst=""):
+    """Build a two-page site in ``language`` and return its output directory."""
+    src = root / "src"
+    src.mkdir()
+    (src / "conf.py").write_text(
+        'project = "I18n"\nhtml_theme = "lumina"\n'
+        'html_theme_options = {"show_reading_time": "true", "code_wrap_toggle": "true"}\n'
+        f"language = {language!r}\n{conf}"
+    )
+    (src / "index.rst").write_text(
+        "Home\n====\n\nIntro.\n\nPart\n----\n\n::\n\n    code\n"
+        f"{rst}\n.. toctree::\n\n   other\n"
+    )
+    (src / "other.rst").write_text("Other\n=====\n\nText.\n")
+    locale.translators.clear()  # Sphinx keeps catalogs in module-global state.
+    try:
+        sphinx_app(src, root / "out").build()
+    finally:
+        locale.translators.clear()
+    return root / "out"
 
 
 def copy_sample_docs(dest_dir):

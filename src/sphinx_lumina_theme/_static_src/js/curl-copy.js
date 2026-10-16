@@ -137,9 +137,9 @@ function buildCurl(dl, baseUrl) {
   const path = extractPath(dl);
   const url = baseUrl ? baseUrl.replace(/\/$/, "") + path : path;
   const dd = dl.querySelector("dd");
-  const headers = extractFieldSection(dd, "Request Headers");
+  const headers = extractFieldSection(dd, "requestheader");
   const example = extractBody(dd);
-  const queryParams = extractFieldSection(dd, "Query Parameters");
+  const queryParams = extractFieldSection(dd, "queryparameter");
   const qs = queryParams.map((p) => `${encodeURIComponent(p.name)}=<value>`).join("&");
   const request = {
     method,

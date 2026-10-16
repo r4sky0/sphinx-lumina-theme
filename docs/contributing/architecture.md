@@ -74,7 +74,7 @@ the nested links keep a straight CSS guide.
 
 ### HTTP request editor
 
-`try-it.js` and `curl-copy.js` enhance the rendered `dl.http` endpoints. `_http-api-utils.js` extracts paths, fields, and HTTP request examples. A shared curl serializer handles both documentation templates and edited requests, with POSIX shell quoting.
+`try-it.js` and `curl-copy.js` enhance the rendered `dl.http` endpoints. `_http-api-utils.js` extracts paths, fields, and HTTP request examples. At build time, `_tag_http_fields()` classes each httpdomain field name by its field type, such as `lumina-http-requestheader`, so the scripts find query parameters, headers, and JSON fields whatever language the labels use. A shared curl serializer handles both documentation templates and edited requests, with POSIX shell quoting.
 
 The request panel keeps authentication in memory, shared by the normalized API base URL. It sends browser `fetch` requests with cookies omitted, redirects rejected, and cancellation through `AbortController`. It does not parse the original OpenAPI specification. The showcase uses sphinxcontrib-openapi's `httpdomain` renderer to preserve request schemas and examples.
 

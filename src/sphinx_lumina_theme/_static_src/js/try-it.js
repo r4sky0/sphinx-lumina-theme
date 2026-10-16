@@ -290,8 +290,8 @@ function injectPanel(dl, baseUrl) {
   const method      = extractMethod(dl);
   const path        = extractPath(dl);
   const pathParams  = parsePathParams(path);
-  const queryParams = extractFieldSection(dd, "Query Parameters");
-  const allHeaders  = extractFieldSection(dd, "Request Headers");
+  const queryParams = extractFieldSection(dd, "queryparameter");
+  const allHeaders  = extractFieldSection(dd, "requestheader");
   const example = extractBody(dd);
   const hasBody = !["GET", "HEAD", "OPTIONS"].includes(method);
 
