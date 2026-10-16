@@ -1,5 +1,13 @@
 # Releases
 
+## v2.12.0 (2026-10-16)
+
+### Features
+
+- **i18n**: Translate theme UI strings with Sphinx’s language setting
+  ([#185](https://github.com/r4sky0/sphinx-lumina-theme/pull/185),
+  [`073920d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/073920d23eb6f3e38c735a83ce5ba413001dff33))
+
 ## v2.11.0 (2026-10-13)
 
 ### Features
