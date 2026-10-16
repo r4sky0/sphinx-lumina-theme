@@ -141,11 +141,16 @@
 })();
         </script>
     {% endif %}
+    {% if language and not language.startswith("en") %}
+
+        {% include "components/i18n.html" %}
+
+    {% endif %}
     {% if has_llms_txt %}
         <link rel="alternate"
               type="text/markdown"
               href="{{ pathto('llms.txt', 1) }}"
-              title="LLM-friendly documentation index">
+              title="{{ _('LLM-friendly documentation index') }}">
     {% endif %}
 
 {% endblock extrahead %}
@@ -163,7 +168,7 @@
 {% endblock relbar2 %}
 
 {%- block content %}
-    <a href="#lumina-content" class="lumina-skip-link">Skip to content</a>
+    <a href="#lumina-content" class="lumina-skip-link">{{ _("Skip to content") }}</a>
 
     <div id="lumina-header">
 
@@ -191,8 +196,8 @@
             </div>
             {% if theme_show_toc == "true" and toc %}
                 <details class="lumina-mobile-outline" data-pagefind-ignore>
-                    <summary>On this page {{ lumina_icon("chevron-down", size=14) }}</summary>
-                    <nav aria-label="Page outline">
+                    <summary>{{ _("On this page") }} {{ lumina_icon("chevron-down", size=14) }}</summary>
+                    <nav aria-label="{{ _('Page outline') }}">
                         {{ toc }}
                     </nav>
                 </details>
@@ -237,7 +242,7 @@
                 x-transition:leave-end="opacity-0 translate-y-2"
                 @click="scrollToTop()"
                 class="lumina-back-to-top z-40 hover:border-lumina-accent transition-colors"
-                aria-label="Back to top"
+                aria-label="{{ _('Back to top') }}"
                 type="button">{{ lumina_icon("chevron-up", size=20) }}</button>
     {% endif %}
 
@@ -248,12 +253,12 @@
                 x-on:close="onClose()"
                 class="lumina-lightbox-overlay"
                 aria-modal="true"
-                x-bind:aria-label="caption || 'Image preview'">
+                x-bind:aria-label="caption || $t('Image preview')">
             <div class="lumina-overlay-backdrop lumina-lightbox-backdrop"
                  x-on:click="close()"></div>
             <form method="dialog">
                 <button class="lumina-lightbox-close"
-                        aria-label="Close preview"
+                        aria-label="{{ _('Close preview') }}"
                         type="submit">{{ lumina_icon("x", size=20) }}</button>
             </form>
             <div class="lumina-lightbox-figure">

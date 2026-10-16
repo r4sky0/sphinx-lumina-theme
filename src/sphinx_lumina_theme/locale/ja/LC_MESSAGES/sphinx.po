@@ -1,0 +1,440 @@
+# Japanese translations for sphinx-lumina-theme.
+# Copyright (C) 2026 Ralph Offinger
+# This file is distributed under the same license as the sphinx-lumina-theme
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sphinx-lumina-theme VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-10-16 08:54+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#, python-format
+msgid "%(minutes)s min read"
+msgstr "%(minutes)s 分で読めます"
+
+msgid "(No response body)"
+msgstr "（レスポンスボディなし）"
+
+msgid "(current)"
+msgstr "（現在）"
+
+msgid "(opens in new tab)"
+msgstr "（新しいタブで開きます）"
+
+msgid "API display"
+msgstr "API の表示"
+
+msgid "API key"
+msgstr "API キー"
+
+msgid "Add header"
+msgstr "ヘッダーを追加"
+
+msgid "Additional headers"
+msgstr "追加のヘッダー"
+
+msgid "All docs"
+msgstr "すべてのドキュメント"
+
+msgid "Authentication"
+msgstr "認証"
+
+msgid "Back to top"
+msgstr "トップへ戻る"
+
+msgid "Basic authentication"
+msgstr "Basic 認証"
+
+msgid "Bearer token"
+msgstr "Bearer トークン"
+
+msgid "Breadcrumb"
+msgstr "パンくずリスト"
+
+msgid "Browse sections"
+msgstr "セクションを見る"
+
+msgid "Built with"
+msgstr "使用テーマ"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "Cancelled"
+msgstr "キャンセルされました"
+
+msgid "Clear"
+msgstr "クリア"
+
+msgid "Clear credentials"
+msgstr "認証情報を消去"
+
+msgid "Close"
+msgstr "閉じる"
+
+msgid "Close preview"
+msgstr "プレビューを閉じる"
+
+msgid "Collapse all"
+msgstr "すべて折りたたむ"
+
+msgid "Content type"
+msgstr "コンテンツタイプ"
+
+msgid "Copied"
+msgstr "コピーしました"
+
+msgid "Copied!"
+msgstr "コピーしました！"
+
+msgid "Copy as Markdown"
+msgstr "Markdown としてコピー"
+
+msgid "Copy as curl"
+msgstr "curl としてコピー"
+
+msgid "Copy curl"
+msgstr "curl をコピー"
+
+msgid "Copy page as Markdown"
+msgstr "ページを Markdown としてコピー"
+
+msgid "Copy response"
+msgstr "レスポンスをコピー"
+
+msgid "Could not copy. Select the curl command below and copy it manually."
+msgstr "コピーできませんでした。下の curl コマンドを選択して手動でコピーしてください。"
+
+msgid "Could not copy. Select the response text and copy it manually."
+msgstr "コピーできませんでした。レスポンスのテキストを選択して手動でコピーしてください。"
+
+msgid ""
+"Could not reach the API. Check the server URL, network, HTTPS and CORS "
+"settings. Redirects are not followed. Try Copy as curl to debug outside "
+"the browser."
+msgstr ""
+"API に接続できませんでした。サーバー URL、ネットワーク、HTTPS と CORS "
+"の設定を確認してください。リダイレクトは追跡されません。ブラウザー外でデバッグするには「curl としてコピー」を使ってください。"
+
+#, python-brace-format
+msgid "Details for {name}"
+msgstr "{name} の詳細"
+
+msgid "Dismiss announcement"
+msgstr "お知らせを閉じる"
+
+msgid "Enter an HTTP(S) server URL without credentials, a query, or a fragment."
+msgstr "認証情報・クエリ・フラグメントを含まない HTTP(S) のサーバー URL を入力してください。"
+
+#, python-brace-format
+msgid "Enter required parameters: {names}."
+msgstr "必須パラメーターを入力してください: {names}。"
+
+msgid "Enter the API key name and value, or select No authentication."
+msgstr "API キーの名前と値を入力するか、「認証なし」を選択してください。"
+
+msgid "Error"
+msgstr "エラー"
+
+msgid "Expand all"
+msgstr "すべて展開"
+
+msgid "Failed to load versions"
+msgstr "バージョンを読み込めませんでした"
+
+msgid "Filter rows"
+msgstr "行を絞り込む"
+
+msgid "Header"
+msgstr "ヘッダー"
+
+msgid "Header name"
+msgstr "ヘッダー名"
+
+msgid "Header value"
+msgstr "ヘッダー値"
+
+msgid "Headers"
+msgstr "ヘッダー"
+
+msgid "Hide credentials"
+msgstr "認証情報を隠す"
+
+msgid "Image preview"
+msgstr "画像プレビュー"
+
+msgid "Instant search is unavailable. Sphinx search covers all docs."
+msgstr "インスタント検索は利用できません。Sphinx の検索ですべてのドキュメントを検索できます。"
+
+msgid "Instant search is unavailable. Use Sphinx search below."
+msgstr "インスタント検索は利用できません。下の Sphinx 検索を使ってください。"
+
+msgid "Key name"
+msgstr "キー名"
+
+msgid "Key value"
+msgstr "キーの値"
+
+msgid "LLM-friendly documentation index"
+msgstr "LLM 向けドキュメント索引"
+
+msgid "Leave empty to send without a body"
+msgstr "空のままにするとボディなしで送信します"
+
+msgid "Loading search index…"
+msgstr "検索インデックスを読み込み中…"
+
+msgid "Main navigation"
+msgstr "メインナビゲーション"
+
+msgid "Navigate"
+msgstr "移動"
+
+msgid "Next"
+msgstr "次へ"
+
+msgid "No authentication"
+msgstr "認証なし"
+
+msgid "No matching rows. Try another term or reset the table."
+msgstr "一致する行がありません。別の語句を試すか、表をリセットしてください。"
+
+msgid "No results found."
+msgstr "結果が見つかりません。"
+
+#, python-brace-format
+msgid "No results in {scope}."
+msgstr "{scope} に結果はありません。"
+
+msgid "On this page"
+msgstr "このページの内容"
+
+msgid "Open"
+msgstr "開く"
+
+msgid "Open Sphinx search results page"
+msgstr "Sphinx の検索結果ページを開く"
+
+msgid "Page actions"
+msgstr "ページの操作"
+
+msgid "Page navigation"
+msgstr "ページナビゲーション"
+
+msgid "Page outline"
+msgstr "ページの構成"
+
+msgid "Password"
+msgstr "パスワード"
+
+msgid "Path Parameters"
+msgstr "パスパラメーター"
+
+msgid "Previous"
+msgstr "前へ"
+
+msgid "Query Parameters"
+msgstr "クエリパラメーター"
+
+msgid "Query string"
+msgstr "クエリ文字列"
+
+msgid "Remove"
+msgstr "削除"
+
+msgid "Remove header"
+msgstr "ヘッダーを削除"
+
+msgid "Request body"
+msgstr "リクエストボディ"
+
+msgid "Request body is not valid JSON. Fix it before sending."
+msgstr "リクエストボディが有効な JSON ではありません。送信前に修正してください。"
+
+msgid "Request command"
+msgstr "リクエストコマンド"
+
+msgid "Request timed out after 30 seconds."
+msgstr "30 秒でリクエストがタイムアウトしました。"
+
+msgid "Reset"
+msgstr "リセット"
+
+msgid "Response body"
+msgstr "レスポンスボディ"
+
+msgid "Response headers"
+msgstr "レスポンスヘッダー"
+
+msgid "Search"
+msgstr "検索"
+
+msgid "Search all docs"
+msgstr "すべてのドキュメントを検索"
+
+msgid "Search docs..."
+msgstr "ドキュメントを検索…"
+
+msgid "Search documentation"
+msgstr "ドキュメントを検索"
+
+#, python-brace-format
+msgid "Search for \"{query}\""
+msgstr "「{query}」を検索"
+
+msgid "Search icons..."
+msgstr "アイコンを検索…"
+
+msgid "Search in"
+msgstr "検索対象"
+
+msgid "Searching…"
+msgstr "検索中…"
+
+msgid "Section navigation"
+msgstr "セクションナビゲーション"
+
+msgid "Select documentation version"
+msgstr "ドキュメントのバージョンを選択"
+
+msgid "Send Request"
+msgstr "リクエストを送信"
+
+msgid "Send in"
+msgstr "送信先"
+
+msgid "Send request"
+msgstr "リクエストを送信"
+
+msgid "Send request (Ctrl/⌘ + Enter)"
+msgstr "リクエストを送信 (Ctrl/⌘ + Enter)"
+
+msgid "Sending request…"
+msgstr "リクエストを送信中…"
+
+msgid "Sending…"
+msgstr "送信中…"
+
+msgid "Server URL"
+msgstr "サーバー URL"
+
+msgid ""
+"Shared for this server on this page. Cleared on reload. Copied curl "
+"commands include credentials."
+msgstr "このページ内のこのサーバーで共有され、再読み込みで消去されます。コピーした curl コマンドには認証情報が含まれます。"
+
+msgid "Show credentials"
+msgstr "認証情報を表示"
+
+msgid "Site announcement"
+msgstr "サイトからのお知らせ"
+
+msgid "Skip to content"
+msgstr "本文へスキップ"
+
+msgid "Stop wrapping long lines"
+msgstr "長い行の折り返しをやめる"
+
+msgid "Stopped waiting for this request. The server may still process it."
+msgstr "このリクエストの待機を停止しました。サーバーではまだ処理されている可能性があります。"
+
+msgid "Switch documentation area"
+msgstr "ドキュメントの領域を切り替え"
+
+msgid "Switch documentation section"
+msgstr "ドキュメントのセクションを切り替え"
+
+msgid "Switch to dark mode"
+msgstr "ダークモードに切り替え"
+
+msgid "Switch to light mode"
+msgstr "ライトモードに切り替え"
+
+msgid "Switch to normal layout"
+msgstr "通常のレイアウトに切り替え"
+
+msgid "Switch to system theme"
+msgstr "システムのテーマに切り替え"
+
+msgid "Switch to wide layout"
+msgstr "ワイドレイアウトに切り替え"
+
+msgid "Table"
+msgstr "表"
+
+msgid "Table of contents"
+msgstr "目次"
+
+msgid "Toggle color theme"
+msgstr "カラーテーマを切り替え"
+
+msgid "Toggle layout width"
+msgstr "レイアウト幅を切り替え"
+
+msgid "Toggle navigation"
+msgstr "ナビゲーションを切り替え"
+
+#, python-brace-format
+msgid "Toggle {name}"
+msgstr "{name} を開閉"
+
+msgid "Top navigation"
+msgstr "上部ナビゲーション"
+
+msgid "Try it out"
+msgstr "試してみる"
+
+msgid "Type"
+msgstr "種類"
+
+msgid "Type to filter…"
+msgstr "入力して絞り込み…"
+
+msgid "Type to search..."
+msgstr "入力して検索…"
+
+msgid "Untitled"
+msgstr "無題"
+
+msgid "Username"
+msgstr "ユーザー名"
+
+msgid "Value"
+msgstr "値"
+
+msgid "Wrap long lines"
+msgstr "長い行を折り返す"
+
+msgid "optional"
+msgstr "任意"
+
+msgid "required"
+msgstr "必須"
+
+#, python-brace-format
+msgid "{count} icons found"
+msgstr "{count} 件のアイコン"
+
+#, python-brace-format
+msgid "{count} links across all docs"
+msgstr "すべてのドキュメントで {count} 件のリンク"
+
+#, python-brace-format
+msgid "{count} links in {scope}"
+msgstr "{scope} で {count} 件のリンク"
+
+#, python-brace-format
+msgid "{visible} of {total} rows"
+msgstr "{total} 行中 {visible} 行"
+

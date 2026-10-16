@@ -8,7 +8,7 @@
                 @click="toggle()"
                 :aria-expanded="open"
                 aria-haspopup="true"
-                aria-label="Switch documentation section"
+                aria-label="{{ _('Switch documentation section') }}"
                 class="lumina-section-switcher-trigger"
                 type="button">
             {% if lumina_current_section %}
@@ -27,8 +27,8 @@
                     {{ lumina_icon("layout-grid", size=18) }}
                 </span>
                 <span class="lumina-section-switcher-label">
-                    <span class="lumina-section-switcher-name">Browse sections</span>
-                    <span class="lumina-section-switcher-desc">Switch documentation area</span>
+                    <span class="lumina-section-switcher-name">{{ _("Browse sections") }}</span>
+                    <span class="lumina-section-switcher-desc">{{ _("Switch documentation area") }}</span>
                 </span>
             {% endif %}
             <svg class="lumina-section-switcher-chevron"

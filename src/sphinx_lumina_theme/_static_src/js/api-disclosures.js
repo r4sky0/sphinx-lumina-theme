@@ -3,6 +3,8 @@
  * @description Collapses API definitions while preserving Sphinx signatures,
  * nested members, cross-references, and the fully readable no-JavaScript page.
  */
+
+import { t } from "./utils/i18n.js";
 export default function apiDisclosures() {
   const definitions = [...document.querySelectorAll("dl.http, dl.py, dl.js, dl.c, dl.cpp, dl.rst")];
   const expanded = document.documentElement.dataset.apiExpanded === "true";
@@ -19,7 +21,7 @@ export default function apiDisclosures() {
       const button = document.createElement("button");
       button.type = "button";
       button.className = "lumina-api-toggle";
-      button.setAttribute("aria-label", `Details for ${sig.textContent.trim().split('¶')[0].trim()}`);
+      button.setAttribute("aria-label", t("Details for {name}", { name: sig.textContent.trim().split("¶")[0].trim() }));
       button.setAttribute("aria-controls", body.id);
       sig.prepend(button);
       // Signature links and copy buttons retain their own actions.
@@ -40,8 +42,8 @@ export default function apiDisclosures() {
   const toolbar = document.createElement("div");
   toolbar.className = "lumina-api-toolbar";
   toolbar.setAttribute("role", "group");
-  toolbar.setAttribute("aria-label", "API display");
-  for (const [label, open] of [["Expand all", true], ["Collapse all", false]]) {
+  toolbar.setAttribute("aria-label", t("API display"));
+  for (const [label, open] of [[t("Expand all"), true], [t("Collapse all"), false]]) {
     const button = document.createElement("button");
     button.type = "button";
     button.textContent = label;

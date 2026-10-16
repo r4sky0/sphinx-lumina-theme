@@ -1,6 +1,6 @@
 <nav class="flex items-center gap-2 overflow-x-auto text-sm text-lumina-text-muted"
      style="scrollbar-width:none"
-     aria-label="Breadcrumb">
+     aria-label="{{ _('Breadcrumb') }}">
     {% if not parents %}
         <a href="{{ pathto(root_doc) }}"
            class="whitespace-nowrap hover:text-lumina-accent no-underline transition-colors">{{ shorttitle }}</a>

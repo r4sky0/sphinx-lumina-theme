@@ -7,7 +7,8 @@
     "build:icons": "node scripts/build-assets.js --icons",
     "dev": "node scripts/build-assets.js --watch",
     "prepare": "husky",
-    "record-demo": "uv run python scripts/record-demo.py"
+    "record-demo": "uv run python scripts/record-demo.py",
+    "i18n": "uv run pybabel extract -F pyproject.toml --no-location --sort-output --project=sphinx-lumina-theme --copyright-holder=\"Ralph Offinger\" -o src/sphinx_lumina_theme/locale/sphinx.pot src/sphinx_lumina_theme && uv run pybabel update -i src/sphinx_lumina_theme/locale/sphinx.pot -d src/sphinx_lumina_theme/locale -D sphinx --ignore-pot-creation-date --no-fuzzy-matching && uv run pybabel compile -d src/sphinx_lumina_theme/locale -D sphinx"
   },
   "lint-staged": {
     "*.py": [

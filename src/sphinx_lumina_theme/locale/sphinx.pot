@@ -1,0 +1,437 @@
+# Translations template for sphinx-lumina-theme.
+# Copyright (C) 2026 Ralph Offinger
+# This file is distributed under the same license as the sphinx-lumina-theme
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sphinx-lumina-theme VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-10-16 09:07+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#, python-format
+msgid "%(minutes)s min read"
+msgstr ""
+
+msgid "(No response body)"
+msgstr ""
+
+msgid "(current)"
+msgstr ""
+
+msgid "(opens in new tab)"
+msgstr ""
+
+msgid "API display"
+msgstr ""
+
+msgid "API key"
+msgstr ""
+
+msgid "Add header"
+msgstr ""
+
+msgid "Additional headers"
+msgstr ""
+
+msgid "All docs"
+msgstr ""
+
+msgid "Authentication"
+msgstr ""
+
+msgid "Back to top"
+msgstr ""
+
+msgid "Basic authentication"
+msgstr ""
+
+msgid "Bearer token"
+msgstr ""
+
+msgid "Breadcrumb"
+msgstr ""
+
+msgid "Browse sections"
+msgstr ""
+
+msgid "Built with"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Cancelled"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
+msgid "Clear credentials"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Close preview"
+msgstr ""
+
+msgid "Collapse all"
+msgstr ""
+
+msgid "Content type"
+msgstr ""
+
+msgid "Copied"
+msgstr ""
+
+msgid "Copied!"
+msgstr ""
+
+msgid "Copy as Markdown"
+msgstr ""
+
+msgid "Copy as curl"
+msgstr ""
+
+msgid "Copy curl"
+msgstr ""
+
+msgid "Copy page as Markdown"
+msgstr ""
+
+msgid "Copy response"
+msgstr ""
+
+msgid "Could not copy. Select the curl command below and copy it manually."
+msgstr ""
+
+msgid "Could not copy. Select the response text and copy it manually."
+msgstr ""
+
+msgid ""
+"Could not reach the API. Check the server URL, network, HTTPS and CORS "
+"settings. Redirects are not followed. Try Copy as curl to debug outside "
+"the browser."
+msgstr ""
+
+#, python-brace-format
+msgid "Details for {name}"
+msgstr ""
+
+msgid "Dismiss announcement"
+msgstr ""
+
+msgid "Enter an HTTP(S) server URL without credentials, a query, or a fragment."
+msgstr ""
+
+#, python-brace-format
+msgid "Enter required parameters: {names}."
+msgstr ""
+
+msgid "Enter the API key name and value, or select No authentication."
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Expand all"
+msgstr ""
+
+msgid "Failed to load versions"
+msgstr ""
+
+msgid "Filter rows"
+msgstr ""
+
+msgid "Header"
+msgstr ""
+
+msgid "Header name"
+msgstr ""
+
+msgid "Header value"
+msgstr ""
+
+msgid "Headers"
+msgstr ""
+
+msgid "Hide credentials"
+msgstr ""
+
+msgid "Image preview"
+msgstr ""
+
+msgid "Instant search is unavailable. Sphinx search covers all docs."
+msgstr ""
+
+msgid "Instant search is unavailable. Use Sphinx search below."
+msgstr ""
+
+msgid "Key name"
+msgstr ""
+
+msgid "Key value"
+msgstr ""
+
+msgid "LLM-friendly documentation index"
+msgstr ""
+
+msgid "Leave empty to send without a body"
+msgstr ""
+
+msgid "Loading search index…"
+msgstr ""
+
+msgid "Main navigation"
+msgstr ""
+
+msgid "Navigate"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "No authentication"
+msgstr ""
+
+msgid "No matching rows. Try another term or reset the table."
+msgstr ""
+
+msgid "No results found."
+msgstr ""
+
+#, python-brace-format
+msgid "No results in {scope}."
+msgstr ""
+
+msgid "On this page"
+msgstr ""
+
+msgid "Open"
+msgstr ""
+
+msgid "Open Sphinx search results page"
+msgstr ""
+
+msgid "Page actions"
+msgstr ""
+
+msgid "Page navigation"
+msgstr ""
+
+msgid "Page outline"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Path Parameters"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Query Parameters"
+msgstr ""
+
+msgid "Query string"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Remove header"
+msgstr ""
+
+msgid "Request body"
+msgstr ""
+
+msgid "Request body is not valid JSON. Fix it before sending."
+msgstr ""
+
+msgid "Request command"
+msgstr ""
+
+msgid "Request timed out after 30 seconds."
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Response body"
+msgstr ""
+
+msgid "Response headers"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search all docs"
+msgstr ""
+
+msgid "Search docs..."
+msgstr ""
+
+msgid "Search documentation"
+msgstr ""
+
+#, python-brace-format
+msgid "Search for \"{query}\""
+msgstr ""
+
+msgid "Search icons..."
+msgstr ""
+
+msgid "Search in"
+msgstr ""
+
+msgid "Searching…"
+msgstr ""
+
+msgid "Section navigation"
+msgstr ""
+
+msgid "Select documentation version"
+msgstr ""
+
+msgid "Send Request"
+msgstr ""
+
+msgid "Send in"
+msgstr ""
+
+msgid "Send request"
+msgstr ""
+
+msgid "Send request (Ctrl/⌘ + Enter)"
+msgstr ""
+
+msgid "Sending request…"
+msgstr ""
+
+msgid "Sending…"
+msgstr ""
+
+msgid "Server URL"
+msgstr ""
+
+msgid ""
+"Shared for this server on this page. Cleared on reload. Copied curl "
+"commands include credentials."
+msgstr ""
+
+msgid "Show credentials"
+msgstr ""
+
+msgid "Site announcement"
+msgstr ""
+
+msgid "Skip to content"
+msgstr ""
+
+msgid "Stop wrapping long lines"
+msgstr ""
+
+msgid "Stopped waiting for this request. The server may still process it."
+msgstr ""
+
+msgid "Switch documentation area"
+msgstr ""
+
+msgid "Switch documentation section"
+msgstr ""
+
+msgid "Switch to dark mode"
+msgstr ""
+
+msgid "Switch to light mode"
+msgstr ""
+
+msgid "Switch to normal layout"
+msgstr ""
+
+msgid "Switch to system theme"
+msgstr ""
+
+msgid "Switch to wide layout"
+msgstr ""
+
+msgid "Table"
+msgstr ""
+
+msgid "Table of contents"
+msgstr ""
+
+msgid "Toggle color theme"
+msgstr ""
+
+msgid "Toggle layout width"
+msgstr ""
+
+msgid "Toggle navigation"
+msgstr ""
+
+#, python-brace-format
+msgid "Toggle {name}"
+msgstr ""
+
+msgid "Top navigation"
+msgstr ""
+
+msgid "Try it out"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Type to filter…"
+msgstr ""
+
+msgid "Type to search..."
+msgstr ""
+
+msgid "Untitled"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Wrap long lines"
+msgstr ""
+
+msgid "optional"
+msgstr ""
+
+msgid "required"
+msgstr ""
+
+#, python-brace-format
+msgid "{count} icons found"
+msgstr ""
+
+#, python-brace-format
+msgid "{count} links across all docs"
+msgstr ""
+
+#, python-brace-format
+msgid "{count} links in {scope}"
+msgstr ""
+
+#, python-brace-format
+msgid "{visible} of {total} rows"
+msgstr ""
+

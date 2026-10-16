@@ -1,0 +1,457 @@
+# Spanish translations for sphinx-lumina-theme.
+# Copyright (C) 2026 Ralph Offinger
+# This file is distributed under the same license as the sphinx-lumina-theme
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sphinx-lumina-theme VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-10-16 08:54+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#, python-format
+msgid "%(minutes)s min read"
+msgstr "%(minutes)s min de lectura"
+
+msgid "(No response body)"
+msgstr "(Sin cuerpo de respuesta)"
+
+msgid "(current)"
+msgstr "(actual)"
+
+msgid "(opens in new tab)"
+msgstr "(se abre en una pestaña nueva)"
+
+msgid "API display"
+msgstr "Vista de la API"
+
+msgid "API key"
+msgstr "Clave de API"
+
+msgid "Add header"
+msgstr "Añadir encabezado"
+
+msgid "Additional headers"
+msgstr "Encabezados adicionales"
+
+msgid "All docs"
+msgstr "Toda la documentación"
+
+msgid "Authentication"
+msgstr "Autenticación"
+
+msgid "Back to top"
+msgstr "Volver arriba"
+
+msgid "Basic authentication"
+msgstr "Autenticación básica"
+
+msgid "Bearer token"
+msgstr "Token Bearer"
+
+msgid "Breadcrumb"
+msgstr "Ruta de navegación"
+
+msgid "Browse sections"
+msgstr "Explorar secciones"
+
+msgid "Built with"
+msgstr "Creado con"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Cancelled"
+msgstr "Cancelada"
+
+msgid "Clear"
+msgstr "Borrar"
+
+msgid "Clear credentials"
+msgstr "Borrar credenciales"
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "Close preview"
+msgstr "Cerrar vista previa"
+
+msgid "Collapse all"
+msgstr "Contraer todo"
+
+msgid "Content type"
+msgstr "Tipo de contenido"
+
+msgid "Copied"
+msgstr "Copiado"
+
+msgid "Copied!"
+msgstr "¡Copiado!"
+
+msgid "Copy as Markdown"
+msgstr "Copiar como Markdown"
+
+msgid "Copy as curl"
+msgstr "Copiar como curl"
+
+msgid "Copy curl"
+msgstr "Copiar curl"
+
+msgid "Copy page as Markdown"
+msgstr "Copiar la página como Markdown"
+
+msgid "Copy response"
+msgstr "Copiar respuesta"
+
+msgid "Could not copy. Select the curl command below and copy it manually."
+msgstr ""
+"No se pudo copiar. Selecciona el comando curl de abajo y cópialo "
+"manualmente."
+
+msgid "Could not copy. Select the response text and copy it manually."
+msgstr ""
+"No se pudo copiar. Selecciona el texto de la respuesta y cópialo "
+"manualmente."
+
+msgid ""
+"Could not reach the API. Check the server URL, network, HTTPS and CORS "
+"settings. Redirects are not followed. Try Copy as curl to debug outside "
+"the browser."
+msgstr ""
+"No se pudo conectar con la API. Revisa la URL del servidor, la red y la "
+"configuración de HTTPS y CORS. Las redirecciones no se siguen. Usa "
+"«Copiar como curl» para depurar fuera del navegador."
+
+#, python-brace-format
+msgid "Details for {name}"
+msgstr "Detalles de {name}"
+
+msgid "Dismiss announcement"
+msgstr "Descartar anuncio"
+
+msgid "Enter an HTTP(S) server URL without credentials, a query, or a fragment."
+msgstr ""
+"Introduce una URL de servidor HTTP(S) sin credenciales, consulta ni "
+"fragmento."
+
+#, python-brace-format
+msgid "Enter required parameters: {names}."
+msgstr "Introduce los parámetros obligatorios: {names}."
+
+msgid "Enter the API key name and value, or select No authentication."
+msgstr ""
+"Introduce el nombre y el valor de la clave de API, o selecciona «Sin "
+"autenticación»."
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Expand all"
+msgstr "Expandir todo"
+
+msgid "Failed to load versions"
+msgstr "No se pudieron cargar las versiones"
+
+msgid "Filter rows"
+msgstr "Filtrar filas"
+
+msgid "Header"
+msgstr "Encabezado"
+
+msgid "Header name"
+msgstr "Nombre del encabezado"
+
+msgid "Header value"
+msgstr "Valor del encabezado"
+
+msgid "Headers"
+msgstr "Encabezados"
+
+msgid "Hide credentials"
+msgstr "Ocultar credenciales"
+
+msgid "Image preview"
+msgstr "Vista previa de la imagen"
+
+msgid "Instant search is unavailable. Sphinx search covers all docs."
+msgstr ""
+"La búsqueda instantánea no está disponible. La búsqueda de Sphinx abarca "
+"toda la documentación."
+
+msgid "Instant search is unavailable. Use Sphinx search below."
+msgstr ""
+"La búsqueda instantánea no está disponible. Usa la búsqueda de Sphinx de "
+"abajo."
+
+msgid "Key name"
+msgstr "Nombre de la clave"
+
+msgid "Key value"
+msgstr "Valor de la clave"
+
+msgid "LLM-friendly documentation index"
+msgstr "Índice de la documentación para LLM"
+
+msgid "Leave empty to send without a body"
+msgstr "Déjalo vacío para enviar sin cuerpo"
+
+msgid "Loading search index…"
+msgstr "Cargando el índice de búsqueda…"
+
+msgid "Main navigation"
+msgstr "Navegación principal"
+
+msgid "Navigate"
+msgstr "Navegar"
+
+msgid "Next"
+msgstr "Siguiente"
+
+msgid "No authentication"
+msgstr "Sin autenticación"
+
+msgid "No matching rows. Try another term or reset the table."
+msgstr "No hay filas coincidentes. Prueba otro término o restablece la tabla."
+
+msgid "No results found."
+msgstr "No se encontraron resultados."
+
+#, python-brace-format
+msgid "No results in {scope}."
+msgstr "No hay resultados en {scope}."
+
+msgid "On this page"
+msgstr "En esta página"
+
+msgid "Open"
+msgstr "Abrir"
+
+msgid "Open Sphinx search results page"
+msgstr "Abrir la página de resultados de búsqueda de Sphinx"
+
+msgid "Page actions"
+msgstr "Acciones de la página"
+
+msgid "Page navigation"
+msgstr "Navegación entre páginas"
+
+msgid "Page outline"
+msgstr "Esquema de la página"
+
+msgid "Password"
+msgstr "Contraseña"
+
+msgid "Path Parameters"
+msgstr "Parámetros de ruta"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Query Parameters"
+msgstr "Parámetros de consulta"
+
+msgid "Query string"
+msgstr "Cadena de consulta"
+
+msgid "Remove"
+msgstr "Quitar"
+
+msgid "Remove header"
+msgstr "Quitar encabezado"
+
+msgid "Request body"
+msgstr "Cuerpo de la solicitud"
+
+msgid "Request body is not valid JSON. Fix it before sending."
+msgstr "El cuerpo de la solicitud no es JSON válido. Corrígelo antes de enviarlo."
+
+msgid "Request command"
+msgstr "Comando de la solicitud"
+
+msgid "Request timed out after 30 seconds."
+msgstr "La solicitud superó el tiempo de espera de 30 segundos."
+
+msgid "Reset"
+msgstr "Restablecer"
+
+msgid "Response body"
+msgstr "Cuerpo de la respuesta"
+
+msgid "Response headers"
+msgstr "Encabezados de la respuesta"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Search all docs"
+msgstr "Buscar en toda la documentación"
+
+msgid "Search docs..."
+msgstr "Buscar en la documentación…"
+
+msgid "Search documentation"
+msgstr "Buscar en la documentación"
+
+#, python-brace-format
+msgid "Search for \"{query}\""
+msgstr "Buscar «{query}»"
+
+msgid "Search icons..."
+msgstr "Buscar iconos…"
+
+msgid "Search in"
+msgstr "Buscar en"
+
+msgid "Searching…"
+msgstr "Buscando…"
+
+msgid "Section navigation"
+msgstr "Navegación de la sección"
+
+msgid "Select documentation version"
+msgstr "Seleccionar la versión de la documentación"
+
+msgid "Send Request"
+msgstr "Enviar solicitud"
+
+msgid "Send in"
+msgstr "Enviar en"
+
+msgid "Send request"
+msgstr "Enviar solicitud"
+
+msgid "Send request (Ctrl/⌘ + Enter)"
+msgstr "Enviar solicitud (Ctrl/⌘ + Intro)"
+
+msgid "Sending request…"
+msgstr "Enviando solicitud…"
+
+msgid "Sending…"
+msgstr "Enviando…"
+
+msgid "Server URL"
+msgstr "URL del servidor"
+
+msgid ""
+"Shared for this server on this page. Cleared on reload. Copied curl "
+"commands include credentials."
+msgstr ""
+"Se comparte para este servidor en esta página. Se borra al recargar. Los "
+"comandos curl copiados incluyen las credenciales."
+
+msgid "Show credentials"
+msgstr "Mostrar credenciales"
+
+msgid "Site announcement"
+msgstr "Anuncio del sitio"
+
+msgid "Skip to content"
+msgstr "Saltar al contenido"
+
+msgid "Stop wrapping long lines"
+msgstr "Dejar de ajustar las líneas largas"
+
+msgid "Stopped waiting for this request. The server may still process it."
+msgstr ""
+"Se dejó de esperar esta solicitud. Es posible que el servidor aún la "
+"procese."
+
+msgid "Switch documentation area"
+msgstr "Cambiar de área de documentación"
+
+msgid "Switch documentation section"
+msgstr "Cambiar de sección de documentación"
+
+msgid "Switch to dark mode"
+msgstr "Cambiar al modo oscuro"
+
+msgid "Switch to light mode"
+msgstr "Cambiar al modo claro"
+
+msgid "Switch to normal layout"
+msgstr "Cambiar al diseño normal"
+
+msgid "Switch to system theme"
+msgstr "Usar el tema del sistema"
+
+msgid "Switch to wide layout"
+msgstr "Cambiar al diseño ancho"
+
+msgid "Table"
+msgstr "Tabla"
+
+msgid "Table of contents"
+msgstr "Tabla de contenidos"
+
+msgid "Toggle color theme"
+msgstr "Cambiar el tema de color"
+
+msgid "Toggle layout width"
+msgstr "Cambiar el ancho del diseño"
+
+msgid "Toggle navigation"
+msgstr "Mostrar u ocultar la navegación"
+
+#, python-brace-format
+msgid "Toggle {name}"
+msgstr "Expandir o contraer {name}"
+
+msgid "Top navigation"
+msgstr "Navegación superior"
+
+msgid "Try it out"
+msgstr "Probar"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Type to filter…"
+msgstr "Escribe para filtrar…"
+
+msgid "Type to search..."
+msgstr "Escribe para buscar…"
+
+msgid "Untitled"
+msgstr "Sin título"
+
+msgid "Username"
+msgstr "Nombre de usuario"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "Wrap long lines"
+msgstr "Ajustar las líneas largas"
+
+msgid "optional"
+msgstr "opcional"
+
+msgid "required"
+msgstr "obligatorio"
+
+#, python-brace-format
+msgid "{count} icons found"
+msgstr "{count} iconos encontrados"
+
+#, python-brace-format
+msgid "{count} links across all docs"
+msgstr "{count} enlaces en toda la documentación"
+
+#, python-brace-format
+msgid "{count} links in {scope}"
+msgstr "{count} enlaces en {scope}"
+
+#, python-brace-format
+msgid "{visible} of {total} rows"
+msgstr "{visible} de {total} filas"
+

@@ -8,11 +8,13 @@ from pathlib import Path
 
 from sphinx import addnodes
 from sphinx.environment.adapters.toctree import _resolve_toctree
+from sphinx.locale import get_translation
 from sphinx.util import logging
 
 from . import _seo
 
 logger = logging.getLogger(__name__)
+_ = get_translation("sphinx")
 
 __version__ = "2.11.0"
 
@@ -107,7 +109,7 @@ def _insert_reading_time(app, doctree, pagename):
         nodes.raw(
             "",
             f'<div class="lumina-reading-time" data-pagefind-ignore>'
-            f"{icon}<span>{minutes} min read</span></div>",
+            f"{icon}<span>{_('%(minutes)s min read') % {'minutes': minutes}}</span></div>",
             format="html",
         ),
     )
@@ -301,6 +303,28 @@ def _add_search_heading_ids(app, doctree, docname):
             anchor += "-"
         title["ids"].append(anchor)
         used_ids.add(anchor)
+
+
+def _tag_http_fields(app, doctree, docname):
+    """Class httpdomain field names by field type, e.g. ``lumina-http-requestheader``.
+
+    The HTTP request scripts find query parameters, headers, and JSON fields by
+    these classes, because the visible labels follow the httpdomain translation.
+    """
+    try:
+        from sphinxcontrib.httpdomain import HTTPResource
+    except ImportError:
+        return
+    from docutils import nodes
+
+    # Labels are compared as rendered in this build, so any language matches.
+    kinds = {str(field.label): field.name for field in HTTPResource.doc_field_types}
+    for desc in doctree.findall(addnodes.desc):
+        if desc.get("domain") != "http":
+            continue
+        for name in desc.findall(nodes.field_name):
+            if kind := kinds.get(name.astext()):
+                name["classes"].append(f"lumina-http-{kind}")
 
 
 def _prepare_sections(app, sections):
@@ -924,6 +948,7 @@ def setup(app):
     from ._directives import LuminaCardDirective, LuminaGridItemCardDirective
 
     app.add_html_theme("lumina", str(Path(__file__).parent / "theme"))
+    app.add_message_catalog("sphinx", str(Path(__file__).parent / "locale"))
     app.add_js_file("lumina.js", loading_method="defer", priority=900)
     app.add_directive("card", LuminaCardDirective, override=True)
     app.add_directive("grid-item-card", LuminaGridItemCardDirective, override=True)
@@ -949,6 +974,7 @@ def setup(app):
     app.connect("env-updated", _prepare_search_sections)
     app.connect("doctree-resolved", _insert_reading_time)
     app.connect("doctree-resolved", _add_search_heading_ids)
+    app.connect("doctree-resolved", _tag_http_fields)
     app.connect("build-finished", _write_search_symbols)
     app.connect("build-finished", _run_pagefind)
     app.connect("build-finished", _filter_sitemap_noindex)

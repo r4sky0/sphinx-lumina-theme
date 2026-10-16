@@ -85,6 +85,14 @@ Live reload with sphinx-autobuild and the asset watcher.
 Out-of-the-box meta tags, social cards, JSON-LD, sitemap, and `robots.txt`.
 :::
 
+:::{grid-item-card} Internationalization
+:link: internationalization
+:link-type: doc
+:icon: languages
+:icon-style: featured
+Translate the theme's interface text with Sphinx's `language` setting.
+:::
+
 ::::
 
 ```{toctree}
@@ -99,4 +107,5 @@ wide-layout
 icons
 development-workflow
 seo
+internationalization
 ```

@@ -86,6 +86,14 @@ format_js = false
 ignore = "H006,H021,H023"
 use_gitignore = true
 
+[[tool.babel.mappings]]
+method = "python"
+pattern = "**.py"
+
+[[tool.babel.mappings]]
+method = "jinja2.ext:babel_extract"
+pattern = "**/theme/**.html"
+
 [tool.semantic_release.remote]
 ignore_token_for_push = true
 

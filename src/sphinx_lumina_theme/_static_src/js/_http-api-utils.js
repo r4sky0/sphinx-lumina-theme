@@ -34,14 +34,14 @@ export function extractPath(dl) {
     .replace(/\((?:[^():]+:\s*)?([^()]+)\)/g, "{$1}") || "/";
 }
 
-/* Parse a field list section (e.g. "Request Headers") inside an endpoint's
-   ``<dd>``. Returns name, type, value, and requiredness for list or paragraph entries. */
-export function extractFieldSection(dd, label) {
+/* Parse one httpdomain field type (e.g. ``requestheader``) inside an endpoint's
+   ``<dd>``. The theme classes each field name by type at build time, so this works
+   whatever language the labels are in. Returns name, type, value, and requiredness
+   for list or paragraph entries. */
+export function extractFieldSection(dd, kind) {
   if (!dd) return [];
   const items = [];
-  for (const dt of dd.querySelectorAll(":scope > dl.field-list > dt")) {
-    if (!dt.textContent.replace(/:$/, "").trim().startsWith(label)) continue;
-
+  for (const dt of dd.querySelectorAll(`:scope > dl.field-list > dt.lumina-http-${kind}`)) {
     const sibling = dt.nextElementSibling;
     if (!sibling) continue;
 
@@ -55,7 +55,7 @@ export function extractFieldSection(dd, label) {
       const type = markers.replace(/,?\s*\brequired\b/i, "").trim();
       let value = "";
 
-      if (label === "Request Headers") {
+      if (kind === "requestheader") {
         const code = li.querySelector("code");
         if (code) {
           value = code.textContent;
@@ -91,10 +91,10 @@ export function extractBody(dd) {
       contentType: text.match(/^Content-Type:\s*(.+)$/im)?.[1].trim() || "application/json",
     };
   }
-  const fields = extractFieldSection(dd, "Request JSON Object");
+  const fields = extractFieldSection(dd, "requestjsonobject");
   const body = Object.fromEntries(fields.filter((f) => !/[.\[\]]/.test(f.name))
     .map((f) => [f.name, fieldPlaceholder(f.type)]));
-  const contentType = extractFieldSection(dd, "Request Headers").find((h) => h.name.toLowerCase() === "content-type")?.value || "application/json";
+  const contentType = extractFieldSection(dd, "requestheader").find((h) => h.name.toLowerCase() === "content-type")?.value || "application/json";
   return { body: fields.length ? JSON.stringify(body, null, 2) : "", contentType };
 }
 

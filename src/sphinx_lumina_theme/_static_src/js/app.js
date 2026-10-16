@@ -29,6 +29,7 @@ import imageLightbox from "./image-lightbox.js";
 import responsiveTables from "./responsive-tables.js";
 import mermaidSizing from "./mermaid.js";
 import tableControls from "./table-controls.js";
+import { t } from "./utils/i18n.js";
 Alpine.data("scrollspy", scrollspy);
 Alpine.data("themeToggle", themeToggle);
 Alpine.data("searchModal", searchModal);
@@ -46,6 +47,7 @@ Alpine.data("layoutToggle", layoutToggle);
 Alpine.data("iconBrowser", iconBrowser);
 Alpine.data("imageLightbox", imageLightbox);
 Alpine.data("tableControls", tableControls);
+Alpine.magic("t", () => t);
 
 window.Alpine = Alpine;
 

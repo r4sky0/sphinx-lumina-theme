@@ -20,6 +20,7 @@ import {
 } from "./_http-api-utils.js";
 
 import { copyText } from "./utils/clipboard.js";
+import { t } from "./utils/i18n.js";
 
 // Credentials live only on this page and are isolated by the complete API base URL.
 const credentials = new Map();
@@ -158,13 +159,13 @@ export function tryItPanel() {
       const missing = [...this.pathParams, ...this.queryParams.filter((p) => p.required)]
         .filter((p) => !String((this.pathParams.includes(p) ? this.pathValues : this.queryValues)[p.name] ?? "").trim());
       if (missing.length) {
-        this.requestError = `Enter required parameters: ${missing.map((p) => p.name).join(", ")}.`;
+        this.requestError = t("Enter required parameters: {names}.", { names: missing.map((p) => p.name).join(", ") });
         return;
       }
       if (this.hasBody && this.bodyJson.trim() && /(?:^|[/+])json(?:;|$)/i.test(this.contentType)) {
         try { JSON.parse(this.bodyJson); }
         catch {
-          this.bodyError = "Request body is not valid JSON. Fix it before sending.";
+          this.bodyError = t("Request body is not valid JSON. Fix it before sending.");
           this.$refs.body.focus();
           return;
         }
@@ -173,10 +174,10 @@ export function tryItPanel() {
       try {
         const base = new URL(this.baseUrl.trim(), document.baseURI);
         if (!this.baseUrl.trim() || !["http:", "https:"].includes(base.protocol) || base.username || base.password || base.search || base.hash) {
-          throw new Error("Enter an HTTP(S) server URL without credentials, a query, or a fragment.");
+          throw new Error(t("Enter an HTTP(S) server URL without credentials, a query, or a fragment."));
         }
         if (this.auth.type === "apiKey" && (!this.auth.keyName.trim() || !this.auth.keyValue)) {
-          throw new Error("Enter the API key name and value, or select No authentication.");
+          throw new Error(t("Enter the API key name and value, or select No authentication."));
         }
         request = this.request;
         new Headers(request.headers); // Validate header names and values before fetching.
@@ -188,7 +189,7 @@ export function tryItPanel() {
       this.response = null;
       this.copiedResponse = false;
       this.controller = new AbortController();
-      const timeout = setTimeout(() => this.controller?.abort(new DOMException("Request timed out after 30 seconds.", "TimeoutError")), 30000);
+      const timeout = setTimeout(() => this.controller?.abort(new DOMException(t("Request timed out after 30 seconds."), "TimeoutError")), 30000);
       const t0 = performance.now();
       try {
         const res = await fetch(request.url, {
@@ -206,7 +207,7 @@ export function tryItPanel() {
           statusText: res.statusText,
           statusClass: res.status >= 500 ? "error" : res.status >= 400 ? "warning" : res.status >= 300 ? "info" : "success",
           elapsed: Math.round(performance.now() - t0),
-          bodyText: raw || "(No response body)",
+          bodyText: raw || t("(No response body)"),
           bodyHtml: isJson ? highlight(raw) : null,
           headers: [...res.headers].map(([name, value]) => `${name}: ${value}`).join("\n"),
           url: res.url || request.url,
@@ -216,11 +217,11 @@ export function tryItPanel() {
       } catch (err) {
         this.response = {
           status: null,
-          statusText: err.name === "AbortError" ? "Cancelled" : "Error",
+          statusText: err.name === "AbortError" ? t("Cancelled") : t("Error"),
           statusClass: "error",
           elapsed: Math.round(performance.now() - t0),
-          bodyText: err.name === "AbortError" ? "Stopped waiting for this request. The server may still process it."
-            : err.name === "TypeError" ? "Could not reach the API. Check the server URL, network, HTTPS and CORS settings. Redirects are not followed. Try Copy as curl to debug outside the browser."
+          bodyText: err.name === "AbortError" ? t("Stopped waiting for this request. The server may still process it.")
+            : err.name === "TypeError" ? t("Could not reach the API. Check the server URL, network, HTTPS and CORS settings. Redirects are not followed. Try Copy as curl to debug outside the browser.")
             : err.message,
           headers: "", url: request.url, isJson: false, error: true,
         };
@@ -237,7 +238,7 @@ export function tryItPanel() {
     async copyCurl() {
       this.copyError = "";
       try { await copyText(this.curlCommand); }
-      catch { this.copyError = "Could not copy. Select the curl command below and copy it manually."; return; }
+      catch { this.copyError = t("Could not copy. Select the curl command below and copy it manually."); return; }
       this.copiedCurl = true;
       setTimeout(() => { this.copiedCurl = false; }, 1500);
     },
@@ -245,7 +246,7 @@ export function tryItPanel() {
     async copyResponse() {
       this.copyError = "";
       try { await copyText(this.response.bodyText); }
-      catch { this.copyError = "Could not copy. Select the response text and copy it manually."; return; }
+      catch { this.copyError = t("Could not copy. Select the response text and copy it manually."); return; }
       this.copiedResponse = true;
       setTimeout(() => { this.copiedResponse = false; }, 1500);
     },
@@ -289,8 +290,8 @@ function injectPanel(dl, baseUrl) {
   const method      = extractMethod(dl);
   const path        = extractPath(dl);
   const pathParams  = parsePathParams(path);
-  const queryParams = extractFieldSection(dd, "Query Parameters");
-  const allHeaders  = extractFieldSection(dd, "Request Headers");
+  const queryParams = extractFieldSection(dd, "queryparameter");
+  const allHeaders  = extractFieldSection(dd, "requestheader");
   const example = extractBody(dd);
   const hasBody = !["GET", "HEAD", "OPTIONS"].includes(method);
 
@@ -304,7 +305,7 @@ function injectPanel(dl, baseUrl) {
   wrap.setAttribute("x-id", "['api-field']");
 
   /* Static Alpine template */
-  wrap.insertAdjacentHTML("beforeend", PANEL_TEMPLATE);
+  wrap.insertAdjacentHTML("beforeend", panelTemplate());
 
   dd.appendChild(wrap);
 
@@ -314,7 +315,7 @@ function injectPanel(dl, baseUrl) {
 
 /* ── Alpine template ───────────────────────────────────────────────── */
 
-const PANEL_TEMPLATE = `
+const panelTemplate = () => `
   <button type="button" class="lumina-try-it-toggle"
           @click="open = !open"
           :class="{ 'is-open': open }"
@@ -326,7 +327,7 @@ const PANEL_TEMPLATE = `
          :class="{ 'is-open': open }" aria-hidden="true">
       <polyline points="9 18 15 12 9 6"/>
     </svg>
-    Try it out
+    ${esc(t("Try it out"))}
   </button>
 
   <div class="lumina-try-it-grid" :class="{ 'is-open': open }" :inert="!open"
@@ -334,7 +335,7 @@ const PANEL_TEMPLATE = `
     <div class="lumina-try-it-panel" @keydown.ctrl.enter.prevent="send()" @keydown.meta.enter.prevent="send()">
 
       <div class="lumina-try-it-param-row">
-        <label class="lumina-try-it-param-name" :for="$id('api-field', 'server')">Server URL</label>
+        <label class="lumina-try-it-param-name" :for="$id('api-field', 'server')">${esc(t("Server URL"))}</label>
         <input class="lumina-try-it-input" :id="$id('api-field', 'server')" x-model="baseUrl"
                type="text" autocomplete="off" spellcheck="false" />
       </div>
@@ -346,12 +347,12 @@ const PANEL_TEMPLATE = `
       </div>
 
       <div class="lumina-try-it-section" x-show="pathParams.length">
-        <div class="lumina-try-it-section-label">Path Parameters</div>
+        <div class="lumina-try-it-section-label">${esc(t("Path Parameters"))}</div>
         <template x-for="p in pathParams" :key="p.name">
           <div class="lumina-try-it-param-row">
             <label class="lumina-try-it-param-name" :for="$id('api-field', 'path-' + p.name)">
               <span x-text="p.name"></span>
-              <span class="lumina-try-it-required" aria-label="required">*</span>
+              <span class="lumina-try-it-required" aria-label="${esc(t("required"))}">*</span>
             </label>
             <input class="lumina-try-it-input"
                    :id="$id('api-field', 'path-' + p.name)"
@@ -363,77 +364,77 @@ const PANEL_TEMPLATE = `
       </div>
 
       <div class="lumina-try-it-section" x-show="queryParams.length">
-        <div class="lumina-try-it-section-label">Query Parameters</div>
+        <div class="lumina-try-it-section-label">${esc(t("Query Parameters"))}</div>
         <template x-for="p in queryParams" :key="p.name">
           <div class="lumina-try-it-param-row">
             <label class="lumina-try-it-param-name" :for="$id('api-field', 'query-' + p.name)">
               <span x-text="p.name"></span>
               <span class="lumina-try-it-type-tag" x-text="p.type" x-show="p.type"></span>
-              <span class="lumina-try-it-required" x-show="p.required" aria-label="required">*</span>
+              <span class="lumina-try-it-required" x-show="p.required" aria-label="${esc(t("required"))}">*</span>
             </label>
             <input class="lumina-try-it-input"
                    :id="$id('api-field', 'query-' + p.name)"
                    x-model="queryValues[p.name]"
-                   :placeholder="p.required ? 'required' : 'optional'" :aria-required="p.required"
+                   :placeholder="p.required ? $t('required') : $t('optional')" :aria-required="p.required"
                    type="text" autocomplete="off" spellcheck="false" />
           </div>
         </template>
       </div>
 
       <details class="lumina-try-it-section lumina-try-it-details">
-        <summary>Authentication <span x-show="auth.type !== 'none'" x-text="auth.type === 'apiKey' ? '· API key' : '· ' + auth.type"></span></summary>
-        <p class="lumina-try-it-hint">Shared for this server on this page. Cleared on reload. Copied curl commands include credentials.</p>
+        <summary>${esc(t("Authentication"))} <span x-show="auth.type !== 'none'" x-text="auth.type === 'apiKey' ? '· ' + $t('API key') : '· ' + auth.type"></span></summary>
+        <p class="lumina-try-it-hint">${esc(t("Shared for this server on this page. Cleared on reload. Copied curl commands include credentials."))}</p>
         <div class="lumina-try-it-param-row">
-          <label class="lumina-try-it-param-name" :for="$id('api-field', 'auth-type')">Type</label>
+          <label class="lumina-try-it-param-name" :for="$id('api-field', 'auth-type')">${esc(t("Type"))}</label>
           <select class="lumina-try-it-input" :id="$id('api-field', 'auth-type')" x-model="auth.type">
-            <option value="none">No authentication</option>
-            <option value="bearer">Bearer token</option>
-            <option value="basic">Basic authentication</option>
-            <option value="apiKey">API key</option>
+            <option value="none">${esc(t("No authentication"))}</option>
+            <option value="bearer">${esc(t("Bearer token"))}</option>
+            <option value="basic">${esc(t("Basic authentication"))}</option>
+            <option value="apiKey">${esc(t("API key"))}</option>
           </select>
         </div>
         <div class="lumina-try-it-param-row" x-show="auth.type === 'bearer'">
-          <label class="lumina-try-it-param-name" :for="$id('api-field', 'token')">Bearer token</label>
+          <label class="lumina-try-it-param-name" :for="$id('api-field', 'token')">${esc(t("Bearer token"))}</label>
           <input class="lumina-try-it-input" :id="$id('api-field', 'token')" x-model="auth.token"
                  :type="showBearer ? 'text' : 'password'" autocomplete="off" spellcheck="false" />
         </div>
         <div x-show="auth.type === 'basic'">
           <div class="lumina-try-it-param-row">
-            <label class="lumina-try-it-param-name" :for="$id('api-field', 'username')">Username</label>
+            <label class="lumina-try-it-param-name" :for="$id('api-field', 'username')">${esc(t("Username"))}</label>
             <input class="lumina-try-it-input" :id="$id('api-field', 'username')" x-model="auth.username" autocomplete="off" />
           </div>
           <div class="lumina-try-it-param-row">
-            <label class="lumina-try-it-param-name" :for="$id('api-field', 'password')">Password</label>
+            <label class="lumina-try-it-param-name" :for="$id('api-field', 'password')">${esc(t("Password"))}</label>
             <input class="lumina-try-it-input" :id="$id('api-field', 'password')" x-model="auth.password"
                    :type="showBearer ? 'text' : 'password'" autocomplete="off" />
           </div>
         </div>
         <div x-show="auth.type === 'apiKey'">
           <div class="lumina-try-it-param-row">
-            <label class="lumina-try-it-param-name" :for="$id('api-field', 'key-name')">Key name</label>
+            <label class="lumina-try-it-param-name" :for="$id('api-field', 'key-name')">${esc(t("Key name"))}</label>
             <input class="lumina-try-it-input" :id="$id('api-field', 'key-name')" x-model="auth.keyName" placeholder="X-API-Key" autocomplete="off" />
           </div>
           <div class="lumina-try-it-param-row">
-            <label class="lumina-try-it-param-name" :for="$id('api-field', 'key-value')">Key value</label>
+            <label class="lumina-try-it-param-name" :for="$id('api-field', 'key-value')">${esc(t("Key value"))}</label>
             <input class="lumina-try-it-input" :id="$id('api-field', 'key-value')" x-model="auth.keyValue"
                    :type="showBearer ? 'text' : 'password'" autocomplete="off" />
           </div>
           <div class="lumina-try-it-param-row">
-            <label class="lumina-try-it-param-name" :for="$id('api-field', 'key-in')">Send in</label>
+            <label class="lumina-try-it-param-name" :for="$id('api-field', 'key-in')">${esc(t("Send in"))}</label>
             <select class="lumina-try-it-input" :id="$id('api-field', 'key-in')" x-model="auth.keyIn">
-              <option value="header">Header</option><option value="query">Query string</option>
+              <option value="header">${esc(t("Header"))}</option><option value="query">${esc(t("Query string"))}</option>
             </select>
           </div>
         </div>
         <div class="lumina-try-it-actions" x-show="auth.type !== 'none'">
           <button type="button" class="lumina-try-it-clear" @click="showBearer = !showBearer"
-                  :aria-pressed="showBearer" x-text="showBearer ? 'Hide credentials' : 'Show credentials'"></button>
-          <button type="button" class="lumina-try-it-clear" @click="forgetAuth()">Clear credentials</button>
+                  :aria-pressed="showBearer" x-text="showBearer ? $t('Hide credentials') : $t('Show credentials')"></button>
+          <button type="button" class="lumina-try-it-clear" @click="forgetAuth()">${esc(t("Clear credentials"))}</button>
         </div>
       </details>
 
       <div class="lumina-try-it-section" x-show="extraHeaders.length">
-        <div class="lumina-try-it-section-label">Headers</div>
+        <div class="lumina-try-it-section-label">${esc(t("Headers"))}</div>
         <template x-for="h in extraHeaders" :key="h.name">
           <div class="lumina-try-it-param-row">
             <label class="lumina-try-it-param-name" :for="$id('api-field', 'header-' + h.name)" x-text="h.name"></label>
@@ -447,39 +448,39 @@ const PANEL_TEMPLATE = `
       </div>
 
       <details class="lumina-try-it-section lumina-try-it-details">
-        <summary>Additional headers</summary>
+        <summary>${esc(t("Additional headers"))}</summary>
         <template x-for="(h, index) in customHeaders" :key="index">
           <div class="lumina-try-it-custom-header">
-            <input class="lumina-try-it-input" x-model="h.name" aria-label="Header name" placeholder="Header name" />
-            <input class="lumina-try-it-input" x-model="h.value" aria-label="Header value" placeholder="Value" />
-            <button type="button" class="lumina-try-it-clear" @click="customHeaders.splice(index, 1)" aria-label="Remove header">Remove</button>
+            <input class="lumina-try-it-input" x-model="h.name" aria-label="${esc(t("Header name"))}" placeholder="${esc(t("Header name"))}" />
+            <input class="lumina-try-it-input" x-model="h.value" aria-label="${esc(t("Header value"))}" placeholder="${esc(t("Value"))}" />
+            <button type="button" class="lumina-try-it-clear" @click="customHeaders.splice(index, 1)" aria-label="${esc(t("Remove header"))}">${esc(t("Remove"))}</button>
           </div>
         </template>
-        <button type="button" class="lumina-try-it-clear" @click="customHeaders.push({name: '', value: ''})">Add header</button>
+        <button type="button" class="lumina-try-it-clear" @click="customHeaders.push({name: '', value: ''})">${esc(t("Add header"))}</button>
       </details>
 
       <div class="lumina-try-it-section" x-show="hasBody">
         <div class="lumina-try-it-param-row">
-          <label class="lumina-try-it-param-name" :for="$id('api-field', 'content-type')">Content type</label>
+          <label class="lumina-try-it-param-name" :for="$id('api-field', 'content-type')">${esc(t("Content type"))}</label>
           <input class="lumina-try-it-input" :id="$id('api-field', 'content-type')" x-model="contentType" />
         </div>
-        <label class="lumina-try-it-section-label" :for="$id('api-field', 'body')">Request body</label>
+        <label class="lumina-try-it-section-label" :for="$id('api-field', 'body')">${esc(t("Request body"))}</label>
         <textarea class="lumina-try-it-body"
                   x-model="bodyJson" x-ref="body" :id="$id('api-field', 'body')"
                   :aria-invalid="!!bodyError" :aria-describedby="$id('api-field', 'body-error')"
                   :class="{ 'has-error': bodyError }"
                   rows="5" spellcheck="false" autocomplete="off"
-                  placeholder="Leave empty to send without a body"></textarea>
+                  placeholder="${esc(t("Leave empty to send without a body"))}"></textarea>
         <p class="lumina-try-it-body-error" :id="$id('api-field', 'body-error')" role="alert" x-show="bodyError" x-text="bodyError"></p>
       </div>
 
       <p class="lumina-try-it-body-error" role="alert" x-show="requestError" x-text="requestError"></p>
       <div class="lumina-try-it-actions">
         <button type="button" class="lumina-try-it-send"
-                @click="send()" title="Send request (Ctrl/⌘ + Enter)"
+                @click="send()" title="${esc(t("Send request (Ctrl/⌘ + Enter)"))}"
                 :disabled="sending"
                 :class="{ 'is-loading': sending }"
-                :aria-label="sending ? 'Sending request\u2026' : 'Send request'">
+                :aria-label="sending ? $t('Sending request…') : $t('Send request')">
           <svg class="lumina-send-icon" width="12" height="12" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                stroke-linejoin="round" aria-hidden="true">
@@ -491,22 +492,22 @@ const PANEL_TEMPLATE = `
                stroke-linejoin="round" aria-hidden="true">
             <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
           </svg>
-          <span x-text="sending ? 'Sending\u2026' : 'Send Request'"></span>
+          <span x-text="sending ? $t('Sending…') : $t('Send Request')"></span>
         </button>
-        <button type="button" class="lumina-try-it-clear" @click="cancel()" x-show="sending">Cancel</button>
-        <button type="button" class="lumina-try-it-clear" @click="copyCurl()" x-text="copiedCurl ? 'Copied!' : 'Copy as curl'"></button>
+        <button type="button" class="lumina-try-it-clear" @click="cancel()" x-show="sending">${esc(t("Cancel"))}</button>
+        <button type="button" class="lumina-try-it-clear" @click="copyCurl()" x-text="copiedCurl ? $t('Copied!') : $t('Copy as curl')"></button>
         <button type="button" class="lumina-try-it-clear"
-                @click="clear()" x-show="response">Clear</button>
+                @click="clear()" x-show="response">${esc(t("Clear"))}</button>
       </div>
 
       <p class="lumina-try-it-body-error" role="alert" x-show="copyError" x-text="copyError"></p>
       <details class="lumina-try-it-section lumina-try-it-details">
-        <summary>Request command</summary>
+        <summary>${esc(t("Request command"))}</summary>
         <pre class="lumina-try-it-res-body"><code x-text="curlCommand"></code></pre>
       </details>
-      <p class="sr-only" role="status" x-text="sending ? 'Sending request' : response ? response.statusText : ''"></p>
+      <p class="sr-only" role="status" x-text="sending ? $t('Sending request…') : response ? response.statusText : ''"></p>
       <div class="lumina-try-it-response" x-show="response || sending" x-cloak>
-        <div class="lumina-try-it-sending" x-show="sending">Sending\u2026</div>
+        <div class="lumina-try-it-sending" x-show="sending">${esc(t("Sending…"))}</div>
         <template x-if="response && !sending">
           <div>
             <div class="lumina-try-it-res-header">
@@ -518,8 +519,8 @@ const PANEL_TEMPLATE = `
               <button type="button" class="lumina-try-it-copy-res"
                       @click="copyResponse()"
                       :class="{ 'is-copied': copiedResponse }"
-                      :aria-label="copiedResponse ? 'Copied!' : 'Copy response'"
-                      x-show="response.bodyText !== '(No response body)'">
+                      :aria-label="copiedResponse ? $t('Copied!') : $t('Copy response')"
+                      x-show="response.bodyText !== $t('(No response body)')">
                 <svg x-show="!copiedResponse" width="13" height="13" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" stroke-width="2" stroke-linecap="round"
                      stroke-linejoin="round" aria-hidden="true">
@@ -535,10 +536,10 @@ const PANEL_TEMPLATE = `
             </div>
             <p class="lumina-try-it-hint" x-text="response.url"></p>
             <details class="lumina-try-it-details" x-show="response.headers">
-              <summary>Response headers</summary>
+              <summary>${esc(t("Response headers"))}</summary>
               <pre class="lumina-try-it-res-body"><code x-text="response.headers"></code></pre>
             </details>
-            <pre class="lumina-try-it-res-body" tabindex="0" aria-label="Response body"
+            <pre class="lumina-try-it-res-body" tabindex="0" aria-label="${esc(t("Response body"))}"
                  :class="{ 'lumina-try-it-res-body--error': response.error }"><code x-html="formattedBody"></code></pre>
           </div>
         </template>
