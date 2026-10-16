@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-10-16T07:31:04+00:00" />
+    <meta property="article:modified_time" content="2026-10-16T07:38:16+00:00" />
     <title>Architecture &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
@@ -450,6 +450,7 @@ document.documentElement.style.setProperty(
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributing</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="javascript-api.html">JavaScript API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="translations.html">Translations</a></li>
 </ul>
 </li>
 </ul>
@@ -596,6 +597,7 @@ document.documentElement.style.setProperty(
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributing</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="javascript-api.html">JavaScript API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="translations.html">Translations</a></li>
 </ul>
 </li>
 </ul>
@@ -800,7 +802,7 @@ one keyboard navigation sequence. Excerpts are sanitized before rendering.</p>
 <section id="translations">
 <h2 id="lumina-search-translations">Translations<a class="headerlink" href="#translations" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">setup()</span></code> registers <code class="docutils literal notranslate"><span class="pre">locale/</span></code> as an additional <code class="docutils literal notranslate"><span class="pre">sphinx</span></code> message catalog, so templates translate strings with the <code class="docutils literal notranslate"><span class="pre">_()</span></code> function that Sphinx provides. Sphinx’s own translations and the project’s <code class="docutils literal notranslate"><span class="pre">locale_dirs</span></code> take precedence over the bundled catalog.</p>
-<p>JavaScript can’t call gettext, so for non-English builds <code class="docutils literal notranslate"><span class="pre">layout.html</span></code> includes <code class="docutils literal notranslate"><span class="pre">components/i18n.html</span></code>, which renders every JavaScript string through <code class="docutils literal notranslate"><span class="pre">_()</span></code> into a <code class="docutils literal notranslate"><span class="pre">&lt;script</span> <span class="pre">id=&quot;lumina-i18n&quot;</span> <span class="pre">type=&quot;application/json&quot;&gt;</span></code> block. <code class="docutils literal notranslate"><span class="pre">utils/i18n.js</span></code> exports <code class="docutils literal notranslate"><span class="pre">t(key,</span> <span class="pre">vars)</span></code>, which looks up that catalog and falls back to the English key; <code class="docutils literal notranslate"><span class="pre">app.js</span></code> exposes it to Alpine expressions as <code class="docutils literal notranslate"><span class="pre">$t</span></code>. See <a class="reference internal" href="../guides/internationalization.html"><span class="doc">Internationalization</span></a> for the contributor workflow.</p>
+<p>JavaScript can’t call gettext, so for non-English builds <code class="docutils literal notranslate"><span class="pre">layout.html</span></code> includes <code class="docutils literal notranslate"><span class="pre">components/i18n.html</span></code>, which renders every JavaScript string through <code class="docutils literal notranslate"><span class="pre">_()</span></code> into a <code class="docutils literal notranslate"><span class="pre">&lt;script</span> <span class="pre">id=&quot;lumina-i18n&quot;</span> <span class="pre">type=&quot;application/json&quot;&gt;</span></code> block. <code class="docutils literal notranslate"><span class="pre">utils/i18n.js</span></code> exports <code class="docutils literal notranslate"><span class="pre">t(key,</span> <span class="pre">vars)</span></code>, which looks up that catalog and falls back to the English key; <code class="docutils literal notranslate"><span class="pre">app.js</span></code> exposes it to Alpine expressions as <code class="docutils literal notranslate"><span class="pre">$t</span></code>. See <a class="reference internal" href="translations.html"><span class="doc">Translations</span></a> for the contributor workflow.</p>
 </section>
 <section id="theming">
 <h2 id="lumina-search-theming">Theming<a class="headerlink" href="#theming" title="Link to this heading">¶</a></h2>

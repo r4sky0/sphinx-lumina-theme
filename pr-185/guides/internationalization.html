@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-10-16T07:31:04+00:00" />
+    <meta property="article:modified_time" content="2026-10-16T07:38:16+00:00" />
     <title>Internationalization &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
@@ -764,10 +764,6 @@ document.documentElement.style.setProperty(
 <li><a class="reference internal" href="#">Internationalization</a><ul>
 <li><a class="reference internal" href="#set-the-language">Set the language</a></li>
 <li><a class="reference internal" href="#override-a-translation">Override a translation</a></li>
-<li><a class="reference internal" href="#contributing-a-translation">Contributing a translation</a><ul>
-<li><a class="reference internal" href="#adding-translatable-strings">Adding translatable strings</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -782,7 +778,7 @@ document.documentElement.style.setProperty(
     <section class="tex2jax_ignore mathjax_ignore" id="internationalization">
 <h1 id="lumina-search-internationalization">Internationalization<a class="headerlink" href="#internationalization" title="Link to this heading">¶</a></h1>
 <p>Lumina’s interface text — navigation labels, the search modal, copy buttons, the HTTP request editor, and screen-reader labels — follows your project’s Sphinx <code class="docutils literal notranslate"><span class="pre">language</span></code> setting. Your page content is translated separately with Sphinx’s own <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/advanced/intl.html">internationalization workflow</a>.</p>
-<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>2 min read</span></div><section id="set-the-language">
+<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>1 min read</span></div><section id="set-the-language">
 <h2 id="lumina-search-set-the-language">Set the language<a class="headerlink" href="#set-the-language" title="Link to this heading">¶</a></h2>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
@@ -818,7 +814,7 @@ document.documentElement.style.setProperty(
 <p>Any other language falls back to English for Lumina’s strings, while Sphinx still translates its own text. The page’s <code class="docutils literal notranslate"><span class="pre">&lt;html</span> <span class="pre">lang&gt;</span></code> attribute and the Pagefind search index follow the same <code class="docutils literal notranslate"><span class="pre">language</span></code> value.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The bundled translations were drafted with machine assistance. Corrections from native speakers are welcome — see <a class="reference internal" href="#i18n-contributing"><span class="std std-ref">Contributing a translation</span></a>.</p>
+<p>The bundled translations were drafted with machine assistance. Corrections from native speakers are welcome — see <a class="reference internal" href="../contributing/translations.html"><span class="doc">Translations</span></a>.</p>
 </div>
 </section>
 <section id="override-a-translation">
@@ -840,30 +836,7 @@ document.documentElement.style.setProperty(
 </div>
 <p>Sphinx compiles <code class="docutils literal notranslate"><span class="pre">sphinx.po</span></code> files in <code class="docutils literal notranslate"><span class="pre">locale_dirs</span></code> automatically on each build. Copy the message IDs from Lumina’s template at <code class="docutils literal notranslate"><span class="pre">sphinx_lumina_theme/locale/sphinx.pot</span></code>.</p>
 <p>The same approach adds a language Lumina doesn’t ship. For a language that Sphinx itself has no translations for, Lumina’s templates stay in English.</p>
-</section>
-<section id="contributing-a-translation">
-<span id="i18n-contributing"></span><h2 id="lumina-search-contributing-a-translation">Contributing a translation<a class="headerlink" href="#contributing-a-translation" title="Link to this heading">¶</a></h2>
-<p>Lumina’s catalogs live in <code class="docutils literal notranslate"><span class="pre">src/sphinx_lumina_theme/locale/&lt;language&gt;/LC_MESSAGES/sphinx.po</span></code>.</p>
-<ol class="arabic">
-<li><p>For a new language, create its catalog from the template:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>uv<span class="w"> </span>run<span class="w"> </span>pybabel<span class="w"> </span>init<span class="w"> </span>-i<span class="w"> </span>src/sphinx_lumina_theme/locale/sphinx.pot<span class="w"> </span>-d<span class="w"> </span>src/sphinx_lumina_theme/locale<span class="w"> </span>-D<span class="w"> </span>sphinx<span class="w"> </span>-l<span class="w"> </span>pt_BR
-</pre></div>
-</div>
-</li>
-<li><p>Fill in each <code class="docutils literal notranslate"><span class="pre">msgstr</span></code>. Keep placeholders such as <code class="docutils literal notranslate"><span class="pre">{count}</span></code> and <code class="docutils literal notranslate"><span class="pre">%(minutes)s</span></code> unchanged, and don’t use <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>, or straight double quotes — use the typographic quotes of your language instead.</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">pnpm</span> <span class="pre">run</span> <span class="pre">i18n</span></code> to refresh the template and compile the <code class="docutils literal notranslate"><span class="pre">.mo</span></code> files, then commit both the <code class="docutils literal notranslate"><span class="pre">.po</span></code> and <code class="docutils literal notranslate"><span class="pre">.mo</span></code> files.</p></li>
-<li><p>Add the language to the table above.</p></li>
-</ol>
-<section id="adding-translatable-strings">
-<h3 id="lumina-search-adding-translatable-strings">Adding translatable strings<a class="headerlink" href="#adding-translatable-strings" title="Link to this heading">¶</a></h3>
-<p>When you add interface text to the theme:</p>
-<ul class="simple">
-<li><p>In templates, wrap it as <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">_(&quot;Text&quot;)</span> <span class="pre">}}</span></code>.</p></li>
-<li><p>In JavaScript, call <code class="docutils literal notranslate"><span class="pre">t(&quot;Text&quot;)</span></code> from <code class="docutils literal notranslate"><span class="pre">utils/i18n.js</span></code>. In Alpine expressions, use the <code class="docutils literal notranslate"><span class="pre">$t('Text')</span></code> magic. Placeholders use braces: <code class="docutils literal notranslate"><span class="pre">t(&quot;{count}</span> <span class="pre">rows&quot;,</span> <span class="pre">{</span> <span class="pre">count</span> <span class="pre">})</span></code>.</p></li>
-<li><p>List every JavaScript string in <code class="docutils literal notranslate"><span class="pre">theme/components/i18n.html</span></code>, which emits the translated strings for non-English builds.</p></li>
-</ul>
-<p>Then run <code class="docutils literal notranslate"><span class="pre">pnpm</span> <span class="pre">run</span> <span class="pre">i18n</span></code>. <code class="docutils literal notranslate"><span class="pre">tests/test_i18n.py</span></code> fails when a JavaScript string is missing from <code class="docutils literal notranslate"><span class="pre">i18n.html</span></code>, the template is stale, or a <code class="docutils literal notranslate"><span class="pre">.mo</span></code> file doesn’t match its <code class="docutils literal notranslate"><span class="pre">.po</span></code> file.</p>
-</section>
+<p>To fix or add a bundled translation, see <a class="reference internal" href="../contributing/translations.html"><span class="doc">Translations</span></a>.</p>
 </section>
 </section>
 
@@ -927,10 +900,6 @@ document.documentElement.style.setProperty(
 <li><a class="reference internal" href="#">Internationalization</a><ul>
 <li><a class="reference internal" href="#set-the-language">Set the language</a></li>
 <li><a class="reference internal" href="#override-a-translation">Override a translation</a></li>
-<li><a class="reference internal" href="#contributing-a-translation">Contributing a translation</a><ul>
-<li><a class="reference internal" href="#adding-translatable-strings">Adding translatable strings</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
