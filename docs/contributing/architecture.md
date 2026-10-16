@@ -112,7 +112,7 @@ one keyboard navigation sequence. Excerpts are sanitized before rendering.
 
 `setup()` registers `locale/` as an additional `sphinx` message catalog, so templates translate strings with the `_()` function that Sphinx provides. Sphinx's own translations and the project's `locale_dirs` take precedence over the bundled catalog.
 
-JavaScript can't call gettext, so for non-English builds `layout.html` includes `components/i18n.html`, which renders every JavaScript string through `_()` into a `<script id="lumina-i18n" type="application/json">` block. `utils/i18n.js` exports `t(key, vars)`, which looks up that catalog and falls back to the English key; `app.js` exposes it to Alpine expressions as `$t`. See {doc}`/guides/internationalization` for the contributor workflow.
+JavaScript can't call gettext, so for non-English builds `layout.html` includes `components/i18n.html`, which renders every JavaScript string through `_()` into a `<script id="lumina-i18n" type="application/json">` block. `utils/i18n.js` exports `t(key, vars)`, which looks up that catalog and falls back to the English key; `app.js` exposes it to Alpine expressions as `$t`. See {doc}`translations` for the contributor workflow.
 
 ## Theming
 

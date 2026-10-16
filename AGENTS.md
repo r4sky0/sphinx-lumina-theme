@@ -56,7 +56,7 @@ Alpine.js components are registered with `Alpine.data()` in modules under `_stat
 
 When creating elements with `document.createElement()` and setting Alpine directives through `setAttribute()`, use long-form attributes such as `x-on:click` and `x-bind:class`. WebKit/Safari rejects shorthand `@click` and `:class` in `setAttribute()`; shorthand remains valid in HTML templates parsed by the browser.
 
-User-visible text is translatable: wrap template strings as `{{ _("Text") }}`; in JavaScript use `t("Text")` from `utils/i18n.js` (or `$t('Text')` in Alpine expressions) and list every JavaScript string in `theme/components/i18n.html`. Run `pnpm run i18n` to refresh `locale/` afterward. See `docs/guides/internationalization.md`.
+User-visible text is translatable: wrap template strings as `{{ _("Text") }}`; in JavaScript use `t("Text")` from `utils/i18n.js` (or `$t('Text')` in Alpine expressions) and list every JavaScript string in `theme/components/i18n.html`. Run `pnpm run i18n` to refresh `locale/` afterward. See `docs/contributing/translations.md`.
 
 Dark mode uses CSS custom properties such as `--lumina-accent`, `--lumina-bg`, and `--lumina-text`, toggled by `[data-theme="dark"]` on `<html>`. The preference is stored under `lumina-theme`, and the inline `extrahead` script in `layout.html` applies it before paint to prevent FOUC.
 
