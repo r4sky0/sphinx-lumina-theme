@@ -31,7 +31,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-build = ["uv~=0.12.17"]
+build = ["uv>=0.12.17,<0.14.0"]
 
 [project.urls]
 Homepage = "https://r4sky0.github.io/sphinx-lumina-theme/"
@@ -101,7 +101,7 @@ ignore_token_for_push = true
 version_toml = ["pyproject.toml:project.version"]
 version_variables = ["src/sphinx_lumina_theme/__init__.py:__version__"]
 build_command = """
-python -m pip install "uv~=0.12.17"
+python -m pip install "uv>=0.12.17,<0.14.0"
 uv lock --upgrade-package "$PACKAGE_NAME"
 git add uv.lock
 """
