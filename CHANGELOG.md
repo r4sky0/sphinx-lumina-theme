@@ -2,6 +2,46 @@
 
 <!-- releases -->
 
+## v2.12.1 (2026-10-28)
+
+### Bug Fixes
+
+- **headings**: Space the permalink icon from heading text
+  ([#198](https://github.com/r4sky0/sphinx-lumina-theme/pull/198),
+  [`32164dc`](https://github.com/r4sky0/sphinx-lumina-theme/commit/32164dc67d5dd4be5d866370feb2f68bd75a6ce3))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump fast-uri from 3.1.8 to 3.1.9
+  ([#197](https://github.com/r4sky0/sphinx-lumina-theme/pull/197),
+  [`5e9849c`](https://github.com/r4sky0/sphinx-lumina-theme/commit/5e9849cd435964e1d970272cb926b14c798ff01d))
+
+- **deps**: Bump markdown-it from 14.3.2 to 14.3.3
+  ([#190](https://github.com/r4sky0/sphinx-lumina-theme/pull/190),
+  [`ad49405`](https://github.com/r4sky0/sphinx-lumina-theme/commit/ad494051fc67e4aebb746bccd17da580b3ddbf53))
+
+- **deps**: Bump pypa/gh-action-pypi-publish from 1.14.2 to 1.14.3 in the github-actions-minor group
+  ([#196](https://github.com/r4sky0/sphinx-lumina-theme/pull/196),
+  [`6a96be5`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6a96be5460cbbfb9a7b7587e8dba2f5bc7260bae))
+
+- **deps**: Bump the github-actions-minor group with 3 updates
+  ([#186](https://github.com/r4sky0/sphinx-lumina-theme/pull/186),
+  [`d481f03`](https://github.com/r4sky0/sphinx-lumina-theme/commit/d481f03af92ef6adc58853439316de7c0860faa2))
+
+- **deps**: Bump the npm-minor group with 2 updates
+  ([#187](https://github.com/r4sky0/sphinx-lumina-theme/pull/187),
+  [`aa95a3f`](https://github.com/r4sky0/sphinx-lumina-theme/commit/aa95a3fc3c18365ec9a01c74f313df6b14767583))
+
+- **deps**: Bump the uv group across 1 directory with 2 updates
+  ([#191](https://github.com/r4sky0/sphinx-lumina-theme/pull/191),
+  [`e4290d7`](https://github.com/r4sky0/sphinx-lumina-theme/commit/e4290d7afbb1e15e19f5dd2fe46d5376342d6b29))
+
+</details>
+
+
 ## v2.12.0 (2026-10-16)
 
 ### Features
