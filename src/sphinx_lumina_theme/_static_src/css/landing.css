@@ -116,13 +116,12 @@
 
 .lumina-landing-content {
   max-width: 48rem;
-  margin: var(--lumina-header-offset) auto 0;
   padding: 2rem 2rem 4rem;
 }
 
-/* When a hero is present it already clears the fixed header. */
-.lumina-hero + .lumina-landing-content {
-  margin-top: 0;
+/* Without a hero, clear the fixed header; IDs outrank #lumina-content's margin reset. */
+#lumina-header + #lumina-content.lumina-landing-content {
+  margin-top: var(--lumina-header-offset);
 }
 
 /* ── Wide layout mode ── */

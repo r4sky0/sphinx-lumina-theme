@@ -164,6 +164,20 @@ def test_headerlink_is_spaced_from_heading_text(page: Page, live_server: str):
     assert gap > 0
 
 
+def test_landing_without_hero_clears_header(page: Page):
+    """Landing content starts below the fixed header when no hero is present."""
+    page.locator(".lumina-hero").evaluate("el => el.remove()")
+    # The docs index body is empty and hidden; unhide it to measure the layout.
+    page.locator("#lumina-content").evaluate("el => el.classList.remove('is-empty')")
+    header_bottom = page.locator("#lumina-header header").evaluate(
+        "el => el.getBoundingClientRect().bottom"
+    )
+    content_top = page.locator("#lumina-content .lumina-article").evaluate(
+        "el => el.getBoundingClientRect().top"
+    )
+    assert content_top >= header_bottom
+
+
 def test_font_subsets_load_full_fonts_only_for_other_characters(page: Page):
     page.evaluate("document.fonts.ready")
     font_urls = "performance.getEntriesByType('resource').map(r => r.name).filter(n => n.endsWith('.woff2'))"
