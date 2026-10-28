@@ -1,5 +1,10 @@
 """Test extension-rendered content in the theme."""
 
+import json
+from pathlib import Path
+from unittest.mock import MagicMock
+
+import sphinxcontrib.mermaid
 from bs4 import BeautifulSoup
 from sphinx.application import Sphinx
 
@@ -43,3 +48,16 @@ def test_copybutton_script_loaded(index_html):
     scripts = index_html.find_all("script")
     copybutton_loaded = any("copybutton" in (s.get("src") or "") for s in scripts)
     assert copybutton_loaded, "copybutton.js script not loaded"
+
+
+def test_test_mermaid_matches_plugin_default():
+    """Browser tests serve npm mermaid; it must match what sphinxcontrib-mermaid loads."""
+    app = MagicMock()
+    sphinxcontrib.mermaid.setup(app)
+    plugin_default = next(
+        c.args[1]
+        for c in app.add_config_value.call_args_list
+        if c.args[0] == "mermaid_version"
+    )
+    package = json.loads((Path(__file__).parent.parent / "package.json").read_text())
+    assert package["devDependencies"]["mermaid"] == plugin_default
