@@ -251,8 +251,8 @@ reading_time: 12      # Force "12 min read" on this page
   - Description
 * - `search_backend`
   - string
-  - `"sphinx"`
-  - Search implementation. `"sphinx"` for Sphinx built-in search, `"pagefind"` for Pagefind (requires the `pagefind` extra; see {doc}`/guides/search`).
+  - `"auto"`
+  - Search implementation. `"auto"` uses Pagefind when the `pagefind` extra is installed and Sphinx built-in search otherwise; `"pagefind"` or `"sphinx"` forces one. See {doc}`/guides/search`.
 ```
 
 ### API display

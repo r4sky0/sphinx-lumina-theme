@@ -1,12 +1,12 @@
 # Search
 
-Configure how readers search your documentation: Sphinx’s built-in search by default, or Pagefind for fast client-side search with section filters and heading results.
+Configure how readers search your documentation: Pagefind for fast client-side search with section filters and heading results, or Sphinx’s built-in search.
 
 ## Pagefind
 
 [Pagefind](https://pagefind.app) provides fast, keyboard-driven search with no external services. Press `⌘K` or `Ctrl`+`K` to open the search modal.
 
-Pagefind is opt-in. Install the theme with the `pagefind` extra, which pins a tested Pagefind release:
+Pagefind is opt-in. Install the theme with the `pagefind` extra:
 
 ### uv (recommended)
 
@@ -20,15 +20,15 @@ uv add "sphinx-lumina-theme[pagefind]"
 pip install "sphinx-lumina-theme[pagefind]"
 ```
 
-Then enable it in `conf.py`:
+That’s all. With the default `search_backend = "auto"`, Lumina uses Pagefind whenever it is installed and indexes your site at the end of each build. No Node.js is required.
+
+To require Pagefind explicitly, set it in `conf.py`:
 
 ```python
 html_theme_options = {
     "search_backend": "pagefind",
 }
 ```
-
-Lumina runs Pagefind at the end of each build, so search is ready as soon as the build finishes. No Node.js is required.
 
 ## Search within a section
 
@@ -65,7 +65,7 @@ backends.
 
 ## Built-in Sphinx Search
 
-Sphinx’s built-in search is the default and needs no extra tools. To switch back from Pagefind, remove `search_backend` or set it explicitly:
+Without the `pagefind` extra, Lumina uses Sphinx’s built-in search. To use it even when Pagefind is installed, set:
 
 ```python
 html_theme_options = {

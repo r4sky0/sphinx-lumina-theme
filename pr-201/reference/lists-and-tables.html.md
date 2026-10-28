@@ -116,7 +116,7 @@ Tables with many columns scroll horizontally on larger screens when they overflo
 | `show_breadcrumbs`  | string | `true`    | No         | Show breadcrumb trail | `false`    | v1.0.0  |
 | `show_prev_next`    | string | `true`    | No         | Show pagination       | `false`    | v1.0.0  |
 | `nav_depth`         | string | `4`       | No         | Sidebar tree depth    | `2`        | v1.0.0  |
-| `search_backend`    | string | `sphinx`  | No         | Search provider       | `pagefind` | v1.0.0  |
+| `search_backend`    | string | `auto`    | No         | Search provider       | `pagefind` | v1.0.0  |
 
 ### Interactive Tables
 
@@ -213,7 +213,7 @@ List tables can contain code, badges, and other inline elements.
 | Option           | Status   | Usage                                |
 |------------------|----------|--------------------------------------|
 | `accent_color`   | stable   | Set with `"accent_color": "#hex"`    |
-| `search_backend` | stable   | `"pagefind"` or `"sphinx"`           |
+| `search_backend` | stable   | `"auto"`, `"pagefind"` or `"sphinx"` |
 | `nav_links`      | stable   | JSON array of `{title, url}` objects |
 
 Code blocks inside a table keep the table within the page: long lines scroll inside their cell instead of widening every column.
