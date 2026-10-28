@@ -1,5 +1,24 @@
 # Releases
 
+## v2.12.2 (2026-10-28)
+
+### Bug Fixes
+
+- **github**: Render bug report steps as Markdown
+  ([#203](https://github.com/r4sky0/sphinx-lumina-theme/pull/203),
+  [`872866d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/872866dcf7108f5b43306ce497e830052881db09))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps-dev**: Pin test mermaid to sphinxcontrib-mermaid’s default version
+  ([#200](https://github.com/r4sky0/sphinx-lumina-theme/pull/200),
+  [`0e6a74d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/0e6a74dc1aa33e40be230d10523591a2140114b9))
+
+</details>
+
 ## v2.12.1 (2026-10-28)
 
 ### Bug Fixes
