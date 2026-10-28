@@ -83,6 +83,16 @@ html_theme_options = {
 }
 ```
 
+The root page never shows breadcrumbs, because the trail would only repeat its own title.
+To hide them on a single page, add `hide_breadcrumbs` to its front matter:
+
+```{code-block} markdown
+:caption: page.md
+---
+hide_breadcrumbs: true
+---
+```
+
 ## Page Table of Contents
 
 The right-side page outline indents nested headings along a curved guide.
