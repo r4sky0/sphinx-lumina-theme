@@ -2,6 +2,21 @@
 
 <!-- releases -->
 
+## v2.13.0 (2026-10-28)
+
+### Features
+
+- **search**: Make Pagefind opt-in through a Python extra
+  ([#201](https://github.com/r4sky0/sphinx-lumina-theme/pull/201),
+  [`65c7803`](https://github.com/r4sky0/sphinx-lumina-theme/commit/65c7803f3092f9c57d56a2c1093e2fb491dddc51))
+
+### Additional Release Information
+
+- **search**: Search_backend now defaults to "auto": Pagefind is used only when the
+  sphinx-lumina-theme[pagefind] extra is installed, otherwise Sphinx's built-in search. Install the
+  extra to keep Pagefind.
+
+
 ## v2.12.3 (2026-10-28)
 
 ### Bug Fixes
