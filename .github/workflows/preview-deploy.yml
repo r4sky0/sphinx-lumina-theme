@@ -11,8 +11,7 @@ jobs:
   deploy-preview:
     if: >-
       github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.event == 'pull_request' &&
-      github.event.workflow_run.pull_requests[0].number
+      github.event.workflow_run.event == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -43,35 +42,51 @@ jobs:
         shell: bash
         env:
           ARTIFACT_DIR: preview-artifact
+          GH_TOKEN: ${{ github.token }}
+          RUN_PR: ${{ github.event.workflow_run.pull_requests[0].number }}
         run: |
           action="$(cat "$ARTIFACT_DIR/lumina-preview-event.txt")"
+          pr="$(cat "$ARTIFACT_DIR/lumina-preview-pr.txt")"
+          if ! [[ "$pr" =~ ^[0-9]+$ ]]; then
+            echo "Invalid PR number: $pr" >&2
+            exit 1
+          fi
           case "$action" in
             opened|synchronize|reopened)
               test -f "$ARTIFACT_DIR/index.html"
+              # Only deploy previews for branches GitHub ties to this PR.
+              if [ "$pr" = "$RUN_PR" ]; then
+                echo "deploy=true" >> "$GITHUB_OUTPUT"
+              fi
               ;;
             closed)
+              # The artifact comes from PR code, so confirm the PR is really closed.
+              state="$(gh pr view "$pr" --repo "$GITHUB_REPOSITORY" --json state --jq .state)"
+              if [ "$state" != "OPEN" ]; then
+                echo "cleanup=true" >> "$GITHUB_OUTPUT"
+              fi
               ;;
             *)
               echo "Unsupported preview event: $action" >&2
               exit 1
               ;;
           esac
-          rm "$ARTIFACT_DIR/lumina-preview-event.txt"
-          echo "action=$action" >> "$GITHUB_OUTPUT"
+          rm "$ARTIFACT_DIR/lumina-preview-event.txt" "$ARTIFACT_DIR/lumina-preview-pr.txt"
+          echo "pr=$pr" >> "$GITHUB_OUTPUT"
 
       - name: Deploy preview
-        if: steps.preview.outputs.action != 'closed'
+        if: steps.preview.outputs.deploy == 'true'
         uses: ./.github/actions/deploy-gh-pages
         with:
           source-dir: preview-artifact
-          target-dir: pr-${{ github.event.workflow_run.pull_requests[0].number }}
-          commit-message: "Deploy PR #${{ github.event.workflow_run.pull_requests[0].number }} preview"
+          target-dir: pr-${{ steps.preview.outputs.pr }}
+          commit-message: "Deploy PR #${{ steps.preview.outputs.pr }} preview"
 
       - name: Remove closed preview
-        if: steps.preview.outputs.action == 'closed'
+        if: steps.preview.outputs.cleanup == 'true'
         shell: bash
         env:
-          PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
+          PR_NUMBER: ${{ steps.preview.outputs.pr }}
         run: |
           if ! git fetch origin gh-pages:gh-pages 2>/dev/null; then
             echo "gh-pages does not exist; nothing to clean up."
@@ -94,11 +109,13 @@ jobs:
           fi
 
       - name: Comment on PR
-        if: steps.preview.outputs.action != 'closed'
+        if: steps.preview.outputs.deploy == 'true'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PR_NUMBER: ${{ steps.preview.outputs.pr }}
         with:
           script: |
-            const prNumber = ${{ github.event.workflow_run.pull_requests[0].number }};
+            const prNumber = Number(process.env.PR_NUMBER);
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const marker = '<!-- lumina-preview -->';

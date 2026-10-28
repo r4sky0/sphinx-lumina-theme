@@ -34,7 +34,10 @@ jobs:
       - name: Record preview event
         env:
           PREVIEW_ACTION: ${{ github.event.action }}
-        run: echo "$PREVIEW_ACTION" > docs/_build/html/lumina-preview-event.txt
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          echo "$PREVIEW_ACTION" > docs/_build/html/lumina-preview-event.txt
+          echo "$PR_NUMBER" > docs/_build/html/lumina-preview-pr.txt
 
       - name: Upload preview
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -49,15 +52,22 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      # Closed PRs arrive with an empty workflow_run.pull_requests, so the
+      # deploy workflow reads the PR number from this artifact instead.
       - name: Record closed event
         env:
           PREVIEW_ACTION: ${{ github.event.action }}
-        run: echo "$PREVIEW_ACTION" > lumina-preview-event.txt
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          echo "$PREVIEW_ACTION" > lumina-preview-event.txt
+          echo "$PR_NUMBER" > lumina-preview-pr.txt
 
       - name: Upload cleanup marker
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: preview
-          path: lumina-preview-event.txt
+          path: |
+            lumina-preview-event.txt
+            lumina-preview-pr.txt
           if-no-files-found: error
           retention-days: 1
