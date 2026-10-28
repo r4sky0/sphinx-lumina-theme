@@ -18,8 +18,8 @@
     "*.html": "uv run djlint --reformat"
   },
   "devDependencies": {
-    "@commitlint/cli": "21.2.3",
-    "@commitlint/config-conventional": "21.2.3",
+    "@commitlint/cli": "21.2.4",
+    "@commitlint/config-conventional": "21.2.4",
     "@tailwindcss/cli": "^4.3",
     "alpinejs": "^3.17",
     "d3": "7.9.0",
@@ -27,7 +27,7 @@
     "husky": "9.1.7",
     "jsdoc": "^4.0",
     "lint-staged": "17.6.0",
-    "lucide-static": "1.56.0",
+    "lucide-static": "1.61.0",
     "mermaid": "11.12.1",
     "tailwindcss": "^4.3"
   },
