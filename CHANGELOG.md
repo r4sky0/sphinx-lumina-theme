@@ -2,6 +2,26 @@
 
 <!-- releases -->
 
+## v2.13.1 (2026-10-28)
+
+### Bug Fixes
+
+- **ci**: Remove PR previews when pull requests close
+  ([#205](https://github.com/r4sky0/sphinx-lumina-theme/pull/205),
+  [`3264243`](https://github.com/r4sky0/sphinx-lumina-theme/commit/326424359b7166d619a300e1e6650be00dac0397))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps-dev**: Bump the npm-minor group with 4 updates
+  ([#202](https://github.com/r4sky0/sphinx-lumina-theme/pull/202),
+  [`d2555e3`](https://github.com/r4sky0/sphinx-lumina-theme/commit/d2555e3cb4361cac0660dbebc17f33e289597e2d))
+
+</details>
+
+
 ## v2.13.0 (2026-10-28)
 
 ### Features
