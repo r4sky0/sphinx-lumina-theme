@@ -107,9 +107,9 @@ reading_time: 12      # Force "12 min read" on this page
 
 ### Search
 
-| Option           | Type   | Default      | Description                                                                                            |
-|------------------|--------|--------------|--------------------------------------------------------------------------------------------------------|
-| `search_backend` | string | `"pagefind"` | Search implementation. `"pagefind"` for Pagefind (recommended), `"sphinx"` for Sphinx built-in search. |
+| Option           | Type   | Default   | Description                                                                                                                                                                                          |
+|------------------|--------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `search_backend` | string | `"auto"`  | Search implementation. `"auto"` uses Pagefind when the `pagefind` extra is installed and Sphinx built-in search otherwise; `"pagefind"` or `"sphinx"` forces one. See [Search](../guides/search.md). |
 
 ### API display
 

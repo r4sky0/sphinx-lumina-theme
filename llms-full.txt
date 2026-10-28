@@ -1493,9 +1493,9 @@ reading_time: 12      # Force "12 min read" on this page
 
 ### Search
 
-| Option           | Type   | Default      | Description                                                                                            |
-|------------------|--------|--------------|--------------------------------------------------------------------------------------------------------|
-| `search_backend` | string | `"pagefind"` | Search implementation. `"pagefind"` for Pagefind (recommended), `"sphinx"` for Sphinx built-in search. |
+| Option           | Type   | Default   | Description                                                                                                                                                                                          |
+|------------------|--------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `search_backend` | string | `"auto"`  | Search implementation. `"auto"` uses Pagefind when the `pagefind` extra is installed and Sphinx built-in search otherwise; `"pagefind"` or `"sphinx"` forces one. See [Search](../guides/search.md). |
 
 ### API display
 
@@ -3265,6 +3265,8 @@ uv add sphinx-lumina-theme
 pip install sphinx-lumina-theme
 ```
 
+For Pagefind search, install `sphinx-lumina-theme[pagefind]` instead. See [Search](../guides/search.md).
+
 ## First Build
 
 Open your `conf.py` and set the theme:
@@ -3881,15 +3883,15 @@ Alignment markers:
 
 Tables with many columns scroll horizontally on larger screens when they overflow the content area. On narrow screens, simple data tables become labelled rows so each record can be read without side-to-side scrolling; complex tables keep the horizontal-scroll fallback. The values below are illustrative.
 
-| Option              | Type   | Default    | Required   | Description           | Example   | Since   |
-|---------------------|--------|------------|------------|-----------------------|-----------|---------|
-| `accent_color`      | string | `#10b981`  | No         | Primary accent color  | `#3b82f6` | v1.0.0  |
-| `dark_mode_default` | string | `auto`     | No         | Initial dark mode     | `dark`    | v1.0.0  |
-| `show_toc`          | string | `true`     | No         | Show right-side TOC   | `false`   | v1.0.0  |
-| `show_breadcrumbs`  | string | `true`     | No         | Show breadcrumb trail | `false`   | v1.0.0  |
-| `show_prev_next`    | string | `true`     | No         | Show pagination       | `false`   | v1.0.0  |
-| `nav_depth`         | string | `4`        | No         | Sidebar tree depth    | `2`       | v1.0.0  |
-| `search_backend`    | string | `pagefind` | No         | Search provider       | `sphinx`  | v1.0.0  |
+| Option              | Type   | Default   | Required   | Description           | Example    | Since   |
+|---------------------|--------|-----------|------------|-----------------------|------------|---------|
+| `accent_color`      | string | `#10b981` | No         | Primary accent color  | `#3b82f6`  | v1.0.0  |
+| `dark_mode_default` | string | `auto`    | No         | Initial dark mode     | `dark`     | v1.0.0  |
+| `show_toc`          | string | `true`    | No         | Show right-side TOC   | `false`    | v1.0.0  |
+| `show_breadcrumbs`  | string | `true`    | No         | Show breadcrumb trail | `false`    | v1.0.0  |
+| `show_prev_next`    | string | `true`    | No         | Show pagination       | `false`    | v1.0.0  |
+| `nav_depth`         | string | `4`       | No         | Sidebar tree depth    | `2`        | v1.0.0  |
+| `search_backend`    | string | `auto`    | No         | Search provider       | `pagefind` | v1.0.0  |
 
 ### Interactive Tables
 
@@ -3986,7 +3988,7 @@ List tables can contain code, badges, and other inline elements.
 | Option           | Status   | Usage                                |
 |------------------|----------|--------------------------------------|
 | `accent_color`   | stable   | Set with `"accent_color": "#hex"`    |
-| `search_backend` | stable   | `"pagefind"` or `"sphinx"`           |
+| `search_backend` | stable   | `"auto"`, `"pagefind"` or `"sphinx"` |
 | `nav_links`      | stable   | JSON array of `{title, url}` objects |
 
 Code blocks inside a table keep the table within the page: long lines scroll inside their cell instead of widening every column.
@@ -6005,26 +6007,34 @@ html_theme_options = {
 
 # Search
 
-Configure how readers search your documentation — Pagefind for fast client-side search, or Sphinx’s built-in search as a fallback.
+Configure how readers search your documentation: Pagefind for fast client-side search with section filters and heading results, or Sphinx’s built-in search.
 
-## Pagefind (default)
+## Pagefind
 
 [Pagefind](https://pagefind.app) provides fast, keyboard-driven search with no external services. Press `⌘K` or `Ctrl`+`K` to open the search modal.
 
-Lumina runs Pagefind automatically at the end of each build — no manual setup required. You just need [Node.js](https://nodejs.org) installed so that `npx` is available.
-
-Build your docs and search is ready:
+Pagefind is opt-in. Install the theme with the `pagefind` extra:
 
 ### uv (recommended)
 
 ```bash
-uv run sphinx-build docs docs/_build/html
+uv add "sphinx-lumina-theme[pagefind]"
 ```
 
 ### pip
 
 ```bash
-sphinx-build docs docs/_build/html
+pip install "sphinx-lumina-theme[pagefind]"
+```
+
+That’s all. With the default `search_backend = "auto"`, Lumina uses Pagefind whenever it is installed and indexes your site at the end of each build. No Node.js is required.
+
+To require Pagefind explicitly, set it in `conf.py`:
+
+```python
+html_theme_options = {
+    "search_backend": "pagefind",
+}
 ```
 
 ## Search within a section
@@ -6062,7 +6072,7 @@ backends.
 
 ## Built-in Sphinx Search
 
-If you prefer not to use Pagefind, switch to Sphinx’s built-in search:
+Without the `pagefind` extra, Lumina uses Sphinx’s built-in search. To use it even when Pagefind is installed, set:
 
 ```python
 html_theme_options = {

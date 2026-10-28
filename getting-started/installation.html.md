@@ -39,6 +39,8 @@ uv add sphinx-lumina-theme
 pip install sphinx-lumina-theme
 ```
 
+For Pagefind search, install `sphinx-lumina-theme[pagefind]` instead. See [Search](../guides/search.md).
+
 ## First Build
 
 Open your `conf.py` and set the theme:
