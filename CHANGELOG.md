@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.14.0 (2026-10-28)
+
+### Features
+
+- Hide breadcrumbs on the root page and per page via front matter
+  ([#206](https://github.com/r4sky0/sphinx-lumina-theme/pull/206),
+  [`daf744d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/daf744de5355072dc8dd9013aca9bb25ad83a9d5))
+
+
 ## v2.13.1 (2026-10-28)
 
 ### Bug Fixes
