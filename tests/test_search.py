@@ -1,5 +1,7 @@
 """Test search modal markup."""
 
+import pytest
+
 
 def test_search_modal_exists(index_html):
     """Page should have a search modal element."""
@@ -157,3 +159,56 @@ def test_search_symbols_follow_sphinx_search_rules(tmp_path):
         ("Widget", "", "Python class", "index.html", "", "Widget"),
         ("draw", "Widget", "Python method", "index.html", "", "Widget.draw"),
     }
+
+
+@pytest.mark.parametrize(
+    ("option", "installed", "expected"),
+    [
+        ("auto", True, "pagefind"),
+        ("auto", False, "sphinx"),
+        ("pagefind", False, "sphinx"),
+        ("sphinx", True, "sphinx"),
+    ],
+)
+def test_search_backend_resolution(tmp_path, monkeypatch, option, installed, expected):
+    """Pagefind runs only when it is installed and not switched off."""
+    import importlib.util
+    import io
+    import subprocess
+    import sys
+
+    from bs4 import BeautifulSoup
+    from conftest import sphinx_app
+
+    find_spec = importlib.util.find_spec
+    monkeypatch.setattr(
+        importlib.util,
+        "find_spec",
+        lambda name, *a: (
+            None if name == "pagefind" and not installed else find_spec(name, *a)
+        ),
+    )
+    calls = []
+    monkeypatch.setattr(subprocess, "run", lambda cmd, **kw: calls.append(cmd))
+    (tmp_path / "conf.py").write_text('html_theme = "lumina"\n')
+    (tmp_path / "index.rst").write_text("Home\n====\n")
+    warnings = io.StringIO()
+
+    out = tmp_path / "_build"
+    sphinx_app(
+        tmp_path,
+        out,
+        confoverrides={"html_theme_options.search_backend": option},
+        warning=warnings,
+    ).build()
+
+    html = BeautifulSoup((out / "index.html").read_text(), "html.parser")
+    meta = html.find("meta", attrs={"name": "lumina-search-backend"})
+    assert meta["content"] == expected
+    ran = [cmd[:3] for cmd in calls]
+    assert ran == (
+        [[sys.executable, "-m", "pagefind"]] if expected == "pagefind" else []
+    )
+    assert ("Pagefind is not installed" in warnings.getvalue()) == (
+        option == "pagefind"
+    )

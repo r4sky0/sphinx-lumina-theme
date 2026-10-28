@@ -32,6 +32,9 @@ dependencies = [
 
 [project.optional-dependencies]
 build = ["uv>=0.12.17,<0.14.0"]
+pagefind = [
+    "pagefind[bin]>=1.5,<2",
+]
 
 [project.urls]
 Homepage = "https://r4sky0.github.io/sphinx-lumina-theme/"
@@ -126,6 +129,9 @@ template_dir = "templates"
 changelog_file = "CHANGELOG.md"
 output_format = "md"
 
+[tool.uv.sources]
+sphinx-lumina-theme = { workspace = true }
+
 
 [dependency-groups]
 dev = [
@@ -143,4 +149,5 @@ dev = [
     "pytest-playwright>=0.6",
     "sphinx-llm>=0.4.1",
     "sphinx-js>=4.0",
+    "sphinx-lumina-theme[pagefind]",
 ]

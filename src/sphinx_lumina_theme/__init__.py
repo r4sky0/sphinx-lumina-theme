@@ -891,32 +891,46 @@ def _write_search_symbols(app, exception):
     )
 
 
+def _resolve_search_backend(app):
+    """Resolve ``search_backend`` to ``"pagefind"`` or ``"sphinx"``.
+
+    ``"auto"`` uses Pagefind when the ``sphinx-lumina-theme[pagefind]`` extra is
+    installed. Runs on ``builder-inited`` so templates see the resolved value.
+    """
+    import importlib.util
+
+    opts = app.builder.theme_options
+    backend = opts.get("search_backend", "auto")
+    if backend not in ("auto", "pagefind"):
+        return
+    installed = importlib.util.find_spec("pagefind") is not None
+    if backend == "pagefind" and not installed:
+        logger.warning(
+            'search_backend is "pagefind" but Pagefind is not installed — using '
+            "Sphinx's built-in search instead. Install it with: "
+            'pip install "sphinx-lumina-theme[pagefind]"'
+        )
+    opts["search_backend"] = "pagefind" if installed else "sphinx"
+
+
 def _run_pagefind(app, exception):
     """Run Pagefind to index the built HTML for search."""
     if exception:
         return
     if app.builder.format != "html":
         return
-    if app.builder.theme_options.get("search_backend", "pagefind") != "pagefind":
+    if app.builder.theme_options.get("search_backend") != "pagefind":
         return
 
-    import shutil
     import subprocess
-
-    npx = shutil.which("npx")
-    if not npx:
-        logger.warning(
-            "npx not found — skipping Pagefind indexing. "
-            "Install Node.js or run manually: npx pagefind --site %s",
-            app.outdir,
-        )
-        return
+    import sys
 
     logger.info("Running Pagefind indexing...")
     try:
         subprocess.run(
             [
-                npx,
+                sys.executable,
+                "-m",
                 "pagefind",
                 "--site",
                 app.outdir,
@@ -939,8 +953,6 @@ def _run_pagefind(app, exception):
         logger.info("Pagefind index created successfully")
     except subprocess.CalledProcessError as e:
         logger.warning("Pagefind indexing failed: %s", e.stderr.strip())
-    except FileNotFoundError:
-        logger.warning("Pagefind not found — skipping search indexing")
 
 
 def setup(app):
@@ -969,6 +981,7 @@ def setup(app):
     _apply_sitemap_defaults(app, app.config)
     app.connect("build-finished", _suppress_sitemap_when_seo_disabled)
     app.connect("builder-inited", _apply_code_style)
+    app.connect("builder-inited", _resolve_search_backend)
     app.connect("builder-inited", _check_baseurl)
     app.connect("html-page-context", _add_context)
     app.connect("env-updated", _prepare_search_sections)

@@ -1,33 +1,42 @@
 # Search
 
-Configure how readers search your documentation — Pagefind for fast client-side search, or Sphinx's built-in search as a fallback.
+Configure how readers search your documentation: Pagefind for fast client-side search with section filters and heading results, or Sphinx's built-in search.
 
-## Pagefind (default)
+## Pagefind
 
 [Pagefind](https://pagefind.app) provides fast, keyboard-driven search with no external services. Press {kbd}`⌘K` or {kbd}`Ctrl+K` to open the search modal.
 
-Lumina runs Pagefind automatically at the end of each build — no manual setup required. You just need [Node.js](https://nodejs.org) installed so that `npx` is available.
-
-Build your docs and search is ready:
+Pagefind is opt-in. Install the theme with the `pagefind` extra:
 
 ::::{tab-set}
 
 :::{tab-item} uv (recommended)
 ```bash
-uv run sphinx-build docs docs/_build/html
+uv add "sphinx-lumina-theme[pagefind]"
 ```
 :::
 
 :::{tab-item} pip
 ```bash
-sphinx-build docs docs/_build/html
+pip install "sphinx-lumina-theme[pagefind]"
 ```
 :::
 
 ::::
 
+That's all. With the default `search_backend = "auto"`, Lumina uses Pagefind whenever it is installed and indexes your site at the end of each build. No Node.js is required.
+
+To require Pagefind explicitly, set it in `conf.py`:
+
+```{code-block} python
+:caption: conf.py
+html_theme_options = {
+    "search_backend": "pagefind",
+}
+```
+
 :::{tip}
-If `npx` is not found, the build completes normally but search won't be indexed. Install Node.js to enable Pagefind, or switch to Sphinx's built-in search below.
+If `search_backend` is `"pagefind"` but the extra is not installed, the build warns and uses Sphinx's built-in search instead.
 :::
 
 ## Search within a section
@@ -65,7 +74,7 @@ backends.
 
 ## Built-in Sphinx Search
 
-If you prefer not to use Pagefind, switch to Sphinx's built-in search:
+Without the `pagefind` extra, Lumina uses Sphinx's built-in search. To use it even when Pagefind is installed, set:
 
 ```{code-block} python
 :caption: conf.py
