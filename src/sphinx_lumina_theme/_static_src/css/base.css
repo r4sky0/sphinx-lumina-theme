@@ -841,7 +841,7 @@ div.sphinxsidebar {
 a.headerlink {
   position: relative;
   opacity: 0;
-  margin-left: 0.375em;
+  margin-left: 0.375rem; /* rem: em resolves to 0 with font-size: 0 */
   font-size: 0;       /* hide ¶ text */
   text-decoration: none;
   transition: opacity 0.15s;
