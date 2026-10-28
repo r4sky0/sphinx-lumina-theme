@@ -157,3 +157,26 @@ def test_search_symbols_follow_sphinx_search_rules(tmp_path):
         ("Widget", "", "Python class", "index.html", "", "Widget"),
         ("draw", "Widget", "Python method", "index.html", "", "Widget.draw"),
     }
+
+
+def test_pagefind_is_opt_in(tmp_path, monkeypatch):
+    """Default builds never run Pagefind; opting in runs the installed package."""
+    import subprocess
+    import sys
+
+    from conftest import sphinx_app
+
+    calls = []
+    monkeypatch.setattr(subprocess, "run", lambda cmd, **kw: calls.append(cmd))
+    (tmp_path / "conf.py").write_text('html_theme = "lumina"\n')
+    (tmp_path / "index.rst").write_text("Home\n====\n")
+
+    sphinx_app(tmp_path, tmp_path / "default").build()
+    assert calls == []
+
+    sphinx_app(
+        tmp_path,
+        tmp_path / "pagefind",
+        confoverrides={"html_theme_options.search_backend": "pagefind"},
+    ).build()
+    assert calls[0][:3] == [sys.executable, "-m", "pagefind"]

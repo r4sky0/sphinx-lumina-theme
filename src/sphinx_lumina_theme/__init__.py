@@ -897,18 +897,18 @@ def _run_pagefind(app, exception):
         return
     if app.builder.format != "html":
         return
-    if app.builder.theme_options.get("search_backend", "pagefind") != "pagefind":
+    if app.builder.theme_options.get("search_backend", "sphinx") != "pagefind":
         return
 
-    import shutil
+    import importlib.util
     import subprocess
+    import sys
 
-    npx = shutil.which("npx")
-    if not npx:
+    # The Pagefind version is pinned by the sphinx-lumina-theme[pagefind] extra.
+    if importlib.util.find_spec("pagefind") is None:
         logger.warning(
-            "npx not found — skipping Pagefind indexing. "
-            "Install Node.js or run manually: npx pagefind --site %s",
-            app.outdir,
+            "Pagefind is not installed — skipping search indexing. "
+            'Install it with: pip install "sphinx-lumina-theme[pagefind]"'
         )
         return
 
@@ -916,7 +916,8 @@ def _run_pagefind(app, exception):
     try:
         subprocess.run(
             [
-                npx,
+                sys.executable,
+                "-m",
                 "pagefind",
                 "--site",
                 app.outdir,
@@ -939,8 +940,6 @@ def _run_pagefind(app, exception):
         logger.info("Pagefind index created successfully")
     except subprocess.CalledProcessError as e:
         logger.warning("Pagefind indexing failed: %s", e.stderr.strip())
-    except FileNotFoundError:
-        logger.warning("Pagefind not found — skipping search indexing")
 
 
 def setup(app):

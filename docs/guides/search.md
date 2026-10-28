@@ -1,33 +1,42 @@
 # Search
 
-Configure how readers search your documentation — Pagefind for fast client-side search, or Sphinx's built-in search as a fallback.
+Configure how readers search your documentation: Sphinx's built-in search by default, or Pagefind for fast client-side search with section filters and heading results.
 
-## Pagefind (default)
+## Pagefind
 
 [Pagefind](https://pagefind.app) provides fast, keyboard-driven search with no external services. Press {kbd}`⌘K` or {kbd}`Ctrl+K` to open the search modal.
 
-Lumina runs Pagefind automatically at the end of each build — no manual setup required. You just need [Node.js](https://nodejs.org) installed so that `npx` is available.
-
-Build your docs and search is ready:
+Pagefind is opt-in. Install the theme with the `pagefind` extra, which pins a tested Pagefind release:
 
 ::::{tab-set}
 
 :::{tab-item} uv (recommended)
 ```bash
-uv run sphinx-build docs docs/_build/html
+uv add "sphinx-lumina-theme[pagefind]"
 ```
 :::
 
 :::{tab-item} pip
 ```bash
-sphinx-build docs docs/_build/html
+pip install "sphinx-lumina-theme[pagefind]"
 ```
 :::
 
 ::::
 
+Then enable it in `conf.py`:
+
+```{code-block} python
+:caption: conf.py
+html_theme_options = {
+    "search_backend": "pagefind",
+}
+```
+
+Lumina runs Pagefind at the end of each build, so search is ready as soon as the build finishes. No Node.js is required.
+
 :::{tip}
-If `npx` is not found, the build completes normally but search won't be indexed. Install Node.js to enable Pagefind, or switch to Sphinx's built-in search below.
+If the `pagefind` extra is not installed, the build completes normally with a warning but search won't be indexed.
 :::
 
 ## Search within a section
@@ -65,7 +74,7 @@ backends.
 
 ## Built-in Sphinx Search
 
-If you prefer not to use Pagefind, switch to Sphinx's built-in search:
+Sphinx's built-in search is the default and needs no extra tools. To switch back from Pagefind, remove `search_backend` or set it explicitly:
 
 ```{code-block} python
 :caption: conf.py

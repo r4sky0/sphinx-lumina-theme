@@ -134,7 +134,7 @@ Tables with many columns scroll horizontally on larger screens when they overflo
 | `show_breadcrumbs` | string | `true` | No | Show breadcrumb trail | `false` | v1.0.0 |
 | `show_prev_next` | string | `true` | No | Show pagination | `false` | v1.0.0 |
 | `nav_depth` | string | `4` | No | Sidebar tree depth | `2` | v1.0.0 |
-| `search_backend` | string | `pagefind` | No | Search provider | `sphinx` | v1.0.0 |
+| `search_backend` | string | `sphinx` | No | Search provider | `pagefind` | v1.0.0 |
 
 ### Interactive Tables
 

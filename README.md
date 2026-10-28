@@ -18,7 +18,7 @@ A crisp, responsive Sphinx theme with readable typography, dark mode, and instan
 ## Features
 
 - **Light and dark modes** with a system-aware toggle.
-- **Instant search** powered by Pagefind, with `⌘K` / `Ctrl+K` access.
+- **Instant search** with `⌘K` / `Ctrl+K` access, optionally powered by Pagefind.
 - **Responsive navigation** with section and version switchers, a collapsible sidebar, and a mobile page outline.
 - **Rich content** with MyST Markdown, syntax highlighting, and one-click code copying.
 - **Interactive API docs** with OpenAPI support, request panels, and curl copying.
@@ -26,8 +26,8 @@ A crisp, responsive Sphinx theme with readable typography, dark mode, and instan
 
 ## Quick Start
 
-Requires **Python 3.12+** and **Sphinx 8.0+**. Pagefind search also needs
-Node.js so the build can create its search index.
+Requires **Python 3.12+** and **Sphinx 8.0+**. For Pagefind search, install
+`sphinx-lumina-theme[pagefind]` and set `search_backend` to `"pagefind"`.
 
 ```bash
 pip install sphinx-lumina-theme
