@@ -488,6 +488,34 @@ def test_mobile_tables_stack_rows(page: Page, live_server: str):
     )
 
 
+def test_mobile_stacked_table_caption_and_stub_column(page: Page, live_server: str):
+    """Stacked tables keep a full-width caption and title each card with its row header."""
+    page.set_viewport_size({"width": 375, "height": 667})
+    page.goto(f"{live_server}/reference/lists-and-tables.html")
+    page.wait_for_function("() => window.Alpine !== undefined")
+
+    table = page.locator(
+        "table.lumina-table-stackable",
+        has=page.locator("caption", has_text="Theme Comparison"),
+    )
+    expect(table).to_be_visible()
+    layout = table.evaluate(
+        """(table) => {
+            const width = (el) => el.getBoundingClientRect().width;
+            const row = table.tBodies[0].rows[0];
+            return {
+                table: width(table),
+                caption: width(table.caption),
+                row: row.clientWidth,
+                stub: width(row.querySelector("th")),
+            };
+        }"""
+    )
+    assert layout["caption"] >= layout["table"] - 1
+    # The stub spans the card's content box (row width minus its padding).
+    assert layout["stub"] >= layout["row"] - 2 * 12 - 1
+
+
 @pytest.mark.parametrize("width", [390, 1440])
 def test_interactive_tables(context, live_server: str, width):
     """Opt-in tables filter independently and support keyboard sorting/reset."""

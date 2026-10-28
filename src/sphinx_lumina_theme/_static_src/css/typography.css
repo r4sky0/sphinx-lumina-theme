@@ -430,10 +430,20 @@
     white-space: nowrap;
   }
 
+  /* A table-caption inside a block table gets an anonymous shrink-to-fit
+     table, so the caption would wrap one word per line. */
+  .lumina-article table.lumina-table-stackable caption,
   .lumina-article table.lumina-table-stackable tbody,
   .lumina-article table.lumina-table-stackable tr,
   .lumina-article table.lumina-table-stackable td {
     display: block;
+  }
+
+  /* Stub columns (row headers) title their card. */
+  .lumina-article table.lumina-table-stackable tbody th {
+    display: block;
+    padding: 0.5rem 0;
+    background: transparent;
   }
 
   .lumina-article table.lumina-table-stackable tr {
