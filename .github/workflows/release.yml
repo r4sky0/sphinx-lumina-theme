@@ -19,6 +19,7 @@ jobs:
       contents: write
     outputs:
       released: ${{ steps.semantic.outputs.released }}
+      tag: ${{ steps.semantic.outputs.tag }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -54,6 +55,38 @@ jobs:
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # v1.14.3
+
+  comment-released:
+    if: needs.release.outputs.released == 'true'
+    needs: [release, publish-pypi]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      # Tell human-authored PRs and the issues they close which release shipped them.
+      - name: Comment on released pull requests and issues
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.release.outputs.tag }}
+        run: |
+          previous=$(git describe --tags --abbrev=0 "$TAG^")
+          body="Released in [$TAG]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/tag/$TAG) 🎉"
+          for pr in $(git log --format=%s "$previous..$TAG" | sed -nE 's/.*\(#([0-9]+)\)$/\1/p'); do
+            if [ "$(gh pr view "$pr" --json author --jq .author.is_bot)" = "true" ]; then
+              continue
+            fi
+            gh pr comment "$pr" --body "$body"
+            for issue in $(gh pr view "$pr" --json closingIssuesReferences --jq '.closingIssuesReferences[].number'); do
+              gh issue comment "$issue" --body "$body"
+            done
+          done
 
   deploy-docs:
     if: needs.release.outputs.released == 'true'
