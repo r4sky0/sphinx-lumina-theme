@@ -183,7 +183,8 @@
         </aside>
         <main id="lumina-content" role="main" data-pagefind-body>
             <div class="lumina-content-toolbar" data-pagefind-ignore>
-                {% if theme_show_breadcrumbs == "true" %}
+                {# The root page's trail would only repeat its own title; pages opt out with `hide_breadcrumbs: true`. #}
+                {% if theme_show_breadcrumbs == "true" and pagename != root_doc and (meta or {}).get("hide_breadcrumbs", "") | string | lower != "true" %}
                     <div class="min-w-0 flex-1">
 
                         {% include "components/breadcrumbs.html" %}

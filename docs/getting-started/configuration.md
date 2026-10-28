@@ -124,7 +124,7 @@ Lucide icons are designed on a 24×24 grid with 2-unit-wide strokes. When a Luci
 * - `show_breadcrumbs`
   - string
   - `"true"`
-  - Show or hide the breadcrumb trail above the content.
+  - Show or hide the breadcrumb trail above the content. It is never shown on the root page; hide it on any other page with `hide_breadcrumbs: true` in the front matter.
 * - `show_prev_next`
   - string
   - `"true"`

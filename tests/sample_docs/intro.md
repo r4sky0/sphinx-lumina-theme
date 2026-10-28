@@ -1,5 +1,6 @@
 ---
 noindex: true
+hide_breadcrumbs: true
 ---
 
 # Intro
