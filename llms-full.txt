@@ -5,87 +5,6 @@
 
 # index.html.md
 
-# Contributing
-
-How to set up a development environment and contribute to the Sphinx Lumina Theme.
-
-## Prerequisites
-
-You need the following tools installed:
-
-- **Python 3.12+** and [uv](https://docs.astral.sh/uv/) for Python dependency management
-- **Node.js 18+** and [pnpm](https://pnpm.io/) for JavaScript dependency management
-
-## Development Setup
-
-Clone the repository and install dependencies:
-
-```bash
-git clone https://github.com/r4sky0/sphinx-lumina-theme.git
-cd sphinx-lumina-theme
-pnpm install        # JS dependencies
-uv sync --dev       # Python dependencies
-```
-
-Build the theme’s CSS and JavaScript:
-
-```bash
-pnpm run build
-```
-
-Build the documentation (which dogfoods the theme):
-
-```bash
-uv run sphinx-build docs docs/_build/html
-```
-
-Open `docs/_build/html/index.html` to see the result.
-
-## Running Tests
-
-```bash
-uv run pytest                       # All tests
-uv run pytest tests/test_build.py   # Single file
-uv run pytest -k test_name          # Single test by name
-```
-
-Tests use pytest with BeautifulSoup for HTML assertions. The `build_output` fixture builds `tests/sample_docs/` with Sphinx and verifies the rendered HTML structure.
-
-## Making Changes
-
-1. Create a branch from `main`
-2. Edit source files — see [Architecture](architecture.md) for where things live
-3. If you changed CSS or JS in `_static_src/`, run `pnpm run build`
-4. Build docs to verify: `uv run sphinx-build docs docs/_build/html`
-5. Run tests: `uv run pytest`
-6. Commit with a descriptive message
-
-## Pull Requests
-
-- Keep PRs focused on a single change
-- Include a clear description of what changed and why
-- Ensure all tests pass before requesting review
-
-Learn how the theme is structured — build pipeline, templates, Alpine.js components, and testing.
-
-Auto-generated reference for every Alpine.js component in the theme.
-
-Fix or add a bundled translation and make new interface text translatable.
-
-
-# index.html.md
-
-# Getting Started
-
-Get Lumina running in your Sphinx project in under five minutes.
-
-Install the theme, configure one line, and build your first page.
-
-Theme options, accent colors, and a complete configuration reference.
-
-
-# index.html.md
-
 # Extensions
 
 Lumina is designed to work with extensions that target standard Sphinx output. These are the ones we recommend and style specifically.
@@ -170,6 +89,35 @@ intersphinx_mapping = {
 
 # index.html.md
 
+# Guides
+
+Go deeper with Lumina — search, styling, navigation, and development workflows.
+
+Configure Pagefind or Sphinx built-in search.
+
+Color mode settings and CSS custom properties.
+
+Write docs in Markdown with full Sphinx directive support.
+
+Header links, social icons, sidebar depth, and breadcrumbs.
+
+CSS custom properties, fonts, syntax highlighting, and templates.
+
+Create a full-width entry point with an optional hero section.
+
+Expand the content area for code-heavy docs on wide screens.
+
+Add Lucide icons to cards, sidebar items, and your logo.
+
+Live reload with sphinx-autobuild and the asset watcher.
+
+Out-of-the-box meta tags, social cards, JSON-LD, sitemap, and `robots.txt`.
+
+Translate the theme’s interface text with Sphinx’s `language` setting.
+
+
+# index.html.md
+
 # Reference
 
 Visual showcase and syntax reference for every content type Lumina styles.
@@ -205,31 +153,83 @@ Every theme token, its default in light and dark mode, and what it controls.
 
 # index.html.md
 
-# Guides
+# Getting Started
 
-Go deeper with Lumina — search, styling, navigation, and development workflows.
+Get Lumina running in your Sphinx project in under five minutes.
 
-Configure Pagefind or Sphinx built-in search.
+Install the theme, configure one line, and build your first page.
 
-Color mode settings and CSS custom properties.
+Theme options, accent colors, and a complete configuration reference.
 
-Write docs in Markdown with full Sphinx directive support.
 
-Header links, social icons, sidebar depth, and breadcrumbs.
+# index.html.md
 
-CSS custom properties, fonts, syntax highlighting, and templates.
+# Contributing
 
-Create a full-width entry point with an optional hero section.
+How to set up a development environment and contribute to the Sphinx Lumina Theme.
 
-Expand the content area for code-heavy docs on wide screens.
+## Prerequisites
 
-Add Lucide icons to cards, sidebar items, and your logo.
+You need the following tools installed:
 
-Live reload with sphinx-autobuild and the asset watcher.
+- **Python 3.12+** and [uv](https://docs.astral.sh/uv/) for Python dependency management
+- **Node.js 18+** and [pnpm](https://pnpm.io/) for JavaScript dependency management
 
-Out-of-the-box meta tags, social cards, JSON-LD, sitemap, and `robots.txt`.
+## Development Setup
 
-Translate the theme’s interface text with Sphinx’s `language` setting.
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/r4sky0/sphinx-lumina-theme.git
+cd sphinx-lumina-theme
+pnpm install        # JS dependencies
+uv sync --dev       # Python dependencies
+```
+
+Build the theme’s CSS and JavaScript:
+
+```bash
+pnpm run build
+```
+
+Build the documentation (which dogfoods the theme):
+
+```bash
+uv run sphinx-build docs docs/_build/html
+```
+
+Open `docs/_build/html/index.html` to see the result.
+
+## Running Tests
+
+```bash
+uv run pytest                       # All tests
+uv run pytest tests/test_build.py   # Single file
+uv run pytest -k test_name          # Single test by name
+```
+
+Tests use pytest with BeautifulSoup for HTML assertions. The `build_output` fixture builds `tests/sample_docs/` with Sphinx and verifies the rendered HTML structure.
+
+## Making Changes
+
+1. Create a branch from `main`
+2. Edit source files — see [Architecture](architecture.md) for where things live
+3. If you changed CSS or JS in `_static_src/`, run `pnpm run build`
+4. Build docs to verify: `uv run sphinx-build docs docs/_build/html`
+5. Run tests: `uv run pytest`
+6. Commit with a descriptive message
+
+## Pull Requests
+
+- Keep PRs focused on a single change
+- Include a clear description of what changed and why
+- Ensure all tests pass before requesting review
+
+Learn how the theme is structured — build pipeline, templates, Alpine.js components, and testing.
+
+Auto-generated reference for every Alpine.js component in the theme.
+
+Fix or add a bundled translation and make new interface text translatable.
 
 
 # admonitions.html.md
@@ -2970,11 +2970,6 @@ The syntax:
 
 # icons.html.md
 
-# Icon Browser
-
-
-# icons.html.md
-
 # Icons
 
 Make your docs easier to scan by adding icons to cards, sidebar navigation, and your site logo. Lumina includes all 1900+ [Lucide](https://lucide.dev/icons/) icons — rendered as inline SVG at build time with zero runtime cost.
@@ -3073,6 +3068,11 @@ Icon names use **kebab-case** — the same format shown on [lucide.dev/icons](ht
 | Sparkles    | `sparkles`    |
 
 If you use an icon name that doesn’t exist, the build continues without errors — the icon is silently omitted.
+
+
+# icons.html.md
+
+# Icon Browser
 
 
 # images-and-figures.html.md
