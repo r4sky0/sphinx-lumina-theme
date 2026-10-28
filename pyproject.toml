@@ -33,7 +33,7 @@ dependencies = [
 [project.optional-dependencies]
 build = ["uv>=0.12.17,<0.14.0"]
 pagefind = [
-    "pagefind[bin]==1.5.2",
+    "pagefind[bin]>=1.5,<2",
 ]
 
 [project.urls]

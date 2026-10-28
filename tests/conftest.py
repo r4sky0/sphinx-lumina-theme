@@ -162,6 +162,11 @@ def live_server(tmp_path_factory):
         project_root / "node_modules/d3/dist/d3.min.js", out_dir / "_static/d3.min.js"
     )
 
+    yield from _serve(out_dir)
+
+
+def _serve(out_dir):
+    """Serve ``out_dir`` on localhost until the generator is closed."""
     port = _find_free_port()
 
     server = subprocess.Popen(
@@ -183,3 +188,15 @@ def live_server(tmp_path_factory):
 
     server.terminate()
     server.wait(timeout=5)
+
+
+@pytest.fixture(scope="session")
+def sphinx_search_server(tmp_path_factory):
+    """Serve the sample docs built with Sphinx's built-in search backend."""
+    out_dir = tmp_path_factory.mktemp("sphinx_search_build")
+    sphinx_app(
+        SAMPLE_DOCS,
+        out_dir,
+        confoverrides={"html_theme_options.search_backend": "sphinx"},
+    ).build()
+    yield from _serve(out_dir)

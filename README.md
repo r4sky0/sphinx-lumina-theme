@@ -27,7 +27,7 @@ A crisp, responsive Sphinx theme with readable typography, dark mode, and instan
 ## Quick Start
 
 Requires **Python 3.12+** and **Sphinx 8.0+**. For Pagefind search, install
-`sphinx-lumina-theme[pagefind]` and set `search_backend` to `"pagefind"`.
+`sphinx-lumina-theme[pagefind]`.
 
 ```bash
 pip install sphinx-lumina-theme

@@ -1127,7 +1127,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "pagefind", extras = ["bin"], marker = "extra == 'pagefind'", specifier = "==1.5.2" },
+    { name = "pagefind", extras = ["bin"], marker = "extra == 'pagefind'", specifier = ">=1.5,<2" },
     { name = "sphinx", specifier = ">=8.0" },
     { name = "sphinx-design", specifier = ">=0.6" },
     { name = "sphinx-sitemap", specifier = ">=2.6" },

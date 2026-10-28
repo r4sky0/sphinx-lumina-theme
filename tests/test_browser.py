@@ -183,12 +183,34 @@ def test_font_subsets_load_full_fonts_only_for_other_characters(page: Page):
 
 
 def test_search_returns_results(page: Page, live_server: str):
-    """Typing a query should produce search results."""
+    """Typing a query should produce Pagefind results."""
+    expect(page.locator('meta[name="lumina-search-backend"]')).to_have_attribute(
+        "content", "pagefind"
+    )
     page.click("[data-search-trigger]")
     page.locator("#lumina-search-modal input[type='search']").fill("getting started")
     page.wait_for_selector("#lumina-search-modal a[href]", timeout=10000)
     results = page.locator("#lumina-search-modal a[href]")
     assert results.count() >= 1
+    expect(results.first).not_to_have_attribute("href", re.compile(r"search\.html"))
+
+
+def test_sphinx_search_backend(page: Page, sphinx_search_server: str):
+    """The Sphinx backend links the modal to Sphinx's search page, never Pagefind."""
+    requests = []
+    page.on("request", lambda request: requests.append(request.url))
+    page.goto(f"{sphinx_search_server}/index.html")
+    page.wait_for_function("() => window.Alpine !== undefined")
+    expect(page.locator('meta[name="lumina-search-backend"]')).to_have_attribute(
+        "content", "sphinx"
+    )
+
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    modal.get_by_role("searchbox").fill("content")
+    modal.get_by_role("link", name='Search for "content"').click()
+    expect(page.locator("#search-results li").first).to_be_visible()
+    assert not [url for url in requests if "_pagefind" in url]
 
 
 def test_theme_toggle_cycles(page: Page):
