@@ -1,5 +1,24 @@
 # Releases
 
+## v2.12.3 (2026-10-28)
+
+### Bug Fixes
+
+- **landing**: Clear the fixed header when a landing page has no hero
+  ([#199](https://github.com/r4sky0/sphinx-lumina-theme/pull/199),
+  [`d44e4f4`](https://github.com/r4sky0/sphinx-lumina-theme/commit/d44e4f4ca4d15e5252c2c7fc19cf27bb6959a4e1))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Continuous Integration
+
+- **release**: Comment on released pull requests and issues
+  ([#204](https://github.com/r4sky0/sphinx-lumina-theme/pull/204),
+  [`2c50674`](https://github.com/r4sky0/sphinx-lumina-theme/commit/2c506743409aefd2bd099466f31f4f41f348a379))
+
+</details>
+
 ## v2.12.2 (2026-10-28)
 
 ### Bug Fixes
