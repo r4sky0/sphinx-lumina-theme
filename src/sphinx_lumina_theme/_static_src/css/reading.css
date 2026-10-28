@@ -89,6 +89,9 @@
 
 #lumina-content { padding: 2.25rem 2.75rem 4rem; }
 .lumina-content-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+/* Without a trail, float the actions beside the title instead of spending a row on them. */
+.lumina-content-toolbar.is-bare { float: right; margin: 0 0 0 1rem; }
+.lumina-content-toolbar.is-bare ~ .lumina-article > section:first-of-type > h1:first-of-type { clear: none; }
 .lumina-content-toolbar nav { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: var(--lumina-text-muted); }
 .lumina-content-toolbar nav a { color: var(--lumina-link); text-decoration: none; }
 .lumina-content-toolbar nav svg { opacity: 0.5; }

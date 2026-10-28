@@ -75,10 +75,16 @@ def _has_breadcrumbs(build_output, page):
     return 'aria-label="Breadcrumb"' in (build_output / page).read_text()
 
 
+def _toolbar_is_bare(build_output, page):
+    return "lumina-content-toolbar is-bare" in (build_output / page).read_text()
+
+
 def test_breadcrumbs_hidden_on_root_page(build_output):
     """The root page's trail would only repeat its own title, so it is omitted."""
     assert not _has_breadcrumbs(build_output, "index.html")
+    assert _toolbar_is_bare(build_output, "index.html")
     assert _has_breadcrumbs(build_output, "getting-started.html")
+    assert not _toolbar_is_bare(build_output, "getting-started.html")
 
 
 def test_breadcrumbs_hidden_by_front_matter(build_output):
