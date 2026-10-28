@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from conftest import copy_sample_docs, sphinx_app
 
 
-def build_with_options(tmp_path, options):
+def build_with_options(tmp_path, options, page="index.html"):
     """Build sample docs with custom theme options."""
     conf_dir = tmp_path / "conf"
     conf_dir.mkdir()
@@ -23,7 +23,7 @@ def build_with_options(tmp_path, options):
 
     app = sphinx_app(conf_dir, out_dir)
     app.build()
-    return BeautifulSoup((out_dir / "index.html").read_text(), "html.parser")
+    return BeautifulSoup((out_dir / page).read_text(), "html.parser")
 
 
 def test_custom_accent_color(tmp_path):
@@ -53,7 +53,10 @@ def test_page_actions_respect_options(tmp_path):
 
 def test_hide_breadcrumbs(tmp_path):
     """Setting show_breadcrumbs to False should remove breadcrumbs."""
-    html = build_with_options(tmp_path, {"show_breadcrumbs": "false"})
+    # The root page never has breadcrumbs, so check a child page.
+    html = build_with_options(
+        tmp_path, {"show_breadcrumbs": "false"}, page="getting-started.html"
+    )
     breadcrumbs = html.find(attrs={"aria-label": "Breadcrumb"})
     assert breadcrumbs is None
 
