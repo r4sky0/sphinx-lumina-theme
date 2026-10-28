@@ -152,6 +152,18 @@ def test_hero_text_has_no_entrance_animation(page: Page, width):
         )
 
 
+def test_headerlink_is_spaced_from_heading_text(page: Page, live_server: str):
+    page.goto(f"{live_server}/getting-started/configuration.html")
+    gap = page.locator("h2 > a.headerlink").first.evaluate(
+        """link => {
+            const range = document.createRange();
+            range.selectNodeContents(link.parentElement.firstChild);
+            return link.getBoundingClientRect().left - range.getBoundingClientRect().right;
+        }"""
+    )
+    assert gap > 0
+
+
 def test_font_subsets_load_full_fonts_only_for_other_characters(page: Page):
     page.evaluate("document.fonts.ready")
     font_urls = "performance.getEntriesByType('resource').map(r => r.name).filter(n => n.endsWith('.woff2'))"
