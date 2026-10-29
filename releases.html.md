@@ -1,5 +1,13 @@
 # Releases
 
+## v2.14.2 (2026-10-29)
+
+### Bug Fixes
+
+- **search**: Add role=main to landing pages for Sphinx search summaries
+  ([#208](https://github.com/r4sky0/sphinx-lumina-theme/pull/208),
+  [`9406319`](https://github.com/r4sky0/sphinx-lumina-theme/commit/940631905dc52d86ea49fc9fc52abceba0130c30))
+
 ## v2.14.1 (2026-10-29)
 
 ### Bug Fixes
