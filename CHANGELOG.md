@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.14.1 (2026-10-29)
+
+### Bug Fixes
+
+- **tables**: Keep captions and stub columns intact in stacked mobile tables
+  ([#207](https://github.com/r4sky0/sphinx-lumina-theme/pull/207),
+  [`67d882c`](https://github.com/r4sky0/sphinx-lumina-theme/commit/67d882c070e2793e648965e64f142a0203bb2901))
+
+
 ## v2.14.0 (2026-10-28)
 
 ### Features
