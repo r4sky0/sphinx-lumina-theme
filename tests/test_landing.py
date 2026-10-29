@@ -40,6 +40,13 @@ def test_landing_hero_renders_title(landing_html):
     assert "Test Landing" in hero.get_text()
 
 
+def test_landing_main_has_role_main(landing_html):
+    """Sphinx search reads result summaries from the ``[role="main"]`` block."""
+    main = landing_html.find("main", id="lumina-content")
+    assert main is not None
+    assert main.get("role") == "main"
+
+
 def test_landing_hero_renders_subtitle(landing_html):
     """Landing page should render hero subtitle from metadata."""
     hero = landing_html.find(class_="lumina-hero")
