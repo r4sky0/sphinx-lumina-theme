@@ -3952,7 +3952,7 @@ headings stay available. Printing includes all rows, even when a filter is activ
 
 ### List Tables
 
-Use the `list-table` directive for complex tables that are hard to format in Markdown. List tables support multi-line cells, rich content, and precise column widths.
+Use the `list-table` directive for complex tables that are hard to format in Markdown. List tables support multi-line cells, rich content, and precise column widths. Use `:stub-columns: 1` to turn the first column into row headers; on narrow screens each row header titles its stacked card.
 
 #### Theme Comparison
 
