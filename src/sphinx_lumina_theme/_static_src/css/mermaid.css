@@ -104,7 +104,7 @@ body .mermaid-container-fullscreen[class] pre.mermaid > svg {
 
 /* SVG text and HTML labels must use the same font while Mermaid measures them. */
 pre.mermaid :is(svg, text, tspan, .label, .nodeLabel, .edgeLabel, foreignObject div, foreignObject span, foreignObject p) {
-  font-family: "Source Sans 3", sans-serif !important;
+  font-family: var(--lumina-font-sans) !important;
 }
 
 pre.mermaid :is(text, tspan, .label, .nodeLabel, .edgeLabel, .cluster-label) {

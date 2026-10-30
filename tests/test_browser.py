@@ -78,6 +78,43 @@ def test_accent_preview(page: Page, live_server: str):
     expect(emerald).to_have_attribute("aria-pressed", "true")
 
 
+def test_font_preview(page: Page, live_server: str):
+    """The documentation-only font picker previews the font tokens."""
+    page.goto(f"{live_server}/guides/custom-styling.html#preview-a-font")
+    body_group = page.get_by_role("group", name="Body text")
+    code_group = page.get_by_role("group", name="Code")
+    default = body_group.get_by_role("button", name="Source Sans 3")
+    literata = body_group.get_by_role("button", name="Literata")
+    fira_code = code_group.get_by_role("button", name="Fira Code")
+    body = page.locator("body")
+    code = page.locator(".lumina-article code").first
+    # Browsers differ on quoting family names when serializing font-family.
+    fira_code_stack = re.compile(r'^"?Fira Code"?, ')
+
+    expect(default).to_have_attribute("aria-pressed", "true")
+    default_body_font = body.evaluate("element => getComputedStyle(element).fontFamily")
+
+    with page.expect_response("**/_static/fonts/literata.woff2") as response:
+        literata.click()
+    assert response.value.ok
+    expect(literata).to_have_attribute("aria-pressed", "true")
+    expect(body).to_have_css("font-family", "Literata, Georgia, serif")
+    expect(page.locator("#font-preview")).to_contain_text(
+        "--lumina-font-sans: Literata, Georgia, serif"
+    )
+
+    fira_code.click()
+    expect(code).to_have_css("font-family", fira_code_stack)
+    expect(body).to_have_css("font-family", "Literata, Georgia, serif")
+
+    default.click()
+    expect(body).to_have_css("font-family", default_body_font)
+
+    page.reload()
+    expect(code).not_to_have_css("font-family", fira_code_stack)
+    expect(default).to_have_attribute("aria-pressed", "true")
+
+
 def test_search_modal_opens(page: Page):
     """Clicking search trigger should open the search modal."""
     page.click("[data-search-trigger]")
@@ -1036,7 +1073,11 @@ def test_mermaid_sizing_and_colors_survive_theme_changes(context, live_server: s
             }"""
         )
         label = diagrams.first.locator(".nodeLabel").first
-        expect(label).to_have_css("font-family", '"Source Sans 3", sans-serif')
+        expect(label).to_have_css(
+            "font-family",
+            '"Source Sans 3", "Source Sans 3 Fallback", "Source Sans Pro", '
+            "system-ui, -apple-system, sans-serif",
+        )
         # The author's classDef highlight survives the theme defaults.
         highlight = diagrams.first.locator(".node.ready path, .node.ready rect").first
         expect(highlight).to_have_css("stroke-width", "2px")

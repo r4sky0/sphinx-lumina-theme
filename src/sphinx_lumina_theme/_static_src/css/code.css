@@ -13,7 +13,7 @@ pre.highlight {
   padding: 1rem 3rem 1rem 1.25rem;
   margin: 0;
   overflow-x: auto;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.875rem;
   line-height: 1.7;
   font-variant-ligatures: none;
@@ -36,7 +36,7 @@ div.highlight span.linenos {
   padding: 1rem 0.75rem;
   margin: 0;
   text-align: right;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.875rem;
   line-height: 1.7;
   user-select: none;
@@ -185,7 +185,7 @@ div.highlight[data-lumina-wrap="on"] .linenodiv pre {
   padding: 0.5rem 1rem;
   background: var(--lumina-bg-secondary);
   border-bottom: 1px solid color-mix(in srgb, var(--lumina-accent) 10%, var(--lumina-border));
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--lumina-text-muted);

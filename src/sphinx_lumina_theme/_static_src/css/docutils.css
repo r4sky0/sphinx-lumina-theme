@@ -151,7 +151,7 @@
   border: 1px solid color-mix(in srgb, var(--lumina-accent) 10%, var(--lumina-border));
   border-radius: 0.5rem;
   background: var(--lumina-code-bg);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.875rem;
   line-height: 1.7;
   font-variant-ligatures: none;
@@ -178,7 +178,7 @@
 
 /* ── Option lists: options are typed, so use the code face ── */
 .lumina-article dl.option-list kbd {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-weight: 400;
   font-variant-ligatures: none;
   color: var(--lumina-text);

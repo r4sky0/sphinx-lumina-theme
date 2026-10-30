@@ -13,7 +13,7 @@ dt.sig {
   border-block: 1px solid var(--lumina-border);
   border-radius: 0;
   padding: 1rem 0;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.8125rem;
   line-height: 1.7;
   overflow-wrap: anywhere;
@@ -42,7 +42,7 @@ dt.sig > a:has(> .viewcode-link) {
 }
 
 dt.sig .viewcode-link {
-  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-family: var(--lumina-font-sans);
   font-size: 0.75rem;
   color: var(--lumina-text-muted);
 }
@@ -195,7 +195,7 @@ dl:has(> dt.sig) dl.field-list dd li em {
 }
 
 dl:has(> dt.sig) dl.field-list dd li span > a.reference.external {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.8125rem;
   text-decoration: none;
   padding: 0.0625rem 0.375rem;
@@ -333,7 +333,7 @@ dl.http > dd > p:first-child:has(> strong:only-child) {
 .lumina-api-host {
   display: block;
   margin-top: 0.375rem;
-  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-family: var(--lumina-font-sans);
   font-size: 0.8125rem;
   color: var(--lumina-text-muted);
   font-style: normal;
@@ -478,7 +478,7 @@ dt.sig .pre {
   background: transparent;
   color: var(--lumina-text-muted);
   cursor: pointer;
-  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-family: var(--lumina-font-sans);
   font-size: 0.8125rem;
   transition: color 0.15s, background-color 0.15s, border-color 0.15s, opacity 0.15s;
 }
@@ -520,7 +520,7 @@ dt.sig .pre {
   border-radius: 0.375rem;
   background: transparent;
   color: var(--lumina-link);
-  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-family: var(--lumina-font-sans);
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
@@ -581,7 +581,7 @@ dt.sig .pre {
   color: var(--http-method-color);
   background: color-mix(in srgb, var(--http-method-color) 9%, var(--lumina-code-bg));
   flex-shrink: 0;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -592,7 +592,7 @@ dt.sig .pre {
 .lumina-try-it-url-bar .lumina-try-it-url-display {
   flex: 1;
   min-width: 0;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.8125rem;
   color: var(--lumina-text);
   background: none;
@@ -607,7 +607,7 @@ dt.sig .pre {
 }
 
 .lumina-try-it-section-label {
-  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-family: var(--lumina-font-sans);
   font-size: 0.6875rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -625,7 +625,7 @@ dt.sig .pre {
 }
 
 .lumina-try-it-param-name {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.8125rem;
   color: var(--lumina-text);
   display: flex;
@@ -641,7 +641,7 @@ dt.sig .pre {
 }
 
 .lumina-try-it-type-tag {
-  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-family: var(--lumina-font-sans);
   font-size: 0.6875rem;
   font-weight: 500;
   color: var(--lumina-text-muted);
@@ -659,7 +659,7 @@ dt.sig .pre {
   background: var(--lumina-bg);
   border: 1px solid var(--lumina-border);
   border-radius: 0.375rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.8125rem;
   color: var(--lumina-text);
   transition: border-color 0.15s, box-shadow 0.15s;
@@ -682,7 +682,7 @@ dt.sig .pre {
   background: var(--lumina-code-bg);
   border: 1px solid var(--lumina-border);
   border-radius: 0.375rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.8125rem;
   line-height: 1.6;
   color: var(--lumina-text);
@@ -723,7 +723,7 @@ dt.sig .pre {
   background: var(--lumina-link);
   border: none;
   border-radius: 0.375rem;
-  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-family: var(--lumina-font-sans);
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--lumina-bg);
@@ -768,7 +768,7 @@ dt.sig .pre {
   background: transparent;
   border: 1px solid var(--lumina-border);
   border-radius: 0.375rem;
-  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-family: var(--lumina-font-sans);
   font-size: 0.875rem;
   color: var(--lumina-text-muted);
   cursor: pointer;
@@ -838,7 +838,7 @@ dt.sig .pre {
   align-items: center;
   padding: 0.1875rem 0.5rem;
   border-radius: 0.25rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.8125rem;
   font-weight: 600;
 }
@@ -849,7 +849,7 @@ dt.sig .pre {
 .lumina-try-it-status--error   { color: var(--lumina-adm-danger);  background: color-mix(in srgb, var(--lumina-adm-danger)  12%, var(--lumina-bg)); }
 
 .lumina-try-it-elapsed {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.75rem;
   color: var(--lumina-text-muted);
 }
@@ -860,7 +860,7 @@ dt.sig .pre {
   background: var(--lumina-code-bg);
   border: 1px solid var(--lumina-border);
   border-radius: 0.375rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.8125rem;
   line-height: 1.6;
   overflow-x: auto;

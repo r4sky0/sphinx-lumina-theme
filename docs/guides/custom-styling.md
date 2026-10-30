@@ -103,20 +103,125 @@ Lumina ships with self-hosted fonts — no external CDN requests:
 Latin text uses smaller font subsets. The browser loads the original full fonts
 when other characters are needed, preserving the existing language coverage.
 
-To use your own fonts, override the font-family declarations in your custom CSS:
+To use your own fonts, load them from your docs or a font provider, then set the `--lumina-font-sans` and `--lumina-font-mono` tokens. The theme applies them everywhere, including code blocks, API documentation and diagrams.
 
-```css
-body {
-    font-family: "Inter", system-ui, sans-serif;
-}
+### Preview a font
 
-code, pre, .highlight {
-    font-family: "Fira Code", ui-monospace, monospace;
+Choose a font to preview it on this page. The preview resets when you leave or reload. These fonts are examples hosted with this documentation, so they aren't included in the theme. You can find them all on [Google Fonts](https://fonts.google.com/).
+
+```{raw} html
+<style>
+  @font-face { font-family: "Instrument Sans"; src: url("../_static/fonts/instrument-sans.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+  @font-face { font-family: "Literata"; src: url("../_static/fonts/literata.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+  @font-face { font-family: "Atkinson Hyperlegible Next"; src: url("../_static/fonts/atkinson-hyperlegible-next.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+  @font-face { font-family: "Fira Code"; src: url("../_static/fonts/fira-code.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+  @font-face { font-family: "Geist Mono"; src: url("../_static/fonts/geist-mono.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+  .font-picker { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: .65rem; margin: .5rem 0 1.25rem; }
+  .font-picker button { min-height: 3rem; padding: .6rem .75rem; border: 1px solid var(--lumina-border); border-radius: .6rem; background: var(--lumina-bg-secondary); color: var(--lumina-text); text-align: left; cursor: pointer; }
+  .font-picker button:hover, .font-picker button[aria-pressed="true"] { border-color: var(--lumina-link); background: var(--lumina-accent-light); }
+  .font-picker button:focus-visible { outline: 2px solid var(--lumina-link); outline-offset: 2px; }
+  .font-picker small { display: block; color: var(--lumina-text-muted); font-size: .75rem; }
+</style>
+<div id="font-preview" x-data="{ sans: '', mono: '', pick(kind, stack) { this[kind] = stack; const style = document.documentElement.style; const token = '--lumina-font-' + kind; stack ? style.setProperty(token, stack) : style.removeProperty(token); } }">
+  <p id="font-preview-sans"><strong>Body text</strong></p>
+  <div class="font-picker" role="group" aria-labelledby="font-preview-sans">
+    <button type="button" x-on:click="pick('sans', '')" x-bind:aria-pressed="sans === ''">Source Sans 3<small>Default</small></button>
+    <button type="button" x-on:click="pick('sans', 'Instrument Sans, system-ui, sans-serif')" x-bind:aria-pressed="sans.startsWith('Instrument')">Instrument Sans<small>Modern sans-serif</small></button>
+    <button type="button" x-on:click="pick('sans', 'Literata, Georgia, serif')" x-bind:aria-pressed="sans.startsWith('Literata')">Literata<small>Book serif</small></button>
+    <button type="button" x-on:click="pick('sans', 'Atkinson Hyperlegible Next, system-ui, sans-serif')" x-bind:aria-pressed="sans.startsWith('Atkinson')">Atkinson Hyperlegible Next<small>Designed for legibility</small></button>
+  </div>
+  <p id="font-preview-mono"><strong>Code</strong></p>
+  <div class="font-picker" role="group" aria-labelledby="font-preview-mono">
+    <button type="button" x-on:click="pick('mono', '')" x-bind:aria-pressed="mono === ''">JetBrains Mono<small>Default</small></button>
+    <button type="button" x-on:click="pick('mono', 'Fira Code, ui-monospace, monospace')" x-bind:aria-pressed="mono.startsWith('Fira')">Fira Code<small>Coding ligatures</small></button>
+    <button type="button" x-on:click="pick('mono', 'Geist Mono, ui-monospace, monospace')" x-bind:aria-pressed="mono.startsWith('Geist')">Geist Mono<small>Clean and geometric</small></button>
+  </div>
+  <p x-show="sans || mono" style="display: none">Try in <code>custom.css</code>: <code x-text="':root { ' + (sans ? '--lumina-font-sans: ' + sans + '; ' : '') + (mono ? '--lumina-font-mono: ' + mono + '; ' : '') + '}'"></code></p>
+</div>
+```
+
+### Local font files
+
+Host a font with your docs when you want a font that isn't on Google Fonts, or when readers' browsers shouldn't contact a third party. This example uses a font called `My Font` with regular and bold files.
+
+1. Copy the `.woff2` files into your static directory:
+
+   ```text
+   docs/
+   ├── conf.py
+   └── _static/
+       ├── custom.css
+       └── fonts/
+           ├── my-font-regular.woff2
+           └── my-font-bold.woff2
+   ```
+
+2. Register the stylesheet in `conf.py`:
+
+   ```{code-block} python
+   :caption: conf.py
+   html_static_path = ["_static"]
+   html_css_files = ["custom.css"]
+   ```
+
+3. Declare each file with `@font-face`, then point Lumina at the font:
+
+   ```{code-block} css
+   :caption: docs/_static/custom.css
+   @font-face {
+       font-family: "My Font";
+       src: url("fonts/my-font-regular.woff2") format("woff2");
+       font-weight: 400;
+       font-display: swap;
+   }
+
+   @font-face {
+       font-family: "My Font";
+       src: url("fonts/my-font-bold.woff2") format("woff2");
+       font-weight: 700;
+       font-display: swap;
+   }
+
+   :root {
+       --lumina-font-sans: "My Font", system-ui, sans-serif;
+   }
+   ```
+
+4. Rebuild your docs. Pages now use `My Font` for body text.
+
+To change the code font, set `--lumina-font-mono` the same way.
+
+Keep these details in mind:
+
+- **Paths:** `url()` paths are relative to the CSS file, not to `conf.py`.
+- **Weights:** Lumina uses weights 400, 500, 600 and 700 for body text. If a weight is missing, the browser uses the closest one or synthesizes bold.
+- **Variable fonts:** one file can cover every weight. Declare it with `font-weight: 400 700;`.
+- **Missing fonts:** if a page still shows the system font, check the browser's Network tab for a 404 on the `.woff2` file, and check that the `font-family` name matches in both places.
+
+### Other font providers, e.g. Google Fonts
+
+Add the provider's stylesheet to `html_css_files`, then set the font tokens in your custom CSS. This example loads Inter and Fira Code from [Google Fonts](https://fonts.google.com/):
+
+```{code-block} python
+:caption: conf.py
+html_static_path = ["_static"]
+html_css_files = [
+    "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap",
+    "custom.css",
+]
+```
+
+```{code-block} css
+:caption: docs/_static/custom.css
+
+:root {
+    --lumina-font-sans: "Inter", system-ui, sans-serif;
+    --lumina-font-mono: "Fira Code", ui-monospace, monospace;
 }
 ```
 
-:::{note}
-If you use custom fonts, add the font files to your `_static/` directory and include the appropriate `@font-face` declarations.
+:::{warning}
+With a hosted font, readers' browsers contact the provider, which receives their IP address. Check whether this affects your privacy policy or GDPR obligations.
 :::
 
 ## Hyphenation

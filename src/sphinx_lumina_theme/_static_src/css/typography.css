@@ -224,7 +224,7 @@
 }
 
 .lumina-article code:not(pre code) {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--lumina-font-mono);
   font-size: 0.8125em;
   font-variant-ligatures: none;
   background: var(--lumina-code-bg);
@@ -234,7 +234,7 @@
 }
 
 .lumina-article kbd {
-  font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  font-family: var(--lumina-font-sans);
   font-size: 0.8125em;
   font-weight: 500;
   background: linear-gradient(180deg, var(--lumina-bg), var(--lumina-bg-secondary));

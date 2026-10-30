@@ -29,6 +29,8 @@
 
 /* ── Light mode (default) ── */
 :root {
+  --lumina-font-sans: "Source Sans 3", "Source Sans 3 Fallback", "Source Sans Pro", system-ui, -apple-system, sans-serif;
+  --lumina-font-mono: "JetBrains Mono", ui-monospace, monospace;
   --lumina-bg: #fdfdfc;
   --lumina-bg-secondary: #f4f5f4;
   --lumina-text: #202624;
@@ -206,7 +208,7 @@ html[data-theme="dark"] {
 }
 
 body {
-  font-family: "Source Sans 3", "Source Sans 3 Fallback", "Source Sans Pro", system-ui, -apple-system, sans-serif;
+  font-family: var(--lumina-font-sans);
   font-kerning: normal;
   background-color: var(--lumina-bg);
   color: var(--lumina-text);
