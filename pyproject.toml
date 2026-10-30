@@ -25,6 +25,7 @@ classifiers = [
     "Topic :: Software Development :: Documentation",
 ]
 dependencies = [
+    "babel>=2.13",
     "sphinx>=8.0",
     "sphinx-design>=0.6",
     "sphinx-sitemap>=2.6",

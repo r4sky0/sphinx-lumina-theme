@@ -1093,6 +1093,7 @@ name = "sphinx-lumina-theme"
 version = "2.16.0"
 source = { editable = "." }
 dependencies = [
+    { name = "babel" },
     { name = "sphinx" },
     { name = "sphinx-design" },
     { name = "sphinx-sitemap" },
@@ -1127,6 +1128,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "babel", specifier = ">=2.13" },
     { name = "pagefind", extras = ["bin"], marker = "extra == 'pagefind'", specifier = ">=1.5,<2" },
     { name = "sphinx", specifier = ">=8.0" },
     { name = "sphinx-design", specifier = ">=0.6" },

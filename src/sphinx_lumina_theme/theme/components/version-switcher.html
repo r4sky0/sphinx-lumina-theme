@@ -33,7 +33,7 @@
              x-transition:leave="transition ease-in duration-100"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
-             class="absolute left-0 top-full mt-1 min-w-[10rem] rounded-lg border border-lumina-border bg-lumina-bg py-1 shadow-lg"
+             class="absolute start-0 top-full mt-1 min-w-[10rem] rounded-lg border border-lumina-border bg-lumina-bg py-1 shadow-lg"
              role="menu">
             <template x-for="v in versions" :key="v.version">
                 <a :href="_versionUrl(v)"
@@ -42,7 +42,7 @@
                    role="menuitem">
                     <span x-text="v.name || v.version"></span>
                     <span x-show="v.version === match"
-                          class="ml-auto text-[0.6875rem] text-lumina-accent">{{ _("(current)") }}</span>
+                          class="ms-auto text-[0.6875rem] text-lumina-accent">{{ _("(current)") }}</span>
                 </a>
             </template>
             <div x-show="error"

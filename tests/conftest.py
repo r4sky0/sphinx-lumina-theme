@@ -170,7 +170,7 @@ def _serve(out_dir):
     port = _find_free_port()
 
     server = subprocess.Popen(
-        [sys.executable, "-m", "http.server", str(port)],
+        [sys.executable, "-m", "http.server", "--bind", "127.0.0.1", str(port)],
         cwd=str(out_dir),
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
@@ -188,6 +188,14 @@ def _serve(out_dir):
 
     server.terminate()
     server.wait(timeout=5)
+
+
+@pytest.fixture(scope="session")
+def rtl_server(tmp_path_factory):
+    """Serve the sample docs built in Arabic."""
+    out_dir = tmp_path_factory.mktemp("rtl_build")
+    sphinx_app(SAMPLE_DOCS, out_dir, confoverrides={"language": "ar"}).build()
+    yield from _serve(out_dir)
 
 
 @pytest.fixture(scope="session")

@@ -110,7 +110,9 @@ export default function scrollspy() {
       for (const { id, el } of this._links) {
         const top = el.offsetTop;
         const bottom = top + el.offsetHeight;
-        const x = el.offsetLeft + 1;
+        const x = document.documentElement.dir === "rtl"
+          ? el.offsetLeft + el.offsetWidth - 1
+          : el.offsetLeft + 1;
         this._positions.set(id, [top, bottom, x]);
         if (previousX === undefined) {
           path = `M ${x} ${top}`;

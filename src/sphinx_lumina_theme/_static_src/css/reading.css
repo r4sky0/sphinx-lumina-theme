@@ -21,7 +21,7 @@
   min-height: 2.25rem;
   background: var(--lumina-bg-secondary);
   border-color: transparent;
-  margin-right: 0.5rem;
+  margin-inline-end: 0.5rem;
 }
 
 .lumina-sidebar-desktop { background: var(--lumina-navigation-bg); padding: 2rem 1rem; }
@@ -57,7 +57,8 @@
   position: relative;
   align-items: flex-start;
   gap: 0.625rem;
-  padding: 0.75rem 1.5rem 0.75rem 0.625rem;
+  padding-block: 0.75rem;
+  padding-inline: 0.625rem 1.5rem;
   border-radius: 0.375rem;
 }
 .lumina-section-switcher-item + .lumina-section-switcher-item { margin-top: 0.25rem; }
@@ -69,7 +70,7 @@
 .lumina-section-switcher-item.active::after {
   content: "✓";
   position: absolute;
-  right: 0.625rem;
+  inset-inline-end: 0.625rem;
   top: 0.75rem;
   color: var(--lumina-link);
   font-size: 0.875rem;
@@ -80,22 +81,22 @@
 .lumina-sidebar-nav li.current:not(.toctree-l1) > a,
 .lumina-sidebar-nav li.toctree-l1.current > a.current {
   color: var(--lumina-link);
-  border-left: 0;
-  padding-left: 0.75rem;
+  border-inline-start: 0;
+  padding-inline-start: 0.75rem;
   border-radius: 0.375rem;
 }
-.lumina-sidebar-nav li > ul { border-left: 0; margin-left: 0; padding-left: 0.75rem; }
+.lumina-sidebar-nav li > ul { border-inline-start: 0; margin-inline-start: 0; padding-inline-start: 0.75rem; }
 .lumina-sidebar-nav-toggle { min-width: 1.75rem; min-height: 1.75rem; }
 
 #lumina-content { padding: 2.25rem 2.75rem 4rem; }
 .lumina-content-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
 /* Without a trail, float the actions beside the title instead of spending a row on them. */
-.lumina-content-toolbar.is-bare { float: right; margin: 0 0 0 1rem; }
+.lumina-content-toolbar.is-bare { float: inline-end; margin: 0; margin-inline-start: 1rem; }
 .lumina-content-toolbar.is-bare ~ .lumina-article > section:first-of-type > h1:first-of-type { clear: none; }
 .lumina-content-toolbar nav { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: var(--lumina-text-muted); }
 .lumina-content-toolbar nav a { color: var(--lumina-link); text-decoration: none; }
 .lumina-content-toolbar nav svg { opacity: 0.5; }
-.lumina-page-actions { position: relative; margin-left: auto; flex-shrink: 0; }
+.lumina-page-actions { position: relative; margin-inline-start: auto; flex-shrink: 0; }
 .lumina-page-actions summary {
   display: flex;
   align-items: center;
@@ -111,7 +112,7 @@
 .lumina-page-actions summary:hover, .lumina-page-actions[open] summary { background: var(--lumina-bg-secondary); }
 .lumina-page-action-list {
   position: absolute;
-  right: 0;
+  inset-inline-end: 0;
   top: calc(100% + 0.25rem);
   z-index: 30;
   width: 13rem;
@@ -168,8 +169,8 @@ div.highlight pre, pre.highlight { padding: 1.125rem 3rem 1.125rem 1.25rem; font
   border-radius: 0 !important;
   margin: 0 !important;
 }
-.lumina-link-list .sd-card-body { position: relative; padding: 1.125rem 2rem 1.125rem 0; }
-.lumina-link-list .sd-card-body::after { content: "→"; position: absolute; right: 0.5rem; top: 1.125rem; color: var(--lumina-text-muted); }
+.lumina-link-list .sd-card-body { position: relative; padding-block: 1.125rem; padding-inline: 0 2rem; }
+.lumina-link-list .sd-card-body::after { content: "→"; position: absolute; inset-inline-end: 0.5rem; top: 1.125rem; color: var(--lumina-text-muted); }
 .lumina-link-list .sd-card-icon-featured { display: none; }
 .lumina-link-list .sd-card-title { font-size: 1.0625rem; font-weight: 600; margin-bottom: 0.25rem !important; }
 .lumina-link-list .sd-card-text { font-size: 0.9375rem; }
@@ -177,7 +178,7 @@ div.highlight pre, pre.highlight { padding: 1.125rem 3rem 1.125rem 1.25rem; font
 .lumina-toc-container { padding-top: 3rem; }
 .lumina-toc-container > p { text-transform: none; letter-spacing: 0; font-size: 0.8125rem; font-weight: 600; color: var(--lumina-text); }
 .lumina-toc-nav > ul > li:has(> ul) > a { display: none; }
-.lumina-toc-nav > ul > li > ul { padding-left: 0; }
+.lumina-toc-nav > ul > li > ul { padding-inline-start: 0; }
 .lumina-toc-nav ul ul a { font-size: 0.8125rem; padding-block: 0.4375rem; }
 .lumina-toc-nav a.lumina-toc-active { color: var(--lumina-link); }
 #lumina-content footer { margin-top: 2.5rem; }
@@ -188,7 +189,7 @@ div.highlight pre, pre.highlight { padding: 1.125rem 3rem 1.125rem 1.25rem; font
 #lumina-search-modal .bg-lumina-accent { background: var(--lumina-link); color: var(--lumina-bg); opacity: 1; }
 :focus-visible { outline-color: var(--lumina-link); }
 .sd-card:has(a:focus-visible) { outline-color: var(--lumina-link); }
-.lumina-back-to-top { position: fixed; right: 1.25rem; bottom: 1.25rem; width: 2.75rem; height: 2.75rem; display: grid; place-items: center; border: 1px solid var(--lumina-border); border-radius: 0.5rem; background: var(--lumina-floating-bg); color: var(--lumina-text); cursor: pointer; }
+.lumina-back-to-top { position: fixed; inset-inline-end: 1.25rem; bottom: 1.25rem; width: 2.75rem; height: 2.75rem; display: grid; place-items: center; border: 1px solid var(--lumina-border); border-radius: 0.5rem; background: var(--lumina-floating-bg); color: var(--lumina-text); cursor: pointer; }
 
 @media (min-width: 1024px) {
   .lumina-header-inner [data-search-trigger] { min-width: 15rem; }
@@ -197,14 +198,14 @@ div.highlight pre, pre.highlight { padding: 1.125rem 3rem 1.125rem 1.25rem; font
   .lumina-mobile-outline { display: block; margin-bottom: 1.5rem; font-size: 0.8125rem; color: var(--lumina-text-muted); }
   .lumina-mobile-outline summary { display: flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; cursor: pointer; list-style: none; }
   .lumina-mobile-outline summary::-webkit-details-marker { display: none; }
-  .lumina-mobile-outline nav { padding: 0.5rem 1rem; border-left: 1px solid var(--lumina-border); }
+  .lumina-mobile-outline nav { padding: 0.5rem 1rem; border-inline-start: 1px solid var(--lumina-border); }
   .lumina-mobile-outline nav > ul > li:has(> ul) > a { display: none; }
   .lumina-mobile-outline nav a { display: block; padding-block: 0.5rem; color: var(--lumina-link); }
 }
 @media (max-width: 639px) {
   .lumina-header-inner { padding-inline: 1rem; }
   .lumina-header-inner > div:first-child { gap: 0; }
-  .lumina-header-inner [data-search-trigger] { min-height: 2.75rem; margin-right: 0; }
+  .lumina-header-inner [data-search-trigger] { min-height: 2.75rem; margin-inline-end: 0; }
   #lumina-content { padding: 1rem 1.25rem 3rem; }
   .lumina-content-toolbar { margin-bottom: 0; }
   .lumina-mobile-outline { margin-bottom: 1rem; }

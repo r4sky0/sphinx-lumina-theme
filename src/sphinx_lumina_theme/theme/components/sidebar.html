@@ -1,6 +1,6 @@
 <div x-data="sidebar()">
     {# Desktop sidebar #}
-    <div class="lumina-sidebar-desktop hidden flex-col overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 py-6 lg:flex">
+    <div class="lumina-sidebar-desktop hidden flex-col overflow-y-auto border-e border-lumina-border bg-lumina-bg px-4 py-6 lg:flex">
 
         {% include "components/section-switcher.html" %}
 
@@ -55,13 +55,13 @@
             <div id="lumina-sidebar-drawer"
                  x-show="mobileOpen"
                  x-transition:enter="transition ease-out duration-250"
-                 x-transition:enter-start="-translate-x-full"
+                 x-transition:enter-start="-translate-x-full rtl:translate-x-full"
                  x-transition:enter-end="translate-x-0"
                  x-transition:leave="transition ease-in duration-200"
                  x-transition:leave-start="translate-x-0"
-                 x-transition:leave-end="-translate-x-full"
+                 x-transition:leave-end="-translate-x-full rtl:translate-x-full"
                  @keydown.escape.window="close()"
-                 class="fixed inset-y-0 top-[var(--lumina-header-offset)] left-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-r border-lumina-border bg-lumina-bg px-4 py-6 lg:hidden">
+                 class="fixed inset-y-0 top-[var(--lumina-header-offset)] start-0 z-50 w-[min(280px,85vw)] overflow-y-auto border-e border-lumina-border bg-lumina-bg px-4 py-6 lg:hidden">
 
                 {# in_drawer suppresses the element id so it isn't duplicated
                    across the desktop sidebar and this drawer. #}
