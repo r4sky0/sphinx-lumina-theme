@@ -1,0 +1,444 @@
+# Arabic translations for sphinx-lumina-theme.
+# Copyright (C) 2026 Ralph Offinger
+# This file is distributed under the same license as the sphinx-lumina-theme
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sphinx-lumina-theme VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-10-16 09:07+0200\n"
+"PO-Revision-Date: 2026-10-30 17:38+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ar\n"
+"Language-Team: ar <LL@li.org>\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : "
+"n%100>=3 && n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#, python-format
+msgid "%(minutes)s min read"
+msgstr "مدة القراءة بالدقائق: %(minutes)s"
+
+msgid "(No response body)"
+msgstr "(لا يوجد محتوى في الاستجابة)"
+
+msgid "(current)"
+msgstr "(الحالي)"
+
+msgid "(opens in new tab)"
+msgstr "(يفتح في علامة تبويب جديدة)"
+
+msgid "API display"
+msgstr "عرض الواجهة البرمجية"
+
+msgid "API key"
+msgstr "مفتاح الواجهة البرمجية"
+
+msgid "Add header"
+msgstr "إضافة ترويسة"
+
+msgid "Additional headers"
+msgstr "ترويسات إضافية"
+
+msgid "All docs"
+msgstr "كل الوثائق"
+
+msgid "Authentication"
+msgstr "المصادقة"
+
+msgid "Back to top"
+msgstr "العودة إلى الأعلى"
+
+msgid "Basic authentication"
+msgstr "مصادقة أساسية"
+
+msgid "Bearer token"
+msgstr "رمز Bearer"
+
+msgid "Breadcrumb"
+msgstr "مسار التنقل"
+
+msgid "Browse sections"
+msgstr "تصفح الأقسام"
+
+msgid "Built with"
+msgstr "بُني باستخدام"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Cancelled"
+msgstr "أُلغي"
+
+msgid "Clear"
+msgstr "مسح"
+
+msgid "Clear credentials"
+msgstr "مسح بيانات الاعتماد"
+
+msgid "Close"
+msgstr "إغلاق"
+
+msgid "Close preview"
+msgstr "إغلاق المعاينة"
+
+msgid "Collapse all"
+msgstr "طي الكل"
+
+msgid "Content type"
+msgstr "نوع المحتوى"
+
+msgid "Copied"
+msgstr "نُسخ"
+
+msgid "Copied!"
+msgstr "تم النسخ!"
+
+msgid "Copy as Markdown"
+msgstr "نسخ بتنسيق Markdown"
+
+msgid "Copy as curl"
+msgstr "نسخ كأمر curl"
+
+msgid "Copy curl"
+msgstr "نسخ أمر curl"
+
+msgid "Copy page as Markdown"
+msgstr "نسخ الصفحة بتنسيق Markdown"
+
+msgid "Copy response"
+msgstr "نسخ الاستجابة"
+
+msgid "Could not copy. Select the curl command below and copy it manually."
+msgstr "تعذّر النسخ. حدد أمر curl أدناه وانسخه يدويًا."
+
+msgid "Could not copy. Select the response text and copy it manually."
+msgstr "تعذّر النسخ. حدد نص الاستجابة وانسخه يدويًا."
+
+msgid ""
+"Could not reach the API. Check the server URL, network, HTTPS and CORS "
+"settings. Redirects are not followed. Try Copy as curl to debug outside "
+"the browser."
+msgstr ""
+"تعذّر الوصول إلى الواجهة البرمجية. تحقق من عنوان الخادم والشبكة وإعدادات "
+"HTTPS وCORS. لا تُتبع عمليات إعادة التوجيه. جرّب «نسخ كأمر curl» لتصحيح "
+"الخطأ خارج المتصفح."
+
+#, python-brace-format
+msgid "Details for {name}"
+msgstr "تفاصيل {name}"
+
+msgid "Dismiss announcement"
+msgstr "إخفاء الإعلان"
+
+msgid "Enter an HTTP(S) server URL without credentials, a query, or a fragment."
+msgstr "أدخل عنوان خادم HTTP(S) بدون بيانات اعتماد أو سلسلة استعلام أو جزء."
+
+#, python-brace-format
+msgid "Enter required parameters: {names}."
+msgstr "أدخل المعاملات المطلوبة: {names}."
+
+msgid "Enter the API key name and value, or select No authentication."
+msgstr "أدخل اسم مفتاح الواجهة البرمجية وقيمته، أو اختر «بدون مصادقة»."
+
+msgid "Error"
+msgstr "خطأ"
+
+msgid "Expand all"
+msgstr "توسيع الكل"
+
+msgid "Failed to load versions"
+msgstr "تعذّر تحميل الإصدارات"
+
+msgid "Filter rows"
+msgstr "تصفية الصفوف"
+
+msgid "Header"
+msgstr "الترويسة"
+
+msgid "Header name"
+msgstr "اسم الترويسة"
+
+msgid "Header value"
+msgstr "قيمة الترويسة"
+
+msgid "Headers"
+msgstr "الترويسات"
+
+msgid "Hide credentials"
+msgstr "إخفاء بيانات الاعتماد"
+
+msgid "Image preview"
+msgstr "معاينة الصورة"
+
+msgid "Instant search is unavailable. Sphinx search covers all docs."
+msgstr "البحث الفوري غير متاح. يشمل بحث Sphinx كل الوثائق."
+
+msgid "Instant search is unavailable. Use Sphinx search below."
+msgstr "البحث الفوري غير متاح. استخدم بحث Sphinx أدناه."
+
+msgid "Key name"
+msgstr "اسم المفتاح"
+
+msgid "Key value"
+msgstr "قيمة المفتاح"
+
+msgid "LLM-friendly documentation index"
+msgstr "فهرس وثائق ملائم لنماذج اللغة الكبيرة"
+
+msgid "Leave empty to send without a body"
+msgstr "اتركه فارغًا للإرسال بدون محتوى"
+
+msgid "Loading search index…"
+msgstr "جارٍ تحميل فهرس البحث…"
+
+msgid "Main navigation"
+msgstr "التنقل الرئيسي"
+
+msgid "Navigate"
+msgstr "التنقل"
+
+msgid "Next"
+msgstr "التالي"
+
+msgid "No authentication"
+msgstr "بدون مصادقة"
+
+msgid "No matching rows. Try another term or reset the table."
+msgstr "لا توجد صفوف مطابقة. جرّب كلمة أخرى أو أعد ضبط الجدول."
+
+msgid "No results found."
+msgstr "لم يُعثر على نتائج."
+
+#, python-brace-format
+msgid "No results in {scope}."
+msgstr "لا توجد نتائج في {scope}."
+
+msgid "On this page"
+msgstr "في هذه الصفحة"
+
+msgid "Open"
+msgstr "فتح"
+
+msgid "Open Sphinx search results page"
+msgstr "فتح صفحة نتائج بحث Sphinx"
+
+msgid "Page actions"
+msgstr "إجراءات الصفحة"
+
+msgid "Page navigation"
+msgstr "التنقل بين الصفحات"
+
+msgid "Page outline"
+msgstr "مخطط الصفحة"
+
+msgid "Password"
+msgstr "كلمة المرور"
+
+msgid "Path Parameters"
+msgstr "معاملات المسار"
+
+msgid "Previous"
+msgstr "السابق"
+
+msgid "Query Parameters"
+msgstr "معاملات الاستعلام"
+
+msgid "Query string"
+msgstr "سلسلة الاستعلام"
+
+msgid "Remove"
+msgstr "إزالة"
+
+msgid "Remove header"
+msgstr "إزالة الترويسة"
+
+msgid "Request body"
+msgstr "محتوى الطلب"
+
+msgid "Request body is not valid JSON. Fix it before sending."
+msgstr "محتوى الطلب ليس JSON صالحًا. أصلحه قبل الإرسال."
+
+msgid "Request command"
+msgstr "أمر الطلب"
+
+msgid "Request timed out after 30 seconds."
+msgstr "انتهت مهلة الطلب بعد 30 ثانية."
+
+msgid "Reset"
+msgstr "إعادة الضبط"
+
+msgid "Response body"
+msgstr "محتوى الاستجابة"
+
+msgid "Response headers"
+msgstr "ترويسات الاستجابة"
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "Search all docs"
+msgstr "البحث في كل الوثائق"
+
+msgid "Search docs..."
+msgstr "ابحث في الوثائق..."
+
+msgid "Search documentation"
+msgstr "البحث في الوثائق"
+
+#, python-brace-format
+msgid "Search for \"{query}\""
+msgstr "البحث عن «{query}»"
+
+msgid "Search icons..."
+msgstr "ابحث عن أيقونة..."
+
+msgid "Search in"
+msgstr "البحث في"
+
+msgid "Searching…"
+msgstr "جارٍ البحث…"
+
+msgid "Section navigation"
+msgstr "التنقل بين الأقسام"
+
+msgid "Select documentation version"
+msgstr "اختر إصدار الوثائق"
+
+msgid "Send Request"
+msgstr "إرسال الطلب"
+
+msgid "Send in"
+msgstr "الإرسال عبر"
+
+msgid "Send request"
+msgstr "إرسال الطلب"
+
+msgid "Send request (Ctrl/⌘ + Enter)"
+msgstr "إرسال الطلب (Ctrl/⌘ + Enter)"
+
+msgid "Sending request…"
+msgstr "جارٍ إرسال الطلب…"
+
+msgid "Sending…"
+msgstr "جارٍ الإرسال…"
+
+msgid "Server URL"
+msgstr "عنوان الخادم"
+
+msgid ""
+"Shared for this server on this page. Cleared on reload. Copied curl "
+"commands include credentials."
+msgstr ""
+"تُستخدم لهذا الخادم في هذه الصفحة وتُمسح عند إعادة التحميل. تتضمن أوامر "
+"curl المنسوخة بيانات الاعتماد."
+
+msgid "Show credentials"
+msgstr "إظهار بيانات الاعتماد"
+
+msgid "Site announcement"
+msgstr "إعلان الموقع"
+
+msgid "Skip to content"
+msgstr "تخطي إلى المحتوى"
+
+msgid "Stop wrapping long lines"
+msgstr "إيقاف التفاف الأسطر الطويلة"
+
+msgid "Stopped waiting for this request. The server may still process it."
+msgstr "توقف انتظار هذا الطلب، وقد يظل الخادم يعالجه."
+
+msgid "Switch documentation area"
+msgstr "تبديل مجال الوثائق"
+
+msgid "Switch documentation section"
+msgstr "تبديل قسم الوثائق"
+
+msgid "Switch to dark mode"
+msgstr "التبديل إلى الوضع الداكن"
+
+msgid "Switch to light mode"
+msgstr "التبديل إلى الوضع الفاتح"
+
+msgid "Switch to normal layout"
+msgstr "التبديل إلى التخطيط العادي"
+
+msgid "Switch to system theme"
+msgstr "التبديل إلى سمة النظام"
+
+msgid "Switch to wide layout"
+msgstr "التبديل إلى التخطيط العريض"
+
+msgid "Table"
+msgstr "جدول"
+
+msgid "Table of contents"
+msgstr "جدول المحتويات"
+
+msgid "Toggle color theme"
+msgstr "تبديل سمة الألوان"
+
+msgid "Toggle layout width"
+msgstr "تبديل عرض التخطيط"
+
+msgid "Toggle navigation"
+msgstr "تبديل قائمة التنقل"
+
+#, python-brace-format
+msgid "Toggle {name}"
+msgstr "تبديل {name}"
+
+msgid "Top navigation"
+msgstr "التنقل العلوي"
+
+msgid "Try it out"
+msgstr "جرّبه"
+
+msgid "Type"
+msgstr "النوع"
+
+msgid "Type to filter…"
+msgstr "اكتب للتصفية…"
+
+msgid "Type to search..."
+msgstr "اكتب للبحث..."
+
+msgid "Untitled"
+msgstr "بدون عنوان"
+
+msgid "Username"
+msgstr "اسم المستخدم"
+
+msgid "Value"
+msgstr "القيمة"
+
+msgid "Wrap long lines"
+msgstr "التفاف الأسطر الطويلة"
+
+msgid "optional"
+msgstr "اختياري"
+
+msgid "required"
+msgstr "مطلوب"
+
+#, python-brace-format
+msgid "{count} icons found"
+msgstr "عدد الأيقونات: {count}"
+
+#, python-brace-format
+msgid "{count} links across all docs"
+msgstr "الروابط في كل الوثائق: {count}"
+
+#, python-brace-format
+msgid "{count} links in {scope}"
+msgstr "الروابط في {scope}: {count}"
+
+#, python-brace-format
+msgid "{visible} of {total} rows"
+msgstr "الصفوف: {visible} من {total}"
+

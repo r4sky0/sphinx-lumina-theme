@@ -54,7 +54,7 @@ body .mermaid-fullscreen-close[class] {
 body .mermaid-fullscreen-btn[class] {
   position: absolute;
   top: 0.5rem !important;
-  right: 0.5rem !important;
+  inset-inline-end: 0.5rem !important;
   font-size: 1.125rem;
 }
 

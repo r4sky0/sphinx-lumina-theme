@@ -87,7 +87,7 @@
                                  x-transition:leave-end="opacity-0"
                                  @mouseenter="cancelHide()"
                                  @mouseleave="hide()"
-                                 class="absolute left-0 top-full mt-1 min-w-[10rem] rounded-lg border border-lumina-border bg-lumina-bg py-1 shadow-lg"
+                                 class="absolute start-0 top-full mt-1 min-w-[10rem] rounded-lg border border-lumina-border bg-lumina-bg py-1 shadow-lg"
                                  role="menu">
                                 {% for child in link.children %}
                                     <a href="{{ child.url }}"
@@ -112,7 +112,7 @@
                     aria-label="{{ _('Search documentation') }}"
                     aria-haspopup="dialog">
                 {{ lumina_icon("search", size=16, css_class="shrink-0") }}
-                <span class="hidden lg:inline flex-1 text-left">{{ _("Search docs...") }}</span>
+                <span class="hidden lg:inline flex-1 text-start">{{ _("Search docs...") }}</span>
                 <kbd data-search-shortcut
                      class="hidden lg:inline rounded border border-lumina-border bg-lumina-bg px-1.5 py-0.5 text-[0.6875rem] font-[family-name:'JetBrains_Mono'] tracking-[0.02em]">⌘K</kbd>
             </button>

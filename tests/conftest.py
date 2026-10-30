@@ -191,6 +191,14 @@ def _serve(out_dir):
 
 
 @pytest.fixture(scope="session")
+def rtl_server(tmp_path_factory):
+    """Serve the sample docs built in Arabic."""
+    out_dir = tmp_path_factory.mktemp("rtl_build")
+    sphinx_app(SAMPLE_DOCS, out_dir, confoverrides={"language": "ar"}).build()
+    yield from _serve(out_dir)
+
+
+@pytest.fixture(scope="session")
 def sphinx_search_server(tmp_path_factory):
     """Serve the sample docs built with Sphinx's built-in search backend."""
     out_dir = tmp_path_factory.mktemp("sphinx_search_build")

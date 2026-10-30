@@ -3,6 +3,8 @@
 
 {% extends "basic/layout.html" %}
 
+{% set html_tag = '<html lang="%s" dir="rtl" data-content_root="%s">' | format(language, content_root) if lumina_rtl else "" %}
+
 {%- block doctype -%}
     <!DOCTYPE html>
 {%- endblock -%}
