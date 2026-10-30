@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content="Complete reference of all CSS custom properties (theme tokens) Lumina exposes for customization." name="description" />
 
-    <meta property="article:modified_time" content="2026-09-21T19:46:06+00:00" />
+    <meta property="article:modified_time" content="2026-10-30T17:17:46+00:00" />
     <title>CSS Variables &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=4e8d20e5" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=e5886d8a" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -74,7 +74,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/pr-211/"}, {"@type": "ListItem", "position": 2, "name": "Reference", "item": "https://r4sky0.github.io/sphinx-lumina-theme/pr-211/reference/index.html"}, {"@type": "ListItem", "position": 3, "name": "CSS Variables", "item": "https://r4sky0.github.io/sphinx-lumina-theme/pr-211/reference/css-variables.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "CSS Variables", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/pr-211/_static/logo-square.png"}}, "description": "Every visual surface in Lumina is driven by a CSS custom property. Override any of these in your own stylesheet to retheme the docs without forking the theme.…", "url": "https://r4sky0.github.io/sphinx-lumina-theme/pr-211/reference/css-variables.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/pr-211/reference/css-variables.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/pr-211/_static/og-card.png", "datePublished": "2026-09-21T00:00:00+00:00", "dateModified": "2026-09-21T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "CSS Variables", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/pr-211/_static/logo-square.png"}}, "description": "Every visual surface in Lumina is driven by a CSS custom property. Override any of these in your own stylesheet to retheme the docs without forking the theme.…", "url": "https://r4sky0.github.io/sphinx-lumina-theme/pr-211/reference/css-variables.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/pr-211/reference/css-variables.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/pr-211/_static/og-card.png", "datePublished": "2026-10-30T00:00:00+00:00", "dateModified": "2026-10-30T00:00:00+00:00"}</script>
         
         
     
@@ -219,7 +219,7 @@ document.documentElement.style.setProperty(
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
                 <span class="hidden lg:inline flex-1 text-start">Search docs...</span>
                 <kbd data-search-shortcut
-                     class="hidden lg:inline rounded border border-lumina-border bg-lumina-bg px-1.5 py-0.5 text-[0.6875rem] font-[family-name:'JetBrains_Mono'] tracking-[0.02em]">⌘K</kbd>
+                     class="hidden lg:inline rounded border border-lumina-border bg-lumina-bg px-1.5 py-0.5 text-[0.6875rem] font-[family-name:var(--lumina-font-mono)] tracking-[0.02em]">⌘K</kbd>
             </button>
             
             <button data-theme-toggle
@@ -517,7 +517,7 @@ document.documentElement.style.setProperty(
                         <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                     </svg>
                 Lumina</a>
-                <span class="lumina-sidebar-footer-version">v2.14.2</span>
+                <span class="lumina-sidebar-footer-version">v2.15.0</span>
             </div>
         
     </div>
@@ -698,7 +698,7 @@ document.documentElement.style.setProperty(
                         <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                            target="_blank"
                            rel="noopener">Lumina</a>
-                        <span class="lumina-sidebar-footer-version">v2.14.2</span>
+                        <span class="lumina-sidebar-footer-version">v2.15.0</span>
                     </div>
                 
             </div>
@@ -790,7 +790,7 @@ document.documentElement.style.setProperty(
     <section class="tex2jax_ignore mathjax_ignore" id="css-variables">
 <h1 id="lumina-search-css-variables">CSS Variables<a class="headerlink" href="#css-variables" title="Link to this heading">¶</a></h1>
 <p>Every visual surface in Lumina is driven by a CSS custom property. Override any of these in your own stylesheet to retheme the docs without forking the theme. For step-by-step instructions on adding a custom stylesheet, see <a class="reference internal" href="../guides/custom-styling.html"><span class="doc">Custom Styling</span></a>.</p>
-<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>2 min read</span></div><p>All tokens are defined for both the default light scope (<code class="docutils literal notranslate"><span class="pre">:root</span></code> / <code class="docutils literal notranslate"><span class="pre">[data-theme=&quot;light&quot;]</span></code>) and dark mode (<code class="docutils literal notranslate"><span class="pre">[data-theme=&quot;dark&quot;]</span></code>).</p>
+<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>3 min read</span></div><p>All tokens are defined for both the default light scope (<code class="docutils literal notranslate"><span class="pre">:root</span></code> / <code class="docutils literal notranslate"><span class="pre">[data-theme=&quot;light&quot;]</span></code>) and dark mode (<code class="docutils literal notranslate"><span class="pre">[data-theme=&quot;dark&quot;]</span></code>).</p>
 <section id="theme-tokens">
 <h2 id="lumina-search-theme-tokens">Theme tokens<a class="headerlink" href="#theme-tokens" title="Link to this heading">¶</a></h2>
 <p>The core surface and text tokens. These are the variables you’ll override most often.</p>
@@ -863,6 +863,16 @@ document.documentElement.style.setProperty(
 <td><p><code class="docutils literal notranslate"><span class="pre">#f6f7f6</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">#1b211e</span></code></p></td>
 <td><p>Inline code and code block background</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--lumina-font-sans</span></code></p></td>
+<td><p>Source Sans 3 stack</p></td>
+<td><p>Same as light</p></td>
+<td><p>Body text, UI labels, API documentation, and diagrams. See <a class="reference internal" href="../guides/custom-styling.html"><span class="doc">Custom Styling</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--lumina-font-mono</span></code></p></td>
+<td><p>JetBrains Mono stack</p></td>
+<td><p>Same as light</p></td>
+<td><p>Code blocks, inline code, and API signatures. See <a class="reference internal" href="../guides/custom-styling.html"><span class="doc">Custom Styling</span></a>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1025,7 +1035,7 @@ document.documentElement.style.setProperty(
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>September 21, 2026</time>
+            Last updated <time>October 30, 2026</time>
         </p>
     
     

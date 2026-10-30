@@ -66,6 +66,14 @@ The core surface and text tokens. These are the variables you'll override most o
   - `#f6f7f6`
   - `#1b211e`
   - Inline code and code block background
+* - `--lumina-font-sans`
+  - Source Sans 3 stack
+  - Same as light
+  - Body text, UI labels, API documentation, and diagrams. See {doc}`/guides/custom-styling`.
+* - `--lumina-font-mono`
+  - JetBrains Mono stack
+  - Same as light
+  - Code blocks, inline code, and API signatures. See {doc}`/guides/custom-styling`.
 ```
 
 :::{tip}
