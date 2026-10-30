@@ -88,6 +88,8 @@ def test_font_preview(page: Page, live_server: str):
     fira_code = code_group.get_by_role("button", name="Fira Code")
     body = page.locator("body")
     code = page.locator(".lumina-article code").first
+    # Browsers differ on quoting family names when serializing font-family.
+    fira_code_stack = re.compile(r'^"?Fira Code"?, ')
 
     expect(default).to_have_attribute("aria-pressed", "true")
     default_body_font = body.evaluate("element => getComputedStyle(element).fontFamily")
@@ -102,14 +104,14 @@ def test_font_preview(page: Page, live_server: str):
     )
 
     fira_code.click()
-    expect(code).to_have_css("font-family", '"Fira Code", ui-monospace, monospace')
+    expect(code).to_have_css("font-family", fira_code_stack)
     expect(body).to_have_css("font-family", "Literata, Georgia, serif")
 
     default.click()
     expect(body).to_have_css("font-family", default_body_font)
 
     page.reload()
-    expect(code).not_to_have_css("font-family", '"Fira Code", ui-monospace, monospace')
+    expect(code).not_to_have_css("font-family", fira_code_stack)
     expect(default).to_have_attribute("aria-pressed", "true")
 
 
