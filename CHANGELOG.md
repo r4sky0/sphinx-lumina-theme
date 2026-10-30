@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.17.0 (2026-10-30)
+
+### Features
+
+- Add right-to-left layout support and Arabic translation
+  ([#211](https://github.com/r4sky0/sphinx-lumina-theme/pull/211),
+  [`9bfb660`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9bfb6604689731503a8fdfdd59ffcfd87dda6b9c))
+
+
 ## v2.16.0 (2026-10-30)
 
 ### Features
