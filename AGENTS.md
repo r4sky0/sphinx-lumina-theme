@@ -58,6 +58,8 @@ When creating elements with `document.createElement()` and setting Alpine direct
 
 User-visible text is translatable: wrap template strings as `{{ _("Text") }}`; in JavaScript use `t("Text")` from `utils/i18n.js` (or `$t('Text')` in Alpine expressions) and list every JavaScript string in `theme/components/i18n.html`. Run `pnpm run i18n` to refresh `locale/` afterward. See `docs/contributing/translations.md`.
 
+Layout must work in both directions: `dir="rtl"` is set on `<html>` for right-to-left languages. Use logical CSS (`margin-inline-start`, `inset-inline-end`) and Tailwind utilities (`ms-*`, `pe-*`, `start-*`, `border-s`) instead of physical left/right, except where left and right are literal. Rules specific to RTL are in the "Right-to-left" section of `base.css`.
+
 Dark mode uses CSS custom properties such as `--lumina-accent`, `--lumina-bg`, and `--lumina-text`, toggled by `[data-theme="dark"]` on `<html>`. The preference is stored under `lumina-theme`, and the inline `extrahead` script in `layout.html` applies it before paint to prevent FOUC.
 
 ## Coding Style & Naming Conventions

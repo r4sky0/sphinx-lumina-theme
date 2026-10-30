@@ -90,13 +90,13 @@ def test_sidebar_root_current_no_accent_highlight(build_output):
 
 
 def test_sidebar_active_leaf_has_border_left(build_output):
-    """The active leaf style should use border-left, not a ::before pseudo-element."""
+    """The active leaf style should use an inline border, not a ::before pseudo-element."""
     css_path = build_output / "_static" / "lumina.css"
     css_text = css_path.read_text()
     # The old ::before rule should be gone
     assert "li.current:not(.toctree-l1) > a::before" not in css_text
-    # The new rule should use border-left
-    assert "border-left:" in css_text
+    # The new rule should use a logical border so it mirrors in RTL
+    assert "border-inline-start:" in css_text
 
 
 def test_sidebar_toggle_button_after_link(build_output):

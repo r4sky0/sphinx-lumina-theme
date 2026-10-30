@@ -70,7 +70,7 @@
                 <a :href="result.url"
                    data-search-result
                    class="flex flex-col gap-1 rounded-lg px-3 py-2.5 no-underline transition-colors focus-visible:outline-2 focus-visible:outline-lumina-accent"
-                   :class="[index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text', result.isHeading ? 'ml-4 border-l border-lumina-border' : 'mt-1']"
+                   :class="[index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text', result.isHeading ? 'ms-4 border-s border-lumina-border' : 'mt-1']"
                    @mouseenter="selectedIndex = index"
                    @focus="selectedIndex = index">
                     <template x-if="result.breadcrumb">
