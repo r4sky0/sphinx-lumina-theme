@@ -170,7 +170,7 @@ def _serve(out_dir):
     port = _find_free_port()
 
     server = subprocess.Popen(
-        [sys.executable, "-m", "http.server", str(port)],
+        [sys.executable, "-m", "http.server", "--bind", "127.0.0.1", str(port)],
         cwd=str(out_dir),
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
