@@ -12,10 +12,9 @@ let cw = 0,
   ch = 0;
 let darkMode = 0;
 let prefersReduced = false;
-let frameId = 0;
-const pointer = { x: 0, y: 0, prevX: -1, prevY: -1, active: false };
-let smoothVx = 0,
-  smoothVy = 0;
+let redraw = null; /* set under reduced motion, when no loop repaints the canvas */
+/* x/y ease toward the cursor so strokes stay continuous between input events */
+const pointer = { x: 0, y: 0, targetX: 0, targetY: 0, active: false };
 
 /* ── Message handler ── */
 self.onmessage = (e) => {
@@ -24,31 +23,31 @@ self.onmessage = (e) => {
     case "init":
       init(d);
       break;
-    case "pointer":
-      pointer.x = d.x;
-      pointer.y = d.y;
-      pointer.active = true;
-      break;
     case "pointerenter":
-      pointer.prevX = d.x;
-      pointer.prevY = d.y;
-      smoothVx = 0;
-      smoothVy = 0;
+      pointer.active = false;
+    /* fall through */
+    case "pointer":
+      /* Snap on first contact, or a tap reads as a stroke from the last tap */
+      if (!pointer.active) {
+        pointer.x = d.x;
+        pointer.y = d.y;
+        pointer.active = true;
+      }
+      pointer.targetX = d.x;
+      pointer.targetY = d.y;
       break;
     case "theme":
       darkMode = d.dark ? 1.0 : 0.0;
+      redraw?.();
       break;
     case "resize":
       cw = d.w;
       ch = d.h;
       if (canvas) {
-        canvas.width = d.w * d.dpr;
-        canvas.height = d.h * d.dpr;
+        canvas.width = d.w * d.scale;
+        canvas.height = d.h * d.scale;
       }
-      break;
-    case "stop":
-      cancelAnimationFrame(frameId);
-      self.close();
+      redraw?.();
       break;
   }
 };
@@ -61,22 +60,45 @@ function init(cfg) {
   darkMode = cfg.dark ? 1.0 : 0.0;
   prefersReduced = cfg.reduced;
 
-  const dpr = Math.min(cfg.dpr || 1, 2);
-  canvas.width = cw * dpr;
-  canvas.height = ch * dpr;
+  canvas.width = cw * cfg.scale;
+  canvas.height = ch * cfg.scale;
 
-  gl = canvas.getContext("webgl2", { alpha: true, premultipliedAlpha: false });
+  gl = canvas.getContext("webgl2", {
+    alpha: true,
+    premultipliedAlpha: false,
+    antialias: false,
+    depth: false,
+    stencil: false,
+    powerPreference: "low-power",
+  });
   if (!gl || !gl.getExtension("EXT_color_buffer_float")) return;
 
-  const SIM = cfg.sim || 256;
-  const DYE = cfg.dye || 512;
-  const JACOBI_ITERS = cfg.jacobi || 30;
+  /* Square texels keep the flow isotropic; each grid keeps its texel budget.
+     shortcut: sized once, so a later aspect change stretches the flow; rebuild the FBOs on resize if that shows. */
+  function gridSize(base) {
+    const scale = Math.sqrt(cw / ch);
+    return [Math.round(base * scale), Math.round(base / scale)];
+  }
+
+  const [simW, simH] = gridSize(cfg.sim);
+  const [dyeW, dyeH] = gridSize(cfg.dye);
+  const JACOBI_ITERS = cfg.jacobi;
+  /* Velocity is in texels/s; forces below are tuned for a 256 grid */
+  const VELOCITY_SCALE = cfg.sim / 256;
   const VEL_DISSIPATION = 0.985;
   const DYE_DISSIPATION = 0.978;
   const PRESS_DISSIPATION = 0.8;
   const SPLAT_RADIUS = 0.006;
-  const SPLAT_FORCE = 200;
-  const SIM_TEXEL = new Float32Array([1 / SIM, 1 / SIM]);
+  const POINTER_EASE = 0.25;
+  const POINTER_FORCE = 36; /* velocity per px moved in a frame */
+  const POINTER_MAX_FORCE = 2000;
+  const POINTER_DYE = 0.35;
+  const POINTER_DYE_SPEED = 24; /* px per frame that deposits the full POINTER_DYE */
+  const AMBIENT_FRAMES = 24;
+  const AMBIENT_DYE = 1.6; /* total per wisp */
+  const FRAME_MS = 1000 / 60;
+  const SETTLE_FRAMES = 45;
+  const SIM_TEXEL = new Float32Array([1 / simW, 1 / simH]);
 
   const DYE_COLORS = [
     [0.06, 0.5, 0.28],
@@ -200,7 +222,6 @@ function init(cfg) {
     precision highp float;
     in vec2 vUv;
     out vec4 fragColor;
-    uniform sampler2D uTarget;
     uniform float aspectRatio;
     uniform vec3 color;
     uniform vec2 point;
@@ -208,7 +229,7 @@ function init(cfg) {
     void main() {
       vec2 p = vUv - point;
       p.x *= aspectRatio;
-      fragColor = vec4(texture(uTarget, vUv).rgb + exp(-dot(p,p) / radius) * color, 1.0);
+      fragColor = vec4(exp(-dot(p,p) / radius) * color, 0.0);
     }`;
 
   const advectionFS = `#version 300 es
@@ -323,32 +344,32 @@ function init(cfg) {
 
   /* ── FBOs ── */
   const velocity = createDoubleFBO(
-    SIM,
-    SIM,
+    simW,
+    simH,
     gl.RG16F,
     gl.RG,
     gl.HALF_FLOAT,
     gl.LINEAR,
   );
   const pressure = createDoubleFBO(
-    SIM,
-    SIM,
+    simW,
+    simH,
     gl.R16F,
     gl.RED,
     gl.HALF_FLOAT,
     gl.LINEAR,
   );
   const divergenceFBO = createFBO(
-    SIM,
-    SIM,
+    simW,
+    simH,
     gl.R16F,
     gl.RED,
     gl.HALF_FLOAT,
     gl.NEAREST,
   );
   const dye = createDoubleFBO(
-    DYE,
-    DYE,
+    dyeW,
+    dyeH,
     gl.RGBA16F,
     gl.RGBA,
     gl.HALF_FLOAT,
@@ -356,30 +377,50 @@ function init(cfg) {
   );
 
   /* ── Splat ── */
-  function splat(x, y, dx, dy, radius) {
+  function splat(x, y, dx, dy, radius, dyeAmount = 1) {
     const u = prog.splat.uniforms;
+    const aspect = cw / ch;
+    const reach = 2.5 * Math.sqrt(radius); /* where the gaussian falls below 0.2% */
+    /* Blended in place and scissored, so a splat costs its footprint, not the grid */
+    const stamp = (target) => {
+      gl.scissor(
+        (x - reach / aspect) * target.width,
+        (y - reach) * target.height,
+        ((2 * reach) / aspect) * target.width + 1,
+        2 * reach * target.height + 1,
+      );
+      blit(target);
+    };
+
     use(prog.splat);
-    gl.uniform1i(u.uTarget, 0);
-    gl.uniform1f(u.aspectRatio, cw / ch);
+    gl.enable(gl.BLEND);
+    gl.enable(gl.SCISSOR_TEST);
+    gl.uniform1f(u.aspectRatio, aspect);
     gl.uniform2f(u.point, x, y);
     gl.uniform1f(u.radius, radius);
 
-    gl.uniform3f(u.color, dx, dy, 0);
-    bindTex(0, velocity.read.texture);
-    blit(velocity.write);
-    velocity.swap();
+    gl.uniform3f(u.color, dx * VELOCITY_SCALE, dy * VELOCITY_SCALE, 0);
+    stamp(velocity.read);
 
     const c = DYE_COLORS[(Math.random() * DYE_COLORS.length) | 0];
-    gl.uniform3f(u.color, c[0], c[1], c[2]);
-    bindTex(0, dye.read.texture);
-    blit(dye.write);
-    dye.swap();
+    gl.uniform3f(
+      u.color,
+      c[0] * dyeAmount,
+      c[1] * dyeAmount,
+      c[2] * dyeAmount,
+    );
+    stamp(dye.read);
+
+    gl.disable(gl.SCISSOR_TEST);
+    gl.disable(gl.BLEND);
   }
 
   /* ── Ambient edge splats ── */
   let nextAmbientAt = 0.7 + Math.random() * 0.6;
   let ambientTimer = 0;
+  let ambient = null;
 
+  /* Starts a wisp that fades in over AMBIENT_FRAMES instead of popping in */
   function edgeSplat() {
     const regions = [
       () => [0.02 + Math.random() * 0.2, Math.random()],
@@ -390,54 +431,49 @@ function init(cfg) {
     const [x, y] = regions[(Math.random() * 4) | 0]();
     const angle = Math.random() * Math.PI * 2;
     const speed = 200 + Math.random() * 400;
-    splat(
+    ambient = {
       x,
       y,
-      Math.cos(angle) * speed,
-      Math.sin(angle) * speed,
-      0.005 + Math.random() * 0.003,
-    );
+      dx: (Math.cos(angle) * speed) / AMBIENT_FRAMES,
+      dy: (Math.sin(angle) * speed) / AMBIENT_FRAMES,
+      radius: 0.005 + Math.random() * 0.003,
+      framesLeft: AMBIENT_FRAMES,
+    };
   }
 
   /* ── Simulation loop ── */
   let lastTime = performance.now();
 
-  function step() {
-    const now = performance.now();
-    const dt = Math.min((now - lastTime) / 1000, 0.016);
-    lastTime = now;
+  function draw() {
+    use(prog.display);
+    gl.uniform1i(prog.display.uniforms.uDye, 0);
+    gl.uniform1f(prog.display.uniforms.uDark, darkMode);
+    bindTex(0, dye.read.texture);
+    blit(null);
+  }
 
-    if (prefersReduced) {
-      use(prog.display);
-      gl.uniform1i(prog.display.uniforms.uDye, 0);
-      gl.uniform1f(prog.display.uniforms.uDark, darkMode);
-      bindTex(0, dye.read.texture);
-      blit(null);
-      return;
-    }
-
+  function advance(dt) {
     /* Input */
-    if (pointer.active && pointer.prevX >= 0) {
-      const rawDx = (pointer.x - pointer.prevX) * cw;
-      const rawDy = (pointer.y - pointer.prevY) * ch;
-      pointer.prevX = pointer.x;
-      pointer.prevY = pointer.y;
-      const speed = Math.sqrt(rawDx * rawDx + rawDy * rawDy);
-      if (speed > 0.5) {
-        const force = Math.min(8000, Math.sqrt(speed) * SPLAT_FORCE);
-        const vx = (rawDx / speed) * force;
-        const vy = (rawDy / speed) * force;
-        const EMA = 0.3;
-        smoothVx += EMA * (vx - smoothVx);
-        smoothVy += EMA * (vy - smoothVy);
-        splat(pointer.x, pointer.y, smoothVx, smoothVy, SPLAT_RADIUS);
-      } else {
-        smoothVx *= 0.85;
-        smoothVy *= 0.85;
+    if (pointer.active) {
+      const moveX = (pointer.targetX - pointer.x) * POINTER_EASE;
+      const moveY = (pointer.targetY - pointer.y) * POINTER_EASE;
+      pointer.x += moveX;
+      pointer.y += moveY;
+      const pxX = moveX * cw;
+      const pxY = moveY * ch;
+      const speed = Math.hypot(pxX, pxY);
+      if (speed > 0.25) {
+        const force = Math.min(POINTER_MAX_FORCE, speed * POINTER_FORCE);
+        splat(
+          pointer.x,
+          pointer.y,
+          (pxX / speed) * force,
+          (pxY / speed) * force,
+          SPLAT_RADIUS,
+          /* Dye follows speed, so small movements never stamp a full blob */
+          POINTER_DYE * Math.min(1, speed / POINTER_DYE_SPEED),
+        );
       }
-    } else if (pointer.active) {
-      pointer.prevX = pointer.x;
-      pointer.prevY = pointer.y;
     }
 
     /* Ambient */
@@ -447,6 +483,17 @@ function init(cfg) {
       nextAmbientAt = 0.7 + Math.random() * 0.6;
       edgeSplat();
     }
+    if (ambient) {
+      splat(
+        ambient.x,
+        ambient.y,
+        ambient.dx,
+        ambient.dy,
+        ambient.radius,
+        AMBIENT_DYE / AMBIENT_FRAMES,
+      );
+      if (--ambient.framesLeft === 0) ambient = null;
+    }
 
     /* Advect velocity */
     use(prog.advection);
@@ -454,16 +501,21 @@ function init(cfg) {
     gl.uniform1i(prog.advection.uniforms.uVelocity, 0);
     gl.uniform1i(prog.advection.uniforms.uSource, 0);
     gl.uniform1f(prog.advection.uniforms.dt, dt);
-    gl.uniform1f(prog.advection.uniforms.dissipation, VEL_DISSIPATION);
+    /* Tuned per 60Hz frame; scale by dt so 120Hz displays fade at the same speed */
+    gl.uniform1f(
+      prog.advection.uniforms.dissipation,
+      VEL_DISSIPATION ** (dt * 60),
+    );
     bindTex(0, velocity.read.texture);
     blit(velocity.write);
     velocity.swap();
 
     /* Advect dye */
-    use(prog.advection);
-    gl.uniform2fv(prog.advection.uniforms.texelSize, SIM_TEXEL);
     gl.uniform1i(prog.advection.uniforms.uSource, 1);
-    gl.uniform1f(prog.advection.uniforms.dissipation, DYE_DISSIPATION);
+    gl.uniform1f(
+      prog.advection.uniforms.dissipation,
+      DYE_DISSIPATION ** (dt * 60),
+    );
     bindTex(0, velocity.read.texture);
     bindTex(1, dye.read.texture);
     blit(dye.write);
@@ -505,18 +557,23 @@ function init(cfg) {
     bindTex(1, velocity.read.texture);
     blit(velocity.write);
     velocity.swap();
+  }
 
-    /* Display */
-    use(prog.display);
-    gl.uniform1i(prog.display.uniforms.uDye, 0);
-    gl.uniform1f(prog.display.uniforms.uDark, darkMode);
-    bindTex(0, dye.read.texture);
-    blit(null);
+  function step() {
+    requestAnimationFrame(step);
+    const now = performance.now();
+    /* Cap at 60fps; high refresh displays gain nothing on a soft background.
+       The margin keeps a 60Hz display from skipping frames on timer jitter. */
+    if (now - lastTime < FRAME_MS - 2) return;
+    const dt = Math.min((now - lastTime) / 1000, 0.016);
+    lastTime = now;
 
-    frameId = requestAnimationFrame(step);
+    advance(dt);
+    draw();
   }
 
   gl.bindVertexArray(quadVAO);
+  gl.blendFunc(gl.ONE, gl.ONE);
 
   /* Seed initial wisps at edges */
   [
@@ -533,5 +590,12 @@ function init(cfg) {
     splat(x, y, Math.cos(angle) * speed, Math.sin(angle) * speed, 0.003);
   });
 
-  step();
+  if (prefersReduced) {
+    /* Hold one still frame, after letting the seeds flow into wisps */
+    for (let i = 0; i < SETTLE_FRAMES; i++) advance(1 / 60);
+    redraw = draw;
+    draw();
+  } else {
+    step();
+  }
 }
