@@ -36,8 +36,8 @@ dt.sig:hover > a.headerlink {
 
 /* [source] links from sphinx.ext.viewcode and sphinx.ext.linkcode sit apart from the signature */
 dt.sig > a:has(> .viewcode-link) {
-  float: right;
-  margin-left: 1rem;
+  float: inline-end;
+  margin-inline-start: 1rem;
   text-decoration: none;
 }
 
@@ -239,22 +239,22 @@ div.versionremoved {
 }
 
 .versionadded {
-  border-left: 3px solid var(--lumina-adm-tip);
+  border-inline-start: 3px solid var(--lumina-adm-tip);
   background: color-mix(in srgb, var(--lumina-adm-tip) 5%, var(--lumina-bg));
 }
 
 .versionchanged {
-  border-left: 3px solid var(--lumina-adm-note);
+  border-inline-start: 3px solid var(--lumina-adm-note);
   background: color-mix(in srgb, var(--lumina-adm-note) 5%, var(--lumina-bg));
 }
 
 div.deprecated {
-  border-left: 3px solid var(--lumina-adm-warning);
+  border-inline-start: 3px solid var(--lumina-adm-warning);
   background: color-mix(in srgb, var(--lumina-adm-warning) 5%, var(--lumina-bg));
 }
 
 div.versionremoved {
-  border-left: 3px solid var(--lumina-adm-danger);
+  border-inline-start: 3px solid var(--lumina-adm-danger);
   background: color-mix(in srgb, var(--lumina-adm-danger) 5%, var(--lumina-bg));
 }
 
@@ -296,7 +296,8 @@ dl.http.options { --http-method-color: var(--lumina-adm-important); }
 
 /* Keep Sphinx's inline path tokens together, with room for the curl action. */
 dl.http > dt.sig {
-  padding: 1rem 6.5rem 1rem 0;
+  padding-block: 1rem;
+  padding-inline: 0 6.5rem;
   border: none;
   border-block: 1px solid var(--lumina-border);
   border-radius: 0;
@@ -309,7 +310,7 @@ dl.http > dt.sig {
 dl.http > dt.sig .sig-name.descname:first-of-type {
   display: inline-block;
   min-width: 3.5rem;
-  margin-right: 0.625rem;
+  margin-inline-end: 0.625rem;
   padding: 0.125rem 0.5rem;
   border-radius: 0.25rem;
   background: color-mix(in srgb, var(--http-method-color) 9%, var(--lumina-bg));
@@ -364,14 +365,14 @@ dl:has(> dt > .lumina-api-toggle) + dl:has(> dt.sig) > dt.sig {
 }
 
 .lumina-article dt.sig:has(> .lumina-api-toggle) {
-  padding-left: 2.75rem;
-  padding-right: 1.5rem;
+  padding-inline-start: 2.75rem;
+  padding-inline-end: 1.5rem;
   min-height: 3.5rem;
   cursor: pointer;
 }
 
 .lumina-article dt.sig:has(> .lumina-curl-copy) {
-  padding-right: 7.75rem;
+  padding-inline-end: 7.75rem;
 }
 
 dt.sig .pre {
@@ -381,7 +382,7 @@ dt.sig .pre {
 .lumina-api-toggle {
   position: absolute;
   top: 0.375rem;
-  left: 0;
+  inset-inline-start: 0;
   width: 2.75rem;
   height: 2.75rem;
   border: none;
@@ -393,7 +394,7 @@ dt.sig .pre {
   content: "";
   position: absolute;
   top: 1.125rem;
-  left: 1rem;
+  inset-inline-start: 1rem;
   width: 0.375rem;
   height: 0.375rem;
   border: solid var(--lumina-text-muted);
@@ -412,15 +413,16 @@ dt.sig .pre {
 .lumina-article dt.sig:has(> .lumina-api-toggle) > .headerlink {
   position: absolute;
   top: 1rem;
-  right: 0.25rem;
+  inset-inline-end: 0.25rem;
 }
 
 .lumina-article dt.sig:has(> .lumina-curl-copy) > .headerlink {
-  right: 6.5rem;
+  inset-inline-end: 6.5rem;
 }
 
 .lumina-article dl:has(> dt > .lumina-api-toggle) > dd {
-  padding: 1.25rem 0.75rem 1.5rem 2.75rem;
+  padding-block: 1.25rem 1.5rem;
+  padding-inline: 2.75rem 0.75rem;
 }
 
 @container (max-width: 32rem) {
@@ -466,7 +468,7 @@ dt.sig .pre {
 .lumina-curl-copy {
   position: absolute;
   top: 0.75rem;
-  right: 0;
+  inset-inline-end: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -800,7 +802,7 @@ dt.sig .pre {
 }
 
 .lumina-try-it-copy-res {
-  margin-left: auto;
+  margin-inline-start: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;

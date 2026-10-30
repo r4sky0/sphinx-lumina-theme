@@ -115,6 +115,39 @@ def test_font_preview(page: Page, live_server: str):
     expect(default).to_have_attribute("aria-pressed", "true")
 
 
+def test_rtl_layout_mirrors(page: Page, rtl_server: str):
+    page.set_viewport_size({"width": 1440, "height": 900})
+    page.goto(f"{rtl_server}/typography-test.html")
+
+    sidebar = page.locator("#lumina-sidebar").bounding_box()
+    content = page.locator("#lumina-content").bounding_box()
+    assert sidebar["x"] > content["x"]
+
+    nav = page.locator(".lumina-toc-nav").bounding_box()
+    dot = page.locator(".lumina-toc-guide circle").bounding_box()
+    assert dot["x"] > nav["x"] + nav["width"] / 2
+
+    assert page.evaluate("document.documentElement.scrollWidth === innerWidth")
+    expect(page.locator("footer nav .inline-block").first).to_have_css("scale", "-1 1")
+
+    page.goto(f"{rtl_server}/index.html")
+    code = page.locator("div.highlight pre").first
+    expect(code).to_have_css("direction", "ltr")
+    expect(code).to_have_css("font-family", re.compile(r"JetBrains Mono.*Arial"))
+
+
+def test_rtl_mobile_drawer_opens_from_the_right(page: Page, rtl_server: str):
+    page.set_viewport_size({"width": 390, "height": 800})
+    page.goto(f"{rtl_server}/typography-test.html")
+    page.locator("[aria-controls='lumina-sidebar-drawer']").click()
+
+    drawer = page.locator("#lumina-sidebar-drawer")
+    expect(drawer).to_be_visible()
+    page.wait_for_timeout(400)
+    box = drawer.bounding_box()
+    assert box["x"] + box["width"] == 390
+
+
 def test_search_modal_opens(page: Page):
     """Clicking search trigger should open the search modal."""
     page.click("[data-search-trigger]")
@@ -1404,7 +1437,7 @@ def test_docutils_elements_are_styled(page: Page, docutils_elements_page: str):
     page.set_viewport_size({"width": 1280, "height": 900})
     page.goto(docutils_elements_page)
 
-    assert computed_style(page, "aside.sidebar", "float") == "right"
+    assert computed_style(page, "aside.sidebar", "float") == "inline-end"
     assert computed_style(page, "img.align-right", "float") == "right"
     assert computed_style(page, "aside.topic", "borderTopStyle") == "solid"
     assert computed_style(page, "p.rubric", "fontWeight") == "600"
@@ -1414,7 +1447,9 @@ def test_docutils_elements_are_styled(page: Page, docutils_elements_page: str):
     assert computed_style(page, "dt .classifier", "content", "::before") == '":"'
     assert computed_style(page, "div.versionremoved", "borderLeftStyle") == "solid"
     assert computed_style(page, "pre:has(> strong)", "overflowX") == "auto"
-    assert computed_style(page, "aside.footnote > span.label", "float") == "left"
+    assert (
+        computed_style(page, "aside.footnote > span.label", "float") == "inline-start"
+    )
     assert computed_style(page, "td", "hyphens") == "none"
     assert computed_style(page, "section > h2", "clear") == "both"
 

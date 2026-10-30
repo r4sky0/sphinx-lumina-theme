@@ -6,6 +6,7 @@ import posixpath
 import re
 from pathlib import Path
 
+from babel import Locale, UnknownLocaleError
 from sphinx import addnodes
 from sphinx.environment.adapters.toctree import _resolve_toctree
 from sphinx.locale import get_translation
@@ -526,8 +527,17 @@ def _iso_last_updated(app, pagename: str) -> str | None:
         return None
 
 
+def _is_rtl(language):
+    """Return whether a Sphinx ``language`` value is written right to left."""
+    try:
+        return Locale.parse((language or "").replace("-", "_")).text_direction == "rtl"
+    except (TypeError, ValueError, UnknownLocaleError):
+        return False
+
+
 def _add_context(app, pagename, templatename, context, doctree):
     context["lumina_version"] = __version__
+    context["lumina_rtl"] = _is_rtl(app.config.language)
     context["has_llms_txt"] = "sphinx_llm.txt" in app.extensions
     wide_val = str(app.builder.theme_options.get("wide_layout", "false")).lower()
     if wide_val in ("toggle", "always"):

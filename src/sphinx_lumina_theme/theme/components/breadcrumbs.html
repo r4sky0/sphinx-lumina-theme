@@ -7,13 +7,15 @@
     {% endif %}
     {% if parents %}
         {% for parent in parents %}
-            {% if not loop.first %}{{ lumina_icon("chevron-right", size=14, css_class="flex-shrink-0") }}{% endif %}
+            {% if not loop.first %}
+                {{ lumina_icon("chevron-right", size=14, css_class="flex-shrink-0 rtl:-scale-x-100") }}
+            {% endif %}
             {# Middle parents shorten first, so a long package name never hides the current page. #}
             <a href="{{ parent.link }}"
                class="{{ 'shrink-0 whitespace-nowrap' if loop.first and not loop.last else 'min-w-0 truncate' }} hover:text-lumina-accent no-underline transition-colors">{{ parent.title }}</a>
         {% endfor %}
     {% endif %}
-    {{ lumina_icon("chevron-right", size=14, css_class="flex-shrink-0") }}
+    {{ lumina_icon("chevron-right", size=14, css_class="flex-shrink-0 rtl:-scale-x-100") }}
     <span class="shrink-0 whitespace-nowrap text-lumina-text"
           aria-current="page">{{ title }}</span>
 </nav>
