@@ -392,6 +392,7 @@ def test_prose_wrapping_and_optional_hyphenation(page: Page, live_server: str):
         " a.textContent = a.href; p.replaceChildren(a); }"
     )
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    expect(page.locator(".lumina-article p").first).to_have_css("hyphens", "manual")
     page.add_style_tag(
         content=".lumina-article { -webkit-hyphens: auto; hyphens: auto; }"
     )

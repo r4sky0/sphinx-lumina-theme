@@ -445,7 +445,7 @@ span.highlighted {
 }
 
 .lumina-section-switcher-item .lumina-section-switcher-desc {
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -955,9 +955,9 @@ a.headerlink[data-tooltip].lumina-tooltip-visible::after {
 .lumina-sidebar-footer-version {
   display: block;
   margin-top: 0.125rem;
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.02em;
-  color: color-mix(in srgb, var(--lumina-text-muted) 45%, transparent);
+  color: var(--lumina-text-muted);
 }
 
 /* ── Search page ── Sphinx's own search page (search_backend = "sphinx" and

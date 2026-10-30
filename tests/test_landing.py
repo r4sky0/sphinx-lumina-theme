@@ -40,6 +40,12 @@ def test_landing_hero_renders_title(landing_html):
     assert "Test Landing" in hero.get_text()
 
 
+def test_landing_hero_is_the_only_h1(landing_html):
+    """The page's own title steps down so the page keeps one h1."""
+    assert [h1.get_text() for h1 in landing_html.find_all("h1")] == ["Test Landing"]
+    assert landing_html.find("article").find("h2").get_text().startswith("Landing Test")
+
+
 def test_landing_main_has_role_main(landing_html):
     """Sphinx search reads result summaries from the ``[role="main"]`` block."""
     main = landing_html.find("main", id="lumina-content")
