@@ -1036,7 +1036,11 @@ def test_mermaid_sizing_and_colors_survive_theme_changes(context, live_server: s
             }"""
         )
         label = diagrams.first.locator(".nodeLabel").first
-        expect(label).to_have_css("font-family", '"Source Sans 3", sans-serif')
+        expect(label).to_have_css(
+            "font-family",
+            '"Source Sans 3", "Source Sans 3 Fallback", "Source Sans Pro", '
+            "system-ui, -apple-system, sans-serif",
+        )
         # The author's classDef highlight survives the theme defaults.
         highlight = diagrams.first.locator(".node.ready path, .node.ready rect").first
         expect(highlight).to_have_css("stroke-width", "2px")

@@ -103,20 +103,90 @@ Lumina ships with self-hosted fonts — no external CDN requests:
 Latin text uses smaller font subsets. The browser loads the original full fonts
 when other characters are needed, preserving the existing language coverage.
 
-To use your own fonts, override the font-family declarations in your custom CSS:
+To use your own fonts, load them from your docs or a font provider, then set the `--lumina-font-sans` and `--lumina-font-mono` tokens. The theme applies them everywhere, including code blocks, API documentation and diagrams.
 
-```css
-body {
-    font-family: "Inter", system-ui, sans-serif;
-}
+### Local font files
 
-code, pre, .highlight {
-    font-family: "Fira Code", ui-monospace, monospace;
+Host a font with your docs when you want a font that isn't on Google Fonts, or when readers' browsers shouldn't contact a third party. This example uses a font called `My Font` with regular and bold files.
+
+1. Copy the `.woff2` files into your static directory:
+
+   ```text
+   docs/
+   ├── conf.py
+   └── _static/
+       ├── custom.css
+       └── fonts/
+           ├── my-font-regular.woff2
+           └── my-font-bold.woff2
+   ```
+
+2. Register the stylesheet in `conf.py`:
+
+   ```{code-block} python
+   :caption: conf.py
+   html_static_path = ["_static"]
+   html_css_files = ["custom.css"]
+   ```
+
+3. Declare each file with `@font-face`, then point Lumina at the font:
+
+   ```{code-block} css
+   :caption: docs/_static/custom.css
+   @font-face {
+       font-family: "My Font";
+       src: url("fonts/my-font-regular.woff2") format("woff2");
+       font-weight: 400;
+       font-display: swap;
+   }
+
+   @font-face {
+       font-family: "My Font";
+       src: url("fonts/my-font-bold.woff2") format("woff2");
+       font-weight: 700;
+       font-display: swap;
+   }
+
+   :root {
+       --lumina-font-sans: "My Font", system-ui, sans-serif;
+   }
+   ```
+
+4. Rebuild your docs. Pages now use `My Font` for body text.
+
+To change the code font, set `--lumina-font-mono` the same way.
+
+Keep these details in mind:
+
+- **Paths:** `url()` paths are relative to the CSS file, not to `conf.py`.
+- **Weights:** Lumina uses weights 400, 500, 600 and 700 for body text. If a weight is missing, the browser uses the closest one or synthesizes bold.
+- **Variable fonts:** one file can cover every weight. Declare it with `font-weight: 400 700;`.
+- **Missing fonts:** if a page still shows the system font, check the browser's Network tab for a 404 on the `.woff2` file, and check that the `font-family` name matches in both places.
+
+### Other font providers, e.g. Google Fonts
+
+Add the provider's stylesheet to `html_css_files`, then set the font tokens in your custom CSS. This example loads Inter and Fira Code from [Google Fonts](https://fonts.google.com/):
+
+```{code-block} python
+:caption: conf.py
+html_static_path = ["_static"]
+html_css_files = [
+    "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap",
+    "custom.css",
+]
+```
+
+```{code-block} css
+:caption: docs/_static/custom.css
+
+:root {
+    --lumina-font-sans: "Inter", system-ui, sans-serif;
+    --lumina-font-mono: "Fira Code", ui-monospace, monospace;
 }
 ```
 
-:::{note}
-If you use custom fonts, add the font files to your `_static/` directory and include the appropriate `@font-face` declarations.
+:::{warning}
+With a hosted font, readers' browsers contact the provider, which receives their IP address. Check whether this affects your privacy policy or GDPR obligations.
 :::
 
 ## Hyphenation

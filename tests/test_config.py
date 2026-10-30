@@ -1,5 +1,9 @@
 """Test theme configuration options."""
 
+import re
+from pathlib import Path
+
+import sphinx_lumina_theme
 from bs4 import BeautifulSoup
 from conftest import copy_sample_docs, sphinx_app
 
@@ -32,6 +36,24 @@ def test_custom_accent_color(tmp_path):
     page_text = str(html)
     assert "#8b5cf6" in page_text
     assert "--lumina-link:color-mix(in srgb,#8b5cf6" in page_text
+
+
+def test_font_families_use_tokens():
+    """Named families bypass the font tokens that users override."""
+    package = Path(sphinx_lumina_theme.__file__).parent
+    named_family = re.compile(
+        r"font-family:\s*[\"'](Source Sans 3|JetBrains Mono)[\"']"
+    )
+    sources = [
+        path
+        for path in (
+            *package.glob("_static_src/css/*.css"),
+            *package.glob("theme/**/*.html"),
+        )
+        if path.name != "fonts.css"
+    ]
+    assert sources
+    assert [p.name for p in sources if named_family.search(p.read_text())] == []
 
 
 def test_hide_toc(tmp_path):

@@ -64,7 +64,7 @@ Dark mode uses CSS custom properties such as `--lumina-accent`, `--lumina-bg`, a
 
 Use four spaces in Python and Jinja templates; `djlint` is configured with a 120-character limit for templates. Follow the existing two-space JavaScript style. Name Python modules and functions with `snake_case`; use descriptive hyphenated names for JavaScript, CSS, and template files. Edit source assets rather than compiled files in `theme/static/`. Ruff formats and checks Python; djlint formats Jinja. The pre-commit hook runs these tools on staged files.
 
-Use self-hosted fonts only (Source Sans 3 and JetBrains Mono). Keep Sphinx template inheritance through the `basic` theme and override blocks instead of replacing the inheritance chain. See `.impeccable.md` for brand guidelines, design philosophy, and reference sites.
+Use self-hosted fonts only (Source Sans 3 and JetBrains Mono). Use the `--lumina-font-sans` and `--lumina-font-mono` tokens instead of naming a family in CSS or templates. Keep Sphinx template inheritance through the `basic` theme and override blocks instead of replacing the inheritance chain. See `.impeccable.md` for brand guidelines, design philosophy, and reference sites.
 
 ## Testing Guidelines
 
