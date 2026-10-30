@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.16.0 (2026-10-30)
+
+### Features
+
+- **landing**: Refresh landing heroes and fix reading details
+  ([#212](https://github.com/r4sky0/sphinx-lumina-theme/pull/212),
+  [`c721e4d`](https://github.com/r4sky0/sphinx-lumina-theme/commit/c721e4d4f15a1a2e77751e0c74821c8e6617a990))
+
+
 ## v2.15.0 (2026-10-30)
 
 ### Features
