@@ -5,8 +5,6 @@
   line-height: 1.75;
   color: var(--lumina-text);
   overflow-wrap: break-word;
-  -webkit-hyphens: auto;
-  hyphens: auto;
 }
 
 /* Hyphenation may be enabled for prose, but must not change code spelling
@@ -237,7 +235,7 @@
   font-family: var(--lumina-font-sans);
   font-size: 0.8125em;
   font-weight: 500;
-  background: linear-gradient(180deg, var(--lumina-bg), var(--lumina-bg-secondary));
+  background: var(--lumina-bg-secondary);
   border: 1px solid color-mix(in srgb, var(--lumina-text) 20%, var(--lumina-border));
   border-bottom-width: 2px;
   border-radius: 0.25rem;
