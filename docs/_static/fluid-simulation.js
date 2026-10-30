@@ -15,11 +15,13 @@
 // This file is NOT part of the shipped theme — it's docs-only.
 const _scriptSrc = document.currentScript && document.currentScript.src;
 
+// Canvas pixels per CSS pixel. The dye is soft, so extra pixels only cost GPU time.
+const RENDER_SCALE = 0.5;
+
 document.addEventListener("alpine:init", () => {
   window.Alpine.data("fluidSimulation", () => ({
     _worker: null,
     _workerCleanup: null,
-    _observer: null,
     _idleId: null,
     _timerId: null,
 
@@ -28,8 +30,8 @@ document.addEventListener("alpine:init", () => {
       const container = this.$el;
       const isMobile = window.innerWidth < 768;
       const opts = isMobile
-        ? { sim: 128, dye: 256, jacobi: 20 }
-        : { sim: 256, dye: 512, jacobi: 30 };
+        ? { sim: 96, dye: 256, jacobi: 10 }
+        : { sim: 128, dye: 384, jacobi: 12 };
 
       const start = () => {
         if (!_scriptSrc || !canvas.transferControlToOffscreen) return;
@@ -46,18 +48,6 @@ document.addEventListener("alpine:init", () => {
       } else {
         this._timerId = setTimeout(start, 100);
       }
-
-      /* Track hero visibility so the header can go transparent */
-      this._observer = new IntersectionObserver(
-        ([e]) =>
-          document.documentElement.toggleAttribute(
-            "data-hero-visible",
-            e.isIntersecting,
-          ),
-        { threshold: 0 },
-      );
-      this._observer.observe(this.$el);
-      document.documentElement.setAttribute("data-hero-visible", "");
     },
 
     _startWorker(canvas, container, opts) {
@@ -74,7 +64,7 @@ document.addEventListener("alpine:init", () => {
           canvas: offscreen,
           w: canvas.clientWidth,
           h: canvas.clientHeight,
-          dpr: Math.min(window.devicePixelRatio || 1, 2),
+          scale: RENDER_SCALE,
           dark:
             document.documentElement.getAttribute("data-theme") === "dark",
           reduced: window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -86,8 +76,13 @@ document.addEventListener("alpine:init", () => {
 
       /* Forward pointer events to the worker — rAF-gated to send at most
          one message per display frame regardless of input event frequency. */
-      const cw = () => canvas.clientWidth;
-      const ch = () => canvas.clientHeight;
+      const toUv = ({ clientX, clientY }) => {
+        const rect = canvas.getBoundingClientRect();
+        return {
+          x: (clientX - rect.left) / rect.width,
+          y: 1.0 - (clientY - rect.top) / rect.height,
+        };
+      };
       let pendingEnter = null;
       let pendingPointer = null;
       let sendScheduled = false;
@@ -112,21 +107,19 @@ document.addEventListener("alpine:init", () => {
       }
 
       const onMouseEnter = (e) => {
-        pendingEnter = { x: e.clientX / cw(), y: 1.0 - e.clientY / ch() };
+        pendingEnter = toUv(e);
         scheduleFlush();
       };
       const onMouseMove = (e) => {
-        pendingPointer = { x: e.clientX / cw(), y: 1.0 - e.clientY / ch() };
+        pendingPointer = toUv(e);
         scheduleFlush();
       };
       const onTouchStart = (e) => {
-        const t = e.touches[0];
-        pendingEnter = { x: t.clientX / cw(), y: 1.0 - t.clientY / ch() };
+        pendingEnter = toUv(e.touches[0]);
         scheduleFlush();
       };
       const onTouchMove = (e) => {
-        const t = e.touches[0];
-        pendingPointer = { x: t.clientX / cw(), y: 1.0 - t.clientY / ch() };
+        pendingPointer = toUv(e.touches[0]);
         scheduleFlush();
       };
 
@@ -158,13 +151,12 @@ document.addEventListener("alpine:init", () => {
           type: "resize",
           w: canvas.clientWidth,
           h: canvas.clientHeight,
-          dpr: Math.min(window.devicePixelRatio || 1, 2),
+          scale: RENDER_SCALE,
         });
       window.addEventListener("resize", onResize);
 
       this._worker = worker;
       this._workerCleanup = () => {
-        worker.postMessage({ type: "stop" });
         worker.terminate();
         themeObs.disconnect();
         window.removeEventListener("resize", onResize);
@@ -179,8 +171,6 @@ document.addEventListener("alpine:init", () => {
       if (this._idleId) cancelIdleCallback(this._idleId);
       if (this._timerId) clearTimeout(this._timerId);
       if (this._workerCleanup) this._workerCleanup();
-      if (this._observer) this._observer.disconnect();
-      document.documentElement.removeAttribute("data-hero-visible");
     },
   }));
 });

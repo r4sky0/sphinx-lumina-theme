@@ -210,6 +210,51 @@ def test_fluid_worker_starts(page: Page, live_server: str):
     )
 
 
+def _hero_corner_brightness(page: Page) -> float:
+    """Mean RGB of a text-free patch of the rendered hero, decoded by the browser."""
+    box = page.locator(".lumina-hero").bounding_box()
+    shot = page.screenshot(
+        clip={"x": 8, "y": box["height"] - 80, "width": 40, "height": 40}
+    )
+    return page.evaluate(
+        """async (b64) => {
+            const img = await createImageBitmap(
+                await (await fetch(`data:image/png;base64,${b64}`)).blob()
+            );
+            const ctx = new OffscreenCanvas(1, 1).getContext("2d");
+            ctx.drawImage(img, 0, 0, 1, 1);
+            const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+            return (r + g + b) / 3;
+        }""",
+        base64.b64encode(shot).decode(),
+    )
+
+
+def test_fluid_reduced_motion_follows_theme(context, live_server: str):
+    """The still frame repaints on theme change, keeping dark hero text readable."""
+    page = context.new_page()
+    page.emulate_media(reduced_motion="reduce")
+    page.goto(live_server)
+    page.wait_for_function(
+        "() => !!window.Alpine?.$data(document.querySelector('.lumina-hero'))?._worker"
+    )
+    if not page.evaluate(
+        """() => {
+            const gl = new OffscreenCanvas(1, 1).getContext("webgl2");
+            return !!gl?.getExtension("EXT_color_buffer_float");
+        }"""
+    ):
+        pytest.skip("Fluid simulation needs OffscreenCanvas WebGL2")
+
+    page.locator("html").evaluate("el => el.dataset.theme = 'dark'")
+    # The canvas is translucent over the hero, so a stale light frame reads as grey.
+    for _ in range(50):
+        if _hero_corner_brightness(page) < 90:
+            break
+        page.wait_for_timeout(100)
+    assert _hero_corner_brightness(page) < 90
+
+
 @pytest.mark.parametrize("width", [390, 1440])
 def test_hero_text_has_no_entrance_animation(page: Page, width):
     page.set_viewport_size({"width": width, "height": 844})
