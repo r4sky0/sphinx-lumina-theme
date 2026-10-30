@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-09-29T18:25:25+00:00" />
+    <meta property="article:modified_time" content="2026-10-30T16:53:27+00:00" />
     <title>Custom Styling &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=d9f6fa04" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=ad06c36a" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -73,7 +73,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://r4sky0.github.io/sphinx-lumina-theme/guides/index.html"}, {"@type": "ListItem", "position": 3, "name": "Custom Styling", "item": "https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Custom Styling", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Override CSS custom properties, fonts, syntax highlighting themes, and templates for deeper customization.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-09-29T00:00:00+00:00", "dateModified": "2026-09-29T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Custom Styling", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "Override CSS custom properties, fonts, syntax highlighting themes, and templates for deeper customization.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-10-30T00:00:00+00:00", "dateModified": "2026-10-30T00:00:00+00:00"}</script>
         
         
     
@@ -218,7 +218,7 @@ document.documentElement.style.setProperty(
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
                 <span class="hidden lg:inline flex-1 text-left">Search docs...</span>
                 <kbd data-search-shortcut
-                     class="hidden lg:inline rounded border border-lumina-border bg-lumina-bg px-1.5 py-0.5 text-[0.6875rem] font-[family-name:'JetBrains_Mono'] tracking-[0.02em]">⌘K</kbd>
+                     class="hidden lg:inline rounded border border-lumina-border bg-lumina-bg px-1.5 py-0.5 text-[0.6875rem] font-[family-name:var(--lumina-font-mono)] tracking-[0.02em]">⌘K</kbd>
             </button>
             
             <button data-theme-toggle
@@ -772,7 +772,12 @@ document.documentElement.style.setProperty(
 <li><a class="reference internal" href="#admonition-colors">Admonition Colors</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#fonts">Fonts</a></li>
+<li><a class="reference internal" href="#fonts">Fonts</a><ul>
+<li><a class="reference internal" href="#preview-a-font">Preview a font</a></li>
+<li><a class="reference internal" href="#local-font-files">Local font files</a></li>
+<li><a class="reference internal" href="#other-font-providers-e-g-google-fonts">Other font providers, e.<wbr>g. Google Fonts</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#hyphenation">Hyphenation</a></li>
 <li><a class="reference internal" href="#syntax-highlighting">Syntax Highlighting</a><ul>
 <li><a class="reference internal" href="#custom-styles">Custom styles</a></li>
@@ -798,7 +803,7 @@ document.documentElement.style.setProperty(
     <section class="tex2jax_ignore mathjax_ignore" id="custom-styling">
 <h1 id="lumina-search-custom-styling">Custom Styling<a class="headerlink" href="#custom-styling" title="Link to this heading">¶</a></h1>
 <p>Override CSS custom properties, fonts, syntax highlighting themes, and templates for deeper customization.</p>
-<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>3 min read</span></div><section id="migrating-to-lumina-2">
+<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>4 min read</span></div><section id="migrating-to-lumina-2">
 <h2 id="lumina-search-migrating-to-lumina-2">Migrating to Lumina 2<a class="headerlink" href="#migrating-to-lumina-2" title="Link to this heading">¶</a></h2>
 <p>Lumina 2 refreshes the default design. Existing theme options still work, but custom CSS and template overrides need review.</p>
 <ul class="simple">
@@ -899,27 +904,131 @@ document.documentElement.style.setProperty(
 </ul>
 <p>Latin text uses smaller font subsets. The browser loads the original full fonts
 when other characters are needed, preserving the existing language coverage.</p>
-<p>To use your own fonts, override the font-family declarations in your custom CSS:</p>
-<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">font-family</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Inter&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">system-ui</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
+<p>To use your own fonts, load them from your docs or a font provider, then set the <code class="docutils literal notranslate"><span class="pre">--lumina-font-sans</span></code> and <code class="docutils literal notranslate"><span class="pre">--lumina-font-mono</span></code> tokens. The theme applies them everywhere, including code blocks, API documentation and diagrams.</p>
+<section id="preview-a-font">
+<h3 id="lumina-search-preview-a-font">Preview a font<a class="headerlink" href="#preview-a-font" title="Link to this heading">¶</a></h3>
+<p>Choose a font to preview it on this page. The preview resets when you leave or reload. These fonts are examples hosted with this documentation, so they aren’t included in the theme. You can find them all on <a class="reference external" href="https://fonts.google.com/">Google Fonts</a>.</p>
+<style>
+  @font-face { font-family: "Instrument Sans"; src: url("../_static/fonts/instrument-sans.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+  @font-face { font-family: "Literata"; src: url("../_static/fonts/literata.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+  @font-face { font-family: "Atkinson Hyperlegible Next"; src: url("../_static/fonts/atkinson-hyperlegible-next.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+  @font-face { font-family: "Fira Code"; src: url("../_static/fonts/fira-code.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+  @font-face { font-family: "Geist Mono"; src: url("../_static/fonts/geist-mono.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+  .font-picker { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: .65rem; margin: .5rem 0 1.25rem; }
+  .font-picker button { min-height: 3rem; padding: .6rem .75rem; border: 1px solid var(--lumina-border); border-radius: .6rem; background: var(--lumina-bg-secondary); color: var(--lumina-text); text-align: left; cursor: pointer; }
+  .font-picker button:hover, .font-picker button[aria-pressed="true"] { border-color: var(--lumina-link); background: var(--lumina-accent-light); }
+  .font-picker button:focus-visible { outline: 2px solid var(--lumina-link); outline-offset: 2px; }
+  .font-picker small { display: block; color: var(--lumina-text-muted); font-size: .75rem; }
+</style>
+<div id="font-preview" x-data="{ sans: '', mono: '', pick(kind, stack) { this[kind] = stack; const style = document.documentElement.style; const token = '--lumina-font-' + kind; stack ? style.setProperty(token, stack) : style.removeProperty(token); } }">
+  <p id="font-preview-sans"><strong>Body text</strong></p>
+  <div class="font-picker" role="group" aria-labelledby="font-preview-sans">
+    <button type="button" x-on:click="pick('sans', '')" x-bind:aria-pressed="sans === ''">Source Sans 3<small>Default</small></button>
+    <button type="button" x-on:click="pick('sans', 'Instrument Sans, system-ui, sans-serif')" x-bind:aria-pressed="sans.startsWith('Instrument')">Instrument Sans<small>Modern sans-serif</small></button>
+    <button type="button" x-on:click="pick('sans', 'Literata, Georgia, serif')" x-bind:aria-pressed="sans.startsWith('Literata')">Literata<small>Book serif</small></button>
+    <button type="button" x-on:click="pick('sans', 'Atkinson Hyperlegible Next, system-ui, sans-serif')" x-bind:aria-pressed="sans.startsWith('Atkinson')">Atkinson Hyperlegible Next<small>Designed for legibility</small></button>
+  </div>
+  <p id="font-preview-mono"><strong>Code</strong></p>
+  <div class="font-picker" role="group" aria-labelledby="font-preview-mono">
+    <button type="button" x-on:click="pick('mono', '')" x-bind:aria-pressed="mono === ''">JetBrains Mono<small>Default</small></button>
+    <button type="button" x-on:click="pick('mono', 'Fira Code, ui-monospace, monospace')" x-bind:aria-pressed="mono.startsWith('Fira')">Fira Code<small>Coding ligatures</small></button>
+    <button type="button" x-on:click="pick('mono', 'Geist Mono, ui-monospace, monospace')" x-bind:aria-pressed="mono.startsWith('Geist')">Geist Mono<small>Clean and geometric</small></button>
+  </div>
+  <p x-show="sans || mono" style="display: none">Try in <code>custom.css</code>: <code x-text="':root { ' + (sans ? '--lumina-font-sans: ' + sans + '; ' : '') + (mono ? '--lumina-font-mono: ' + mono + '; ' : '') + '}'"></code></p>
+</div></section>
+<section id="local-font-files">
+<h3 id="lumina-search-local-font-files">Local font files<a class="headerlink" href="#local-font-files" title="Link to this heading">¶</a></h3>
+<p>Host a font with your docs when you want a font that isn’t on Google Fonts, or when readers’ browsers shouldn’t contact a third party. This example uses a font called <code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">Font</span></code> with regular and bold files.</p>
+<ol class="arabic">
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">.woff2</span></code> files into your static directory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>docs/
+├── conf.py
+└── _static/
+    ├── custom.css
+    └── fonts/
+        ├── my-font-regular.woff2
+        └── my-font-bold.woff2
+</pre></div>
+</div>
+</li>
+<li><p>Register the stylesheet in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_static_path</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;_static&quot;</span><span class="p">]</span>
+<span class="n">html_css_files</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;custom.css&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Declare each file with <code class="docutils literal notranslate"><span class="pre">&#64;font-face</span></code>, then point Lumina at the font:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">docs/_static/custom.css</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">@</span><span class="k">font-face</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">font-family</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;My Font&quot;</span><span class="o">;</span>
+<span class="w">    </span><span class="nt">src</span><span class="o">:</span><span class="w"> </span><span class="nt">url</span><span class="o">(</span><span class="s2">&quot;fonts/my-font-regular.woff2&quot;</span><span class="o">)</span><span class="w"> </span><span class="nt">format</span><span class="o">(</span><span class="s2">&quot;woff2&quot;</span><span class="o">);</span>
+<span class="w">    </span><span class="nt">font-weight</span><span class="o">:</span><span class="w"> </span><span class="nt">400</span><span class="o">;</span>
+<span class="w">    </span><span class="nt">font-display</span><span class="o">:</span><span class="w"> </span><span class="nt">swap</span><span class="o">;</span>
 <span class="p">}</span>
 
-<span class="nt">code</span><span class="o">,</span><span class="w"> </span><span class="nt">pre</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">highlight</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">font-family</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fira Code&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ui-monospace</span><span class="p">,</span><span class="w"> </span><span class="kc">monospace</span><span class="p">;</span>
+<span class="p">@</span><span class="k">font-face</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">font-family</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;My Font&quot;</span><span class="o">;</span>
+<span class="w">    </span><span class="nt">src</span><span class="o">:</span><span class="w"> </span><span class="nt">url</span><span class="o">(</span><span class="s2">&quot;fonts/my-font-bold.woff2&quot;</span><span class="o">)</span><span class="w"> </span><span class="nt">format</span><span class="o">(</span><span class="s2">&quot;woff2&quot;</span><span class="o">);</span>
+<span class="w">    </span><span class="nt">font-weight</span><span class="o">:</span><span class="w"> </span><span class="nt">700</span><span class="o">;</span>
+<span class="w">    </span><span class="nt">font-display</span><span class="o">:</span><span class="w"> </span><span class="nt">swap</span><span class="o">;</span>
+<span class="p">}</span>
+
+<span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nv">--lumina-font-sans</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My Font&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">system-ui</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you use custom fonts, add the font files to your <code class="docutils literal notranslate"><span class="pre">_static/</span></code> directory and include the appropriate <code class="docutils literal notranslate"><span class="pre">&#64;font-face</span></code> declarations.</p>
 </div>
+</li>
+<li><p>Rebuild your docs. Pages now use <code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">Font</span></code> for body text.</p></li>
+</ol>
+<p>To change the code font, set <code class="docutils literal notranslate"><span class="pre">--lumina-font-mono</span></code> the same way.</p>
+<p>Keep these details in mind:</p>
+<ul class="simple">
+<li><p><strong>Paths:</strong> <code class="docutils literal notranslate"><span class="pre">url()</span></code> paths are relative to the CSS file, not to <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>.</p></li>
+<li><p><strong>Weights:</strong> Lumina uses weights 400, 500, 600 and 700 for body text. If a weight is missing, the browser uses the closest one or synthesizes bold.</p></li>
+<li><p><strong>Variable fonts:</strong> one file can cover every weight. Declare it with <code class="docutils literal notranslate"><span class="pre">font-weight:</span> <span class="pre">400</span> <span class="pre">700;</span></code>.</p></li>
+<li><p><strong>Missing fonts:</strong> if a page still shows the system font, check the browser’s Network tab for a 404 on the <code class="docutils literal notranslate"><span class="pre">.woff2</span></code> file, and check that the <code class="docutils literal notranslate"><span class="pre">font-family</span></code> name matches in both places.</p></li>
+</ul>
+</section>
+<section id="other-font-providers-e-g-google-fonts">
+<h3 id="lumina-search-other-font-providers-e-g-google-fonts">Other font providers, e.g. Google Fonts<a class="headerlink" href="#other-font-providers-e-g-google-fonts" title="Link to this heading">¶</a></h3>
+<p>Add the provider’s stylesheet to <code class="docutils literal notranslate"><span class="pre">html_css_files</span></code>, then set the font tokens in your custom CSS. This example loads Inter and Fira Code from <a class="reference external" href="https://fonts.google.com/">Google Fonts</a>:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_static_path</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;_static&quot;</span><span class="p">]</span>
+<span class="n">html_css_files</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;custom.css&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">docs/_static/custom.css</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nv">--lumina-font-sans</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Inter&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">system-ui</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">--lumina-font-mono</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fira Code&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ui-monospace</span><span class="p">,</span><span class="w"> </span><span class="kc">monospace</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>With a hosted font, readers’ browsers contact the provider, which receives their IP address. Check whether this affects your privacy policy or GDPR obligations.</p>
+</div>
+</section>
 </section>
 <section id="hyphenation">
 <h2 id="lumina-search-hyphenation">Hyphenation<a class="headerlink" href="#hyphenation" title="Link to this heading">¶</a></h2>
 <p>Paragraphs fill the center column and wrap at spaces. Long unbroken text, such as URLs, can wrap to prevent overflow.</p>
 <p>To let the browser hyphenate words at language-appropriate points, add this to your custom stylesheet:</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">docs/_static/custom.css</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">docs/_static/custom.css</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
 <div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">lumina-article</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kp">-webkit-</span><span class="k">hyphens</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span>
 <span class="w">    </span><span class="k">hyphens</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span>
@@ -928,8 +1037,8 @@ when other characters are needed, preserving the existing language coverage.</p>
 </div>
 </div>
 <p>Set the document language in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> so Sphinx emits the matching HTML <code class="docutils literal notranslate"><span class="pre">lang</span></code> attribute:</p>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">language</span> <span class="o">=</span> <span class="s2">&quot;en&quot;</span>  <span class="c1"># Use &quot;de&quot; for German, for example.</span>
 </pre></div>
 </div>
@@ -939,16 +1048,16 @@ when other characters are needed, preserving the existing language coverage.</p>
 <section id="syntax-highlighting">
 <h2 id="lumina-search-syntax-highlighting">Syntax Highlighting<a class="headerlink" href="#syntax-highlighting" title="Link to this heading">¶</a></h2>
 <p>Lumina ships five syntax highlighting presets — curated light/dark pairs tested for contrast on the theme’s code block backgrounds. Set the <code class="docutils literal notranslate"><span class="pre">code_style</span></code> theme option to switch:</p>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;code_style&quot;</span><span class="p">:</span> <span class="s2">&quot;nord&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<table class="docutils align-default" id="id6">
-<caption><span class="caption-text">Available presets</span><a class="headerlink" href="#id6" title="Link to this table">¶</a></caption>
+<table class="docutils align-default" id="id10">
+<caption><span class="caption-text">Available presets</span><a class="headerlink" href="#id10" title="Link to this table">¶</a></caption>
 <colgroup>
 <col style="width: 15.0%" />
 <col style="width: 20.0%" />
@@ -993,8 +1102,8 @@ when other characters are needed, preserving the existing language coverage.</p>
 <section id="custom-styles">
 <h3 id="lumina-search-custom-styles">Custom styles<a class="headerlink" href="#custom-styles" title="Link to this heading">¶</a></h3>
 <p>For full control, set <code class="docutils literal notranslate"><span class="pre">pygments_style</span></code> and <code class="docutils literal notranslate"><span class="pre">pygments_dark_style</span></code> directly in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>. When either is set, the <code class="docutils literal notranslate"><span class="pre">code_style</span></code> preset is ignored.</p>
-<div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id11" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pygments_style</span> <span class="o">=</span> <span class="s2">&quot;friendly&quot;</span>
 <span class="n">pygments_dark_style</span> <span class="o">=</span> <span class="s2">&quot;dracula&quot;</span>
 </pre></div>
@@ -1011,8 +1120,8 @@ when other characters are needed, preserving the existing language coverage.</p>
 <p>Selectively hide UI elements globally or per-page.</p>
 <section id="globally">
 <h3 id="lumina-search-globally">Globally<a class="headerlink" href="#globally" title="Link to this heading">¶</a></h3>
-<div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id12" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;show_toc&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>           <span class="c1"># Hide right-side TOC on all pages</span>
     <span class="s2">&quot;show_breadcrumbs&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>   <span class="c1"># Hide breadcrumbs on all pages</span>
@@ -1035,15 +1144,15 @@ when other characters are needed, preserving the existing language coverage.</p>
 <section id="custom-templates">
 <h2 id="lumina-search-custom-templates">Custom Templates<a class="headerlink" href="#custom-templates" title="Link to this heading">¶</a></h2>
 <p>Lumina’s templates are designed for extension. To override a specific component, create a <code class="docutils literal notranslate"><span class="pre">_templates/</span></code> directory:</p>
-<div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id13" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">templates_path</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;_templates&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <p>Then create a template that extends the original:</p>
-<div class="literal-block-wrapper docutils container" id="id10">
-<div class="code-block-caption"><span class="caption-text">docs/_templates/layout.html</span><a class="headerlink" href="#id10" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text">docs/_templates/layout.html</span><a class="headerlink" href="#id14" title="Link to this code">¶</a></div>
 <div class="highlight-html+jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;!layout.html&quot;</span> <span class="cp">%}</span>
 
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">extrahead</span> <span class="cp">%}</span>
@@ -1090,7 +1199,7 @@ when other characters are needed, preserving the existing language coverage.</p>
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>September 29, 2026</time>
+            Last updated <time>October 30, 2026</time>
         </p>
     
     
@@ -1122,7 +1231,12 @@ when other characters are needed, preserving the existing language coverage.</p>
 <li><a class="reference internal" href="#admonition-colors">Admonition Colors</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#fonts">Fonts</a></li>
+<li><a class="reference internal" href="#fonts">Fonts</a><ul>
+<li><a class="reference internal" href="#preview-a-font">Preview a font</a></li>
+<li><a class="reference internal" href="#local-font-files">Local font files</a></li>
+<li><a class="reference internal" href="#other-font-providers-e-g-google-fonts">Other font providers, e.<wbr>g. Google Fonts</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#hyphenation">Hyphenation</a></li>
 <li><a class="reference internal" href="#syntax-highlighting">Syntax Highlighting</a><ul>
 <li><a class="reference internal" href="#custom-styles">Custom styles</a></li>

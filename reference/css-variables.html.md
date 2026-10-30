@@ -8,19 +8,21 @@ All tokens are defined for both the default light scope (`:root` / `[data-theme=
 
 The core surface and text tokens. These are the variables you’ll override most often.
 
-| Token                    | Light default   | Dark default   | What it affects                                                                                                            |
-|--------------------------|-----------------|----------------|----------------------------------------------------------------------------------------------------------------------------|
-| `--lumina-bg`            | `#fdfdfc`       | `#151918`      | Page background                                                                                                            |
-| `--lumina-bg-secondary`  | `#f4f5f4`       | `#202623`      | Hover surfaces and table-header tint                                                                                       |
-| `--lumina-text`          | `#202624`       | `#e9eeeb`      | Body and heading color                                                                                                     |
-| `--lumina-text-muted`    | `#59635e`       | `#a8b5ac`      | Secondary text (TOC links, captions, footer)                                                                               |
-| `--lumina-border`        | `#dfe5e1`       | `#303b34`      | Dividers, table cell borders, sidebar separators                                                                           |
-| `--lumina-accent`        | `#10b981`       | `#10b981`      | Brand accents, active indicators, skip link, headerlink tooltip. Also overridable through the `accent_color` theme option. |
-| `--lumina-link`          | `#08764f`       | `#5ed9a3`      | Readable text links and focus outlines                                                                                     |
-| `--lumina-navigation-bg` | `#f7f8f6`       | `#111613`      | Desktop sidebar surface and the outer gutter to its left                                                                   |
-| `--lumina-floating-bg`   | `#fdfdfc`       | `#242c27`      | Section switcher, page-actions menu, search dialog, and back-to-top button                                                 |
-| `--lumina-accent-light`  | `#eaf6ef`       | `#1c3329`      | Hover/active background tint for accent surfaces, including the current sidebar item                                       |
-| `--lumina-code-bg`       | `#f6f7f6`       | `#1b211e`      | Inline code and code block background                                                                                      |
+| Token                    | Light default        | Dark default   | What it affects                                                                                                            |
+|--------------------------|----------------------|----------------|----------------------------------------------------------------------------------------------------------------------------|
+| `--lumina-bg`            | `#fdfdfc`            | `#151918`      | Page background                                                                                                            |
+| `--lumina-bg-secondary`  | `#f4f5f4`            | `#202623`      | Hover surfaces and table-header tint                                                                                       |
+| `--lumina-text`          | `#202624`            | `#e9eeeb`      | Body and heading color                                                                                                     |
+| `--lumina-text-muted`    | `#59635e`            | `#a8b5ac`      | Secondary text (TOC links, captions, footer)                                                                               |
+| `--lumina-border`        | `#dfe5e1`            | `#303b34`      | Dividers, table cell borders, sidebar separators                                                                           |
+| `--lumina-accent`        | `#10b981`            | `#10b981`      | Brand accents, active indicators, skip link, headerlink tooltip. Also overridable through the `accent_color` theme option. |
+| `--lumina-link`          | `#08764f`            | `#5ed9a3`      | Readable text links and focus outlines                                                                                     |
+| `--lumina-navigation-bg` | `#f7f8f6`            | `#111613`      | Desktop sidebar surface and the outer gutter to its left                                                                   |
+| `--lumina-floating-bg`   | `#fdfdfc`            | `#242c27`      | Section switcher, page-actions menu, search dialog, and back-to-top button                                                 |
+| `--lumina-accent-light`  | `#eaf6ef`            | `#1c3329`      | Hover/active background tint for accent surfaces, including the current sidebar item                                       |
+| `--lumina-code-bg`       | `#f6f7f6`            | `#1b211e`      | Inline code and code block background                                                                                      |
+| `--lumina-font-sans`     | Source Sans 3 stack  | Same as light  | Body text, UI labels, API documentation, and diagrams. See [Custom Styling](../guides/custom-styling.md).                  |
+| `--lumina-font-mono`     | JetBrains Mono stack | Same as light  | Code blocks, inline code, and API signatures. See [Custom Styling](../guides/custom-styling.md).                           |
 
 ## Admonition tokens
 
