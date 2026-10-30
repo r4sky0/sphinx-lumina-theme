@@ -1,5 +1,13 @@
 # Releases
 
+## v2.17.1 (2026-10-30)
+
+### Bug Fixes
+
+- **landing**: Smooth the fluid hero and cut its GPU use
+  ([#213](https://github.com/r4sky0/sphinx-lumina-theme/pull/213),
+  [`7f332e0`](https://github.com/r4sky0/sphinx-lumina-theme/commit/7f332e022439ee33eef95e174fdb5beff17b1ef7))
+
 ## v2.17.0 (2026-10-30)
 
 ### Features
