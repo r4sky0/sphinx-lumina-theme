@@ -2,6 +2,25 @@
 
 <!-- releases -->
 
+## v2.15.0 (2026-10-30)
+
+### Features
+
+- Add font tokens for custom fonts ([#210](https://github.com/r4sky0/sphinx-lumina-theme/pull/210),
+  [`9506146`](https://github.com/r4sky0/sphinx-lumina-theme/commit/9506146db6aeea6901485f09b6868e9f269bdc32))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps-dev**: Bump lucide-static from 1.61.0 to 1.62.0 in the npm-minor group
+  ([#209](https://github.com/r4sky0/sphinx-lumina-theme/pull/209),
+  [`97c2466`](https://github.com/r4sky0/sphinx-lumina-theme/commit/97c2466fd54e833e13b3780ea247ea7b51b60d21))
+
+</details>
+
+
 ## v2.14.2 (2026-10-29)
 
 ### Bug Fixes
