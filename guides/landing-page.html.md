@@ -88,5 +88,6 @@ MIT license. Contributions welcome.
 
 - The sidebar, table of contents, and breadcrumbs are hidden on landing pages.
 - The page body is still indexed by Pagefind.
+- When a page has a `hero_title`, the hero is the page’s `h1`, and the page’s own title renders as an `h2`.
 - A landing page can be used for any page, not just the root `index.md`.
 - The secondary button detects external URLs automatically — any URL containing `://` opens in a new tab with `rel="noopener"`.
