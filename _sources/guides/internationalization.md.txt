@@ -13,6 +13,7 @@ Lumina ships translations for these languages:
 
 | Code    | Language            |
 | ------- | ------------------- |
+| `ar`    | Arabic              |
 | `de`    | German              |
 | `es`    | Spanish             |
 | `fr`    | French              |
@@ -24,6 +25,14 @@ Any other language falls back to English for Lumina's strings, while Sphinx stil
 :::{note}
 The bundled translations were drafted with machine assistance. Corrections from native speakers are welcome — see {doc}`/contributing/translations`.
 :::
+
+## Right-to-left languages
+
+Lumina mirrors its layout automatically when `language` is a right-to-left language such as Arabic (`ar`), Hebrew (`he`), Persian (`fa`), or Urdu (`ur`). The page gets `<html dir="rtl">`, so the sidebar, table of contents, and directional icons switch sides. There is nothing else to configure.
+
+Code blocks, inline code, API signatures, and HTTP request fields stay left to right. The `:align: left` and `:align: right` image options keep their literal meaning. Lumina's fonts have no Arabic or Hebrew glyphs, so that text uses the reader's system font.
+
+When you add your own CSS, use logical properties such as `margin-inline-start` and `inset-inline-end` so it mirrors too. For anything that must differ, target `[dir="rtl"]`.
 
 ## Override a translation
 
