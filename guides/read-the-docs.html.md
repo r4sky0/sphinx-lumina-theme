@@ -10,7 +10,9 @@ To see the result, browse [Lumina’s own docs on Read the Docs](https://sphinx-
 - The project in a Git repository on GitHub, GitLab, or Bitbucket.
 - A free account on [Read the Docs](https://app.readthedocs.org/accounts/signup/).
 
-## Step 1: Declare your docs dependencies
+## Set up hosting
+
+### Declare your docs dependencies
 
 Read the Docs installs only what you list. Choose the tab that matches how your project manages dependencies.
 
@@ -36,7 +38,7 @@ myst-parser
 
 Add any other Sphinx extensions your `conf.py` loads, such as `sphinx-design` or `sphinxcontrib-mermaid`. For Pagefind search, use `sphinx-lumina-theme[pagefind]` instead.
 
-## Step 2: Add `.readthedocs.yaml`
+### Add `.readthedocs.yaml`
 
 Create `.readthedocs.yaml` in the repository root:
 
@@ -81,7 +83,7 @@ python:
 
 Change `docs/conf.py` if your configuration lives elsewhere. Commit the file and push.
 
-## Step 3: Import the project
+### Import the project
 
 1. Sign in to [Read the Docs](https://app.readthedocs.org/) and import your repository from the dashboard. If it isn’t listed, enter its URL manually.
 2. Confirm the project name. It becomes your subdomain, such as `my-project.readthedocs.io`.
@@ -90,7 +92,7 @@ Change `docs/conf.py` if your configuration lives elsewhere. Commit the file and
 
 Read the Docs’ [tutorial](https://docs.readthedocs.com/platform/stable/tutorial/index.html) walks through the import screens in detail.
 
-## Step 4: Preview pull requests
+### Preview pull requests
 
 Read the Docs builds every pull request and links the preview from the pull request’s checks. This is on by default for new projects; you can change it under **Settings → Pull request builds**.
 
@@ -124,7 +126,7 @@ Keep the flyout if readers need its extras, such as switching between translatio
 
 **Cause:** `sphinx-lumina-theme` isn’t in the dependencies Read the Docs installs.
 
-**Solution:** Add it to your `docs` group or `docs/requirements.txt` (Step 1), and check that `.readthedocs.yaml` points at that file or group.
+**Solution:** Add it to your `docs` group or `docs/requirements.txt` (the first setup step), and check that `.readthedocs.yaml` points at that file or group.
 
 ### “Extension error: Could not import extension …”
 
