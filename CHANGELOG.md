@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.19.1 (2026-11-04)
+
+### Bug Fixes
+
+- **version-switcher**: Restyle the picker and list PR builds
+  ([#217](https://github.com/r4sky0/sphinx-lumina-theme/pull/217),
+  [`547ffdc`](https://github.com/r4sky0/sphinx-lumina-theme/commit/547ffdc9281adf750ae1f7cd9e43bd69a91a9114))
+
+
 ## v2.19.0 (2026-11-04)
 
 ### Features
