@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.19.0 (2026-11-04)
+
+### Features
+
+- Add numbered steps for heading sequences
+  ([#216](https://github.com/r4sky0/sphinx-lumina-theme/pull/216),
+  [`af63625`](https://github.com/r4sky0/sphinx-lumina-theme/commit/af636254fea79cf6fff79e876bc6cca3efd4ca71))
+
+
 ## v2.18.0 (2026-11-04)
 
 ### Features
