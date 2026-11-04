@@ -58,8 +58,41 @@ export default function versionSwitcher() {
         }
       }
 
-      if (jsonUrl) {
+      if (el.getAttribute("data-source") === "readthedocs") {
+        // The addons script loads async: read the cached data if it already
+        // fired, otherwise wait for the event.
+        if (window.ReadTheDocsEventData) {
+          this._setRtdVersions(window.ReadTheDocsEventData.data());
+        } else {
+          document.addEventListener(
+            "readthedocs-addons-data-ready",
+            (e) => this._setRtdVersions(e.detail.data()),
+            { once: true },
+          );
+        }
+      } else if (jsonUrl) {
         this._fetchVersions(jsonUrl);
+      }
+    },
+
+    _setRtdVersions(data) {
+      const active = data?.versions?.active || [];
+      this._setVersions(
+        active.map((v) => ({
+          version: v.slug,
+          name: v.verbose_name,
+          url: v.urls?.documentation,
+        })),
+      );
+    },
+
+    _setVersions(list) {
+      this.versions = list.filter(
+        (v) => v && typeof v.version === "string" && typeof v.url === "string"
+      );
+      const current = this.versions.find((v) => v.version === this.match);
+      if (current) {
+        this.currentLabel = current.name || current.version;
       }
     },
 
@@ -91,15 +124,7 @@ export default function versionSwitcher() {
           this.error = true;
           return;
         }
-        this.versions = data.filter(
-          (v) => v && typeof v.version === "string" && typeof v.url === "string"
-        );
-
-        // Find the current version and set the display label
-        const current = this.versions.find((v) => v.version === this.match);
-        if (current) {
-          this.currentLabel = current.name || current.version;
-        }
+        this._setVersions(data);
       } catch {
         this.error = true;
       }

@@ -93,6 +93,14 @@ Out-of-the-box meta tags, social cards, JSON-LD, sitemap, and `robots.txt`.
 Translate the theme's interface text with Sphinx's `language` setting.
 :::
 
+:::{grid-item-card} Read the Docs
+:link: read-the-docs
+:link-type: doc
+:icon: book-open
+:icon-style: featured
+Host your docs on Read the Docs with versions, previews, and canonical URLs.
+:::
+
 ::::
 
 ```{toctree}
@@ -108,4 +116,5 @@ icons
 development-workflow
 seo
 internationalization
+read-the-docs
 ```

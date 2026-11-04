@@ -123,3 +123,43 @@ def test_build_warns_when_json_set_without_match(tmp_path):
     html = BeautifulSoup((out_dir / "index.html").read_text(), "html.parser")
     switcher = html.find(id="lumina-version-switcher")
     assert switcher is not None, "Switcher should still render even without match"
+
+
+def test_switcher_uses_readthedocs_versions(tmp_path, monkeypatch):
+    """On Read the Docs the switcher renders without JSON and reads addons data."""
+    monkeypatch.setenv("READTHEDOCS", "True")
+    monkeypatch.setenv("READTHEDOCS_VERSION", "latest")
+    html = _build_with_options(tmp_path)
+    switcher = html.find(id="lumina-version-switcher")
+    assert switcher.get("data-source") == "readthedocs"
+    assert switcher.get("data-version-match") == "latest"
+    assert not switcher.has_attr("data-json-url")
+    assert html.find("meta", attrs={"name": "readthedocs-addons-api-version"})
+
+
+def test_switcher_json_wins_on_readthedocs(tmp_path, monkeypatch):
+    """An explicit version_switcher_json keeps priority over the addons data."""
+    monkeypatch.setenv("READTHEDOCS", "True")
+    html = _build_with_options(
+        tmp_path,
+        {
+            "version_switcher_json": "https://example.com/versions.json",
+            "version_switcher_match": "1.17",
+        },
+    )
+    switcher = html.find(id="lumina-version-switcher")
+    assert switcher.get("data-json-url") == "https://example.com/versions.json"
+    assert not switcher.has_attr("data-source")
+
+
+def test_no_addons_meta_off_readthedocs(index_html):
+    """The addons API meta tag is only emitted for Read the Docs builds."""
+    assert not index_html.find("meta", attrs={"name": "readthedocs-addons-api-version"})
+
+
+def test_readthedocs_canonical_url_default(tmp_path, monkeypatch):
+    """READTHEDOCS_CANONICAL_URL fills in html_baseurl when it is unset."""
+    monkeypatch.setenv("READTHEDOCS_CANONICAL_URL", "https://example.org/en/latest/")
+    html = _build_with_options(tmp_path)
+    canonical = html.find("link", rel="canonical")
+    assert canonical["href"] == "https://example.org/en/latest/index.html"

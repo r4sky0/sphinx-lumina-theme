@@ -1,7 +1,7 @@
-{% if lumina_version_json is defined and lumina_version_json %}
+{% if lumina_version_json or lumina_version_rtd %}
     <div id="lumina-version-switcher"
          x-data="versionSwitcher()"
-         data-json-url="{{ lumina_version_json }}"
+         {% if lumina_version_rtd %}data-source="readthedocs"{% else %}data-json-url="{{ lumina_version_json }}"{% endif %}
          data-version-match="{{ lumina_version_match }}"
          class="relative"
          @keydown.escape="open = false">

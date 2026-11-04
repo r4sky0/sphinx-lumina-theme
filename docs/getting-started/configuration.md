@@ -232,7 +232,7 @@ reading_time: 12      # Force "12 min read" on this page
 * - `version_switcher_json`
   - string
   - `""`
-  - URL to a JSON file listing available documentation versions. Enables a version dropdown in the header.
+  - URL to a JSON file listing available documentation versions. Enables a version dropdown in the header. On Read the Docs the dropdown appears without it, filled from your project's versions; see {doc}`/guides/read-the-docs`.
 * - `version_switcher_match`
   - string
   - `""`
