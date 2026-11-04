@@ -29,6 +29,61 @@ The MyST syntax:
 Use heading level 1 for the page title only — one per page. Start sections with h2, and sub-sections with h3. Lumina's right-side table of contents displays h2 and h3 by default.
 :::
 
+## Steps
+
+Number a sequence of sections on a connecting rail, for setup guides and tutorials. Steps are ordinary headings, so each one keeps its anchor link and its entry in the table of contents.
+
+Add the `lumina-steps` class before the first step heading:
+
+::::{tab-set}
+
+:::{tab-item} MyST
+~~~markdown
+## Get started
+
+```{rst-class} lumina-steps
+```
+
+### Install the theme
+
+### Configure Sphinx
+~~~
+:::
+
+:::{tab-item} reStructuredText
+```rst
+Get started
+-----------
+
+.. rst-class:: lumina-steps
+
+Install the theme
+~~~~~~~~~~~~~~~~~
+
+Configure Sphinx
+~~~~~~~~~~~~~~~~
+```
+:::
+
+::::
+
+The marked heading and every following heading at the same level become steps, up to the end of the parent section. Put the steps under their own heading, as above, so the sections after them stay unnumbered. Steps can hold any content, including tabs, code blocks, and admonitions.
+
+```{rst-class} lumina-steps
+```
+
+### Install the theme
+
+Add `sphinx-lumina-theme` to your docs dependencies.
+
+### Configure Sphinx
+
+Set `html_theme = "lumina"` in `conf.py`.
+
+### Build the docs
+
+Run `sphinx-build docs docs/_build/html` and open `index.html`.
+
 ## Inline Formatting
 
 Use inline formatting to emphasize or annotate text.
