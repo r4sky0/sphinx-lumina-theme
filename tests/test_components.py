@@ -59,6 +59,13 @@ def test_toc_has_page_headings(index_html):
     assert "Section Two" in texts
 
 
+def test_toc_hidden_on_title_only_page(build_output):
+    """A page with no sections should not render an outline of just its title."""
+    html = _parse(build_output, "seo-noindex.html")
+    assert html.select_one(".lumina-toc-container") is None
+    assert html.select_one(".lumina-mobile-outline") is None
+
+
 def test_navigation_names_break_after_dots_and_parentheses():
     html = '<a href="org.example.Type.html" title="a.b">org.example.Type 3.21</a>'
     assert _add_name_breaks(html) == (

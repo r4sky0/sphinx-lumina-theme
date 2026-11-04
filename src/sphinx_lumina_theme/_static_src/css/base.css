@@ -829,6 +829,11 @@ html:not(.has-announcement) #lumina-announcement { display: none; }
   #lumina-toc > div { display: none; }
 }
 
+/* Keep the outline column so content doesn't shift on pages without one. */
+@media (min-width: 1280px) {
+  #lumina-toc { flex-shrink: 0; width: 220px; }
+}
+
 /* Reset basic theme styles that conflict */
 div.document,
 div.documentwrapper,
