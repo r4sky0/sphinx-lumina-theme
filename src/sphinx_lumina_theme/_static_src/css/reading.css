@@ -205,6 +205,7 @@ div.highlight pre, pre.highlight { padding: 1.125rem 3rem 1.125rem 1.25rem; font
 @media (max-width: 639px) {
   .lumina-header-inner { padding-inline: 1rem; }
   .lumina-header-inner > div:first-child { gap: 0; }
+  #lumina-version-switcher { margin-inline-start: 0.5rem; }
   .lumina-header-inner [data-search-trigger] { min-height: 2.75rem; margin-inline-end: 0; }
   #lumina-content { padding: 1rem 1.25rem 3rem; }
   .lumina-content-toolbar { margin-bottom: 0; }

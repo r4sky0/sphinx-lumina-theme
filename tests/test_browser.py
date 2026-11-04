@@ -1695,3 +1695,28 @@ def test_steps_number_sibling_sections(page: Page, live_server: str):
     assert computed_style(page, "#install-the-theme", "borderInlineStartWidth") == "1px"
     # Sections after the steps' parent stay plain.
     assert computed_style(page, "#inline-formatting", "borderInlineStartWidth") == "0px"
+
+
+def test_version_switcher_lists_readthedocs_pr_build(page: Page, live_server: str):
+    """A pull request preview isn't an active version; it's listed first as #N."""
+    page.goto(f"{live_server}/getting-started/configuration.html")
+    page.wait_for_function("() => window.Alpine !== undefined")
+    result = page.evaluate(
+        """async () => {
+          const pr = {slug: "216", verbose_name: "216", type: "external",
+                      urls: {documentation: "https://pr.example.org/en/216/"}};
+          window.ReadTheDocsEventData = {data: () => ({versions: {current: pr, active: [
+            {slug: "latest", verbose_name: "latest", type: "branch",
+             urls: {documentation: "https://example.org/en/latest/"}},
+          ]}})};
+          const el = document.createElement("div");
+          el.setAttribute("x-data", "versionSwitcher()");
+          el.setAttribute("data-source", "readthedocs");
+          el.setAttribute("data-version-match", "216");
+          document.body.append(el);
+          await new Promise((r) => setTimeout(r, 50));
+          const c = Alpine.$data(el);
+          return {label: c.currentLabel, names: c.versions.map((v) => v.name)};
+        }"""
+    )
+    assert result == {"label": "#216", "names": ["#216", "latest"]}
