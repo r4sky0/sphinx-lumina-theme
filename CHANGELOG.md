@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.18.0 (2026-11-04)
+
+### Features
+
+- Integrate with Read the Docs addons
+  ([#215](https://github.com/r4sky0/sphinx-lumina-theme/pull/215),
+  [`7db0867`](https://github.com/r4sky0/sphinx-lumina-theme/commit/7db08672ffc5f3ee1570c50d151cea1d5560c38e))
+
+
 ## v2.17.2 (2026-11-04)
 
 ### Bug Fixes
