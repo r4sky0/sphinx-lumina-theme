@@ -10,7 +10,7 @@ Visual showcase and syntax reference for every content type Lumina styles.
 :link-type: doc
 :icon: type
 :icon-style: featured
-Headings, inline formatting, block quotes, definition lists, and links.
+Headings, steps, inline formatting, block quotes, definition lists, and links.
 :::
 
 :::{grid-item-card} Admonitions

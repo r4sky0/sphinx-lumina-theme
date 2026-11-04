@@ -1682,3 +1682,16 @@ def test_tab_padding_depends_on_content(page: Page, live_server: str):
         computed_style(page, ".sd-tab-content div.highlight", "borderTopStyle")
         == "solid"
     )
+
+
+def test_steps_number_sibling_sections(page: Page, live_server: str):
+    """``lumina-steps`` numbers the marked section and its following siblings."""
+    page.goto(f"{live_server}/reference/typography.html")
+    numbers = page.evaluate(
+        """() => [...document.querySelectorAll('#steps > section > h3')]
+          .map((h) => getComputedStyle(h, '::before').content)"""
+    )
+    assert numbers == ["counter(lumina-step)"] * 3
+    assert computed_style(page, "#install-the-theme", "borderInlineStartWidth") == "1px"
+    # Sections after the steps' parent stay plain.
+    assert computed_style(page, "#inline-formatting", "borderInlineStartWidth") == "0px"

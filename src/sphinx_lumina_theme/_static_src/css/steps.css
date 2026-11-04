@@ -1,0 +1,55 @@
+/* Steps: `rst-class:: lumina-steps` before a heading turns its section and
+   every following sibling section into numbered steps on a shared rail.
+   rst-class only reaches the next section, hence the sibling selector. */
+
+/* Registered so `1lh` resolves on the heading, not on the smaller ::before. */
+@property --lumina-step-line {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+section:has(> section.lumina-steps) {
+  counter-reset: lumina-step;
+}
+
+:is(section.lumina-steps, section.lumina-steps ~ section) {
+  --lumina-step-size: 1.75rem;
+  counter-increment: lumina-step;
+  display: flow-root; /* keep heading margins inside, so the rail has no gaps */
+  margin-inline-start: calc(var(--lumina-step-size) / 2);
+  padding-inline-start: 1.75rem;
+  padding-block-end: 0.25rem;
+  border-inline-start: 1px solid var(--lumina-border);
+}
+
+:is(section.lumina-steps, section.lumina-steps ~ section) > :is(h2, h3, h4, h5, h6):first-child {
+  --lumina-step-line: 1lh;
+  position: relative;
+}
+
+section.lumina-steps > :is(h2, h3, h4, h5, h6):first-child {
+  margin-top: 0;
+}
+
+section.lumina-steps ~ section > :is(h2, h3, h4, h5, h6):first-child {
+  margin-top: 1.5rem;
+}
+
+/* The circle is centered on the rail and on the heading's first line. */
+:is(section.lumina-steps, section.lumina-steps ~ section) > :is(h2, h3, h4, h5, h6):first-child::before {
+  content: counter(lumina-step);
+  position: absolute;
+  inset-inline-start: calc(-1.75rem - var(--lumina-step-size) / 2 - 0.5px);
+  top: calc((var(--lumina-step-line) - var(--lumina-step-size)) / 2);
+  display: grid;
+  place-items: center;
+  width: var(--lumina-step-size);
+  height: var(--lumina-step-size);
+  border: 1px solid color-mix(in srgb, var(--lumina-accent) 35%, var(--lumina-border));
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--lumina-accent) 10%, var(--lumina-bg));
+  color: var(--lumina-link);
+  font: 600 0.8125rem/1 var(--lumina-font-sans);
+  font-variant-numeric: tabular-nums;
+}
