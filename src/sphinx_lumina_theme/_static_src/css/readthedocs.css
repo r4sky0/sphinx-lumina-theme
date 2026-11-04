@@ -1,0 +1,42 @@
+/* Read the Docs addons render in shadow DOM and read these inherited custom
+   properties, so mapping them to Lumina tokens covers light and dark mode. */
+:root {
+  --readthedocs-font-family: var(--lumina-font-sans);
+
+  /* The flyout's Read the Docs logo is white-only, so it keeps a dark surface
+     in light mode too, built from the near-black text token. */
+  --readthedocs-flyout-background-color: var(--lumina-text);
+  --readthedocs-flyout-color: color-mix(in srgb, var(--lumina-bg) 60%, var(--lumina-text));
+  --readthedocs-flyout-section-heading-color: color-mix(in srgb, var(--lumina-bg) 60%, var(--lumina-text));
+  --readthedocs-flyout-item-link-color: var(--lumina-bg);
+  --readthedocs-flyout-current-version-color: var(--lumina-accent);
+  --readthedocs-flyout-link-color: var(--lumina-accent);
+  --readthedocs-flyout-divider-color: color-mix(in srgb, var(--lumina-bg) 15%, var(--lumina-text));
+
+  --readthedocs-notification-background-color: var(--lumina-bg-secondary);
+  --readthedocs-notification-title-background-color: var(--lumina-bg-secondary);
+  --readthedocs-notification-color: var(--lumina-text-muted);
+  --readthedocs-notification-title-color: var(--lumina-text);
+  --readthedocs-notification-link-color: var(--lumina-link);
+  --readthedocs-notification-inverted-background-color: var(--lumina-bg-secondary);
+  --readthedocs-notification-inverted-color: var(--lumina-text-muted);
+  --readthedocs-notification-inverted-title-color: var(--lumina-text);
+  --readthedocs-notification-inverted-link-color: var(--lumina-link);
+}
+
+[data-theme="dark"] {
+  --readthedocs-flyout-background-color: var(--lumina-floating-bg);
+  --readthedocs-flyout-color: var(--lumina-text-muted);
+  --readthedocs-flyout-section-heading-color: var(--lumina-text-muted);
+  --readthedocs-flyout-item-link-color: var(--lumina-text);
+  --readthedocs-flyout-link-color: var(--lumina-link);
+  --readthedocs-flyout-divider-color: var(--lumina-border);
+}
+
+/* The flyout sits at right: 20px; bottom: 50px and covers the back-to-top
+   button, so lift the button above the collapsed flyout.
+   shortcut: assumes the default bottom-right flyout position; revisit if
+   projects move it with the dashboard's position setting. */
+:root:not([dir="rtl"]):has(readthedocs-flyout) .lumina-back-to-top {
+  bottom: 6.5rem;
+}

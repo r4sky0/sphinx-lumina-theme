@@ -1624,3 +1624,61 @@ def test_scripts_follow_the_page_language(page: Page, spanish_page: str):
     expect(panel.get_by_label("Accept")).to_have_attribute(
         "placeholder", "application/json"
     )
+
+
+def test_version_switcher_reads_readthedocs_addons(page: Page, live_server: str):
+    """The switcher fills from Read the Docs addons data, fired before or after init."""
+    page.goto(f"{live_server}/getting-started/configuration.html")
+    page.wait_for_function("() => window.Alpine !== undefined")
+    result = page.evaluate(
+        """async () => {
+          const data = {versions: {active: [
+            {slug: "latest", verbose_name: "latest",
+             urls: {documentation: "https://example.org/en/latest/"}},
+            {slug: "v2", verbose_name: "2.0",
+             urls: {documentation: "https://example.org/en/v2/"}},
+          ]}};
+          const mount = () => {
+            const el = document.createElement("div");
+            el.setAttribute("x-data", "versionSwitcher()");
+            el.setAttribute("data-source", "readthedocs");
+            el.setAttribute("data-version-match", "v2");
+            document.body.append(el);
+            return el;
+          };
+          const tick = () => new Promise((r) => setTimeout(r, 50));
+          const read = (el) => {
+            const c = Alpine.$data(el);
+            return {label: c.currentLabel, urls: c.versions.map((v) => c._versionUrl(v))};
+          };
+
+          const late = mount();
+          await tick();
+          document.dispatchEvent(new CustomEvent("readthedocs-addons-data-ready",
+            {detail: {data: () => data}}));
+          window.ReadTheDocsEventData = {data: () => data};
+          const early = mount();
+          await tick();
+          return [read(late), read(early)];
+        }"""
+    )
+    expected = {
+        "label": "2.0",
+        "urls": [
+            "https://example.org/en/latest/getting-started/configuration.html",
+            "https://example.org/en/v2/getting-started/configuration.html",
+        ],
+    }
+    assert result == [expected, expected]
+
+
+def test_tab_padding_depends_on_content(page: Page, live_server: str):
+    """Code-only tabs stay flush; tabs with prose get padding and framed code."""
+    page.goto(f"{live_server}/getting-started/installation.html")
+    assert computed_style(page, ".sd-tab-content", "paddingTop") == "0px"
+    page.goto(f"{live_server}/guides/read-the-docs.html")
+    assert computed_style(page, ".sd-tab-content", "paddingTop") != "0px"
+    assert (
+        computed_style(page, ".sd-tab-content div.highlight", "borderTopStyle")
+        == "solid"
+    )

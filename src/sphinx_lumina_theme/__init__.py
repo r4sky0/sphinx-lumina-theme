@@ -2,6 +2,7 @@
 
 import copy
 import hashlib
+import os
 import posixpath
 import re
 from pathlib import Path
@@ -477,6 +478,17 @@ def _suppress_sitemap_when_seo_disabled(app, exception):
             pass
 
 
+def _apply_readthedocs_baseurl(app):
+    """Default ``html_baseurl`` to the canonical URL Read the Docs provides.
+
+    Read the Docs no longer edits ``conf.py``, so projects that don't set
+    ``html_baseurl`` themselves lose canonical links and the sitemap.
+    """
+    canonical = os.environ.get("READTHEDOCS_CANONICAL_URL", "")
+    if canonical and not (app.config.html_baseurl or "").strip():
+        app.config.html_baseurl = canonical
+
+
 def _check_baseurl(app):
     """Warn once at build start if html_baseurl is missing or non-absolute.
 
@@ -579,7 +591,12 @@ def _add_context(app, pagename, templatename, context, doctree):
     # Version switcher
     vs_json = app.builder.theme_options.get("version_switcher_json", "")
     vs_match = app.builder.theme_options.get("version_switcher_match", "")
-    if vs_json:
+    context["lumina_on_rtd"] = os.environ.get("READTHEDOCS") == "True"
+    if not vs_json and context["lumina_on_rtd"]:
+        # Versions come from the Read the Docs addons data at runtime.
+        context["lumina_version_rtd"] = True
+        context["lumina_version_match"] = os.environ.get("READTHEDOCS_VERSION", "")
+    elif vs_json:
         context["lumina_version_json"] = vs_json
         context["lumina_version_match"] = vs_match
         if not vs_match:
@@ -992,6 +1009,7 @@ def setup(app):
     app.connect("build-finished", _suppress_sitemap_when_seo_disabled)
     app.connect("builder-inited", _apply_code_style)
     app.connect("builder-inited", _resolve_search_backend)
+    app.connect("builder-inited", _apply_readthedocs_baseurl)
     app.connect("builder-inited", _check_baseurl)
     app.connect("html-page-context", _add_context)
     app.connect("env-updated", _prepare_search_sections)
