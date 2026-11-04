@@ -23,3 +23,5 @@ Live reload with sphinx-autobuild and the asset watcher.
 Out-of-the-box meta tags, social cards, JSON-LD, sitemap, and `robots.txt`.
 
 Translate the theme’s interface text with Sphinx’s `language` setting.
+
+Host your docs on Read the Docs with versions, previews, and canonical URLs.

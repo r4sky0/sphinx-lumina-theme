@@ -20,7 +20,7 @@ Canonical URLs, sitemap entries, and the `robots.txt` `Sitemap:` line all need a
 html_baseurl = "https://docs.example.com/"
 ```
 
-If you don’t set this, Lumina logs one warning at the start of the build and skips the URL-dependent features. The rest (description, OG title, Twitter card, etc.) still work.
+On Read the Docs, Lumina fills this in from `READTHEDOCS_CANONICAL_URL` (see [Read the Docs](read-the-docs.md)). Elsewhere, if you don’t set it, Lumina logs one warning at the start of the build and skips the URL-dependent features. The rest (description, OG title, Twitter card, etc.) still work.
 
 ## Configuring social cards
 

@@ -82,6 +82,10 @@ The request panel keeps authentication in memory, shared by the normalized API b
 
 Mermaid rendering, theme changes, and fullscreen controls belong to `sphinxcontrib-mermaid`. Lumina’s `mermaid.js` observes rendered diagrams and records each SVG’s natural width; `mermaid.css` handles sizing, typography, and colors. The observer also handles SVG replacement after a theme change.
 
+### Read the Docs
+
+On Read the Docs builds (`READTHEDOCS=True`), `layout.html` emits the `readthedocs-addons-api-version` meta tag and `version-switcher.html` renders with `data-source="readthedocs"`. `version-switcher.js` then reads versions from the `readthedocs-addons-data-ready` event, or from `window.ReadTheDocsEventData` if the async addons script fired first. The addons render in shadow DOM, so `readthedocs.css` styles them only through their `--readthedocs-*` custom properties.
+
 ### Tables
 
 `responsive-tables.js` wraps article tables in scrollable regions before Alpine

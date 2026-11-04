@@ -100,10 +100,10 @@ reading_time: 12      # Force "12 min read" on this page
 
 ### Version Switcher
 
-| Option                   | Type   | Default   | Description                                                                                            |
-|--------------------------|--------|-----------|--------------------------------------------------------------------------------------------------------|
-| `version_switcher_json`  | string | `""`      | URL to a JSON file listing available documentation versions. Enables a version dropdown in the header. |
-| `version_switcher_match` | string | `""`      | The current version string to highlight in the dropdown. Should match a `version` field in the JSON.   |
+| Option                   | Type   | Default   | Description                                                                                                                                                                                                                                    |
+|--------------------------|--------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `version_switcher_json`  | string | `""`      | URL to a JSON file listing available documentation versions. Enables a version dropdown in the header. On Read the Docs the dropdown appears without it, filled from your project’s versions; see [Read the Docs](../guides/read-the-docs.md). |
+| `version_switcher_match` | string | `""`      | The current version string to highlight in the dropdown. Should match a `version` field in the JSON.                                                                                                                                           |
 
 ### Search
 
