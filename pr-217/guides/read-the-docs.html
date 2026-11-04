@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-11-04T20:57:15+00:00" />
+    <meta property="article:modified_time" content="2026-11-04T21:14:51+00:00" />
     <title>Read the Docs &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=29776469" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=58f88365" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -518,7 +518,7 @@ document.documentElement.style.setProperty(
                         <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                     </svg>
                 Lumina</a>
-                <span class="lumina-sidebar-footer-version">v2.18.0</span>
+                <span class="lumina-sidebar-footer-version">v2.19.0</span>
             </div>
         
     </div>
@@ -700,7 +700,7 @@ document.documentElement.style.setProperty(
                         <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                            target="_blank"
                            rel="noopener">Lumina</a>
-                        <span class="lumina-sidebar-footer-version">v2.18.0</span>
+                        <span class="lumina-sidebar-footer-version">v2.19.0</span>
                     </div>
                 
             </div>
@@ -769,10 +769,13 @@ document.documentElement.style.setProperty(
                         <ul>
 <li><a class="reference internal" href="#">Read the Docs</a><ul>
 <li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
-<li><a class="reference internal" href="#step-1-declare-your-docs-dependencies">Step 1: Declare your docs dependencies</a></li>
-<li><a class="reference internal" href="#step-2-add-readthedocs-yaml">Step 2: Add <code class="docutils literal notranslate"><span class="pre">.readthedocs.<wbr>yaml</span></code></a></li>
-<li><a class="reference internal" href="#step-3-import-the-project">Step 3: Import the project</a></li>
-<li><a class="reference internal" href="#step-4-preview-pull-requests">Step 4: Preview pull requests</a></li>
+<li><a class="reference internal" href="#set-up-hosting">Set up hosting</a><ul>
+<li><a class="reference internal" href="#declare-your-docs-dependencies">Declare your docs dependencies</a></li>
+<li><a class="reference internal" href="#add-readthedocs-yaml">Add <code class="docutils literal notranslate"><span class="pre">.readthedocs.<wbr>yaml</span></code></a></li>
+<li><a class="reference internal" href="#import-the-project">Import the project</a></li>
+<li><a class="reference internal" href="#preview-pull-requests">Preview pull requests</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#what-lumina-handles-automatically">What Lumina handles automatically</a></li>
 <li><a class="reference internal" href="#flyout-menu">Flyout menu</a></li>
 <li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
@@ -804,8 +807,10 @@ document.documentElement.style.setProperty(
 <li><p>A free account on <a class="reference external" href="https://app.readthedocs.org/accounts/signup/">Read the Docs</a>.</p></li>
 </ul>
 </section>
-<section id="step-1-declare-your-docs-dependencies">
-<h2 id="lumina-search-step-1-declare-your-docs-dependencies">Step 1: Declare your docs dependencies<a class="headerlink" href="#step-1-declare-your-docs-dependencies" title="Link to this heading">¶</a></h2>
+<section id="set-up-hosting">
+<h2 id="lumina-search-set-up-hosting">Set up hosting<a class="headerlink" href="#set-up-hosting" title="Link to this heading">¶</a></h2>
+<section class="lumina-steps" id="declare-your-docs-dependencies">
+<h3 id="lumina-search-declare-your-docs-dependencies">Declare your docs dependencies<a class="headerlink" href="#declare-your-docs-dependencies" title="Link to this heading">¶</a></h3>
 <p>Read the Docs installs only what you list. Choose the tab that matches how your project manages dependencies.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
@@ -833,8 +838,8 @@ myst-parser
 </div>
 <p>Add any other Sphinx extensions your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> loads, such as <code class="docutils literal notranslate"><span class="pre">sphinx-design</span></code> or <code class="docutils literal notranslate"><span class="pre">sphinxcontrib-mermaid</span></code>. For Pagefind search, use <code class="docutils literal notranslate"><span class="pre">sphinx-lumina-theme[pagefind]</span></code> instead.</p>
 </section>
-<section id="step-2-add-readthedocs-yaml">
-<h2 id="lumina-search-step-2-add-readthedocs-yaml">Step 2: Add <code class="docutils literal notranslate"><span class="pre">.readthedocs.yaml</span></code><a class="headerlink" href="#step-2-add-readthedocs-yaml" title="Link to this heading">¶</a></h2>
+<section id="add-readthedocs-yaml">
+<h3 id="lumina-search-add-readthedocs-yaml">Add <code class="docutils literal notranslate"><span class="pre">.readthedocs.yaml</span></code><a class="headerlink" href="#add-readthedocs-yaml" title="Link to this heading">¶</a></h3>
 <p>Create <code class="docutils literal notranslate"><span class="pre">.readthedocs.yaml</span></code> in the repository root:</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
@@ -897,8 +902,8 @@ pip</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </section>
-<section id="step-3-import-the-project">
-<h2 id="lumina-search-step-3-import-the-project">Step 3: Import the project<a class="headerlink" href="#step-3-import-the-project" title="Link to this heading">¶</a></h2>
+<section id="import-the-project">
+<h3 id="lumina-search-import-the-project">Import the project<a class="headerlink" href="#import-the-project" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Sign in to <a class="reference external" href="https://app.readthedocs.org/">Read the Docs</a> and import your repository from the dashboard. If it isn’t listed, enter its URL manually.</p></li>
 <li><p>Confirm the project name. It becomes your subdomain, such as <code class="docutils literal notranslate"><span class="pre">my-project.readthedocs.io</span></code>.</p></li>
@@ -907,9 +912,10 @@ pip</label><div class="sd-tab-content docutils">
 </ol>
 <p>Read the Docs’ <a class="reference external" href="https://docs.readthedocs.com/platform/stable/tutorial/index.html">tutorial</a> walks through the import screens in detail.</p>
 </section>
-<section id="step-4-preview-pull-requests">
-<h2 id="lumina-search-step-4-preview-pull-requests">Step 4: Preview pull requests<a class="headerlink" href="#step-4-preview-pull-requests" title="Link to this heading">¶</a></h2>
+<section id="preview-pull-requests">
+<h3 id="lumina-search-preview-pull-requests">Preview pull requests<a class="headerlink" href="#preview-pull-requests" title="Link to this heading">¶</a></h3>
 <p>Read the Docs builds every pull request and links the preview from the pull request’s checks. This is on by default for new projects; you can change it under <strong>Settings → Pull request builds</strong>.</p>
+</section>
 </section>
 <section id="what-lumina-handles-automatically">
 <h2 id="lumina-search-what-lumina-handles-automatically">What Lumina handles automatically<a class="headerlink" href="#what-lumina-handles-automatically" title="Link to this heading">¶</a></h2>
@@ -936,7 +942,7 @@ pip</label><div class="sd-tab-content docutils">
 <section id="the-build-fails-with-no-theme-named-lumina-found">
 <h3 id="lumina-search-the-build-fails-with-no-theme-named-lumina-found">The build fails with “no theme named ‘lumina’ found”<a class="headerlink" href="#the-build-fails-with-no-theme-named-lumina-found" title="Link to this heading">¶</a></h3>
 <p><strong>Cause:</strong> <code class="docutils literal notranslate"><span class="pre">sphinx-lumina-theme</span></code> isn’t in the dependencies Read the Docs installs.</p>
-<p><strong>Solution:</strong> Add it to your <code class="docutils literal notranslate"><span class="pre">docs</span></code> group or <code class="docutils literal notranslate"><span class="pre">docs/requirements.txt</span></code> (Step 1), and check that <code class="docutils literal notranslate"><span class="pre">.readthedocs.yaml</span></code> points at that file or group.</p>
+<p><strong>Solution:</strong> Add it to your <code class="docutils literal notranslate"><span class="pre">docs</span></code> group or <code class="docutils literal notranslate"><span class="pre">docs/requirements.txt</span></code> (the first setup step), and check that <code class="docutils literal notranslate"><span class="pre">.readthedocs.yaml</span></code> points at that file or group.</p>
 </section>
 <section id="extension-error-could-not-import-extension">
 <h3 id="lumina-search-extension-error-could-not-import-extension">“Extension error: Could not import extension …”<a class="headerlink" href="#extension-error-could-not-import-extension" title="Link to this heading">¶</a></h3>
@@ -1010,10 +1016,13 @@ pip</label><div class="sd-tab-content docutils">
                 <ul>
 <li><a class="reference internal" href="#">Read the Docs</a><ul>
 <li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
-<li><a class="reference internal" href="#step-1-declare-your-docs-dependencies">Step 1: Declare your docs dependencies</a></li>
-<li><a class="reference internal" href="#step-2-add-readthedocs-yaml">Step 2: Add <code class="docutils literal notranslate"><span class="pre">.readthedocs.<wbr>yaml</span></code></a></li>
-<li><a class="reference internal" href="#step-3-import-the-project">Step 3: Import the project</a></li>
-<li><a class="reference internal" href="#step-4-preview-pull-requests">Step 4: Preview pull requests</a></li>
+<li><a class="reference internal" href="#set-up-hosting">Set up hosting</a><ul>
+<li><a class="reference internal" href="#declare-your-docs-dependencies">Declare your docs dependencies</a></li>
+<li><a class="reference internal" href="#add-readthedocs-yaml">Add <code class="docutils literal notranslate"><span class="pre">.readthedocs.<wbr>yaml</span></code></a></li>
+<li><a class="reference internal" href="#import-the-project">Import the project</a></li>
+<li><a class="reference internal" href="#preview-pull-requests">Preview pull requests</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#what-lumina-handles-automatically">What Lumina handles automatically</a></li>
 <li><a class="reference internal" href="#flyout-menu">Flyout menu</a></li>
 <li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>

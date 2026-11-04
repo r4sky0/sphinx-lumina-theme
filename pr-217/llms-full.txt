@@ -174,7 +174,7 @@ intersphinx_mapping = {
 
 Visual showcase and syntax reference for every content type Lumina styles.
 
-Headings, inline formatting, block quotes, definition lists, and links.
+Headings, steps, inline formatting, block quotes, definition lists, and links.
 
 Note, tip, warning, danger, and six more callout types with custom titles and nesting.
 
@@ -2449,7 +2449,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 2.18.0.
+This documentation is for Sphinx Lumina Theme version 2.19.0.
 
 The MyST syntax:
 
@@ -4907,7 +4907,9 @@ To see the result, browse [Lumina’s own docs on Read the Docs](https://sphinx-
 - The project in a Git repository on GitHub, GitLab, or Bitbucket.
 - A free account on [Read the Docs](https://app.readthedocs.org/accounts/signup/).
 
-## Step 1: Declare your docs dependencies
+## Set up hosting
+
+### Declare your docs dependencies
 
 Read the Docs installs only what you list. Choose the tab that matches how your project manages dependencies.
 
@@ -4933,7 +4935,7 @@ myst-parser
 
 Add any other Sphinx extensions your `conf.py` loads, such as `sphinx-design` or `sphinxcontrib-mermaid`. For Pagefind search, use `sphinx-lumina-theme[pagefind]` instead.
 
-## Step 2: Add `.readthedocs.yaml`
+### Add `.readthedocs.yaml`
 
 Create `.readthedocs.yaml` in the repository root:
 
@@ -4978,7 +4980,7 @@ python:
 
 Change `docs/conf.py` if your configuration lives elsewhere. Commit the file and push.
 
-## Step 3: Import the project
+### Import the project
 
 1. Sign in to [Read the Docs](https://app.readthedocs.org/) and import your repository from the dashboard. If it isn’t listed, enter its URL manually.
 2. Confirm the project name. It becomes your subdomain, such as `my-project.readthedocs.io`.
@@ -4987,7 +4989,7 @@ Change `docs/conf.py` if your configuration lives elsewhere. Commit the file and
 
 Read the Docs’ [tutorial](https://docs.readthedocs.com/platform/stable/tutorial/index.html) walks through the import screens in detail.
 
-## Step 4: Preview pull requests
+### Preview pull requests
 
 Read the Docs builds every pull request and links the preview from the pull request’s checks. This is on by default for new projects; you can change it under **Settings → Pull request builds**.
 
@@ -5021,7 +5023,7 @@ Keep the flyout if readers need its extras, such as switching between translatio
 
 **Cause:** `sphinx-lumina-theme` isn’t in the dependencies Read the Docs installs.
 
-**Solution:** Add it to your `docs` group or `docs/requirements.txt` (Step 1), and check that `.readthedocs.yaml` points at that file or group.
+**Solution:** Add it to your `docs` group or `docs/requirements.txt` (the first setup step), and check that `.readthedocs.yaml` points at that file or group.
 
 ### “Extension error: Could not import extension …”
 
@@ -5039,6 +5041,14 @@ Keep the flyout if readers need its extras, such as switching between translatio
 # releases.html.md
 
 # Releases
+
+## v2.19.0 (2026-11-04)
+
+### Features
+
+- Add numbered steps for heading sequences
+  ([#216](https://github.com/r4sky0/sphinx-lumina-theme/pull/216),
+  [`af63625`](https://github.com/r4sky0/sphinx-lumina-theme/commit/af636254fea79cf6fff79e876bc6cca3efd4ca71))
 
 ## v2.18.0 (2026-11-04)
 
@@ -6966,6 +6976,54 @@ The MyST syntax:
 ##### Heading 5
 
 ###### Heading 6
+
+## Steps
+
+Number a sequence of sections on a connecting rail, for setup guides and tutorials. Steps are ordinary headings, so each one keeps its anchor link and its entry in the table of contents.
+
+Add the `lumina-steps` class before the first step heading:
+
+### MyST
+
+```markdown
+## Get started
+
+```{rst-class} lumina-steps
+```
+
+### Install the theme
+
+### Configure Sphinx
+```
+
+### reStructuredText
+
+```rst
+Get started
+-----------
+
+.. rst-class:: lumina-steps
+
+Install the theme
+~~~~~~~~~~~~~~~~~
+
+Configure Sphinx
+~~~~~~~~~~~~~~~~
+```
+
+The marked heading and every following heading at the same level become steps, up to the end of the parent section. Put the steps under their own heading, as above, so the sections after them stay unnumbered. Steps can hold any content, including tabs, code blocks, and admonitions.
+
+### Install the theme
+
+Add `sphinx-lumina-theme` to your docs dependencies.
+
+### Configure Sphinx
+
+Set `html_theme = "lumina"` in `conf.py`.
+
+### Build the docs
+
+Run `sphinx-build docs docs/_build/html` and open `index.html`.
 
 ## Inline Formatting
 
