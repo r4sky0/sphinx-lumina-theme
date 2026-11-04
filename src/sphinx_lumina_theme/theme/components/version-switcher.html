@@ -9,20 +9,24 @@
                 :aria-expanded="open"
                 aria-haspopup="true"
                 aria-label="{{ _('Select documentation version') }}"
-                class="flex items-center gap-1 rounded-md border border-lumina-border bg-lumina-bg-secondary px-2 py-1 text-xs font-medium text-lumina-text-muted hover:text-lumina-text hover:border-lumina-accent transition-colors cursor-pointer"
+                class="group flex items-center cursor-pointer"
                 type="button">
-            <span x-text="currentLabel || '{{ lumina_version_match }}'">{{ lumina_version_match }}</span>
-            <svg class="h-3 w-3 transition-transform duration-200"
-                 :class="open && 'rotate-180'"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="2"
-                 stroke-linecap="round"
-                 stroke-linejoin="round"
-                 viewBox="0 0 24 24"
-                 aria-hidden="true">
-                {{ lumina_icon_inner("chevron-down") }}
-            </svg>
+            {# The button keeps the header's touch target; the badge is the visible part. #}
+            <span class="flex items-center gap-1 rounded-full border bg-lumina-bg-secondary py-0.5 ps-2.5 pe-2 text-xs font-medium tabular-nums transition-colors group-hover:border-lumina-accent group-hover:text-lumina-text"
+                  :class="open ? 'border-lumina-accent text-lumina-text' : 'border-lumina-border text-lumina-text-muted'">
+                <span x-text="currentLabel || '{{ lumina_version_match }}'">{{ lumina_version_match }}</span>
+                <svg class="h-3 w-3 transition-transform duration-200"
+                     :class="open && 'rotate-180'"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     viewBox="0 0 24 24"
+                     aria-hidden="true">
+                    {{ lumina_icon_inner("chevron-down") }}
+                </svg>
+            </span>
         </button>
         <div x-show="open"
              x-cloak
@@ -33,20 +37,31 @@
              x-transition:leave="transition ease-in duration-100"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
-             class="absolute start-0 top-full mt-1 min-w-[10rem] rounded-lg border border-lumina-border bg-lumina-bg py-1 shadow-lg"
+             class="absolute start-0 top-full min-w-[10rem] rounded-lg border border-lumina-border bg-lumina-bg p-1 shadow-lg"
              role="menu">
             <template x-for="v in versions" :key="v.version">
                 <a :href="_versionUrl(v)"
-                   class="flex items-center gap-2 px-3 py-1.5 text-[0.8125rem] text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors no-underline"
-                   :class="v.version === match && 'font-medium text-lumina-accent'"
+                   class="flex items-center gap-3 rounded-md px-2.5 py-1.5 text-[0.8125rem] tabular-nums hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors no-underline"
+                   :class="v.version === match ? 'font-medium text-lumina-text' : 'text-lumina-text-muted'"
+                   :aria-current="v.version === match ? 'page' : null"
                    role="menuitem">
                     <span x-text="v.name || v.version"></span>
-                    <span x-show="v.version === match"
-                          class="ms-auto text-[0.6875rem] text-lumina-accent">{{ _("(current)") }}</span>
+                    <svg x-show="v.version === match"
+                         class="ms-auto h-3.5 w-3.5 text-lumina-accent"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2.5"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         viewBox="0 0 24 24"
+                         aria-hidden="true">
+                        {{ lumina_icon_inner("check") }}
+                    </svg>
+                    <span x-show="v.version === match" class="sr-only">{{ _("(current)") }}</span>
                 </a>
             </template>
             <div x-show="error"
-                 class="px-3 py-1.5 text-[0.8125rem] text-lumina-text-muted italic">
+                 class="px-2.5 py-1.5 text-[0.8125rem] text-lumina-text-muted italic">
                 {{ _("Failed to load versions") }}
             </div>
         </div>

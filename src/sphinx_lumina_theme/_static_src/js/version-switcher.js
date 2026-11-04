@@ -77,10 +77,17 @@ export default function versionSwitcher() {
 
     _setRtdVersions(data) {
       const active = data?.versions?.active || [];
+      const current = data?.versions?.current;
+      // Pull request previews and hidden versions aren't listed as active;
+      // add the current one so readers can see where they are.
+      const list =
+        current && !active.some((v) => v.slug === current.slug)
+          ? [current, ...active]
+          : active;
       this._setVersions(
-        active.map((v) => ({
+        list.map((v) => ({
           version: v.slug,
-          name: v.verbose_name,
+          name: v.type === "external" ? `#${v.verbose_name}` : v.verbose_name,
           url: v.urls?.documentation,
         })),
       );
