@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.17.2 (2026-11-04)
+
+### Bug Fixes
+
+- Keep content aligned and hide title-only TOC
+  ([#214](https://github.com/r4sky0/sphinx-lumina-theme/pull/214),
+  [`4236c24`](https://github.com/r4sky0/sphinx-lumina-theme/commit/4236c24497bc6a66b7561de17c5152d246605f2b))
+
+
 ## v2.17.1 (2026-10-30)
 
 ### Bug Fixes
