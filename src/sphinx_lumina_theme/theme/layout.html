@@ -199,7 +199,7 @@
                 {% include "components/page-actions.html" %}
 
             </div>
-            {% if theme_show_toc == "true" and toc %}
+            {% if theme_show_toc == "true" and display_toc %}
                 <details class="lumina-mobile-outline" data-pagefind-ignore>
                     <summary>{{ _("On this page") }} {{ lumina_icon("chevron-down", size=14) }}</summary>
                     <nav aria-label="{{ _('Page outline') }}">

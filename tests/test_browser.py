@@ -461,6 +461,16 @@ def test_article_width_and_navigation_surface(
             assert dimensions["gutterColor"] == dimensions["sidebarColor"]
 
 
+def test_content_aligns_on_pages_without_toc(page: Page, live_server: str):
+    """The search page has no outline but must keep the article where other pages put it."""
+    page.set_viewport_size({"width": 1600, "height": 900})
+    left = []
+    for path in ("guides/wide-layout.html", "search.html"):
+        page.goto(f"{live_server}/{path}")
+        left.append(page.locator(".lumina-article").bounding_box()["x"])
+    assert left[0] == pytest.approx(left[1])
+
+
 def test_prose_wrapping_and_optional_hyphenation(page: Page, live_server: str):
     page.set_viewport_size({"width": 390, "height": 844})
     page.goto(f"{live_server}/guides/wide-layout.html")
