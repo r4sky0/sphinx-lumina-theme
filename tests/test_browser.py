@@ -1660,3 +1660,15 @@ def test_version_switcher_reads_readthedocs_addons(page: Page, live_server: str)
         ],
     }
     assert result == [expected, expected]
+
+
+def test_tab_padding_depends_on_content(page: Page, live_server: str):
+    """Code-only tabs stay flush; tabs with prose get padding and framed code."""
+    page.goto(f"{live_server}/getting-started/installation.html")
+    assert computed_style(page, ".sd-tab-content", "paddingTop") == "0px"
+    page.goto(f"{live_server}/guides/read-the-docs.html")
+    assert computed_style(page, ".sd-tab-content", "paddingTop") != "0px"
+    assert (
+        computed_style(page, ".sd-tab-content div.highlight", "borderTopStyle")
+        == "solid"
+    )

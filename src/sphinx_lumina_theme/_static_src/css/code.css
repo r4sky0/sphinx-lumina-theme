@@ -268,19 +268,23 @@ html .sd-tab-set > label:hover {
 }
 
 .sd-tab-set > .sd-tab-content {
-  padding: 0;
+  padding: 1rem 1.25rem;
   box-shadow: none;
   border-top: 1px solid color-mix(in srgb, var(--lumina-accent) 10%, var(--lumina-border));
 }
 
-.sd-tab-content div.highlight,
-.sd-tab-content pre.highlight {
-  margin: 0;
-  border: none;
-  border-radius: 0;
+.sd-tab-set > .sd-tab-content > :first-child { margin-top: 0; }
+.sd-tab-set > .sd-tab-content > :last-child { margin-bottom: 0; }
+
+/* A tab holding a single code block becomes the code frame itself; tabs
+   with prose keep their padding and regular code blocks. */
+.sd-tab-set > .sd-tab-content:has(> :only-child:is([class*="highlight-"], pre.highlight, .literal-block-wrapper)) {
+  padding: 0;
 }
 
-.sd-tab-content .literal-block-wrapper {
+.sd-tab-content > :only-child div.highlight,
+.sd-tab-content > pre.highlight:only-child,
+.sd-tab-content > .literal-block-wrapper:only-child {
   margin: 0;
   border: none;
   border-radius: 0;
