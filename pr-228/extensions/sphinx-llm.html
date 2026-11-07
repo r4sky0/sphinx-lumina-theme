@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-04-16T16:59:05+00:00" />
+    <meta property="article:modified_time" content="2026-11-07T10:14:38+00:00" />
 <link rel="alternate" type="text/markdown" href="sphinx-llm.html.md">
 <link rel="describedby" href="llms.txt">
     <title>sphinx-llm &#8212; Sphinx Lumina Theme  documentation</title>
@@ -23,7 +23,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=62abdc0c"></script>
+    <script defer="defer" src="../_static/lumina.js?v=313b8e52"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/pr-228/extensions/sphinx-llm.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -75,7 +75,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/pr-228/"}, {"@type": "ListItem", "position": 2, "name": "Extensions", "item": "https://r4sky0.github.io/sphinx-lumina-theme/pr-228/extensions/index.html"}, {"@type": "ListItem", "position": 3, "name": "sphinx-llm", "item": "https://r4sky0.github.io/sphinx-lumina-theme/pr-228/extensions/sphinx-llm.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "sphinx-llm", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/pr-228/_static/logo-square.png"}}, "description": "Make your docs readable by AI assistants and coding tools. sphinx-llm generates LLM-friendly versions of your documentation following the llms.txt convention —…", "url": "https://r4sky0.github.io/sphinx-lumina-theme/pr-228/extensions/sphinx-llm.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/pr-228/extensions/sphinx-llm.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/pr-228/_static/og-card.png", "datePublished": "2026-04-16T00:00:00+00:00", "dateModified": "2026-04-16T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "sphinx-llm", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/pr-228/_static/logo-square.png"}}, "description": "Make your docs readable by AI assistants and coding tools. sphinx-llm generates LLM-friendly versions of your documentation following the llms.txt convention —…", "url": "https://r4sky0.github.io/sphinx-lumina-theme/pr-228/extensions/sphinx-llm.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/pr-228/extensions/sphinx-llm.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/pr-228/_static/og-card.png", "datePublished": "2026-11-07T00:00:00+00:00", "dateModified": "2026-11-07T00:00:00+00:00"}</script>
         
         
     
@@ -91,18 +91,19 @@
   
   if (stored === 'dark' || stored === 'light') {
     document.documentElement.setAttribute('data-theme', stored);
-    // Sphinx gates the dark highlight stylesheet on the OS color scheme only;
-    // a stored override must rewrite its media query before first paint.
-    var pygmentsDark = document.getElementById('pygments_dark_css');
-    if (pygmentsDark) {
-      pygmentsDark.media = stored === 'dark' ? 'screen' : 'not all';
-    }
   } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.documentElement.setAttribute('data-theme', 'dark');
   } else {
     document.documentElement.setAttribute('data-theme', 'light');
   }
   
+  // Sphinx gates the dark highlight stylesheet on the OS color scheme only;
+  // a stored override or dark_mode_default must rewrite its media query
+  // before first paint.
+  var pygmentsDark = document.getElementById('pygments_dark_css');
+  if (pygmentsDark) {
+    pygmentsDark.media = document.documentElement.getAttribute('data-theme') === 'dark' ? 'screen' : 'not all';
+  }
 })();
     </script>
     
@@ -520,7 +521,7 @@ document.documentElement.style.setProperty(
                         <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                     </svg>
                 Lumina</a>
-                <span class="lumina-sidebar-footer-version">v2.19.2</span>
+                <span class="lumina-sidebar-footer-version">v2.19.3</span>
             </div>
         
     </div>
@@ -702,7 +703,7 @@ document.documentElement.style.setProperty(
                         <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                            target="_blank"
                            rel="noopener">Lumina</a>
-                        <span class="lumina-sidebar-footer-version">v2.19.2</span>
+                        <span class="lumina-sidebar-footer-version">v2.19.3</span>
                     </div>
                 
             </div>
@@ -789,17 +790,17 @@ document.documentElement.style.setProperty(
     <section class="tex2jax_ignore mathjax_ignore" id="sphinx-llm">
 <h1 id="lumina-search-sphinx-llm">sphinx-llm<a class="headerlink" href="#sphinx-llm" title="Link to this heading">¶</a></h1>
 <p>Make your docs readable by AI assistants and coding tools. <a class="reference external" href="https://github.com/NVIDIA/sphinx-llm">sphinx-llm</a> generates LLM-friendly versions of your documentation following the <a class="reference external" href="https://llmstxt.org/">llms.txt convention</a> — Lumina links to <code class="docutils literal notranslate"><span class="pre">llms.txt</span></code> automatically once the extension is enabled.</p>
-<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>1 min read</span></div><section id="what-it-produces">
+<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>2 min read</span></div><section id="what-it-produces">
 <h2 id="lumina-search-what-it-produces">What It Produces<a class="headerlink" href="#what-it-produces" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">llms.txt</span></code></strong> — A markdown index of all pages with titles, URLs, and descriptions</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">llms-full.txt</span></code></strong> — The full content of every page concatenated into a single markdown file</p></li>
-<li><p><strong>Per-page <code class="docutils literal notranslate"><span class="pre">.md</span></code> files</strong> — Each HTML page gets a companion markdown file (e.g., <code class="docutils literal notranslate"><span class="pre">getting-started.html.md</span></code>)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">llms.txt</span></code></strong> — A markdown index of all pages with titles, URLs, and descriptions, plus a scoped <code class="docutils literal notranslate"><span class="pre">llms.txt</span></code> in each section folder</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">llms-full.txt</span></code></strong> — The full content of every page concatenated into a single markdown file (opt-in, see <code class="docutils literal notranslate"><span class="pre">llms_txt_full_build</span></code>)</p></li>
+<li><p><strong>Per-page <code class="docutils literal notranslate"><span class="pre">.md</span></code> files</strong> — Each HTML page gets a companion markdown file (e.g., <code class="docutils literal notranslate"><span class="pre">getting-started.html.md</span></code> and <code class="docutils literal notranslate"><span class="pre">getting-started.md</span></code>)</p></li>
 </ul>
 </section>
 <section id="lumina-integration">
 <h2 id="lumina-search-lumina-integration">Lumina Integration<a class="headerlink" href="#lumina-integration" title="Link to this heading">¶</a></h2>
-<p>Lumina automatically adds a <code class="docutils literal notranslate"><span class="pre">&lt;link</span> <span class="pre">rel=&quot;alternate&quot;&gt;</span></code> tag in the HTML <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code> pointing to <code class="docutils literal notranslate"><span class="pre">llms.txt</span></code> when this extension is detected — no extra configuration needed.</p>
+<p>Lumina automatically adds a <code class="docutils literal notranslate"><span class="pre">&lt;link</span> <span class="pre">rel=&quot;alternate&quot;&gt;</span></code> tag in the HTML <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code> pointing to <code class="docutils literal notranslate"><span class="pre">llms.txt</span></code> when this extension is detected — no extra configuration needed. sphinx-llm 1.1 and later also add their own <code class="docutils literal notranslate"><span class="pre">&lt;link</span> <span class="pre">rel=&quot;describedby&quot;&gt;</span></code> tag.</p>
 </section>
 <section id="setup">
 <h2 id="lumina-search-setup">Setup<a class="headerlink" href="#setup" title="Link to this heading">¶</a></h2>
@@ -812,7 +813,17 @@ document.documentElement.style.setProperty(
 </pre></div>
 </div>
 </div>
-<p>That’s it. On the next build, <code class="docutils literal notranslate"><span class="pre">llms.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">llms-full.txt</span></code>, and per-page <code class="docutils literal notranslate"><span class="pre">.md</span></code> files appear alongside your HTML output.</p>
+<p>That’s it. On the next build, <code class="docutils literal notranslate"><span class="pre">llms.txt</span></code> and per-page <code class="docutils literal notranslate"><span class="pre">.md</span></code> files appear alongside your HTML output.</p>
+<p>Lumina’s own documentation builds with <code class="docutils literal notranslate"><span class="pre">-W</span></code> and also sets these options:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">conf.py</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">llms_txt_full_build</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># Skip nodes the Markdown export can&#39;t render (tips, sidebars, diagrams)</span>
+<span class="c1"># instead of warning about each one.</span>
+<span class="n">llms_txt_suppress_unknown_node_warnings</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
 </section>
 <section id="configuration">
 <h2 id="lumina-search-configuration">Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>
@@ -844,11 +855,19 @@ document.documentElement.style.setProperty(
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">llms_txt_suffix_mode</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code></p></td>
-<td><p>Controls per-page markdown filenames. Options: <code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;file-suffix&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;url-suffix&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;replace&quot;</span></code>.</p></td>
+<td><p>Controls per-page markdown filenames: <code class="docutils literal notranslate"><span class="pre">&quot;append&quot;</span></code> writes <code class="docutils literal notranslate"><span class="pre">page.html.md</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;replace&quot;</span></code> writes <code class="docutils literal notranslate"><span class="pre">page.md</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code> writes both. <code class="docutils literal notranslate"><span class="pre">&quot;file-suffix&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;url-suffix&quot;</span></code> are deprecated aliases for <code class="docutils literal notranslate"><span class="pre">&quot;append&quot;</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">llms_txt_full_build</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
-<td><p>Whether to generate <code class="docutils literal notranslate"><span class="pre">llms-full.txt</span></code>.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Whether to generate <code class="docutils literal notranslate"><span class="pre">llms-full.txt</span></code>. Before sphinx-llm 1.1 this defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">llms_txt_exclude</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+<td><p>Glob patterns of document names (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;internal/*&quot;</span></code>) to leave out of the <code class="docutils literal notranslate"><span class="pre">llms.txt</span></code> outputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">llms_txt_suppress_unknown_node_warnings</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Skip document nodes the Markdown export can’t render without warning. <code class="docutils literal notranslate"><span class="pre">True</span></code> silences all of them; a list of node class names silences only those.</p></td>
 </tr>
 </tbody>
 </table>
@@ -893,7 +912,7 @@ document.documentElement.style.setProperty(
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>April 16, 2026</time>
+            Last updated <time>November 7, 2026</time>
         </p>
     
     
