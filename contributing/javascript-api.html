@@ -7,13 +7,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-11-07T10:26:43+00:00" />
+    <meta property="article:modified_time" content="2026-11-07T15:34:09+00:00" />
 <link rel="alternate" type="text/markdown" href="javascript-api.html.md">
 <link rel="describedby" href="llms.txt">
     <title>JavaScript API &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=91618d8e" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=4f7d4ba8" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=1eb1eda9" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=bc31efa2" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -23,7 +23,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=dba1a852"></script>
+    <script defer="defer" src="../_static/lumina.js?v=e39a7ba2"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/contributing/javascript-api.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -728,8 +728,10 @@ document.documentElement.style.setProperty(
                 </details>
             
             <article class="lumina-article" x-data="headerLinks()">
-
                 
+                <div class="body">
+
+                    
 
     <section class="tex2jax_ignore mathjax_ignore" id="javascript-api">
 <h1 id="lumina-search-javascript-api">JavaScript API<a class="headerlink" href="#javascript-api" title="Link to this heading">¶</a></h1>
@@ -890,6 +892,7 @@ Registered as <code class="docutils literal notranslate"><span class="pre">Alpin
 <li><p><code class="docutils literal notranslate"><span class="pre">moveDown()</span></code> — Moves keyboard selection down.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">moveUp()</span></code> — Moves keyboard selection up.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">goToSelected()</span></code> — Navigates to the selected result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rememberQuery()</span></code> — Stores the query for <code class="docutils literal notranslate"><span class="pre">sphinx_highlight.js</span></code> on the next page.</p></li>
 </ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -1050,6 +1053,7 @@ is set on <code class="docutils literal notranslate"><span class="pre">&lt;html&
 
 
 
+                </div>
             </article>
             
 
@@ -1247,6 +1251,7 @@ is set on <code class="docutils literal notranslate"><span class="pre">&lt;html&
                        data-search-result
                        class="flex flex-col gap-1 rounded-lg px-3 py-2.5 no-underline transition-colors focus-visible:outline-2 focus-visible:outline-lumina-accent"
                        :class="[index === selectedIndex ? 'bg-lumina-accent-light text-lumina-accent' : 'hover:bg-lumina-bg-secondary text-lumina-text', result.isHeading ? 'ms-4 border-s border-lumina-border' : 'mt-1']"
+                       @click="rememberQuery()"
                        @mouseenter="selectedIndex = index"
                        @focus="selectedIndex = index">
                         <template x-if="result.breadcrumb">

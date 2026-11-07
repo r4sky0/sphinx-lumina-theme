@@ -134,6 +134,7 @@ Registered as `Alpine.data("searchModal", searchModal)`.
 - `moveDown()` — Moves keyboard selection down.
 - `moveUp()` — Moves keyboard selection up.
 - `goToSelected()` — Navigates to the selected result.
+- `rememberQuery()` — Stores the query for `sphinx_highlight.js` on the next page.
 
 * **Returns:**
   **object** – Alpine.js component data.

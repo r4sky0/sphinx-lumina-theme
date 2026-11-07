@@ -112,6 +112,13 @@ responses, including responses arriving after the dialog closes. The dialog
 lists up to ten pages with up to three heading links per page; all links share
 one keyboard navigation sequence. Excerpts are sanitized before rendering.
 
+Opening a result stores the query under `sphinx_highlight_terms` in
+localStorage, the hand-off Sphinx's own search page uses. Sphinx's
+`sphinx_highlight.js` then marks the terms on the next page. It searches only
+inside `div.body`, so `layout.html` wraps the page content in
+`<div class="body">` inside `.lumina-article`; without it the sidebar and header
+would be marked too.
+
 ## Translations
 
 `setup()` registers `locale/` as an additional `sphinx` message catalog, so templates translate strings with the `_()` function that Sphinx provides. Sphinx's own translations and the project's `locale_dirs` take precedence over the bundled catalog.

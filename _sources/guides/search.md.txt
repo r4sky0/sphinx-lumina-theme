@@ -72,6 +72,13 @@ negative search priority and pages marked `:nosearch:` are left out. Lumina writ
 them to `_static/lumina-symbols.json` at the end of each build, for both search
 backends.
 
+## Matches on the page
+
+When a reader opens a search result, the search terms are marked in the page
+content in the accent color. Press {kbd}`Esc` to clear them. This uses Sphinx's
+own `sphinx_highlight.js`, so it works the same with both backends, and a link
+such as `guides/search.html?highlight=pagefind` opens with the term marked.
+
 ## Built-in Sphinx Search
 
 Without the `pagefind` extra, Lumina uses Sphinx's built-in search. To use it even when Pagefind is installed, set:
