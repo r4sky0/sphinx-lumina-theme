@@ -1310,7 +1310,7 @@ wheels = [
 
 [[package]]
 name = "sphinx-lumina-theme"
-version = "2.19.1"
+version = "2.19.2"
 source = { editable = "." }
 dependencies = [
     { name = "babel" },

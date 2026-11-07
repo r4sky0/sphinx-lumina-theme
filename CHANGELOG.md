@@ -2,6 +2,50 @@
 
 <!-- releases -->
 
+## v2.19.2 (2026-11-07)
+
+### Bug Fixes
+
+- **search**: Resolve fallback search link under dirhtml builds
+  ([#220](https://github.com/r4sky0/sphinx-lumina-theme/pull/220),
+  [`46d9dfc`](https://github.com/r4sky0/sphinx-lumina-theme/commit/46d9dfce32552646a7e8f938140614e4a4fd132f))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- Support Python 3.15 ([#224](https://github.com/r4sky0/sphinx-lumina-theme/pull/224),
+  [`7ab986e`](https://github.com/r4sky0/sphinx-lumina-theme/commit/7ab986e595db7cf8c8b4f1e7a475d3aec1d365a5))
+
+#### Chores
+
+- **deps**: Bump sphinx to 9.2.0 ([#221](https://github.com/r4sky0/sphinx-lumina-theme/pull/221),
+  [`8bc5ef0`](https://github.com/r4sky0/sphinx-lumina-theme/commit/8bc5ef04e7a16533eb36913cae17dcf2debb44ba))
+
+#### Continuous Integration
+
+- Fix browser tests on Ubuntu 26.04 and run engines in parallel
+  ([#222](https://github.com/r4sky0/sphinx-lumina-theme/pull/222),
+  [`70e32a6`](https://github.com/r4sky0/sphinx-lumina-theme/commit/70e32a68a3b3163488c2572710dccd72d63db5be))
+
+- Skip browser tests on pushes to main
+  ([#226](https://github.com/r4sky0/sphinx-lumina-theme/pull/226),
+  [`fd86bdf`](https://github.com/r4sky0/sphinx-lumina-theme/commit/fd86bdf6d6bca066fe265db4c4c910863f3b5973))
+
+- Use dependabot uv ecosystem for python deps
+  ([#225](https://github.com/r4sky0/sphinx-lumina-theme/pull/225),
+  [`646a653`](https://github.com/r4sky0/sphinx-lumina-theme/commit/646a653c45e351a39882a03d1fc3759b8f70a3e4))
+
+#### Testing
+
+- Filter upstream deprecation warnings
+  ([#223](https://github.com/r4sky0/sphinx-lumina-theme/pull/223),
+  [`ccc2d81`](https://github.com/r4sky0/sphinx-lumina-theme/commit/ccc2d81f52704b63c9de4c58277669514ea06edf))
+
+</details>
+
+
 ## v2.19.1 (2026-11-04)
 
 ### Bug Fixes
