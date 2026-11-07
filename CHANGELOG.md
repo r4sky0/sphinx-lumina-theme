@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.20.0 (2026-11-07)
+
+### Features
+
+- Lumina code style preset and reading polish
+  ([#234](https://github.com/r4sky0/sphinx-lumina-theme/pull/234),
+  [`8d1db77`](https://github.com/r4sky0/sphinx-lumina-theme/commit/8d1db77724417afdec7c6cc16bf58856808be906))
+
+
 ## v2.19.6 (2026-11-07)
 
 ### Bug Fixes
