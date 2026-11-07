@@ -51,8 +51,8 @@ The core surface and text tokens. These are the variables you'll override most o
   - `#5ed9a3`
   - Readable text links and focus outlines
 * - `--lumina-navigation-bg`
-  - `#f7f8f6`
-  - `#111613`
+  - `#f9fbfa`
+  - `#171c19`
   - Desktop sidebar surface and the outer gutter to its left
 * - `--lumina-floating-bg`
   - `#fdfdfc`
