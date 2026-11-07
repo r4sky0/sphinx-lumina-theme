@@ -268,6 +268,147 @@
   background: var(--lumina-accent-light);
 }
 
+/* ── Indices (genindex, py-modindex, other domain indices) ──
+   Sphinx lays these out as tables with " | "-separated jump links. */
+.lumina-article :is(.genindex-jumpbox, .modindex-jumpbox) {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1.625rem;
+  font-size: 0; /* hides the " | " separator text */
+}
+
+.lumina-article :is(.genindex-jumpbox, .modindex-jumpbox) a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  /* Margins, not gap: the hidden separators are flex items too. */
+  margin: 0 0 0.375rem;
+  margin-inline-end: 0.375rem;
+  padding-inline: 0.5rem;
+  border: 1px solid var(--lumina-border);
+  border-radius: 0.375rem;
+  color: var(--lumina-text);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+}
+
+.lumina-article :is(.genindex-jumpbox, .modindex-jumpbox) a:hover {
+  border-color: color-mix(in srgb, var(--lumina-link) 40%, var(--lumina-border));
+  background: var(--lumina-accent-light);
+  color: var(--lumina-link);
+}
+
+.lumina-article :is(.genindex-jumpbox, .modindex-jumpbox) a:focus-visible {
+  outline: 2px solid var(--lumina-link);
+  outline-offset: 2px;
+}
+
+.lumina-article table.indextable {
+  border: 0;
+}
+
+.lumina-article .indextable :is(a, a code.xref) {
+  text-decoration-line: none;
+}
+
+.lumina-article .indextable a:hover,
+.lumina-article .indextable a:hover code.xref {
+  text-decoration-line: underline;
+}
+
+.lumina-article .indextable tr:hover {
+  background: none;
+}
+
+.lumina-article h2:has(+ .genindextable) {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--lumina-border);
+}
+
+.lumina-article .genindextable :is(tbody, tr) {
+  display: block;
+}
+
+.lumina-article .genindextable tr {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  column-gap: 2rem;
+}
+
+.lumina-article .genindextable td {
+  display: block;
+  width: auto !important; /* overrides Sphinx's inline width: 33% */
+  padding: 0;
+  border: 0;
+}
+
+.lumina-article .genindextable ul {
+  margin: 0;
+  padding: 0;
+}
+
+.lumina-article .genindextable li {
+  margin: 0;
+  padding: 0.125rem 0;
+  list-style: none;
+}
+
+.lumina-article .genindextable li > ul {
+  margin-block: 0.125rem 0.25rem;
+  padding-inline-start: 0.875rem;
+  border-inline-start: 1px solid var(--lumina-border);
+}
+
+/* The table stays the scroll container; its rows span the column. */
+.lumina-article .modindextable > tbody {
+  display: table;
+  width: 100%;
+}
+
+.lumina-article .modindextable tr.pcap {
+  display: none;
+}
+
+.lumina-article .modindextable td {
+  padding: 0.5rem 0.75rem;
+}
+
+/* The first column only holds the collapse toggler. */
+.lumina-article .modindextable td:first-child {
+  width: 0;
+  padding-inline: 0;
+}
+
+.lumina-article .modindextable td:nth-child(2) {
+  padding-inline-start: 0;
+}
+
+.lumina-article .modindextable td:last-child {
+  color: var(--lumina-text-muted);
+}
+
+.lumina-article .modindextable tr.cap td {
+  padding-top: 2rem;
+  font-size: 1.25rem;
+}
+
+.lumina-article .modindextable tr.cap:nth-child(2) td {
+  padding-top: 0;
+}
+
+.lumina-article .modindextable img.toggler {
+  margin-inline-end: 0.375rem;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+[data-theme="dark"] .lumina-article .modindextable img.toggler {
+  filter: invert(1);
+}
+
 /* ── Narrow screens: stack instead of float ── */
 @media (max-width: 39.999rem) {
   .lumina-article :is(.align-left, .align-right, aside.sidebar) {
