@@ -91,6 +91,16 @@ format_js = false
 ignore = "H006,H021,H023"
 use_gitignore = true
 
+[tool.pytest.ini_options]
+# Upstream deprecations we can't fix here; drop each entry once the dependency releases a fix.
+filterwarnings = [
+    "ignore::PendingDeprecationWarning:sphinx_sitemap",
+    "ignore::PendingDeprecationWarning:myst_parser",
+    "ignore::DeprecationWarning:sphinxcontrib.openapi",
+    "ignore::DeprecationWarning:sphinx_llm",
+    "ignore::DeprecationWarning:cattrs",
+]
+
 [[tool.babel.mappings]]
 method = "python"
 pattern = "**.py"
