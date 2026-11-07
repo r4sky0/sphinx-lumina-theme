@@ -5,7 +5,8 @@
 
 import { t } from "./utils/i18n.js";
 export default function responsiveTables() {
-  document.querySelectorAll(".lumina-article table").forEach((table) => {
+  // Index pages use tables for layout, not data.
+  document.querySelectorAll(".lumina-article table:not(.indextable)").forEach((table) => {
     if (table.parentElement.classList.contains("lumina-table-scroll")) return;
     const scroll = document.createElement("div");
     scroll.className = "lumina-table-scroll";

@@ -289,6 +289,37 @@ span.highlighted {
   top: 0;
 }
 
+/* ── Search clear button: Lucide "x" instead of the browser's blue glyph ── */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  background: var(--lumina-text-muted);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M18 6 6 18M6 6l12 12'/%3E%3C/svg%3E") center / contain no-repeat;
+  cursor: pointer;
+}
+
+input[type="search"]::-webkit-search-cancel-button:hover {
+  background: var(--lumina-text);
+}
+
+/* ── Selects: Lucide chevron inset from the edge, unlike the native arrow ── */
+select:not([multiple], [size]) {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-inline-end: 2rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2359635e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.625rem center;
+  background-size: 1rem;
+}
+
+/* Data URIs cannot read tokens; the stroke matches dark --lumina-text-muted. */
+[data-theme="dark"] select:not([multiple], [size]) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a8b5ac' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
 /* ── Custom scrollbars ── */
 * {
   scrollbar-width: thin;
@@ -1142,6 +1173,10 @@ a.headerlink[data-tooltip].lumina-tooltip-visible::after {
    Courier New, which leaves Arabic unjoined. Name local fonts so that fallback is never reached. */
 [dir="rtl"] :is(pre, code, kbd, samp, .code-block-caption, .lumina-try-it-param-name, .lumina-try-it-input, .lumina-try-it-body, .lumina-try-it-status) {
   font-family: var(--lumina-font-mono), "Segoe UI", Tahoma, Arial, "Noto Sans Arabic", "Noto Sans Hebrew", sans-serif;
+}
+
+[dir="rtl"] select:not([multiple], [size]) {
+  background-position: left 0.625rem center;
 }
 
 /* Letter spacing breaks the joins in Arabic script. */

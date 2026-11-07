@@ -1321,6 +1321,18 @@ def test_sphinx_search_page_lists_results(page: Page, live_server: str):
     expect(page.locator("#search-results li").first).to_be_visible()
 
 
+def test_index_pages_load_without_errors(page: Page, live_server: str):
+    """Index pages run Sphinx's inline index script and keep layout tables unwrapped."""
+    page.goto("about:blank")
+    errors = []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    for path in ("genindex.html", "py-modindex.html"):
+        page.goto(f"{live_server}/{path}")
+        expect(page.locator(".indextable").first).to_be_visible()
+        expect(page.locator(".lumina-table-scroll")).to_have_count(0)
+    assert errors == []
+
+
 def test_search_keyboard_reaches_heading(page: Page, live_server: str):
     page.click("[data-search-trigger]")
     modal = page.locator("#lumina-search-modal")

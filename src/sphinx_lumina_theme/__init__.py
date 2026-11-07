@@ -666,9 +666,14 @@ def _add_context(app, pagename, templatename, context, doctree):
     # to inject defer="defer" into all external <script> tags while leaving
     # inline scripts (FOUC prevention, announcement state) synchronous.
     _original_js_tag = context["js_tag"]
+    # basic/domainindex.html sets DOCUMENTATION_OPTIONS.COLLAPSE_INDEX inline,
+    # so the script defining it must run first on collapsible index pages.
+    keep_sync = "documentation_options.js" if context.get("collapse_index") else None
 
     def _deferred_js_tag(js):
         tag = _original_js_tag(js)
+        if keep_sync and keep_sync in tag:
+            return tag
         if "src=" in tag and "defer" not in tag and "async" not in tag:
             tag = tag.replace("<script ", '<script defer="defer" ', 1)
         return tag
