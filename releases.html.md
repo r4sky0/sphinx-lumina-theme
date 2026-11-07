@@ -1,5 +1,13 @@
 # Releases
 
+## v2.21.0 (2026-11-07)
+
+### Features
+
+- **search**: Highlight search terms on the opened page
+  ([#235](https://github.com/r4sky0/sphinx-lumina-theme/pull/235),
+  [`785e824`](https://github.com/r4sky0/sphinx-lumina-theme/commit/785e824732315c7780c4f4175acc3440c8250cd0))
+
 ## v2.20.0 (2026-11-07)
 
 ### Features
