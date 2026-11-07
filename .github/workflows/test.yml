@@ -68,13 +68,21 @@ jobs:
       - name: Run structure tests
         run: uv run --no-sync pytest tests/ --ignore=tests/test_browser.py --ignore=tests/test_http_api_browser.py -v
 
-  test-extensions:
+  # The newest Python catches extensions that don't support it yet.
+  test-extensions-python:
+    name: test-extensions (${{ matrix.python }})
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.14", "3.15"]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - uses: ./.github/actions/setup
+        with:
+          python-version: ${{ matrix.python }}
 
       - name: Build assets
         run: pnpm run build
@@ -89,6 +97,14 @@ jobs:
 
       - name: Run extension tests
         run: uv run --locked pytest tests/test_extensions.py -v
+
+  # Keeps the required check name stable across the Python matrix.
+  test-extensions:
+    needs: test-extensions-python
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - run: test "${{ needs.test-extensions-python.result }}" = success
 
   # The PR run already tested the merge result; pushes to main would repeat it.
   test-browser-engine:
