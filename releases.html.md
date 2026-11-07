@@ -1,5 +1,13 @@
 # Releases
 
+## v2.19.4 (2026-11-07)
+
+### Bug Fixes
+
+- **search**: Expose keyboard selection to screen readers
+  ([#231](https://github.com/r4sky0/sphinx-lumina-theme/pull/231),
+  [`06a5661`](https://github.com/r4sky0/sphinx-lumina-theme/commit/06a566145e090491314f90e4827c4bd71fde2196))
+
 ## v2.19.3 (2026-11-07)
 
 ### Bug Fixes
