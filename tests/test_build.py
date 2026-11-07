@@ -90,3 +90,8 @@ def test_breadcrumbs_hidden_on_root_page(build_output):
 def test_breadcrumbs_hidden_by_front_matter(build_output):
     """`hide_breadcrumbs: true` front matter removes the trail from one page."""
     assert not _has_breadcrumbs(build_output, "intro.html")
+
+
+def test_article_body_wrapper(index_html):
+    """Page content sits in div.body so sphinx_highlight.js stays inside the article."""
+    assert index_html.select_one(".lumina-article > div.body > section")
