@@ -7,13 +7,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-11-07T13:21:06+00:00" />
+    <meta property="article:modified_time" content="2026-11-07T13:40:22+00:00" />
 <link rel="alternate" type="text/markdown" href="custom-styling.html.md">
 <link rel="describedby" href="llms.txt">
     <title>Custom Styling &#8212; Sphinx Lumina Theme  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=91618d8e" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css?v=4f7d4ba8" />
-    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=d17febd3" />
+    <link rel="stylesheet" type="text/css" href="../_static/lumina.css?v=d0df72e4" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -175,13 +175,11 @@
          data-announcement-id="4622f63a"
          role="region"
          aria-label="Site announcement"
-         class="bg-lumina-accent-light text-lumina-text text-center text-sm border-b border-lumina-border">
+         class="bg-[color-mix(in_srgb,var(--lumina-accent),black_40%)] text-white text-center text-sm">
         <div class="mx-auto flex max-w-[90rem] items-center justify-center gap-4 px-4 py-1">
-            <div class="flex-1 [&_a]:underline [&_a]:font-medium [&_a]:text-[var(--lumina-link)]">
-                New in 2.15: swap Lumina's fonts from your own CSS, and <a href="https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html#preview-a-font">preview any of them live</a>.
-            </div>
+            <div class="flex-1 [&_a]:underline [&_a]:font-medium">New in 2.15: swap Lumina's fonts from your own CSS, and <a href="https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html#preview-a-font">preview any of them live</a>.</div>
             <button @click="dismiss()"
-                    class="grid size-8 shrink-0 place-items-center rounded-md text-lumina-text-muted hover:text-lumina-text hover:bg-[color-mix(in_srgb,var(--lumina-text)_8%,transparent)] transition-colors cursor-pointer"
+                    class="grid size-8 shrink-0 place-items-center rounded-md text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                     aria-label="Dismiss announcement"
                     type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
         </div>
@@ -782,7 +780,6 @@ document.documentElement.style.setProperty(
                     <nav aria-label="Page outline">
                         <ul>
 <li><a class="reference internal" href="#">Custom Styling</a><ul>
-<li><a class="reference internal" href="#migrating-to-lumina-2">Migrating to Lumina 2</a></li>
 <li><a class="reference internal" href="#adding-a-custom-stylesheet">Adding a Custom Stylesheet</a></li>
 <li><a class="reference internal" href="#css-custom-properties">CSS Custom Properties</a><ul>
 <li><a class="reference internal" href="#core-colors">Core Colors</a></li>
@@ -820,19 +817,7 @@ document.documentElement.style.setProperty(
     <section class="tex2jax_ignore mathjax_ignore" id="custom-styling">
 <h1 id="lumina-search-custom-styling">Custom Styling<a class="headerlink" href="#custom-styling" title="Link to this heading">¶</a></h1>
 <p>Override CSS custom properties, fonts, syntax highlighting themes, and templates for deeper customization.</p>
-<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>5 min read</span></div><section id="migrating-to-lumina-2">
-<h2 id="lumina-search-migrating-to-lumina-2">Migrating to Lumina 2<a class="headerlink" href="#migrating-to-lumina-2" title="Link to this heading">¶</a></h2>
-<p>Lumina 2 refreshes the default design. Existing theme options still work, but custom CSS and template overrides need review.</p>
-<ul class="simple">
-<li><p><strong>Page actions:</strong> Copy Markdown and edit links now live in the page-actions menu. Reading time appears below the introduction with a clock icon. Overrides of <code class="docutils literal notranslate"><span class="pre">layout.html</span></code> or <code class="docutils literal notranslate"><span class="pre">components/toc.html</span></code> should use the new <code class="docutils literal notranslate"><span class="pre">components/page-actions.html</span></code> component.</p></li>
-<li><p><strong>Link colors:</strong> <code class="docutils literal notranslate"><span class="pre">--lumina-accent</span></code> controls brand accents; <code class="docutils literal notranslate"><span class="pre">--lumina-link</span></code> controls readable text links and focus outlines. Set both for each mode if you customize tokens directly. The <code class="docutils literal notranslate"><span class="pre">accent_color</span></code> option derives both automatically.</p></li>
-<li><p><strong>Surfaces:</strong> <code class="docutils literal notranslate"><span class="pre">--lumina-navigation-bg</span></code> and <code class="docutils literal notranslate"><span class="pre">--lumina-floating-bg</span></code> control the sidebar and floating menus separately from the page background.</p></li>
-<li><p><strong>Content:</strong> Cards no longer lift or cast shadows; admonitions use a thin border on all sides. Heading sizes, weights, and spacing have changed.</p></li>
-<li><p><strong>Mobile navigation:</strong> The page outline is now available below the breadcrumbs. <code class="docutils literal notranslate"><span class="pre">show_toc</span> <span class="pre">=</span> <span class="pre">&quot;false&quot;</span></code> hides both desktop and mobile outlines.</p></li>
-</ul>
-<p>Rebuild your docs and check custom styles in both color modes, including mobile layouts. Use <code class="docutils literal notranslate"><span class="pre">html_short_title</span></code> for a shorter header label without changing your Sphinx project name.</p>
-</section>
-<section id="adding-a-custom-stylesheet">
+<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>4 min read</span></div><section id="adding-a-custom-stylesheet">
 <h2 id="lumina-search-adding-a-custom-stylesheet">Adding a Custom Stylesheet<a class="headerlink" href="#adding-a-custom-stylesheet" title="Link to this heading">¶</a></h2>
 <p>Create a CSS file and register it in your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
@@ -1246,7 +1231,6 @@ when other characters are needed, preserving the existing language coverage.</p>
                  x-data="scrollspy()">
                 <ul>
 <li><a class="reference internal" href="#">Custom Styling</a><ul>
-<li><a class="reference internal" href="#migrating-to-lumina-2">Migrating to Lumina 2</a></li>
 <li><a class="reference internal" href="#adding-a-custom-stylesheet">Adding a Custom Stylesheet</a></li>
 <li><a class="reference internal" href="#css-custom-properties">CSS Custom Properties</a><ul>
 <li><a class="reference internal" href="#core-colors">Core Colors</a></li>
