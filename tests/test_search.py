@@ -23,6 +23,26 @@ def test_search_base_url_meta_tag(index_html):
     assert meta.get("content"), "lumina-base-url meta tag should have content"
 
 
+def test_search_base_url_under_dirhtml(tmp_path):
+    """dirhtml's root page must not get "#" as its base URL (sphinx-themes.org)."""
+    from bs4 import BeautifulSoup
+    from sphinx.application import Sphinx
+
+    src, out = tmp_path / "src", tmp_path / "out"
+    (src / "sub").mkdir(parents=True)
+    (src / "conf.py").write_text('html_theme = "lumina"\n')
+    (src / "index.rst").write_text("Home\n====\n\n.. toctree::\n\n   sub/page\n")
+    (src / "sub/page.rst").write_text("Page\n====\n")
+    Sphinx(str(src), str(src), str(out), str(out / ".doctrees"), "dirhtml").build()
+
+    def base_url(path):
+        html = BeautifulSoup((out / path).read_text(), "html.parser")
+        return html.find("meta", attrs={"name": "lumina-base-url"})["content"]
+
+    assert base_url("index.html") == "./"
+    assert base_url("sub/page/index.html") == "../../"
+
+
 def test_search_metadata_and_heading_anchors(build_output):
     """Index real navigation labels and keep existing section links intact."""
     from bs4 import BeautifulSoup

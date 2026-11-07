@@ -1279,7 +1279,7 @@ def test_search_fallback_when_pagefind_unavailable(page: Page):
     modal = page.locator("#lumina-search-modal")
     modal.get_by_role("searchbox").fill("hello world")
     fallback = modal.get_by_role("link", name='Search for "hello world"')
-    expect(fallback).to_have_attribute("href", "./search.html?q=hello%20world")
+    expect(fallback).to_have_attribute("href", "search.html?q=hello%20world")
     expect(modal.get_by_label("Search in")).to_have_count(0)
 
 
