@@ -95,7 +95,11 @@ export default function versionSwitcher() {
 
     _setVersions(list) {
       this.versions = list.filter(
-        (v) => v && typeof v.version === "string" && typeof v.url === "string"
+        (v) =>
+          v &&
+          typeof v.version === "string" &&
+          typeof v.url === "string" &&
+          this._versionUrl(v),
       );
       const current = this.versions.find((v) => v.version === this.match);
       if (current) {
@@ -111,11 +115,17 @@ export default function versionSwitcher() {
       // Safely join version base URL with current page's relative path.
       // The trailing slash matters: without it the last path segment of
       // ``v.url`` would be replaced instead of appended to.
+      // Relative entries resolve against the current page; anything that
+      // isn't http(s) is dropped, since a ``javascript:`` URL would run on click.
       try {
-        const base = v.url.endsWith("/") ? v.url : v.url + "/";
-        return new URL(this.relPath, base).href;
+        const base = new URL(
+          v.url.endsWith("/") ? v.url : v.url + "/",
+          window.location.href,
+        );
+        const target = new URL(this.relPath, base);
+        return ["http:", "https:"].includes(target.protocol) ? target.href : "";
       } catch {
-        return v.url;
+        return "";
       }
     },
 

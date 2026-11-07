@@ -1707,6 +1707,34 @@ def test_version_switcher_reads_readthedocs_addons(page: Page, live_server: str)
     assert result == [expected, expected]
 
 
+def test_version_switcher_drops_unsafe_urls(page: Page, live_server: str):
+    """Only http(s) versions are listed; relative URLs resolve against the page."""
+    page.goto(f"{live_server}/getting-started/configuration.html")
+    page.wait_for_function("() => window.Alpine !== undefined")
+    result = page.evaluate(
+        """async () => {
+          const doc = (slug, url) => ({slug, verbose_name: slug, urls: {documentation: url}});
+          window.ReadTheDocsEventData = {data: () => ({versions: {active: [
+            doc("script", "javascript:alert(1)"),
+            doc("data", "data:text/html,hi"),
+            doc("relative", "/en/v1/"),
+            doc("latest", "https://example.org/en/latest/"),
+          ]}})};
+          const el = document.createElement("div");
+          el.setAttribute("x-data", "versionSwitcher()");
+          el.setAttribute("data-source", "readthedocs");
+          document.body.append(el);
+          await new Promise((r) => setTimeout(r, 50));
+          const c = Alpine.$data(el);
+          return c.versions.map((v) => [v.version, c._versionUrl(v)]);
+        }"""
+    )
+    assert result == [
+        ["relative", f"{live_server}/en/v1/getting-started/configuration.html"],
+        ["latest", "https://example.org/en/latest/getting-started/configuration.html"],
+    ]
+
+
 def test_tab_padding_depends_on_content(page: Page, live_server: str):
     """Code-only tabs stay flush; tabs with prose get padding and framed code."""
     page.goto(f"{live_server}/getting-started/installation.html")
