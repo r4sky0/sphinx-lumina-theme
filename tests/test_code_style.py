@@ -53,8 +53,15 @@ def test_invalid_preset_warns(tmp_path):
     assert "#008000" in css
 
 
+def test_lumina_preset_applies(tmp_path):
+    """The 'lumina' preset should load the theme's own emerald styles."""
+    out = _build_with_code_style(tmp_path, "lumina")
+    assert "#047857" in (out / "_static" / "pygments.css").read_text().lower()
+    assert "#5ed9a3" in (out / "_static" / "pygments_dark.css").read_text().lower()
+
+
 @pytest.mark.parametrize(
-    "preset", ["default", "nord", "one-dark", "gruvbox", "material"]
+    "preset", ["default", "nord", "one-dark", "gruvbox", "material", "lumina"]
 )
 def test_all_presets_build(tmp_path, preset):
     """Every preset should build successfully and produce both CSS files."""

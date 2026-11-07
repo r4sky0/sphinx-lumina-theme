@@ -47,6 +47,7 @@ html_theme_options = {
     "api_base_url": "https://petstore3.swagger.io/api/v3",
     "announcement": 'New in 2.15: swap Lumina\'s fonts from your own CSS, and <a href="https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html#preview-a-font">preview any of them live</a>.',
     "search_backend": "pagefind",
+    "code_style": "lumina",
     "wide_layout": "toggle",
     "show_reading_time": "true",
     "image_lightbox": "true",

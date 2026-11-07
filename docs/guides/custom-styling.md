@@ -286,6 +286,10 @@ html_theme_options = {
   - lovelace
   - material
   - Refined, editorial — Google's Material palette
+* - `"lumina"`
+  - lumina-light
+  - lumina-dark
+  - Lumina's own — emerald keywords, warm strings, quiet punctuation (these docs use it)
 ```
 
 ### Custom styles
