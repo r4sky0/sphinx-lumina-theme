@@ -12,7 +12,7 @@ _BASE_RST = (
     "   :status 200: An array of tasks.\n\n"
     ".. http:post:: /tasks\n\n"
     "   Creates a new task.\n\n"
-    "   :<json string title: Task title.\n"
+    "   :reqjson string title: Task title.\n"
     "   :reqheader Authorization: Bearer token.\n"
     "   :reqheader Content-Type: ``application/json``\n"
     "   :status 201: Created.\n\n"
