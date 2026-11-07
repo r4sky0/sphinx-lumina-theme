@@ -7,12 +7,6 @@
   overflow-wrap: break-word;
 }
 
-/* Cap running prose at a readable measure; code, tables and callouts keep
-   the full column. */
-.lumina-article section > :is(p, ul, ol, dl, blockquote) {
-  max-width: 70ch;
-}
-
 /* Hyphenation may be enabled for prose, but must not change code spelling
    or break words in narrow table columns. */
 .lumina-article :is(code, pre, kbd, samp, th, td) {

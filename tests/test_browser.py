@@ -462,17 +462,13 @@ def test_article_width_and_navigation_surface(
                 content: document.querySelector('#lumina-content').getBoundingClientRect().width,
                 article: article.getBoundingClientRect().width,
                 paragraph: article.querySelector('p').getBoundingClientRect().width,
-                measure: parseFloat(getComputedStyle(article.querySelector('section > p')).maxWidth),
                 overflow: document.documentElement.scrollWidth > innerWidth,
                 gutterLeft: sidebar.getBoundingClientRect().left - parseFloat(gutter.width),
                 gutterColor: gutter.backgroundColor,
                 sidebarColor: getComputedStyle(sidebar.querySelector('.lumina-sidebar-desktop')).backgroundColor,
             };
         }""")
-        # Prose stops at its readable measure; the article keeps the full column.
-        assert dimensions["paragraph"] == pytest.approx(
-            min(dimensions["article"], dimensions["measure"]), abs=0.5
-        )
+        assert dimensions["paragraph"] == pytest.approx(dimensions["article"])
         assert dimensions["content"] <= maximum
         assert not dimensions["overflow"]
         if width >= 1920:
