@@ -206,6 +206,13 @@ def test_accessible_panels_and_mobile_layout(api_page):
         assert forms[0].locator(".lumina-try-it-grid").get_attribute("inert") is None
 
 
+def test_request_body_prefilled_from_reqjson_fields(api_page):
+    """Request JSON fields seed the editable body with typed placeholders."""
+    form = panel(api_page, "post--users")
+    body = json.loads(form.get_by_label("Request body", exact=True).input_value())
+    assert set(body) == {"email", "name", "role"}
+
+
 def test_raw_body_custom_headers_and_keyboard_send(api_page):
     requests = []
 

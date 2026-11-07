@@ -48,7 +48,7 @@ HTTP_ENDPOINT_RST = """
 
    :query limit: Max items.
    :reqheader Accept: ``application/json``
-   :<json string name: Item name.
+   :reqjson string name: Item name.
 """
 
 
@@ -181,7 +181,7 @@ def _serve(out_dir):
         try:
             urllib.request.urlopen(base_url)
             break
-        except Exception:
+        except OSError:
             time.sleep(0.1)
 
     yield base_url

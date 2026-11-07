@@ -53,7 +53,7 @@ def start_server(port):
         try:
             urllib.request.urlopen(base_url)
             break
-        except Exception:
+        except OSError:
             time.sleep(0.1)
     return server, base_url
 

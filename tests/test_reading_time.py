@@ -5,6 +5,7 @@ from types import SimpleNamespace
 import pytest
 from docutils import nodes
 from docutils.utils import new_document
+
 from sphinx_lumina_theme import _insert_reading_time
 
 

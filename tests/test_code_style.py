@@ -1,9 +1,9 @@
 """Tests for the code_style Pygments preset feature."""
 
-from conftest import sphinx_app
 from pathlib import Path
 
 import pytest
+from conftest import sphinx_app
 
 SAMPLE_DOCS = Path(__file__).parent / "sample_docs"
 

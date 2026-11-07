@@ -30,6 +30,10 @@ The public demo server’s availability and CORS settings may vary.
 
 For individual endpoints or when you need more control, use the HTTP domain directives directly. These examples use `api.example.com`, a placeholder server. Change **Server URL** to your own API before sending a request.
 
+:::{tip}
+Write request and response fields with the `reqjson`, `resjson`, `reqheader` and `resheader` field names. sphinxcontrib-httpdomain 2.1 swapped the meaning of the arrow shorthands, so `:<json` now documents a *response* field. **Try it out** fills the request body from request JSON fields only.
+:::
+
 ```{raw} html
 <div data-api-base-url="https://api.example.com/v1">
 ```
@@ -56,9 +60,9 @@ For individual endpoints or when you need more control, use the HTTP domain dire
 
    Creates a new user account.
 
-   :<json string email: The user's email address (required).
-   :<json string name: Display name (required).
-   :<json string role: One of ``admin``, ``editor``, or ``viewer`` (default ``viewer``).
+   :reqjson string email: The user's email address (required).
+   :reqjson string name: Display name (required).
+   :reqjson string role: One of ``admin``, ``editor``, or ``viewer`` (default ``viewer``).
    :reqheader Authorization: Bearer token with admin scope.
    :reqheader Content-Type: ``application/json``
    :status 201: The newly created user object.
@@ -100,9 +104,9 @@ When some endpoints live on a different server than the global `api_base_url`, w
 
    Queues a new report for generation.
 
-   :<json string type: Report type: ``summary``, ``detail``, or ``audit``.
-   :<json string from: Start date in ``YYYY-MM-DD`` format.
-   :<json string to: End date in ``YYYY-MM-DD`` format.
+   :reqjson string type: Report type: ``summary``, ``detail``, or ``audit``.
+   :reqjson string from: Start date in ``YYYY-MM-DD`` format.
+   :reqjson string to: End date in ``YYYY-MM-DD`` format.
    :reqheader Authorization: Bearer token.
    :reqheader Content-Type: ``application/json``
    :status 202: Report generation queued.

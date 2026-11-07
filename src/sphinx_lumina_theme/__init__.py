@@ -531,9 +531,9 @@ def _iso_last_updated(app, pagename: str) -> str | None:
     if timestamp is None:
         return None
     try:
-        from datetime import datetime, timezone
+        from datetime import UTC, datetime
 
-        dt = datetime.fromtimestamp(int(timestamp), timezone.utc)
+        dt = datetime.fromtimestamp(int(timestamp), UTC)
         return dt.date().isoformat()  # YYYY-MM-DD
     except (TypeError, ValueError):
         return None

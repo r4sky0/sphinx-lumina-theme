@@ -1,10 +1,10 @@
 """Test llms.txt integration."""
 
-from conftest import sphinx_app
 from pathlib import Path
 
 import pytest
 from bs4 import BeautifulSoup
+from conftest import sphinx_app
 
 
 def test_no_llms_txt_link_by_default(build_output):

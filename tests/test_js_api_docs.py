@@ -1,10 +1,10 @@
 """Tests for the auto-generated JavaScript API documentation page."""
 
-from conftest import sphinx_app
 from pathlib import Path
 
 import pytest
 from bs4 import BeautifulSoup
+from conftest import sphinx_app
 
 DOCS_DIR = Path(__file__).parent.parent / "docs"
 

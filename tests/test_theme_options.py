@@ -1,7 +1,7 @@
 """Test theme option rendering."""
 
-from conftest import sphinx_app
 from bs4 import BeautifulSoup
+from conftest import sphinx_app
 
 
 def test_nav_links_render(index_html):

@@ -14,7 +14,7 @@
             <nav class="lumina-sidebar-nav"
                  aria-label="{{ _('Main navigation') }}"
                  x-data="sidebarNav()">
-                {{ add_sidebar_icons(toctree(maxdepth=theme_nav_depth|int, collapse=False, titles_only=True, includehidden=True) ) }}
+                {{ add_sidebar_icons(toctree(maxdepth=theme_nav_depth|int, collapse=False, titles_only=True, includehidden=True)) }}
             </nav>
         {% endif %}
         {% if theme_show_attribution == "true" %}
@@ -98,7 +98,7 @@
                     <nav class="lumina-sidebar-nav"
                          aria-label="{{ _('Main navigation') }}"
                          x-data="sidebarNav()">
-                        {{ add_sidebar_icons(toctree(maxdepth=theme_nav_depth|int, collapse=False, titles_only=True, includehidden=True) ) }}
+                        {{ add_sidebar_icons(toctree(maxdepth=theme_nav_depth|int, collapse=False, titles_only=True, includehidden=True)) }}
                     </nav>
                 {% endif %}
                 {% if theme_show_attribution == "true" %}

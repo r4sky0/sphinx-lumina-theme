@@ -88,6 +88,7 @@ def test_extract_description_falls_back_to_first_paragraph():
     """Without front matter, use the first prose paragraph."""
     from docutils import frontend, utils
     from docutils.parsers.rst import Parser
+
     from sphinx_lumina_theme._seo import extract_description
 
     rst = "Title\n=====\n\nThis is the first paragraph with enough text to qualify as prose.\n"
@@ -105,6 +106,7 @@ def test_extract_description_skips_short_paragraphs():
     """Paragraphs under 30 chars don't qualify (avoid taglines)."""
     from docutils import frontend, utils
     from docutils.parsers.rst import Parser
+
     from sphinx_lumina_theme._seo import extract_description
 
     rst = (
@@ -141,6 +143,7 @@ def test_extract_description_truncates_to_160_chars():
     """Long paragraphs are truncated cleanly."""
     from docutils import frontend, utils
     from docutils.parsers.rst import Parser
+
     from sphinx_lumina_theme._seo import extract_description
 
     long_text = "word " * 200  # > 160 chars
