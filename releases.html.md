@@ -1,5 +1,33 @@
 # Releases
 
+## v2.19.5 (2026-11-07)
+
+### Bug Fixes
+
+- **version-switcher**: Drop non-http(s) version URLs
+  ([#230](https://github.com/r4sky0/sphinx-lumina-theme/pull/230),
+  [`2847629`](https://github.com/r4sky0/sphinx-lumina-theme/commit/28476298ee08bdf39d822914decf3c3c443665e8))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump the uv-minor group with 10 updates
+  ([#227](https://github.com/r4sky0/sphinx-lumina-theme/pull/227),
+  [`de5f924`](https://github.com/r4sky0/sphinx-lumina-theme/commit/de5f92497256eb32740f0af66cd98ed65aa330f2))
+- **deps-dev**: Bump sphinx-llm from 0.4.1 to 1.1.0 in the uv-major group
+  ([#228](https://github.com/r4sky0/sphinx-lumina-theme/pull/228),
+  [`ad6bf1e`](https://github.com/r4sky0/sphinx-lumina-theme/commit/ad6bf1e1f067a9f1f850e4e67c553ce607956358))
+
+#### Continuous Integration
+
+- Run extension tests on Python 3.14 and 3.15
+  ([#232](https://github.com/r4sky0/sphinx-lumina-theme/pull/232),
+  [`3c4ebc9`](https://github.com/r4sky0/sphinx-lumina-theme/commit/3c4ebc95dea8f7ea85c2582014864fdd26215300))
+
+</details>
+
 ## v2.19.4 (2026-11-07)
 
 ### Bug Fixes
