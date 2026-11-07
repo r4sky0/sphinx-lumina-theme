@@ -18,7 +18,7 @@ from . import _seo
 logger = logging.getLogger(__name__)
 _ = get_translation("sphinx")
 
-__version__ = "2.19.2"
+__version__ = "2.19.3"
 
 _CODE_STYLE_PRESETS = {
     "default": ("default", "monokai"),
