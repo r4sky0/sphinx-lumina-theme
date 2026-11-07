@@ -1162,10 +1162,13 @@ def test_mermaid_sizing_and_colors_survive_theme_changes(context, live_server: s
             }"""
         )
         label = diagrams.first.locator(".nodeLabel").first
+        # WebKit leaves out the quotes around Source Sans Pro.
         expect(label).to_have_css(
             "font-family",
-            '"Source Sans 3", "Source Sans 3 Fallback", "Source Sans Pro", '
-            "system-ui, -apple-system, sans-serif",
+            re.compile(
+                r'^"Source Sans 3", "Source Sans 3 Fallback", "?Source Sans Pro"?, '
+                r"system-ui, -apple-system, sans-serif$"
+            ),
         )
         # The author's classDef highlight survives the theme defaults.
         highlight = diagrams.first.locator(".node.ready path, .node.ready rect").first
