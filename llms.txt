@@ -6,11 +6,11 @@
 ## Pages
 
 - [Sphinx Lumina Theme](index.html.md): Main documentation page
-- [Contributing](contributing/index.html.md): How to set up a development environment and contribute to the Sphinx Lumina Theme.
-- [Getting Started](getting-started/index.html.md): Get Lumina running in your Sphinx project in under five minutes.
-- [Extensions](extensions/index.html.md): Lumina is designed to work with extensions that target standard Sphinx output. These are the ones we...
 - [Reference](reference/index.html.md): Visual showcase and syntax reference for every content type Lumina styles.
 - [Guides](guides/index.html.md): Go deeper with Lumina — search, styling, navigation, and development workflows.
+- [Getting Started](getting-started/index.html.md): Get Lumina running in your Sphinx project in under five minutes.
+- [Contributing](contributing/index.html.md): How to set up a development environment and contribute to the Sphinx Lumina Theme.
+- [Extensions](extensions/index.html.md): Lumina is designed to work with extensions that target standard Sphinx output. These are the ones we...
 - [Admonitions](reference/admonitions.html.md): Callout boxes that highlight important information. Each type has a distinct color and icon.
 - [API Documentation](reference/api-documentation.html.md): Browse functions, classes, and module members. Open a signature to inspect its parameters and return...
 - [Architecture](contributing/architecture.html.md): How the Sphinx Lumina Theme is structured internally.
