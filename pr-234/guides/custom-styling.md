@@ -30,7 +30,7 @@ Lumina defines CSS custom properties for all visual tokens. Override them in you
     --lumina-accent: #10b981;          /* Brand accents and active indicators */
     --lumina-accent-light: #eaf6ef;    /* Accent background tint */
     --lumina-link: #08764f;            /* Readable links and focus outlines */
-    --lumina-navigation-bg: #f7f8f6;   /* Sidebar surface */
+    --lumina-navigation-bg: #f9fbfa;   /* Sidebar surface */
     --lumina-floating-bg: #fdfdfc;     /* Floating menus and search */
     --lumina-code-bg: #f6f7f6;         /* Inline code background */
 }
@@ -45,7 +45,7 @@ Lumina defines CSS custom properties for all visual tokens. Override them in you
     --lumina-accent: #10b981;
     --lumina-accent-light: #1c3329;
     --lumina-link: #5ed9a3;
-    --lumina-navigation-bg: #111613;
+    --lumina-navigation-bg: #171c19;
     --lumina-floating-bg: #242c27;
     --lumina-code-bg: #1b211e;
 }
