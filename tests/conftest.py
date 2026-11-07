@@ -208,3 +208,15 @@ def sphinx_search_server(tmp_path_factory):
         confoverrides={"html_theme_options.search_backend": "sphinx"},
     ).build()
     yield from _serve(out_dir)
+
+
+@pytest.fixture(scope="session")
+def dark_default_server(tmp_path_factory):
+    """Serve the sample docs built with ``dark_mode_default = "dark"``."""
+    out_dir = tmp_path_factory.mktemp("dark_default_build")
+    sphinx_app(
+        SAMPLE_DOCS,
+        out_dir,
+        confoverrides={"html_theme_options.dark_mode_default": "dark"},
+    ).build()
+    yield from _serve(out_dir)

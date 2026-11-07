@@ -425,6 +425,22 @@ def test_theme_persists_on_reload(page: Page, live_server: str):
     expect(page.locator("html")).to_have_attribute("data-theme", "dark")
 
 
+@pytest.mark.parametrize("with_js", [False, True])
+def test_dark_mode_default_uses_dark_code_palette(
+    page: Page, dark_default_server: str, with_js
+):
+    """dark_mode_default="dark" must enable the dark Pygments stylesheet on a light OS."""
+    page.emulate_media(color_scheme="light")
+    if not with_js:
+        # Check the pre-paint script on its own, before theme-toggle.js runs.
+        page.route("**/lumina.js*", lambda route: route.abort())
+    page.goto(f"{dark_default_server}/index.html")
+    if with_js:
+        page.wait_for_function("() => window.Alpine !== undefined")
+    expect(page.locator("html")).to_have_attribute("data-theme", "dark")
+    expect(page.locator("#pygments_dark_css")).to_have_attribute("media", "screen")
+
+
 @pytest.mark.parametrize("theme", ["light", "dark"])
 @pytest.mark.parametrize("layout, maximum", [("normal", 800), ("wide", 960)])
 def test_article_width_and_navigation_surface(
