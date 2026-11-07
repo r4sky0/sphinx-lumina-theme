@@ -90,9 +90,11 @@ jobs:
       - name: Run extension tests
         run: uv run --locked pytest tests/test_extensions.py -v
 
+  # The PR run already tested the merge result; pushes to main would repeat it.
   test-browser-engine:
     name: test-browser (${{ matrix.browser }})
     needs: test-structure
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
@@ -133,7 +135,7 @@ jobs:
   # Required status check; a skipped required job would count as passing.
   test-browser:
     needs: test-browser-engine
-    if: always()
+    if: always() && github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - run: test "${{ needs.test-browser-engine.result }}" = success
