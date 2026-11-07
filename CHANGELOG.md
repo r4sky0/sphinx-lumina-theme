@@ -2,6 +2,15 @@
 
 <!-- releases -->
 
+## v2.19.6 (2026-11-07)
+
+### Bug Fixes
+
+- Style index pages and native search and select controls
+  ([#233](https://github.com/r4sky0/sphinx-lumina-theme/pull/233),
+  [`6926e27`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6926e279d529bf3f7caf2c43dbab631e80d08311))
+
+
 ## v2.19.5 (2026-11-07)
 
 ### Bug Fixes
