@@ -83,7 +83,7 @@ The icon renders in your accent color and adapts to both light and dark mode aut
 
 ## Finding Icon Names
 
-Use the [Icon Browser](../reference/icons.md) to search all 1900+ icons and click to copy names.
+Use the [Icon Browser](../reference/icons.html.md) to search all 1900+ icons and click to copy names.
 
 Icon names use **kebab-case** — the same format shown on [lucide.dev/icons](https://lucide.dev/icons/):
 

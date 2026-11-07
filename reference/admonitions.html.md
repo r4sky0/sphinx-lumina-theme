@@ -28,7 +28,7 @@ This is an **important** admonition. Use it for key information the reader must 
 ### See Also
 
 #### SEE ALSO
-Check out the [Typography](typography.md) page for text formatting options.
+Check out the [Typography](typography.html.md) page for text formatting options.
 
 ### Hint
 

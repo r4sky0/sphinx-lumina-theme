@@ -23,4 +23,4 @@ myst_enable_extensions = [
 ```
 
 #### SEE ALSO
-[MyST Markdown](../guides/myst-markdown.md) — writing syntax, colon fence usage, substitutions, and directive examples.
+[MyST Markdown](../guides/myst-markdown.html.md) — writing syntax, colon fence usage, substitutions, and directive examples.

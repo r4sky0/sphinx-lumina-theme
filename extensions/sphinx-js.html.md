@@ -131,7 +131,7 @@ sphinx-js provides several directives:
 
 ## Example Output
 
-This theme’s own JavaScript components are documented with sphinx-js. See the [JavaScript API](../contributing/javascript-api.md) page for a real-world example of all these patterns in action.
+This theme’s own JavaScript components are documented with sphinx-js. See the [JavaScript API](../contributing/javascript-api.html.md) page for a real-world example of all these patterns in action.
 
 ## Troubleshooting
 

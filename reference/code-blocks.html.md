@@ -291,7 +291,7 @@ All code blocks include a copy-to-clipboard button provided by `sphinx-copybutto
 
 ## Wrap Long Lines
 
-Set `code_wrap_toggle = "true"` in `html_theme_options` to add a “wrap long lines” toggle alongside the copy button on every code block (it is off by default) — see [Configuration](../getting-started/configuration.md). Click it to wrap the current block — useful for long URLs, single-line shell commands, or any code that overflows horizontally. The toggle is per-block: turning wrap on for one block leaves the others unchanged.
+Set `code_wrap_toggle = "true"` in `html_theme_options` to add a “wrap long lines” toggle alongside the copy button on every code block (it is off by default) — see [Configuration](../getting-started/configuration.html.md). Click it to wrap the current block — useful for long URLs, single-line shell commands, or any code that overflows horizontally. The toggle is per-block: turning wrap on for one block leaves the others unchanged.
 
 ## Quick Reference
 

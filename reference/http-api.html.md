@@ -2,7 +2,7 @@
 
 Browse endpoints, inspect parameters, and send requests directly from your documentation.
 
-[Setup and configuration](../extensions/openapi.md) · [`Download the example spec`](openapi-petstore.yml)
+[Setup and configuration](../extensions/openapi.html.md) · [`Download the example spec`](openapi-petstore.yml)
 
 ## From an OpenAPI Spec
 

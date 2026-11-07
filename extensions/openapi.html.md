@@ -28,13 +28,13 @@ Point the `openapi` directive at your spec file:
 ```
 ```
 
-See [HTTP API Documentation](../reference/http-api.md) for rendered examples of both auto-generated and manually written HTTP API documentation.
+See [HTTP API Documentation](../reference/http-api.html.md) for rendered examples of both auto-generated and manually written HTTP API documentation.
 
 ## Expanding endpoint details
 
 Endpoints start collapsed. Select a signature to see its description, parameters, examples, and request controls. **Expand all** and **Collapse all** apply to every API definition on the page.
 
-To start with all definitions expanded, set `"api_expanded": "true"` in `html_theme_options`. This option also applies to Python and JavaScript API documentation. See [Configuration](../getting-started/configuration.md).
+To start with all definitions expanded, set `"api_expanded": "true"` in `html_theme_options`. This option also applies to Python and JavaScript API documentation. See [Configuration](../getting-started/configuration.html.md).
 
 ## Interactive Features
 

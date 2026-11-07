@@ -1,6 +1,6 @@
 # CSS Variables
 
-Every visual surface in Lumina is driven by a CSS custom property. Override any of these in your own stylesheet to retheme the docs without forking the theme. For step-by-step instructions on adding a custom stylesheet, see [Custom Styling](../guides/custom-styling.md).
+Every visual surface in Lumina is driven by a CSS custom property. Override any of these in your own stylesheet to retheme the docs without forking the theme. For step-by-step instructions on adding a custom stylesheet, see [Custom Styling](../guides/custom-styling.html.md).
 
 All tokens are defined for both the default light scope (`:root` / `[data-theme="light"]`) and dark mode (`[data-theme="dark"]`).
 
@@ -21,8 +21,8 @@ The core surface and text tokens. These are the variables you’ll override most
 | `--lumina-floating-bg`   | `#fdfdfc`            | `#242c27`      | Section switcher, page-actions menu, search dialog, and back-to-top button                                                 |
 | `--lumina-accent-light`  | `#eaf6ef`            | `#1c3329`      | Hover/active background tint for accent surfaces, including the current sidebar item                                       |
 | `--lumina-code-bg`       | `#f6f7f6`            | `#1b211e`      | Inline code and code block background                                                                                      |
-| `--lumina-font-sans`     | Source Sans 3 stack  | Same as light  | Body text, UI labels, API documentation, and diagrams. See [Custom Styling](../guides/custom-styling.md).                  |
-| `--lumina-font-mono`     | JetBrains Mono stack | Same as light  | Code blocks, inline code, and API signatures. See [Custom Styling](../guides/custom-styling.md).                           |
+| `--lumina-font-sans`     | Source Sans 3 stack  | Same as light  | Body text, UI labels, API documentation, and diagrams. See [Custom Styling](../guides/custom-styling.html.md).  |
+| `--lumina-font-mono`     | JetBrains Mono stack | Same as light  | Code blocks, inline code, and API signatures. See [Custom Styling](../guides/custom-styling.html.md).           |
 
 ## Admonition tokens
 
@@ -102,4 +102,4 @@ html:root {
 
 Every token is consumed in `src/sphinx_lumina_theme/_static_src/css/`. If you’re customizing deeply and want to know exactly where a token is read, the easiest reference is the source — `base.css` declares the tokens; the per-feature stylesheets (`typography.css`, `code.css`, `admonitions.css`, `api.css`, `landing.css`, `mermaid.css`) consume them via `var(--…)`.
 
-For non-color customization (fonts, page elements, syntax highlighting), see [Custom Styling](../guides/custom-styling.md).
+For non-color customization (fonts, page elements, syntax highlighting), see [Custom Styling](../guides/custom-styling.html.md).

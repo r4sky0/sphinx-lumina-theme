@@ -37,7 +37,7 @@ choose **All docs** to search the whole documentation build. Opening the dialog
 starts with **All docs** each time. When a section has no matches, **Search all
 docs** broadens the search without changing your query.
 
-Scopes come from your [doc sections](navigation.md) configuration,
+Scopes come from your [doc sections](navigation.html.md) configuration,
 including multi-path and default sections. Without `doc_sections`, Lumina uses
 the root toctree’s document titles and includes each entry’s descendants. A page
 listed under several branches belongs to the first one. Pages outside those

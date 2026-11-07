@@ -26,4 +26,4 @@ copybutton_prompt_is_regexp = True
 This strips `>>>`, `...`, `$`, and `>` prompts so readers copy only the actual commands.
 
 #### SEE ALSO
-[Code Blocks](../reference/code-blocks.md) — for syntax highlighting, line numbers, captions, diffs, and tabbed code examples.
+[Code Blocks](../reference/code-blocks.html.md) — for syntax highlighting, line numbers, captions, diffs, and tabbed code examples.

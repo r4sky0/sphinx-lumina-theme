@@ -1,6 +1,6 @@
 # Cards & Grids
 
-Layout components from sphinx-design for visually organizing content into cards and responsive grids. Requires the `sphinx_design` extension — see [sphinx-design](../extensions/sphinx-design.md) for setup.
+Layout components from sphinx-design for visually organizing content into cards and responsive grids. Requires the `sphinx_design` extension — see [sphinx-design](../extensions/sphinx-design.html.md) for setup.
 
 ## Basic Cards
 

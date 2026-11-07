@@ -37,4 +37,4 @@ $$
 $$
 
 #### SEE ALSO
-[Math](../reference/math.md) — labeled equations, multi-line systems, matrices, and symbol tables.
+[Math](../reference/math.html.md) — labeled equations, multi-line systems, matrices, and symbol tables.

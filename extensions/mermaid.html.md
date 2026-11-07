@@ -47,4 +47,4 @@ class publish ready
 Add these lines inside the diagram after the node definitions. Explicit node fills and strokes are also preserved. If you supply custom colors, check their contrast in both modes.
 
 #### SEE ALSO
-[Diagrams](../reference/diagrams.md) — flowcharts, sequence diagrams, class diagrams, Gantt charts, and more rendered examples.
+[Diagrams](../reference/diagrams.html.md) — flowcharts, sequence diagrams, class diagrams, Gantt charts, and more rendered examples.

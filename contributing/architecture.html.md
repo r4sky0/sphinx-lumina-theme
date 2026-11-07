@@ -47,7 +47,7 @@ available for characters outside the Latin subsets.
 
 Alpine.js components are registered via `Alpine.data()` in separate modules under `_static_src/js/`. Each component is imported and registered in `app.js`, then referenced in templates with `x-data`.
 
-See [JavaScript API](javascript-api.md) for the full component API reference.
+See [JavaScript API](javascript-api.html.md) for the full component API reference.
 
 An inline script measures the announcement before page content renders; the
 announcement component keeps that measurement current with `ResizeObserver`. The shared
@@ -89,7 +89,7 @@ starts. Simple tables receive labels for the mobile layout. Tables with the
 `lumina-table-interactive` class instead use the `tableControls` Alpine component
 from `table-controls.js` for local filtering and sorting. It moves existing rows
 to preserve their markup and state. Unsupported table structures remain static.
-See [Lists & Tables](../reference/lists-and-tables.md) for the opt-in syntax.
+See [Lists & Tables](../reference/lists-and-tables.html.md) for the opt-in syntax.
 
 ## Search index and results
 
@@ -112,11 +112,11 @@ one keyboard navigation sequence. Excerpts are sanitized before rendering.
 
 `setup()` registers `locale/` as an additional `sphinx` message catalog, so templates translate strings with the `_()` function that Sphinx provides. Sphinx’s own translations and the project’s `locale_dirs` take precedence over the bundled catalog.
 
-JavaScript can’t call gettext, so for non-English builds `layout.html` includes `components/i18n.html`, which renders every JavaScript string through `_()` into a `<script id="lumina-i18n" type="application/json">` block. `utils/i18n.js` exports `t(key, vars)`, which looks up that catalog and falls back to the English key; `app.js` exposes it to Alpine expressions as `$t`. See [Translations](translations.md) for the contributor workflow.
+JavaScript can’t call gettext, so for non-English builds `layout.html` includes `components/i18n.html`, which renders every JavaScript string through `_()` into a `<script id="lumina-i18n" type="application/json">` block. `utils/i18n.js` exports `t(key, vars)`, which looks up that catalog and falls back to the English key; `app.js` exposes it to Alpine expressions as `$t`. See [Translations](translations.html.md) for the contributor workflow.
 
 ## Theming
 
-- CSS custom properties (`--lumina-accent`, `--lumina-bg`, `--lumina-text`, etc.) defined in `base.css`. See [CSS Variables](../reference/css-variables.md) for the full token reference.
+- CSS custom properties (`--lumina-accent`, `--lumina-bg`, `--lumina-text`, etc.) defined in `base.css`. See [CSS Variables](../reference/css-variables.html.md) for the full token reference.
 - The same tokens are exposed as Tailwind v4 theme colors via an `@theme inline` block in `base.css`, so templates use named utilities (`bg-lumina-bg`, `text-lumina-text-muted`, `border-lumina-border`) rather than `bg-[var(--lumina-bg)]`. Add a new entry to that block when introducing a new token you want available as a Tailwind utility.
 - Dark mode toggled via `[data-theme="dark"]` attribute on `<html>`
 - User preference persisted in `localStorage` key `lumina-theme`

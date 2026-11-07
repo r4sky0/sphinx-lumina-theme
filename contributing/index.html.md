@@ -47,7 +47,7 @@ Tests use pytest with BeautifulSoup for HTML assertions. The `build_output` fixt
 ## Making Changes
 
 1. Create a branch from `main`
-2. Edit source files — see [Architecture](architecture.md) for where things live
+2. Edit source files — see [Architecture](architecture.html.md) for where things live
 3. If you changed CSS or JS in `_static_src/`, run `pnpm run build`
 4. Build docs to verify: `uv run sphinx-build docs docs/_build/html`
 5. Run tests: `uv run pytest`

@@ -22,7 +22,7 @@ Lumina ships translations for these languages:
 Any other language falls back to English for Lumina’s strings, while Sphinx still translates its own text. The page’s `<html lang>` attribute and the Pagefind search index follow the same `language` value.
 
 #### NOTE
-The bundled translations were drafted with machine assistance. Corrections from native speakers are welcome — see [Translations](../contributing/translations.md).
+The bundled translations were drafted with machine assistance. Corrections from native speakers are welcome — see [Translations](../contributing/translations.html.md).
 
 ## Right-to-left languages
 
@@ -50,4 +50,4 @@ Sphinx compiles `sphinx.po` files in `locale_dirs` automatically on each build. 
 
 The same approach adds a language Lumina doesn’t ship. For a language that Sphinx itself has no translations for, Lumina’s templates stay in English.
 
-To fix or add a bundled translation, see [Translations](../contributing/translations.md).
+To fix or add a bundled translation, see [Translations](../contributing/translations.html.md).

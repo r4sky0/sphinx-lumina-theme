@@ -48,7 +48,7 @@ The reader’s choice is persisted in `localStorage` under the key `lumina-layou
 
 The left navigation sidebar (260px) and right table of contents (220px) stay the same width. All extra space goes to the content column.
 
-Paragraphs wrap at spaces by default. For automatic word separation at syllable boundaries, see the hyphenation example in [Custom Styling](custom-styling.md).
+Paragraphs wrap at spaces by default. For automatic word separation at syllable boundaries, see the hyphenation example in [Custom Styling](custom-styling.html.md).
 
 ## Customizing Wide Mode Widths
 

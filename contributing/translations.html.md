@@ -1,6 +1,6 @@
 # Translations
 
-How to fix or add a bundled translation, and how to make new interface text translatable. For setting a site’s language, see [Internationalization](../guides/internationalization.md).
+How to fix or add a bundled translation, and how to make new interface text translatable. For setting a site’s language, see [Internationalization](../guides/internationalization.html.md).
 
 ## Contributing a translation
 
@@ -12,7 +12,7 @@ Lumina’s catalogs live in `src/sphinx_lumina_theme/locale/<language>/LC_MESSAG
    ```
 2. Fill in each `msgstr`. Keep placeholders such as `{count}` and `%(minutes)s` unchanged, and don’t use `<`, `>`, `&`, or straight double quotes — use the typographic quotes of your language instead.
 3. Run `pnpm run i18n` to refresh the template and compile the `.mo` files, then commit both the `.po` and `.mo` files.
-4. Add the language to the table in [Internationalization](../guides/internationalization.md).
+4. Add the language to the table in [Internationalization](../guides/internationalization.html.md).
 
 ### Adding translatable strings
 

@@ -6,7 +6,7 @@ To see the result, browse [Lumina’s own docs on Read the Docs](https://sphinx-
 
 ## Prerequisites
 
-- A Sphinx project that builds locally with `html_theme = "lumina"`. See [Installation](../getting-started/installation.md).
+- A Sphinx project that builds locally with `html_theme = "lumina"`. See [Installation](../getting-started/installation.html.md).
 - The project in a Git repository on GitHub, GitLab, or Bitbucket.
 - A free account on [Read the Docs](https://app.readthedocs.org/accounts/signup/).
 
@@ -101,16 +101,16 @@ Read the Docs builds every pull request and links the preview from the pull requ
 You don’t need to change `conf.py` for any of these.
 
 Canonical URL
-: When `html_baseurl` is unset, Lumina uses the `READTHEDOCS_CANONICAL_URL` that Read the Docs provides. This enables canonical links, `sitemap.xml`, and the `robots.txt` sitemap line (see [SEO and discoverability](seo.md)). A value you set in `conf.py` always takes priority.
+: When `html_baseurl` is unset, Lumina uses the `READTHEDOCS_CANONICAL_URL` that Read the Docs provides. This enables canonical links, `sitemap.xml`, and the `robots.txt` sitemap line (see [SEO and discoverability](seo.html.md)). A value you set in `conf.py` always takes priority.
 
 Version switcher
-: The header shows Lumina’s version dropdown, filled with your project’s active versions. Choosing a version opens the same page in that version. To use your own list instead, set `version_switcher_json` (see [Configuration](../getting-started/configuration.md)).
+: The header shows Lumina’s version dropdown, filled with your project’s active versions. Choosing a version opens the same page in that version. To use your own list instead, set `version_switcher_json` (see [Configuration](../getting-started/configuration.html.md)).
 
 Addon styling
 : The Read the Docs flyout and version notifications use Lumina’s colors and font in light and dark mode. The back-to-top button moves up so the flyout doesn’t cover it.
 
 Search
-: The search box, `/`, and `⌘K` or `Ctrl`+`K` open Lumina’s search. See [Search](search.md).
+: The search box, `/`, and `⌘K` or `Ctrl`+`K` open Lumina’s search. See [Search](search.html.md).
 
 To publish more versions, open **Versions** in your project dashboard and activate the branches or tags you want. They appear in the version dropdown after their first build.
 

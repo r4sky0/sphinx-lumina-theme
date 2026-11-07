@@ -23,7 +23,7 @@ sphinx-autobuild docs docs/_build/html --open-browser
 This watches your `docs/` directory and automatically rebuilds when files change. Your browser refreshes automatically.
 
 #### SEE ALSO
-Pagefind only indexes during full builds, so `⌘K` search may not be populated during live preview. See [Search](search.md) for details and fallbacks.
+Pagefind only indexes during full builds, so `⌘K` search may not be populated during live preview. See [Search](search.html.md) for details and fallbacks.
 
 ## Asset Watcher
 

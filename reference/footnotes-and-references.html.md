@@ -22,7 +22,7 @@ Some text with a footnote[^1].
 
 Link to other pages in the documentation using the `{doc}` role.
 
-See the [Typography](typography.md) page for text formatting options, or check out [Code Blocks](code-blocks.md) for syntax highlighting.
+See the [Typography](typography.html.md) page for text formatting options, or check out [Code Blocks](code-blocks.html.md) for syntax highlighting.
 
 The MyST syntax:
 

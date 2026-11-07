@@ -258,8 +258,8 @@ The MyST syntax:
 Standard Markdown links work as expected.
 
 - External: [Sphinx Documentation](https://www.sphinx-doc.org)
-- Internal: [Admonitions](admonitions.md) (uses the `{doc}` role)
-- Section: [Section References](footnotes-and-references.md#section-label) in another page (uses the `{ref}` role)
+- Internal: [Admonitions](admonitions.html.md) (uses the `{doc}` role)
+- Section: [Section References](footnotes-and-references.html.md#section-label) in another page (uses the `{ref}` role)
 
 The MyST syntax:
 
@@ -269,6 +269,6 @@ The MyST syntax:
 {ref}`section-label`
 ```
 
-See [Footnotes & References](footnotes-and-references.md) for the full cross-referencing guide.
+See [Footnotes & References](footnotes-and-references.html.md) for the full cross-referencing guide.
 
 ## Formatting Best Practices

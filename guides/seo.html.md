@@ -20,7 +20,7 @@ Canonical URLs, sitemap entries, and the `robots.txt` `Sitemap:` line all need a
 html_baseurl = "https://docs.example.com/"
 ```
 
-On Read the Docs, Lumina fills this in from `READTHEDOCS_CANONICAL_URL` (see [Read the Docs](read-the-docs.md)). Elsewhere, if you don’t set it, Lumina logs one warning at the start of the build and skips the URL-dependent features. The rest (description, OG title, Twitter card, etc.) still work.
+On Read the Docs, Lumina fills this in from `READTHEDOCS_CANONICAL_URL` (see [Read the Docs](read-the-docs.html.md)). Elsewhere, if you don’t set it, Lumina logs one warning at the start of the build and skips the URL-dependent features. The rest (description, OG title, Twitter card, etc.) still work.
 
 ## Configuring social cards
 
@@ -54,7 +54,7 @@ The fallback chain is: `publisher_logo` → `html_logo` (when raster) → omit `
 
 ## Sitemap `<lastmod>`
 
-When [sphinx-last-updated-by-git](../extensions/sphinx-last-updated-by-git.md) is in your `extensions` list, Lumina automatically flips `sitemap_show_lastmod = True` so every URL in `sitemap.xml` carries the file’s last-commit date. `<lastmod>` is one signal Google uses to schedule recrawls, so it can help search engines notice content updates sooner.
+When [sphinx-last-updated-by-git](../extensions/sphinx-last-updated-by-git.html.md) is in your `extensions` list, Lumina automatically flips `sitemap_show_lastmod = True` so every URL in `sitemap.xml` carries the file’s last-commit date. `<lastmod>` is one signal Google uses to schedule recrawls, so it can help search engines notice content updates sooner.
 
 ```python
 extensions = [

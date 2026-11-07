@@ -1,6 +1,6 @@
 # Badges & Buttons
 
-Inline badges and clickable buttons from sphinx-design for labeling and calls to action. Requires the `sphinx_design` extension — see [sphinx-design](../extensions/sphinx-design.md) for setup.
+Inline badges and clickable buttons from sphinx-design for labeling and calls to action. Requires the `sphinx_design` extension — see [sphinx-design](../extensions/sphinx-design.html.md) for setup.
 
 ## Badges
 
@@ -89,7 +89,7 @@ Button Text
 
 Link buttons to internal documentation pages using `button-ref`.
 
-[Read the Guide](../getting-started/installation.md)
+[Read the Guide](../getting-started/installation.html.md)
 
 The MyST syntax:
 
@@ -119,6 +119,6 @@ Document API stability inline: The configuration API is stable, the plugin syste
 
 Use primary buttons for the main action and outline buttons for alternatives:
 
-[Get Started](../getting-started/installation.md)
+[Get Started](../getting-started/installation.html.md)
 
-[View Configuration](../getting-started/configuration.md)
+[View Configuration](../getting-started/configuration.html.md)
