@@ -1,3 +1,7 @@
+---
+reading_time: false
+---
+
 # Reference
 
 Visual showcase and syntax reference for every content type Lumina styles.

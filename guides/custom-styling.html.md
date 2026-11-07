@@ -2,18 +2,6 @@
 
 Override CSS custom properties, fonts, syntax highlighting themes, and templates for deeper customization.
 
-## Migrating to Lumina 2
-
-Lumina 2 refreshes the default design. Existing theme options still work, but custom CSS and template overrides need review.
-
-- **Page actions:** Copy Markdown and edit links now live in the page-actions menu. Reading time appears below the introduction with a clock icon. Overrides of `layout.html` or `components/toc.html` should use the new `components/page-actions.html` component.
-- **Link colors:** `--lumina-accent` controls brand accents; `--lumina-link` controls readable text links and focus outlines. Set both for each mode if you customize tokens directly. The `accent_color` option derives both automatically.
-- **Surfaces:** `--lumina-navigation-bg` and `--lumina-floating-bg` control the sidebar and floating menus separately from the page background.
-- **Content:** Cards no longer lift or cast shadows; admonitions use a thin border on all sides. Heading sizes, weights, and spacing have changed.
-- **Mobile navigation:** The page outline is now available below the breadcrumbs. `show_toc = "false"` hides both desktop and mobile outlines.
-
-Rebuild your docs and check custom styles in both color modes, including mobile layouts. Use `html_short_title` for a shorter header label without changing your Sphinx project name.
-
 ## Adding a Custom Stylesheet
 
 Create a CSS file and register it in your `conf.py`:
@@ -42,7 +30,7 @@ Lumina defines CSS custom properties for all visual tokens. Override them in you
     --lumina-accent: #10b981;          /* Brand accents and active indicators */
     --lumina-accent-light: #eaf6ef;    /* Accent background tint */
     --lumina-link: #08764f;            /* Readable links and focus outlines */
-    --lumina-navigation-bg: #f7f8f6;   /* Sidebar surface */
+    --lumina-navigation-bg: #f9fbfa;   /* Sidebar surface */
     --lumina-floating-bg: #fdfdfc;     /* Floating menus and search */
     --lumina-code-bg: #f6f7f6;         /* Inline code background */
 }
@@ -57,7 +45,7 @@ Lumina defines CSS custom properties for all visual tokens. Override them in you
     --lumina-accent: #10b981;
     --lumina-accent-light: #1c3329;
     --lumina-link: #5ed9a3;
-    --lumina-navigation-bg: #111613;
+    --lumina-navigation-bg: #171c19;
     --lumina-floating-bg: #242c27;
     --lumina-code-bg: #1b211e;
 }
@@ -241,13 +229,14 @@ html_theme_options = {
 
 #### Available presets
 
-| Preset       | Light style   | Dark style   | Character                                      |
-|--------------|---------------|--------------|------------------------------------------------|
-| `"default"`  | default       | monokai      | Neutral baseline — familiar Pygments defaults  |
-| `"nord"`     | tango         | nord         | Cool, crisp, precise — arctic calm             |
-| `"one-dark"` | friendly      | one-dark     | Warm, modern — Atom’s popular syntax theme     |
-| `"gruvbox"`  | gruvbox-light | gruvbox-dark | Earthy, bold — retro groove with warm tones    |
-| `"material"` | lovelace      | material     | Refined, editorial — Google’s Material palette |
+| Preset       | Light style   | Dark style   | Character                                                                            |
+|--------------|---------------|--------------|--------------------------------------------------------------------------------------|
+| `"default"`  | default       | monokai      | Neutral baseline — familiar Pygments defaults                                        |
+| `"nord"`     | tango         | nord         | Cool, crisp, precise — arctic calm                                                   |
+| `"one-dark"` | friendly      | one-dark     | Warm, modern — Atom’s popular syntax theme                                           |
+| `"gruvbox"`  | gruvbox-light | gruvbox-dark | Earthy, bold — retro groove with warm tones                                          |
+| `"material"` | lovelace      | material     | Refined, editorial — Google’s Material palette                                       |
+| `"lumina"`   | lumina-light  | lumina-dark  | Lumina’s own — emerald keywords, warm strings, quiet punctuation (these docs use it) |
 
 ### Custom styles
 

@@ -1233,7 +1233,7 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 | Option              | Type   | Default     | Description                                                                                                                                                                                                                                                                                                                                                                                                       |
 |---------------------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `accent_color`      | string | `"#10b981"` | Primary brand color used for links, active states, and accents. Any valid CSS color.                                                                                                                                                                                                                                                                                                                              |
-| `code_style`        | string | `"default"` | Syntax highlighting preset. Sets matched Pygments styles for light and dark modes. Options: `"default"`, `"nord"`, `"one-dark"`, `"gruvbox"`, `"material"`. See [Custom Styling](guides/custom-styling.html.md) for details.                                                                                                                                                                        |
+| `code_style`        | string | `"default"` | Syntax highlighting preset. Sets matched Pygments styles for light and dark modes. Options: `"default"`, `"nord"`, `"one-dark"`, `"gruvbox"`, `"material"`, `"lumina"`. See [Custom Styling](guides/custom-styling.html.md) for details.                                                                                                                                                            |
 | `dark_mode_default` | string | `"auto"`    | Initial color mode. `"auto"` follows system preference, `"light"` and `"dark"` force a mode.                                                                                                                                                                                                                                                                                                                      |
 | `wide_layout`       | string | `"false"`   | Controls wide content layout (`60rem` instead of `48rem`). `"toggle"` shows a button in the header that lets readers switch (visible on viewports ≥1280px, persisted in browser). `"always"` forces wide mode permanently with no toggle. See [Wide Layout](guides/wide-layout.html.md).                                                                                                         |
 | `logo_only`         | string | `"false"`   | When `"true"`, hides the project name in the header and shows only the logo.                                                                                                                                                                                                                                                                                                                                      |
@@ -1615,18 +1615,6 @@ Browse the complete reference for typography, admonitions, code blocks, and more
 
 Override CSS custom properties, fonts, syntax highlighting themes, and templates for deeper customization.
 
-## Migrating to Lumina 2
-
-Lumina 2 refreshes the default design. Existing theme options still work, but custom CSS and template overrides need review.
-
-- **Page actions:** Copy Markdown and edit links now live in the page-actions menu. Reading time appears below the introduction with a clock icon. Overrides of `layout.html` or `components/toc.html` should use the new `components/page-actions.html` component.
-- **Link colors:** `--lumina-accent` controls brand accents; `--lumina-link` controls readable text links and focus outlines. Set both for each mode if you customize tokens directly. The `accent_color` option derives both automatically.
-- **Surfaces:** `--lumina-navigation-bg` and `--lumina-floating-bg` control the sidebar and floating menus separately from the page background.
-- **Content:** Cards no longer lift or cast shadows; admonitions use a thin border on all sides. Heading sizes, weights, and spacing have changed.
-- **Mobile navigation:** The page outline is now available below the breadcrumbs. `show_toc = "false"` hides both desktop and mobile outlines.
-
-Rebuild your docs and check custom styles in both color modes, including mobile layouts. Use `html_short_title` for a shorter header label without changing your Sphinx project name.
-
 ## Adding a Custom Stylesheet
 
 Create a CSS file and register it in your `conf.py`:
@@ -1655,7 +1643,7 @@ Lumina defines CSS custom properties for all visual tokens. Override them in you
     --lumina-accent: #10b981;          /* Brand accents and active indicators */
     --lumina-accent-light: #eaf6ef;    /* Accent background tint */
     --lumina-link: #08764f;            /* Readable links and focus outlines */
-    --lumina-navigation-bg: #f7f8f6;   /* Sidebar surface */
+    --lumina-navigation-bg: #f9fbfa;   /* Sidebar surface */
     --lumina-floating-bg: #fdfdfc;     /* Floating menus and search */
     --lumina-code-bg: #f6f7f6;         /* Inline code background */
 }
@@ -1670,7 +1658,7 @@ Lumina defines CSS custom properties for all visual tokens. Override them in you
     --lumina-accent: #10b981;
     --lumina-accent-light: #1c3329;
     --lumina-link: #5ed9a3;
-    --lumina-navigation-bg: #111613;
+    --lumina-navigation-bg: #171c19;
     --lumina-floating-bg: #242c27;
     --lumina-code-bg: #1b211e;
 }
@@ -1854,13 +1842,14 @@ html_theme_options = {
 
 #### Available presets
 
-| Preset       | Light style   | Dark style   | Character                                      |
-|--------------|---------------|--------------|------------------------------------------------|
-| `"default"`  | default       | monokai      | Neutral baseline — familiar Pygments defaults  |
-| `"nord"`     | tango         | nord         | Cool, crisp, precise — arctic calm             |
-| `"one-dark"` | friendly      | one-dark     | Warm, modern — Atom’s popular syntax theme     |
-| `"gruvbox"`  | gruvbox-light | gruvbox-dark | Earthy, bold — retro groove with warm tones    |
-| `"material"` | lovelace      | material     | Refined, editorial — Google’s Material palette |
+| Preset       | Light style   | Dark style   | Character                                                                            |
+|--------------|---------------|--------------|--------------------------------------------------------------------------------------|
+| `"default"`  | default       | monokai      | Neutral baseline — familiar Pygments defaults                                        |
+| `"nord"`     | tango         | nord         | Cool, crisp, precise — arctic calm                                                   |
+| `"one-dark"` | friendly      | one-dark     | Warm, modern — Atom’s popular syntax theme                                           |
+| `"gruvbox"`  | gruvbox-light | gruvbox-dark | Earthy, bold — retro groove with warm tones                                          |
+| `"material"` | lovelace      | material     | Refined, editorial — Google’s Material palette                                       |
+| `"lumina"`   | lumina-light  | lumina-dark  | Lumina’s own — emerald keywords, warm strings, quiet punctuation (these docs use it) |
 
 ### Custom styles
 
@@ -4153,7 +4142,7 @@ The core surface and text tokens. These are the variables you’ll override most
 | `--lumina-border`        | `#dfe5e1`            | `#303b34`      | Dividers, table cell borders, sidebar separators                                                                           |
 | `--lumina-accent`        | `#10b981`            | `#10b981`      | Brand accents, active indicators, skip link, headerlink tooltip. Also overridable through the `accent_color` theme option. |
 | `--lumina-link`          | `#08764f`            | `#5ed9a3`      | Readable text links and focus outlines                                                                                     |
-| `--lumina-navigation-bg` | `#f7f8f6`            | `#111613`      | Desktop sidebar surface and the outer gutter to its left                                                                   |
+| `--lumina-navigation-bg` | `#f9fbfa`            | `#171c19`      | Desktop sidebar surface and the outer gutter to its left                                                                   |
 | `--lumina-floating-bg`   | `#fdfdfc`            | `#242c27`      | Section switcher, page-actions menu, search dialog, and back-to-top button                                                 |
 | `--lumina-accent-light`  | `#eaf6ef`            | `#1c3329`      | Hover/active background tint for accent surfaces, including the current sidebar item                                       |
 | `--lumina-code-bg`       | `#f6f7f6`            | `#1b211e`      | Inline code and code block background                                                                                      |

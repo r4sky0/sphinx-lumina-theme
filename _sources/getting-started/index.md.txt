@@ -1,3 +1,7 @@
+---
+reading_time: false
+---
+
 # Getting Started
 
 Get Lumina running in your Sphinx project in under five minutes.
