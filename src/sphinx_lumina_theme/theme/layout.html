@@ -223,11 +223,14 @@
                 </details>
             {% endif %}
             <article class="lumina-article" x-data="headerLinks()">
+                {# sphinx_highlight.js marks search terms inside div.body only. #}
+                <div class="body">
 
-                {% block body %}
+                    {% block body %}
 
-                {% endblock body %}
+                    {% endblock body %}
 
+                </div>
             </article>
             {% if theme_show_prev_next == "true" %}
 

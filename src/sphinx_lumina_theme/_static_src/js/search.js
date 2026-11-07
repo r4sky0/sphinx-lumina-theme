@@ -79,6 +79,7 @@ function matchSymbols(symbols, query, scope) {
  * - ``moveDown()`` — Moves keyboard selection down.
  * - ``moveUp()`` — Moves keyboard selection up.
  * - ``goToSelected()`` — Navigates to the selected result.
+ * - ``rememberQuery()`` — Stores the query for ``sphinx_highlight.js`` on the next page.
  *
  * @function searchModal
  * @returns {object} Alpine.js component data.
@@ -354,8 +355,19 @@ export default function searchModal() {
       });
     },
 
+    /* Sphinx's sphinx_highlight.js marks these terms on the page that opens next,
+       the same hand-off its own search page uses. */
+    rememberQuery() {
+      try {
+        localStorage.setItem("sphinx_highlight_terms", this.query.trim());
+      } catch {
+        // Highlighting is optional when storage is blocked.
+      }
+    },
+
     goToSelected() {
       if (this.results[this.selectedIndex]) {
+        this.rememberQuery();
         window.location.href = this.results[this.selectedIndex].url;
       }
     },

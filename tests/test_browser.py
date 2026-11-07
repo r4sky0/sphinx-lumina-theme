@@ -336,6 +336,18 @@ def test_search_returns_results(page: Page, live_server: str):
     expect(results.first).not_to_have_attribute("href", re.compile(r"search\.html"))
 
 
+def test_search_terms_highlighted_in_article(page: Page, live_server: str):
+    """Opening a result marks the query in the article only (sphinx_highlight.js)."""
+    page.click("[data-search-trigger]")
+    page.locator("#lumina-search-modal input[type='search']").fill("pagefind")
+    page.wait_for_selector("#lumina-search-modal a[href]", timeout=10000)
+    page.keyboard.press("Enter")
+    expect(page.locator(".lumina-article div.body span.highlighted")).not_to_have_count(
+        0
+    )
+    expect(page.locator("span.highlighted:not(div.body span)")).to_have_count(0)
+
+
 def test_sphinx_search_backend(page: Page, sphinx_search_server: str):
     """The Sphinx backend links the modal to Sphinx's search page, never Pagefind."""
     requests = []

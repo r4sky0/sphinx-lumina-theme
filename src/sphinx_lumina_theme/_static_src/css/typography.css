@@ -84,7 +84,7 @@
   margin-bottom: 1.125rem;
 }
 
-.lumina-article > section > h1 + p {
+.lumina-article > .body > section > h1 + p {
   color: var(--lumina-text-muted);
   font-size: 1.125rem;
   line-height: 1.6;
