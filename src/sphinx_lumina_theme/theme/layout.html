@@ -114,7 +114,7 @@
         </script>
     {% endif %}
     <meta name="lumina-search-backend" content="{{ theme_search_backend }}">
-    <meta name="lumina-base-url" content="{{ pathto('', 1) }}">
+    <meta name="lumina-base-url" content="{{ content_root }}">
     {% if lumina_on_rtd %}<meta name="readthedocs-addons-api-version" content="1">{% endif %}
     {% if theme_api_base_url %}
         <script>document.documentElement.dataset.apiBaseUrl = {{ theme_api_base_url | tojson }};</script>

@@ -312,7 +312,9 @@ export default function searchModal() {
     fallbackResults(query) {
       return [{
         title: t('Search for "{query}"', { query }),
-        url: this.baseUrl + "search.html?q=" + encodeURIComponent(query),
+        // Sphinx's search link is search/ under dirhtml, search.html otherwise.
+        url: (document.querySelector('link[rel="search"]')?.getAttribute("href") || this.baseUrl + "search.html") +
+          "?q=" + encodeURIComponent(query),
         excerpt: t("Open Sphinx search results page"),
         breadcrumb: "",
         isHeading: false,
