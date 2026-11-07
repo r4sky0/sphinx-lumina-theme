@@ -1,8 +1,9 @@
 """Custom Sphinx directives for the Lumina theme."""
 
+from typing import ClassVar
+
 from docutils import nodes
 from sphinx.util import logging
-
 from sphinx_design.cards import CardDirective
 from sphinx_design.grids import GridItemCardDirective
 from sphinx_design.shared import create_component
@@ -57,7 +58,7 @@ def _inject_icon(card_node, icon_name, icon_style):
 class LuminaCardDirective(CardDirective):
     """Card directive with Lucide icon support."""
 
-    option_spec = {
+    option_spec: ClassVar[dict] = {
         **CardDirective.option_spec,
         "icon": lambda x: x.strip() if x else "",
         "icon-style": lambda x: (
@@ -77,7 +78,7 @@ class LuminaCardDirective(CardDirective):
 class LuminaGridItemCardDirective(GridItemCardDirective):
     """Grid-item-card directive with Lucide icon support."""
 
-    option_spec = {
+    option_spec: ClassVar[dict] = {
         **GridItemCardDirective.option_spec,
         "icon": lambda x: x.strip() if x else "",
         "icon-style": lambda x: (

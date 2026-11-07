@@ -1,9 +1,12 @@
 {%- extends "basic/search.html" %}
+
 {# Lumina defers the core scripts, so the search scripts must run after doctools.js too. #}
 {%- block scripts %}
+
     {{ super.super() }}
     <script defer="defer" src="{{ pathto('_static/searchtools.js', 1) }}"></script>
     <script defer="defer" src="{{ pathto('_static/language_data.js', 1) }}"></script>
+
 {%- endblock %}
 
 {% block searchbox %}

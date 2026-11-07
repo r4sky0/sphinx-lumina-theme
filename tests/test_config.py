@@ -3,9 +3,10 @@
 import re
 from pathlib import Path
 
-import sphinx_lumina_theme
 from bs4 import BeautifulSoup
 from conftest import copy_sample_docs, sphinx_app
+
+import sphinx_lumina_theme
 
 
 def build_with_options(tmp_path, options, page="index.html"):

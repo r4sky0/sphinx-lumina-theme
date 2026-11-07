@@ -86,7 +86,6 @@ def _truncate(text: str) -> str:
 def _first_prose_paragraph(doctree: nodes.document) -> str | None:
     """Walk the doctree, return the first paragraph node that qualifies."""
     from docutils import nodes
-
     from sphinx import addnodes
 
     skip_ancestors: tuple[type, ...] = (
@@ -170,9 +169,8 @@ def resolve_og_image(
     )
 
     candidate = page_image or theme_image
-    if not candidate and html_logo:
-        if html_logo.lower().endswith(_RASTER_EXTS):
-            candidate = html_logo
+    if not candidate and html_logo and html_logo.lower().endswith(_RASTER_EXTS):
+        candidate = html_logo
 
     if not candidate:
         return None, None

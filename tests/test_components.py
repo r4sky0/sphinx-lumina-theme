@@ -1,6 +1,7 @@
 """Test that theme components render correctly."""
 
 from bs4 import BeautifulSoup
+
 from sphinx_lumina_theme import _add_name_breaks
 
 

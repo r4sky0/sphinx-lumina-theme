@@ -16,6 +16,6 @@ class BuildAssetsHook(BuildHookInterface):
         self._run(["pnpm", "run", "build"])
 
     def _run(self, cmd):
-        result = subprocess.run(cmd, cwd=self.root)
+        result = subprocess.run(cmd, check=False, cwd=self.root)
         if result.returncode != 0:
             sys.exit(f"[hatch] Command failed: {' '.join(cmd)}")

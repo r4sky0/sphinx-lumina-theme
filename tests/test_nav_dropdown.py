@@ -1,8 +1,8 @@
 """Test header nav dropdown rendering."""
 
+import pytest
 from bs4 import BeautifulSoup
 from conftest import copy_sample_docs, sphinx_app
-import pytest
 
 
 @pytest.fixture(scope="module")

@@ -6,7 +6,9 @@
 {% set html_tag = '<html lang="%s" dir="rtl" data-content_root="%s">' | format(language, content_root) if lumina_rtl else "" %}
 
 {%- block doctype -%}
+
     <!DOCTYPE html>
+
 {%- endblock -%}
 
 {% block extrahead %}
@@ -34,14 +36,18 @@
         {% if lumina_seo_keywords %}<meta name="keywords" content="{{ lumina_seo_keywords }}">{% endif %}
         {% if lumina_seo_theme_color %}<meta name="theme-color" content="{{ lumina_seo_theme_color }}">{% endif %}
         <meta property="og:title" content="{{ lumina_seo_og_title }}">
-        {% if lumina_seo_description %}<meta property="og:description" content="{{ lumina_seo_description }}">{% endif %}
+        {% if lumina_seo_description %}
+            <meta property="og:description" content="{{ lumina_seo_description }}">
+        {% endif %}
         {% if lumina_seo_page_url %}<meta property="og:url" content="{{ lumina_seo_page_url }}">{% endif %}
         <meta property="og:type" content="{{ lumina_seo_og_type }}">
         <meta property="og:site_name" content="{{ lumina_seo_og_site_name }}">
         <meta property="og:locale" content="{{ lumina_seo_og_locale }}">
         {% if lumina_seo_og_image %}
             <meta property="og:image" content="{{ lumina_seo_og_image }}">
-            {% if lumina_seo_og_image_alt %}<meta property="og:image:alt" content="{{ lumina_seo_og_image_alt }}">{% endif %}
+            {% if lumina_seo_og_image_alt %}
+                <meta property="og:image:alt" content="{{ lumina_seo_og_image_alt }}">
+            {% endif %}
             {% if lumina_seo_og_image_width %}
                 <meta property="og:image:width" content="{{ lumina_seo_og_image_width }}">
             {% endif %}
@@ -51,7 +57,9 @@
         {% endif %}
         <meta name="twitter:card" content="{{ lumina_seo_twitter_card }}">
         <meta name="twitter:title" content="{{ lumina_seo_og_title }}">
-        {% if lumina_seo_description %}<meta name="twitter:description" content="{{ lumina_seo_description }}">{% endif %}
+        {% if lumina_seo_description %}
+            <meta name="twitter:description" content="{{ lumina_seo_description }}">
+        {% endif %}
         {% if lumina_seo_og_image %}<meta name="twitter:image" content="{{ lumina_seo_og_image }}">{% endif %}
         {% if lumina_seo_twitter_site %}<meta name="twitter:site" content="{{ lumina_seo_twitter_site }}">{% endif %}
         {% if lumina_seo_breadcrumb_jsonld %}
@@ -119,14 +127,18 @@
     {% if theme_api_base_url %}
         <script>document.documentElement.dataset.apiBaseUrl = {{ theme_api_base_url | tojson }};</script>
     {% endif %}
-    {% if theme_try_it_out == "false" %}<script>document.documentElement.dataset.tryItOut = "false";</script>{% endif %}
+    {% if theme_try_it_out == "false" %}
+        <script>document.documentElement.dataset.tryItOut = "false";</script>
+    {% endif %}
     {% if theme_api_expanded == "true" %}
         <script>document.documentElement.dataset.apiExpanded = "true";</script>
     {% endif %}
     {% if theme_code_wrap_toggle == "true" %}
         <script>document.documentElement.dataset.codeWrap = "true";</script>
     {% endif %}
-    {% if theme_image_lightbox == "true" %}<script>document.documentElement.dataset.lightbox = "true";</script>{% endif %}
+    {% if theme_image_lightbox == "true" %}
+        <script>document.documentElement.dataset.lightbox = "true";</script>
+    {% endif %}
     {% if theme_accent_color != "#10b981" %}
         <style>
             :root,[data-theme="light"]{--lumina-accent:{{ theme_accent_color }};--lumina-link:color-mix(in srgb,{{ theme_accent_color }} 65%,#202624);--lumina-accent-light:color-mix(in srgb,{{ theme_accent_color }} 12%,var(--lumina-bg));}
@@ -171,6 +183,7 @@
 {% endblock relbar2 %}
 
 {%- block content %}
+
     <a href="#lumina-content" class="lumina-skip-link">{{ _("Skip to content") }}</a>
 
     <div id="lumina-header">
