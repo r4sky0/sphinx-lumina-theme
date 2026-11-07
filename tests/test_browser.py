@@ -348,8 +348,8 @@ def test_sphinx_search_backend(page: Page, sphinx_search_server: str):
 
     page.click("[data-search-trigger]")
     modal = page.locator("#lumina-search-modal")
-    modal.get_by_role("searchbox").fill("content")
-    modal.get_by_role("link", name='Search for "content"').click()
+    modal.locator('input[type="search"]').fill("content")
+    modal.get_by_role("option", name='Search for "content"').click()
     expect(page.locator("#search-results li").first).to_be_visible()
     assert not [url for url in requests if "_pagefind" in url]
 
@@ -1211,7 +1211,7 @@ def test_search_scopes_and_heading_links(page: Page, live_server: str):
     scope = modal.get_by_label("Search in")
     expect(scope).to_be_visible()
     scope.select_option(label="Developer Documentation")
-    modal.get_by_role("searchbox").fill("search")
+    modal.locator('input[type="search"]').fill("search")
     links = modal.locator("[data-search-result]")
     expect(links.first).to_be_visible()
     for href in links.evaluate_all("els => els.map(el => el.getAttribute('href'))"):
@@ -1232,7 +1232,7 @@ def test_search_scoped_empty_state_and_reset(page: Page):
     modal = page.locator("#lumina-search-modal")
     scope = modal.get_by_label("Search in")
     scope.select_option(label="Developer Documentation")
-    search = modal.get_by_role("searchbox")
+    search = modal.locator('input[type="search"]')
     search.fill("petstore")
     expect(modal.get_by_text("No results in Developer Documentation.")).to_be_visible()
     modal.get_by_role("button", name="Search all docs").click()
@@ -1293,8 +1293,8 @@ def test_search_fallback_when_pagefind_unavailable(page: Page):
     page.route("**/_pagefind/**", lambda route: route.abort())
     page.click("[data-search-trigger]")
     modal = page.locator("#lumina-search-modal")
-    modal.get_by_role("searchbox").fill("hello world")
-    fallback = modal.get_by_role("link", name='Search for "hello world"')
+    modal.locator('input[type="search"]').fill("hello world")
+    fallback = modal.get_by_role("option", name='Search for "hello world"')
     expect(fallback).to_have_attribute("href", "search.html?q=hello%20world")
     expect(modal.get_by_label("Search in")).to_have_count(0)
 
@@ -1324,7 +1324,7 @@ def test_sphinx_search_page_lists_results(page: Page, live_server: str):
 def test_search_keyboard_reaches_heading(page: Page, live_server: str):
     page.click("[data-search-trigger]")
     modal = page.locator("#lumina-search-modal")
-    search = modal.get_by_role("searchbox")
+    search = modal.locator('input[type="search"]')
     search.fill("pagefind")
     links = modal.locator("[data-search-result]")
     expect(links.first).to_be_visible()
@@ -1336,11 +1336,27 @@ def test_search_keyboard_reaches_heading(page: Page, live_server: str):
     expect(page).to_have_url(live_server + hrefs[index])
 
 
+def test_search_exposes_keyboard_selection(page: Page):
+    """Screen readers follow the arrow-key selection via aria-activedescendant."""
+    page.click("[data-search-trigger]")
+    modal = page.locator("#lumina-search-modal")
+    search = modal.get_by_role("combobox", name="Search documentation")
+    search.fill("pagefind")
+    options = modal.get_by_role("listbox").get_by_role("option")
+    expect(options.nth(1)).to_be_visible()
+    expect(search).to_have_attribute("aria-expanded", "true")
+    expect(search).to_have_attribute("aria-activedescendant", "lumina-search-result-0")
+    search.press("ArrowDown")
+    expect(search).to_have_attribute("aria-activedescendant", "lumina-search-result-1")
+    expect(options.nth(1)).to_have_attribute("aria-selected", "true")
+    expect(options.nth(0)).to_have_attribute("aria-selected", "false")
+
+
 def test_search_repeat_query_keeps_keyboard_selection(page: Page, live_server: str):
     """A repeated search for the shown query must not reset the selection."""
     page.click("[data-search-trigger]")
     modal = page.locator("#lumina-search-modal")
-    search = modal.get_by_role("searchbox")
+    search = modal.locator('input[type="search"]')
     search.fill("pagefind")
     links = modal.locator("[data-search-result]")
     expect(links.nth(1)).to_be_visible()
@@ -1361,7 +1377,7 @@ def test_search_keyboard_focus_indicators(page: Page, theme: str):
     modal = page.locator("#lumina-search-modal")
     scope = modal.get_by_label("Search in")
     scope.select_option(label="User Documentation")
-    search = modal.get_by_role("searchbox")
+    search = modal.locator('input[type="search"]')
     search.fill("search")
     expect(modal.locator("[data-search-result]").first).to_be_visible()
     search.focus()
@@ -1573,7 +1589,7 @@ def test_search_lists_api_symbols_first(page: Page, live_server: str):
     """Domain objects match by qualified name and lead to their definitions."""
     page.click("[data-search-trigger]")
     modal = page.locator("#lumina-search-modal")
-    search = modal.get_by_role("searchbox")
+    search = modal.locator('input[type="search"]')
     search.fill("EventEmitter.on")
     first = modal.locator("[data-search-result]").first
     expect(first).to_contain_text("Python method in EventEmitter")
