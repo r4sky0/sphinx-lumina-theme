@@ -1,5 +1,27 @@
 # Releases
 
+## v2.19.3 (2026-11-07)
+
+### Bug Fixes
+
+- Apply dark Pygments palette for dark_mode_default
+  ([#229](https://github.com/r4sky0/sphinx-lumina-theme/pull/229),
+  [`5a79730`](https://github.com/r4sky0/sphinx-lumina-theme/commit/5a79730eacd5e24a0d4e6fffa642c6496291c0f1))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Build System
+
+- **deps**: Bump pnpm/action-setup from 6.1.0 to 6.1.1 in the github-actions-minor group across 1
+  directory ([#218](https://github.com/r4sky0/sphinx-lumina-theme/pull/218),
+  [`6b94dc6`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6b94dc653a788cfeaa9fbca6dac0463393cacabf))
+- **deps-dev**: Bump the npm-minor group across 1 directory with 4 updates
+  ([#219](https://github.com/r4sky0/sphinx-lumina-theme/pull/219),
+  [`9913256`](https://github.com/r4sky0/sphinx-lumina-theme/commit/99132561e75319aea7ba4e080bc0ee72ec657b58))
+
+</details>
+
 ## v2.19.2 (2026-11-07)
 
 ### Bug Fixes
