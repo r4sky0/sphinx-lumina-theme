@@ -25,6 +25,7 @@ html_last_updated_fmt = "%B %-d, %Y"
 suppress_warnings = ["git.too_shallow"]
 # sphinx-llm's Markdown export skips nodes it can't render (tips, sidebars, diagrams).
 llms_txt_suppress_unknown_node_warnings = True
+llms_txt_full_build = True
 myst_enable_extensions = [
     "colon_fence",
     "amsmath",
