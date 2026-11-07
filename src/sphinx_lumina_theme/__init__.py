@@ -26,6 +26,10 @@ _CODE_STYLE_PRESETS = {
     "one-dark": ("friendly", "one-dark"),
     "gruvbox": ("gruvbox-light", "gruvbox-dark"),
     "material": ("lovelace", "material"),
+    "lumina": (
+        "sphinx_lumina_theme.pygments_styles.LuminaLightStyle",
+        "sphinx_lumina_theme.pygments_styles.LuminaDarkStyle",
+    ),
 }
 
 _HERO_FIELDS = (

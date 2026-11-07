@@ -40,7 +40,7 @@
   --lumina-accent-light: #eaf6ef;
   --lumina-code-bg: #f6f7f6;
   --lumina-link: #08764f;
-  --lumina-navigation-bg: #f7f8f6;
+  --lumina-navigation-bg: #f9fbfa;
   --lumina-floating-bg: #fdfdfc;
   --lumina-adm-note: #2563eb;
   --lumina-adm-tip: #08764f;
@@ -124,7 +124,7 @@ html:root {
   --lumina-accent-light: #1c3329;
   --lumina-code-bg: #1b211e;
   --lumina-link: #5ed9a3;
-  --lumina-navigation-bg: #111613;
+  --lumina-navigation-bg: #171c19;
   --lumina-floating-bg: #242c27;
 
   /* Floating surfaces cast dark shadows; borders provide the visible edge. */

@@ -51,8 +51,6 @@ With uv, prefix the build command with `uv run`. Open `docs/_build/html/index.ht
 
 New to Sphinx? Start with the [installation guide](https://r4sky0.github.io/sphinx-lumina-theme/getting-started/installation.html), including project creation and MyST setup.
 
-Upgrading from 1.x? Review the [Lumina 2 migration notes](https://r4sky0.github.io/sphinx-lumina-theme/guides/custom-styling.html#migrating-to-lumina-2) if you use custom CSS or templates.
-
 ## Contributing
 
 See the [contributing guide](https://r4sky0.github.io/sphinx-lumina-theme/contributing/) for local setup, asset builds, and tests. Bug reports and pull requests are welcome.

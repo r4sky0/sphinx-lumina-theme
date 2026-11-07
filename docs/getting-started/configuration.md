@@ -48,7 +48,7 @@ All options go in `html_theme_options` in your `conf.py`. Every option has a sen
 * - `code_style`
   - string
   - `"default"`
-  - Syntax highlighting preset. Sets matched Pygments styles for light and dark modes. Options: `"default"`, `"nord"`, `"one-dark"`, `"gruvbox"`, `"material"`. See {doc}`/guides/custom-styling` for details.
+  - Syntax highlighting preset. Sets matched Pygments styles for light and dark modes. Options: `"default"`, `"nord"`, `"one-dark"`, `"gruvbox"`, `"material"`, `"lumina"`. See {doc}`/guides/custom-styling` for details.
 * - `dark_mode_default`
   - string
   - `"auto"`

@@ -421,6 +421,12 @@ html .sd-card-hover:active {
 }
 
 /* ── sphinx-design grid ── */
+/* The row's negative margin already offsets column padding; the container's
+   own gutter would push cards inside the text edge. */
+.lumina-article .sd-container-fluid {
+  padding-inline: 0;
+}
+
 .sd-col {
   padding: 0.5rem !important;
 }

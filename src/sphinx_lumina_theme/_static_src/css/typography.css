@@ -2,7 +2,7 @@
 
 .lumina-article {
   font-size: 1rem;
-  line-height: 1.75;
+  line-height: 1.65;
   color: var(--lumina-text);
   overflow-wrap: break-word;
 }
@@ -16,7 +16,7 @@
 
 /* Light-on-dark text appears thinner — give it slightly more breathing room */
 [data-theme="dark"] .lumina-article {
-  line-height: 1.8;
+  line-height: 1.7;
 }
 
 /* Fluid headings keep a clear title / section / subsection hierarchy. */
