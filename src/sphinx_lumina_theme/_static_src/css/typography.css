@@ -2,9 +2,15 @@
 
 .lumina-article {
   font-size: 1rem;
-  line-height: 1.75;
+  line-height: 1.65;
   color: var(--lumina-text);
   overflow-wrap: break-word;
+}
+
+/* Cap running prose at a readable measure; code, tables and callouts keep
+   the full column. */
+.lumina-article section > :is(p, ul, ol, dl, blockquote) {
+  max-width: 70ch;
 }
 
 /* Hyphenation may be enabled for prose, but must not change code spelling
@@ -16,7 +22,7 @@
 
 /* Light-on-dark text appears thinner — give it slightly more breathing room */
 [data-theme="dark"] .lumina-article {
-  line-height: 1.8;
+  line-height: 1.7;
 }
 
 /* Fluid headings keep a clear title / section / subsection hierarchy. */
