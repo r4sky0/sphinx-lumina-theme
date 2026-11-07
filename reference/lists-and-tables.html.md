@@ -40,11 +40,11 @@ Nested ordered lists:
 
 Track to-do items with checkboxes.
 
-- <input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Set up project structure
-- <input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Create base templates
-- <input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Add search functionality
-- <input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Write documentation
-- <input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Publish to PyPI
+- <input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox">Set up project structure
+- <input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox">Create base templates
+- <input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Add search functionality
+- <input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Write documentation
+- <input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Publish to PyPI
 
 The MyST syntax:
 

@@ -30,7 +30,7 @@ Set a sitewide Open Graph image — the picture that appears when your docs are 
 html_theme_options = {
     "og_image": "og-card.png",  # filename in _static/, OR an absolute URL
     "og_image_alt": "MyProject — distributed task queue",
-    "og_image_width": "1200",   # match your card; helps Slack/Facebook render instantly
+    "og_image_width": "1200",  # match your card; helps Slack/Facebook render instantly
     "og_image_height": "630",
     "twitter_site": "@myproject",  # optional; falls back to social_links
 }
@@ -100,7 +100,7 @@ This is for niche cases — internal-only sites that don’t want to leak struct
 Lumina only writes `robots.txt` if one isn’t already at the build root. Drop your own into a directory and point `html_extra_path` at it:
 
 ```python
-html_extra_path = ["public"]   # public/robots.txt will win
+html_extra_path = ["public"]  # public/robots.txt will win
 ```
 
 ## How descriptions are picked
