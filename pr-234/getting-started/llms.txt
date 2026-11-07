@@ -1,0 +1,14 @@
+# Sphinx Lumina Theme
+
+> Sphinx Lumina Theme  documentation
+
+
+## Pages in this subsection
+
+- [Getting Started](index.html.md): Get Lumina running in your Sphinx project in under five minutes.
+- [Installation](installation.html.md): Install the Lumina theme and build your first page.
+- [Configuration](configuration.html.md): Everything you can configure in Lumina — theme options, accent colors, and a complete reference.
+
+## Optional
+
+- [Top-level llms.txt](../llms.txt): Complete documentation index.
