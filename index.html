@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx_js.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+
     <script defer src="_static/fluid-simulation.js"></script>
     
     <script defer="defer" src="_static/documentation_options.js?v=5929fcd5"></script>
@@ -27,7 +28,7 @@
     <script defer="defer" src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="_static/lumina.js?v=7d659972"></script>
+    <script defer="defer" src="_static/lumina.js?v=3e122351"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/index.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -95,7 +96,8 @@
     
     <script>
 (function() {
-  var stored = localStorage.getItem('lumina-theme');
+  var stored = null;
+  try { stored = localStorage.getItem('lumina-theme'); } catch (e) {}
   
   if (stored === 'dark' || stored === 'light') {
     document.documentElement.setAttribute('data-theme', stored);
@@ -118,9 +120,11 @@
         <script>
 (function() {
   
-  if (localStorage.getItem('lumina-layout') === 'wide') {
-    document.documentElement.setAttribute('data-layout', 'wide');
-  }
+  try {
+    if (localStorage.getItem('lumina-layout') === 'wide') {
+      document.documentElement.setAttribute('data-layout', 'wide');
+    }
+  } catch (e) {}
   
 })();
         </script>
@@ -144,7 +148,9 @@
         <script>
 (function() {
   var id = '4622f63a';
-  if (!id || localStorage.getItem('lumina-announce-' + id) !== '1') {
+  var dismissed = false;
+  try { dismissed = !!id && localStorage.getItem('lumina-announce-' + id) === '1'; } catch (e) {}
+  if (!dismissed) {
     document.documentElement.classList.add('has-announcement');
   }
 })();
@@ -164,6 +170,7 @@
 
 
   </head><body>
+
 
 
 
@@ -371,7 +378,7 @@ document.documentElement.style.setProperty(
         <canvas x-ref="canvas" class="lumina-hero-canvas" aria-hidden="true"></canvas>
         <div class="lumina-hero-content">
             <div class="lumina-hero-badge">
-                Sphinx Theme <span class="lumina-hero-badge-sep">&middot;</span> v2.21.1
+                Sphinx Theme <span class="lumina-hero-badge-sep">·</span> v2.21.1
             </div>
             <h1 id="lumina-hero-title" class="lumina-hero-title" tabindex="-1">
                 Your docs,
@@ -508,15 +515,16 @@ document.documentElement.style.setProperty(
           role="main"
           data-pagefind-body>
         <article class="lumina-article">
+            <div class="body">
 
-            <section class="tex2jax_ignore mathjax_ignore" id="sphinx-lumina-theme">
+                <section class="tex2jax_ignore mathjax_ignore" id="sphinx-lumina-theme">
 <h1 class="sd-d-none" id="lumina-search-sphinx-lumina-theme">Sphinx Lumina Theme<a class="headerlink" href="#sphinx-lumina-theme" title="Link to this heading">¶</a></h1>
 <div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>1 min read</span></div><div class="toctree-wrapper compound">
 </div>
 </section>
 
 
-
+            </div>
         </article>
     </main>
 

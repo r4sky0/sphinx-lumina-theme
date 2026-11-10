@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-11-07T15:34:09+00:00" />
+    <meta property="article:modified_time" content="2026-11-10T19:27:14+00:00" />
 <link rel="alternate" type="text/markdown" href="architecture.html.md">
 <link rel="describedby" href="llms.txt">
     <title>Architecture &#8212; Sphinx Lumina Theme  documentation</title>
@@ -23,7 +23,7 @@
     <script defer="defer" src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script defer="defer" src="../_static/copybutton.js?v=f281be69"></script>
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script defer="defer" src="../_static/lumina.js?v=7d659972"></script>
+    <script defer="defer" src="../_static/lumina.js?v=3e122351"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -83,7 +83,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Contributing", "item": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/index.html"}, {"@type": "ListItem", "position": 3, "name": "Architecture", "item": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Architecture", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "How the Sphinx Lumina Theme is structured internally.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-11-07T00:00:00+00:00", "dateModified": "2026-11-07T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Architecture", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "How the Sphinx Lumina Theme is structured internally.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/contributing/architecture.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-11-10T00:00:00+00:00", "dateModified": "2026-11-10T00:00:00+00:00"}</script>
         
         
     
@@ -95,7 +95,8 @@
     
     <script>
 (function() {
-  var stored = localStorage.getItem('lumina-theme');
+  var stored = null;
+  try { stored = localStorage.getItem('lumina-theme'); } catch (e) {}
   
   if (stored === 'dark' || stored === 'light') {
     document.documentElement.setAttribute('data-theme', stored);
@@ -118,9 +119,11 @@
         <script>
 (function() {
   
-  if (localStorage.getItem('lumina-layout') === 'wide') {
-    document.documentElement.setAttribute('data-layout', 'wide');
-  }
+  try {
+    if (localStorage.getItem('lumina-layout') === 'wide') {
+      document.documentElement.setAttribute('data-layout', 'wide');
+    }
+  } catch (e) {}
   
 })();
         </script>
@@ -144,7 +147,9 @@
         <script>
 (function() {
   var id = '4622f63a';
-  if (!id || localStorage.getItem('lumina-announce-' + id) !== '1') {
+  var dismissed = false;
+  try { dismissed = !!id && localStorage.getItem('lumina-announce-' + id) === '1'; } catch (e) {}
+  if (!dismissed) {
     document.documentElement.classList.add('has-announcement');
   }
 })();
@@ -723,7 +728,7 @@ document.documentElement.style.setProperty(
     <section class="tex2jax_ignore mathjax_ignore" id="architecture">
 <h1 id="lumina-search-architecture">Architecture<a class="headerlink" href="#architecture" title="Link to this heading">¶</a></h1>
 <p>How the Sphinx Lumina Theme is structured internally.</p>
-<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>5 min read</span></div><section id="theme-structure">
+<div class="lumina-reading-time" data-pagefind-ignore><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span>6 min read</span></div><section id="theme-structure">
 <h2 id="lumina-search-theme-structure">Theme Structure<a class="headerlink" href="#theme-structure" title="Link to this heading">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>src/sphinx_lumina_theme/
 ├── __init__.py              # Sphinx setup() hook, registers theme
@@ -825,10 +830,11 @@ lists up to ten pages with up to three heading links per page; all links share
 one keyboard navigation sequence. Excerpts are sanitized before rendering.</p>
 <p>Opening a result stores the query under <code class="docutils literal notranslate"><span class="pre">sphinx_highlight_terms</span></code> in
 localStorage, the hand-off Sphinx’s own search page uses. Sphinx’s
-<code class="docutils literal notranslate"><span class="pre">sphinx_highlight.js</span></code> then marks the terms on the next page. It searches only
-inside <code class="docutils literal notranslate"><span class="pre">div.body</span></code>, so <code class="docutils literal notranslate"><span class="pre">layout.html</span></code> wraps the page content in
-<code class="docutils literal notranslate"><span class="pre">&lt;div</span> <span class="pre">class=&quot;body&quot;&gt;</span></code> inside <code class="docutils literal notranslate"><span class="pre">.lumina-article</span></code>; without it the sidebar and header
-would be marked too.</p>
+<code class="docutils literal notranslate"><span class="pre">sphinx_highlight.js</span></code> then marks the terms on the next page. A result on the
+current page only changes the hash, so the search modal marks them on
+<code class="docutils literal notranslate"><span class="pre">hashchange</span></code> instead. Sphinx searches only inside <code class="docutils literal notranslate"><span class="pre">div.body</span></code>, so <code class="docutils literal notranslate"><span class="pre">layout.html</span></code>
+and <code class="docutils literal notranslate"><span class="pre">landing.html</span></code> wrap the page content in <code class="docutils literal notranslate"><span class="pre">&lt;div</span> <span class="pre">class=&quot;body&quot;&gt;</span></code> inside
+<code class="docutils literal notranslate"><span class="pre">.lumina-article</span></code>; without it the sidebar, header and hero would be marked too.</p>
 </section>
 <section id="translations">
 <h2 id="lumina-search-translations">Translations<a class="headerlink" href="#translations" title="Link to this heading">¶</a></h2>
@@ -893,7 +899,7 @@ uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </sp
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>November 7, 2026</time>
+            Last updated <time>November 10, 2026</time>
         </p>
     
     

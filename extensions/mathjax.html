@@ -25,7 +25,7 @@
     <script defer="defer" src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
-    <script defer="defer" src="../_static/lumina.js?v=7d659972"></script>
+    <script defer="defer" src="../_static/lumina.js?v=3e122351"></script>
     <link rel="canonical" href="https://r4sky0.github.io/sphinx-lumina-theme/extensions/mathjax.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -97,7 +97,8 @@
     
     <script>
 (function() {
-  var stored = localStorage.getItem('lumina-theme');
+  var stored = null;
+  try { stored = localStorage.getItem('lumina-theme'); } catch (e) {}
   
   if (stored === 'dark' || stored === 'light') {
     document.documentElement.setAttribute('data-theme', stored);
@@ -120,9 +121,11 @@
         <script>
 (function() {
   
-  if (localStorage.getItem('lumina-layout') === 'wide') {
-    document.documentElement.setAttribute('data-layout', 'wide');
-  }
+  try {
+    if (localStorage.getItem('lumina-layout') === 'wide') {
+      document.documentElement.setAttribute('data-layout', 'wide');
+    }
+  } catch (e) {}
   
 })();
         </script>
@@ -146,7 +149,9 @@
         <script>
 (function() {
   var id = '4622f63a';
-  if (!id || localStorage.getItem('lumina-announce-' + id) !== '1') {
+  var dismissed = false;
+  try { dismissed = !!id && localStorage.getItem('lumina-announce-' + id) === '1'; } catch (e) {}
+  if (!dismissed) {
     document.documentElement.classList.add('has-announcement');
   }
 })();
