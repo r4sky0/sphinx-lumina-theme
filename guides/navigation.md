@@ -16,6 +16,8 @@ html_theme_options = {
 }
 ```
 
+Write `url` as a document name, as in a toctree. Lumina turns it into a link that works from every page. Full URLs, and paths starting with `/` or `#`, are used as given. `"external": True` opens the link in a new tab.
+
 ### Dropdown Menus
 
 Create dropdown navigation menus with the `children` key:
