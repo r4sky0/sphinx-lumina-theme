@@ -29,11 +29,6 @@ export default function iconBrowser() {
       this.visible = count;
     },
 
-    matches(name) {
-      if (!this.query) return true;
-      return name.includes(this.query.toLowerCase().trim());
-    },
-
     async copy(name) {
       try {
         await copyText(name);

@@ -24,6 +24,8 @@ export default function headerLinks() {
     init() {
       document.querySelectorAll("a.headerlink").forEach((link) => {
         link.addEventListener("click", (e) => {
+          // Without a clipboard (plain HTTP), keep the link's normal jump.
+          if (!navigator.clipboard) return;
           e.preventDefault();
           const href = link.getAttribute("href");
           const url = new URL(href, window.location.href).toString();

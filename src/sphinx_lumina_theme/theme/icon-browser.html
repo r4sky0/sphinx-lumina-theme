@@ -48,8 +48,7 @@
             {% for name, svg in icon_entries %}
                 <button class="lumina-icon-cell group flex flex-col items-center gap-2 rounded-lg border border-transparent p-3 text-lumina-text-muted hover:border-lumina-border hover:bg-lumina-bg-secondary hover:text-lumina-text transition-all cursor-pointer"
                         data-icon-name="{{ name }}"
-                        @click="copy('{{ name }}')"
-                        x-show="matches('{{ name }}')">
+                        @click="copy('{{ name }}')">
                     <svg class="h-6 w-6"
                          viewBox="0 0 24 24"
                          fill="none"

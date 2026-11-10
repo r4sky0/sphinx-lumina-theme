@@ -28,7 +28,11 @@ export default function layoutToggle() {
     wide: false,
 
     init() {
-      this.wide = localStorage.getItem("lumina-layout") === "wide";
+      try {
+        this.wide = localStorage.getItem("lumina-layout") === "wide";
+      } catch {
+        // Blocked storage: start with the normal layout.
+      }
       this.apply();
     },
 
@@ -40,10 +44,14 @@ export default function layoutToggle() {
     apply() {
       if (this.wide) {
         document.documentElement.setAttribute("data-layout", "wide");
-        localStorage.setItem("lumina-layout", "wide");
       } else {
         document.documentElement.removeAttribute("data-layout");
-        localStorage.removeItem("lumina-layout");
+      }
+      try {
+        if (this.wide) localStorage.setItem("lumina-layout", "wide");
+        else localStorage.removeItem("lumina-layout");
+      } catch {
+        // Blocked storage: the choice lasts until the page is left.
       }
     },
   };

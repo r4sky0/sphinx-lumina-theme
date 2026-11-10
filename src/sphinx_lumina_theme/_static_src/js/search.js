@@ -235,7 +235,6 @@ export default function searchModal() {
       } catch (e) {
         this.pagefind = null;
         this.scopes = [];
-        this.error = t("Instant search is unavailable. Use Sphinx search below.");
       }
     },
 
@@ -296,6 +295,9 @@ export default function searchModal() {
           results = [...matchSymbols(symbols, query, scope), ...results];
           this._cacheResults(key, results);
         } else {
+          if (this.backend === "pagefind") {
+            this.error = t("Instant search is unavailable. Use Sphinx search below.");
+          }
           results = [...matchSymbols(symbols, query, scope), ...this.fallbackResults(query)];
         }
         if (requestId !== this._requestId || query !== this.query.trim() || scope !== this.scope) return;
