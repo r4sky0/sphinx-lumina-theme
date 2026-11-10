@@ -1,5 +1,30 @@
 # Releases
 
+## v2.21.2 (2026-11-10)
+
+### Bug Fixes
+
+- **hooks**: Sitemap noindex, sidebar depth and icons, boolean options
+  ([#237](https://github.com/r4sky0/sphinx-lumina-theme/pull/237),
+  [`13384c5`](https://github.com/r4sky0/sphinx-lumina-theme/commit/13384c512748b3ad8e54f1a2e6f2f6f9653b7c70))
+- **js**: Survive blocked storage and fix TOC, copy, permalink and search edge cases
+  ([#238](https://github.com/r4sky0/sphinx-lumina-theme/pull/238),
+  [`77981a8`](https://github.com/r4sky0/sphinx-lumina-theme/commit/77981a8bae970e260c18714e792b9a36381e64da))
+- **search**: Mark same-page results and keep landing highlights in the body
+  ([#240](https://github.com/r4sky0/sphinx-lumina-theme/pull/240),
+  [`6e6efc0`](https://github.com/r4sky0/sphinx-lumina-theme/commit/6e6efc0659f73ad3763f336014be912ca6e7c9e5))
+
+<details>
+<summary>Maintenance</summary>
+
+#### Continuous Integration
+
+- **release**: Publish and deploy the tagged commit; build sdist without pnpm
+  ([#239](https://github.com/r4sky0/sphinx-lumina-theme/pull/239),
+  [`5ac3f62`](https://github.com/r4sky0/sphinx-lumina-theme/commit/5ac3f626ed6cac3ff8f1063797a0f3f290256b80))
+
+</details>
+
 ## v2.21.1 (2026-11-10)
 
 ### Bug Fixes
