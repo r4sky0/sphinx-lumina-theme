@@ -95,3 +95,13 @@ def test_breadcrumbs_hidden_by_front_matter(build_output):
 def test_article_body_wrapper(index_html):
     """Page content sits in div.body so sphinx_highlight.js stays inside the article."""
     assert index_html.select_one(".lumina-article > div.body > section")
+
+
+def test_landing_body_wrapper(build_output):
+    """Landing pages wrap their content in div.body too."""
+    from bs4 import BeautifulSoup
+
+    html = BeautifulSoup(
+        (build_output / "landing-test.html").read_text(), "html.parser"
+    )
+    assert html.select_one(".lumina-article > div.body > section")
