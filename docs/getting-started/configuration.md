@@ -29,7 +29,7 @@ See {doc}`/guides/custom-styling` for CSS custom properties, custom fonts, and t
 
 ## Theme Options Reference
 
-All options go in `html_theme_options` in your `conf.py`. Every option has a sensible default, so you only need to set what you want to change.
+All options go in `html_theme_options` in your `conf.py`. Every option has a sensible default, so you only need to set what you want to change. On/off options take `"true"` and `"false"`, or Python's `True` and `False`.
 
 ### Appearance
 
