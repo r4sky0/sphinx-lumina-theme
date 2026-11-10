@@ -47,7 +47,7 @@ function matchSymbols(symbols, query, scope) {
     title: symbol.name,
     url: symbol.url,
     excerpt: "",
-    breadcrumb: symbol.prefix ? `${symbol.kind} in ${symbol.prefix}` : symbol.kind,
+    breadcrumb: symbol.prefix ? t("{kind} in {prefix}", { kind: symbol.kind, prefix: symbol.prefix }) : symbol.kind,
     isHeading: false,
     isSymbol: true,
   }));

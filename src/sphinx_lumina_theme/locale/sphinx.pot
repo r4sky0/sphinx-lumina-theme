@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sphinx-lumina-theme VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-16 09:07+0200\n"
+"POT-Creation-Date: 2026-11-10 08:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,10 @@ msgstr ""
 
 #, python-format
 msgid "%(minutes)s min read"
+msgstr ""
+
+#, python-format
+msgid "%(project)s logo"
 msgstr ""
 
 msgid "(No response body)"
@@ -59,6 +63,12 @@ msgid "Bearer token"
 msgstr ""
 
 msgid "Breadcrumb"
+msgstr ""
+
+#, python-format
+msgid ""
+"Browse all %(count)s available Lucide icons. Click any icon to copy its "
+"name."
 msgstr ""
 
 msgid "Browse sections"
@@ -131,6 +141,9 @@ msgstr ""
 msgid "Dismiss announcement"
 msgstr ""
 
+msgid "Edit this page"
+msgstr ""
+
 msgid "Enter an HTTP(S) server URL without credentials, a query, or a fragment."
 msgstr ""
 
@@ -184,6 +197,9 @@ msgid "Key value"
 msgstr ""
 
 msgid "LLM-friendly documentation index"
+msgstr ""
+
+msgid "Last updated"
 msgstr ""
 
 msgid "Leave empty to send without a body"
@@ -429,6 +445,10 @@ msgstr ""
 
 #, python-brace-format
 msgid "{count} links in {scope}"
+msgstr ""
+
+#, python-brace-format
+msgid "{kind} in {prefix}"
 msgstr ""
 
 #, python-brace-format

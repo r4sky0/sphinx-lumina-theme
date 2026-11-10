@@ -13,6 +13,25 @@ def test_nav_links_render(index_html):
     assert "Guide" in link_texts
 
 
+def test_nav_links_resolve_docnames(build_output):
+    """Docname URLs are relative to the current page; external links open a new tab."""
+    soup = BeautifulSoup(
+        (build_output / "guides/index.html").read_text(), "html.parser"
+    )
+    nav = soup.find("nav", attrs={"aria-label": "Top navigation"})
+    guide = nav.find("a", string="Guide")
+    assert guide["href"] == "../getting-started.html"
+    github = nav.find("a", string="GitHub")
+    assert github["href"] == "https://github.com/example/test"
+    assert github["target"] == "_blank"
+
+
+def test_no_edit_link_on_generated_pages(build_output):
+    """Generated pages such as the index have no source file to edit."""
+    soup = BeautifulSoup((build_output / "genindex.html").read_text(), "html.parser")
+    assert not [a for a in soup.find_all("a") if "Edit this page" in a.get_text()]
+
+
 def test_social_links_render(index_html):
     """Header should contain social link icons."""
     social = index_html.find("a", attrs={"aria-label": lambda v: v and "Github" in v})

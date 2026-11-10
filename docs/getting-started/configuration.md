@@ -112,7 +112,7 @@ Lucide icons are designed on a 24×24 grid with 2-unit-wide strokes. When a Luci
 * - `nav_links`
   - list
   - `[]`
-  - Links displayed in the header navigation bar. Each item needs `title` and `url` keys. Add `"external": True` for off-site links, or `"children"` with a list of `{title, url}` items for dropdown menus.
+  - Links displayed in the header navigation bar. Each item needs `title` and `url` keys. A `url` is a document name such as `getting-started`, resolved from the current page, or a full URL. Add `"external": True` to open a link in a new tab, or `"children"` with a list of `{title, url}` items for dropdown menus.
 * - `nav_depth`
   - string
   - `"4"`

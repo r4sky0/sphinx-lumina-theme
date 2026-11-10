@@ -23,6 +23,10 @@ msgstr ""
 msgid "%(minutes)s min read"
 msgstr "%(minutes)s 分で読めます"
 
+#, python-format
+msgid "%(project)s logo"
+msgstr "%(project)s のロゴ"
+
 msgid "(No response body)"
 msgstr "（レスポンスボディなし）"
 
@@ -61,6 +65,12 @@ msgstr "Bearer トークン"
 
 msgid "Breadcrumb"
 msgstr "パンくずリスト"
+
+#, python-format
+msgid ""
+"Browse all %(count)s available Lucide icons. Click any icon to copy its "
+"name."
+msgstr "利用できる %(count)s 個の Lucide アイコンを一覧できます。アイコンをクリックすると名前をコピーします。"
 
 msgid "Browse sections"
 msgstr "セクションを見る"
@@ -134,6 +144,9 @@ msgstr "{name} の詳細"
 msgid "Dismiss announcement"
 msgstr "お知らせを閉じる"
 
+msgid "Edit this page"
+msgstr "このページを編集"
+
 msgid "Enter an HTTP(S) server URL without credentials, a query, or a fragment."
 msgstr "認証情報・クエリ・フラグメントを含まない HTTP(S) のサーバー URL を入力してください。"
 
@@ -188,6 +201,9 @@ msgstr "キーの値"
 
 msgid "LLM-friendly documentation index"
 msgstr "LLM 向けドキュメント索引"
+
+msgid "Last updated"
+msgstr "最終更新"
 
 msgid "Leave empty to send without a body"
 msgstr "空のままにするとボディなしで送信します"
@@ -433,6 +449,10 @@ msgstr "すべてのドキュメントで {count} 件のリンク"
 #, python-brace-format
 msgid "{count} links in {scope}"
 msgstr "{scope} で {count} 件のリンク"
+
+#, python-brace-format
+msgid "{kind} in {prefix}"
+msgstr "{prefix} の{kind}"
 
 #, python-brace-format
 msgid "{visible} of {total} rows"

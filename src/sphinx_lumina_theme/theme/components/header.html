@@ -9,21 +9,23 @@
                class="flex items-center gap-2 text-lumina-text no-underline hover:opacity-80 transition-opacity">
                 {% if lumina_light_logo is defined and lumina_dark_logo is defined and lumina_light_logo and lumina_dark_logo %}
                     <img src="{{ lumina_light_logo }}"
-                         alt="{{ project }} logo"
+                         alt="{{ _('%(project)s logo') | format(project=project) }}"
                          class="lumina-logo-light h-7 w-auto">
                     <img src="{{ lumina_dark_logo }}"
-                         alt="{{ project }} logo"
+                         alt="{{ _('%(project)s logo') | format(project=project) }}"
                          class="lumina-logo-dark h-7 w-auto">
                 {% elif lumina_light_logo is defined and lumina_light_logo %}
                     <img src="{{ lumina_light_logo }}"
-                         alt="{{ project }} logo"
+                         alt="{{ _('%(project)s logo') | format(project=project) }}"
                          class="h-7 w-auto">
                 {% elif lumina_dark_logo is defined and lumina_dark_logo %}
                     <img src="{{ lumina_dark_logo }}"
-                         alt="{{ project }} logo"
+                         alt="{{ _('%(project)s logo') | format(project=project) }}"
                          class="h-7 w-auto">
                 {% elif logo_url is defined and logo_url %}
-                    <img src="{{ logo_url }}" alt="{{ project }} logo" class="h-7 w-auto">
+                    <img src="{{ logo_url }}"
+                         alt="{{ _('%(project)s logo') | format(project=project) }}"
+                         class="h-7 w-auto">
                 {% elif theme_logo_icon and theme_logo_icon != "" %}
                     {{ lumina_icon(theme_logo_icon, size=theme_logo_icon_size|default(24) |int, css_class="lumina-logo-icon") }}
                 {% else %}
@@ -90,7 +92,7 @@
                                  class="absolute start-0 top-full mt-1 min-w-[10rem] rounded-lg border border-lumina-border bg-lumina-bg py-1 shadow-lg"
                                  role="menu">
                                 {% for child in link.children %}
-                                    <a href="{{ child.url }}"
+                                    <a href="{{ child.url if ':' in child.url or child.url.startswith(('/', '#')) else pathto(child.url) }}"{% if child.external %} target="_blank" rel="noopener"{% endif %}
                                        class="block px-3 py-1.5 text-[0.8125rem] text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary transition-colors no-underline"
                                        role="menuitem">{{ child.title }}</a>
                                 {% endfor %}
@@ -98,7 +100,7 @@
                         </div>
                     {% else %}
                         {# Flat nav link #}
-                        <a href="{{ link.url }}"
+                        <a href="{{ link.url if ':' in link.url or link.url.startswith(('/', '#')) else pathto(link.url) }}"{% if link.external %} target="_blank" rel="noopener"{% endif %}
                            class="text-[0.8125rem] font-medium text-lumina-text-muted hover:text-lumina-text transition-colors no-underline">{{ link.title }}</a>
                     {% endif %}
                 {% endfor %}

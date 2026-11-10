@@ -179,6 +179,14 @@ def test_meta_description_falls_back_to_paragraph(tmp_path):
     )
 
 
+def test_meta_description_keeps_double_quotes(tmp_path):
+    """A quote in the first paragraph must not end the content attribute early."""
+    out = _build(tmp_path)
+    soup = _soup(out, "seo-keywords.html")
+    tag = soup.find("meta", attrs={"name": "description"})
+    assert tag["content"] == 'Used to test the "keywords" meta tag override path.'
+
+
 def test_meta_theme_color_from_accent(tmp_path):
     """theme-color reflects the accent_color theme option."""
     out = _build(tmp_path, options={"accent_color": "#ff00aa"})
