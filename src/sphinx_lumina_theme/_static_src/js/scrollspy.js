@@ -90,12 +90,14 @@ export default function scrollspy() {
       const readingLine = parseFloat(getComputedStyle(this._links[0].target).scrollMarginTop) || 0;
       let current = this._links[0];
       for (const link of this._links) {
+        // Collapsed API members have no box and would report a top of 0.
+        if (!link.target.getClientRects().length) continue;
         if (link.target.getBoundingClientRect().top > readingLine + 1) break;
         current = link;
       }
       // Short final sections cannot always reach the reading line.
       if (window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
-        current = this._links.at(-1);
+        current = this._links.findLast((link) => link.target.getClientRects().length) || current;
       }
       if (this.activeId === current.id) return;
       this.activeId = current.id;

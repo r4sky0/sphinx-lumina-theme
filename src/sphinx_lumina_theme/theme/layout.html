@@ -87,7 +87,8 @@
        ``data-theme-default``. #}
     <script>
 (function() {
-  var stored = localStorage.getItem('lumina-theme');
+  var stored = null;
+  try { stored = localStorage.getItem('lumina-theme'); } catch (e) {}
   {% if theme_dark_mode_default in ("light", "dark") %}
   document.documentElement.setAttribute('data-theme-default', '{{ theme_dark_mode_default }}');
   if (stored === 'dark' || stored === 'light') {
@@ -119,9 +120,11 @@
   {% if lumina_wide_layout_mode == "always" %}
   document.documentElement.setAttribute('data-layout', 'wide');
   {% else %}
-  if (localStorage.getItem('lumina-layout') === 'wide') {
-    document.documentElement.setAttribute('data-layout', 'wide');
-  }
+  try {
+    if (localStorage.getItem('lumina-layout') === 'wide') {
+      document.documentElement.setAttribute('data-layout', 'wide');
+    }
+  } catch (e) {}
   {% endif %}
 })();
         </script>
@@ -155,7 +158,9 @@
         <script>
 (function() {
   var id = '{{ announcement_id }}';
-  if (!id || localStorage.getItem('lumina-announce-' + id) !== '1') {
+  var dismissed = false;
+  try { dismissed = !!id && localStorage.getItem('lumina-announce-' + id) === '1'; } catch (e) {}
+  if (!dismissed) {
     document.documentElement.classList.add('has-announcement');
   }
 })();

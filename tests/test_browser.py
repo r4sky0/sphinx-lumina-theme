@@ -823,6 +823,22 @@ def test_toc_scrollspy(page: Page, live_server: str, theme):
     expect(nested).to_be_focused()
 
 
+def test_toc_skips_collapsed_api_entries(page: Page, live_server: str):
+    """An entry inside a collapsed API body is never the current TOC entry."""
+    page.set_viewport_size({"width": 1400, "height": 900})
+    page.goto(f"{live_server}/reference/api-documentation.html")
+    expect(page.locator("#directive-option-lumina-card-link")).to_be_hidden()
+    # Bring the directive that holds the collapsed option to the reading line.
+    page.locator("#directive-lumina-card").evaluate("""el => {
+        const margin = parseFloat(getComputedStyle(el).scrollMarginTop);
+        const top = el.getBoundingClientRect().top + scrollY - margin;
+        window.scrollTo({ top, behavior: "instant" });
+    }""")
+    expect(page.locator("#lumina-toc a[aria-current]")).to_have_attribute(
+        "href", "#directive-lumina-card"
+    )
+
+
 @pytest.mark.parametrize("theme", ["light", "dark"])
 @pytest.mark.parametrize("motion", ["no-preference", "reduce"])
 def test_toc_indicator_stays_aligned_during_fast_scroll(
@@ -1308,6 +1324,7 @@ def test_search_fallback_when_pagefind_unavailable(page: Page):
     modal.locator('input[type="search"]').fill("hello world")
     fallback = modal.get_by_role("option", name='Search for "hello world"')
     expect(fallback).to_have_attribute("href", "search.html?q=hello%20world")
+    expect(modal.get_by_text("Instant search is unavailable.")).to_be_visible()
     expect(modal.get_by_label("Search in")).to_have_count(0)
 
 

@@ -39,8 +39,10 @@ export default function announcementBanner() {
     },
 
     dismiss() {
-      if (_id) {
-        localStorage.setItem("lumina-announce-" + _id, "1");
+      try {
+        if (_id) localStorage.setItem("lumina-announce-" + _id, "1");
+      } catch {
+        // Blocked storage: the banner returns on the next page.
       }
       document.documentElement.classList.remove("has-announcement");
     },

@@ -58,9 +58,10 @@
                         {# Dropdown nav item #}
                         <div class="relative"
                              x-data="navDropdown()"
-                             @mouseenter="show()"
+                             @pointerenter="$event.pointerType === 'mouse' && show()"
                              @mouseleave="hide()"
                              @keydown="handleKeydown($event)">
+                            {# Hover opens for a mouse only; a tap fires both and would close it again. #}
                             <button x-ref="trigger"
                                     @click="toggle()"
                                     class="flex items-center gap-1 text-[0.8125rem] font-medium text-lumina-text-muted hover:text-lumina-text transition-colors cursor-pointer bg-transparent border-none p-0"

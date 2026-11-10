@@ -28,7 +28,12 @@ export default function themeToggle() {
     mode: "auto",
 
     init() {
-      const stored = localStorage.getItem("lumina-theme");
+      let stored;
+      try {
+        stored = localStorage.getItem("lumina-theme");
+      } catch {
+        // Blocked storage: follow the default until the reader picks a theme.
+      }
       if (stored === "light" || stored === "dark") {
         this.mode = stored;
       } else {
@@ -76,10 +81,14 @@ export default function themeToggle() {
             ? "dark"
             : "light";
         }
-        localStorage.removeItem("lumina-theme");
       } else {
         effectiveTheme = this.mode;
-        localStorage.setItem("lumina-theme", this.mode);
+      }
+      try {
+        if (this.mode === "auto") localStorage.removeItem("lumina-theme");
+        else localStorage.setItem("lumina-theme", this.mode);
+      } catch {
+        // Blocked storage: the choice lasts until the page is left.
       }
       document.documentElement.setAttribute("data-theme", effectiveTheme);
 
