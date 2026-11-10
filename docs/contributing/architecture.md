@@ -114,10 +114,11 @@ one keyboard navigation sequence. Excerpts are sanitized before rendering.
 
 Opening a result stores the query under `sphinx_highlight_terms` in
 localStorage, the hand-off Sphinx's own search page uses. Sphinx's
-`sphinx_highlight.js` then marks the terms on the next page. It searches only
-inside `div.body`, so `layout.html` wraps the page content in
-`<div class="body">` inside `.lumina-article`; without it the sidebar and header
-would be marked too.
+`sphinx_highlight.js` then marks the terms on the next page. A result on the
+current page only changes the hash, so the search modal marks them on
+`hashchange` instead. Sphinx searches only inside `div.body`, so `layout.html`
+and `landing.html` wrap the page content in `<div class="body">` inside
+`.lumina-article`; without it the sidebar, header and hero would be marked too.
 
 ## Translations
 

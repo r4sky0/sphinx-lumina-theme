@@ -112,9 +112,12 @@ export default function searchModal() {
         btn.addEventListener("click", () => this.toggle(btn));
       });
 
-      // A result on the current page only changes the hash; close so the target shows.
+      // A result on the current page only changes the hash; close so the target shows,
+      // and mark the stored terms now instead of on the next page opened.
       window.addEventListener("hashchange", () => {
         if (this.$el.open) this.close();
+        // sphinx_highlight.js declares a top-level const, not a window property.
+        if (typeof SphinxHighlight !== "undefined") SphinxHighlight.highlightSearchWords();
       });
 
       // "/" shortcut — open search when not typing in an input

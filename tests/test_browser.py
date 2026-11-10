@@ -348,6 +348,29 @@ def test_search_terms_highlighted_in_article(page: Page, live_server: str):
     expect(page.locator("span.highlighted:not(div.body span)")).to_have_count(0)
 
 
+def test_search_terms_highlighted_on_same_page_result(page: Page, live_server: str):
+    """A result on the current page only changes the hash; it is marked at once."""
+    page.goto(f"{live_server}/guides/search.html")
+    page.evaluate("""() => {
+        localStorage.setItem("sphinx_highlight_terms", "pagefind");
+        location.hash = "#lumina-content";
+    }""")
+    expect(page.locator(".lumina-article div.body span.highlighted")).not_to_have_count(
+        0
+    )
+    assert page.evaluate("localStorage.getItem('sphinx_highlight_terms')") is None
+
+
+def test_search_terms_highlighted_in_landing_body(page: Page, live_server: str):
+    """The landing page marks terms in its content only, not the header or hero."""
+    page.evaluate("localStorage.setItem('sphinx_highlight_terms', 'lumina')")
+    page.reload()
+    expect(page.locator(".lumina-article div.body span.highlighted")).not_to_have_count(
+        0
+    )
+    expect(page.locator("span.highlighted:not(div.body span)")).to_have_count(0)
+
+
 def test_sphinx_search_backend(page: Page, sphinx_search_server: str):
     """The Sphinx backend links the modal to Sphinx's search page, never Pagefind."""
     requests = []
