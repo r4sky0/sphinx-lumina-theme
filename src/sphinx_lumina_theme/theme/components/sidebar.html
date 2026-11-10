@@ -78,11 +78,11 @@
                             {% if link.children is defined %}
                                 <p class="px-3 pt-3 pb-1 text-xs font-semibold uppercase tracking-wide text-lumina-text-muted">{{ link.title }}</p>
                                 {% for child in link.children %}
-                                    <a href="{{ child.url }}"
+                                    <a href="{{ child.url if ':' in child.url or child.url.startswith(('/', '#')) else pathto(child.url) }}"{% if child.external %} target="_blank" rel="noopener"{% endif %}
                                        class="block px-3 py-1.5 text-sm text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary rounded-md transition-colors no-underline">{{ child.title }}</a>
                                 {% endfor %}
                             {% else %}
-                                <a href="{{ link.url }}"
+                                <a href="{{ link.url if ':' in link.url or link.url.startswith(('/', '#')) else pathto(link.url) }}"{% if link.external %} target="_blank" rel="noopener"{% endif %}
                                    class="block px-3 py-1.5 text-sm text-lumina-text-muted hover:text-lumina-text hover:bg-lumina-bg-secondary rounded-md transition-colors no-underline">{{ link.title }}</a>
                             {% endif %}
                         {% endfor %}

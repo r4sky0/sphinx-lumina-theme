@@ -6,7 +6,7 @@
 
     <div x-data="iconBrowser()">
         <p class="text-lumina-text-muted mb-6">
-            Browse all {{ icon_count }} available Lucide icons. Click any icon to copy its name.
+            {{ _("Browse all %(count)s available Lucide icons. Click any icon to copy its name.") | format(count=icon_count) }}
         </p>
 
         {# Search input #}

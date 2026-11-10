@@ -23,6 +23,10 @@ msgstr ""
 msgid "%(minutes)s min read"
 msgstr "%(minutes)s min de lectura"
 
+#, python-format
+msgid "%(project)s logo"
+msgstr "Logotipo de %(project)s"
+
 msgid "(No response body)"
 msgstr "(Sin cuerpo de respuesta)"
 
@@ -61,6 +65,14 @@ msgstr "Token Bearer"
 
 msgid "Breadcrumb"
 msgstr "Ruta de navegación"
+
+#, python-format
+msgid ""
+"Browse all %(count)s available Lucide icons. Click any icon to copy its "
+"name."
+msgstr ""
+"Explora los %(count)s iconos de Lucide disponibles. Haz clic en un icono "
+"para copiar su nombre."
 
 msgid "Browse sections"
 msgstr "Explorar secciones"
@@ -139,6 +151,9 @@ msgstr "Detalles de {name}"
 msgid "Dismiss announcement"
 msgstr "Descartar anuncio"
 
+msgid "Edit this page"
+msgstr "Editar esta página"
+
 msgid "Enter an HTTP(S) server URL without credentials, a query, or a fragment."
 msgstr ""
 "Introduce una URL de servidor HTTP(S) sin credenciales, consulta ni "
@@ -201,6 +216,9 @@ msgstr "Valor de la clave"
 
 msgid "LLM-friendly documentation index"
 msgstr "Índice de la documentación para LLM"
+
+msgid "Last updated"
+msgstr "Última actualización"
 
 msgid "Leave empty to send without a body"
 msgstr "Déjalo vacío para enviar sin cuerpo"
@@ -450,6 +468,10 @@ msgstr "{count} enlaces en toda la documentación"
 #, python-brace-format
 msgid "{count} links in {scope}"
 msgstr "{count} enlaces en {scope}"
+
+#, python-brace-format
+msgid "{kind} in {prefix}"
+msgstr "{kind} en {prefix}"
 
 #, python-brace-format
 msgid "{visible} of {total} rows"

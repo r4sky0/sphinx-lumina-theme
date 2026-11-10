@@ -23,6 +23,10 @@ msgstr ""
 msgid "%(minutes)s min read"
 msgstr "阅读时间 %(minutes)s 分钟"
 
+#, python-format
+msgid "%(project)s logo"
+msgstr "%(project)s 徽标"
+
 msgid "(No response body)"
 msgstr "（无响应体）"
 
@@ -61,6 +65,12 @@ msgstr "Bearer 令牌"
 
 msgid "Breadcrumb"
 msgstr "面包屑导航"
+
+#, python-format
+msgid ""
+"Browse all %(count)s available Lucide icons. Click any icon to copy its "
+"name."
+msgstr "浏览全部 %(count)s 个可用的 Lucide 图标。点击任意图标即可复制其名称。"
 
 msgid "Browse sections"
 msgstr "浏览各部分"
@@ -132,6 +142,9 @@ msgstr "{name} 的详细信息"
 msgid "Dismiss announcement"
 msgstr "关闭公告"
 
+msgid "Edit this page"
+msgstr "编辑此页"
+
 msgid "Enter an HTTP(S) server URL without credentials, a query, or a fragment."
 msgstr "请输入不含凭据、查询参数或片段的 HTTP(S) 服务器 URL。"
 
@@ -186,6 +199,9 @@ msgstr "密钥值"
 
 msgid "LLM-friendly documentation index"
 msgstr "适用于 LLM 的文档索引"
+
+msgid "Last updated"
+msgstr "最后更新"
 
 msgid "Leave empty to send without a body"
 msgstr "留空则不带请求体发送"
@@ -431,6 +447,10 @@ msgstr "全部文档中共 {count} 个链接"
 #, python-brace-format
 msgid "{count} links in {scope}"
 msgstr "{scope} 中共 {count} 个链接"
+
+#, python-brace-format
+msgid "{kind} in {prefix}"
+msgstr "{prefix} 中的{kind}"
 
 #, python-brace-format
 msgid "{visible} of {total} rows"
