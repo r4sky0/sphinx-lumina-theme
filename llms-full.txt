@@ -1234,7 +1234,7 @@ html_theme_options = {
 
 ## Theme Options Reference
 
-All options go in `html_theme_options` in your `conf.py`. Every option has a sensible default, so you only need to set what you want to change.
+All options go in `html_theme_options` in your `conf.py`. Every option has a sensible default, so you only need to set what you want to change. On/off options take `"true"` and `"false"`, or Python’s `True` and `False`.
 
 ### Appearance
 
@@ -2884,6 +2884,12 @@ html_baseurl = "https://docs.example.com/"
 
 On Read the Docs, Lumina fills this in from `READTHEDOCS_CANONICAL_URL` (see [Read the Docs](guides/read-the-docs.html.md)). Elsewhere, if you don’t set it, Lumina logs one warning at the start of the build and skips the URL-dependent features. The rest (description, OG title, Twitter card, etc.) still work.
 
+To build without a site URL under `sphinx-build -W`, silence that warning and sphinx-sitemap’s:
+
+```python
+suppress_warnings = ["lumina.seo", "sitemap.configuration"]
+```
+
 ## Configuring social cards
 
 Set a sitewide Open Graph image — the picture that appears when your docs are shared on Slack, Twitter/X, LinkedIn, etc.
@@ -4470,7 +4476,7 @@ The MyST syntax:
 
 Define reusable text snippets in `conf.py` and use them across pages.
 
-This documentation is for Sphinx Lumina Theme version 2.21.0.
+This documentation is for Sphinx Lumina Theme version 2.21.1.
 
 The MyST syntax:
 
@@ -5968,6 +5974,14 @@ See [Footnotes & References](reference/footnotes-and-references.html.md) for the
 # releases.html.md
 
 # Releases
+
+## v2.21.1 (2026-11-10)
+
+### Bug Fixes
+
+- **templates**: Escape SEO tags, resolve nav links, translate leftover text
+  ([#236](https://github.com/r4sky0/sphinx-lumina-theme/pull/236),
+  [`8428a4b`](https://github.com/r4sky0/sphinx-lumina-theme/commit/8428a4b91a236bcbf915b4bf83217a64531d61c0))
 
 ## v2.21.0 (2026-11-07)
 

@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-11-07T10:26:59+00:00" />
+    <meta property="article:modified_time" content="2026-11-10T19:25:15+00:00" />
 <link rel="alternate" type="text/markdown" href="seo.html.md">
 <link rel="describedby" href="llms.txt">
     <title>SEO and discoverability &#8212; Sphinx Lumina Theme  documentation</title>
@@ -83,7 +83,7 @@
             <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Sphinx Lumina Theme", "item": "https://r4sky0.github.io/sphinx-lumina-theme/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://r4sky0.github.io/sphinx-lumina-theme/guides/index.html"}, {"@type": "ListItem", "position": 3, "name": "SEO and discoverability", "item": "https://r4sky0.github.io/sphinx-lumina-theme/guides/seo.html"}]}</script>
         
         
-            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "SEO and discoverability", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "How Lumina handles SEO and social-share metadata, plus per-page overrides and opt-out controls.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/guides/seo.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/guides/seo.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-11-07T00:00:00+00:00", "dateModified": "2026-11-07T00:00:00+00:00"}</script>
+            <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "SEO and discoverability", "author": {"@type": "Person", "name": "Sphinx Lumina Theme"}, "publisher": {"@type": "Organization", "name": "Sphinx Lumina Theme", "logo": {"@type": "ImageObject", "url": "https://r4sky0.github.io/sphinx-lumina-theme/_static/logo-square.png"}}, "description": "How Lumina handles SEO and social-share metadata, plus per-page overrides and opt-out controls.", "url": "https://r4sky0.github.io/sphinx-lumina-theme/guides/seo.html", "mainEntityOfPage": "https://r4sky0.github.io/sphinx-lumina-theme/guides/seo.html", "image": "https://r4sky0.github.io/sphinx-lumina-theme/_static/og-card.png", "datePublished": "2026-11-10T00:00:00+00:00", "dateModified": "2026-11-10T00:00:00+00:00"}</script>
         
         
     
@@ -532,7 +532,7 @@ document.documentElement.style.setProperty(
                         <path d="M16 10L24 27H16" fill="currentColor" opacity="0.3" />
                     </svg>
                 Lumina</a>
-                <span class="lumina-sidebar-footer-version">v2.21.0</span>
+                <span class="lumina-sidebar-footer-version">v2.21.1</span>
             </div>
         
     </div>
@@ -714,7 +714,7 @@ document.documentElement.style.setProperty(
                         <a href="https://github.com/r4sky0/sphinx-lumina-theme"
                            target="_blank"
                            rel="noopener">Lumina</a>
-                        <span class="lumina-sidebar-footer-version">v2.21.0</span>
+                        <span class="lumina-sidebar-footer-version">v2.21.1</span>
                     </div>
                 
             </div>
@@ -824,6 +824,10 @@ document.documentElement.style.setProperty(
 </pre></div>
 </div>
 <p>On Read the Docs, Lumina fills this in from <code class="docutils literal notranslate"><span class="pre">READTHEDOCS_CANONICAL_URL</span></code> (see <a class="reference internal" href="read-the-docs.html"><span class="doc">Read the Docs</span></a>). Elsewhere, if you don’t set it, Lumina logs one warning at the start of the build and skips the URL-dependent features. The rest (description, OG title, Twitter card, etc.) still work.</p>
+<p>To build without a site URL under <code class="docutils literal notranslate"><span class="pre">sphinx-build</span> <span class="pre">-W</span></code>, silence that warning and sphinx-sitemap’s:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">suppress_warnings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lumina.seo&quot;</span><span class="p">,</span> <span class="s2">&quot;sitemap.configuration&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
 </section>
 <section id="configuring-social-cards">
 <h2 id="lumina-search-configuring-social-cards">Configuring social cards<a class="headerlink" href="#configuring-social-cards" title="Link to this heading">¶</a></h2>
@@ -949,7 +953,7 @@ keywords: &quot;comma, separated, terms&quot;
     
         <p class="mb-4 flex items-center gap-1.5 text-xs text-lumina-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-            Last updated <time>November 7, 2026</time>
+            Last updated <time>November 10, 2026</time>
         </p>
     
     

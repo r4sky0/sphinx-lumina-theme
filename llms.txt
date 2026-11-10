@@ -52,7 +52,7 @@
 - [Architecture](contributing/architecture.html.md): How the Sphinx Lumina Theme is structured internally.
 - [JavaScript API](contributing/javascript-api.html.md): Auto-generated reference for the theme’s Alpine.js components. Each component is a factory function ...
 - [Translations](contributing/translations.html.md): How to fix or add a bundled translation, and how to make new interface text translatable. For settin...
-- [Releases](releases.html.md): - &#42;&#42;search&#42;&#42;: Highlight search terms on the opened page
+- [Releases](releases.html.md): - &#42;&#42;templates&#42;&#42;: Escape SEO tags, resolve nav links, translate leftover text
 
 ## Optional
 

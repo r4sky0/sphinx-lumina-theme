@@ -1,5 +1,13 @@
 # Releases
 
+## v2.21.1 (2026-11-10)
+
+### Bug Fixes
+
+- **templates**: Escape SEO tags, resolve nav links, translate leftover text
+  ([#236](https://github.com/r4sky0/sphinx-lumina-theme/pull/236),
+  [`8428a4b`](https://github.com/r4sky0/sphinx-lumina-theme/commit/8428a4b91a236bcbf915b4bf83217a64531d61c0))
+
 ## v2.21.0 (2026-11-07)
 
 ### Features
