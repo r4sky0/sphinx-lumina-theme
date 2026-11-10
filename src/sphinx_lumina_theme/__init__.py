@@ -121,6 +121,15 @@ def _insert_reading_time(app, doctree, pagename):
     )
 
 
+def _normalize_bool_options(app):
+    """Turn ``True``/``False`` option values into the ``"true"``/``"false"``
+    strings that templates and hooks compare against."""
+    opts = app.builder.theme_options
+    for key, value in opts.items():
+        if isinstance(value, bool):
+            opts[key] = str(value).lower()
+
+
 def _apply_code_style(app):
     """Map the ``code_style`` theme option to Pygments style pair.
 
@@ -171,17 +180,6 @@ def _resolve_href_to_pagename(href, pagename):
     return posixpath.normpath(target)
 
 
-def _with_basename_fallback(target):
-    """Yield ``target`` and, if distinct, its basename.
-
-    Sphinx pagenames are path-like (``guides/search``) but a page's own
-    metadata may be keyed just by the basename in some edge cases.
-    """
-    yield target
-    if "/" in target:
-        yield target.rsplit("/", 1)[-1]
-
-
 def _add_sidebar_icons(toctree_html, page_icons, pagename, get_icon_fn):
     """Post-process toctree HTML to inject icon SVGs into sidebar links."""
     if not page_icons:
@@ -194,14 +192,7 @@ def _add_sidebar_icons(toctree_html, page_icons, pagename, get_icon_fn):
             icon_name = page_icons.get(pagename, "")
         else:
             target = _resolve_href_to_pagename(href, pagename)
-            icon_name = next(
-                (
-                    page_icons[k]
-                    for k in _with_basename_fallback(target)
-                    if k in page_icons
-                ),
-                "",
-            )
+            icon_name = page_icons.get(target, "")
         if not icon_name:
             return full_match
         svg = get_icon_fn(icon_name, size=16, css_class="lumina-sidebar-icon")
@@ -507,8 +498,9 @@ def _check_baseurl(app):
         logger.warning(
             "html_baseurl is not set — canonical URLs, sitemap.xml entries, "
             "and the robots.txt sitemap reference will be skipped. "
-            "Set html_baseurl in conf.py to enable them. "
-            "[lumina.seo]"
+            "Set html_baseurl in conf.py to enable them.",
+            type="lumina",
+            subtype="seo",
         )
 
 
@@ -606,7 +598,8 @@ def _add_context(app, pagename, templatename, context, doctree):
         if not vs_match:
             logger.warning(
                 "version_switcher_json is set but version_switcher_match is empty — "
-                "the version dropdown will not highlight the current version"
+                "the version dropdown will not highlight the current version",
+                once=True,
             )
 
     # Allow pages to opt into a custom template via metadata
@@ -616,10 +609,6 @@ def _add_context(app, pagename, templatename, context, doctree):
     for field in _HERO_FIELDS:
         if field in meta:
             context[field] = meta[field]
-
-    rt = _reading_time(app, doctree, pagename)
-    if rt is not None:
-        context["lumina_reading_time"] = rt
 
     # Icon system: make icon renderer and sidebar filter available to templates
     from ._icon_utils import get_icon_inner, get_icon_svg
@@ -646,7 +635,7 @@ def _add_context(app, pagename, templatename, context, doctree):
         context["lumina_sections"] = sections
         context["lumina_current_section"] = current_section
         if current_section:
-            maxdepth = int(app.builder.theme_options.get("nav_depth", "3"))
+            maxdepth = int(app.builder.theme_options.get("nav_depth", "4"))
             section_html = _section_toctree(
                 app, pagename, current_section, maxdepth, collapse=False
             )
@@ -814,53 +803,24 @@ def _add_context(app, pagename, templatename, context, doctree):
         return meta["template"]
 
 
-def _filter_sitemap_noindex(app, exception):
-    """Remove noindex pages from sitemap.xml after sphinx-sitemap writes it.
+def _exclude_noindex_from_sitemap(app, env):
+    """Add noindex pages to sphinx-sitemap's ``sitemap_excludes``.
 
-    Implemented as a post-processor because sphinx-sitemap's URL collection
-    happens inside its own ``build-finished`` handler with no public hook
-    for exclusion. We rewrite the file in place, stripping ``<url>`` blocks
-    whose ``<loc>`` matches an excluded page.
-
-    Reads the noindex flag straight from ``app.env.metadata`` so incremental
-    builds (where some pages weren't re-rendered this run) still exclude all
-    noindex pages from the sitemap.
+    Runs after reading, before pages are written. The links are built the way
+    sphinx-sitemap builds them, which it compares exactly (2.6) or as globs.
     """
-    if exception:
-        return
-    if app.builder.format != "html":
-        return
     if not _seo.should_emit_seo(app.builder.theme_options):
         return
-    excluded = {
-        docname for docname, meta in app.env.metadata.items() if _seo.is_noindex(meta)
-    }
-    if not excluded:
-        return
-    sitemap_path = Path(app.outdir) / app.config.sitemap_filename
-    if not sitemap_path.exists():
-        return
-
-    import xml.etree.ElementTree as ET
-
-    ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
-    ET.register_namespace("", ns)
-    tree = ET.parse(sitemap_path)
-    root = tree.getroot()
-
-    # The html builder always emits .html for page outputs; sphinx-sitemap
-    # uses the same suffix. Anchor at the slash boundary so 'noindex.html'
-    # doesn't accidentally match 'seo-noindex.html' or '.../foo-noindex.html'.
-    excluded_paths = {f"/{name}.html" for name in excluded}
-
-    for url_el in list(root.findall(f"{{{ns}}}url")):
-        loc_el = url_el.find(f"{{{ns}}}loc")
-        if loc_el is None or loc_el.text is None:
-            continue
-        if any(loc_el.text.endswith(p) for p in excluded_paths):
-            root.remove(url_el)
-
-    tree.write(sitemap_path, xml_declaration=True, encoding="utf-8")
+    suffix = app.config.html_file_suffix or ".html"
+    excluded = [
+        app.builder.get_target_uri(docname)
+        if app.builder.name == "dirhtml"
+        else docname + suffix
+        for docname, meta in env.metadata.items()
+        if _seo.is_noindex(meta)
+    ]
+    # A new list: the config default is shared by every app in the process.
+    app.config.sitemap_excludes = [*app.config.sitemap_excludes, *excluded]
 
 
 def _write_robots_txt(app, exception):
@@ -1016,6 +976,7 @@ def setup(app):
     app.connect("config-inited", _apply_sitemap_defaults)
     _apply_sitemap_defaults(app, app.config)
     app.connect("build-finished", _suppress_sitemap_when_seo_disabled)
+    app.connect("builder-inited", _normalize_bool_options)
     app.connect("builder-inited", _apply_code_style)
     app.connect("builder-inited", _resolve_search_backend)
     app.connect("builder-inited", _apply_readthedocs_baseurl)
@@ -1027,7 +988,7 @@ def setup(app):
     app.connect("doctree-resolved", _tag_http_fields)
     app.connect("build-finished", _write_search_symbols)
     app.connect("build-finished", _run_pagefind)
-    app.connect("build-finished", _filter_sitemap_noindex)
+    app.connect("env-updated", _exclude_noindex_from_sitemap)
     app.connect("build-finished", _write_robots_txt)
     return {
         "version": __version__,

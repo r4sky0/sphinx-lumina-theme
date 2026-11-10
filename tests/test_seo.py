@@ -953,3 +953,21 @@ def test_user_configured_sitemap_preserved_when_seo_disabled(tmp_path):
     )
     # User explicitly added sphinx_sitemap → sitemap.xml is preserved.
     assert (out / "sitemap.xml").exists()
+
+
+def test_noindex_page_keeps_same_named_pages_in_sitemap(tmp_path):
+    """A noindex ``changelog`` must not drop ``api/changelog`` from the sitemap."""
+    src = tmp_path / "src"
+    (src / "api").mkdir(parents=True)
+    (src / "conf.py").write_text(
+        'html_theme = "lumina"\nhtml_baseurl = "https://example.com/"\n'
+    )
+    (src / "index.rst").write_text(
+        "Home\n====\n\n.. toctree::\n\n   changelog\n   api/changelog\n"
+    )
+    (src / "changelog.rst").write_text(":noindex: true\n\nChangelog\n=========\n")
+    (src / "api" / "changelog.rst").write_text("API changelog\n=============\n")
+    sphinx_app(src, tmp_path / "out").build()
+    sitemap = (tmp_path / "out/sitemap.xml").read_text()
+    assert "https://example.com/changelog.html" not in sitemap
+    assert "https://example.com/api/changelog.html" in sitemap

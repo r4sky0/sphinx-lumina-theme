@@ -26,6 +26,12 @@ html_baseurl = "https://docs.example.com/"
 
 On Read the Docs, Lumina fills this in from `READTHEDOCS_CANONICAL_URL` (see {doc}`/guides/read-the-docs`). Elsewhere, if you don't set it, Lumina logs one warning at the start of the build and skips the URL-dependent features. The rest (description, OG title, Twitter card, etc.) still work.
 
+To build without a site URL under `sphinx-build -W`, silence that warning and sphinx-sitemap's:
+
+```python
+suppress_warnings = ["lumina.seo", "sitemap.configuration"]
+```
+
 ## Configuring social cards
 
 Set a sitewide Open Graph image — the picture that appears when your docs are shared on Slack, Twitter/X, LinkedIn, etc.

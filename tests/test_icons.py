@@ -170,3 +170,16 @@ class TestLogoIcon:
         svg = header.find("svg", class_="lumina-logo-icon")
         assert svg is not None
         assert svg.get("aria-hidden") == "true"
+
+
+def test_sidebar_icon_not_shared_by_file_name():
+    """A root ``index`` icon must not appear on ``guides/index``."""
+    from sphinx_lumina_theme import _add_sidebar_icons
+
+    html = _add_sidebar_icons(
+        '<a href="guides/index.html">Guides</a>',
+        {"index": "house"},
+        "index",
+        get_icon_svg,
+    )
+    assert "<svg" not in html

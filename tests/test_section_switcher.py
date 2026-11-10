@@ -161,3 +161,21 @@ def test_section_color_in_styles(tmp_path):
     icon = switcher.find(class_="lumina-section-switcher-icon")
     style = icon.get("style", "")
     assert "#8b5cf6" in style, f"Section color not found in style: {style}"
+
+
+def test_section_nav_shows_four_levels_by_default(tmp_path):
+    """Section sidebars follow the documented nav_depth default of 4."""
+    src = tmp_path / "src"
+    (src / "s").mkdir(parents=True)
+    (src / "conf.py").write_text(
+        'html_theme = "lumina"\n'
+        'html_theme_options = {"doc_sections": [{"path": "s", "name": "S"}]}\n'
+    )
+    (src / "index.rst").write_text("Home\n====\n\n.. toctree::\n\n   s/index\n")
+    pages = ["index", "one", "two", "three"]
+    for page, child in zip(pages, [*pages[1:], None]):
+        toctree = f"\n.. toctree::\n\n   {child}\n" if child else ""
+        (src / "s" / f"{page}.rst").write_text(f"{page}\n=====\n{toctree}")
+    sphinx_app(src, tmp_path / "out").build()
+    nav = _parse(tmp_path / "out", "s/index.html").find(class_="lumina-sidebar-nav")
+    assert nav.find("a", href="three.html") is not None

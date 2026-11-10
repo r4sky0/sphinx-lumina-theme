@@ -70,3 +70,18 @@ def test_code_wrap_toggle_is_opt_in(tmp_path):
         confoverrides={"html_theme_options.code_wrap_toggle": "true"},
     ).build()
     assert "dataset.codeWrap" in (tmp_path / "enabled/index.html").read_text()
+
+
+def test_boolean_options_accept_python_bools(tmp_path):
+    """``True``/``False`` work like the strings ``"true"``/``"false"``."""
+    src = tmp_path / "src"
+    src.mkdir()
+    (src / "conf.py").write_text(
+        'html_theme = "lumina"\n'
+        'html_theme_options = {"show_toc": True, "try_it_out": False}\n'
+    )
+    (src / "index.rst").write_text("Home\n====\n\nPart\n----\n\nText.\n")
+    sphinx_app(src, tmp_path / "out").build()
+    html = (tmp_path / "out/index.html").read_text()
+    assert BeautifulSoup(html, "html.parser").find(id="lumina-toc") is not None
+    assert 'dataset.tryItOut = "false"' in html
