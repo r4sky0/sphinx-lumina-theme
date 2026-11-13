@@ -27,7 +27,7 @@
     "husky": "9.1.7",
     "jsdoc": "^4.0",
     "lint-staged": "17.6.0",
-    "lucide-static": "1.68.0",
+    "lucide-static": "1.71.0",
     "mermaid": "11.12.1",
     "tailwindcss": "^4.3"
   },
